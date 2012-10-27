@@ -1,0 +1,957 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Adoo's blog</title><link href="http://www.roading.org/" rel="alternate"></link><link href="http://www.roading.org/feed/Introduction%20to%20Algorithm%20-thrid%20edition.xml" rel="self"></link><id>http://www.roading.org/</id><updated>2012-04-15T22:23:00+08:00</updated><entry><title>算法导论——B-trees</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html" rel="alternate"></link><updated>2012-04-15T22:23:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-15:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html</id><summary type="html">&lt;p&gt;B-trees(叫“B树”还是“B-树”？我还是用它的英文名吧)，是一种为磁盘或其它辅存设备而设计的平衡树。它与红黑树有些类似，但是在节省IO操作上比红黑树表现的更好。很多数据库系统会用B-trees
+或它的变形来存储信息。&lt;/p&gt;
+&lt;p&gt;B-trees
+的特点是，一个结点可以有n个关键字，这些关键字把一段数据划分成n+1段，对应n+1个孩子，如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="0" src="http://www.roading.org/wp-content/uploads/2012/04/0.png" title="0" /&gt;&lt;/p&gt;
+&lt;h3&gt;B-trees的定义&lt;/h3&gt;
+&lt;p&gt;一棵 B-trees T具有如下属性(设其根结点为T.root):&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1.Every node &lt;em&gt;x&lt;/em&gt; has the following fields:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;x.n&lt;/em&gt;, the number of keys currently stored in node &lt;em&gt;x&lt;/em&gt;,&lt;/li&gt;
+&lt;li&gt;the x.n keys themselves, stored in nondecreasing order, so that
+    x.&lt;em&gt;key&lt;/em&gt;~1~ ≤ x.&lt;em&gt;key&lt;/em&gt;~2~ ≤ ··· ≤ &lt;em&gt;x.key~x.n~.&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;x.leaf&lt;/em&gt; , a boolean value that is TRUE if &lt;em&gt;x&lt;/em&gt; is a leaf and FALSE
+    if &lt;em&gt;x&lt;/em&gt; is an internal node.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2.Each internal node &lt;em&gt;x&lt;/em&gt; also contains &lt;em&gt;x.n+1&lt;/em&gt; pointers x.&lt;em&gt;c&lt;/em&gt;~1~,
+x.&lt;em&gt;c&lt;/em&gt;~2~, ..., x.&lt;em&gt;c~x.~&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;+1~ to its children. Leaf nodes have no
+children, so their &lt;em&gt;c~i~&lt;/em&gt; fields are undefined.&lt;/p&gt;
+&lt;p&gt;The keys x.&lt;em&gt;key~i~&lt;/em&gt; separate the ranges of keys stored in each
+subtree: if &lt;em&gt;k~i~&lt;/em&gt; is any key stored in the subtree with root x.&lt;em&gt;c~i~&lt;/em&gt;
+, then&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;k&lt;/em&gt;~1~ ≤ x.&lt;em&gt;key&lt;/em&gt;~1~≤&lt;em&gt;k&lt;/em&gt;~2~ ≤x. &lt;em&gt;key&lt;/em&gt;~2~ ≤··· ≤x. &lt;em&gt;key~x.~&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;~ ≤
+&lt;em&gt;k&lt;/em&gt;~&lt;em&gt;x.n+1&lt;/em&gt;~.&lt;/p&gt;
+&lt;p&gt;All leaves have the same depth, which is the tree's height &lt;em&gt;h&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;There are lower and upper bounds on the number of keys a node can
+contain. These bounds can be expressed in terms of a fixed integer &lt;em&gt;t&lt;/em&gt;
+≥ 2 called the &lt;strong&gt;&lt;em&gt;minimum degree&lt;/em&gt;&lt;/strong&gt; of the B-tree:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Every node other than the root must have at least &lt;em&gt;t&lt;/em&gt; - 1 keys.
+    Every internal node other than the root thus has at least &lt;em&gt;t&lt;/em&gt;
+    children. If the tree is nonempty, the root must have at least one
+    key.&lt;/li&gt;
+&lt;li&gt;Every node can contain at most 2&lt;em&gt;t&lt;/em&gt; - 1 keys. Therefore, an
+    internal node can have at most 2&lt;em&gt;t&lt;/em&gt; children. We say that a node
+    is &lt;strong&gt;&lt;em&gt;full&lt;/em&gt;&lt;/strong&gt; if it contains exactly 2&lt;em&gt;t&lt;/em&gt; - 1 keys.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;创建一棵空&lt;em&gt;B-trees&lt;/em&gt;&lt;/h3&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ALLOCATE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;NODE&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;leaf&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TRUE&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; 0
+    &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;/p&gt;
+
+&lt;h3&gt;搜索操作:&lt;/h3&gt;
+&lt;/p&gt;
+
+&lt;p&gt;搜索操作与二叉搜索树的搜索有点类似，两点不同之处在于：一是结点中可能有多个key，二是往下走的时候有可能有多个子路。这些不同只在于选路的时候多做点判断罢了。下面为伪码：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SEARCH&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt;1
+  &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; ≤ &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyi&lt;/span&gt;
+     &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 1
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; ≤ &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyi&lt;/span&gt; 
+     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;leaf&lt;/span&gt;
+      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+  &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SEARCH&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ci&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;h3&gt;&lt;span style="font-family: georgia"&gt;插入操作&lt;/span&gt;&lt;/h3&gt;
+&lt;/p&gt;
+
+&lt;p&gt;参照二叉搜索树的插入操作，其实B-trees
+的整体插入思路也类似。但是要注意一点，如果要插入的目标结点已经满了(即关键字的数目为2t-1)，这个时候并不能直接插入，因为直接插入就会破坏B-trees
+的结点性质。解决之道为，将这个已经满了的结点以其第t个关键字为界一分为二，并把第t个关键字抽取出来插入到父结点相应位置。并不能等到确定了要插入的目的结点再决定分不分裂，而是在下降的过程中遇到满结点就应当分裂，这样就可以保证要分裂的时候父结点总不是满的。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;分裂结点的伪码：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SPLIT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CHILD&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ALLOCATE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;NODE&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ci&lt;/span&gt; 
+    &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;leaf&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;leaf&lt;/span&gt;
+    &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; 1 &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1
+          &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyj&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyj&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; 
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;leaf&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; 1 &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;
+             &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cj&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cj&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; 
+    &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 1 &lt;span class="n"&gt;downto&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 1
+          &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cj&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1 &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cj&lt;/span&gt; 
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ci&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1 &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="n"&gt;downto&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;
+         &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyj&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1  &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyj&lt;/span&gt; 
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyi&lt;/span&gt;  &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyt&lt;/span&gt;     &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;p&gt;插入结点的伪码：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;
+   &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; 2&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1
+          &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ALLOCATE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;NODE&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+          &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;
+          &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;leaf&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FALSE&lt;/span&gt;
+          &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; 0
+          &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;c1&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;
+          &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SPLIT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CHILD&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 1&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;NONFULL&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;NONFULL&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;p&gt;在非满根结点插入关键字的伪码(供上面B-Tree-INSERT 使用的一个辅助函数)：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;NONFULL&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+ &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;leaf&lt;/span&gt;
+     &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; ≥ 1 &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyi&lt;/span&gt;       
+         &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyi&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1 &lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyi&lt;/span&gt;   
+         &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyi&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1 &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1
+ &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; ≥ 1 &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyi&lt;/span&gt;
+            &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1
+    &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 1
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ci&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; 2&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1
+        &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SPLIT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CHILD&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keyi&lt;/span&gt; 
+        &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 1
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;NONFULL&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ci&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;h3&gt;删除操作&lt;/h3&gt;
+&lt;/p&gt;
+
+&lt;p&gt;删除操作要比插入操作更复杂一点，因为删除一个关键字的时候，这个关键字不但可以在叶子结点，也可以在内部结点。算法导论的叙述虽然很严密与细致,但却对解题思路的骨架并不突出。这一段笔记我试着抛开算导，完全按我自己的思路来组织，而不是被他牵着鼻子走。（稳妥起见，你应该同时参照原书）：&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;从&lt;em&gt;B-trees&lt;/em&gt;
+中删除关键字&lt;em&gt;key&lt;/em&gt;无非两种情况，从一个叶子结点中删除或是从一个非叶子结点中删除。我很难想到一种好的办法可以直接删除一个非叶子结点中的关键字，又维持&lt;em&gt;B-trees&lt;/em&gt;的属性。转念一想，能否把从非叶子结点中删除转化为从一个叶子结点中删除呢？当然能的，既然是一棵树，如果我们把问题从其所在的结点转移到其子结点，那么问题最终总能转移到叶子结点上。在具体考虑如何把从非叶子结点中删除关键字转化为从叶子结点中删除关键字之前，我们先要论证一下从叶子结点中删除一个关键字是否足够简单。如果从叶子结点中删除一个关键字比从非叶子结点中删除一个关键字更加复杂，那么就得不偿失了。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;从叶子结点中删除一个关键字也可以分为两种情况:1.该叶子结点中的关键字的数目大于&lt;em&gt;t-1&lt;/em&gt;,此时可以直接进行删除;2.叶子结点中的关键字数目恰巧等于&lt;em&gt;t-1&lt;/em&gt;,这时直接删除会破坏&lt;em&gt;B-trees&lt;/em&gt;的属性，而且破坏之后再进行修正也看得出来不是容易事。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;到这里我们遇到了窘境，如果叶子结点中关键字的数目等于&lt;em&gt;t-1&lt;/em&gt;,那么从中删除一个关键字很复杂，那么如果我们避免这种情况出现呢？便如同进行插入操作时有意的为分裂结点的操作，避免出现其父结点是满的情况一样。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;span style="font-family: helvetica; color: #333333"&gt;到此为止，我们有了初步的算法模型骨架，分为三步：1.定位要删除的关键字所在的结点；2.将删除问题下降到叶子结点；3.从叶子结点直接删除关键字。再完善其具体细节就可以得到以下算法模型：&lt;/span&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;由根结点出发定位被删除关键字所在的结点，在整个下降过程中，应保证每一次下降的&lt;span style="color: #0080c0"&gt;目的结点&lt;/span&gt;的关键字的数目至少为&lt;em&gt;t&lt;/em&gt;(保证下降到叶子的时候&lt;em&gt;关键字&lt;/em&gt;的数目大于&lt;em&gt;t-1&lt;/em&gt;)。如果下降过程中遇到关键字的数目为&lt;em&gt;t-1&lt;/em&gt;的目的结点&lt;em&gt;x&lt;/em&gt;，那么可以具体如下做：&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;如果&lt;em&gt;x&lt;/em&gt;有一个相邻的兄弟&lt;em&gt;y&lt;/em&gt;且其关键字的数目大于&lt;em&gt;t-1，&lt;/em&gt;，那么可以从父结点下降一个合适的关键字给&lt;em&gt;ｘ&lt;/em&gt;，并从&lt;em&gt;y&lt;/em&gt;上升一个关键字给父结点，并妥善设置好相关孩子指针。&lt;/li&gt;
+&lt;li&gt;如果&lt;em&gt;x&lt;/em&gt;的两个相邻的兄弟关键字的的数目都为&lt;em&gt;t-1&lt;/em&gt;，那么将&lt;em&gt;x&lt;/em&gt;与其任意一相邻的兄弟合并，并从父结点下降相关关键字到合并的结点中间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果&lt;em&gt;key&lt;/em&gt;所在的结点是内部结点，设该结点为&lt;em&gt;x&lt;/em&gt;，那么将问题下降到其子一级并保证第1点，递归处理其子一级。具体做法：&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;若&lt;em&gt;key&lt;/em&gt;的前驱所在结点的最少有&lt;em&gt;t&lt;/em&gt;个关键字，那么可用其前驱替换掉key，问题就从删除key转变为删除&lt;em&gt;key&lt;/em&gt;的前驱，并且下降了一级。&lt;/li&gt;
+&lt;li&gt;若&lt;em&gt;key&lt;/em&gt;的后继所在的结点最少有&lt;em&gt;t&lt;/em&gt;个关键字,那么同体可以用&lt;em&gt;key&lt;/em&gt;的后继替换&lt;em&gt;key&lt;/em&gt;，问题得到转换并下降一级。&lt;/li&gt;
+&lt;li&gt;如果&lt;em&gt;key&lt;/em&gt;的前驱和后继所在的结点关键字数目都为&lt;em&gt;t-1&lt;/em&gt;,那么令&lt;em&gt;x&lt;/em&gt;合并这任意两个相邻的结点之一，并将&lt;em&gt;key&lt;/em&gt;降下来，作为中间关键字，问题也得到下降。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果是叶子，直接删除。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/p&gt;
+
+&lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。&lt;/em&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;2012/4/15 by Adoo | homepage:&lt;/em&gt;&lt;a href="http://www.roading.org/"&gt;&lt;em&gt;www.roading.org&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/p&gt;</summary><category term="B-trees"></category><category term="Introduction to algorithm"></category></entry><entry><title>算法导论——赫夫曼编码</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html" rel="alternate"></link><updated>2012-03-28T16:01:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-28:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html</id><summary type="html">&lt;p&gt;赫夫曼编码(huffman
+codes)是一种非常有用的数据压缩方法，通常能将数据压缩20%\~90%。从具体问题出发，假设我们有一包含10000个字符的文件，这些字符仅由6个不同的字符组成，就设这6个字符分别为“abcdef”，下面的表给出了这6个字符在整个文件中的占比，和两种不同的编码方式。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;                         &lt;span class="n"&gt;a&lt;/span&gt;     &lt;span class="n"&gt;b&lt;/span&gt;     &lt;span class="n"&gt;c&lt;/span&gt;     &lt;span class="n"&gt;d&lt;/span&gt;     &lt;span class="n"&gt;e&lt;/span&gt;      &lt;span class="n"&gt;f&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Frequency (in thousands)   45    13    12    10    9      5
+  Fixed-length codeword      000   001   010   011   100    101
+  Variable-length codeword   0     101   100   111   1101   1100&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;/p&gt;
+上例中固定长度的编码方式最少需要三位。那么整个文件的长度大小为300,000
+bits，而对于可变长度的编码方式其使用大小为：&lt;/p&gt;
+&lt;p&gt;(45 · 1 + 13 · 3 + 12 · 3 + 16 · 3 + 9 · 4 + 5 · 4) · 1,000 = 224,000
+bits&lt;/p&gt;
+&lt;p&gt;使用第二种编码方式能比第一种方式节约大约25%的空间。上述变长编码的方式实际上是一种名为&lt;strong&gt;前缀编码&lt;/strong&gt;的编码方式。&lt;/p&gt;
+&lt;h3&gt;前缀编码&lt;/h3&gt;
+&lt;p&gt;如果某种编码方案中，没有一个编码会是其它编码的前缀，则称这种编码方案为前缀编码。有一条已证明的结论，任何由字符编码技术所获得的最佳压缩数据，也可以由前缀编码来获得。&lt;/p&gt;
+&lt;p&gt;前缀编码的编码很容易，只需将文件中的字符用对应的编码表示即可。解码也容易完成，因为其性质，可以直接从头至尾按编码与字符的对应关系翻译即可。&lt;/p&gt;
+&lt;p&gt;在解码过程中，为了方便和提高效率，可以用一颗二叉树来提供帮助。在这棵二叉树中，0表示往左走，1表示往右走。字符则被放置在树的叶子上。所以从根节点到叶子的路径表示了该字符的编码。这样一颗树对于解码时很有帮助的。下图是上面的例子中的两种编码对应的二叉树：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb22.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;h3&gt;赫夫曼编码&lt;/h3&gt;
+&lt;p&gt;赫夫曼编码是指赫夫曼提供的一种构建最优前缀编码的方法。其方法是总选取权重最小的两个结点&lt;em&gt;x&lt;/em&gt;和&lt;em&gt;y&lt;/em&gt;合并成一个结点&lt;em&gt;z&lt;/em&gt;,并用&lt;em&gt;z&lt;/em&gt;代替它们，再从中选出两个权重最小的结点…如是反复。图解：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image3_thumb.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;h3&gt;伪码:&lt;/h3&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb24.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;h3&gt;赫夫曼编码的正确性&lt;/h3&gt;
+&lt;p&gt;证明赫夫曼编码的正确性需证明贪心算法的两要素：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;font face="Georgia"&gt;&lt;font color="#555555" size="2"&gt;具有最优子结构&lt;/font&gt;&lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;&lt;font face="Georgia"&gt;&lt;font color="#555555" size="2"&gt;贪心选择性质&lt;/font&gt;&lt;/font&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ps:&lt;font face="楷体"&gt;本来按照之前些笔记的思路该记下证明过程的。但今天就不写了，我免不了要吐槽几句。一直以来，我是很不喜欢也很少做笔记的，我更愿意的方式是在书旁边的空白处写点理解感想之类的，潦潦草草，信手涂鸦。大一大二的时候因为看技术方面的书籍多是从图书馆借来。特别是《C++
+primer》
+这本书，被我借了两年，期间续借了又续借。刚开始看书的时候，是很期待从上面看到点什么前辈心得的，当然上面除了很少处的一两段短线之外，并没有什么其它前辈手迹。我有这种心理，因此遗憾之余也并没有介意在书上留下点东西。期间我涂涂画画写了不少东西，起初我不以为意，但后来还了书后，这本书恰巧又被我的同学ZWL借去。我从他手中偶然看到这本书，又随手翻了翻我以前写在其中的小记，个中有不少错误之处，有的是因为笔误，有的是因为刚开始看时理解的浅薄，这令我无比汗颜。我于是想最好还是不要在借来的书上乱写。到不是为了爱惜书籍，虽然，太多人很高尚的认为不要在图书馆中借来的书上写画，但我仍固执的以为，书被翻烂了写烂了才最能体现它的价值。我所顾忌的一是恐误了后来人，二是那些心得，虽然写了，却再难翻看了。&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;font face="楷体"&gt;再到后来会偶尔用本子记下一点心得，但确实麻烦难了。因为我看书一直以来的习惯决定了，那些个笔记心得难成体系，太随意了，太散了。如果不是附在原文旁边，我自己翻看，也没觉得有多大用处。另外一点在于，我向来对于笔记本这些东西保存不善，指不定哪天丢了，或撕了——我喜欢用质量差的作业本写字，那些漂亮的笔记本反而让我写不习惯，因此我的笔记本和作业本还有草稿本完全是一路货色。&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;font face="楷体"&gt;到看算法导论的时候，我开始萌生了要系统记一记笔记的想法。
+我原来写这个笔记的初衷在于，一是要囊括要点，二是能写一些书本之外的理解，更重要的是我想这些笔记能够简明易懂，使我以后不用频频翻看原书。不过发现自己的水平也就能勉强读懂这本书，原来的目的自然只达到了十之一二。&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;font face="楷体"&gt;这本书的笔记我还是会将它写完，但有些无谓的地方将不会多浪费笔墨。&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;font face="楷体"&gt;每个人都有自己的做事原则，我的原则是做一件事，要有一个明确的理由，放弃一件在做的事也要有一个明确的理由。&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;2010/3/28 by Adoo | homepage: &lt;a href="http://www.roading.org/"&gt;www.roading.org&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb22.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image22.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image3_thumb.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image31.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb24.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image24.png&lt;/p&gt;</summary><category term="greedy algorithm"></category><category term="huffman codes"></category></entry><entry><title>算法导论——贪心算法</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html" rel="alternate"></link><updated>2012-03-27T16:46:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-27:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html</id><summary type="html">&lt;p&gt;与动态规划相同贪心算法通过做出一系列选择来构建出问题的最优解，不同的是贪心算法并不会全局考虑各种选择，它只做当前看起来最佳的选择。如君所见，贪心算法企图用每一步的最优解来构建出整个问题的最优解。这并不能保证总能构建出最优解，但它通常能做到。我们可以先看一个具体的问题——活动安排问题。&lt;/p&gt;
+&lt;h3&gt;活动安排问题&lt;/h3&gt;
+&lt;p&gt;有一系列活动&lt;em&gt;S&lt;/em&gt; = {&lt;em&gt;a&lt;/em&gt;~1~, &lt;em&gt;a&lt;/em&gt;~2~, ...,
+&lt;em&gt;a~n~&lt;/em&gt;}，它们都要用到同一个舞台，而舞台一次只能举办一个活动。那么要如何安排才能举办最多的活动呢？&lt;/p&gt;
+&lt;p&gt;假设活动&lt;em&gt;a~i~&lt;/em&gt; 的开始时间用&lt;em&gt;s~i~&lt;/em&gt; 表示，结束时间用&lt;em&gt;f~i~&lt;/em&gt;表示, 有 0 ≤
+&lt;em&gt;s~i~&lt;/em&gt; &amp;lt; &lt;em&gt;f~i~&lt;/em&gt; &amp;lt; ∞. 也就是说&lt;em&gt;a~i~&lt;/em&gt; 占用舞台的时间段为[&lt;em&gt;s~i~,
+f~i~&lt;/em&gt;).那么安排的活动之间必须满足一个条件，那就是各自的时间段之间没有重叠的部分。&lt;/p&gt;
+&lt;p&gt;一个具体的例子（将这些活动按结束时间排好了序）：&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;i&lt;/em&gt;      1   2   3   4   5   6   7    8    9    10   11
+  &lt;em&gt;s~i~&lt;/em&gt;   1   3   0   5   3   5   6    8    8    2    12
+  &lt;em&gt;f~i~&lt;/em&gt;   4   5   6   7   9   9   10   11   12   14   16&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;/p&gt;
+对于这样一个问题，因为能够比较快速的发现其最优子结构，我们会很容易想到用动态规划来解决。——假设&lt;em&gt;a~i~&lt;/em&gt;是最优解中的一个元素，那么以&lt;em&gt;a~i~&lt;/em&gt;为界可以将问题分成为两个子问题，一个是活动结束时间在&lt;em&gt;a~i~&lt;/em&gt;的开始时间之前的所有活动，另一个则是活动开始时间在&lt;em&gt;a~i~&lt;/em&gt;结束时间之后的所有活动。可以证明最优解包含这两个子问题的最优解组成的，具体证明可见原书。&lt;/p&gt;
+&lt;p&gt;令&lt;em&gt;S~ij~&lt;/em&gt;代表活动开始时间在&lt;em&gt;a~i~&lt;/em&gt;
+结束之后而活动结束时间在&lt;em&gt;a~j~&lt;/em&gt;开始之前的所有活动的集合，用&lt;em&gt;c&lt;/em&gt;[&lt;em&gt;i, j&lt;/em&gt; ]
+来代表的&lt;em&gt;Sij&lt;/em&gt;的最优解，那么我们可以获得递归公式：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb18.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;如果用贪心算法的话，则不用考虑那么多种选择，只需考虑贪心选择——当前最佳的选择。在这个问题上，我们可以总是优先安排结束时间最早而又不与之前安排的任务有冲突的活动，这即是一种贪心选择。但最大的问题在于贪心选择是否是最佳选择？在这里，确实是的，你可以用算导中提到的“粘贴替代”的方法轻易的证明。&lt;/p&gt;
+&lt;h4&gt;&lt;/h4&gt;
+&lt;h4&gt;迭代与递归两种版本的伪码&lt;/h4&gt;
+&lt;p&gt;递归版：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb19.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;迭代版：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb20.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;h4&gt;C++的实现&lt;/h4&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Container&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; 
+&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;greedy_activity_selector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Container&lt;/span&gt; &lt;span class="n"&gt;input&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Container&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="o"&gt;//*&lt;/span&gt;&lt;span class="n"&gt;input&lt;/span&gt; 应当是一个容器，每个元素为一个&lt;span class="n"&gt;pair&lt;/span&gt;对，
+    &lt;span class="o"&gt;//*&lt;/span&gt;每个&lt;span class="n"&gt;pair&lt;/span&gt;对包含一个活动的开始时间和结束时间
+    &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clear&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;auto&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;input&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;                    &lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; 存储贪心选择；
+    &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push_back&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;auto&lt;/span&gt; &lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;!&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;input&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;second&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push_back&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+            &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;size&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;h3&gt;贪心算法的基本内容&lt;/h3&gt;
+&lt;/p&gt;
+
+&lt;p&gt;贪心算法并不能解决所有最优解问题。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;贪心选择性质(greedy-choice property )和最优子结构(optimal
+substructure)是贪心算法的两个关键点。如果一个问题具备以上两种属性，那么就能设计出适合这个问题的贪心算法。&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;greedy-choice property&lt;/em&gt;&lt;/strong&gt;: we can assemble a globally optimal
+solution by making a locally optimal (greedy) choice. In other words,
+when we are considering which choice to make, we make the choice that
+looks best in the current problem, without considering results from
+subproblems.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/p&gt;
+
+&lt;h4&gt;&lt;a name="IDX-381"&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;/p&gt;
+
+&lt;h4&gt;贪心策略VS动态规划&lt;/h4&gt;
+&lt;/p&gt;
+
+&lt;p&gt;就动态规划来说，我们在每一步做出选择，但是这些选择往往会依赖与子问题的解。而贪心算法，总是做出当前看似最佳的选择，它可能会依赖于之前做过的选择，但绝不会依赖于尚未做出的选择或者子问题。一次动态规划通常采用自下而上的方式，不断解决小问题以供大问题使用，而贪心算法则采用自顶而下的方式不断缩小问题的规模。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;一般来讲，对于一个有贪心策略解法的问题，也常常有一个更复杂的动态规划解法。也由于动态规划和贪心策略都利用了最优子结构这一性质，往往容易在贪心算法足以解决问题的情况小使用了动态规划。或者在需要动态规划解决的地方使用贪心策略，这需要我们自行甄别。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h4&gt;0-1背包和部分背包问题&lt;/h4&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The &lt;strong&gt;&lt;em&gt;0-1 knapsack problem&lt;/em&gt;&lt;/strong&gt; is the following. A thief robbing a
+store finds &lt;em&gt;n&lt;/em&gt; items; the &lt;em&gt;i&lt;/em&gt;th item is worth &lt;em&gt;v~i~&lt;/em&gt; dollars and
+weighs &lt;em&gt;w~i~&lt;/em&gt; pounds, where &lt;em&gt;v~i~&lt;/em&gt; and &lt;em&gt;w~i~&lt;/em&gt; are integers. He wants
+to take as valuable a load as possible, but he can carry at most &lt;em&gt;W&lt;/em&gt;
+pounds in his knapsack for some integer &lt;em&gt;W&lt;/em&gt;. Which items should he
+take? (This is called the 0-1 knapsack problem because each item must
+either be taken or left behind; the thief cannot take a fractional
+amount of an item or take an item more than once.)&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;In the &lt;strong&gt;&lt;em&gt;fractional knapsack problem&lt;/em&gt;&lt;/strong&gt;, the setup is the same, but
+the thief can take fractions of items, rather than having to make a
+binary (0-1) choice for each item. You can think of an item in the 0-1
+knapsack problem as being like a gold ingot, while an item in the
+fractional knapsack problem is more like gold dust.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/p&gt;
+
+&lt;p&gt;两个背包问题都有最优子结构，但0-1背包不能用贪心策略来解决，而部分背包可以。对于部分背包来说，因为可以只拿部分，所以不用考虑背包会不会不能塞满，所以总是先拿剩余物品中每镑最值钱的东西会导致全局最优解。而0-1背包则不然，因为物体不能只拿部分，所以可能会导致背包不能完全被利用。下图为一个实例。[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb21.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;图解： The greedy strategy does not work for the 0-1 knapsack problem.
+&lt;em&gt;(a)&lt;/em&gt; The thief must select a subset of the three items shown whose
+weight must not exceed 50 pounds. &lt;em&gt;(b)&lt;/em&gt; The optimal subset includes
+items 2 and 3. Any solution with item 1 is suboptimal, even though
+item 1 has the greatest value per pound. &lt;em&gt;(c)&lt;/em&gt; For the fractional
+knapsack problem, taking the items in order of greatest value per
+pound yields an optimal solution.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/p&gt;
+
+&lt;p&gt;0-1背包不能用贪心策略来求解，但动态规划确实使用它的。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;参考： introduction to algorithm –third edition&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/em&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;2010/3/27 by Adoo | homepage: &lt;a href="http://www.roading.org/"&gt;www.roading.org&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb18.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image18.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb19.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image19.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb20.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image20.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb21.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image21.png&lt;/p&gt;</summary><category term="c++"></category><category term="greedy algorithm"></category><category term="Introduction to algorithm"></category></entry><entry><title>最优二叉查找树</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html" rel="alternate"></link><updated>2012-03-26T11:56:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-26:/algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html</id><summary type="html">&lt;p&gt;假如我们要设计一个简单的程序将一段英文翻译成法语，那么就需要为每个英语单词找到对应的法语单词，简单的做法是在单词库中对每个单词进行遍历查找。更快一点的做法是，我们可以将单词库建成一颗平衡二叉搜索树——用英文单词做Key,对应的法语单词做附属信息。第二种方法，虽然可以保证每个单词的查询时间控制在
+O(lgn),不过却也有不合理之处。由于单词出现的频率有高有低，于是一些常用单词离根节点很远，而一些很生僻的单词却在根节点附近。可见用一颗平衡二叉搜索树来做这个问题并不是非常高效，在这儿就引出了另一种二叉查找树——最优二叉查找树。&lt;/p&gt;
+&lt;h3&gt;问题定义&lt;/h3&gt;
+&lt;p&gt;假设给定一组有序的序列 &lt;em&gt;K&lt;/em&gt; = 〈&lt;em&gt;k~1~&lt;/em&gt;, &lt;em&gt;k&lt;/em&gt;~2~, ...,
+&lt;em&gt;k~n~&lt;/em&gt;〉，在查找的过程中被查找的键是&lt;em&gt;k~i~&lt;/em&gt;的概率是&lt;em&gt;p~i~&lt;/em&gt;
+。同时因为有一些单词是
+&lt;em&gt;K&lt;/em&gt;中不存在的,因此我们用n+1个虚拟键来表示这些不存在于&lt;em&gt;K&lt;/em&gt;中的键，分别为&lt;em&gt;d&lt;/em&gt;~0~,
+&lt;em&gt;d&lt;/em&gt;~1~, &lt;em&gt;d&lt;/em&gt;~2~, ..., &lt;em&gt;d~n~&lt;/em&gt; 。其中 &lt;em&gt;d~0~&lt;/em&gt;代表所有比 &lt;em&gt;k&lt;/em&gt;~1~小的键, &lt;em&gt;d~n~&lt;/em&gt;
+表示 所有比&lt;em&gt;k~n~&lt;/em&gt;大的键,对于 &lt;em&gt;i&lt;/em&gt; = 1, 2, ..., &lt;em&gt;n&lt;/em&gt; -1, 虚拟键&lt;em&gt;d~i~&lt;/em&gt;
+表示所有位于 &lt;em&gt;k~i~&lt;/em&gt; 和&lt;em&gt;k~i+1~&lt;/em&gt;之间的键。对于每一个&lt;em&gt;d~i~&lt;/em&gt;,
+我们有一个概率&lt;em&gt;q~i~&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;对于每次搜索，非成功，即失败，所以有：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb13.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;因为对于每个关键字和虚拟键的概率都是已知的，所以我们可以求出一颗二叉搜索树的期望值：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb14.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;depth~&lt;em&gt;T&lt;/em&gt;~
+代表结点在树种的深度。而我们的目标就是要建立起一颗搜索期望值最小的二叉树——也就是最优二叉搜索树。&lt;/p&gt;
+&lt;h3&gt;动态规划的解法&lt;/h3&gt;
+&lt;p&gt;很显然，假如k~i~是最优二叉搜索树的根节点，那么它的左子树和右子树必然是最优二叉搜索树。由此可见，这个问题拥有最优子结构。&lt;/p&gt;
+&lt;p&gt;要注意到，当一棵树成为另一棵树的子树的时候，由于每个结点的深度增加了1，所以搜索期望代价增加量为所有结点的概率总和：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb15.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;所以对于一棵根结点为 &lt;em&gt;k~r~&lt;/em&gt; 包含有结点&lt;em&gt;k~i~&lt;/em&gt;, ...,
+&lt;em&gt;k~j~&lt;/em&gt;的最优二叉搜索树，我们有：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt; ] = &lt;em&gt;p~r~&lt;/em&gt; + (&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;r&lt;/em&gt; - 1] + &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;r&lt;/em&gt; - 1)) +
+(&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;r&lt;/em&gt; + 1, &lt;em&gt;j&lt;/em&gt;] + &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;r&lt;/em&gt; + 1, &lt;em&gt;j&lt;/em&gt;)).&lt;/p&gt;
+&lt;p&gt;注意到：&lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;) = &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;r&lt;/em&gt; - 1) + &lt;em&gt;p~r~&lt;/em&gt; + &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;r&lt;/em&gt; + 1,
+&lt;em&gt;j&lt;/em&gt;)，所以：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt; ] = &lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;r&lt;/em&gt; - 1] + &lt;em&gt;e&lt;/em&gt;[&lt;em&gt;r&lt;/em&gt; + 1, &lt;em&gt;j&lt;/em&gt;] + &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;如此一来，我们可以建立起递归式了：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb16.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt; ]
+记录了最优二叉查找树中的期望搜索代价，为了可以建立起二叉搜索树的结构，我们需要一个&lt;em&gt;root&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;,
+&lt;em&gt;j&lt;/em&gt; ]来记录根结点&lt;em&gt;k~r~&lt;/em&gt;的下标。&lt;/p&gt;
+&lt;p&gt;在下面的伪码中，用表 &lt;em&gt;e&lt;/em&gt;[1 ‥ &lt;em&gt;n&lt;/em&gt; + 1, 0 ‥ &lt;em&gt;n&lt;/em&gt;]来存储&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;]
+。第一维需要到&lt;em&gt;n&lt;/em&gt; + 1 而不是 &lt;em&gt;n&lt;/em&gt; 因为有子树只包含虚拟键
+&lt;em&gt;d~n~&lt;/em&gt;，我们需要计算和存储 &lt;em&gt;e&lt;/em&gt;[&lt;em&gt;n&lt;/em&gt; + 1, &lt;em&gt;n&lt;/em&gt;].
+第二维需要从0开始是因为有子树只包含虚拟键&lt;em&gt;d&lt;/em&gt;~0~,
+我们需要计算和存储&lt;em&gt;e&lt;/em&gt;[1, 0]. 此外，除了用表&lt;em&gt;root&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;
+]来记录根结点&lt;em&gt;k~r~&lt;/em&gt;的下标外，我们还需要一个表&lt;em&gt;w&lt;/em&gt;[1 ‥ &lt;em&gt;n&lt;/em&gt; + 1, 0 ‥
+&lt;em&gt;n&lt;/em&gt;]，来记录&lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;)以提高效率——这样就不必每次都从头计算&lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;,
+&lt;em&gt;j&lt;/em&gt;)了。对于 1 ≤ &lt;em&gt;i&lt;/em&gt; ≤ &lt;em&gt;n&lt;/em&gt;. 且 &lt;em&gt;j&lt;/em&gt; ≥ &lt;em&gt;i&lt;/em&gt;, 我们有：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;) = &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt; - 1) + &lt;em&gt;p~j~&lt;/em&gt;+ &lt;em&gt;q~j~&lt;/em&gt;&lt;/p&gt;
+&lt;h4&gt;伪码：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb17.png" title="image" /&gt;][]&lt;/h4&gt;
+&lt;h4&gt;C++的实现: &lt;span style="color: blue"&gt;&lt;/span&gt;&lt;/h4&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c"&gt;#include&amp;lt;iostream&amp;gt;&lt;/span&gt;
+&lt;span class="c"&gt;#include&amp;lt;numeric&amp;gt;&lt;/span&gt;
+&lt;span class="c"&gt;#include&amp;quot;LSC.h&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;double&lt;/span&gt; &lt;span class="n"&gt;optimal_bst&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;float&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;float&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;double&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;dob_array&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;2&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;double&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;dob_array&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;2&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; !&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;2&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;]=&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;];&lt;/span&gt;
+        &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;]=&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;!&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1 &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; !&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;2&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+            &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric_limits&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+            &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; !&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+                &lt;span class="n"&gt;double&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]){&lt;/span&gt;
+                    &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                    &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;]=&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;double&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;1&lt;span class="p"&gt;][&lt;/span&gt;5&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="n"&gt;delete_dob_array&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;2&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;delete_dob_array&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;2&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt;  &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;float&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;6&lt;span class="p"&gt;]={&lt;/span&gt;0&lt;span class="p"&gt;.&lt;/span&gt;05&lt;span class="p"&gt;,&lt;/span&gt; 0&lt;span class="p"&gt;.&lt;/span&gt;10&lt;span class="p"&gt;,&lt;/span&gt; 0&lt;span class="p"&gt;.&lt;/span&gt;05&lt;span class="p"&gt;,&lt;/span&gt; 0&lt;span class="p"&gt;.&lt;/span&gt;05&lt;span class="p"&gt;,&lt;/span&gt; 0&lt;span class="p"&gt;.&lt;/span&gt;05&lt;span class="p"&gt;,&lt;/span&gt; 0&lt;span class="p"&gt;.&lt;/span&gt;10&lt;span class="p"&gt;};&lt;/span&gt;
+    &lt;span class="n"&gt;float&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;5&lt;span class="p"&gt;]={&lt;/span&gt;0&lt;span class="p"&gt;.&lt;/span&gt;15&lt;span class="p"&gt;,&lt;/span&gt; 0&lt;span class="p"&gt;.&lt;/span&gt;10&lt;span class="p"&gt;,&lt;/span&gt; 0&lt;span class="p"&gt;.&lt;/span&gt;05&lt;span class="p"&gt;,&lt;/span&gt; 0&lt;span class="p"&gt;.&lt;/span&gt;10&lt;span class="p"&gt;,&lt;/span&gt; 0&lt;span class="p"&gt;.&lt;/span&gt;20 &lt;span class="p"&gt;};&lt;/span&gt;
+    &lt;span class="n"&gt;const&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="nb"&gt;size&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;5&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;dob_array&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;size&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;size&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;optimal_bst&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;size&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;delete_dob_array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;size&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;p&gt;上面用到的两个函数dob_array 和 delete_dob_array
+是在前一篇笔记&lt;a href="http://www.roading.org/?p=865"&gt;最长公共子序列&lt;/a&gt;中实现的。
+此外，我们可以定义一个函数来输出一下树的结构，也就是课后练习15.5-2：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;void&lt;/span&gt; &lt;span class="n"&gt;print_optimal_bst&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;];&lt;/span&gt;
+        &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&amp;quot;&lt;span class="n"&gt;k&lt;/span&gt;&amp;quot;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&amp;quot;&lt;span class="n"&gt;k&lt;/span&gt;&amp;quot;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&amp;quot;&lt;span class="s"&gt;&amp;#39;s lefe child is &amp;quot;;&lt;/span&gt;
+&lt;span class="s"&gt;        if(r-1&amp;lt;i)&lt;/span&gt;
+&lt;span class="s"&gt;            std::cout&amp;lt;&amp;lt;&amp;quot;d&amp;quot;&amp;lt;&amp;lt;r-1&amp;lt;&amp;lt;std::endl;&lt;/span&gt;
+&lt;span class="s"&gt;        else&lt;/span&gt;
+&lt;span class="s"&gt;            print_optimal_bst(root, i, r-1);    &lt;/span&gt;
+&lt;span class="s"&gt;        std::cout&amp;lt;&amp;lt;&amp;quot;k&amp;quot;&amp;lt;&amp;lt;r&amp;lt;&amp;lt;&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="n"&gt;child&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &amp;quot;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&amp;quot;&lt;span class="n"&gt;d&lt;/span&gt;&amp;quot;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+             &lt;span class="n"&gt;print_optimal_bst&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;    
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/em&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;2010/3/26 by Adoo | homepage:www.roading.org&lt;/em&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb13.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image13.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb14.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image14.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb15.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image15.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb16.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image16.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb17.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image17.png&lt;/p&gt;</summary><category term="c++"></category><category term="最优二叉搜索树"></category></entry><entry><title>最长单调子序列问题</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html" rel="alternate"></link><updated>2012-03-22T17:19:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-22:/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html</id><summary type="html">&lt;blockquote&gt;
+&lt;h5&gt;Exercises 15.4-5&lt;/h5&gt;
+&lt;p&gt;Give an &lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;^2^)-time algorithm to find the longest monotonically
+increasing subsequence of a sequence of &lt;em&gt;n&lt;/em&gt; numbers。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Let X is the sequence of the sequence of n numbers.&lt;/li&gt;
+&lt;li&gt;Let Y is the sorted number of the sequence of that n numbers.&lt;/li&gt;
+&lt;li&gt;Find the LCS of the X and Y.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;font color="#333333" face="Helvetica"&gt;这种解法的核心在于问题的转化。求一个序列的最长单调子序列，先由其排序得一个有序的序列。于是问题可以转化为求原序列和有序序列的&lt;a href="http://www.roading.org/?p=865"&gt;最长公共子序列&lt;/a&gt;。&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;font color="#333333" face="Helvetica"&gt;一开始没想出来，网上搜到&lt;a href="http://ripcrixalis.blog.com/"&gt;Rip's
+Infernal Majesty&lt;/a&gt;的博客，茅塞顿开。&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;font color="#333333" face="Helvetica"&gt;算法导论接下来的一题要求用&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;
+lg &lt;em&gt;n&lt;/em&gt;)-求出最长子序列.原题如下：&lt;/font&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h5&gt;Exercises 15.4-6: ⋆&lt;/h5&gt;
+&lt;p&gt;Give an &lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt; lg &lt;em&gt;n&lt;/em&gt;)-time algorithm to find the longest
+monotonically increasing sub-sequence of a sequence of &lt;em&gt;n&lt;/em&gt; numbers.
+(&lt;em&gt;Hint:&lt;/em&gt; Observe that the last element of a candidate subsequence of
+length &lt;em&gt;i&lt;/em&gt; is at least as large as the last element of a candidate
+subsequence of length &lt;em&gt;i&lt;/em&gt; - 1. Maintain candidate subsequences by
+linking them through the input sequence.)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我头脑愚笨，加上今天确实有些头昏，有答案都没看懂，哎，贴出&lt;a href="http://ripcrixalis.blog.com/"&gt;Rip's Infernal
+Majesty&lt;/a&gt;的答案，留待来日慢慢回味。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We can solve the longest increasing subsequence problem using only
+arrays and binary search. It processes the sequence elements in order,
+for each new X[i], maintaining a candidate sequence S by: &lt;br /&gt;
+• if X[i] is larger than the last element in S, add X[i] into S. &lt;br /&gt;
+• otherwise, find the smallest element that is larger than X[i], S[k]
+&amp;lt; X[k] and X[i] ≤ S[k+1], replace S[k+1] with X[i]. &lt;br /&gt;
+After finishing processing all n numbers, the length of S is is length
+of LIS of X. &lt;br /&gt;
+LIS(X, n) &lt;br /&gt;
+1 L = 0 &lt;br /&gt;
+2 for &lt;em&gt;i&lt;/em&gt; = 1, 2, … n &lt;br /&gt;
+3 binary search for the largest positive &lt;em&gt;j&lt;/em&gt; ≤ L such that X[M[&lt;em&gt;j&lt;/em&gt;]] &amp;lt;
+X[&lt;em&gt;i&lt;/em&gt;] (or set &lt;em&gt;j&lt;/em&gt; = 0 if no such value exists) &lt;br /&gt;
+4 P[&lt;em&gt;i&lt;/em&gt;] = M[&lt;em&gt;j&lt;/em&gt;] &lt;br /&gt;
+5 if &lt;em&gt;j&lt;/em&gt; == L or X[&lt;em&gt;i&lt;/em&gt;] &amp;lt; X[M[j+1]] &lt;br /&gt;
+6 M[&lt;em&gt;j&lt;/em&gt;+1] = &lt;em&gt;i&lt;/em&gt; &lt;br /&gt;
+7 L = max(L, &lt;em&gt;j&lt;/em&gt;+1) &lt;br /&gt;
+The algorithm stores values in two arrays: &lt;br /&gt;
+• M[&lt;em&gt;j&lt;/em&gt;] — stores the position &lt;em&gt;k&lt;/em&gt; of the smallest value X[&lt;em&gt;k&lt;/em&gt;] such
+that there is an increasing subsequence of length &lt;em&gt;j&lt;/em&gt; ending at X[&lt;em&gt;k&lt;/em&gt;]
+on the range &lt;em&gt;k&lt;/em&gt; ≤ &lt;em&gt;i&lt;/em&gt; (note we have &lt;em&gt;j&lt;/em&gt; ≤ &lt;em&gt;k&lt;/em&gt; ≤ &lt;em&gt;i&lt;/em&gt; here). &lt;br /&gt;
+• P[&lt;em&gt;k&lt;/em&gt;] — stores the position of the predecessor of X[&lt;em&gt;k&lt;/em&gt;] in the
+longest increasing subsequence ending at X[&lt;em&gt;k&lt;/em&gt;]. &lt;br /&gt;
+L is the length of the longest increasing sequence. The actual longest
+sequence can be found by backtracking through the P array: the last
+item of the longest sequence is in X[M[L]], the second-to-last item is
+in X[P[M[L]]], etc. Thus, the sequence has the form &lt;br /&gt;
+…, X[P[P[M[L]]]], X[P[M[L]]], X[M[L]]. &lt;br /&gt;
+Because the algorithm performs a single binary search per sequence
+element, its total time can be expressed using as O(&lt;em&gt;n&lt;/em&gt; log &lt;em&gt;n&lt;/em&gt;).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;问题来自算法导论，参考博客：&lt;a href="http://ripcrixalis.blog.com/"&gt;Rip's Infernal Majesty&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;2010/3/22 by Adoo | homepage:www.roading.org&lt;/em&gt;&lt;/p&gt;
+&lt;/p&gt;</summary><category term="LIS"></category></entry><entry><title>动态规划基础</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html" rel="alternate"></link><updated>2012-03-19T17:47:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-19:/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html</id><summary type="html">&lt;p&gt;前一篇笔记有过一个动态编程的实例——&lt;a href="http://www.roading.org/?p=792"&gt;rod
+cutting&lt;/a&gt;。这篇笔记主要了解动态规划的基础理论和弄清楚何时运用动态规划。对于何时来运用动态规划来寻得问题的解，取决于两个重要因素：最优子结构和重叠子问题。&lt;/p&gt;
+&lt;h3&gt;最优子结构(Optimal substructure)&lt;/h3&gt;
+&lt;p&gt;如果一个问题的最优解包含了它子问题的最优解，那么这个问题具有最优子结构。&lt;span style="background-color: #ffffff; color: #4f81bd"&gt;当一个问题包含有最优子结构时，往往暗示着这个问题应该使用动态规划来解决（当然，也可能意味着贪心算法是一种好的的解决办法，这一点会在16章讨论到）&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;可以依照一个共同的模式来发现最优子结构：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;\1. You show that a solution to the problem consists of a makeing a
+choice. … &lt;br /&gt;
+2. You suppose that for a given porblem, you are given the choice that
+lead to an optimal solution. … &lt;br /&gt;
+3. Given this choice, you determine which subproblem ensue and how to
+best charatcerize the resulting space of subproblems. … &lt;br /&gt;
+4. You show that the solutions to the subproblems used within an
+optimal solutionsto the problem must themselves be optimal by using a
+“cut and paste” technique. …&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;用无权最短路径和无权最长路径两个例子，来演示这个模型。&lt;/p&gt;
+&lt;p&gt;假设有图 G=(V,E)，且u,v∈V.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;无权最短路径&lt;/strong&gt;：找出u到v的无权最短路径。假定u,v
+是不同点(相同就没什么好讨论了)。我们先假设 w 是u-&gt;v 最短路径 p
+上的一个点(第二步，做一个选择，并假设它导致最优解)，于是最短路径 p
+可以分为两段子路径,子路径p~1~为u-&gt;w;子路径p~2~为w-&gt;v(第三步，描述子问题空间)。显然，p~1~与p~2~也必须是各自子路径的最短路径，不然最短路径p&amp;lt;p~1~+p~2~的长度,这与p=p~1~+p~2~矛盾。于是第四点得证。也就是说这个问题有最优子结构。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;无权最长路径&lt;/strong&gt;：找出u到v的无权最长路径，当然这条路径不能包含环路。同样的办法先假设
+w 是u-&gt;v 最长路径 p
+上的一个点，因此可以得出子路径p~1~和p2，有p=p~1~+p~2~。那么这时p1和p2一定是u-&gt;w与w-&gt;v的最长子路径吗？不是的，我们看下图这种情况：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb10.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;u-&gt;w的最长路径为：u-&gt;v-&gt;s-&gt;w.&lt;/p&gt;
+&lt;p&gt;w-&gt;v的最长路径为： w-&gt;u-&gt;v.&lt;/p&gt;
+&lt;p&gt;假如p1和p2是u-&gt;w与w-&gt;v的最长子路径，那么p=u-&gt;v-&gt;s-&gt;w-&gt;u-&gt;v。这个时候p显然不是最长路径，因为环路形成了。所以这个问题不包含最优子结构。&lt;/p&gt;
+&lt;p&gt;感觉上两个问题非常类似，但是为什么结果却截然相反呢？区别在于第一个问题的子问题是相互独立，而第二个问题的子问题之间却互有依赖关系——p1和p2如果被独立看待，就有可能产生环路。&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;重叠子问题(Overlapping subproblems)&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;使用动态规划求解的第二个必要因素是子问题必须“很小”。也就是说递归算法不能总是产生新的子问题，动态规划求解的意义在于，它记录子问题的解，使得子问题可以只计算一遍，如果总是产生新的子问题，那么也就失去了使用动态规划的意义，因为记录下的子问题的解，不被再用到。&lt;/p&gt;
+&lt;p&gt;这儿可以比较一下动态规划和分治思想，两者虽然都是将问题分割为子问题，但又有很大的不同，分治思想的主要目的在于减小问题的规模，而动态规划则主要为了减少重复的计算。因此，动态规划适用于子问题重叠且独立的情况。&lt;/p&gt;
+&lt;p&gt;动态规划一般采用自下向上的模式，其实自顶而下也是一种选择，如&lt;a href="http://www.roading.org/?p=792"&gt;rod
+cutting&lt;/a&gt;
+中就有这种解法。常规的自顶向下有很差的效率，加入“备忘录”记录之后，其实与自下而上复杂度是一样的。也就是说动态规划中采用自顶向下和自下而上的复杂度是一样的，但通常自下而上，用有更高的效率，因为它采用的是迭代的方法，而自顶而下用的则是递归。但是，当问题中的一些子问题是完全不用求解的时候，那么自顶而下可能是一种更好的选择。&lt;/p&gt;
+&lt;p&gt;动态规划算法的运行时间取决于两个因素的积：一是有多少个子问题，二则是每一个子问题我们有多少选择。&lt;/p&gt;
+&lt;p&gt;总结：动态规划算法的运用有两个必要条件，一是问题包含最优子结构，二是有重叠子问题。第一点保证求解的正确性，第二点则是代价问题。简而言之，我认为当问题含有&lt;span style="color: #ff0000"&gt;独立重叠&lt;/span&gt;的子问题时，往往意味着该使用动态规划。子问题独立，应该可以保证存有最优子结构。&lt;/p&gt;
+&lt;p&gt;参考：算法导论第三版&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/em&gt;&lt;/p&gt;
+&lt;div align="right"&gt;
+*2012/3/19 By Adoo | Homepage:*[*www.roading.org*][]
+
+&lt;/div&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb10.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image10.png&lt;/p&gt;</summary><category term="dynamic programming，elements，DP"></category></entry><entry><title>动态规划笔记（1）——Rod cutting</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html" rel="alternate"></link><updated>2012-03-08T12:16:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-08:/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html</id><summary type="html">&lt;p&gt;动态规划（dynamic programming
+）,与“分治思想”有些相似，都是利用将问题分为子问题，并通过合并子问题的解来获得整个问题的解。于“分治”的不同之处在于，对于一个相同的子问题动态规划算法不会计算第二次，其实现原理是将每一个计算过的子问题的值保存在一个表中。&lt;/p&gt;
+&lt;p&gt;动态规划一般被用于解决“最优解”问题。编写动态规划算法可以按照以下四个步骤(引自原文)：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;font size="1"&gt;1. Characterize the structure of an optimal solution. &lt;br /&gt;
+2. Recursively define the value of an optimal solution. &lt;br /&gt;
+3. Compute the value of an optimal solution, typically in a bottom-up
+fashion. &lt;br /&gt;
+4. Construct an optimal solution from computed information.&lt;/font&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;前三步可以求出最优解的值，如果仅是为了求出最优解的值，第四步可省略。第四步用来获得最优解，这种时候通常要在第三步时维持一些额外的数据信息。&lt;/p&gt;
+&lt;h3&gt;Rod cutting&lt;/h3&gt;
+&lt;p&gt;简单的理论之后，看一个切棒子(Rod cutting
+，撇脚的翻译)的具体问题。问题如下：给你一根长
+&lt;em&gt;n&lt;/em&gt;英尺的棒子和一份关于该棒子的价目表如下（其中 &lt;em&gt;i =
+1,2,3,…,n&lt;/em&gt;），请问如何将这根棒子卖出最高的价格，可以对棒子进行切割。&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;h4&gt;常规的解法&lt;/h4&gt;
+&lt;p&gt;假设最优的切割方法是切为 k 段, 1&amp;lt;=k&amp;lt;=n, 切割的方式为：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb1.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;则其总价格为：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb2.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;不像杂乱的切法，我们可以想象这样一种切法，每一刀切下去之后将棒子分为左右两段，而下一刀总从右段下手，依此类推。那么：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb3.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;根据上述公式，可以很容易的写出相应的代码：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb4.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;这段代码提供两个参数 。p 是一个数组，它存储着一份价目表，而 n
+则表示要切割的棒子的长度。当 n 不大时上述的算法或许简单管用，但是一旦 n
+稍大，运行时间将会成几何倍数增加。为什么会这样慢？其一，是因为其复杂度达到
+O(2^n^),另外则由于递归的次数太多了(多达2^n-1^次)。&lt;/p&gt;
+&lt;p&gt;仔细观察不难发现，上述算法做了太多的重复工作，比方Cut-Rod(p,n),要递归调用Cut-Rod(p,
+n-i), 其中 i=1,2,…,n。但对于其中Cut-Rod(p,n)中递归调用的 Cut-Rod(p,
+n-1)又要重复计算 Cut-Rod(p,n-i-1)。&lt;/p&gt;
+&lt;p&gt;对于上述情况动态规划就能派上用场了。&lt;/p&gt;
+&lt;h3&gt;用动态规划算法来切棒子&lt;/h3&gt;
+&lt;p&gt;动态规划的想法很简单，利用一个表来存储子问题的解。只有表中没有这个子问题的解的时候，才真正去求这个子问题的解并将该解保存到表中，否则直接用表中的解。&lt;/p&gt;
+&lt;p&gt;一般有自顶向下和自下而上两种记忆法来实现动态规划。&lt;/p&gt;
+&lt;p&gt;自顶而下：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb5.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb6.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;自上而下：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb7.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;上述的方法都只求出了最优的值，其解决方案并没有记录下来。也就是说对于切棒子这个问题来说，只求出了最大的总价格，至于怎么切才能卖出这样的价钱并没有解决。要想获得切法，则需要一个额外的数组来存取一些分割信息。&lt;/p&gt;
+&lt;p&gt;具体扩展后的伪码如下：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb8.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;上面代码中数组 s 用 s[i] 记录了长度为 i
+的棒子的最优切法的第一部分长度，这一点让我颇受启发。利用数组 s
+可以轻易输出最优解法：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb9.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;font face="微软雅黑"&gt;欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/font&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;2012/3/8 By Adoo | Homepage:&lt;/em&gt;&lt;a href="http://www.roading.org"&gt;&lt;em&gt;www.roading.org&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb1.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image1.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb2.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image2.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb3.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image3.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb4.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image4.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb5.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image5.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb6.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image6.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb7.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image7.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb8.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image8.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb9.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image9.png&lt;/p&gt;</summary><category term="dynamic programming"></category><category term="rod cutting"></category></entry><entry><title>扩展数据结构</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%89%a9%e5%b1%95%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.html" rel="alternate"></link><updated>2012-01-05T16:08:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-01-05:/algorithm/introductiontoalgorithm/%e6%89%a9%e5%b1%95%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.html</id><summary type="html">&lt;p&gt;&lt;em&gt;&lt;font face="黑体"&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;div&gt;
+摘要：在一般的应用中，极少有可能要构建一种全新的数据结构，大部分情况下会使用一些已有的数据结构，或者已有的数据结构进行扩展，以使得其能支持特殊的功能。当然即便是扩展也需要做一些工作。
+
+&lt;/div&gt;
+
+&lt;div align="right"&gt;
+欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;/font&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;div align="right"&gt;
+*2012/1/5 By Adoo | Homepage:*[*www.roading.org*][]
+
+&lt;div align="right"&gt;
+
+* * * * *
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;h3&gt;动态顺序统计(Dynamic oder statistics)&lt;/h3&gt;
+&lt;p&gt;关于顺序统计这个问题，在&lt;a href="http://www.roading.org/?p=350"&gt;《第九章 中位数和顺序统计量（Medians and Order
+Statistic）》&lt;/a&gt;介绍了在&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)时间内获取一组数据中第
+&lt;em&gt;i&lt;/em&gt;小的数据。在算导第十四章介绍了另外一种方式来求第
+&lt;em&gt;i&lt;/em&gt;小的数据，它的算法复杂度为&lt;em&gt;O&lt;/em&gt;(lg
+&lt;em&gt;n&lt;/em&gt;)，但却要依赖于另外一种数据结构顺序统计树(order statistic tree)。&lt;/p&gt;
+&lt;p&gt;顺序统计树，是从红黑树扩展而来。相较于红黑树，一个顺序统计树的结点&lt;em&gt;x，&lt;/em&gt;比一个红黑树的结点要多拥有一个字段
+size 。size
+为以&lt;em&gt;x&lt;/em&gt;为根结点的子树所包含的所有结点的数目(也包括x本身)。一棵顺序统计树如下图所示：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/01/image_thumb2.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;不难得出一条结论：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;font size="2"&gt; x.size=x.left.size+x.right.size+1&lt;/font&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在一棵顺序统计树中，可以很轻便的求该树中第 &lt;em&gt;i&lt;/em&gt;小的结点：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/01/image_thumb3.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;如左侧伪码所示，先求出 x 结点的排位r,因 x
+不小于其左子树的所有结点，所以r=x.left.size+1.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若 r 等于 i 自不必说。&lt;/li&gt;
+&lt;li&gt;若 r 大于 i ，说明所找的数，排在 x 之前，应从排在x之前的数中找第 i
+    小的数。即，从x 的左子树中找第 i 小的数。&lt;/li&gt;
+&lt;li&gt;若 r 小于 i ，则应该在比 r 大的数种找第 i-r 小的数，即在 x
+    的右子树中找第 i-r 小的数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;同样也可以在&lt;em&gt;O&lt;/em&gt;(lg &lt;em&gt;n&lt;/em&gt;)的时间内求得指定结点的排位：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/01/image_thumb4.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;因为 size
+记录的是以当前结点为根结点的子树所包含的所有结点的数目(也包括当前节点本身)，所以左侧伪码通过统计从x到根结点这条路径中本身为右孩子的结点本身以及它们的的左孩子的size
+来求得x 的排位。&lt;/p&gt;
+&lt;p&gt;顺序统计树以红黑树为基础进行扩展,所以红黑树的原有操作我们都可以继承下来。但是它增加了一个字段size,对于红黑树的删除和插入操作，我们不得不进行一些轻微的升级，以使得size字段总能记录正确的信息。关于红黑树的插入操作，我们可以分为两部分：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The first phase goes down the tree from the root, inserting the new
+node as a child of an existing node. The second phase goes up the
+tree, changing colors and ultimately performing rotations to maintain
+the red-black properties.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对于维持size字段：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;in the first phase, we simply increment x.&lt;em&gt;size&lt;/em&gt; for each node &lt;em&gt;x&lt;/em&gt; on
+the path traversed from the root down toward the leaves. The new node
+added gets a &lt;em&gt;size&lt;/em&gt; of 1. The additional cost of maintaining the
+&lt;em&gt;size&lt;/em&gt; fields is &lt;em&gt;O&lt;/em&gt;(lg &lt;em&gt;n&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;div&gt;
+In the second phase, the only structural changes to the underlying
+red-black tree are caused by rotations, of which there are at most
+two. Moreover, a rotation is a local operation: only two nodes have
+their &lt;em&gt;size&lt;/em&gt; fields invalidated. The link around which the rotation is
+performed is incident on these two nodes. Referring to the code for
+LEFT-ROTATE(&lt;em&gt;T&lt;/em&gt;, &lt;em&gt;x&lt;/em&gt;) in Section 13.2, we add the following lines:&lt;/p&gt;
+&lt;p&gt;&lt;/div&gt;
+&lt;div&gt;
+12 y.&lt;em&gt;size&lt;/em&gt; = x. &lt;em&gt;size&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/div&gt;
+&lt;div&gt;
+13 x.&lt;em&gt;size&lt;/em&gt; = x.left.&lt;em&gt;size&lt;/em&gt; + &lt;em&gt;x.right.size&lt;/em&gt; + 1&lt;/p&gt;
+&lt;p&gt;&lt;/div&gt;
+&lt;div&gt;
+&lt;/div&gt;
+The change to RIGHT-ROTATE is symmetric.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;近似的原理，我们可以用来在删除操作中维持size字段，此处略。&lt;/p&gt;
+&lt;h3&gt;如何扩展数据结构&lt;/h3&gt;
+&lt;p&gt;一般我们可以以下面四条规则作为指引来扩展一个数据结构：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;li&gt;
+Choosing an underlying data structure
+&lt;/li&gt;
+&lt;li&gt;
+Determining additional information to be maintained in the underlying
+data structure.
+&lt;/li&gt;
+&lt;li&gt;
+Verifying that the additional information can be maintained for the
+basic modifying operations on the underlying data structure
+&lt;/li&gt;
+&lt;li&gt;
+Developing new operations.
+&lt;/li&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;一句很好的话:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;As with any prescriptive design method, you should not blindly follow
+the steps in the order given.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/01/image_thumb2.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/01/image2.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/01/image_thumb3.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/01/image3.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/01/image_thumb4.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/01/image4.png&lt;/p&gt;</summary><category term="Introduction to algorithm"></category><category term="Order Statistic tree"></category></entry><entry><title>在没有父指针情况下的红黑树插入操作</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%9c%a8%e6%b2%a1%e6%9c%89%e7%88%b6%e6%8c%87%e9%92%88%e6%83%85%e5%86%b5%e4%b8%8b%e7%9a%84%e7%ba%a2%e9%bb%91%e6%a0%91%e6%8f%92%e5%85%a5%e6%93%8d%e4%bd%9c.html" rel="alternate"></link><updated>2012-01-02T20:38:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-01-02:/algorithm/introductiontoalgorithm/%e5%9c%a8%e6%b2%a1%e6%9c%89%e7%88%b6%e6%8c%87%e9%92%88%e6%83%85%e5%86%b5%e4%b8%8b%e7%9a%84%e7%ba%a2%e9%bb%91%e6%a0%91%e6%8f%92%e5%85%a5%e6%93%8d%e4%bd%9c.html</id><summary type="html">&lt;div&gt;
+*&lt;font face="黑体"&gt;*
+
+&lt;div&gt;
+摘要：算导红黑树课后练习13.3-6，在没有父指针的情况下实现红黑树插入操作。
+
+&lt;/div&gt;
+
+&lt;div&gt;
+同时学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;/font&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/div&gt;
+&lt;div align="right"&gt;
+&lt;em&gt;2011/12/31 By Adoo | Homepage:&lt;/em&gt;&lt;a href="http://www.roading.org"&gt;&lt;em&gt;www.roading.org&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;13.3-6 &lt;br /&gt;
+Suggest how to implement RB-INSERT efﬁciently if the representation
+for red-black trees includes no storage for parent pointers.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;一个结点中没有父指针的红黑树与一个结点中有父指针的红黑树的差别在于，前者不能轻易回溯至其父节点。而对于插入操作的实现，又需要多次回溯父节点。如果能解决这个问题，问题将迎刃而解。对于插入操作的实现，我的方法是：用栈保存从根节点至插入结点路径中所有的结点。当然在恢复红黑属性的过程中要注意栈的维护，具体细节，看下面伪码：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/01/image_thumb.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;style type="text/css"&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;
+.csharpcode, .csharpcode pre
+{
+    font-size: small;
+    color: black;
+    font-family: consolas, &amp;quot;Courier New&amp;quot;, courier, monospace;
+    background-color: #ffffff;
+    /*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+    background-color: #f4f4f4;
+    width: 100%;
+    margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }&lt;/style&gt;
+
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/01/image_thumb1.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/01/image_thumb.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/01/image.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/01/image_thumb1.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/01/image1.png&lt;/p&gt;</summary><category term="Introduction to algorithm"></category><category term="red black trees"></category></entry><entry><title>Solution of CLRS 11.1 exercises</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html" rel="alternate"></link><updated>2011-12-14T14:43:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-14:/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html</id><summary type="html">&lt;ul&gt;
+&lt;li&gt;摘要:CLRS11.1 课后习题选做。两个题目：11.1-2 、11.1-3、 11.1-4&lt;/li&gt;
+&lt;li&gt;学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div align="right"&gt;
+*2011/12/14 By Adoo | Homepage:*[*www.roading.org*][]
+
+* * * * *
+
+&lt;/div&gt;
+
+&lt;div&gt;
+**Exercises 11.1-2**
+
+&lt;/div&gt;
+
+&lt;div&gt;
+A ***bit vector*** is simply an array of bits (0's and 1's). A bit
+vector of length *m* takes much less space than an array of *m*
+pointers. Describe how to use a bit vector
+&lt;a name="706"&gt;&lt;/a&gt;&lt;a name="IDX-223"&gt;&lt;/a&gt;to Represent a Dynamic Set of
+Distinct Elements with no Satellite Data. Dictionary Operations Should
+Run in *O*(1) Time.
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Solution(I get the result from &lt;a href="http://ripcrixalis.blog.com/2011/02/08/hello-world/"&gt;Rip’s blog&lt;/a&gt;, The original text is
+here for ease of reference.):&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Using a bit vector of length m, as our direct-address table to
+represent the dynamic set.Here m bits tags m slots of the table. The
+elements in the dynamic set is stored in the direct-address table
+itself. If slot k is allocated, bit k is 0. If slot k contains no
+element, bit k is 1.&lt;/p&gt;
+&lt;h4&gt;&lt;strong&gt;Bit Vector&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;The free-space list is often implemented as a bit map or bit vector.
+If a block is free, the bit is 1. If a block is allocated, the bit is
+0. Assume the following blocks are allocated, the rest free: 2, 3, 4,
+5, 8, 9, 10, 11, 12, 13, 17, 18, 25, 27 .The free-space bit map would
+be: 0011110011111100011000000111000000…&lt;/p&gt;
+&lt;p&gt;Adavantages of this approach include: &lt;br /&gt;
+· Relatively simple &lt;br /&gt;
+· Efficient to find the first free blocks or n consecutive free blocks
+on the disk.&lt;/p&gt;
+&lt;p&gt;Bit maps are useful only when it can be kept in main memory. But, as
+disks get larger, this is hard to do. 1.3 gigabyte disk with 512 byte
+blocks would need a bit map of over 310k to track its free blocks.
+Clustering the blocks in intervals of foul reduces this number to 78k
+per disk.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Exercises 11.1-3&lt;/strong&gt;&lt;/p&gt;
+&lt;div&gt;
+Suggest how to implement a direct-address table in which the keys of
+stored elements do not need to be distinct and the elements can have
+satellite data. All three dictionary operations (INSERT, DELETE, and
+SEARCH) should run in *O*(1) time. (Don't forget that DELETE takes as an
+argument a pointer to an object to be deleted, not a key.)
+
+&lt;/div&gt;
+
+&lt;div&gt;
+**Solution:**可以直接用链表来解决碰撞问题。对于搜索的话可以返回链表的指针，根据题目的条件来看，对于两个用户提供的两个
+key 相同的 object 我们是无法区分的，因此只能返回一组 key 相同的 objecet
+让用户用自己的方法来区分。
+
+&lt;/div&gt;
+
+&lt;div&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+
+&lt;/div&gt;
+
+&lt;div&gt;
+**Exercises 11.1-4:**
+
+&lt;/div&gt;
+
+&lt;div&gt;
+We wish to implement a dictionary by using direct addressing on a *huge*
+array. At the start, the array entries may contain garbage, and
+initializing the entire array is impractical because of its size.
+Describe a scheme for implementing a direct-address dictionary on a huge
+array. Each stored object should use *O*(1) space; the operations
+SEARCH, INSERT, and DELETE should take *O*(1) time each; and the
+initialization of the data structure should take *O*(1) time. (*Hint:*
+Use an additional stack, whose size is the number of keys actually
+stored in the dictionary, to help determine whether a given entry in the
+huge array is valid or not.)
+
+&lt;/div&gt;
+
+&lt;div&gt;
+**Solution:**一直没想出好的办法来解决这个问题，今天看《算法导论教师手册》有这个题的解答。觉得它的数据结构的思路比较巧妙：字典中每个元素带有一个索引，表示关于该元素的的
+key
+存储在辅助栈中的位置。而辅助栈用数组实现，因此可以随机访问。辅助栈中存储所有存在于字典中的元素的
+key ，于是形成了一个所谓 validating
+cycle。要判断从字典中直接读取到的元素是不是需要的数据，只需要取出该元素中的索引，判断这个索引是否有效（大于栈底而小于栈顶），然后通过索引获取栈中的
+key ,与自己需要的元素的 key
+比较看是否相等即可以。相等表示该数据是要找的数据，否则不是。
+
+&lt;/div&gt;
+
+&lt;div&gt;
+显而易见，通过这个数据结构模型来进行 SEARCH, INSERT 都为
+*O*(1)。至于DELETE 操作，需要将被删除的数据在栈中的 key 与栈顶存储的 key
+交换后再删除，同样可以达到*O*(1)，要注意的是删除过程中，需要更新与原栈顶中
+key 相关元素的索引。
+
+&lt;/div&gt;
+
+&lt;/p&gt;</summary><category term="bit vector"></category><category term="Exercises"></category><category term="Introduction to algorithm"></category></entry></feed>

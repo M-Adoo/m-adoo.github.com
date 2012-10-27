@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Chapter 12 二叉搜索树(Binary Search Tree) 1</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
+        
+        <link href="http://www.roading.org/feed/index.xml" type="application/atom+xml" rel="alternate" title="Adoo's blog Atom Feed" />
+        
+        
+        <link href="http://www.roading.org/feed/all.rss" type="application/rss+xml" rel="alternate" title="Adoo's blog RSS Feed" />
+        
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <div id="siteinfo"><a id="sitename" rel="nofollow" href="http://www.roading.org">Adoo's blog </a><span id="subsitename"> 怀理想主义，行务实之道。</span></div>
+
+		
+			
+<div id="header-search-form">
+<gcse:searchbox-only>Loading...</gcse:searchbox-only>
+</div>
+
+		
+                <div class="clear"></div>
+		<nav>
+			<ul id= "nav-pages">
+				
+				
+				    <li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
+				
+				    <li><a href="http://www.roading.org/pages/links.html">links</a></li>
+				
+				    <li><a href="http://www.roading.org/pages/message.html">Message</a></li>
+				
+				    <li><a href = "http://www.roading.org/tweets.html">Tweets</a></li>
+				    <li><a href="http://www.roading.org/archives.html">Archive</a></li>
+				
+		        </ul>
+			<ul id="nav-tags">
+				
+					
+				
+					
+				
+					
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+			</ul>
+			<div class="clear"></div>
+			<hr>
+			
+<div class="crumbs">
+<a href="http://www.roading.org" title ="Back to homepage">Home</a> »
+
+<a href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a> »
+
+Chapter 12 二叉搜索树(Binary Search Tree) 1
+</div>
+ 
+		</nav>
+	</header><!-- /#banner -->
+
+        
+    <div class="article-page">
+	<h1>Chapter 12 二叉搜索树(Binary Search Tree) 1</h1>
+	<div class="content">
+	      <div class="post-info">
+        <abbr class="published" title="2011-12-15T16:41:00">
+                Thu 15 December 2011
+        </abbr>
+        
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+        		
+	
+	    <abbr title="binary search tree&nbsp;&nbsp;inorder tree walk&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to binary search tree" href="http://www.roading.org/tag/binary-search-tree.html">binary search tree</a>
+	          
+		<a title="permalink to inorder tree walk" href="http://www.roading.org/tag/inorder-tree-walk.html">inorder tree walk</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	          
+	    </abbr>
+	
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+	
+	
+</div><!-- /.post-info -->
+	      <h3>何为二叉搜索树？</h3>
+<blockquote>
+<p>Such a tree can be represented by a linked data structure in which
+each node is an object. In addition to a <em>key</em> field and satellite
+data, each node <a name="797"></a><a name="IDX-254"></a>contains
+fields <em>left</em>, <em>right</em>, and <em>p</em> that point to the nodes corresponding
+to its left child, its right child, and its parent, respectively. If a
+child or the parent is missing, the appropriate field contains the
+value NIL. The root node is the only node in the tree whose parent
+field is NIL.</p>
+<p><strong><em>binary-search-tree property</em></strong>:Let <em>x</em> be a node in a binary search
+tree. If <em>y</em> is a node in the left subtree of <em>x</em>, then <em>key</em>[<em>y</em>] ≤
+<em>key</em>[<em>x</em>]. If <em>y</em> is a node in the right subtree of <em>x</em>, then
+<em>key</em>[<em>x</em>] ≤
+<em>key</em>[<em>y</em>].</p>
+</blockquote>
+<h3>遍历操作</h3>
+<p>可以用三种方式来遍历搜索二叉树：前序遍历(preorder tree walk)、中序遍历(inorder tree walk)、后续遍历(postorder tree walk)。其名字的由来，缘于根节点被呈现的次序，是在最前中间、还是最后。</p>
+<p>对于搜索二叉树来讲，由于其固有的特性（<strong><em>binary-search-tree property</em></strong>），中序遍历是按节点大小顺序方式遍历二叉树的。看一个递归版本的中序遍历代码：</p>
+<div class="codehilite"><pre><span class="n">INORDER</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">WALK</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+ <span class="k">if</span> <span class="n">x</span> <span class="err">≠</span> <span class="n">NIL</span>
+    <span class="n">then</span> <span class="n">INORDER</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">WALK</span><span class="p">(</span><span class="n">left</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+        <span class="n">print</span> <span class="n">key</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+        <span class="n">INORDER</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">WALK</span><span class="p">(</span><span class="n">right</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+</pre></div>
+
+
+<p>因根结点不小于所有左子树的节点，且不大于所有右子树的节点，所以上面的中序遍历的伪代码，输出的结果将按照从小到大排列。虽然递归用来表现算法简单明了，但在实际应用中为了更好的效率，我们可能更希望有一个迭代版。关于迭代版，会在做本节的习题12.1-3 时在来实现，另外，在用C++实现二叉搜索树这个数据结构的时候，也会采用迭代版。</p>
+<h3>搜索以及求最大最小节点的操作</h3>
+<p>根据二叉搜索树属性，这些都是很简单的操作，以下为这些操作的伪码：</p>
+<div class="codehilite"><pre><span class="c1">//搜索</span>
+<span class="no">ITERATIVE</span><span class="o">-</span><span class="no">TREE</span><span class="o">-</span><span class="no">SEARCH</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">x</span> <span class="err">≠</span> <span class="no">NIL</span> <span class="k">and</span> <span class="n">k</span> <span class="err">≠</span> <span class="n">key</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">key</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="n">then</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">left</span>
+        <span class="k">else</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">right</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1">// 最小值</span>
+<span class="no">TREE</span><span class="o">-</span><span class="no">MINIMUM</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">left</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="err">≠</span> <span class="no">NIL</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">left</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1">//最大值</span>
+<span class="no">TREE</span><span class="o">-</span><span class="no">MAXIMUM</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">while</span>  <span class="n">x</span><span class="p">.</span><span class="n">right</span><span class="err">≠</span> <span class="no">NIL</span>
+       <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">.</span> <span class="n">right</span>
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+		  <p style= "text-align:right;"><em>
+		  Thu 15 December 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
+		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html">本文原链</a>)</em></p>
+	    <span class = "left">Share this with your friends:</span>
+	    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+		<a class="bds_tsina"></a>
+		<a class="bds_qzone"></a>
+		<a class="bds_tqq"></a>
+		<a class="bds_douban"></a>
+		<a class="bds_taobao"></a>
+		<a class="bds_renren"></a>
+		<a class="bds_kaixin001"></a>
+		<a class="bds_twi"></a>
+		<a class="bds_copy"></a>
+	    </div>     
+	<div class="ds-thread"></div>
+	</div>
+        <div class="sidebar">
+		<div id="relative-articles">
+		<h3>Related Posts</h3>
+		<ul class="related-articles">
+		
+		
+		   
+		   <li><a title="斐波那契堆的C++实现" href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html">斐波那契堆的C++实现</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="B-树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">B-树的C++实现</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="算法导论——平摊分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html">算法导论——平摊分析</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="Chapter 13 Red-Black trees (红黑树)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-13-red-black-trees-%e7%ba%a2%e9%bb%91%e6%a0%91.html">Chapter 13 Red-Black trees (红黑树)</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Radix Tree 基数树" href="http://www.roading.org/algorithm/introductiontoalgorithm/radix-tree-%e5%9f%ba%e6%95%b0%e6%a0%91.html">Radix Tree 基数树</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 2" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html">Chapter 12 二叉搜索树(Binary Search Tree) 2</a></li>
+		   
+		
+		
+		
+		   <li class="selected">Chapter 12 二叉搜索树(Binary Search Tree) 1</li>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="Chapter 10 Exercises and Problems (2)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html">Chapter 10 Exercises and Problems (2)</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 10 Exercises（1）" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html">Chapter 10 Exercises（1）</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		</ul>
+		</div>
+		
+<h3>Contact me</h3>
+<div class="social">
+	<span style="font-size:15px">I'm here:</span>	
+	<a href="http://www.roading.org/feed/index.xml" type="application/atom+xml" title="Atom feed" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a>
+	
+
+	
+	<a href="http://twitter.com/Monkey_Adoo" title="@Monkey_Adoo"><img src="http://www.roading.org/theme/images/icons/twitter.png"></img></a>
+	
+	<a href="http://weibo.com/boringMonkey" title="@M-Adoo"><img src="http://www.roading.org/theme/images/icons/weibo.png"></img></a>
+	
+	<a href="http://douban.com/people/Monkey_Adoo" title="Adoo"><img src="http://www.roading.org/theme/images/icons/douban.png"></img></a>
+	
+	
+	<a rea="tomail" title="Adoo@outlook.com" href="mailto:Adoo@outlook.com"><img src="http://www.roading.org/theme/images/icons/email.png"></img></a>
+	
+	</div><!-- /.social -->
+	
+	</div>
+	</div>
+
+<div class="clear"></div>
+ <div id="footer">
+	<a class="right" href="#banner"  titile="Back to Top" rel="nofollow" title="Back to top">Top↑</a>
+	<ul id="footer-nav" class="right">
+	
+		<li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
+	
+		<li><a href="http://www.roading.org/pages/links.html">links</a></li>
+	
+		<li><a href="http://www.roading.org/pages/message.html">Message</a></li>
+	
+		<li><a href="http://www.roading.org/archives.html">Archive</a></li>
+	</ul>
+	<div class="clear"></div>
+	<p>Theme designed by Adoo. Powered by Pelican. &copy; 2011-2012</p>
+       </div>
+
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"adoo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+
+
+<!-- Google Search -->
+
+<script>
+  (function() {
+    var cx = '014593096765008582725:vpqn4f4zw88';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+	'//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-29709820-1");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+
+
+<!-- 百度分享 -->
+<script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+</script>
+<!-- Baidu Button END -->
+
+</body>
+</html>

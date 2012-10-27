@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>第八章（3） 基数排序（Radix Sort）</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
+        
+        <link href="http://www.roading.org/feed/index.xml" type="application/atom+xml" rel="alternate" title="Adoo's blog Atom Feed" />
+        
+        
+        <link href="http://www.roading.org/feed/all.rss" type="application/rss+xml" rel="alternate" title="Adoo's blog RSS Feed" />
+        
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <div id="siteinfo"><a id="sitename" rel="nofollow" href="http://www.roading.org">Adoo's blog </a><span id="subsitename"> 怀理想主义，行务实之道。</span></div>
+
+		
+			
+<div id="header-search-form">
+<gcse:searchbox-only>Loading...</gcse:searchbox-only>
+</div>
+
+		
+                <div class="clear"></div>
+		<nav>
+			<ul id= "nav-pages">
+				
+				
+				    <li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
+				
+				    <li><a href="http://www.roading.org/pages/links.html">links</a></li>
+				
+				    <li><a href="http://www.roading.org/pages/message.html">Message</a></li>
+				
+				    <li><a href = "http://www.roading.org/tweets.html">Tweets</a></li>
+				    <li><a href="http://www.roading.org/archives.html">Archive</a></li>
+				
+		        </ul>
+			<ul id="nav-tags">
+				
+					
+				
+					
+				
+					
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+			</ul>
+			<div class="clear"></div>
+			<hr>
+			
+<div class="crumbs">
+<a href="http://www.roading.org" title ="Back to homepage">Home</a> »
+
+<a href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a> »
+
+第八章（3） 基数排序（Radix Sort）
+</div>
+ 
+		</nav>
+	</header><!-- /#banner -->
+
+        
+    <div class="article-page">
+	<h1>第八章（3） 基数排序（Radix Sort）</h1>
+	<div class="content">
+	      <div class="post-info">
+        <abbr class="published" title="2011-10-02T16:37:00">
+                Sun 02 October 2011
+        </abbr>
+        
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+        		
+	
+	    <abbr title="c++&nbsp;&nbsp;Introduction to algorithm&nbsp;&nbsp;快速排序&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+	          
+		<a title="permalink to Introduction to algorithm" href="http://www.roading.org/tag/introduction-to-algorithm.html">Introduction to algorithm</a>
+	          
+		<a title="permalink to 快速排序" href="http://www.roading.org/tag/kuai-su-pai-xu.html">快速排序</a>
+	          
+	    </abbr>
+	
+	<abbr>In <a title="permalink to 算法导论" href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a></abbr>
+	
+	
+</div><!-- /.post-info -->
+	      <h3>算法模型</h3>
+<p>基数排序是一种用在老式穿卡机上的算法。至于穿卡机是怎么使用基数排序的，你可以参考算法导论第八章的描述。</p>
+<p>在之前两种比较排序——合并排序与快速排序中我们使用一种“分而治之”的策略，基数排序则使用另一种与之有有异曲同工之妙的策略。无论是合并排序还是快速排序，我们讲究的是在数组级别的“分而治之”；而基数排序我们讲究的是在元素级别的“分而治之”，例如我们将一个三位数分成，个位，十位，百位三部分。</p>
+<p>我们先来看一个实例，假如，我们要对七个三位数来进行排序，依次对其个位，十位，百位进行排序，如下图：</p>
+<p>[![wps_clip_image-1844][]][]</p>
+<p>[<br />
+][]</p>
+<p>很显然，每一位的数的大小都在[0，9]中，对于每一位的排序用计数排序再适合不过。</p>
+<h3>算法复杂度</h3>
+<p>对于n个d位数而言,如果基数排序的Stable
+Sort（注1）的算法复杂度为θ(n+k)，那么其本身的算法复杂度为θ(dn+kd)。这个就不用证明了。</p>
+<h3>进阶</h3>
+<p>到目前为止，基数排序似乎并不是太实用。首先，你发现好像位数是个麻烦事，比如一组数中间，既有是一位的，也有十位的，这时候似乎就不好用了；其次，如果一列数中间有负数，似乎也死翘翘了。还有就是，这哥们能排浮点数吗？</p>
+<p>当你看到某些教程或者文章的时候，作者会郑重提醒你，排序的数必须是整数，而且整数还不够还要必须是正数。其实对于负数也是可以的，对于实数也同样是可以的，在后面我会给出一个C++实现的对整数（正负数不论）进行基数排序的代码。</p>
+<p>其实，基数排序排序关键还是基于位，对于我们来讲讲位是基于十进制的。但对于计算机来讲，什么八进制，十进制，十六进制都是浮云，最实在的还是二进制。所以对于我们来讲int型5和55555两个数的位数是不一样的，一个一位，一个五位，但对于计算机来讲他们的位数是一样的，都是32位。</p>
+<p>当然，基于二进制的时候我们不是按一位一位来排，我们要按几位几位来排，选多少位最合适？在选多少位之前，我们先总结一条定理。</p>
+<p>定理：对于n个b-bit位的元素和一任意正数r&lt;=b（r代表选取的位数），在Stable
+Sort的时间复杂度为θ(n+k)的情况下，基数排序的时间复杂度为θ((b/r)(n+2^r^))。</p>
+<p>证明：每一次对r位进行排序，则总共进行b/r次Stable
+Sort排序。每一次选r位，显然k=2的r次方。所以θ(d（n+k）)=θ((b/r)(n+2^r^))。 <br />
+算法导论给出说明：当b&lt;
+lgn时，r=b可以得到最小复杂度；当b>=lgn时，r=lgn有最小复杂度。原谅我不能给出数学上的证明。</p>
+<h3>实例</h3>
+<p>回到之前说的关于有负数的时候怎么排序的问题上来，我们要注意的一点事和I负数在内存中存储的是补码。也就是说在我们基于二进制来进行排序的时候负数是用其补码来排序的而不是本身，所以经过基数排序以后会得出这样的序列，所有的正数在一边，所有的负数在一边，正数的一边是有序的，负数的一边也是有序的。但是正数的一边本应该是负数的位置，而负数的一边本应该是正数的位置。比方，我们对3，2，5，-1，-4，-2，-3排序后的结果会是：2，3，5，-4，-3，-2，-1.显然对于这样一个序列，只要在排序后将正数序列和负数序列互换位置就可以了。</p>
+<p>对整数进行基数排序的C++代码：</p>
+<p>~~~~ {.brush:bash}
+//RadixSort.h
+//By Adoo
+//2011/10/2#ifndef RADIX_SORT</p>
+<h1>define RADIX_SORT</h1>
+<h1>include<deque></h1>
+<h1>include<iterator>template<typename InIt></h1>
+<p>void RadixSort(InIt BegIt,InIt EndIt )
+{
+    int byte=8<em>sizeof(</em>BegIt);
+    int count=std::distance (BegIt,EndIt);
+    int size=std::log(double(count))/std::log(double(2));
+    size=byte<size ? byte : size;
+    int from=1;  do
+    {
+        RadixCounting(BegIt,EndIt,from,size);
+        from+=size;
+    }while(from<byte);    for(auto index=BegIt;index!=EndIt; ++index)
+    {
+        if(*index<0)
+        {
+            std::vector< std::iterator_traits<InIt>::value_type &gt; vec(index,EndIt);
+            vec.insert(vec.end(),BegIt,index);
+            std::copy(vec.begin(),vec.end(),BegIt);
+            return;
+        }
+    }};template<typename InIt>
+void RadixCounting(InIt BegIt,InIt EndIt ,const int From, const int Size)
+{//counting sort the elements form BegIt to EndIt base on the Size bits from From;   //the counter
+    int capa=std::pow(double(2),Size);
+    std::vector<int> Counter(capa,0);  int clip=capa-1;
+    for(auto Index=BegIt;Index!=EndIt;++Index)
+        ++Counter[((<em>Index)&gt;&gt;From-1)&amp;clip];    for(int i=1;i!=capa;++i)
+        Counter[i]+=Counter[i-1];    std::vector<int> Result(Counter[capa-1],0);
+    for(std::reverse_iterator<InIt> RIter(EndIt),REnd(BegIt); RIter!=REnd ;++RIter)
+    {
+        int index=((</em>RIter)&gt;&gt;From-1)&clip;
+        Result[ Counter[index]-- -1]=*RIter;
+    }
+    std::copy(Result.begin(),Result.end(),BegIt);
+}#endif
+~~~~</p>
+</p>
+
+<p>对于浮点数呢？（尾数，指数...）。 <br />
+基数排序虽然是线性排序，但在实际应用中它反而有可能比快速排序要慢，因为其常数因子可能远大于快速排序的常数因子。例如，在性能较差的机器上，快速排序在Cache的利用效率上要比基数排序高很多。在内存空间紧张的情况下，应当选择快速排序类的原地排序算法。</p>
+<p>我做了一个小小的测试。</p>
+</p>
+
+<table style="border-bottom-style: none; border-left-style: none; border-collapse: collapse; border-top-style: none; border-right-style: none; mso-border-alt: solid windowtext .5pt; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt" class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr style="height: 20.5pt; mso-yfti-irow: 0; mso-yfti-firstrow: yes">
+<td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; height: 20.5pt; border-top: windowtext 1pt solid; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt" valign="top" width="61">
+<span style="font-family: 宋体; mso-bidi-font-size: 10.5pt; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 宋体; mso-ansi-language: zh-cn">数据量</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; height: 20.5pt; border-left-color: windowtext; border-top: windowtext 1pt solid; border-left-width: 1pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt" valign="top" width="79">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">RadixSort</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; height: 20.5pt; border-left-color: windowtext; border-top: windowtext 1pt solid; border-left-width: 1pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt" valign="top" width="85">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">QiuckSort</span>
+
+</td>
+</tr>
+</p>
+<p>
+<tr style="height: 18.9pt; mso-yfti-irow: 1">
+<td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 18.9pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">1k</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 18.9pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">15</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 18.9pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">16</span>
+
+</td>
+</tr>
+</p>
+<p>
+<tr style="height: 18.25pt; mso-yfti-irow: 2">
+<td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">10k</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">125</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">265</span>
+
+</td>
+</tr>
+</p>
+<p>
+<tr style="height: 18.25pt; mso-yfti-irow: 3">
+<td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">50k</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">672</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">1469</span>
+
+</td>
+</tr>
+</p>
+<p>
+<tr style="height: 17.4pt; mso-yfti-irow: 4">
+<td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 17.4pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">100k</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 17.4pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">922</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 17.4pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">3141</span>
+
+</td>
+</tr>
+</p>
+<p>
+<tr style="height: 18.25pt; mso-yfti-irow: 5">
+<td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">500k</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">4975</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">19125</span>
+
+</td>
+</tr>
+</p>
+<p>
+<tr style="height: 19.15pt; mso-yfti-irow: 6; mso-yfti-lastrow: yes">
+<td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 19.15pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">1000k</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 19.15pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">11844</span>
+
+</td>
+</p>
+<p>
+<td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 19.15pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85">
+<span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US">36025</span>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+</p>
+
+<p>（单位：毫秒） <br />
+对同一组随机数，基数排序和快排分别测试五次取平均值。Cpu：E5200,内存：4G。100万后的数据测不下去了，cpu太慢，不知道等多久，不同的机器上，应该有很多差别。</p>
+</p>
+
+<p>www.roading.org <br />
+by Adoo</p>
+<p>2011/10/2</p>
+</p>
+
+<p>[![wps_clip_image-1844][]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-1844.png
+  [<br />
+ ]: http://1.roading.sinaapp.com/2011/10/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89/radixsortmodel/</p>
+		  <p style= "text-align:right;"><em>
+		  Sun 02 October 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
+		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html">本文原链</a>)</em></p>
+	    <span class = "left">Share this with your friends:</span>
+	    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+		<a class="bds_tsina"></a>
+		<a class="bds_qzone"></a>
+		<a class="bds_tqq"></a>
+		<a class="bds_douban"></a>
+		<a class="bds_taobao"></a>
+		<a class="bds_renren"></a>
+		<a class="bds_kaixin001"></a>
+		<a class="bds_twi"></a>
+		<a class="bds_copy"></a>
+	    </div>     
+	<div class="ds-thread"></div>
+	</div>
+        <div class="sidebar">
+		<div id="relative-articles">
+		<h3>Related Posts</h3>
+		<ul class="related-articles">
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="斐波那契堆(Fibonacci Heaps)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html">斐波那契堆(Fibonacci Heaps)</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="最长公共子序列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html">最长公共子序列</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="C++实现红黑树，仿STL封装" href="http://www.roading.org/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html">C++实现红黑树，仿STL封装</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="非递归不用栈遍历搜索二叉树" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html">非递归不用栈遍历搜索二叉树</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="仿STL 的二叉搜索树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">仿STL 的二叉搜索树的C++实现</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="哈希表的C++模板实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html">哈希表的C++模板实现</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="第十章 Elementary Data Structures" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html">第十章 Elementary Data Structures</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="第八章（4） 桶排序（Bucket sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html">第八章（4） 桶排序（Bucket sort）</a></li>
+		   
+		
+		
+		
+		   <li class="selected">第八章（3） 基数排序（Radix Sort）</li>
+		
+		
+		
+		   
+		   <li><a title="算法导论 第八章(2) 计数排序(Counting Sort)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html">算法导论 第八章(2) 计数排序(Counting Sort)</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="第七章（2） 快速排序 课后7.4-5" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html">第七章（2） 快速排序 课后7.4-5</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="第七章（1） 快速排序" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html">第七章（1） 快速排序</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="利用堆来建立优先级队列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%88%a9%e7%94%a8%e5%a0%86%e6%9d%a5%e5%bb%ba%e7%ab%8b%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97.html">利用堆来建立优先级队列</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="算法导论之堆排序及其C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html">算法导论之堆排序及其C++实现</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="排序之插入排序与合并排序-C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%8f%92%e5%85%a5%e6%8e%92%e5%ba%8f-insertionsort-c%e5%ae%9e%e7%8e%b0.html">排序之插入排序与合并排序-C++实现</a></li>
+		   
+		
+		
+		
+		
+		</ul>
+		</div>
+		
+<h3>Contact me</h3>
+<div class="social">
+	<span style="font-size:15px">I'm here:</span>	
+	<a href="http://www.roading.org/feed/index.xml" type="application/atom+xml" title="Atom feed" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a>
+	
+
+	
+	<a href="http://twitter.com/Monkey_Adoo" title="@Monkey_Adoo"><img src="http://www.roading.org/theme/images/icons/twitter.png"></img></a>
+	
+	<a href="http://weibo.com/boringMonkey" title="@M-Adoo"><img src="http://www.roading.org/theme/images/icons/weibo.png"></img></a>
+	
+	<a href="http://douban.com/people/Monkey_Adoo" title="Adoo"><img src="http://www.roading.org/theme/images/icons/douban.png"></img></a>
+	
+	
+	<a rea="tomail" title="Adoo@outlook.com" href="mailto:Adoo@outlook.com"><img src="http://www.roading.org/theme/images/icons/email.png"></img></a>
+	
+	</div><!-- /.social -->
+	
+	</div>
+	</div>
+
+<div class="clear"></div>
+ <div id="footer">
+	<a class="right" href="#banner"  titile="Back to Top" rel="nofollow" title="Back to top">Top↑</a>
+	<ul id="footer-nav" class="right">
+	
+		<li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
+	
+		<li><a href="http://www.roading.org/pages/links.html">links</a></li>
+	
+		<li><a href="http://www.roading.org/pages/message.html">Message</a></li>
+	
+		<li><a href="http://www.roading.org/archives.html">Archive</a></li>
+	</ul>
+	<div class="clear"></div>
+	<p>Theme designed by Adoo. Powered by Pelican. &copy; 2011-2012</p>
+       </div>
+
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"adoo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+
+
+<!-- Google Search -->
+
+<script>
+  (function() {
+    var cx = '014593096765008582725:vpqn4f4zw88';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+	'//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-29709820-1");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+
+
+<!-- 百度分享 -->
+<script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+</script>
+<!-- Baidu Button END -->
+
+</body>
+</html>

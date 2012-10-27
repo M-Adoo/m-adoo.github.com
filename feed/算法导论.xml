@@ -1,0 +1,1183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Adoo's blog</title><link href="http://www.roading.org/" rel="alternate"></link><link href="http://www.roading.org/feed/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA.xml" rel="self"></link><id>http://www.roading.org/</id><updated>2012-07-30T22:33:00+08:00</updated><entry><title>斐波那契堆(Fibonacci Heaps)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html" rel="alternate"></link><updated>2012-07-30T22:33:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-07-30:/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html</id><summary type="html">&lt;h3&gt;概览&lt;/h3&gt;
+&lt;p&gt;斐波那契堆是由一组最小堆有序树组成，其中的每棵树都必须符合最小堆属性。简单点，斐波那契堆是由一组有点特别的树组成。除了两个与元素删除有关的操作（EXTRACT-MIN和DELETE）之外，它的其它操作都能在常数时间内完成。可以看下斐波那契堆和二叉堆的运行时间对比表：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/07/image.png" title="image" /&gt;&lt;/p&gt;
+&lt;h3&gt;结构&lt;/h3&gt;
+&lt;p&gt;说白点，斐波那契堆由一组有根树组成，不过这些有根树都得是二项堆。大致结构如下：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/07/image1.png" title="image" /&gt;&lt;/p&gt;
+&lt;p&gt;有一个min指针指向了这些树根中关键字最小的一个。&lt;/p&gt;
+&lt;p&gt;对于每一个结点来说，除了关键字之外，至少还得有left、right、parent、child四个指针、一个mark标记和一个degree计数，四个指针好说，分别用来指向左右兄弟、父亲和任意一个孩子。至于mark标记则是用来标识一个非根结点是否已经失去了一个孩子（这样的结点，不能在夺其子女了，可能要进行一些其它的特别操作），实际上涉及到mark的操作并不多。degree则是用来统计该结点有几个儿子。丰满起来的斐波那契堆就成了这样：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/07/image2.png" title="image" /&gt;&lt;/p&gt;
+&lt;h3&gt;基本操作&lt;/h3&gt;
+&lt;p&gt;斐波那契堆包含MAKE-HEAP、INSERT、MINIMUM、EXTRACT-MIN、UNION、DECREASE-KEY、DELETE等几项基本操作。建堆、插入、合并、和获得关键字最小的结点这四个操作比想象的还要简单。建堆只需简单的初始化一下min指针和记录结点数目的成员n即可；插入操作则是直接将结点插入到根链表中，这相当于进行一个循环双向链表的插入操作；合并操作直接将两个斐波那契堆得根链表合二为一；获得自小关键字的结点，更不必说，直接返回min指针即可。因此，对于MAKE-HEAP、INSEST、MINIMUN、UNION这四个操作就不多费笔墨。主要关注一下EXTRACT-MIN和DECREAS-KEY两个操作，而一旦实现了这两个操作，DELETE的实现则变得轻而易举。&lt;/p&gt;
+&lt;h4&gt;EXTRACT-MIN&lt;/h4&gt;
+&lt;p&gt;EXTRACT-MIN
+除了要提取出最小关键字的结点之外，其实还要对斐波那契堆的结构进行整理。如果不进行整理的话，那么斐波那契堆就完全成了一个双向循环链表了。整理到什么程度？直到根链表中所有的结点的degree值都不同！很奇怪之处在于，算导上对于为什么以所有根结点的degree不同为指标，居然只字未提。不过就我观察，其原因可能在于，当根结点的degree都不同的时候，此时的斐波那契堆就成了一个二项堆或者近似二项堆。&lt;/p&gt;
+&lt;p&gt;EXTRACT-MIN可以分为三步走：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将min的所有孩子取出加入到根链表中去；&lt;/li&gt;
+&lt;li&gt;从根链表中移除min结点；&lt;/li&gt;
+&lt;li&gt;整理斐波那契堆并获得新的min指针；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;EXTRACT-MiN的伪码为：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;EXTRACT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MIN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt; !&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt; &lt;span class="n"&gt;child&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt; 
+            &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;
+            &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+        &lt;span class="n"&gt;remove&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;
+            &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+            &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;
+            &lt;span class="n"&gt;CONSOLIDATE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;p&gt;其中CONSOLIDATE函数正是用来整理斐波那契堆的，它创建一个数组A来暂存根结点，并在遍历根链表的过程中将根结点degree相同的树合并。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;其伪码如下（其中的&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/07/image3.png" title="image" /&gt;，且&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/07/image4.png" title="image" /&gt;，具体证明见书本）：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;CONSOLIDATE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;array&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; 0 &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;
+        &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;degree&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; !&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;
+            &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; 
+                &lt;span class="n"&gt;exchange&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
+            &lt;span class="n"&gt;HEAP&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;LINK&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt; 
+            &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 1
+        &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; 
+    &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; 0 &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; !&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+                &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt; &lt;span class="n"&gt;contaning&lt;/span&gt; &lt;span class="n"&gt;just&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;
+                &lt;span class="n"&gt;insert&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;into&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;
+                    &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;HEAP&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;LINK&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;remove&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;
+    &lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;child&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;incrementing&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;degree&lt;/span&gt;
+    &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;p&gt;看一个实例的演示图或许更加清楚明白：&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/07/image5.png" title="image" /&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/07/image6.png" title="image" /&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h3&gt;Decreasing a key&lt;/h3&gt;
+&lt;/p&gt;
+
+&lt;p&gt;将一个关键字变小，有两种情况发生，一种是这个关键字变小以后还是比它的父结点关键字大，这时候什么都不用做；但是如果关键字变小后比它的父结点关键字要小的话，这时候可以将这个结点所在的子树直接移植到根链表中去。但是不管不顾的乱移植，有可能带来各种怪异的树结构，典型的就是变成了一根棍子。于是，可以采取一种折中的方式，当一个非根结点失去第二个孩子的时候，也将被移植到根链表中。这可以保证根链表中的每棵树都是一个近似二项堆。伪码如下：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;DECREASE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;
+        &lt;span class="n"&gt;error&lt;/span&gt; &amp;quot;&lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;greater&lt;/span&gt; &lt;span class="n"&gt;than&lt;/span&gt; &lt;span class="n"&gt;current&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&amp;quot;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; !&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;
+        &lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;CASCADING&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;
+        &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;xCUT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;remove&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;child&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;decrementing&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;degree&lt;/span&gt;
+    &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;false&lt;/span&gt;
+&lt;span class="n"&gt;CASCADING&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt; !&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;false&lt;/span&gt;
+            &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;true&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+            &lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;CASCADING&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;p&gt;删除操作则完全可以利用DECREASE-KEY配合EXTRACT-MIN两者完成，先将要删除结点的关键字减小为无穷小，则提取最小关键字的结点就可以达到目的。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h3&gt;总结&lt;/h3&gt;
+&lt;/p&gt;
+
+&lt;p&gt;总的来说，斐波那契堆可以在常数时间内进行进行插入、合并、减小关键字等操作，但删除搜索等操作并不是其擅长。斐波那契堆并没有太多需要时刻保持的属性，这使得对于插入、合并、减小关键字等操作变得轻而易举。但实际上它将很多的工作留在了提取最小元素时来完成，所以这个操作实现起来复杂，运行起来耗时。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;斐波那契堆将一些事情集中起来在某些操作上来处理，这就产生了一些被优化的操作，所以斐波那契堆就变成了一个优点很鲜明的数据结构。尽管如此，但斐波那契堆对于工程实践来讲，可能太过于复杂了，算导上就说：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;From a practical point of view, however, the constant factors and
+programming &lt;br /&gt;
+complexity of Fibonacci heaps make them less desirable than ordinary
+binary&lt;/p&gt;
+&lt;p&gt;(or k-ary) heaps for most applications, except for certain
+applications that manage&lt;/p&gt;
+&lt;p&gt;large amounts of data.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/p&gt;
+
+&lt;p&gt;它说呢，鉴于斐波那契堆的复杂性和常数因子可能较大，除了某些管理大数据的应用，人们还宁愿用二叉堆。话说回来，它又说了，说斐波那契堆还是有蛮多理论研究价值的&lt;img alt="咬牙切齿" src="http://www.roading.org/wp-content/uploads/2012/07/wlEmoticon-baringteethsmile.png" /&gt;。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。&lt;/em&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;2012/7/30 by Adoo | homepage:&lt;/em&gt;&lt;a href="http://www.roading.org/"&gt;&lt;em&gt;www.roading.org&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/p&gt;</summary><category term="algorithm"></category><category term="fibonacci heaps"></category></entry><entry><title>最长公共子序列</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html" rel="alternate"></link><updated>2012-03-22T12:57:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-22:/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html</id><summary type="html">&lt;h3&gt;概念&lt;/h3&gt;
+&lt;p&gt;序列的&lt;strong&gt;子序列&lt;/strong&gt;，可以由从这个序列中去掉0个或多个元素而得来。所以子序列可以是由其父序列中不连续的元素组成，但相对顺序不能改变。&lt;strong&gt;公共子序列&lt;/strong&gt;指的是,
+假如序列Z既是X的子序列，又是序列Y的子序列，那么称Z为X和Y
+的公共子序列。两个序列最长的公共子序列就被称之为&lt;strong&gt;最长公共子序列&lt;/strong&gt;。最长公共子序列，又被称之为最长公共子串，译自英文名
+Longgest Common Subsequence，可以缩写为
+LCS。求最长公共子序列是一个很有用的问题，它可以用来分析两段序列的相似度，比方可以用来分析DNA串的相似度，也可以分析两段文字的相似度，来判断是否剽窃，等等。&lt;/p&gt;
+&lt;p&gt;举一个实例来说，假如有序列X&amp;lt;A,B,C,B,D,A,B&gt;和序列Y&amp;lt;B,D,C,A,B,A&gt;，那么他们的最长公共子序列为&amp;lt;B,C,D,B&gt;。&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;动态规划法求最长公共子序列&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;求最长公共子序列最直接最暴力的一种方法当然是枚举出两个序列所有的子序列，然后从中找出所有的公共子序列，再选出所有公共子序列中最长的那个。不过这种粗暴的做法是很低效的，假如两个序列的长度分别为m和n,因为它们分别有2^m^和2^n^个子序列，那么这个算法的时间复杂度将是指数级别的O(2^m+n^)，对于长一些的序列这种方法是不实际的。撇开这种方法不谈，我们将关注另一种方法——用动态规划策略来求最长公共子路径问题。&lt;/p&gt;
+&lt;h4&gt;第一步：描述问题的最优子结构&lt;/h4&gt;
+&lt;p&gt;之前一篇笔记有总结到，动态规划算法的运用有两个必要条件，一是问题包含最优子结构，二是有重叠子问题。第一步我们要做的便是证明LCS问题确实包含有最优子结构。定理15.1说明LCS包含有最优子结构，原书的证明已经清楚明了，下面引用原书的定理15.1证明：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h4&gt;Theorem 15.1: (Optimal substructure of an LCS)&lt;/h4&gt;
+&lt;p&gt;Let &lt;em&gt;X&lt;/em&gt; = 〈&lt;em&gt;x&lt;/em&gt;~1~, &lt;em&gt;x&lt;/em&gt;~2~, ..., &lt;em&gt;x~m~&lt;/em&gt;〉 and &lt;em&gt;Y&lt;/em&gt; = 〈&lt;em&gt;y&lt;/em&gt;~1~, &lt;em&gt;y&lt;/em&gt;~2~,
+..., &lt;em&gt;y~n~&lt;/em&gt;〉 be sequences, and let &lt;em&gt;Z&lt;/em&gt; = 〈&lt;em&gt;z&lt;/em&gt;~1~, &lt;em&gt;z&lt;/em&gt;~2~, ...,
+&lt;em&gt;z~k~&lt;/em&gt;〉 be any LCS of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If &lt;em&gt;x~m~&lt;/em&gt; = &lt;em&gt;y~n~&lt;/em&gt;, then &lt;em&gt;z~k~&lt;/em&gt; = &lt;em&gt;x~m~&lt;/em&gt; = &lt;em&gt;y~n~&lt;/em&gt; and &lt;em&gt;Z&lt;/em&gt;~&lt;em&gt;k&lt;/em&gt;-1~
+    is an LCS of &lt;em&gt;X&lt;/em&gt;~&lt;em&gt;m&lt;/em&gt;-1~ and &lt;em&gt;Y&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;-1~.&lt;/li&gt;
+&lt;li&gt;If &lt;em&gt;x~m~&lt;/em&gt; ≠ &lt;em&gt;y~n~&lt;/em&gt;, then &lt;em&gt;z~k~&lt;/em&gt; ≠ &lt;em&gt;x~m~&lt;/em&gt; implies that &lt;em&gt;Z&lt;/em&gt; is an
+    LCS of &lt;em&gt;X&lt;/em&gt;~&lt;em&gt;m&lt;/em&gt;-1~ and &lt;em&gt;Y&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;If &lt;em&gt;x~m~&lt;/em&gt; ≠ &lt;em&gt;y~n~&lt;/em&gt;, then &lt;em&gt;z~k~&lt;/em&gt; ≠ &lt;em&gt;y~n~&lt;/em&gt; implies that &lt;em&gt;Z&lt;/em&gt; is an
+    LCS of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;-1~.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Proof&lt;/em&gt;&lt;/strong&gt; (1) If &lt;em&gt;z~k~&lt;/em&gt; ≠ &lt;em&gt;x~m~&lt;/em&gt;, then we could append &lt;em&gt;x~m~&lt;/em&gt; =
+&lt;em&gt;y~n~&lt;/em&gt; to &lt;em&gt;Z&lt;/em&gt; to obtain a common subsequence of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt; of length
+&lt;em&gt;k&lt;/em&gt; + 1, contradicting the supposition that &lt;em&gt;Z&lt;/em&gt; is a &lt;em&gt;longest&lt;/em&gt; common
+subsequence of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt; . Thus, we must have &lt;em&gt;z~k~&lt;/em&gt; = &lt;em&gt;x~m~&lt;/em&gt; =
+&lt;em&gt;y~n~&lt;/em&gt;. &lt;a name="1088"&gt;&lt;/a&gt;&lt;a name="IDX-352"&gt;&lt;/a&gt;Now, the prefix
+&lt;em&gt;Z&lt;/em&gt;~&lt;em&gt;k&lt;/em&gt;-1~ is a length-(&lt;em&gt;k&lt;/em&gt; - 1) common subsequence of &lt;em&gt;X&lt;/em&gt;~&lt;em&gt;m&lt;/em&gt;-1~ and
+&lt;em&gt;Y&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;-1~. We wish to show that it is an LCS. Suppose for the purpose
+of contradiction that there is a common subsequence &lt;em&gt;W&lt;/em&gt; of &lt;em&gt;X&lt;/em&gt;~&lt;em&gt;m&lt;/em&gt;-1~
+and &lt;em&gt;Y&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;-1~ with length greater than &lt;em&gt;k&lt;/em&gt; - 1. Then, appending
+&lt;em&gt;x~m~&lt;/em&gt; = &lt;em&gt;y~n~&lt;/em&gt; to &lt;em&gt;W&lt;/em&gt; produces a common subsequence of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt;
+whose length is greater than &lt;em&gt;k&lt;/em&gt;, which is a contradiction.&lt;/p&gt;
+&lt;p&gt;(2) If &lt;em&gt;z~k~&lt;/em&gt; ≠ &lt;em&gt;x~m~&lt;/em&gt;, then &lt;em&gt;Z&lt;/em&gt; is a common subsequence of
+&lt;em&gt;X&lt;/em&gt;~&lt;em&gt;m&lt;/em&gt;-1~ and &lt;em&gt;Y&lt;/em&gt;. If there were a common subsequence &lt;em&gt;W&lt;/em&gt; of
+&lt;em&gt;X&lt;/em&gt;~&lt;em&gt;m&lt;/em&gt;-1~ and &lt;em&gt;Y&lt;/em&gt; with length greater than &lt;em&gt;k&lt;/em&gt;, then &lt;em&gt;W&lt;/em&gt; would also
+be a common subsequence of &lt;em&gt;X~m~&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt; , contradicting the
+assumption that &lt;em&gt;Z&lt;/em&gt; is an LCS of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;(3) The proof is symmetric to (2).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;第二步：一个递归解&lt;/h4&gt;
+&lt;p&gt;由定理15.1可以看出，找序列X和序列Y的LCS,我们有可能需要找出X和Y~m-1~的LCS，以及X~n-1~和Y~m~的LCS。而这两个子问题，都拥有一个共同的子子问题,便是求X~n-1~和Y~m-1~的LCS。依次类推，还有很多其他的子问题会共有许多其他的子子问题。这就满足了动态规划的第二点条件，拥有重叠的子问题。&lt;/p&gt;
+&lt;p&gt;定义c[i, j]为X~i~和Y+的LCS长度，根据定理15.1可以得出下面的递归式：
+&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb11.png" title="image" /&gt;&lt;/p&gt;
+&lt;h4&gt;第三步：计算LCS的长度&lt;/h4&gt;
+&lt;p&gt;利用第二步的递归式15.9，可以很容易写出计算LCS长度的递归求解程序，但这种方式并不比我们一开始提到的最简单粗暴的方法快（有可能还要慢），它同样是指数级的复杂度。&lt;/p&gt;
+&lt;p&gt;一二步已经验证了动态规划策略的可行性，于是我们将用动态规划来求解LCS的长度。下面的伪代码程序维护由两个表，表c和表b。表c用来记录c[i,j]的值，表b则用来方便LCS的构造，它会记录一些信息，指引我们在构件最优解的时候，如何选择最优子问题，下面是伪码：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt; &lt;span class="n"&gt;LCS&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;LENGTH&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;length&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+     &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;length&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; 1 &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;
+      &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 0&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; 0
+     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; 0 &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+      &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;0&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; 0
+     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; 1 &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; 1 &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;xi&lt;/span&gt;  &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;yj&lt;/span&gt;
+                &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 1
+                &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &amp;quot;↖&amp;quot; 
+            &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; ≥ &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &amp;quot;↑&amp;quot;
+            &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &amp;quot;←&amp;quot; 
+&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;假设有序列&lt;em&gt;X&lt;/em&gt; = 〈&lt;em&gt;A&lt;/em&gt;, &lt;em&gt;B&lt;/em&gt;, &lt;em&gt;C&lt;/em&gt;, &lt;em&gt;B&lt;/em&gt;, &lt;em&gt;D&lt;/em&gt;, &lt;em&gt;A&lt;/em&gt;, &lt;em&gt;B&lt;/em&gt;〉和 &lt;em&gt;Y&lt;/em&gt; = 〈&lt;em&gt;B&lt;/em&gt;,
+&lt;em&gt;D&lt;/em&gt;, &lt;em&gt;C&lt;/em&gt;, &lt;em&gt;A&lt;/em&gt;, &lt;em&gt;B&lt;/em&gt;, &lt;em&gt;A&lt;/em&gt;〉。那么通过执行LCS-LENGHT 表c
+和表b存储的信息将如下：&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb12.png" title="image" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: 楷体"&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;span style="font-family: 楷体"&gt;说明：右图是将表b和表c的信息合二为一的显示，d第i行和第j列所指方块，记录了c[i,j]和b[i,j]中的信息。我们通过那些箭头来获得问题的最优子问题的路径，路径上的&lt;span style="color: #006080"&gt;"↖"&lt;/span&gt;表示X~i~=Y~i~,所以为LCS上的一个字母。&lt;/span&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h4&gt;第四步：构建LCS&lt;/h4&gt;
+&lt;/p&gt;
+
+&lt;p&gt;通过表b我们可以很快的构建出&lt;em&gt;X&lt;/em&gt; = 〈&lt;em&gt;x&lt;/em&gt;~1~, &lt;em&gt;x&lt;/em&gt;~2~, ..., &lt;em&gt;x~m~&lt;/em&gt;〉和&lt;em&gt;Y&lt;/em&gt; =
+〈&lt;em&gt;y&lt;/em&gt;~1~, &lt;em&gt;y&lt;/em&gt;~2~, ...,
+&lt;em&gt;y~n~&lt;/em&gt;〉的LCS。可以从b[m,n]开始跟踪路径，当b[i,j]为"&lt;span style="color: #006080"&gt;↖"&lt;/span&gt;时，输出当前字母。考虑到时从后往前追踪的，所以求出来的LCS将是反向的，所以在我们下面的递归伪码中，将先递归再输出。以下为伪码：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PRINT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;LCS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; 0 &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; 0
+    &lt;span class="k"&gt;return&lt;/span&gt; 
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &amp;quot;↖&amp;quot; 
+    &lt;span class="n"&gt;PRINT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;LCS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;xi&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &amp;quot;↑&amp;quot; 
+          &lt;span class="n"&gt;PRINT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;LCS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;PRINT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;LCS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; 1&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;C++ 的实现&lt;/h3&gt;
+&lt;/p&gt;
+
+&lt;p&gt;我先实现了一个简单的动态二维数组的分配代码，作为基础工程。&lt;span style="color: green"&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//create a dynamic doble array&lt;/span&gt;
+&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;dob_array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+     &lt;span class="n"&gt;Type&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;  &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="c1"&gt;//delete the dynamic double array&lt;/span&gt;
+&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;delete_dob_array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;p_to_p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;delete&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;p_to_p&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;delete&lt;/span&gt; &lt;span class="n"&gt;p_to_p&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;下面为主体代码：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;lsc_lenght&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;str1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;str2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;const&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;str1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;size&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;const&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;str2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;size&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;!&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;0&lt;span class="p"&gt;]=&lt;/span&gt;0&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;0&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;!&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;0&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;0&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;!&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; !&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str1&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;str2&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;])&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;0&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;])&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+                &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;;}&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;];&lt;/span&gt;
+                &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;1&lt;span class="p"&gt;;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="n"&gt;void&lt;/span&gt; &lt;span class="n"&gt;print_lcs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;0 &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;0&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;switch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;]){&lt;/span&gt;
+    &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;print_lcs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;case&lt;/span&gt; 0&lt;span class="p"&gt;:{&lt;/span&gt;
+    &lt;span class="n"&gt;print_lcs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;];}&lt;/span&gt; &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;case&lt;/span&gt; 1&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;print_lcs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;测试代码：&lt;/p&gt;
+&lt;p&gt;//一个产生随机字符串的函数。 string get_random_str(int size)
+{
+    string base_str="aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsSTtUuVvWwXxYyZz";
+    string result;
+    int i=size;
+    while(i&amp;gt;0){
+        result+=base_str;
+        i-=52;
+    }
+    std::random_shuffle(result.begin(), result.end());
+    result.resize(size);
+    return result;
+}int main()
+{
+    const int size=800;
+    //初始化测试数据； string str1=get_random_str(size);
+    string str2=get_random_str(size);
+    // 表的下标从1开始，所以要多分配1 int &lt;strong&gt;path=dob_array&lt;int&gt;(size+1 , size+1);
+    int &lt;/strong&gt;count=dob_array&lt;int&gt;(size+1 , size+1);
+    lsc_lenght(str1, str2, count, path);
+    print_lcs(path, str1,size,size);
+    delete_dob_array(path, size);
+    delete_dob_array(count,size);
+    std::cin.get();
+}&lt;/p&gt;
+&lt;h4&gt;思考&lt;/h4&gt;
+&lt;/p&gt;
+
+&lt;p&gt;前面所述的求LCS的方式是自下而上的，但在这个问题中，并不一定每一个子问题都会有用到，特别是当两段序列的相似度很高的时候，则更加明显。这一点可以从上面的那个图中可以看出来。我于是想用自顶而下的动态规划方式，比一比两者的效率。自定而下的代码如下：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;memorized_lsc_len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;const&lt;/span&gt; &lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;  &lt;span class="n"&gt;str1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;const&lt;/span&gt; &lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;  &lt;span class="n"&gt;str2&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;
+         &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;str1_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;str2_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;int&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;自定而下求最长公共子序列 &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;0&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str1_len&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;0 &lt;span class="o"&gt;||&lt;/span&gt;  &lt;span class="n"&gt;str2_len&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;0&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; 0&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;str1_len&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;str2_len&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;0&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;str1_len&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;str2_len&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;str1&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;str1_len&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;str2&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;str2_len&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;memorized_lsc_len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;str2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;str1_len&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;str2_len&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;str1_len&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;str2_len&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;str1_len&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;str2_len&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;0&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;result1&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;memorized_lsc_len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;str2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;str1_len&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1 &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;str2_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;int&lt;/span&gt; &lt;span class="n"&gt;result2&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;memorized_lsc_len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;str2&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;str1_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="n"&gt;str2_len&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt; 1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;result2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;result1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;str1_len&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;str2_len&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;result2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;str1_len&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;str2_len&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;str1_len&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;str2_len&lt;/span&gt;&lt;span class="p"&gt;]=&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我的测试方式是，两段代码分别对随机而得的两个个字符串进行操作。不过比较遗憾的是，我的机器内存不大，总共就2G,我大体得到了规模在1万以下的结论。规模在1万以上的时候，我的机器就并不呢功能胜任了，因为内存的使用已经达到了90%以上，每次得到的数据偏差较大，已经不准确。&lt;/p&gt;
+&lt;p&gt;当两个字符串长度在0\~500的时候，自下而上的方式，速度要快的比较明显。然而当长度超过500的时候，自顶而下的方式便开始具有比较不错的优势，大约有25%左右。不过我的数据两只测到8000。另外很明显的一点是自顶而下的方式，消耗更多的内存。&lt;/p&gt;
+&lt;p&gt;我这样认为，当字符串较短的时候，因少计算的子问题带来的时间节省并不足以弥补递归所带来的开销，另外特别是有由于随机而得的短字符串，LCS长度也很小，能少计算的子问题并不多。当字符串长度增大时，这种少计算子问题的优势会有所体现，特别是当两个字符串相似度很高的时候。当然，当字符串长度增长的时候，所多用的内存也会增加。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;要注意的一点是，测试的时候要把程序的栈空间调大一些，不然自顶而下的方式，可能很快就爆栈了。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;参考： introduction to algorithm –third edition&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/em&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;2010/3/22 by Adoo | homepage:www.roading.org&lt;/em&gt;&lt;/p&gt;
+&lt;/p&gt;</summary><category term="dynamic programming"></category><category term="LCS"></category></entry><entry><title>C++实现红黑树，仿STL封装</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html" rel="alternate"></link><updated>2011-12-31T20:37:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-31:/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html</id><summary type="html">&lt;ul&gt;
+&lt;li&gt;摘要：在[&lt;em&gt;Chapter 13 Red-Black trees
+    (红黑树)&lt;/em&gt;][]这篇笔记中对红黑树的各种操作都有较详尽的伪码，相信使用C++来实现也并不是难事，我要做的是，在实现的基础上要进行一定的封装。当然风格嘛，自然参照STL，最终的结果就是要实现一个STL风格的红黑树模板。&lt;/li&gt;
+&lt;li&gt;学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div align="right"&gt;
+*2011/12/31 By Adoo | Homepage:*[*www.roading.org*][]
+
+&lt;/div&gt;
+
+&lt;div align="left"&gt;
+
+* * * * *
+
+&lt;/div&gt;
+
+&lt;p&gt;在C++泛型编程中两个重要的概念即是容器和迭代器。我的目的则是要实现一个与STL中的其他容器类似，但是以红黑树为基础的容器
+RB_Tree。当然，实际上STL中的
+map、multimap、set、multiset其基础结构就是红黑树。在这儿、我们主要尝试自己封装一个红黑树试试。&lt;/p&gt;
+&lt;p&gt;无论如何,从实现来讲，一个rb_node的类模板是需要的，不过它将作为 RB_Tree
+类中的一个嵌套类，因为RB_Tree容器的使用者并不需要知道，rb_node实现。rb_node的实现：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;RB_Tree&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;rb_node&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;Type&lt;/span&gt; &lt;span class="n"&gt;_value&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;rb_node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_left&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;rb_node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;rb_node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_parent&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;RB_Color&lt;/span&gt; &lt;span class="n"&gt;_color&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;_value&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="p"&gt;()),&lt;/span&gt;&lt;span class="n"&gt;_left&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;_parent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;_color&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;red&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;{};&lt;/span&gt;
+    &lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;span style="color: blue"&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;其次，要定义一个供 RB_Tree容器使用的迭代器，为了拥有 iterator_trait
+它将继承自 std::iterator，当然完全可以自己通过宏定义来实现
+iterator_trait ，但毫无疑问继承的话可以写更少的代码.声明如下：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;RB_Tree&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;node_iterator&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+    &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;bidirectional_iterator_tag&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="n"&gt;public&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;_node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;){};&lt;/span&gt;
+    &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="n"&gt;const&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt; –&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="n"&gt;const&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; 
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="p"&gt;();&lt;/span&gt;     
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+    &lt;span class="n"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;r_iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+    &lt;span class="n"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt; !&lt;span class="p"&gt;=(&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;r_iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+    &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;pointer&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; 
+    &lt;span class="o"&gt;//&lt;/span&gt;…省略很多种运算符重载 
+&lt;span class="n"&gt;private&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;_node&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;p&gt;最后就是RB_Tree 这个容器了类了，大体上是这样：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;RB_Tree&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="n"&gt;private&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;public&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;typedef&lt;/span&gt;  &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;typedef&lt;/span&gt; &lt;span class="n"&gt;const&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;const_iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="n"&gt;RB_Tree&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;RB_Tree&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;    
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;eraser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;private&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;_root&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;public&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;static&lt;/span&gt; &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;_nil&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;p&gt;具体的实现代码，你可以下载[RB_Tree.hpp][]&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;当然还应该定义更多的接口，比方重载一个模板函数insert
+能够接受一对迭代器，将迭代器中间的数据插入到红黑树中，等等。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;值得注意的是，该封装实现，是以学习以及练习为目的的，所以有很多本应有但确没有实现的接口。另一个原因则是这段时间太过忙碌。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;如果将上面提到的迭代器类与之前在&lt;a href="http://www.roading.org/?p=649"&gt;仿STL
+的二叉搜索树的C++实现&lt;/a&gt;中的迭代器比较，其实发现，它们提供的是一样的操作，所以完全可以将红黑树和二叉搜索树的结点类抽象出来，让迭代器类针对其抽象类实现，这样一来这一个迭代器模板类就会适用于几乎整个由二叉搜索树派生而来的数据结构了，将会大大提高代码的复用性。当然这个工作我没有做。&lt;/p&gt;
+&lt;/p&gt;</summary><category term="c++"></category><category term="red black trees"></category></entry><entry><title>非递归不用栈遍历搜索二叉树</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html" rel="alternate"></link><updated>2011-12-21T14:45:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-21:/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html</id><summary type="html">&lt;ul&gt;
+&lt;li&gt;摘要：使用非递归的方式来遍历二叉树，同时也是对《算法导论》课后习题
+    12.1-3 的解答。&lt;/li&gt;
+&lt;li&gt;学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div align="right"&gt;
+*2011/12/21 By Adoo | Homepage:*[*www.roading.org*][]
+
+* * * * *
+
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;div&gt;
+&lt;strong&gt;Exercises 12.1-3&lt;/strong&gt;
+&lt;/div&gt;
+&lt;div&gt;
+Give a nonrecursive algorithm that performs an inorder tree walk.
+(&lt;em&gt;Hint:&lt;/em&gt; There is an easy solution that uses a stack as an auxiliary
+data structure and a more complicated but elegant solution that uses
+no stack but assumes that two pointers can be tested for equality.)
+&lt;/div&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div&gt;
+**Solutions:**用非递归的方式来遍历二叉树，假如有一个辅助栈的话关键是要注意一下压栈的顺序，这儿主要在不使用辅助栈的情况下遍历搜索二叉树。以中序遍历为例，如果从根节点开始使用迭代的手法来遍历，那么对于迭代到任意一个结点来讲，都需要考虑的第一个问题：它的孩子被迭代的情况：只有左孩子被迭代？两个孩子都已被迭代？还是都未被迭代？根据不同的情况作出不同的判断。如此一来，情况就变的有点繁琐，在这儿可以做一点简化：直接选用迭代的真实开始点作为起点，也就是最左的叶子，或者说最小结点。这样做的好处是，对于迭代到的任意一个结点，我们只需考虑它的右子树是否已经被迭代，而无需考虑左子树，因为其左子树必然已经被迭代过。模型如下：
+
+&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果 x
+    &lt;font style="background-color: #ffff00"&gt;不是&lt;/font&gt;由其由右孩子回溯而至(说明其右子树还未被遍历)，那么：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;输出 x 结点。&lt;/li&gt;
+&lt;li&gt;若 x 的右结点不为空，将 x 赋值为 x 右子树中的最小结点；否则，将 x
+    向根结点回溯。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果 x
+    是由其右孩子回溯而至(说明，以x为根结点的子树已经遍历完成)，那么将x向根结点方向回溯。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;用伪代码表示如下：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;iter_bst&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;’&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; ≠ &lt;span class="n"&gt;NIL&lt;/span&gt;        
+        &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt; ≠ &lt;span class="n"&gt;xc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;x&lt;/span&gt;’&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;
+            &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;                    
+            &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt; ≠ &lt;span class="n"&gt;NIL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;
+                &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;’&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;p&gt;实质上，因为对于BST来说中序遍历来讲，我们可以直接从最小结点一直求后继，或从最大结点一直求前驱的方式来实现对搜索二叉树的遍历，我在&lt;a href="http://www.roading.org/?p=649"&gt;仿STL
+的二叉搜索树的C++实现&lt;/a&gt;中就是这么做的。且，其算法复杂度也是 O(n)。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;另外，下面给出对应于上述伪代码的C++代码，当然，要配合&lt;a href="http://www.roading.org/?p=649"&gt;仿STL
+的二叉搜索树的C++实现&lt;/a&gt;中的BST类模板才能通过编译。&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;void&lt;/span&gt; &lt;span class="n"&gt;BST&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;  &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_root&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;pointer&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;  &lt;span class="n"&gt;x_pre&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;!&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt; !&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x_pre&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;x_pre&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_value&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt; !&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;pointer&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+                &lt;span class="k"&gt;else&lt;/span&gt;
+                    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_parent&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;
+                &lt;span class="p"&gt;{&lt;/span&gt;   
+                    &lt;span class="n"&gt;x_pre&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_parent&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;    
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;</summary><category term="binary search tree"></category><category term="Exercises"></category><category term="Introduction to algorithm"></category><category term="nonrecursive"></category></entry><entry><title>仿STL 的二叉搜索树的C++实现</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="alternate"></link><updated>2011-12-17T23:37:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-17:/algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html</id><summary type="html">&lt;ul&gt;
+&lt;li&gt;摘要：看完导论的 Chapter 12 binary search tree 后，不忘 C++
+    实现一下这个数据结构，学习算法的时候也锻炼下 C++
+    的编码能力。另则，若按照STL的风格来封装搜索二叉树，一是可以培养良好的编程风格，也能好好体会
+    STL 的设计思想。&lt;/li&gt;
+&lt;li&gt;学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div align="right"&gt;
+*2011/12/17 By Adoo | Homepage:*[*www.roading.org*][]
+
+&lt;/div&gt;
+
+&lt;div align="right"&gt;
+
+* * * * *
+
+&lt;/div&gt;
+
+&lt;p&gt;看完导论的 Chapter 12 binary search tree 后，不忘 C++
+实现一下这个数据结构，学习算法的时候也锻炼下
+C++的编码能力。另则，若按照STL的风格来封装搜索二叉树，一是可以培养良好的编程风格，也能好好体会
+STL 的设计思想。&lt;/p&gt;
+&lt;p&gt;模型： BST模板类中有两个嵌套模板类，一个为节点模板，一个为迭代器的模板。&lt;/p&gt;
+&lt;p&gt;编写的时候也订了三条原则：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;效率优先&lt;/li&gt;
+&lt;li&gt;接口都通过迭代器操作，不以指针直接进行操作。&lt;/li&gt;
+&lt;li&gt;节省时间，毕竟是学习之作，并不是所有应该实现的接口我都实现，只实现一些基本的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果你看到下面声明的接口中有很多显而易见的不合理之处，比方 BST
+类居然没有接受一对迭代器的构造函数构造，也没有重载接受一对迭代器版本的insert
+函数,一个双向迭代器类重载了自增操作符，却没有重载自减操作符…，凡此种种，请不要惊讶以为此行的目的在于对数据结构的学习，以及学习
+STL 的设计思想，而不在于做重复的工作，下面是关于仿 STL 的
+二叉搜索树的C++我实现了的部分的声明，如果你想看看实现的源码，请&lt;a href="https://skydrive.live.com/redir.aspx?cid=23ad8997f219f41d&amp;amp;resid=23AD8997F219F41D!418&amp;amp;parid=23AD8997F219F41D!417"&gt;点击下载(bst.hpp)。&lt;/a&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//BST.hpp     A data structure which be called  binary search tree &lt;/span&gt;
+&lt;span class="c1"&gt;//  2011/12/17   By Adoo&lt;/span&gt;
+&lt;span class="c1"&gt;// homepage:  http://www.roading.org&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;ifndef&lt;/span&gt; &lt;span class="no"&gt;BST_HPP&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;define&lt;/span&gt; &lt;span class="no"&gt;BST_HPP&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="k"&gt;include&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="c1"&gt;// The binary search tree template&lt;/span&gt;
+&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="no"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="no"&gt;BST&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;protected&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="nl"&gt;public:&lt;/span&gt;
+    &lt;span class="k"&gt;typedef&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;typedef&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;const_iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+     &lt;span class="no"&gt;BST&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="k"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;T&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;T&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;iter_type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iter_type&lt;/span&gt; &lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;void&lt;/span&gt;  &lt;span class="n"&gt;eraser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;eraser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;ibeg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;iend&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;eraser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;T&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+    &lt;span class="o"&gt;~&lt;/span&gt;  &lt;span class="no"&gt;BST&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+&lt;span class="nl"&gt;private:&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;  &lt;span class="n"&gt;_root&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;span class="c1"&gt;//The node for binary search tree&lt;/span&gt;
+&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="no"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="no"&gt;BST&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="no"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="no"&gt;T&lt;/span&gt;  &lt;span class="n"&gt;_value&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_left&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_parent&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// I should implement some override operator at here , but  I omit these. &lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="no"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="no"&gt;BST&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="no"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="nl"&gt;node_iterator:&lt;/span&gt; 
+    &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;bidirectional_iterator_tag&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="nl"&gt;public:&lt;/span&gt;
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="no"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;int&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;r_iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;r_iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;pointer&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="nl"&gt;private:&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;_node&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;endif&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;p&gt;上述部分的实现,使得我们可以类似使用 STL 中的容器一样来操作 BST
+了，当然还应该实现更多的函数以及操作符来提供更多的支持，但就上面实现的那些而言，我们已经可以做类似如下的操作了：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//用特定的迭代器来遍历 BST&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;BST&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;int&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;  &lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="no"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="n"&gt;iter&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="no"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;cout&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;*&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;p&gt;接受值类型匹配的其它类型的迭代器来作为插入：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;BST&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vector&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;   &lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;vec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="n"&gt;iter&lt;/span&gt;!&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;vec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;
+
+&lt;p&gt;…总之，目的是让BST使用起来与STL 一样的风格。&lt;/p&gt;
+&lt;/p&gt;</summary><category term="binary search tree"></category><category term="c++"></category><category term="Introduction to algorithm"></category><category term="stl"></category></entry><entry><title>哈希表的C++模板实现</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html" rel="alternate"></link><updated>2011-11-13T16:36:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-11-13:/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html</id><summary type="html">&lt;p&gt;引文：&lt;/p&gt;
+&lt;p&gt;采用引用计数来解决指针管理问题。开放地址、双重哈希来解决碰撞和探测问题，实现了哈希表的创建、查找、插入，复制控制，[]
+操作符… 但总觉得欠缺点什么,恳请指点.&lt;/p&gt;
+&lt;div align="right"&gt;
+*2011/11/13 By Adoo | Homepage:*[*www.roading.org*][]
+
+&lt;div align="right"&gt;
+
+* * * * *
+
+&lt;/div&gt;
+
+&lt;div align="left"&gt;
+&lt;/div&gt;
+
+&lt;p&gt;源码：&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//hash.h &lt;/span&gt;
+&lt;span class="c1"&gt;//2011/11/13   By Adoo&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;ifndef&lt;/span&gt;  &lt;span class="no"&gt;HASH_H&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;define&lt;/span&gt; &lt;span class="n"&gt;HASH_Htemplate&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;long&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;get_key&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="n"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="nl"&gt;public:&lt;/span&gt;
+     &lt;span class="n"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;size_t&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;deleted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;_size&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;    
+       &lt;span class="n"&gt;_ref_count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;size_t&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;&lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;_empty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;_deleted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;deleted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="c1"&gt;//get the adjacency prime with the size;&lt;/span&gt;
+        &lt;span class="k"&gt;do&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;is_prime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_size&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+                &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;
+                &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;_size&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;true&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="c1"&gt;//allocate the memoey&lt;/span&gt;
+        &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;_size&lt;/span&gt;&lt;span class="p"&gt;]();&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;size_t&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="n"&gt;_size&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;_empty&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;    &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;decr_cout&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;    &lt;span class="n"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="c1"&gt;//insert an element k to hash table&lt;/span&gt;
+        &lt;span class="n"&gt;long&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get_key&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;size_t&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="n"&gt;_size&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;long&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;hash_function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get_key&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;_empty&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;_deleted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;    &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;long&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get_key&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;size_t&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="n"&gt;_size&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;ty&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;hash_function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;ty&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt;  &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;hash_function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ty&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;_empty&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;_empty&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;    &lt;span class="n"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="o"&gt;++*&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ref_count&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;decr_count&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;ref_count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ref_count&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;    &lt;span class="n"&gt;hash&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;hash&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+        &lt;span class="o"&gt;++*&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ref_count&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;decr_count&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;ref_count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ref_count&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="p"&gt;[](&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;    &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;hash&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;hash&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="o"&gt;++*&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ref_count&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;decr_count&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;ref_count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ref_count&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;_empty&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_empty&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;_deleted&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_deleted&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;};&lt;/span&gt;
+&lt;span class="nl"&gt;private:&lt;/span&gt;
+    &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;decr_cout&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!--*&lt;/span&gt;&lt;span class="n"&gt;_ref_count&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;delete&lt;/span&gt; &lt;span class="n"&gt;_ref_count&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="n"&gt;delete&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;    &lt;span class="n"&gt;long&lt;/span&gt; &lt;span class="n"&gt;hash_function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;size_t&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;_size&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_size&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;    &lt;span class="n"&gt;bool&lt;/span&gt;  &lt;span class="n"&gt;is_prime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;size_t&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;prime&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;size_t&lt;/span&gt; &lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;sqrtl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mh"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="p"&gt;{&lt;/span&gt;
+                    &lt;span class="n"&gt;prime&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                    &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;prime&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="nl"&gt;private:&lt;/span&gt;
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;size_t&lt;/span&gt;  &lt;span class="n"&gt;_size&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;size_t&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_ref_count&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;type&lt;/span&gt;   &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;_empty&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;_deleted&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;endif&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category></entry><entry><title>第十章 Elementary Data Structures</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html" rel="alternate"></link><updated>2011-10-26T22:23:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-10-26:/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html</id><summary type="html">&lt;h3&gt;&lt;span style="font-weight: bold"&gt;10.1 栈和队列&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;栈是一个后进先出的数据结构，看到《算法导论》关于栈的部分，又让我想起了当初在看严蔚敏的数据结构教科书的时候对栈的一个形象理解。我当初将这样理解栈：栈就相当于往一个桶中方与其直径相同的饼，最先放进去的在最下面，最后才能拿出来。而最后放进去的饼，总在最上面，可以最先拿到。栈简称为LIFO(last
+in first
+out).关于栈的应用，我印象比较深刻的是路径的记录，大一的时候写一个迷宫程序，就是用栈来记录路径。&lt;/p&gt;
+&lt;p&gt;队列的概念还要简单一些，队列数据结构，与我们生活中的队列一样，讲究的是一个先来后到。如同超市的收银队列，先来的先付帐，先出收银口.&lt;/p&gt;
+&lt;p&gt;关于具体的实现就省略了.&lt;/p&gt;
+&lt;h3&gt;&lt;span style="font-weight: bold"&gt;10.2链表&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;线性表由节点组成,每个节点除了存储信息的数据部分,还会由一个或两个指针,来指向它的前一个节点或后一个节点.看张图吧:&lt;/p&gt;
+&lt;p&gt;[![image_thumb7][]][]&lt;/p&gt;
+&lt;h3&gt;10.3实现对象和指针&lt;/h3&gt;
+&lt;h3&gt;略&lt;/h3&gt;
+&lt;h3&gt;10.4有根树&lt;/h3&gt;
+&lt;h3&gt;略&lt;/h3&gt;
+&lt;p&gt;最后发现这一章没有什么好记的,明天做下题目的笔记吧.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.roading.org"&gt;www.roading.org&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;by Adoo&lt;/p&gt;
+&lt;p&gt;2011/10/26&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[![image_thumb7][]]: http://www.roading.org/wp-content/uploads/2011/11/image_thumb7.png&lt;/p&gt;</summary><category term="Introduction to algorithm"></category></entry><entry><title>第八章（4） 桶排序（Bucket sort）</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html" rel="alternate"></link><updated>2011-10-04T14:23:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-10-04:/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html</id><summary type="html">&lt;h3&gt;算法模型&lt;/h3&gt;
+&lt;p&gt;1.桶排序假设待排序的一组数统一的分布在一个范围中，并将这一范围划分成几个子范围，也就是桶。&lt;/p&gt;
+&lt;p&gt;2.将待排序的一组数，分档规入这些子桶。并将桶中的数据进行排序。&lt;/p&gt;
+&lt;p&gt;3.将各个桶中的数据有序的合并起来。&lt;/p&gt;
+&lt;p&gt;仔细想一想，这是不是一种“分治”策略呢？再仔细想一想，计数排序是不是桶排序的一种特化呢？&lt;/p&gt;
+&lt;h3&gt;复杂度：&lt;/h3&gt;
+&lt;p&gt;很显然桶排序的时间复杂度，取决与对各个桶之间数据进行排序的时间复杂度，因为其它部分部分的时间复杂度都为O(n);很显然，桶划分的越小，各个桶之间的数据越少，排序所用的时间也会越少。但相应的空间消耗就会增大。&lt;/p&gt;
+&lt;p&gt;可以证明，即使选用插入排序作为桶内排序的方法，桶排序的平均时间复杂度为线性。具体证明，请参考算法导论。其空间复杂度也为线性。&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;示意图：&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;[![wps_clip_image-2118[7]][]][]&lt;/p&gt;
+&lt;p&gt;伪代码：&lt;/p&gt;
+&lt;p&gt;[![wps_clip_image-2294][]][]&lt;/p&gt;
+&lt;p&gt;[&lt;br /&gt;
+][]&lt;/p&gt;
+&lt;h3&gt;与基数排序排序的比较&lt;/h3&gt;
+&lt;p&gt;基数排序与桶排序都为线性复杂度的排序算法，基数排序排序更稳定，但它的系数更大。桶排序的时间复杂度，与待排序的数组的分布有关，最差情况下可以为O(n的平方)。&lt;/p&gt;
+&lt;p&gt;总的来讲，以个人观点，基数排序与桶排序虽然复杂度为线性，但她们同时都会有各种限制，其灵活性上有欠缺，相较于原地排序其空间要求也更高。所以有一利，总有一弊。但是，当我们的待排序数组具备一些基数排序与桶排序要求的特性，且空间上又比较富裕时，桶排序与基数排序不失为最佳选择。&lt;/p&gt;
+&lt;h3&gt;实例&lt;/h3&gt;
+&lt;p&gt;略&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.roading.org"&gt;www.roading.org&lt;/a&gt; &lt;br /&gt;
+by Adoo &lt;br /&gt;
+2011/10/4&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[wps_clip_image-2118[7]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-21187_thumb.png
+    "wps_clip_image-2118[7]"
+  [![wps_clip_image-2118[7]][]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-21187.png
+  [![wps_clip_image-2294][]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-2294.png
+  [&lt;br /&gt;
+ ]: http://1.roading.sinaapp.com/2011/10/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89/bucket-sort-code/&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category><category term="桶排序"></category></entry><entry><title>第八章（3） 基数排序（Radix Sort）</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html" rel="alternate"></link><updated>2011-10-02T16:37:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-10-02:/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html</id><summary type="html">&lt;h3&gt;算法模型&lt;/h3&gt;
+&lt;p&gt;基数排序是一种用在老式穿卡机上的算法。至于穿卡机是怎么使用基数排序的，你可以参考算法导论第八章的描述。&lt;/p&gt;
+&lt;p&gt;在之前两种比较排序——合并排序与快速排序中我们使用一种“分而治之”的策略，基数排序则使用另一种与之有有异曲同工之妙的策略。无论是合并排序还是快速排序，我们讲究的是在数组级别的“分而治之”；而基数排序我们讲究的是在元素级别的“分而治之”，例如我们将一个三位数分成，个位，十位，百位三部分。&lt;/p&gt;
+&lt;p&gt;我们先来看一个实例，假如，我们要对七个三位数来进行排序，依次对其个位，十位，百位进行排序，如下图：&lt;/p&gt;
+&lt;p&gt;[![wps_clip_image-1844][]][]&lt;/p&gt;
+&lt;p&gt;[&lt;br /&gt;
+][]&lt;/p&gt;
+&lt;p&gt;很显然，每一位的数的大小都在[0，9]中，对于每一位的排序用计数排序再适合不过。&lt;/p&gt;
+&lt;h3&gt;算法复杂度&lt;/h3&gt;
+&lt;p&gt;对于n个d位数而言,如果基数排序的Stable
+Sort（注1）的算法复杂度为θ(n+k)，那么其本身的算法复杂度为θ(dn+kd)。这个就不用证明了。&lt;/p&gt;
+&lt;h3&gt;进阶&lt;/h3&gt;
+&lt;p&gt;到目前为止，基数排序似乎并不是太实用。首先，你发现好像位数是个麻烦事，比如一组数中间，既有是一位的，也有十位的，这时候似乎就不好用了；其次，如果一列数中间有负数，似乎也死翘翘了。还有就是，这哥们能排浮点数吗？&lt;/p&gt;
+&lt;p&gt;当你看到某些教程或者文章的时候，作者会郑重提醒你，排序的数必须是整数，而且整数还不够还要必须是正数。其实对于负数也是可以的，对于实数也同样是可以的，在后面我会给出一个C++实现的对整数（正负数不论）进行基数排序的代码。&lt;/p&gt;
+&lt;p&gt;其实，基数排序排序关键还是基于位，对于我们来讲讲位是基于十进制的。但对于计算机来讲，什么八进制，十进制，十六进制都是浮云，最实在的还是二进制。所以对于我们来讲int型5和55555两个数的位数是不一样的，一个一位，一个五位，但对于计算机来讲他们的位数是一样的，都是32位。&lt;/p&gt;
+&lt;p&gt;当然，基于二进制的时候我们不是按一位一位来排，我们要按几位几位来排，选多少位最合适？在选多少位之前，我们先总结一条定理。&lt;/p&gt;
+&lt;p&gt;定理：对于n个b-bit位的元素和一任意正数r&amp;lt;=b（r代表选取的位数），在Stable
+Sort的时间复杂度为θ(n+k)的情况下，基数排序的时间复杂度为θ((b/r)(n+2^r^))。&lt;/p&gt;
+&lt;p&gt;证明：每一次对r位进行排序，则总共进行b/r次Stable
+Sort排序。每一次选r位，显然k=2的r次方。所以θ(d（n+k）)=θ((b/r)(n+2^r^))。 &lt;br /&gt;
+算法导论给出说明：当b&amp;lt;
+lgn时，r=b可以得到最小复杂度；当b&gt;=lgn时，r=lgn有最小复杂度。原谅我不能给出数学上的证明。&lt;/p&gt;
+&lt;h3&gt;实例&lt;/h3&gt;
+&lt;p&gt;回到之前说的关于有负数的时候怎么排序的问题上来，我们要注意的一点事和I负数在内存中存储的是补码。也就是说在我们基于二进制来进行排序的时候负数是用其补码来排序的而不是本身，所以经过基数排序以后会得出这样的序列，所有的正数在一边，所有的负数在一边，正数的一边是有序的，负数的一边也是有序的。但是正数的一边本应该是负数的位置，而负数的一边本应该是正数的位置。比方，我们对3，2，5，-1，-4，-2，-3排序后的结果会是：2，3，5，-4，-3，-2，-1.显然对于这样一个序列，只要在排序后将正数序列和负数序列互换位置就可以了。&lt;/p&gt;
+&lt;p&gt;对整数进行基数排序的C++代码：&lt;/p&gt;
+&lt;p&gt;~~~~ {.brush:bash}
+//RadixSort.h
+//By Adoo
+//2011/10/2#ifndef RADIX_SORT&lt;/p&gt;
+&lt;h1&gt;define RADIX_SORT&lt;/h1&gt;
+&lt;h1&gt;include&lt;deque&gt;&lt;/h1&gt;
+&lt;h1&gt;include&lt;iterator&gt;template&lt;typename InIt&gt;&lt;/h1&gt;
+&lt;p&gt;void RadixSort(InIt BegIt,InIt EndIt )
+{
+    int byte=8&lt;em&gt;sizeof(&lt;/em&gt;BegIt);
+    int count=std::distance (BegIt,EndIt);
+    int size=std::log(double(count))/std::log(double(2));
+    size=byte&lt;size ? byte : size;
+    int from=1;  do
+    {
+        RadixCounting(BegIt,EndIt,from,size);
+        from+=size;
+    }while(from&lt;byte);    for(auto index=BegIt;index!=EndIt; ++index)
+    {
+        if(*index&lt;0)
+        {
+            std::vector&lt; std::iterator_traits&lt;InIt&gt;::value_type &amp;gt; vec(index,EndIt);
+            vec.insert(vec.end(),BegIt,index);
+            std::copy(vec.begin(),vec.end(),BegIt);
+            return;
+        }
+    }};template&lt;typename InIt&gt;
+void RadixCounting(InIt BegIt,InIt EndIt ,const int From, const int Size)
+{//counting sort the elements form BegIt to EndIt base on the Size bits from From;   //the counter
+    int capa=std::pow(double(2),Size);
+    std::vector&lt;int&gt; Counter(capa,0);  int clip=capa-1;
+    for(auto Index=BegIt;Index!=EndIt;++Index)
+        ++Counter[((&lt;em&gt;Index)&amp;gt;&amp;gt;From-1)&amp;amp;clip];    for(int i=1;i!=capa;++i)
+        Counter[i]+=Counter[i-1];    std::vector&lt;int&gt; Result(Counter[capa-1],0);
+    for(std::reverse_iterator&lt;InIt&gt; RIter(EndIt),REnd(BegIt); RIter!=REnd ;++RIter)
+    {
+        int index=((&lt;/em&gt;RIter)&amp;gt;&amp;gt;From-1)&amp;clip;
+        Result[ Counter[index]-- -1]=*RIter;
+    }
+    std::copy(Result.begin(),Result.end(),BegIt);
+}#endif
+~~~~&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;对于浮点数呢？（尾数，指数...）。 &lt;br /&gt;
+基数排序虽然是线性排序，但在实际应用中它反而有可能比快速排序要慢，因为其常数因子可能远大于快速排序的常数因子。例如，在性能较差的机器上，快速排序在Cache的利用效率上要比基数排序高很多。在内存空间紧张的情况下，应当选择快速排序类的原地排序算法。&lt;/p&gt;
+&lt;p&gt;我做了一个小小的测试。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;table style="border-bottom-style: none; border-left-style: none; border-collapse: collapse; border-top-style: none; border-right-style: none; mso-border-alt: solid windowtext .5pt; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt" class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0"&gt;
+&lt;tbody&gt;
+&lt;tr style="height: 20.5pt; mso-yfti-irow: 0; mso-yfti-firstrow: yes"&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; height: 20.5pt; border-top: windowtext 1pt solid; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt" valign="top" width="61"&gt;
+&lt;span style="font-family: 宋体; mso-bidi-font-size: 10.5pt; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 宋体; mso-ansi-language: zh-cn"&gt;数据量&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; height: 20.5pt; border-left-color: windowtext; border-top: windowtext 1pt solid; border-left-width: 1pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt" valign="top" width="79"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;RadixSort&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; height: 20.5pt; border-left-color: windowtext; border-top: windowtext 1pt solid; border-left-width: 1pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt" valign="top" width="85"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;QiuckSort&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;tr style="height: 18.9pt; mso-yfti-irow: 1"&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 18.9pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;1k&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 18.9pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;15&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 18.9pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;16&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;tr style="height: 18.25pt; mso-yfti-irow: 2"&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;10k&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;125&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;265&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;tr style="height: 18.25pt; mso-yfti-irow: 3"&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;50k&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;672&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;1469&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;tr style="height: 17.4pt; mso-yfti-irow: 4"&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 17.4pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;100k&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 17.4pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;922&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 17.4pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;3141&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;tr style="height: 18.25pt; mso-yfti-irow: 5"&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;500k&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;4975&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;19125&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;tr style="height: 19.15pt; mso-yfti-irow: 6; mso-yfti-lastrow: yes"&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 19.15pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;1000k&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 19.15pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;11844&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 19.15pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85"&gt;
+&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;36025&lt;/span&gt;
+
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;（单位：毫秒） &lt;br /&gt;
+对同一组随机数，基数排序和快排分别测试五次取平均值。Cpu：E5200,内存：4G。100万后的数据测不下去了，cpu太慢，不知道等多久，不同的机器上，应该有很多差别。&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;www.roading.org &lt;br /&gt;
+by Adoo&lt;/p&gt;
+&lt;p&gt;2011/10/2&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[![wps_clip_image-1844][]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-1844.png
+  [&lt;br /&gt;
+ ]: http://1.roading.sinaapp.com/2011/10/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89/radixsortmodel/&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category><category term="快速排序"></category></entry><entry><title>算法导论 第八章(2) 计数排序(Counting Sort)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html" rel="alternate"></link><updated>2011-09-30T21:54:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-09-30:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html</id><summary type="html">&lt;p&gt;与比较排序注重于元素之间的比较不同，计数排序专注于找准自己的位置，而不关心自己比谁小，比谁大。其核心在于，对于任意一个属于数组A的元素x，统计出在A中有多少个元素小于等于x,以确定x的位置。例如，有10个元素小于等于a那么a就应该排在第11位。&lt;/p&gt;
+&lt;h3&gt;算法模型：&lt;/h3&gt;
+&lt;p&gt;假设对数组A[n]进行排序,A[n]中任意一元素x∈[0，k)。我们需要两个辅助数组，一个为B[k],我们用来记录统计信息，另一个为C[n],用来储存排序结果。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用下标i迭代数组A，用B[i]记录A中等于i的元素个数。&lt;/li&gt;
+&lt;li&gt;迭代数组B，用B[i]记录小于等于i的元素的个数。&lt;/li&gt;
+&lt;li&gt;根据B中的统计信息，将A中的元素放到C中合适的位置。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;来看伪代码：&lt;/p&gt;
+&lt;p&gt;[![wps_clip_image-1380][]][]&lt;/p&gt;
+&lt;p&gt;[&lt;br /&gt;
+][] &lt;br /&gt;
+注意：第十行从后向前迭代能保护相等元素的相对位置，12行减1也是因为考虑到相等的元素。&lt;/p&gt;
+&lt;h3&gt;时间复杂度&lt;/h3&gt;
+&lt;p&gt;计数排序具有线性复杂度，与任何一个比较排序相比，其复杂度都要低很多。 &lt;br /&gt;
+Θ（k）+Θ(n)+Θ(k)+Θ(n)=Θ(k+n)。&lt;/p&gt;
+&lt;p&gt;容我说道一下人生：人生如同排序，若你执着与世人较高较低，便总有烦劳忧愁，其路也弯曲（n
+lg
+n）；若你心中自有定位，看淡争先落后，便自能泰然自若，其路也轻松（线性）。特别是在我们学习技术的时候，若我们总在与人比较，又或者总计较于技术间好坏的争论，就会落了下乘，重要的在于找准自己的定位。当然，回到技术层面，并不是说非比较排序就一定比比较排序好，具体分析下一篇算法导论心得——基数排序（Radix
+Sort）会讲到。&lt;/p&gt;
+&lt;h3&gt;C++实现&lt;/h3&gt;
+&lt;p&gt;~~~~ {.brush:cpp}&lt;/p&gt;
+&lt;h1&gt;ifndef COUNTING_SORT&lt;/h1&gt;
+&lt;h1&gt;define COUNTING_SORT&lt;/h1&gt;
+&lt;h1&gt;include&lt;vector&gt;&lt;/h1&gt;
+&lt;p&gt;template &lt;typename InputIter,typename OutIter&gt;
+void CountingSort(InputIter BegIter,InputIter EndIter,OutIter OutputIter, const int Boundary)
+{
+    //the counter
+    std::vector&lt;int&gt; Counter(Boundary,0);  for(auto Index=BegIter;Index!=EndIter;++Index)
+        ++Counter[&lt;em&gt;Index];
+    // Counter[] holds the number of input element equal to &lt;/em&gt;index;  for(int i=1;i!=Boundary;++i)
+        Counter[i]+=Counter[i-1];
+    //Now Counter[] contains the number of elements less than or eaual to i  std::vector&lt;int&gt; Result(Counter[Boundary-1],0);
+    for(std::reverse_iterator&lt;InputIter&gt; RIter(EndIter),REnd(BegIter); RIter!=REnd ;++RIter)
+    {
+        Result[Counter[&lt;em&gt;RIter]-1]=&lt;/em&gt;RIter;
+        --Counter[*RIter];
+    }
+    std::copy(Result.begin (),Result.end (),OutputIter);
+}&lt;/p&gt;
+&lt;h1&gt;endif&lt;/h1&gt;
+&lt;p&gt;~~~~&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;2011/9/30 by Adoo | homepage:&lt;/em&gt;&lt;a href="http://www.roading.org/"&gt;&lt;em&gt;www.roading.org&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[![wps_clip_image-1380][]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-1380.png
+  [&lt;br /&gt;
+ ]: http://1.roading.sinaapp.com/?attachment_id=237&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category><category term="计数排序"></category></entry></feed>
