@@ -122,6 +122,17 @@ h6{
 font-size:15px;
 }
 
+ul
+{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.content ul{
+	clear: both;
+}
+
 hr{border: 1px solid #e8e8e8;}
 
 blockquote {
@@ -265,12 +276,6 @@ margin-top:40px;
 
 .index-sidebar {
 margin:0px;
-}
-
-.sidebar ul, .index-sidebar ul{
-	list-style: none;
-	margin: 0px;
-	padding: 0px;
 }
 
 .discusses{
