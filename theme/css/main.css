@@ -122,15 +122,13 @@ h6{
 font-size:15px;
 }
 
-ul
+.index-sidebar ul, .sidebar ul,
+.index-content ul, .footer ul,
+#banner ul
 {
 	list-style: none;
 	margin: 0px;
 	padding: 0px;
-}
-
-.content ul{
-	clear: both;
 }
 
 hr{border: 1px solid #e8e8e8;}
