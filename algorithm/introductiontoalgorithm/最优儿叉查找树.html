@@ -57,44 +57,6 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -177,6 +139,48 @@
 					
 				
 					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 			</ul>
 			<div class="clear"></div>
@@ -199,7 +203,7 @@
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2012-03-26T11:56:00">
-                Mon 26 March 2012
+                周一 26 三月 2012
         </abbr>
         
         <address class="article_author">
@@ -222,42 +226,42 @@
 	      <p>假如我们要设计一个简单的程序将一段英文翻译成法语，那么就需要为每个英语单词找到对应的法语单词，简单的做法是在单词库中对每个单词进行遍历查找。更快一点的做法是，我们可以将单词库建成一颗平衡二叉搜索树——用英文单词做Key,对应的法语单词做附属信息。第二种方法，虽然可以保证每个单词的查询时间控制在
 O(lgn),不过却也有不合理之处。由于单词出现的频率有高有低，于是一些常用单词离根节点很远，而一些很生僻的单词却在根节点附近。可见用一颗平衡二叉搜索树来做这个问题并不是非常高效，在这儿就引出了另一种二叉查找树——最优二叉查找树。</p>
 <h3>问题定义</h3>
-<p>假设给定一组有序的序列 <em>K</em> = 〈<em>k~1~</em>, <em>k</em>~2~, ...,
-<em>k~n~</em>〉，在查找的过程中被查找的键是<em>k~i~</em>的概率是<em>p~i~</em>
+<p>假设给定一组有序的序列 <em>K</em> = 〈<em>k<sub>1</sub></em>, <em>k</em><sub>2</sub>, ...,
+<em>k<sub>n</sub></em>〉，在查找的过程中被查找的键是<em>k<sub>i</sub></em>的概率是<em>p<sub>i</sub></em>
 。同时因为有一些单词是
-<em>K</em>中不存在的,因此我们用n+1个虚拟键来表示这些不存在于<em>K</em>中的键，分别为<em>d</em>~0~,
-<em>d</em>~1~, <em>d</em>~2~, ..., <em>d~n~</em> 。其中 <em>d~0~</em>代表所有比 <em>k</em>~1~小的键, <em>d~n~</em>
-表示 所有比<em>k~n~</em>大的键,对于 <em>i</em> = 1, 2, ..., <em>n</em> -1, 虚拟键<em>d~i~</em>
-表示所有位于 <em>k~i~</em> 和<em>k~i+1~</em>之间的键。对于每一个<em>d~i~</em>,
-我们有一个概率<em>q~i~</em>。</p>
+<em>K</em>中不存在的,因此我们用n+1个虚拟键来表示这些不存在于<em>K</em>中的键，分别为<em>d</em><sub>0</sub>,
+<em>d</em><sub>1</sub>, <em>d</em><sub>2</sub>, ..., <em>d<sub>n</sub></em> 。其中 <em>d<sub>0</sub></em>代表所有比 <em>k</em><sub>1</sub>小的键, <em>d<sub>n</sub></em>
+表示 所有比<em>k<sub>n</sub></em>大的键,对于 <em>i</em> = 1, 2, ..., <em>n</em> -1, 虚拟键<em>d<sub>i</sub></em>
+表示所有位于 <em>k<sub>i</sub></em> 和<em>k<sub>i+1</sub></em>之间的键。对于每一个<em>d<sub>i</sub></em>,
+我们有一个概率<em>q<sub>i</sub></em>。</p>
 <p>对于每次搜索，非成功，即失败，所以有：</p>
 <p>[<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb13.png" title="image" />][]</p>
 <p>因为对于每个关键字和虚拟键的概率都是已知的，所以我们可以求出一颗二叉搜索树的期望值：[<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb14.png" title="image" />][]</p>
-<p>depth~<em>T</em>~
+<p>depth<sub><em>T</em></sub>
 代表结点在树种的深度。而我们的目标就是要建立起一颗搜索期望值最小的二叉树——也就是最优二叉搜索树。</p>
 <h3>动态规划的解法</h3>
-<p>很显然，假如k~i~是最优二叉搜索树的根节点，那么它的左子树和右子树必然是最优二叉搜索树。由此可见，这个问题拥有最优子结构。</p>
+<p>很显然，假如k<sub>i</sub>是最优二叉搜索树的根节点，那么它的左子树和右子树必然是最优二叉搜索树。由此可见，这个问题拥有最优子结构。</p>
 <p>要注意到，当一棵树成为另一棵树的子树的时候，由于每个结点的深度增加了1，所以搜索期望代价增加量为所有结点的概率总和：[<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb15.png" title="image" />][]</p>
-<p>所以对于一棵根结点为 <em>k~r~</em> 包含有结点<em>k~i~</em>, ...,
-<em>k~j~</em>的最优二叉搜索树，我们有：</p>
-<p><em>e</em>[<em>i</em>, <em>j</em> ] = <em>p~r~</em> + (<em>e</em>[<em>i</em>, <em>r</em> - 1] + <em>w</em>(<em>i</em>, <em>r</em> - 1)) +
+<p>所以对于一棵根结点为 <em>k<sub>r</sub></em> 包含有结点<em>k<sub>i</sub></em>, ...,
+<em>k<sub>j</sub></em>的最优二叉搜索树，我们有：</p>
+<p><em>e</em>[<em>i</em>, <em>j</em> ] = <em>p<sub>r</sub></em> + (<em>e</em>[<em>i</em>, <em>r</em> - 1] + <em>w</em>(<em>i</em>, <em>r</em> - 1)) +
 (<em>e</em>[<em>r</em> + 1, <em>j</em>] + <em>w</em>(<em>r</em> + 1, <em>j</em>)).</p>
-<p>注意到：<em>w</em>(<em>i</em>, <em>j</em>) = <em>w</em>(<em>i</em>, <em>r</em> - 1) + <em>p~r~</em> + <em>w</em>(<em>r</em> + 1,
+<p>注意到：<em>w</em>(<em>i</em>, <em>j</em>) = <em>w</em>(<em>i</em>, <em>r</em> - 1) + <em>p<sub>r</sub></em> + <em>w</em>(<em>r</em> + 1,
 <em>j</em>)，所以：</p>
 <p><em>e</em>[<em>i</em>, <em>j</em> ] = <em>e</em>[<em>i</em>, <em>r</em> - 1] + <em>e</em>[<em>r</em> + 1, <em>j</em>] + <em>w</em>(<em>i</em>, <em>j</em>).</p>
 <p>如此一来，我们可以建立起递归式了：[<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb16.png" title="image" />][]</p>
 <p><em>e</em>[<em>i</em>, <em>j</em> ]
 记录了最优二叉查找树中的期望搜索代价，为了可以建立起二叉搜索树的结构，我们需要一个<em>root</em>[<em>i</em>,
-<em>j</em> ]来记录根结点<em>k~r~</em>的下标。</p>
+<em>j</em> ]来记录根结点<em>k<sub>r</sub></em>的下标。</p>
 <p>在下面的伪码中，用表 <em>e</em>[1 ‥ <em>n</em> + 1, 0 ‥ <em>n</em>]来存储<em>e</em>[<em>i</em>, <em>j</em>]
 。第一维需要到<em>n</em> + 1 而不是 <em>n</em> 因为有子树只包含虚拟键
-<em>d~n~</em>，我们需要计算和存储 <em>e</em>[<em>n</em> + 1, <em>n</em>].
-第二维需要从0开始是因为有子树只包含虚拟键<em>d</em>~0~,
+<em>d<sub>n</sub></em>，我们需要计算和存储 <em>e</em>[<em>n</em> + 1, <em>n</em>].
+第二维需要从0开始是因为有子树只包含虚拟键<em>d</em><sub>0</sub>,
 我们需要计算和存储<em>e</em>[1, 0]. 此外，除了用表<em>root</em>[<em>i</em>, <em>j</em>
-]来记录根结点<em>k~r~</em>的下标外，我们还需要一个表<em>w</em>[1 ‥ <em>n</em> + 1, 0 ‥
+]来记录根结点<em>k<sub>r</sub></em>的下标外，我们还需要一个表<em>w</em>[1 ‥ <em>n</em> + 1, 0 ‥
 <em>n</em>]，来记录<em>w</em>(<em>i</em>, <em>j</em>)以提高效率——这样就不必每次都从头计算<em>w</em>(<em>i</em>,
 <em>j</em>)了。对于 1 ≤ <em>i</em> ≤ <em>n</em>. 且 <em>j</em> ≥ <em>i</em>, 我们有：</p>
-<p><em>w</em>(<em>i</em>, <em>j</em>) = <em>w</em>(<em>i</em>, <em>j</em> - 1) + <em>p~j~</em>+ <em>q~j~</em></p>
+<p><em>w</em>(<em>i</em>, <em>j</em>) = <em>w</em>(<em>i</em>, <em>j</em> - 1) + <em>p<sub>j</sub></em>+ <em>q<sub>j</sub></em></p>
 <h4>伪码：[<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb17.png" title="image" />][]</h4>
 <h4>C++的实现: <span style="color: blue"></span></h4>
 <div class="codehilite"><pre><span class="c">#include&lt;iostream&gt;</span>
@@ -351,7 +355,7 @@ O(lgn),不过却也有不合理之处。由于单词出现的频率有高有低�
   [<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb16.png" title="image" />]: http://www.roading.org/wp-content/uploads/2012/03/image16.png
   [<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb17.png" title="image" />]: http://www.roading.org/wp-content/uploads/2012/03/image17.png</p>
 		  <p style= "text-align:right;"><em>
-		  Mon 26 March 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周一 26 三月 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html">本文原链</a>)</em></p>
@@ -470,10 +474,6 @@ O(lgn),不过却也有不合理之处。由于单词出现的频率有高有低�
 		
 		
 		
-		
-		   
-		   <li><a title="Solution of CLRS 11.1 exercises" href="http://www.roading.org/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html">Solution of CLRS 11.1 exercises</a></li>
-		   
 		
 		
 		
@@ -594,10 +594,6 @@ O(lgn),不过却也有不合理之处。由于单词出现的频率有高有低�
 		
 		
 		
-		
-		   
-		   <li><a title="算法导论6-3 young tableaus" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba6-3-young-tableaus.html">算法导论6-3 young tableaus</a></li>
-		   
 		
 		
 		

@@ -57,44 +57,6 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -177,6 +139,48 @@
 					
 				
 					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 			</ul>
 			<div class="clear"></div>
@@ -206,7 +210,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-24T12:42:00">
-                Thu 24 November 2011
+                周四 24 十一月 2011
         </abbr>
         
         <address class="article_author">
@@ -214,7 +218,7 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;Memory alignment&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;Memory alignment&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
@@ -222,18 +226,20 @@
 	          
 		<a title="permalink to Memory alignment" href="http://www.roading.org/tag/memory-alignment.html">Memory alignment</a>
 	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	          
 	    </abbr>
 	
 	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-                <ul>
-<li>本文所有内容在一个建立在一个前提下：使用VC编译器。着重点在于：VC的内存对齐准则；同样的数据，不同的排列有不同的大小，另外在有虚函数或虚拟继承情况下又有如何影响？</li>
-<li>同时学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。</li>
-</ul>
-<div align="right">
-*2011/11/20 By Adoo | Homepage:*[*www.roading.org ...</div>
+                <p>本文所有内容在建立在一个前提下：使用VC编译器。着重点在于：VC的内存对齐准则；同样的数据，
+不同的排列有不同的大小，另外在有虚函数或虚拟继承情况下又有如何影响？</p>
+<h3>内存对齐？！What？Why?</h3>
+<p>对于一台32位的机器来说如何才能发挥它的最佳存取效率呢？当然是每次都读4字节（32bit）,
+这样才可以让它的bus处于最高效率。实际上它也是这么做的，即使你只需要一个字节，它也是
+读一个机器字长（这儿是32bit）。更重要的是 ...</p>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/vc%e5%86%85%e5%ad%98%e5%af%b9%e9%bd%90%e5%87%86%e5%88%99%ef%bc%88memory-alignment%ef%bc%89.html" rel="bookmark"
                            title="Permalink to VC内存对齐准则（Memory alignment）">Read more→</a>	
 		<div class="clear"></div>
@@ -255,7 +261,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-24T12:41:00">
-                Thu 24 November 2011
+                周四 24 十一月 2011
         </abbr>
         
         <address class="article_author">
@@ -263,11 +269,13 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
@@ -275,12 +283,15 @@
 	
 	
 </div><!-- /.post-info -->
-                <ul>
-<li>本文为Lippman《深度探索C++对象模型》第三章——Data 语意学（The
-    Semantics of Data） 之笔记。 主要关于C++类对象的内存大小。</li>
-<li>同时学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。</li>
-</ul>
-<p><em>2011/11/19 ...</em></p>
+                <h3>一个实例引出的思考</h3>
+<div class="codehilite"><pre><span class="k">class</span> <span class="nc">X</span><span class="p">{};</span>
+<span class="k">class</span> <span class="nc">Y</span><span class="o">:</span><span class="k">virtual</span> <span class="k">public</span> <span class="n">X</span><span class="p">{};</span>
+<span class="k">class</span> <span class="nc">Z</span><span class="o">:</span><span class="k">virtual</span> <span class="k">public</span> <span class="n">X</span><span class="p">{};</span>
+<span class="k">class</span> <span class="nc">A</span><span class="o">:</span><span class="k">public</span> <span class="n">Y</span><span class="p">,</span> <span class="k">public</span> <span class="n">Z</span><span class="p">{};</span>
+</pre></div>
+
+
+<p>猜猜sizeof上面各个类都为多少 ...</p>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e7%b1%bb%e5%af%b9%e8%b1%a1%e7%9a%84%e5%a4%a7%e5%b0%8f.html" rel="bookmark"
                            title="Permalink to C++类对象的大小">Read more→</a>	
 		<div class="clear"></div>
@@ -302,7 +313,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-24T12:40:00">
-                Thu 24 November 2011
+                周四 24 十一月 2011
         </abbr>
         
         <address class="article_author">
@@ -349,7 +360,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-15T19:44:00">
-                Tue 15 November 2011
+                周二 15 十一月 2011
         </abbr>
         
         <address class="article_author">
@@ -397,7 +408,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-12T22:15:00">
-                Sat 12 November 2011
+                周六 12 十一月 2011
         </abbr>
         
         <address class="article_author">
@@ -439,7 +450,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-11T19:36:00">
-                Fri 11 November 2011
+                周五 11 十一月 2011
         </abbr>
         
         <address class="article_author">
@@ -459,17 +470,12 @@
 	
 	
 </div><!-- /.post-info -->
-                <p>引文：</p>
-<ul>
-<li><div align="left">
-    本文为Lippman
-    《深度探索C++对象模型》侯捷译本之第一章笔记，主要为全局概览C++对象模型。
-    </div></li>
-<li><div align="left">
-    学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。
-    </div></li>
-</ul>
-<p><em>2011/11/11 By Adoo | Homepage:</em><a href="http://www.roading.org"><em>www.roading.org ...</em></a></p>
+                <p>学习C++应该看过不少关于C与C++的口水贴，以及关于各种对比C与C++效率比较的帖子，
+最有影响力的恐怕当属linus对C++的炮轰——《<a href="http://blog.csdn.net/turingbook/article/details/1775488">糟糕程序员的垃圾语言</a>》。但无论如
+何，我正喜欢着这样一种垃圾，我当然对linus充满敬意，但这不妨碍我口食垃圾而对其
+仰慕。</p>
+<p>无需太在意站在山巅的巨人们的言论，每个人都有不同的道路来追求真理。与其听着Linus
+的嗤笑之声，不妨跟随Lippman一起探索C++对象模型的 ...</p>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e5%af%b9%e8%b1%a1%e9%9d%a2%e9%9d%a2%e8%a7%82.html" rel="bookmark"
                            title="Permalink to C++对象面面观">Read more→</a>	
 		<div class="clear"></div>

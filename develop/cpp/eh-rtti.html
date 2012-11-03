@@ -57,44 +57,6 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -177,6 +139,48 @@
 					
 				
 					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 			</ul>
 			<div class="clear"></div>
@@ -187,7 +191,7 @@
 
 <a href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a> »
 
-EH &amp; RTTI
+EH & RTTI
 </div>
  
 		</nav>
@@ -195,11 +199,11 @@ EH &amp; RTTI
 
         
     <div class="article-page">
-	<h1>EH &amp; RTTI</h1>
+	<h1>EH & RTTI</h1>
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-12-08T22:24:00">
-                Thu 08 December 2011
+                周四 08 十二月 2011
         </abbr>
         
         <address class="article_author">
@@ -207,10 +211,8 @@ EH &amp; RTTI
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;EH&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;RTTI&nbsp;&nbsp;">
+	    <abbr title="EH&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;RTTI&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-	          
 		<a title="permalink to EH" href="http://www.roading.org/tag/eh.html">EH</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
@@ -224,106 +226,69 @@ EH &amp; RTTI
 	
 </div><!-- /.post-info -->
 	      <h3>异常处理(Exception Handling)</h3>
-<p>C++的 exception handling 有三个主要的语汇组成：</p>
+<p>C++的 exception handling 有三个主要的子句组成：</p>
 <ul>
-<li><div align="left">
-    一个 throw 子句。它在程序的某处丢出一个 exception ，被丢出的
-    exception 可以是内建类型，也可以是自定义类型。——抛出 exception 组件。
-    </div></li>
-<li><div align="left">
-    一个或多个 catch 子句。 每一个 catch 子句都是一个 exception
-    handler。每个子句可以处理一种类型(也包括其继承类)的 exception
-    ，在大括号中包含处理代码。——专治各种不服组件。每一个catch
-    子句都可以用来处理某种 exception.
-    </div></li>
-<li><div align="left">
-    一个 try 区段。用大括号包围一系列语句，这些语句有可能抛出 exception
-    ，从而引发 catch 子句的作用。——逮捕各种 exception 组件。
-    </div></li>
+<li>一个throw子句。它在程序的某处丢出一个exception，被丢出的exception可以是内建类
+    型，也可以是自定义类型。——抛出exception组件。</li>
+<li>一个或多个 catch 子句。 每一个 catch 子句都是一个 exception handler。每个子句
+    可以处理一种类型(也包括其继承类)的exception，在大括号中包含处理代码。——专治各
+    种不服组件。每一个catch子句都可以用来处理某种exception。</li>
+<li>一个 try 区段。用大括号包围一系列语句，这些语句有可能抛出exception，从而引发
+    catch 子句的作用。——逮捕各种 exception 组件。</li>
 </ul>
-<p>当一个 exception 被抛出后，控制权从函数调用中被释放，寻找一个吻合的 catch
-子句，如果<font style="background-color: #ffff00">各层</font>调用都没有吻合的
-catch 子句，terminate()
-将被调用。在控制权被放弃后，堆栈中的每一个函数调用也被出栈，这个过程称为
-unwinding the stack (关于 stack unwinding ,可以参考《C++
-Primer》第四版之 17.1.2 Stack
-Unwinding)，在每一个函数被出栈之前，其局部变量会被摧毁。</p>
-<p>异常抛出有可能带来一些问题，比方在一块内存的 lock 和 unlock
-内存之间，或是在 new 和 delete 之间的代码抛出了异常，那么将导致本该进行的
-unlock 或 delete 操作不能进行。解决方法之一是：</p>
-<div class="codehilite"><pre><span class="n">void</span>  <span class="n">mumble</span><span class="p">(</span> <span class="n">void</span> <span class="o">*</span><span class="n">arena</span> <span class="p">)</span>  
+<p>当一个 exception 被抛出后，控制权从函数调用中被释放，寻找一个吻合的catch子句，如
+果各层调用都没有吻合的catch子句，<code>terminate()</code>将被调用。在控制权被放弃后，堆栈中
+的每一个函数调用也被出栈，这个过程称为unwinding the stack(关于 stack unwinding ,
+可以参考《C++ Primer》第四版之 17.1.2 Stack Unwinding)，在每一个函数被出栈之前,其
+局部变量会被摧毁。</p>
+<p>异常抛出有可能带来一些问题，比方在一块内存的lock和unlock内存之间，或是在new和
+delete之间的代码抛出了异常，那么将导致本该进行的unlock或delete操作不能进行。解决
+方法之一是：</p>
+<div class="codehilite"><pre><span class="kt">void</span>  <span class="nf">mumble</span><span class="p">(</span> <span class="kt">void</span> <span class="o">*</span><span class="n">arena</span> <span class="p">)</span>  
 <span class="p">{</span>  
    <span class="n">Point</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>  
-   <span class="n">p</span> <span class="p">=</span> <span class="n">new</span> <span class="n">Point</span><span class="p">;</span>  
-   <span class="k">try</span> <span class="p">{</span>  
+   <span class="n">p</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Point</span><span class="p">;</span>  
+   <span class="n">try</span> <span class="p">{</span>  
       <span class="n">smLock</span><span class="p">(</span> <span class="n">arena</span> <span class="p">);</span>  
-      <span class="o">//</span> <span class="p">...</span>  
+      <span class="c1">// ...  </span>
    <span class="p">}</span>  
-   <span class="k">catch</span> <span class="p">(</span> <span class="p">...</span> <span class="p">)</span> <span class="p">{</span>  
+   <span class="n">catch</span> <span class="p">(</span> <span class="p">...</span> <span class="p">)</span> <span class="p">{</span>  
       <span class="n">smUnLock</span><span class="p">(</span> <span class="n">arena</span> <span class="p">);</span>  
       <span class="n">delete</span> <span class="n">p</span><span class="p">;</span>  
       <span class="n">throw</span><span class="p">;</span>  
    <span class="p">}</span>  
    <span class="n">smUnLock</span><span class="p">(</span> <span class="n">arena</span> <span class="p">);</span>  
    <span class="n">delete</span> <span class="n">p</span><span class="p">;</span>  
-<span class="p">}</span>  
+<span class="p">}</span>
 </pre></div>
 
 
-</p>
-
-<p>在本函数被出栈之前，先截住异常，在 unlock 和 delete
-之后再将异常原样抛出。new expression 的调用不用包括在 try
-块之内是因为，不论在 new operator
-调用时还是构造函数调用时抛出异常，都会在抛出异常之前释放已分配好的资源，所以不用再调用
-delete 。</p>
-</p>
-
-<p>另一个办法是，将这些资源管理的问题，封装在一个类对象中，由析构函数释放资源，这样就不需要对代码进行上面那样的处理——利用函数释放控制权之前会析构所有局部对象的原理。</p>
-</p>
-
-<p>在对单个对象构造过程中抛出异常，会只调用已经构造好的 base class object 或
-member class object
-的析构函数。同样的道理，适用于数组身上，如果在调用构造函数过程中抛出异常，那么之前所有被构造好的元素的析构函数被调用，对于抛出异常的该元素，则遵循关于单个对象构造的原则，然后释放已经分配好的内存。</p>
-</p>
-
-<p>只有在一个 catch 子句评估完毕并且知道它不会再抛出 exception
-后，真正的exception object 才会被释放。关于 catch
-子句使用引用还是使用对象来捕获异常，省略。</p>
-</p>
-
+<p>在函数被出栈之前，先截住异常，在unlock和delete之后再将异常原样抛出。new expression
+的调用不用包括在try块之内是因为，不论在new operator调用时还是构造函数调用时抛出异
+常，都会在抛出异常之前释放已分配好的资源，所以不用再调用delete 。</p>
+<p>另一个办法是，将这些资源管理的问题，封装在一个类对象中，由析构函数释放资源，这样就
+不需要对代码进行上面那样的处理——利用函数释放控制权之前会析构所有局部对象的原理。</p>
+<p>在对单个对象构造过程中抛出异常，会只调用已经构造好的base class object或member class
+ object的析构函数。同样的道理，适用于数组身上，如果在调用构造函数过程中抛出异常，那
+ 么之前所有被构造好的元素的析构函数被调用，对于抛出异常的该元素，则遵循关于单个对象
+ 构造的原则，然后释放已经分配好的内存。</p>
+<p>只有在一个catch子句评估完毕并且知道它不会再抛出exception后，真正的exception object
+才会被释放。关于 catch子句使用引用还是使用对象来捕获异常，省略。</p>
 <h3>执行期类型识别（Runtime Type Identification RTTI）</h3>
-</p>
-
 <ol>
 <li>RTTI 只支持多态类，也就是说没有定义虚函数是的类是不能进行 RTTI的。</li>
-<li>对指针进行 dynamic_cast 失败会返回 NULL ,而对引用的话，识别会抛出
-    bad_cast exception.</li>
-<li>typeid 可以返回类型为 const type_info&amp; ，用以获取类型信息。</li>
+<li>对指针进行<code>dynamic_cast</code>失败会返回NULL ,而对引用的话，识别会抛出
+    <code>bad_cast exception</code>。</li>
+<li>typeid 可以返回<code>const type_info&amp;</code>，用以获取类型信息。</li>
 </ol>
-</p>
-
-<p>关于 1 是因为 RTTI 的实现是通过 vptr 来获取存储在虚函数表中的
-type_info* ，事实上为非多态类提供RTTI,也没有多大意义。 2
-的原因在于指针可以被赋值为0，以表示 no object，但是引用不行。</p>
-</p>
-
-<p>关于3，虽然第一点指出 RTTI 只支持多态类，但 typeid 和 type_info
-同样可用于内建类型及所有非多态类。与多态类的差别在于，非多态类的
-type_info 对象是静态取得(所以不能叫
-“执行期类型识别”)，而多态类的是在执行期获得。</p>
-</p>
-
+<p>关于1是因为RTTI的实现是通过vptr来获取存储在虚函数表中的<code>type_info*</code> ，事实上为非多
+态类提供RTTI,也没有多大意义。 2的原因在于指针可以被赋值为0，以表示 no object，但是
+引用不行。关于3，虽然第一点指出RTTI只支持多态类，但<code>typeid</code>和<code>type_info</code>同样可用于
+内建类型及所有非多态类。与多态类的差别在于，非多态类的<code>type_info</code>对象是静态取得(所
+以不能叫“执行期类型识别”)，而多态类的是在执行期获得。</p>
 <p>参考：深度探索C++对象模型</p>
-</p>
-
-<p>欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。</p>
-</p>
-
-<p><em>2011/12/8 By Adoo | Homepage:</em><a href="http://www.roading.org"><em>www.roading.org</em></a></p>
-</p>
 		  <p style= "text-align:right;"><em>
-		  Thu 08 December 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周四 08 十二月 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//develop/cpp/eh-rtti.html">本文原链</a>)</em></p>
@@ -425,7 +390,7 @@ type_info 对象是静态取得(所以不能叫
 		
 		
 		
-		   <li class="selected">EH &amp; RTTI</li>
+		   <li class="selected">EH & RTTI</li>
 		
 		
 		
@@ -448,19 +413,19 @@ type_info 对象是静态取得(所以不能叫
 		
 		
 		   
-		   <li><a title="new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（3）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html">new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（3）</a></li>
+		   <li><a title="new expression、operator new和placement new——三个“妞（new）”的故事（3）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html">new expression、operator new和placement new——三个“妞（new）”的故事（3）</a></li>
 		   
 		
 		
 		
 		   
-		   <li><a title="new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（2）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html">new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（2）</a></li>
+		   <li><a title="new expression、operator new和placement new——三个妞（new）的故事（2）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html">new expression、operator new和placement new——三个妞（new）的故事（2）</a></li>
 		   
 		
 		
 		
 		   
-		   <li><a title="new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（1）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html">new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（1）</a></li>
+		   <li><a title="new expression、operator new 和 placement new——三个妞（new）的故事（1）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html">new expression、operator new 和 placement new——三个妞（new）的故事（1）</a></li>
 		   
 		
 		

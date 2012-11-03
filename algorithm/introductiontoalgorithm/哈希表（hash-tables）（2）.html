@@ -57,44 +57,6 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -177,6 +139,48 @@
 					
 				
 					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 			</ul>
 			<div class="clear"></div>
@@ -199,7 +203,7 @@
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-11-09T15:59:00">
-                Wed 09 November 2011
+                周三 09 十一月 2011
         </abbr>
         
         <address class="article_author">
@@ -291,7 +295,7 @@ clustering翻译为“首要扎堆现象”）。</p>
 </p>
 
 <p>二次探查函数形如：[<img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb6.png" title="image" />][]与一次探查类似，首次探查的位置决定了整个探查的顺序，因此对于所有的key也只可能最多用到m种探查顺序，与一次相比的探查比较的好处在于，它的偏移量不是一个常数，而是由一个二次方程决定，这样很大程度上避免了一次探查的首要扎堆现象，所以把二次探查这种现象称之为次要扎堆现象（secondary
-clustering）吧。但是要想填满整个哈希表的话，那么在c~1~，c2的选择上就要斟酌一番了。</p>
+clustering）吧。但是要想填满整个哈希表的话，那么在c<sub>1</sub>，c2的选择上就要斟酌一番了。</p>
 </p>
 
 <h4>双重哈希（Double hashing）</h4>
@@ -300,9 +304,9 @@ clustering）吧。但是要想填满整个哈希表的话，那么在c~1~，c2�
 <p>注意！CLRS开场便说：双重哈希提供最好的方法之一给开放地址法。其函数形如：</p>
 </p>
 
-<p><em>h</em>(<em>k</em>, <em>i</em>) = (<em>h</em>~1~(<em>k</em>) + <em>ih</em>~2~(<em>k</em>)) mod <em>m</em>,
-它有两个辅助函数<em>h</em>~1~ 和
-<em>h</em>2。双重哈希带来的好处是初始探查位置不能决定整个探查序列，因此双重哈希将能使用到O(m^2^)中探查序列，比之线性探查和二次探查的m种强了很多。但要注意的一点是，要使探查序列能包含整个哈希表，h~2~应当与表的大小m互质。两种使之互质的方法是：1.使m为一个质数，h~2~总产生比m小的正整数；2.取m为2的幂，而h~2~总产生质数。</p>
+<p><em>h</em>(<em>k</em>, <em>i</em>) = (<em>h</em><sub>1</sub>(<em>k</em>) + <em>ih</em><sub>2</sub>(<em>k</em>)) mod <em>m</em>,
+它有两个辅助函数<em>h</em><sub>1</sub> 和
+<em>h</em>2。双重哈希带来的好处是初始探查位置不能决定整个探查序列，因此双重哈希将能使用到O(m<sup>2</sup>)中探查序列，比之线性探查和二次探查的m种强了很多。但要注意的一点是，要使探查序列能包含整个哈希表，h<sub>2</sub>应当与表的大小m互质。两种使之互质的方法是：1.使m为一个质数，h<sub>2</sub>总产生比m小的正整数；2.取m为2的幂，而h<sub>2</sub>总产生质数。</p>
 </p>
 
 <h3>完全哈希表</h3>
@@ -317,7 +321,7 @@ clustering）吧。但是要想填满整个哈希表的话，那么在c~1~，c2�
 <p>[<img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb1.png" title="image" />]: http://www.roading.org/wp-content/uploads/2011/11/image1.png
   [<img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb6.png" title="image" />]: http://www.roading.org/wp-content/uploads/2011/11/image6.png</p>
 		  <p style= "text-align:right;"><em>
-		  Wed 09 November 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周三 09 十一月 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html">本文原链</a>)</em></p>
@@ -439,10 +443,6 @@ clustering）吧。但是要想填满整个哈希表的话，那么在c~1~，c2�
 		
 		
 		
-		   
-		   <li><a title="Solution of CLRS 11.1 exercises" href="http://www.roading.org/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html">Solution of CLRS 11.1 exercises</a></li>
-		   
-		
 		
 		
 		
@@ -560,10 +560,6 @@ clustering）吧。但是要想填满整个哈希表的话，那么在c~1~，c2�
 		
 		
 		
-		
-		   
-		   <li><a title="算法导论6-3 young tableaus" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba6-3-young-tableaus.html">算法导论6-3 young tableaus</a></li>
-		   
 		
 		
 		

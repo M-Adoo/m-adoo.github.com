@@ -57,44 +57,6 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -177,6 +139,48 @@
 					
 				
 					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 			</ul>
 			<div class="clear"></div>
@@ -195,10 +199,10 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a  title="Permalink to EH & RTTI" href="http://www.roading.org//develop/cpp/eh-rtti.html">EH &amp; RTTI</a></h1> 
+                    <h1 class="entry-title"><a  title="Permalink to EH & RTTI" href="http://www.roading.org//develop/cpp/eh-rtti.html">EH & RTTI</a></h1> 
                     <div class="post-info">
         <abbr class="published" title="2011-12-08T22:24:00">
-                Thu 08 December 2011
+                周四 08 十二月 2011
         </abbr>
         
         <address class="article_author">
@@ -206,10 +210,8 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;EH&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;RTTI&nbsp;&nbsp;">
+	    <abbr title="EH&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;RTTI&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-	          
 		<a title="permalink to EH" href="http://www.roading.org/tag/eh.html">EH</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
@@ -223,24 +225,18 @@
 	
 </div><!-- /.post-info -->
 		    <h3>异常处理(Exception Handling)</h3>
-<p>C++的 exception handling 有三个主要的语汇组成：</p>
+<p>C++的 exception handling 有三个主要的子句组成：</p>
 <ul>
-<li><div align="left">
-    一个 throw 子句。它在程序的某处丢出一个 exception ，被丢出的
-    exception 可以是内建类型，也可以是自定义类型。——抛出 exception 组件。
-    </div></li>
-<li><div align="left">
-    一个或多个 catch 子句。 每一个 catch 子句都是一个 exception
-    handler。每个子句可以处理一种类型(也包括其继承类)的 exception
-    ，在大括号中包含处理代码。——专治各种不服组件。每一个catch
-    子句都可以用来处理某种 exception.
-    </div></li>
-<li><div align="left">
-    一个 try 区段。用大括号包围一系列语句，这些语句有可能抛出 exception
-    ，从而引发 catch 子句的作用。——逮捕各种 exception 组件。
-    </div></li>
+<li>一个throw子句。它在程序的某处丢出一个exception，被丢出的exception可以是内建类
+    型，也可以是自定义类型。——抛出exception组件。</li>
+<li>一个或多个 catch 子句。 每一个 catch 子句都是一个 exception handler。每个子句
+    可以处理一种类型(也包括其继承类)的exception，在大括号中包含处理代码。——专治各
+    种不服组件。每一个catch子句都可以用来处理某种exception。</li>
+<li>一个 try 区段。用大括号包围一系列语句，这些语句有可能抛出exception，从而引发
+    catch 子句的作用。——逮捕各种 exception 组件。</li>
 </ul>
-<p>当一个 ...</p>
+<p>当一个 exception 被抛出后，控制权从函数调用中被释放，寻找一个吻合的catch子句，如
+果各层调用都没有吻合的catch子句，<code>terminate()</code>将被调用 ...</p>
 		    <a class="read-more" href="http://www.roading.org//develop/cpp/eh-rtti.html" rel="bookmark"
                            title="Permalink to EH & RTTI">Read more→</a>	
                 </article>

@@ -57,44 +57,6 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -177,6 +139,48 @@
 					
 				
 					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 			</ul>
 			<div class="clear"></div>
@@ -199,7 +203,7 @@ Qt Quick 笔记（1）：初识 Qt Quick
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2012-02-23T16:45:00">
-                Thu 23 February 2012
+                周四 23 二月 2012
         </abbr>
         
         <address class="article_author">
@@ -222,105 +226,61 @@ Qt Quick 笔记（1）：初识 Qt Quick
 	
 </div><!-- /.post-info -->
 	      <h3>废语开篇</h3>
-<p>在大二的时候思索着学习一界面库，为此煞费脑经。其中有试过十来天的 QT学习,
-不过最后为 WPF 而沦陷，确实 WPF
-界面与逻辑的分离让我很是向往。不过可惜的是 WPF 并不原生支持 与 C++
-的交互，以致我不得不学习一些 C# 。又四处求医问药——获得 native code 与
-manage code 交互的良方。这之间寻寻觅觅，虽然也算终于达成所愿——可以用 C++
-与 WPF 来完成一些小程序编写了。
-但是这注定是一种非主流的配置，主流与否，我虽然不在意。只是结果并不如我想的那般理想。用
-C++ 与 WPF
-来开发并没有带来效率的提升以及逻辑的简化——这些成本都被转移到了他们之间的交互上，更大的成本其实在于学习的代价——
-C#、C++/cli 、P/invoke… 有意思的是似乎转了一圈，又要回到 QT
-上来。为什么要回到QT? 没有太多理由——公司用的最主要的界面库就是 QT。
-当然这一切并未有让我有哪怕些须遗憾。我一直坚信，所有的弯路都有其价值。何况
-win8 确切会支持 C++ 与 xaml
-的交互——我已经尝试了一下。但是对于相关的系统学习可能要推后一些了。而 QT
-会是接下来不短一段时间的主旋律了。不过可喜之处在于，Qt Quick 甚合我意。</p>
+<p>在大二的时候思索着学习一界面库，为此煞费脑经。其中有试过十来天的Qt学习,不过最后为
+WPF而沦陷，确实WPF界面与逻辑的分离让我很是向往。不过可惜的是WPF并不原生支持与C++
+的交互，以致我不得不学习一些C# 。又四处求医问药——获得native code与manage code交互
+的良方。这之间寻寻觅觅，虽然也算终于达成所愿——可以用C++与WPF 来完成一些小程序编写
+了。但是这注定是一种非主流的配置，主流与否，我虽然不在意。只是结果并不如我想的那般
+理想。用C++与WPF来开发并没有带来效率的提升以及逻辑的简化——这些成本都被转移到了他们
+之间的交互上，更大的成本其实在于学习的代价——C#、C++/cli 、P/invoke… 有意思的是似乎
+转了一圈，又要回到QT上来。为什么要回到QT? 没有太多理由——公司用的最主要的界面库就是
+Qt。当然这一切并未有让我有哪怕些须遗憾。我一直坚信，所有的弯路都有其价值。何况win8
+确切会支持C++与xaml的交互——我已经尝试了一下。但是对于相关的系统学习可能要推后一些了。
+而Qt会是接下来不短一段时间的主旋律了。不过可喜之处在于，Qt Quick 甚合我意。</p>
 <h3>What is Qt Quick ？</h3>
 <p>看一下诺基亚的介绍：</p>
 <blockquote>
-<p>Qt Quick is a UI creation technology designed to enable developers and
-UI designers to work together to create animated, touch-enabled UIs
-and applications.</p>
+<p>Qt Quick is a UI creation technology designed to enable developers and UI 
+designers to work together to create animated, touch-enabled UIs and applications.</p>
 </blockquote>
-<p>简而言之，Qt Quick 将界面与逻辑很好的分离。<a href="http://qt.nokia.com/products/library/qt-quick">更多…</a></p>
-<p>Qt Quick 有一下组成部分：</p>
-<p>Qt Quick consists of:</p>
+<p>简而言之，Qt Quick将界面与逻辑很好的分离。<a href="http://qt.nokia.com/products/library/qt-quick">更多…</a></p>
+<p>Qt Quick有以下组成部分：</p>
 <ul>
 <li>QML: 一种用来撰写界面的声明式语言，很简单，很像CSS.</li>
-<li>Qt Viewer: 用来加载 qml 文件。</li>
-<li>Qt Declarative Module: 一个 Qt 库中的新模块，用它可以很好的使得 QML
-    与 C++交互。</li>
+<li>Qt Viewer: 用来加载qml文件。</li>
+<li>Qt Declarative Module:一个 Qt 库中的新模块，用它可以很好的使得QML与 C++交互。</li>
 </ul>
 <h3>What is QML?</h3>
-<p>qml
-是一种被设计为用来描述用户界面的声明式语言：包括用户界面的摸样和以及行为。</p>
-<p>在 qml 的世界中，UI 元素被组织成树形结构，UI
-元素可以包含其许多子元素，但却只有一个父亲。</p>
+<p>qml是一种被设计为用来描述用户界面的声明式语言：包括用户界面的摸样和以及行为。在
+qml的世界中，UI元素被组织成树形结构，UI元素可以包含其许多子元素，但却只有一个父
+亲。</p>
 <p>一个简单的例子：</p>
-<div class="cnblogs_code">
-    展开代码import QtQuick 1.1
-    Rectangle{
-        width: 200; height: 150
-        color: "lightblue"
-    }
+<div class="codehilite"><pre><span class="n">import</span> <span class="n">QtQuick</span> 1<span class="p">.</span>1
+<span class="n">Rectangle</span><span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> 200<span class="p">;</span> <span class="n">height</span><span class="p">:</span> 150
+    <span class="n">color</span><span class="p">:</span> &quot;<span class="n">lightblue</span>&quot;
+<span class="p">}</span>
+</pre></div>
 
-</div>
 
-<p></span><span style="display: none" id="Code_Open_Text_139556"></p>
-<p>[<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/02/image_thumb.png" title="image" />][]</p>
-<p>上面的代码声明了一个矩形，并设定了它的长宽以及颜色，其效果图如右。具体分析：</p>
-<p>import 可以用来导入相关模块，这儿要使用Qt quick
-的功能，自然要导入相关模块。后面跟的1.1是版本号。规定版本号的优势在于可以只导入对应的版本。因此程序中只能使用对应版本的功能。这样一来就可以使得程序不受旧版本或新版本的影响。在新版本发布后也保存了对旧版本的支持。</p>
-<p>声明了一个 Rectangle 元素 ，紧接着的{}表示在其中的属性都属于描述
-Rectangle。可直接用属性的名字和值来设定属性：
-<font color="#d19049"><font style="background-color: #ffffff">name</font>
-</font>: value 。属性之间用换行符或分号来分隔。注释的方式与 C++
-相同，可以用 “//”与“/* … */ ”两种形式。</p>
-<p>QML 中的元素（elements）可以分为可视化元素和不可见元素：</p>
+<p>上面的代码声明了一个矩形，并设定了它的长宽以及颜色，其效果图如下。</p>
+<p><img alt="示意图" src="http://www.roading.org/images/2012-02/image_thumb.png" /></p>
+<p>import可以用来导入相关模块，这儿要使用Qt quick的功能，自然要导入相关模块。后面跟的
+1.1是版本号。规定版本号的优势在于可以只导入对应的版本。因此程序中只能使用对应版本的
+功能。这样一来就可以使得程序不受旧版本或新版本的影响。在新版本发布后也保存了对旧版
+本的支持。</p>
+<p>声明了一个Rectangle元素，紧接着的{}表示在其中的属性都属于描述Rectangle。可直接用属
+性的名字和值来设定属性：<code>name: value</code>。属性之间用换行符或分号来分隔。注释的方式与
+C++相同，可以用 “//”与“/* … */ ”两种形式。</p>
+<p>QML中的元素（elements）可以分为可视化元素和不可见元素：</p>
 <ul>
-<li>所有的可视化元素都继承自 item, 它们一般都有关于位置和尺寸的属性。像
-    Recatangle 、Text 、InputText…</li>
-<li>不可见元素有 states、 transitions…</li>
+<li>所有的可视化元素都继承自item, 它们一般都有关于位置和尺寸的属性。像Recatangle 、
+    Text 、InputText…</li>
+<li>不可见元素有states、transitions…</li>
 </ul>
 <p>元素拥有一些属性，同时属性用以描述元素。当然，也可以对元素扩展一些自定义的属性。</p>
-<p></span></p>
-<div align="right">
-
-</div>
-
-<div align="right">
-
-</div>
-
-<div align="right">
-
-</div>
-
-<div align="right">
-
-</div>
-
-<div align="right">
-
-</div>
-
-<div align="right">
-*欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。*
-
-</div>
-
-<div align="right">
-*2012/2/23 By Adoo | Homepage:*[*www.roading.org*][]
-
-</div>
-
-</p>
-
-<p>[<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/02/image_thumb.png" title="image" />]: http://www.roading.org/wp-content/uploads/2012/02/image.png</p>
 		  <p style= "text-align:right;"><em>
-		  Thu 23 February 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周四 23 二月 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html">本文原链</a>)</em></p>
@@ -383,7 +343,7 @@ Rectangle。可直接用属性的名字和值来设定属性：
 		
 		
 		   
-		   <li><a title="Qt Quick 笔记（2）：用户界面相关" href="http://www.roading.org/develop/cpp/qt/qt-quick-%e7%ac%94%e8%ae%b0%ef%bc%882%ef%bc%89%ef%bc%9a%e7%94%a8%e6%88%b7%e7%95%8c%e9%9d%a2%e7%9b%b8%e5%85%b3.html">Qt Quick 笔记（2）：用户界面相关</a></li>
+		   <li><a title="Qt Quick 笔记（2）——用户界面相关" href="http://www.roading.org/develop/cpp/qt/qt-quick-%e7%ac%94%e8%ae%b0%ef%bc%882%ef%bc%89%ef%bc%9a%e7%94%a8%e6%88%b7%e7%95%8c%e9%9d%a2%e7%9b%b8%e5%85%b3.html">Qt Quick 笔记（2）——用户界面相关</a></li>
 		   
 		
 		

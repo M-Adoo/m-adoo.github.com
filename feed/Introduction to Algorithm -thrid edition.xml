@@ -11,18 +11,18 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;x.n&lt;/em&gt;, the number of keys currently stored in node &lt;em&gt;x&lt;/em&gt;,&lt;/li&gt;
 &lt;li&gt;the x.n keys themselves, stored in nondecreasing order, so that
-    x.&lt;em&gt;key&lt;/em&gt;~1~ ≤ x.&lt;em&gt;key&lt;/em&gt;~2~ ≤ ··· ≤ &lt;em&gt;x.key~x.n~.&lt;/em&gt;&lt;/li&gt;
+    x.&lt;em&gt;key&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt; ≤ x.&lt;em&gt;key&lt;/em&gt;&lt;sub&gt;2&lt;/sub&gt; ≤ ··· ≤ &lt;em&gt;x.key&lt;sub&gt;x.n&lt;/sub&gt;.&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;x.leaf&lt;/em&gt; , a boolean value that is TRUE if &lt;em&gt;x&lt;/em&gt; is a leaf and FALSE
     if &lt;em&gt;x&lt;/em&gt; is an internal node.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;2.Each internal node &lt;em&gt;x&lt;/em&gt; also contains &lt;em&gt;x.n+1&lt;/em&gt; pointers x.&lt;em&gt;c&lt;/em&gt;~1~,
-x.&lt;em&gt;c&lt;/em&gt;~2~, ..., x.&lt;em&gt;c~x.~&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;+1~ to its children. Leaf nodes have no
-children, so their &lt;em&gt;c~i~&lt;/em&gt; fields are undefined.&lt;/p&gt;
-&lt;p&gt;The keys x.&lt;em&gt;key~i~&lt;/em&gt; separate the ranges of keys stored in each
-subtree: if &lt;em&gt;k~i~&lt;/em&gt; is any key stored in the subtree with root x.&lt;em&gt;c~i~&lt;/em&gt;
+&lt;p&gt;2.Each internal node &lt;em&gt;x&lt;/em&gt; also contains &lt;em&gt;x.n+1&lt;/em&gt; pointers x.&lt;em&gt;c&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt;,
+x.&lt;em&gt;c&lt;/em&gt;&lt;sub&gt;2&lt;/sub&gt;, ..., x.&lt;em&gt;c&lt;sub&gt;x.&lt;/sub&gt;&lt;/em&gt;&lt;sub&gt;&lt;em&gt;n&lt;/em&gt;+1&lt;/sub&gt; to its children. Leaf nodes have no
+children, so their &lt;em&gt;c&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; fields are undefined.&lt;/p&gt;
+&lt;p&gt;The keys x.&lt;em&gt;key&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; separate the ranges of keys stored in each
+subtree: if &lt;em&gt;k&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; is any key stored in the subtree with root x.&lt;em&gt;c&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;
 , then&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;k&lt;/em&gt;~1~ ≤ x.&lt;em&gt;key&lt;/em&gt;~1~≤&lt;em&gt;k&lt;/em&gt;~2~ ≤x. &lt;em&gt;key&lt;/em&gt;~2~ ≤··· ≤x. &lt;em&gt;key~x.~&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;~ ≤
-&lt;em&gt;k&lt;/em&gt;~&lt;em&gt;x.n+1&lt;/em&gt;~.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;k&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt; ≤ x.&lt;em&gt;key&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt;≤&lt;em&gt;k&lt;/em&gt;&lt;sub&gt;2&lt;/sub&gt; ≤x. &lt;em&gt;key&lt;/em&gt;&lt;sub&gt;2&lt;/sub&gt; ≤··· ≤x. &lt;em&gt;key&lt;sub&gt;x.&lt;/sub&gt;&lt;/em&gt;&lt;sub&gt;&lt;em&gt;n&lt;/em&gt;&lt;/sub&gt; ≤
+&lt;em&gt;k&lt;/em&gt;&lt;sub&gt;&lt;em&gt;x.n+1&lt;/em&gt;&lt;/sub&gt;.&lt;/p&gt;
 &lt;p&gt;All leaves have the same depth, which is the tree's height &lt;em&gt;h&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;There are lower and upper bounds on the number of keys a node can
 contain. These bounds can be expressed in terms of a fixed integer &lt;em&gt;t&lt;/em&gt;
@@ -245,21 +245,21 @@ primer》
   [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image3_thumb.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image31.png
   [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb24.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image24.png&lt;/p&gt;</summary><category term="greedy algorithm"></category><category term="huffman codes"></category></entry><entry><title>算法导论——贪心算法</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html" rel="alternate"></link><updated>2012-03-27T16:46:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-27:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html</id><summary type="html">&lt;p&gt;与动态规划相同贪心算法通过做出一系列选择来构建出问题的最优解，不同的是贪心算法并不会全局考虑各种选择，它只做当前看起来最佳的选择。如君所见，贪心算法企图用每一步的最优解来构建出整个问题的最优解。这并不能保证总能构建出最优解，但它通常能做到。我们可以先看一个具体的问题——活动安排问题。&lt;/p&gt;
 &lt;h3&gt;活动安排问题&lt;/h3&gt;
-&lt;p&gt;有一系列活动&lt;em&gt;S&lt;/em&gt; = {&lt;em&gt;a&lt;/em&gt;~1~, &lt;em&gt;a&lt;/em&gt;~2~, ...,
-&lt;em&gt;a~n~&lt;/em&gt;}，它们都要用到同一个舞台，而舞台一次只能举办一个活动。那么要如何安排才能举办最多的活动呢？&lt;/p&gt;
-&lt;p&gt;假设活动&lt;em&gt;a~i~&lt;/em&gt; 的开始时间用&lt;em&gt;s~i~&lt;/em&gt; 表示，结束时间用&lt;em&gt;f~i~&lt;/em&gt;表示, 有 0 ≤
-&lt;em&gt;s~i~&lt;/em&gt; &amp;lt; &lt;em&gt;f~i~&lt;/em&gt; &amp;lt; ∞. 也就是说&lt;em&gt;a~i~&lt;/em&gt; 占用舞台的时间段为[&lt;em&gt;s~i~,
-f~i~&lt;/em&gt;).那么安排的活动之间必须满足一个条件，那就是各自的时间段之间没有重叠的部分。&lt;/p&gt;
+&lt;p&gt;有一系列活动&lt;em&gt;S&lt;/em&gt; = {&lt;em&gt;a&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;em&gt;a&lt;/em&gt;&lt;sub&gt;2&lt;/sub&gt;, ...,
+&lt;em&gt;a&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt;}，它们都要用到同一个舞台，而舞台一次只能举办一个活动。那么要如何安排才能举办最多的活动呢？&lt;/p&gt;
+&lt;p&gt;假设活动&lt;em&gt;a&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; 的开始时间用&lt;em&gt;s&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; 表示，结束时间用&lt;em&gt;f&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;表示, 有 0 ≤
+&lt;em&gt;s&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; &amp;lt; &lt;em&gt;f&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; &amp;lt; ∞. 也就是说&lt;em&gt;a&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; 占用舞台的时间段为[&lt;em&gt;s&lt;sub&gt;i&lt;/sub&gt;,
+f&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;).那么安排的活动之间必须满足一个条件，那就是各自的时间段之间没有重叠的部分。&lt;/p&gt;
 &lt;p&gt;一个具体的例子（将这些活动按结束时间排好了序）：&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;&lt;em&gt;i&lt;/em&gt;      1   2   3   4   5   6   7    8    9    10   11
-  &lt;em&gt;s~i~&lt;/em&gt;   1   3   0   5   3   5   6    8    8    2    12
-  &lt;em&gt;f~i~&lt;/em&gt;   4   5   6   7   9   9   10   11   12   14   16&lt;/p&gt;
+  &lt;em&gt;s&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;   1   3   0   5   3   5   6    8    8    2    12
+  &lt;em&gt;f&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;   4   5   6   7   9   9   10   11   12   14   16&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;&lt;/p&gt;
-对于这样一个问题，因为能够比较快速的发现其最优子结构，我们会很容易想到用动态规划来解决。——假设&lt;em&gt;a~i~&lt;/em&gt;是最优解中的一个元素，那么以&lt;em&gt;a~i~&lt;/em&gt;为界可以将问题分成为两个子问题，一个是活动结束时间在&lt;em&gt;a~i~&lt;/em&gt;的开始时间之前的所有活动，另一个则是活动开始时间在&lt;em&gt;a~i~&lt;/em&gt;结束时间之后的所有活动。可以证明最优解包含这两个子问题的最优解组成的，具体证明可见原书。&lt;/p&gt;
-&lt;p&gt;令&lt;em&gt;S~ij~&lt;/em&gt;代表活动开始时间在&lt;em&gt;a~i~&lt;/em&gt;
-结束之后而活动结束时间在&lt;em&gt;a~j~&lt;/em&gt;开始之前的所有活动的集合，用&lt;em&gt;c&lt;/em&gt;[&lt;em&gt;i, j&lt;/em&gt; ]
+对于这样一个问题，因为能够比较快速的发现其最优子结构，我们会很容易想到用动态规划来解决。——假设&lt;em&gt;a&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;是最优解中的一个元素，那么以&lt;em&gt;a&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;为界可以将问题分成为两个子问题，一个是活动结束时间在&lt;em&gt;a&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;的开始时间之前的所有活动，另一个则是活动开始时间在&lt;em&gt;a&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;结束时间之后的所有活动。可以证明最优解包含这两个子问题的最优解组成的，具体证明可见原书。&lt;/p&gt;
+&lt;p&gt;令&lt;em&gt;S&lt;sub&gt;ij&lt;/sub&gt;&lt;/em&gt;代表活动开始时间在&lt;em&gt;a&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;
+结束之后而活动结束时间在&lt;em&gt;a&lt;sub&gt;j&lt;/sub&gt;&lt;/em&gt;开始之前的所有活动的集合，用&lt;em&gt;c&lt;/em&gt;[&lt;em&gt;i, j&lt;/em&gt; ]
 来代表的&lt;em&gt;Sij&lt;/em&gt;的最优解，那么我们可以获得递归公式：&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb18.png" title="image" /&gt;][]&lt;/p&gt;
 &lt;p&gt;如果用贪心算法的话，则不用考虑那么多种选择，只需考虑贪心选择——当前最佳的选择。在这个问题上，我们可以总是优先安排结束时间最早而又不与之前安排的任务有冲突的活动，这即是一种贪心选择。但最大的问题在于贪心选择是否是最佳选择？在这里，确实是的，你可以用算导中提到的“粘贴替代”的方法轻易的证明。&lt;/p&gt;
@@ -331,8 +331,8 @@ subproblems.&lt;/p&gt;
 &lt;p&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The &lt;strong&gt;&lt;em&gt;0-1 knapsack problem&lt;/em&gt;&lt;/strong&gt; is the following. A thief robbing a
-store finds &lt;em&gt;n&lt;/em&gt; items; the &lt;em&gt;i&lt;/em&gt;th item is worth &lt;em&gt;v~i~&lt;/em&gt; dollars and
-weighs &lt;em&gt;w~i~&lt;/em&gt; pounds, where &lt;em&gt;v~i~&lt;/em&gt; and &lt;em&gt;w~i~&lt;/em&gt; are integers. He wants
+store finds &lt;em&gt;n&lt;/em&gt; items; the &lt;em&gt;i&lt;/em&gt;th item is worth &lt;em&gt;v&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; dollars and
+weighs &lt;em&gt;w&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; pounds, where &lt;em&gt;v&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; and &lt;em&gt;w&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; are integers. He wants
 to take as valuable a load as possible, but he can carry at most &lt;em&gt;W&lt;/em&gt;
 pounds in his knapsack for some integer &lt;em&gt;W&lt;/em&gt;. Which items should he
 take? (This is called the 0-1 knapsack problem because each item must
@@ -380,42 +380,42 @@ pound yields an optimal solution.&lt;/p&gt;
   [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb21.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image21.png&lt;/p&gt;</summary><category term="c++"></category><category term="greedy algorithm"></category><category term="Introduction to algorithm"></category></entry><entry><title>最优二叉查找树</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html" rel="alternate"></link><updated>2012-03-26T11:56:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-26:/algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html</id><summary type="html">&lt;p&gt;假如我们要设计一个简单的程序将一段英文翻译成法语，那么就需要为每个英语单词找到对应的法语单词，简单的做法是在单词库中对每个单词进行遍历查找。更快一点的做法是，我们可以将单词库建成一颗平衡二叉搜索树——用英文单词做Key,对应的法语单词做附属信息。第二种方法，虽然可以保证每个单词的查询时间控制在
 O(lgn),不过却也有不合理之处。由于单词出现的频率有高有低，于是一些常用单词离根节点很远，而一些很生僻的单词却在根节点附近。可见用一颗平衡二叉搜索树来做这个问题并不是非常高效，在这儿就引出了另一种二叉查找树——最优二叉查找树。&lt;/p&gt;
 &lt;h3&gt;问题定义&lt;/h3&gt;
-&lt;p&gt;假设给定一组有序的序列 &lt;em&gt;K&lt;/em&gt; = 〈&lt;em&gt;k~1~&lt;/em&gt;, &lt;em&gt;k&lt;/em&gt;~2~, ...,
-&lt;em&gt;k~n~&lt;/em&gt;〉，在查找的过程中被查找的键是&lt;em&gt;k~i~&lt;/em&gt;的概率是&lt;em&gt;p~i~&lt;/em&gt;
+&lt;p&gt;假设给定一组有序的序列 &lt;em&gt;K&lt;/em&gt; = 〈&lt;em&gt;k&lt;sub&gt;1&lt;/sub&gt;&lt;/em&gt;, &lt;em&gt;k&lt;/em&gt;&lt;sub&gt;2&lt;/sub&gt;, ...,
+&lt;em&gt;k&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt;〉，在查找的过程中被查找的键是&lt;em&gt;k&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;的概率是&lt;em&gt;p&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;
 。同时因为有一些单词是
-&lt;em&gt;K&lt;/em&gt;中不存在的,因此我们用n+1个虚拟键来表示这些不存在于&lt;em&gt;K&lt;/em&gt;中的键，分别为&lt;em&gt;d&lt;/em&gt;~0~,
-&lt;em&gt;d&lt;/em&gt;~1~, &lt;em&gt;d&lt;/em&gt;~2~, ..., &lt;em&gt;d~n~&lt;/em&gt; 。其中 &lt;em&gt;d~0~&lt;/em&gt;代表所有比 &lt;em&gt;k&lt;/em&gt;~1~小的键, &lt;em&gt;d~n~&lt;/em&gt;
-表示 所有比&lt;em&gt;k~n~&lt;/em&gt;大的键,对于 &lt;em&gt;i&lt;/em&gt; = 1, 2, ..., &lt;em&gt;n&lt;/em&gt; -1, 虚拟键&lt;em&gt;d~i~&lt;/em&gt;
-表示所有位于 &lt;em&gt;k~i~&lt;/em&gt; 和&lt;em&gt;k~i+1~&lt;/em&gt;之间的键。对于每一个&lt;em&gt;d~i~&lt;/em&gt;,
-我们有一个概率&lt;em&gt;q~i~&lt;/em&gt;。&lt;/p&gt;
+&lt;em&gt;K&lt;/em&gt;中不存在的,因此我们用n+1个虚拟键来表示这些不存在于&lt;em&gt;K&lt;/em&gt;中的键，分别为&lt;em&gt;d&lt;/em&gt;&lt;sub&gt;0&lt;/sub&gt;,
+&lt;em&gt;d&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;em&gt;d&lt;/em&gt;&lt;sub&gt;2&lt;/sub&gt;, ..., &lt;em&gt;d&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt; 。其中 &lt;em&gt;d&lt;sub&gt;0&lt;/sub&gt;&lt;/em&gt;代表所有比 &lt;em&gt;k&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt;小的键, &lt;em&gt;d&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt;
+表示 所有比&lt;em&gt;k&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt;大的键,对于 &lt;em&gt;i&lt;/em&gt; = 1, 2, ..., &lt;em&gt;n&lt;/em&gt; -1, 虚拟键&lt;em&gt;d&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;
+表示所有位于 &lt;em&gt;k&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; 和&lt;em&gt;k&lt;sub&gt;i+1&lt;/sub&gt;&lt;/em&gt;之间的键。对于每一个&lt;em&gt;d&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;,
+我们有一个概率&lt;em&gt;q&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;。&lt;/p&gt;
 &lt;p&gt;对于每次搜索，非成功，即失败，所以有：&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb13.png" title="image" /&gt;][]&lt;/p&gt;
 &lt;p&gt;因为对于每个关键字和虚拟键的概率都是已知的，所以我们可以求出一颗二叉搜索树的期望值：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb14.png" title="image" /&gt;][]&lt;/p&gt;
-&lt;p&gt;depth~&lt;em&gt;T&lt;/em&gt;~
+&lt;p&gt;depth&lt;sub&gt;&lt;em&gt;T&lt;/em&gt;&lt;/sub&gt;
 代表结点在树种的深度。而我们的目标就是要建立起一颗搜索期望值最小的二叉树——也就是最优二叉搜索树。&lt;/p&gt;
 &lt;h3&gt;动态规划的解法&lt;/h3&gt;
-&lt;p&gt;很显然，假如k~i~是最优二叉搜索树的根节点，那么它的左子树和右子树必然是最优二叉搜索树。由此可见，这个问题拥有最优子结构。&lt;/p&gt;
+&lt;p&gt;很显然，假如k&lt;sub&gt;i&lt;/sub&gt;是最优二叉搜索树的根节点，那么它的左子树和右子树必然是最优二叉搜索树。由此可见，这个问题拥有最优子结构。&lt;/p&gt;
 &lt;p&gt;要注意到，当一棵树成为另一棵树的子树的时候，由于每个结点的深度增加了1，所以搜索期望代价增加量为所有结点的概率总和：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb15.png" title="image" /&gt;][]&lt;/p&gt;
-&lt;p&gt;所以对于一棵根结点为 &lt;em&gt;k~r~&lt;/em&gt; 包含有结点&lt;em&gt;k~i~&lt;/em&gt;, ...,
-&lt;em&gt;k~j~&lt;/em&gt;的最优二叉搜索树，我们有：&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt; ] = &lt;em&gt;p~r~&lt;/em&gt; + (&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;r&lt;/em&gt; - 1] + &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;r&lt;/em&gt; - 1)) +
+&lt;p&gt;所以对于一棵根结点为 &lt;em&gt;k&lt;sub&gt;r&lt;/sub&gt;&lt;/em&gt; 包含有结点&lt;em&gt;k&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;, ...,
+&lt;em&gt;k&lt;sub&gt;j&lt;/sub&gt;&lt;/em&gt;的最优二叉搜索树，我们有：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt; ] = &lt;em&gt;p&lt;sub&gt;r&lt;/sub&gt;&lt;/em&gt; + (&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;r&lt;/em&gt; - 1] + &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;r&lt;/em&gt; - 1)) +
 (&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;r&lt;/em&gt; + 1, &lt;em&gt;j&lt;/em&gt;] + &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;r&lt;/em&gt; + 1, &lt;em&gt;j&lt;/em&gt;)).&lt;/p&gt;
-&lt;p&gt;注意到：&lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;) = &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;r&lt;/em&gt; - 1) + &lt;em&gt;p~r~&lt;/em&gt; + &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;r&lt;/em&gt; + 1,
+&lt;p&gt;注意到：&lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;) = &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;r&lt;/em&gt; - 1) + &lt;em&gt;p&lt;sub&gt;r&lt;/sub&gt;&lt;/em&gt; + &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;r&lt;/em&gt; + 1,
 &lt;em&gt;j&lt;/em&gt;)，所以：&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt; ] = &lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;r&lt;/em&gt; - 1] + &lt;em&gt;e&lt;/em&gt;[&lt;em&gt;r&lt;/em&gt; + 1, &lt;em&gt;j&lt;/em&gt;] + &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;).&lt;/p&gt;
 &lt;p&gt;如此一来，我们可以建立起递归式了：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb16.png" title="image" /&gt;][]&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt; ]
 记录了最优二叉查找树中的期望搜索代价，为了可以建立起二叉搜索树的结构，我们需要一个&lt;em&gt;root&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;,
-&lt;em&gt;j&lt;/em&gt; ]来记录根结点&lt;em&gt;k~r~&lt;/em&gt;的下标。&lt;/p&gt;
+&lt;em&gt;j&lt;/em&gt; ]来记录根结点&lt;em&gt;k&lt;sub&gt;r&lt;/sub&gt;&lt;/em&gt;的下标。&lt;/p&gt;
 &lt;p&gt;在下面的伪码中，用表 &lt;em&gt;e&lt;/em&gt;[1 ‥ &lt;em&gt;n&lt;/em&gt; + 1, 0 ‥ &lt;em&gt;n&lt;/em&gt;]来存储&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;]
 。第一维需要到&lt;em&gt;n&lt;/em&gt; + 1 而不是 &lt;em&gt;n&lt;/em&gt; 因为有子树只包含虚拟键
-&lt;em&gt;d~n~&lt;/em&gt;，我们需要计算和存储 &lt;em&gt;e&lt;/em&gt;[&lt;em&gt;n&lt;/em&gt; + 1, &lt;em&gt;n&lt;/em&gt;].
-第二维需要从0开始是因为有子树只包含虚拟键&lt;em&gt;d&lt;/em&gt;~0~,
+&lt;em&gt;d&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt;，我们需要计算和存储 &lt;em&gt;e&lt;/em&gt;[&lt;em&gt;n&lt;/em&gt; + 1, &lt;em&gt;n&lt;/em&gt;].
+第二维需要从0开始是因为有子树只包含虚拟键&lt;em&gt;d&lt;/em&gt;&lt;sub&gt;0&lt;/sub&gt;,
 我们需要计算和存储&lt;em&gt;e&lt;/em&gt;[1, 0]. 此外，除了用表&lt;em&gt;root&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;
-]来记录根结点&lt;em&gt;k~r~&lt;/em&gt;的下标外，我们还需要一个表&lt;em&gt;w&lt;/em&gt;[1 ‥ &lt;em&gt;n&lt;/em&gt; + 1, 0 ‥
+]来记录根结点&lt;em&gt;k&lt;sub&gt;r&lt;/sub&gt;&lt;/em&gt;的下标外，我们还需要一个表&lt;em&gt;w&lt;/em&gt;[1 ‥ &lt;em&gt;n&lt;/em&gt; + 1, 0 ‥
 &lt;em&gt;n&lt;/em&gt;]，来记录&lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;)以提高效率——这样就不必每次都从头计算&lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;,
 &lt;em&gt;j&lt;/em&gt;)了。对于 1 ≤ &lt;em&gt;i&lt;/em&gt; ≤ &lt;em&gt;n&lt;/em&gt;. 且 &lt;em&gt;j&lt;/em&gt; ≥ &lt;em&gt;i&lt;/em&gt;, 我们有：&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;) = &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt; - 1) + &lt;em&gt;p~j~&lt;/em&gt;+ &lt;em&gt;q~j~&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;) = &lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt; - 1) + &lt;em&gt;p&lt;sub&gt;j&lt;/sub&gt;&lt;/em&gt;+ &lt;em&gt;q&lt;sub&gt;j&lt;/sub&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;h4&gt;伪码：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb17.png" title="image" /&gt;][]&lt;/h4&gt;
 &lt;h4&gt;C++的实现: &lt;span style="color: blue"&gt;&lt;/span&gt;&lt;/h4&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c"&gt;#include&amp;lt;iostream&amp;gt;&lt;/span&gt;
@@ -509,7 +509,7 @@ O(lgn),不过却也有不合理之处。由于单词出现的频率有高有低�
   [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb16.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image16.png
   [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb17.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image17.png&lt;/p&gt;</summary><category term="c++"></category><category term="最优二叉搜索树"></category></entry><entry><title>最长单调子序列问题</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html" rel="alternate"></link><updated>2012-03-22T17:19:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-22:/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html</id><summary type="html">&lt;blockquote&gt;
 &lt;h5&gt;Exercises 15.4-5&lt;/h5&gt;
-&lt;p&gt;Give an &lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;^2^)-time algorithm to find the longest monotonically
+&lt;p&gt;Give an &lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;&lt;sup&gt;2&lt;/sup&gt;)-time algorithm to find the longest monotonically
 increasing subsequence of a sequence of &lt;em&gt;n&lt;/em&gt; numbers。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
@@ -589,10 +589,10 @@ optimal solutionsto the problem must themselves be optimal by using a
 &lt;p&gt;&lt;strong&gt;无权最短路径&lt;/strong&gt;：找出u到v的无权最短路径。假定u,v
 是不同点(相同就没什么好讨论了)。我们先假设 w 是u-&gt;v 最短路径 p
 上的一个点(第二步，做一个选择，并假设它导致最优解)，于是最短路径 p
-可以分为两段子路径,子路径p~1~为u-&gt;w;子路径p~2~为w-&gt;v(第三步，描述子问题空间)。显然，p~1~与p~2~也必须是各自子路径的最短路径，不然最短路径p&amp;lt;p~1~+p~2~的长度,这与p=p~1~+p~2~矛盾。于是第四点得证。也就是说这个问题有最优子结构。&lt;/p&gt;
+可以分为两段子路径,子路径p&lt;sub&gt;1&lt;/sub&gt;为u-&gt;w;子路径p&lt;sub&gt;2&lt;/sub&gt;为w-&gt;v(第三步，描述子问题空间)。显然，p&lt;sub&gt;1&lt;/sub&gt;与p&lt;sub&gt;2&lt;/sub&gt;也必须是各自子路径的最短路径，不然最短路径p&amp;lt;p&lt;sub&gt;1&lt;/sub&gt;+p&lt;sub&gt;2&lt;/sub&gt;的长度,这与p=p&lt;sub&gt;1&lt;/sub&gt;+p&lt;sub&gt;2&lt;/sub&gt;矛盾。于是第四点得证。也就是说这个问题有最优子结构。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;无权最长路径&lt;/strong&gt;：找出u到v的无权最长路径，当然这条路径不能包含环路。同样的办法先假设
 w 是u-&gt;v 最长路径 p
-上的一个点，因此可以得出子路径p~1~和p2，有p=p~1~+p~2~。那么这时p1和p2一定是u-&gt;w与w-&gt;v的最长子路径吗？不是的，我们看下图这种情况：&lt;/p&gt;
+上的一个点，因此可以得出子路径p&lt;sub&gt;1&lt;/sub&gt;和p2，有p=p&lt;sub&gt;1&lt;/sub&gt;+p&lt;sub&gt;2&lt;/sub&gt;。那么这时p1和p2一定是u-&gt;w与w-&gt;v的最长子路径吗？不是的，我们看下图这种情况：&lt;/p&gt;
 &lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb10.png" title="image" /&gt;][]&lt;/p&gt;
 &lt;p&gt;u-&gt;w的最长路径为：u-&gt;v-&gt;s-&gt;w.&lt;/p&gt;
 &lt;p&gt;w-&gt;v的最长路径为： w-&gt;u-&gt;v.&lt;/p&gt;
@@ -644,7 +644,7 @@ fashion. &lt;br /&gt;
 &lt;p&gt;这段代码提供两个参数 。p 是一个数组，它存储着一份价目表，而 n
 则表示要切割的棒子的长度。当 n 不大时上述的算法或许简单管用，但是一旦 n
 稍大，运行时间将会成几何倍数增加。为什么会这样慢？其一，是因为其复杂度达到
-O(2^n^),另外则由于递归的次数太多了(多达2^n-1^次)。&lt;/p&gt;
+O(2&lt;sup&gt;n&lt;/sup&gt;),另外则由于递归的次数太多了(多达2&lt;sup&gt;n-1&lt;/sup&gt;次)。&lt;/p&gt;
 &lt;p&gt;仔细观察不难发现，上述算法做了太多的重复工作，比方Cut-Rod(p,n),要递归调用Cut-Rod(p,
 n-i), 其中 i=1,2,…,n。但对于其中Cut-Rod(p,n)中递归调用的 Cut-Rod(p,
 n-1)又要重复计算 Cut-Rod(p,n-i-1)。&lt;/p&gt;
@@ -842,116 +842,100 @@ for red-black trees includes no storage for parent pointers.&lt;/p&gt;
 &lt;/p&gt;
 
 &lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/01/image_thumb.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/01/image.png
-  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/01/image_thumb1.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/01/image1.png&lt;/p&gt;</summary><category term="Introduction to algorithm"></category><category term="red black trees"></category></entry><entry><title>Solution of CLRS 11.1 exercises</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html" rel="alternate"></link><updated>2011-12-14T14:43:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-14:/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html</id><summary type="html">&lt;ul&gt;
-&lt;li&gt;摘要:CLRS11.1 课后习题选做。两个题目：11.1-2 、11.1-3、 11.1-4&lt;/li&gt;
-&lt;li&gt;学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div align="right"&gt;
-*2011/12/14 By Adoo | Homepage:*[*www.roading.org*][]
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/01/image_thumb1.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/01/image1.png&lt;/p&gt;</summary><category term="Introduction to algorithm"></category><category term="red black trees"></category></entry><entry><title>哈希表（Hash Tables）（2）</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html" rel="alternate"></link><updated>2011-11-09T15:59:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-11-09:/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html</id><summary type="html">&lt;p&gt;引文：&lt;/p&gt;
+&lt;p&gt;本文参考&lt;em&gt;Introduction To Algorithm ——third
+edition&lt;/em&gt;第十一章，置于文首，以表对作者敬意。主要介绍哈希表两种碰撞的解决方法——链表和开放地址法（Open
+addressing），开放地址的三种探查方法——线性探查（Linear
+probing）、二次探查（Quadratic probing）、双重哈希（Double
+hashing），以及完全哈希(Perfect
+hashing)。你可以将本文当做一篇算法导论的笔记，也可以将它当作Adoo对算法导论的理解加讲解。若你也在度算法导论或对算法有兴趣，欢迎交流。同时学习之作难免浅薄，恳请有识之士斧正。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;2011/11/9 By Adoo | Homepage:&lt;/em&gt;&lt;a href="http://www.roading.org"&gt;&lt;em&gt;www.roading.org&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;解决碰撞&lt;/h2&gt;
+&lt;p&gt;解决碰撞无非两种思路：使得一个位置能存储多个元素，此其一；不限定一个元素只能存储到一个位置，既然要去到地方挤不下，那便换个地方，此其二。下文给出对应两种思路将的两种方法。&lt;/p&gt;
+&lt;h3&gt;用链表解决碰撞&lt;/h3&gt;
+&lt;p&gt;既然要使得一个位置能存储多个元素，我们便将要存储到这一位置的多个元素串成链表，并存储链表头，是为链表解决碰撞法。如图：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb1.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;这个方法简单明了，但是效率方面可能要打折扣，如果碰巧诸君不走运，一组元素全哈希到了一个位置，全被放到一个链表中，查找的效率必然可怜（O(n)）。退一步，只要是哈希的不太平均，那么查找的效率也让人有些难受。&lt;/p&gt;
+&lt;h3&gt;开放地址（Open addressing）解决碰撞&lt;/h3&gt;
+&lt;p&gt;开放地址法意味着:所有的元素都被存储在哈希表中,没有链表,没有存储在哈希表之外的元素；更少的内存，更高的内存利用率——开放地址意味着填满哈希表，另外完全逃离了指针，意味着节省了一笔空间，要明白对于一个很大的哈希表来说，如果使用指针（链表）来解决碰撞，意味着存储指针的空间也非常可观；潜在有更快的查找速度，更少的碰撞的可能（当然这只是潜能）。&lt;/p&gt;
+&lt;p&gt;实现开放地址的插入（叫存储更合适一些吧），首先要连续探查哈希表，直到找到一个为空的位置来放入要插入的数。可想而知这个探查的顺序我们不可能1,2,3,…
+这样按顺序来探查，这样的话效率怎么可能高的起来，探查的顺序依赖于要插入的Key。把哈希函数扩展到多一个输入——h(key,n)。n表示第n次探查。于是可以有一个序列，来表示要插入的Key
+k可以放入的位置的顺序：&lt;/p&gt;
+&lt;p&gt;〈&lt;em&gt;h&lt;/em&gt;(&lt;em&gt;k&lt;/em&gt;,0),&lt;em&gt;h&lt;/em&gt;(&lt;em&gt;k&lt;/em&gt;,1), ..., &lt;em&gt;h&lt;/em&gt;(&lt;em&gt;k&lt;/em&gt;,&lt;em&gt;m&lt;/em&gt; - 1)〉 ——称之为探查序列。&lt;/p&gt;
+&lt;p&gt;假如函数的选择得当,那么k有机会放到每一个位置，也就是说只要哈希表未满，就可以插入。看一下插入的伪代码：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;HASH&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+1  &lt;span class="nb"&gt;i&lt;/span&gt; ← 0
+2  &lt;span class="n"&gt;repeat&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; ← &lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+3         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+4            &lt;span class="n"&gt;then&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; ← &lt;span class="n"&gt;k&lt;/span&gt;
+5                 &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;
+6            &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; ← &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 1
+7   &lt;span class="n"&gt;until&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;
+8 &lt;span class="n"&gt;error&lt;/span&gt; &amp;quot;&lt;span class="n"&gt;hash&lt;/span&gt; &lt;span class="n"&gt;table&lt;/span&gt; &lt;span class="n"&gt;overflow&lt;/span&gt;&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
 
-* * * * *
 
-&lt;/div&gt;
+&lt;/p&gt;
 
-&lt;div&gt;
-**Exercises 11.1-2**
+&lt;p&gt;对于开放地址的查找，很显然按照其探查顺序去查找就可以，直到找到相等的key。伪代码：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;
+    HASH-SEARCH(T, k)
+    1  i ← 0
+    2  repeat j ← h(k, i)
+    3         if T[j] = k
+    4            then return j
+    5         i ← i + 1
+    6    until T[j] = NIL or i = m
+    7  return NIL&lt;/p&gt;
+&lt;/p&gt;
 
-&lt;/div&gt;
+&lt;p&gt;需要注意的是，对于一个开放地址的哈希表，如果要从中删除一个元素，我们不能简单地将存放该元素的位置设置为NIL(用以表示空)，因为如此一来，所有原来因为该位置被占，而存储到其它位置的元素将不能再找到。例如，有一key为k的元素的探查序列为&amp;lt;1,5,6,2,8,3,…&gt;,被存储在位置8，假如我们将存储位置2设置为空，那么在对k进行查找时，我们依次查找1,5,6,2位置，但是因为2为空，程序任务已经查找完成——因为开放地址法总是将元素存储在第一个可以存储的位置的嘛——查找到2终止。要解决这个问题，我们应当将被删除元素的位置设置为“已删除”，而不是“空”。这样我们通过小小修改一下插入程序的代码使之能够在标记为“已删除”的位置插入元素就可以了。&lt;/p&gt;
+&lt;/p&gt;
 
-&lt;div&gt;
-A ***bit vector*** is simply an array of bits (0's and 1's). A bit
-vector of length *m* takes much less space than an array of *m*
-pointers. Describe how to use a bit vector
-&lt;a name="706"&gt;&lt;/a&gt;&lt;a name="IDX-223"&gt;&lt;/a&gt;to Represent a Dynamic Set of
-Distinct Elements with no Satellite Data. Dictionary Operations Should
-Run in *O*(1) Time.
+&lt;h3&gt;开放地址的三种探查方式&lt;/h3&gt;
+&lt;/p&gt;
 
-&lt;/div&gt;
+&lt;h4&gt;线性探查（Linear Probing）&lt;/h4&gt;
+&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Solution(I get the result from &lt;a href="http://ripcrixalis.blog.com/2011/02/08/hello-world/"&gt;Rip’s blog&lt;/a&gt;, The original text is
-here for ease of reference.):&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Using a bit vector of length m, as our direct-address table to
-represent the dynamic set.Here m bits tags m slots of the table. The
-elements in the dynamic set is stored in the direct-address table
-itself. If slot k is allocated, bit k is 0. If slot k contains no
-element, bit k is 1.&lt;/p&gt;
-&lt;h4&gt;&lt;strong&gt;Bit Vector&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;The free-space list is often implemented as a bit map or bit vector.
-If a block is free, the bit is 1. If a block is allocated, the bit is
-0. Assume the following blocks are allocated, the rest free: 2, 3, 4,
-5, 8, 9, 10, 11, 12, 13, 17, 18, 25, 27 .The free-space bit map would
-be: 0011110011111100011000000111000000…&lt;/p&gt;
-&lt;p&gt;Adavantages of this approach include: &lt;br /&gt;
-· Relatively simple &lt;br /&gt;
-· Efficient to find the first free blocks or n consecutive free blocks
-on the disk.&lt;/p&gt;
-&lt;p&gt;Bit maps are useful only when it can be kept in main memory. But, as
-disks get larger, this is hard to do. 1.3 gigabyte disk with 512 byte
-blocks would need a bit map of over 310k to track its free blocks.
-Clustering the blocks in intervals of foul reduces this number to 78k
-per disk.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Exercises 11.1-3&lt;/strong&gt;&lt;/p&gt;
-&lt;div&gt;
-Suggest how to implement a direct-address table in which the keys of
-stored elements do not need to be distinct and the elements can have
-satellite data. All three dictionary operations (INSERT, DELETE, and
-SEARCH) should run in *O*(1) time. (Don't forget that DELETE takes as an
-argument a pointer to an object to be deleted, not a key.)
+&lt;p&gt;线性探查很简单，实际上就是一种遍历的方式来探查可用的位置。哈希函数为：&lt;em&gt;h&lt;/em&gt;(&lt;em&gt;k&lt;/em&gt;,
+&lt;em&gt;i&lt;/em&gt;) = (&lt;em&gt;h&lt;/em&gt;'(&lt;em&gt;k&lt;/em&gt;) + &lt;em&gt;i&lt;/em&gt;) mod &lt;em&gt;m&lt;/em&gt; 其中&lt;em&gt;h'(k)&lt;/em&gt;
+称为辅助哈希函数。因为第一次探查的位置决定了整个探查顺序，所以所有的key最多之可能有m个探查顺序，可见发生碰撞的概率不小。&lt;/p&gt;
+&lt;/p&gt;
 
-&lt;/div&gt;
+&lt;p&gt;线性探查易于实现，但是随着时间的推移，哈希表中被占用的位置越多，连续被占用的位置也越来越多，碰撞的几率会大大提升，查找的平均时间将会大大增加。这种现象叫做primary
+clustering（主要聚集？应该叫扎堆现象比较合适，暂定将primary
+clustering翻译为“首要扎堆现象”）。&lt;/p&gt;
+&lt;/p&gt;
 
-&lt;div&gt;
-**Solution:**可以直接用链表来解决碰撞问题。对于搜索的话可以返回链表的指针，根据题目的条件来看，对于两个用户提供的两个
-key 相同的 object 我们是无法区分的，因此只能返回一组 key 相同的 objecet
-让用户用自己的方法来区分。
+&lt;h4&gt;二次探查（Quadratic probing）&lt;/h4&gt;
+&lt;/p&gt;
 
-&lt;/div&gt;
+&lt;p&gt;二次探查函数形如：[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb6.png" title="image" /&gt;][]与一次探查类似，首次探查的位置决定了整个探查的顺序，因此对于所有的key也只可能最多用到m种探查顺序，与一次相比的探查比较的好处在于，它的偏移量不是一个常数，而是由一个二次方程决定，这样很大程度上避免了一次探查的首要扎堆现象，所以把二次探查这种现象称之为次要扎堆现象（secondary
+clustering）吧。但是要想填满整个哈希表的话，那么在c&lt;sub&gt;1&lt;/sub&gt;，c2的选择上就要斟酌一番了。&lt;/p&gt;
+&lt;/p&gt;
 
-&lt;div&gt;
-&lt;/div&gt;
+&lt;h4&gt;双重哈希（Double hashing）&lt;/h4&gt;
+&lt;/p&gt;
 
-&lt;div&gt;
+&lt;p&gt;注意！CLRS开场便说：双重哈希提供最好的方法之一给开放地址法。其函数形如：&lt;/p&gt;
+&lt;/p&gt;
 
-&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;h&lt;/em&gt;(&lt;em&gt;k&lt;/em&gt;, &lt;em&gt;i&lt;/em&gt;) = (&lt;em&gt;h&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt;(&lt;em&gt;k&lt;/em&gt;) + &lt;em&gt;ih&lt;/em&gt;&lt;sub&gt;2&lt;/sub&gt;(&lt;em&gt;k&lt;/em&gt;)) mod &lt;em&gt;m&lt;/em&gt;,
+它有两个辅助函数&lt;em&gt;h&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt; 和
+&lt;em&gt;h&lt;/em&gt;2。双重哈希带来的好处是初始探查位置不能决定整个探查序列，因此双重哈希将能使用到O(m&lt;sup&gt;2&lt;/sup&gt;)中探查序列，比之线性探查和二次探查的m种强了很多。但要注意的一点是，要使探查序列能包含整个哈希表，h&lt;sub&gt;2&lt;/sub&gt;应当与表的大小m互质。两种使之互质的方法是：1.使m为一个质数，h&lt;sub&gt;2&lt;/sub&gt;总产生比m小的正整数；2.取m为2的幂，而h&lt;sub&gt;2&lt;/sub&gt;总产生质数。&lt;/p&gt;
+&lt;/p&gt;
 
-&lt;div&gt;
-**Exercises 11.1-4:**
+&lt;h3&gt;完全哈希表&lt;/h3&gt;
+&lt;/p&gt;
 
-&lt;/div&gt;
+&lt;p&gt;完全哈希是指在最坏情况下，内存访问次数为O(1)。完全哈希采用二级结构，每一级上都采用全域散列。其实犹如用链表解决碰撞的哈希表那样，只不过完全哈希不是使用链表而是使用一个小的哈希表来实现，且保证在小的哈希表上不发生碰撞。&lt;/p&gt;
+&lt;/p&gt;
 
-&lt;div&gt;
-We wish to implement a dictionary by using direct addressing on a *huge*
-array. At the start, the array entries may contain garbage, and
-initializing the entire array is impractical because of its size.
-Describe a scheme for implementing a direct-address dictionary on a huge
-array. Each stored object should use *O*(1) space; the operations
-SEARCH, INSERT, and DELETE should take *O*(1) time each; and the
-initialization of the data structure should take *O*(1) time. (*Hint:*
-Use an additional stack, whose size is the number of keys actually
-stored in the dictionary, to help determine whether a given entry in the
-huge array is valid or not.)
+&lt;p&gt;关于完全哈希尚有疑惑,不记录太多，以免误人，亦免自误。&lt;/p&gt;
+&lt;/p&gt;
 
-&lt;/div&gt;
-
-&lt;div&gt;
-**Solution:**一直没想出好的办法来解决这个问题，今天看《算法导论教师手册》有这个题的解答。觉得它的数据结构的思路比较巧妙：字典中每个元素带有一个索引，表示关于该元素的的
-key
-存储在辅助栈中的位置。而辅助栈用数组实现，因此可以随机访问。辅助栈中存储所有存在于字典中的元素的
-key ，于是形成了一个所谓 validating
-cycle。要判断从字典中直接读取到的元素是不是需要的数据，只需要取出该元素中的索引，判断这个索引是否有效（大于栈底而小于栈顶），然后通过索引获取栈中的
-key ,与自己需要的元素的 key
-比较看是否相等即可以。相等表示该数据是要找的数据，否则不是。
-
-&lt;/div&gt;
-
-&lt;div&gt;
-显而易见，通过这个数据结构模型来进行 SEARCH, INSERT 都为
-*O*(1)。至于DELETE 操作，需要将被删除的数据在栈中的 key 与栈顶存储的 key
-交换后再删除，同样可以达到*O*(1)，要注意的是删除过程中，需要更新与原栈顶中
-key 相关元素的索引。
-
-&lt;/div&gt;
-
-&lt;/p&gt;</summary><category term="bit vector"></category><category term="Exercises"></category><category term="Introduction to algorithm"></category></entry></feed>
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb1.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2011/11/image1.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb6.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2011/11/image6.png&lt;/p&gt;</summary><category term="hash tables"></category><category term="Introduction to algorithm"></category></entry></feed>

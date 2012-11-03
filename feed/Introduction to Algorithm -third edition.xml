@@ -532,7 +532,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;由PUSH, POP, 和 MULTIPOP构成的一个长度为&lt;em&gt;n&lt;/em&gt;的序列操作作用在一个空栈上，最坏情况下的时间复杂度为多少？当然，你可以说是&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;^2^)。的确没错，毕竟这一序列操作可由&lt;em&gt;n&lt;/em&gt;个MULTIPOP组成，由此得出&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)*&lt;em&gt;n&lt;/em&gt; = &lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;^2^)。但我们还能将这个上限向下压。&lt;/p&gt;
+&lt;p&gt;由PUSH, POP, 和 MULTIPOP构成的一个长度为&lt;em&gt;n&lt;/em&gt;的序列操作作用在一个空栈上，最坏情况下的时间复杂度为多少？当然，你可以说是&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;&lt;sup&gt;2&lt;/sup&gt;)。的确没错，毕竟这一序列操作可由&lt;em&gt;n&lt;/em&gt;个MULTIPOP组成，由此得出&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)*&lt;em&gt;n&lt;/em&gt; = &lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;&lt;sup&gt;2&lt;/sup&gt;)。但我们还能将这个上限向下压。&lt;/p&gt;
 &lt;p&gt;MULTIPOP的复杂度为&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)，但它真实的时间花费其实是由伪码中第2句决定的——MULTIPOP内部执行了多少次POP操作。当我们把上述问题综合考虑的时候，问题出现了戏剧性的转变。对于一个空栈来说，调用POP的操作最多等于PUSH的操作。可见上述的&lt;em&gt;n&lt;/em&gt;个操作可以有更矮的上界&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)。而三种操作的平摊代价为&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)/&lt;em&gt;n&lt;/em&gt; = &lt;em&gt;O&lt;/em&gt;(1)。&lt;/p&gt;
 &lt;h3&gt;记账方法(The accounting method)&lt;/h3&gt;
 &lt;p&gt;在记账方法中，给不同的操作分配不同的平摊代价。有些操作的平摊代价大于实际代价，就把多余的部分当作存款，供那些实际代价大于平摊代价的操作使用。需要保证的是序列操作的平均代价总和应该要不小于实际代价的总和。仍然用上面栈的例子，我们给栈的三种操作分派的平摊代价如下：&lt;/p&gt;
@@ -546,16 +546,16 @@
 &lt;p&gt;所以由PUSH, POP, 和 MULTIPOP构成的一个长度为&lt;em&gt;n&lt;/em&gt;的序列操作作用在一个空栈上的总平摊代价为&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;),而它的实际代价也是。&lt;/p&gt;
 &lt;h3&gt;势能方法(he potential method)&lt;/h3&gt;
 &lt;p&gt;势能方法其实与记账方法相通，不同之处在于势能方法不是把账记在单个的对象上，而是记全记在数据结构上。当然按书上的说法来讲就是“势”，当某个操作支付的多时可以为这个数据结构积蓄势能，积蓄的势能则可以释放来支付后续的操作。&lt;/p&gt;
-&lt;p&gt;势能方法的工作流程如下. 对一个初始的数据结构&lt;em&gt;D&lt;/em&gt;~0~ 执行&lt;em&gt;n&lt;/em&gt;次操作。用&lt;em&gt;D~i~&lt;/em&gt;
-来表示执行第&lt;em&gt;i&lt;/em&gt;次操作后的数据结构。函数Φ(&lt;em&gt;D~i~&lt;/em&gt;)代表数据结构&lt;em&gt;D~i~&lt;/em&gt;拥有的势能。如果用&lt;em&gt;c~i~&lt;/em&gt;表示第&lt;em&gt;i&lt;/em&gt;个操作的实际代价的话，那第&lt;em&gt;i&lt;/em&gt;步操作的平摊代价就相当于实际代价加上由于这一步操作所增加的势能。所以第&lt;em&gt;i&lt;/em&gt;步操作的平摊代价：&lt;img alt="公式1" src="http://www.roading.org/images/2012-03/image_thumb25.png" /&gt;。&lt;/p&gt;
+&lt;p&gt;势能方法的工作流程如下. 对一个初始的数据结构&lt;em&gt;D&lt;/em&gt;&lt;sub&gt;0&lt;/sub&gt; 执行&lt;em&gt;n&lt;/em&gt;次操作。用&lt;em&gt;D&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;
+来表示执行第&lt;em&gt;i&lt;/em&gt;次操作后的数据结构。函数Φ(&lt;em&gt;D&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;)代表数据结构&lt;em&gt;D&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;拥有的势能。如果用&lt;em&gt;c&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;表示第&lt;em&gt;i&lt;/em&gt;个操作的实际代价的话，那第&lt;em&gt;i&lt;/em&gt;步操作的平摊代价就相当于实际代价加上由于这一步操作所增加的势能。所以第&lt;em&gt;i&lt;/em&gt;步操作的平摊代价：&lt;img alt="公式1" src="http://www.roading.org/images/2012-03/image_thumb25.png" /&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;n&lt;/em&gt; 步操作的总平摊代价则为：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="公式2" src="http://www.roading.org/images/2012-03/image_thumb26.png" /&gt;&lt;/p&gt;
-&lt;p&gt;如果使得Φ(&lt;em&gt;D~n~&lt;/em&gt;) ≥ Φ(&lt;em&gt;D&lt;/em&gt;~0~)为真，那么我们就可以用总的平摊代价&lt;img alt="公式3" src="http://www.roading.org/images/2012-03/image_thumb27.png" /&gt;表示总的实际代价&lt;img alt="公式4" src="http://www.roading.org/images/2012-03/image_thumb28.png" /&gt;的一个上界。&lt;/p&gt;
-&lt;p&gt;再次用上面的栈例子作为实例，一开始时空栈，而且Φ(&lt;em&gt;D&lt;/em&gt;~0~) = 0 (势能为0)。于是有Φ(&lt;em&gt;D~n~&lt;/em&gt;) ≥ Φ(&lt;em&gt;D&lt;/em&gt;~0~) = 0。因&lt;em&gt;n&lt;/em&gt;的大小是不确定的，这个表达式要说明的是在一系列操作的过程中，势能可以有增有减，但绝不能为负数。&lt;/p&gt;
-&lt;p&gt;如果第&lt;em&gt;i&lt;/em&gt;个操作是个PUSH操作，那么第&lt;em&gt;i&lt;/em&gt;个操作带来的势差为：Φ(&lt;em&gt;D~i~&lt;/em&gt;) - Φ(&lt;em&gt;D&lt;/em&gt;~&lt;em&gt;i&lt;/em&gt;-1~) = (&lt;em&gt;s&lt;/em&gt; + 1) –&lt;em&gt;s&lt;/em&gt;= 1。那么平摊代价PUSH操作的平摊代价就为：&lt;/p&gt;
+&lt;p&gt;如果使得Φ(&lt;em&gt;D&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt;) ≥ Φ(&lt;em&gt;D&lt;/em&gt;&lt;sub&gt;0&lt;/sub&gt;)为真，那么我们就可以用总的平摊代价&lt;img alt="公式3" src="http://www.roading.org/images/2012-03/image_thumb27.png" /&gt;表示总的实际代价&lt;img alt="公式4" src="http://www.roading.org/images/2012-03/image_thumb28.png" /&gt;的一个上界。&lt;/p&gt;
+&lt;p&gt;再次用上面的栈例子作为实例，一开始时空栈，而且Φ(&lt;em&gt;D&lt;/em&gt;&lt;sub&gt;0&lt;/sub&gt;) = 0 (势能为0)。于是有Φ(&lt;em&gt;D&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt;) ≥ Φ(&lt;em&gt;D&lt;/em&gt;&lt;sub&gt;0&lt;/sub&gt;) = 0。因&lt;em&gt;n&lt;/em&gt;的大小是不确定的，这个表达式要说明的是在一系列操作的过程中，势能可以有增有减，但绝不能为负数。&lt;/p&gt;
+&lt;p&gt;如果第&lt;em&gt;i&lt;/em&gt;个操作是个PUSH操作，那么第&lt;em&gt;i&lt;/em&gt;个操作带来的势差为：Φ(&lt;em&gt;D&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;) - Φ(&lt;em&gt;D&lt;/em&gt;&lt;sub&gt;&lt;em&gt;i&lt;/em&gt;-1&lt;/sub&gt;) = (&lt;em&gt;s&lt;/em&gt; + 1) –&lt;em&gt;s&lt;/em&gt;= 1。那么平摊代价PUSH操作的平摊代价就为：&lt;/p&gt;
 &lt;p&gt;![公式5][fromula5]&lt;/p&gt;
 &lt;p&gt;同理也可以求得POP操作的平摊代价为0.&lt;/p&gt;
-&lt;p&gt;如果第&lt;em&gt;i&lt;/em&gt;步操作为MULTIPOP(&lt;em&gt;S&lt;/em&gt;, &lt;em&gt;k&lt;/em&gt;)。令k'= min(&lt;em&gt;k&lt;/em&gt;,&lt;em&gt;s&lt;/em&gt;)&lt;sup id="fnref:注1"&gt;&lt;a href="#fn:注1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;，其中&lt;em&gt;s&lt;/em&gt;表示栈中元素的个数。那么Φ(&lt;em&gt;D~i~&lt;/em&gt;) - Φ(&lt;em&gt;D&lt;/em&gt;~&lt;em&gt;i&lt;/em&gt;-1~)= –k' 。它的平摊代价就为：&lt;/p&gt;
+&lt;p&gt;如果第&lt;em&gt;i&lt;/em&gt;步操作为MULTIPOP(&lt;em&gt;S&lt;/em&gt;, &lt;em&gt;k&lt;/em&gt;)。令k'= min(&lt;em&gt;k&lt;/em&gt;,&lt;em&gt;s&lt;/em&gt;)&lt;sup id="fnref:注1"&gt;&lt;a href="#fn:注1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;，其中&lt;em&gt;s&lt;/em&gt;表示栈中元素的个数。那么Φ(&lt;em&gt;D&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;) - Φ(&lt;em&gt;D&lt;/em&gt;&lt;sub&gt;&lt;em&gt;i&lt;/em&gt;-1&lt;/sub&gt;)= –k' 。它的平摊代价就为：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="公式6" src="http://www.roading.org/images/2012-03/image_thumb30.png" /&gt;&lt;/p&gt;
 &lt;div class="footnote"&gt;
 &lt;hr /&gt;
@@ -564,7 +564,82 @@
 &lt;p&gt;在这儿k'= min(&lt;em&gt;k&lt;/em&gt;,&lt;em&gt;s&lt;/em&gt;)，直接表达的意思是不能令栈中的对象数目为负，而就势能方法来说，它表述了一点原则就是，这一次操作不能令栈的势能为负。&amp;#160;&lt;a href="#fnref:注1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary><category term="Amortized Analysis"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>Chapter 13 Red-Black trees (红黑树)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-13-red-black-trees-%e7%ba%a2%e9%bb%91%e6%a0%91.html" rel="alternate"></link><updated>2011-12-25T22:43:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-25:/algorithm/introductiontoalgorithm/chapter-13-red-black-trees-%e7%ba%a2%e9%bb%91%e6%a0%91.html</id><summary type="html">&lt;p&gt;之前的&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91binary-search-tree.html"&gt;二叉搜索树&lt;/a&gt;提供了一系列算法复杂度为&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;h&lt;/em&gt;)的基本操作：SEARCH,
+&lt;/div&gt;</summary><category term="Amortized Analysis"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>C++实现红黑树，仿STL封装</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html" rel="alternate"></link><updated>2011-12-31T20:37:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-31:/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html</id><summary type="html">&lt;p&gt;在[&lt;em&gt;Chapter 13 Red-Black trees(红黑树)&lt;/em&gt;][]这篇笔记中对红黑树的各种操作都有较详尽的伪码，
+相信使用C++来实现也并不是难事，我要做的是，在实现的基础上要进行一定的封装。当然风格嘛，
+自然参照STL，最终的结果就是要实现一个STL风格的红黑树模板。&lt;/p&gt;
+&lt;p&gt;在C++泛型编程中两个重要的概念即是容器和迭代器。我的目的则是要实现一个与STL中的其他容器
+类似，但是以红黑树为基础的容器&lt;code&gt;RB_Tree&lt;/code&gt;。当然，实际上STL中的map、multimap、set、
+multiset其基础结构就是红黑树。在这儿、我主要尝试自己封装一个红黑树试试。&lt;/p&gt;
+&lt;p&gt;无论如何,从实现来讲，一个&lt;code&gt;rb_node&lt;/code&gt;的类模板是需要的，不过它将作为 &lt;code&gt;RB_Tree&lt;/code&gt;类中的一个嵌
+套类，因为&lt;code&gt;RB_Tree&lt;/code&gt;容器的使用者并不需要知道，&lt;code&gt;rb_node&lt;/code&gt;实现。&lt;code&gt;rb_node&lt;/code&gt;的实现：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;RB_Tree&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;rb_node&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;Type&lt;/span&gt; &lt;span class="n"&gt;_value&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;rb_node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_left&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;rb_node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;rb_node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_parent&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;RB_Color&lt;/span&gt; &lt;span class="n"&gt;_color&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;_value&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="p"&gt;()),&lt;/span&gt;&lt;span class="n"&gt;_left&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;_parent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;_color&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;red&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;{};&lt;/span&gt;
+    &lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;其次，要定义一个供&lt;code&gt;RB_Tree&lt;/code&gt;容器使用的迭代器，为了拥有&lt;code&gt;iterator_trait&lt;/code&gt;它将继承自
+&lt;code&gt;std::iterator&lt;/code&gt;，当然完全可以自己通过宏定义来实现&lt;code&gt;iterator_trait&lt;/code&gt; ，但毫无疑问继承的话可以
+写更少的代码.声明如下：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;RB_Tree&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="nl"&gt;node_iterator:&lt;/span&gt; 
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;bidirectional_iterator_tag&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;_node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;){};&lt;/span&gt;
+    &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; 
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="p"&gt;();&lt;/span&gt;     
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+    &lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;r_iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+    &lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;r_iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+    &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;pointer&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; 
+    &lt;span class="c1"&gt;//…省略很多种运算符重载 &lt;/span&gt;
+&lt;span class="k"&gt;private&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;_node&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;最后就是&lt;code&gt;RB_Tree&lt;/code&gt;这个容器了类了，大体上是这样：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;RB_Tree&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;private&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;node_iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;typedef&lt;/span&gt;  &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;typedef&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;const_iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="n"&gt;RB_Tree&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;RB_Tree&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;    
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;eraser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;private&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;_root&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;_nil&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;具体的实现代码，你可以下载&lt;a href="https://github.com/M-Adoo/Algorithm/blob/master/Coding/rbTree.hpp"&gt;RB_Tree.hpp&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;当然还应该定义更多的接口，比方重载一个模板函数insert能够接受一对迭代器，将迭代器中间的
+数据插入到红黑树中，等等。&lt;/p&gt;
+&lt;p&gt;值得注意的是，该封装实现，是以学习以及练习为目的的，所以有很多本应有但确没有实现的接口。
+另一个原因则是这段时间太过忙碌。&lt;/p&gt;
+&lt;p&gt;如果将上面提到的迭代器类与之前在&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E4%BB%BFstl-%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84c%E5%AE%9E%E7%8E%B0.html"&gt;仿STL的二叉搜索树的C++实现&lt;/a&gt;中的迭代器比较，其实发现，
+它们提供的是一样的操作，所以完全可以将红黑树和二叉搜索树的结点类抽象出来，让迭代器类针
+对其抽象类实现，这样一来这一个迭代器模板类就会适用于几乎整个由二叉搜索树派生而来的数据
+结构了，将会大大提高代码的复用性。当然这个工作我没有做。&lt;/p&gt;</summary><category term="red black trees"></category><category term="算法导论"></category><category term="C++"></category></entry><entry><title>Chapter 13 Red-Black trees (红黑树)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-13-red-black-trees-%e7%ba%a2%e9%bb%91%e6%a0%91.html" rel="alternate"></link><updated>2011-12-25T22:43:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-25:/algorithm/introductiontoalgorithm/chapter-13-red-black-trees-%e7%ba%a2%e9%bb%91%e6%a0%91.html</id><summary type="html">&lt;p&gt;之前的&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91binary-search-tree.html"&gt;二叉搜索树&lt;/a&gt;提供了一系列算法复杂度为&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;h&lt;/em&gt;)的基本操作：SEARCH,
 MINIMUM, MAXIMUM, INSERT, DELETE SUCCESSOR and
 PREDECESSOR。无疑，当树的高度比较小的时候这些操作有很好的效率，然而当二叉树总是“一条脚站立”时，树的高度就会很高，此时它效率并不会比链表快。红黑树即是一种从二叉搜索树上发展而来的“平衡”搜索树，它能保证在最坏情况下上述操作的复杂度为
 &lt;em&gt;O&lt;/em&gt;(lg&lt;em&gt;n&lt;/em&gt;) .&lt;/p&gt;
@@ -819,16 +894,16 @@ RB-DELETE-FIXUP 子函数的问题了。&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="算法导论"></category><category term="red black trees"></category></entry><entry><title>Radix Tree 基数树</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/radix-tree-%e5%9f%ba%e6%95%b0%e6%a0%91.html" rel="alternate"></link><updated>2011-12-21T21:12:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-21:/algorithm/introductiontoalgorithm/radix-tree-%e5%9f%ba%e6%95%b0%e6%a0%91.html</id><summary type="html">&lt;h3&gt;《算法导论》课后习题 12-2 解答。&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Problems 12-2: Radix trees&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Given two strings a = a~0~a~1~...a~p~ and b = b~0~b~1~...b~q~, where each a~i~ and each b~j~ is in some ordered set of characters, we say
+&lt;p&gt;Given two strings a = a&lt;sub&gt;0&lt;/sub&gt;a&lt;sub&gt;1&lt;/sub&gt;...a&lt;sub&gt;p&lt;/sub&gt; and b = b&lt;sub&gt;0&lt;/sub&gt;b&lt;sub&gt;1&lt;/sub&gt;...b&lt;sub&gt;q&lt;/sub&gt;, where each a&lt;sub&gt;i&lt;/sub&gt; and each b&lt;sub&gt;j&lt;/sub&gt; is in some ordered set of characters, we say
 that string a is &lt;strong&gt;lexicographically less than&lt;/strong&gt; string b if either&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;there exists an integer j, where 0 ≤ j ≤ min(p, q), such that a~i~ = b~i~ for all i = 0, 1, ..., j - 1 and a~j~ &amp;lt; b~j~ or&lt;/li&gt;
-&lt;li&gt;p &amp;lt; q and a~i~ = b~i~ for all i = 0, 1, ..., p.&lt;/li&gt;
+&lt;li&gt;there exists an integer j, where 0 ≤ j ≤ min(p, q), such that a&lt;sub&gt;i&lt;/sub&gt; = b&lt;sub&gt;i&lt;/sub&gt; for all i = 0, 1, ..., j - 1 and a&lt;sub&gt;j&lt;/sub&gt; &amp;lt; b&lt;sub&gt;j&lt;/sub&gt; or&lt;/li&gt;
+&lt;li&gt;p &amp;lt; q and a&lt;sub&gt;i&lt;/sub&gt; = b&lt;sub&gt;i&lt;/sub&gt; for all i = 0, 1, ..., p.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;For example, if a and b are bit strings, then 10100 &amp;lt; 10110 by rule 1 (letting j = 3) and 10100 &amp;lt; 101000 by rule 2. This is similar to the
 ordering used in English-language dictionaries.&lt;/p&gt;
 &lt;p&gt;The &lt;strong&gt;radix tree&lt;/strong&gt; data structure shown in Figure 12.5 stores the bit strings 1011, 10, 011, 100, and 0. When searching for a key a =
-a~0~a~1~...a~p~, we go left at a node of depth i if a~i~ = 0 and right if a~i~ = 1. Let S be a set of distinct binary strings whose
+a&lt;sub&gt;0&lt;/sub&gt;a&lt;sub&gt;1&lt;/sub&gt;...a&lt;sub&gt;p&lt;/sub&gt;, we go left at a node of depth i if a&lt;sub&gt;i&lt;/sub&gt; = 0 and right if a&lt;sub&gt;i&lt;/sub&gt; = 1. Let S be a set of distinct binary strings whose
 lengths sum to n. Show how to use a radix tree to sort S lexicographically in Θ(n) time. For the example in Figure 12.5, the output of the &amp;gt;sort should be the sequence 0, 011, 10, 100, 1011.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="image" src="http://www.roading.org/images/2012-01/image_thumb5.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Figure 12.5: A radix tree storing the
@@ -1010,7 +1085,68 @@ tree. If &lt;em&gt;y&lt;/em&gt; is a node in the left subtree of &lt;em&gt;x&lt;
     &lt;span class="k"&gt;while&lt;/span&gt;  &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="no"&gt;NIL&lt;/span&gt;
        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;right&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="binary search tree"></category><category term="inorder tree walk"></category><category term="笔记"></category></entry><entry><title>Chapter 10 Exercises and Problems (2)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html" rel="alternate"></link><updated>2011-11-06T17:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-11-06:/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html</id><summary type="html">&lt;h3&gt;Exercises 10.3-4&lt;/h3&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="binary search tree"></category><category term="inorder tree walk"></category><category term="笔记"></category></entry><entry><title>Solution of CLRS 11.1 exercises</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html" rel="alternate"></link><updated>2011-12-14T14:43:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-14:/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html</id><summary type="html">&lt;h3&gt;Exercises 11.1-2&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A &lt;strong&gt;&lt;em&gt;bit vector&lt;/em&gt;&lt;/strong&gt; is simply an array of bits (0's and 1's). A bit vector of
+length &lt;em&gt;m&lt;/em&gt; takes much less space than an array of &lt;em&gt;m&lt;/em&gt; pointers. Describe how
+to use a bit vector to Represent a Dynamic Set of Distinct Elements with no 
+Satellite Data. Dictionary Operations Should Run in &lt;em&gt;O&lt;/em&gt;(1) Time.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Solution(I get the result from &lt;a href="http://ripcrixalis.blog.com/2011/02/08/hello-world/"&gt;Rip’s blog&lt;/a&gt;, The original text is
+here for ease of reference.):&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Using a bit vector of length m, as our direct-address table to represent the
+dynamic set.Here m bits tags m slots of the table. The elements in the 
+dynamic set is stored in the direct-address table itself. If slot k is
+allocated, bit k is 0. If slot k contains no element, bit k is 1.&lt;/p&gt;
+&lt;h4&gt;Bit Vector&lt;/h4&gt;
+&lt;p&gt;The free-space list is often implemented as a bit map or bit vector. If a
+block is free, the bit is 1. If a block is allocated, the bit is 0. Assume
+the following blocks are allocated, the rest free: 2, 3, 4, 5, 8, 9, 10, 11,
+12, 13, 17, 18, 25, 27 .The free-space bit map would
+be: 0011110011111100011000000111000000…&lt;/p&gt;
+&lt;p&gt;Adavantages of this approach include: &lt;br /&gt;
+· Relatively simple &lt;br /&gt;
+· Efficient to find the first free blocks or n consecutive free blocks
+on the disk.&lt;/p&gt;
+&lt;p&gt;Bit maps are useful only when it can be kept in main memory. But, as disks get
+larger, this is hard to do. 1.3 gigabyte disk with 512 byte blocks would need 
+a bit map of over 310k to track its free blocks. Clustering the blocks in
+intervals of foul reduces this number to 78k per disk.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Exercises 11.1-3&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Suggest how to implement a direct-address table in which the keys of stored
+elements do not need to be distinct and the elements can have satellite data.
+All three dictionary operations (INSERT, DELETE, and SEARCH) should run in 
+&lt;em&gt;O&lt;/em&gt;(1) time. (Don't forget that DELETE takes as an argument a pointer to an 
+object to be deleted, not a key.)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;可以直接用链表来解决碰撞问题。对于搜索的话可以返回链表的指针，根据题
+目的条件来看，对于两个用户提供的两个key相同的object我们是无法区分的，因此只能返回
+一组key相同的objecet让用户用自己的方法来区分。&lt;/p&gt;
+&lt;h3&gt;Exercises 11.1-4&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We wish to implement a dictionary by using direct addressing on a &lt;em&gt;huge&lt;/em&gt; array.
+At the start, the array entries may contain garbage, and initializing the
+entire array is impractical because of its size. Describe a scheme for 
+implementing a direct-address dictionary on a huge array. Each stored object
+should use &lt;em&gt;O&lt;/em&gt;(1) space; the operations SEARCH, INSERT, and DELETE should
+take &lt;em&gt;O&lt;/em&gt;(1) time each; and the initialization of the data structure should take
+&lt;em&gt;O&lt;/em&gt;(1) time. (&lt;em&gt;Hint:&lt;/em&gt;Use an additional stack, whose size is the number of keys
+actually stored in the dictionary, to help determine whether a given entry in 
+the huge array is valid or not.)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;一直没想出好的办法来解决这个问题，今天看《算法导论教师手册》有这个题
+的解答。觉得它的数据结构的思路比较巧妙：字典中每个元素带有一个索引，表示关于该元
+素的的key存储在辅助栈中的位置。而辅助栈用数组实现，因此可以随机访问。辅助栈中存储
+所有存在于字典中的元素的key ，于是形成了一个所谓validating cycle。要判断从字典中
+直接读取到的元素是不是需要的数据，只需要取出该元素中的索引，判断这个索引是否有效
+（大于栈底而小于栈顶），然后通过索引获取栈中的key ,与自己需要的元素的key比较看是
+否相等即可以。相等表示该数据是要找的数据，否则不是。显而易见，通过这个数据结构模
+型来进行SEARCH, INSERT都为&lt;em&gt;O&lt;/em&gt;(1)。至于DELETE 操作，需要将被删除的数据在栈中的key
+与栈顶存储的key交换后再删除，同样可以达到&lt;em&gt;O&lt;/em&gt;(1)，要注意的是删除过程中，需要更新与
+原栈顶中key相关元素的索引。&lt;/p&gt;</summary><category term="bit vector"></category><category term="Exercises"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>Chapter 10 Exercises and Problems (2)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html" rel="alternate"></link><updated>2011-11-06T17:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-11-06:/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html</id><summary type="html">&lt;h3&gt;Exercises 10.3-4&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;It is often desirable to keep all elements of a doubly linked list compact &amp;gt;in storage, using, for example, the first &lt;em&gt;m&lt;/em&gt; index locations in the &amp;gt;multiple-array representation. (This is the case in a paged, virtual-memory &amp;gt;computing environment.) Explain how the procedures ALLOCATE-OBJECT and FREE-&amp;gt;OBJECT can be implemented so that therepresentation is compact. Assume that &amp;gt;there are no pointers to elements of the linked list outside the list &amp;gt;itself. (&lt;em&gt;Hint:&lt;/em&gt; Use the array implementation of a stack.)&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1080,87 +1216,4 @@ Alternatively, if it supported MAXIMUM and EXTRACT-MAX, it would be a
 &lt;strong&gt;&lt;em&gt;mergeable max-heap&lt;/em&gt;&lt;/strong&gt;.&amp;#160;&lt;a href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary><category term="Exercises"></category><category term="算法导论"></category></entry><entry><title>Chapter 10 Exercises（1）</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html" rel="alternate"></link><updated>2011-11-05T14:49:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-11-05:/algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html</id><summary type="html">&lt;h3&gt;Exercises 10.1-2★&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Explain how to implement two stacks in one array &lt;em&gt;A&lt;/em&gt;[&lt;em&gt;1&lt;/em&gt; ‥ &lt;em&gt;n&lt;/em&gt;] in such a
-way that neither stack overflows unless the total number of elements in
-both stacks together is &lt;em&gt;n&lt;/em&gt;. The PUSH and POP operations should run in
-&lt;em&gt;O&lt;/em&gt;(1) time.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;令两个栈的栈底为一个数组的两端，这样的话可以充分利用整个数组，直到两个栈顶相遇。关键在于怎么样来判断两个栈顶是否相遇，两种思路。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;思路一&lt;/strong&gt;：设置哨兵（Sentinel）：在栈顶的下一个位置存储一个特殊值来作为警戒线，这如同告诉另一个栈，到这个地方就是我的领地了，别再过来，哨兵随着栈的大小而移动，需要注意的是哨兵在移动到新的位置的过程中，需将原来的哨兵撤销。示图：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2011-11/2ad0ba5fcd7b_thumb.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;这种方式哨兵需占有两个空间，实际的空间利用为n-2而不是n.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;思路二&lt;/strong&gt;：与思路一相反，思路二将所有的未利用空间全部标记为“未利用空间”——用无穷表示。栈的任何一次Pop操作以后，都需将原来的栈顶标记为未使用空间。在Push操作之前，先判断栈顶之后的元素是否为未使用空间。如下图示：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2011-11/11_thumb.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;两种不同的思路，恰恰如同大国奉行的国土攻守政策，思路一主防——凡是我过领土，派兵进驻边境，阻止外国倾入。思路二主攻——凡是无主领地，我便派兵占领。南海问题是一种怎么样的政策？&lt;/p&gt;
-&lt;h3&gt;Exercises 10.1-6★&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Show how to implement a queue using two stacks. Analyze the running time
-of the queue operations.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solutions:&lt;/strong&gt;我将这个问题概括为桶饼模型：给俩个与饼同大的小桶，往桶中放饼，要求你在拿饼的时候将先放进去的饼给拿出来。很显然，先放的饼在桶底，无法直接拿出，我们只能借助于另一个桶——把桶中的饼到往另一个桶中，原来桶底的饼就到了最上面，可以直接拿到了。&lt;/p&gt;
-&lt;p&gt;完整的步骤为：将一个桶设为放饼桶，另一个桶设为取饼桶。所有的放饼操作都在放饼桶进行，并保证放饼之前，所有的饼已经都在放饼桶，若不在将取饼桶的饼倒入放饼桶，所有的取饼操作都在取饼桶进行，取饼之前将放饼桶的饼倒入取饼桶。&lt;/p&gt;
-&lt;p&gt;以此模型类推，Dequeue和EnQueue操作的复杂度都为O(n).当连续进行Dequeue或连续进行EnQueue操作时，它们的复杂度为1。&lt;/p&gt;
-&lt;h3&gt;Exercises 10.1-7★&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Show how to implement a stack using two queues. Analyze the running time
-of the stack operations.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;我一开始在纸上划了几个图，想快速找出方法，但总想不到可行办法，其实无形中忽略了问题的本质。栈的本质在于后进先出，抓住这一点问题就很快解决了。这个题的实质就是要得到队列的最后一个元素，那么我们直接拿出前n-1不就可以了。&lt;/p&gt;
-&lt;p&gt;具体步骤：
-1.  对于插入操作，将数据插入到有数据的那一个队列，若两队列都没有，随便插入一个队列。
-2.  对于出栈操作，将有数据的一个队列中的数据一个个第拿出放入另一个队列，直到拿到最后一个，该数就是要出栈的数。&lt;/p&gt;
-&lt;p&gt;算法复杂度，入栈复杂度为O(1),出栈复杂度O(n)。&lt;/p&gt;
-&lt;h3&gt;Exercises 10.2-7★&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Give a Θ(&lt;em&gt;n&lt;/em&gt;)-time nonrecursive procedure that reverses a singly linked list &amp;gt;of &lt;em&gt;n&lt;/em&gt; elements. The procedure should use no more than constant storage &amp;gt;beyond that needed for the list itself.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Soulutions:&lt;/strong&gt;在深信服笔试的时候好像做过这个题目，今天看到了特意再做一遍。要在&lt;em&gt;O&lt;/em&gt;(n)的时间用非递归的方法使得单向线性表转向，要求空间复杂度为&lt;em&gt;O&lt;/em&gt;(1)。反向嘛，所有的节点next指针指向前面的节点即可。但是有一点要注意的是将next指向它之前的节点的话，会有信息丢失，也就是说，此时你不知道了原来的next指向哪个节点了，迭代就无法继续，所以我们要用另外的空间来保存这些信息。&lt;/p&gt;
-&lt;p&gt;伪代码：
-    :::C
-    ReverseList(L)
-        if(L.head == NIL || L.head-&amp;gt;next == NIL)
-            return L; 
-        Pre_OP = L.head; //the previous node of the opera node; 
-        Op=head-&amp;gt;next; //Op contain the opera node 
-        Pre_OP-&amp;gt;next=NIL; //let the head point to the NIL,then head be the tail&lt;br /&gt;
-        while(Op!= NIL) 
-            Next_OP = Op-&amp;gt;next
-            Op-&amp;gt;next =Pre_OP
-            L.head = Op
-            Pre_op = Op 
-            Op = Next_OP&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;retutn&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; 16
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h3&gt;Exercises 10.2-8: ★&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Explain how to implement doubly linked lists using only one pointer
-value &lt;em&gt;np&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;] per item instead of the usual two (&lt;em&gt;next&lt;/em&gt; and &lt;em&gt;prev&lt;/em&gt;).
-Assume that all pointer values can be interpreted as &lt;em&gt;k&lt;/em&gt;-bit integers,
-and define &lt;em&gt;np&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;] to be &lt;em&gt;np&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;] = &lt;em&gt;next&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;] XOR &lt;em&gt;prev&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;], the
-&lt;em&gt;k&lt;/em&gt;-bit "exclusive-or" of &lt;em&gt;next&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;] and &lt;em&gt;prev&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;]. (The value NIL is
-represented by 0.) Be sure to describe what information is needed to
-access the head of the list. Show how to implement the SEARCH, INSERT,
-and DELETE operations on such a list. Also show how to reverse such a
-list in &lt;em&gt;O&lt;/em&gt;(1) time.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;这个题目比较有意思，用一个指针来实现一个双向链表。通常来讲我们实现一个双向链表每个节点有两个指针。在这儿的一个指针其实存储的是两个指针的信息——next和pre两个指针的按位异或。问题的关键在于如何将np解析成pre和next指针，这样我们就将问题转化为了一个普通的双向链表了。&lt;/p&gt;
-&lt;p&gt;由于是按位异或操作，只要将pre与next中任意一个与np进行一次按位异或操作就可以得到另一个了。而head的pre为0，那么可以得到head的next指针了，而&lt;code&gt;head-&amp;gt;next-&amp;gt;pre==head&lt;/code&gt;,那么&lt;code&gt;head-&amp;gt;next-&amp;gt;next==head XOR head-&amp;gt;next-&amp;gt;np&lt;/code&gt;，依次类推。这样就可以实现对这个一个指针的双向链表进行遍历了。需要的信息仅为指向表头的指针。&lt;/p&gt;
-&lt;p&gt;Search函数的伪代码：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;Search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt; 
-    &lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;XOR&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt; 
-    &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="n"&gt;NIL&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;XOR&lt;/span&gt; &lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;
-        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
-        &lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; 
-&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Delete与Insert操作的伪代码略。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;show how to reverse such a list in O(1)
-time.&lt;/em&gt;在没有存储尾节点的情况下在O(1)时间内似乎无法办到，如果有存储尾节点的话，这倒是好办，直接head与tail交换即可（也可能我没有理解好题意）。&lt;/p&gt;</summary><category term="Exercises"></category><category term="算法导论"></category></entry></feed>
+&lt;/div&gt;</summary><category term="Exercises"></category><category term="算法导论"></category></entry></feed>

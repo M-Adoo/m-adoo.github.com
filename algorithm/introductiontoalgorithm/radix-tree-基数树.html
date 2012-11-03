@@ -57,44 +57,6 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -177,6 +139,48 @@
 					
 				
 					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 			</ul>
 			<div class="clear"></div>
@@ -199,7 +203,7 @@ Radix Tree 基数树
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-12-21T21:12:00">
-                Wed 21 December 2011
+                周三 21 十二月 2011
         </abbr>
         
         <address class="article_author">
@@ -224,16 +228,16 @@ Radix Tree 基数树
 	      <h3>《算法导论》课后习题 12-2 解答。</h3>
 <blockquote>
 <p><strong>Problems 12-2: Radix trees</strong></p>
-<p>Given two strings a = a~0~a~1~...a~p~ and b = b~0~b~1~...b~q~, where each a~i~ and each b~j~ is in some ordered set of characters, we say
+<p>Given two strings a = a<sub>0</sub>a<sub>1</sub>...a<sub>p</sub> and b = b<sub>0</sub>b<sub>1</sub>...b<sub>q</sub>, where each a<sub>i</sub> and each b<sub>j</sub> is in some ordered set of characters, we say
 that string a is <strong>lexicographically less than</strong> string b if either</p>
 <ol>
-<li>there exists an integer j, where 0 ≤ j ≤ min(p, q), such that a~i~ = b~i~ for all i = 0, 1, ..., j - 1 and a~j~ &lt; b~j~ or</li>
-<li>p &lt; q and a~i~ = b~i~ for all i = 0, 1, ..., p.</li>
+<li>there exists an integer j, where 0 ≤ j ≤ min(p, q), such that a<sub>i</sub> = b<sub>i</sub> for all i = 0, 1, ..., j - 1 and a<sub>j</sub> &lt; b<sub>j</sub> or</li>
+<li>p &lt; q and a<sub>i</sub> = b<sub>i</sub> for all i = 0, 1, ..., p.</li>
 </ol>
 <p>For example, if a and b are bit strings, then 10100 &lt; 10110 by rule 1 (letting j = 3) and 10100 &lt; 101000 by rule 2. This is similar to the
 ordering used in English-language dictionaries.</p>
 <p>The <strong>radix tree</strong> data structure shown in Figure 12.5 stores the bit strings 1011, 10, 011, 100, and 0. When searching for a key a =
-a~0~a~1~...a~p~, we go left at a node of depth i if a~i~ = 0 and right if a~i~ = 1. Let S be a set of distinct binary strings whose
+a<sub>0</sub>a<sub>1</sub>...a<sub>p</sub>, we go left at a node of depth i if a<sub>i</sub> = 0 and right if a<sub>i</sub> = 1. Let S be a set of distinct binary strings whose
 lengths sum to n. Show how to use a radix tree to sort S lexicographically in Θ(n) time. For the example in Figure 12.5, the output of the &gt;sort should be the sequence 0, 011, 10, 100, 1011.</p>
 <p><img alt="image" src="http://www.roading.org/images/2012-01/image_thumb5.png" /></p>
 <p>Figure 12.5: A radix tree storing the
@@ -257,7 +261,7 @@ They are also used for <a href="http://en.wikipedia.org/wiki/Inverted_index">inv
 </blockquote>
 <p>无奈的是，上面列举的几个应用方面我都不太熟悉。只好先标记，留待以后发掘吧。</p>
 		  <p style= "text-align:right;"><em>
-		  Wed 21 December 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周三 21 十二月 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/radix-tree-%e5%9f%ba%e6%95%b0%e6%a0%91.html">本文原链</a>)</em></p>
@@ -341,6 +345,10 @@ They are also used for <a href="http://en.wikipedia.org/wiki/Inverted_index">inv
 		
 		
 		
+		   
+		   <li><a title="C++实现红黑树，仿STL封装" href="http://www.roading.org/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html">C++实现红黑树，仿STL封装</a></li>
+		   
+		
 		
 		
 		   
@@ -368,6 +376,10 @@ They are also used for <a href="http://en.wikipedia.org/wiki/Inverted_index">inv
 		   
 		
 		
+		
+		   
+		   <li><a title="Solution of CLRS 11.1 exercises" href="http://www.roading.org/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html">Solution of CLRS 11.1 exercises</a></li>
+		   
 		
 		
 		
@@ -445,6 +457,9 @@ They are also used for <a href="http://en.wikipedia.org/wiki/Inverted_index">inv
 		
 		
 		
+		   
+		   <li><a title="第八章（3） 基数排序（Radix Sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html">第八章（3） 基数排序（Radix Sort）</a></li>
+		   
 		
 		
 		
@@ -466,6 +481,9 @@ They are also used for <a href="http://en.wikipedia.org/wiki/Inverted_index">inv
 		
 		
 		
+		   
+		   <li><a title="算法导论6-3 young tableaus" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba6-3-young-tableaus.html">算法导论6-3 young tableaus</a></li>
+		   
 		
 		
 		
@@ -476,6 +494,12 @@ They are also used for <a href="http://en.wikipedia.org/wiki/Inverted_index">inv
 		
 		
 		
+		
+		
+		
+		   
+		   <li><a title="排序之插入排序与合并排序-C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%8f%92%e5%85%a5%e6%8e%92%e5%ba%8f-insertionsort-c%e5%ae%9e%e7%8e%b0.html">排序之插入排序与合并排序-C++实现</a></li>
+		   
 		
 		
 		

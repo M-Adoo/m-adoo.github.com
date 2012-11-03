@@ -57,44 +57,6 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -177,6 +139,48 @@
 					
 				
 					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 			</ul>
 			<div class="clear"></div>
@@ -185,7 +189,7 @@
 <div class="crumbs">
 <a href="http://www.roading.org" title ="Back to homepage">Home</a> »
 
-<a href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a> »
+<a href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a> »
 
 C++实现红黑树，仿STL封装
 </div>
@@ -199,7 +203,7 @@ C++实现红黑树，仿STL封装
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-12-31T20:37:00">
-                Sat 31 December 2011
+                周六 31 十二月 2011
         </abbr>
         
         <address class="article_author">
@@ -207,41 +211,30 @@ C++实现红黑树，仿STL封装
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;red black trees&nbsp;&nbsp;">
+	    <abbr title="red black trees&nbsp;&nbsp;算法导论&nbsp;&nbsp;C++&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-	          
 		<a title="permalink to red black trees" href="http://www.roading.org/tag/red-black-trees.html">red black trees</a>
+	          
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+	          
+		<a title="permalink to C++" href="http://www.roading.org/tag/c.html">C++</a>
 	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to 算法导论" href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-	      <ul>
-<li>摘要：在[<em>Chapter 13 Red-Black trees
-    (红黑树)</em>][]这篇笔记中对红黑树的各种操作都有较详尽的伪码，相信使用C++来实现也并不是难事，我要做的是，在实现的基础上要进行一定的封装。当然风格嘛，自然参照STL，最终的结果就是要实现一个STL风格的红黑树模板。</li>
-<li>学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。</li>
-</ul>
-<div align="right">
-*2011/12/31 By Adoo | Homepage:*[*www.roading.org*][]
-
-</div>
-
-<div align="left">
-
-* * * * *
-
-</div>
-
-<p>在C++泛型编程中两个重要的概念即是容器和迭代器。我的目的则是要实现一个与STL中的其他容器类似，但是以红黑树为基础的容器
-RB_Tree。当然，实际上STL中的
-map、multimap、set、multiset其基础结构就是红黑树。在这儿、我们主要尝试自己封装一个红黑树试试。</p>
-<p>无论如何,从实现来讲，一个rb_node的类模板是需要的，不过它将作为 RB_Tree
-类中的一个嵌套类，因为RB_Tree容器的使用者并不需要知道，rb_node实现。rb_node的实现：</p>
-<div class="codehilite"><pre><span class="n">template</span><span class="o">&lt;</span><span class="n">typename</span> <span class="n">Type</span><span class="o">&gt;</span>
-<span class="n">struct</span> <span class="n">RB_Tree</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span><span class="p">::</span><span class="n">rb_node</span>
+	      <p>在[<em>Chapter 13 Red-Black trees(红黑树)</em>][]这篇笔记中对红黑树的各种操作都有较详尽的伪码，
+相信使用C++来实现也并不是难事，我要做的是，在实现的基础上要进行一定的封装。当然风格嘛，
+自然参照STL，最终的结果就是要实现一个STL风格的红黑树模板。</p>
+<p>在C++泛型编程中两个重要的概念即是容器和迭代器。我的目的则是要实现一个与STL中的其他容器
+类似，但是以红黑树为基础的容器<code>RB_Tree</code>。当然，实际上STL中的map、multimap、set、
+multiset其基础结构就是红黑树。在这儿、我主要尝试自己封装一个红黑树试试。</p>
+<p>无论如何,从实现来讲，一个<code>rb_node</code>的类模板是需要的，不过它将作为 <code>RB_Tree</code>类中的一个嵌
+套类，因为<code>RB_Tree</code>容器的使用者并不需要知道，<code>rb_node</code>实现。<code>rb_node</code>的实现：</p>
+<div class="codehilite"><pre><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">RB_Tree</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;::</span><span class="n">rb_node</span>
 <span class="p">{</span>
         <span class="n">Type</span> <span class="n">_value</span><span class="p">;</span>
         <span class="n">rb_node</span>  <span class="o">*</span><span class="n">_left</span><span class="p">;</span>
@@ -249,82 +242,67 @@ map、multimap、set、multiset其基础结构就是红黑树。在这儿、我�
         <span class="n">rb_node</span>  <span class="o">*</span><span class="n">_parent</span><span class="p">;</span>
         <span class="n">RB_Color</span> <span class="n">_color</span><span class="p">;</span>
         <span class="n">rb_node</span><span class="p">()</span>
-            <span class="p">:</span><span class="n">_value</span><span class="p">(</span><span class="n">Type</span><span class="p">()),</span><span class="n">_left</span><span class="p">(</span><span class="n">NULL</span><span class="p">),</span><span class="n">_right</span><span class="p">(</span><span class="n">NULL</span><span class="p">),</span><span class="n">_parent</span><span class="p">(</span><span class="n">NULL</span><span class="p">),</span><span class="n">_color</span><span class="p">(</span><span class="n">red</span><span class="p">)</span>
+            <span class="o">:</span><span class="n">_value</span><span class="p">(</span><span class="n">Type</span><span class="p">()),</span><span class="n">_left</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span><span class="n">_right</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span><span class="n">_parent</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span><span class="n">_color</span><span class="p">(</span><span class="n">red</span><span class="p">)</span>
         <span class="p">{};</span>
     <span class="p">};</span>
 </pre></div>
 
 
-<p><span style="color: blue"></span></p>
-</p>
-
-<p>其次，要定义一个供 RB_Tree容器使用的迭代器，为了拥有 iterator_trait
-它将继承自 std::iterator，当然完全可以自己通过宏定义来实现
-iterator_trait ，但毫无疑问继承的话可以写更少的代码.声明如下：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">template</span><span class="o">&lt;</span><span class="n">typename</span> <span class="n">Type</span><span class="o">&gt;</span>
-<span class="n">class</span> <span class="n">RB_Tree</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span><span class="p">::</span><span class="n">node_iterator</span><span class="p">:</span> 
-    <span class="n">public</span> <span class="n">std</span><span class="p">::</span><span class="n">iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="p">::</span><span class="n">bidirectional_iterator_tag</span> <span class="p">,</span><span class="n">rb_node</span><span class="o">&gt;</span>
+<p>其次，要定义一个供<code>RB_Tree</code>容器使用的迭代器，为了拥有<code>iterator_trait</code>它将继承自
+<code>std::iterator</code>，当然完全可以自己通过宏定义来实现<code>iterator_trait</code> ，但毫无疑问继承的话可以
+写更少的代码.声明如下：</p>
+<div class="codehilite"><pre><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">RB_Tree</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;::</span><span class="nl">node_iterator:</span> 
+    <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">bidirectional_iterator_tag</span> <span class="p">,</span><span class="n">rb_node</span><span class="o">&gt;</span>
 <span class="p">{</span>
-<span class="n">public</span><span class="p">:</span>
-    <span class="n">node_iterator</span><span class="p">(</span><span class="n">rb_node</span><span class="o">*</span> <span class="n">n</span><span class="p">):</span> <span class="n">_node</span><span class="p">(</span><span class="n">n</span><span class="p">){};</span>
-    <span class="n">Type</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">*</span> <span class="p">()</span> <span class="n">const</span><span class="p">;</span>
-    <span class="n">rb_node</span><span class="o">*</span> <span class="n">operator</span> –<span class="o">&gt;</span><span class="p">()</span><span class="n">const</span><span class="p">;</span> 
-    <span class="n">node_iterator</span> <span class="n">operator</span><span class="o">++</span> <span class="p">();</span>     
-    <span class="n">node_iterator</span> <span class="n">operator</span><span class="o">++</span><span class="p">(</span><span class="n">int</span><span class="p">);</span> 
-    <span class="n">bool</span> <span class="n">operator</span> <span class="o">==</span><span class="p">(</span> <span class="n">node_iterator</span> <span class="n">r_iter</span><span class="p">);</span> 
-    <span class="n">bool</span> <span class="n">operator</span> !<span class="p">=(</span> <span class="n">node_iterator</span> <span class="n">r_iter</span><span class="p">);</span> 
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">node_iterator</span><span class="p">(</span><span class="n">rb_node</span><span class="o">*</span> <span class="n">n</span><span class="p">)</span><span class="o">:</span> <span class="n">_node</span><span class="p">(</span><span class="n">n</span><span class="p">){};</span>
+    <span class="n">Type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">*</span> <span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">rb_node</span><span class="o">*</span> <span class="k">operator</span> <span class="err">–</span><span class="o">&gt;</span><span class="p">()</span><span class="k">const</span><span class="p">;</span> 
+    <span class="n">node_iterator</span> <span class="k">operator</span><span class="o">++</span> <span class="p">();</span>     
+    <span class="n">node_iterator</span> <span class="k">operator</span><span class="o">++</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span> 
+    <span class="kt">bool</span> <span class="k">operator</span> <span class="o">==</span><span class="p">(</span> <span class="n">node_iterator</span> <span class="n">r_iter</span><span class="p">);</span> 
+    <span class="kt">bool</span> <span class="k">operator</span> <span class="o">!=</span><span class="p">(</span> <span class="n">node_iterator</span> <span class="n">r_iter</span><span class="p">);</span> 
     <span class="n">rb_node</span><span class="o">*</span> <span class="n">pointer</span><span class="p">();</span> 
-    <span class="o">//</span>…省略很多种运算符重载 
-<span class="n">private</span><span class="p">:</span>
+    <span class="c1">//…省略很多种运算符重载 </span>
+<span class="k">private</span><span class="o">:</span>
     <span class="n">rb_node</span><span class="o">*</span> <span class="n">_node</span><span class="p">;</span>
-<span class="p">};</span>
+<span class="p">;</span>
 </pre></div>
 
 
-</p>
-
-<p>最后就是RB_Tree 这个容器了类了，大体上是这样：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">template</span><span class="o">&lt;</span><span class="n">typename</span> <span class="n">Type</span><span class="o">&gt;</span>
-<span class="n">class</span> <span class="n">RB_Tree</span><span class="p">{</span>
-<span class="n">private</span><span class="p">:</span>
-    <span class="n">struct</span> <span class="n">rb_node</span><span class="p">;</span>
-    <span class="n">class</span> <span class="n">node_iterator</span><span class="p">;</span>
-<span class="n">public</span><span class="p">:</span>
-    <span class="n">typedef</span>  <span class="n">node_iterator</span> <span class="n">iterator</span><span class="p">;</span>
-    <span class="n">typedef</span> <span class="n">const</span> <span class="n">node_iterator</span> <span class="n">const_iterator</span><span class="p">;</span>    <span class="n">RB_Tree</span><span class="p">();</span>
+<p>最后就是<code>RB_Tree</code>这个容器了类了，大体上是这样：</p>
+<div class="codehilite"><pre><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">RB_Tree</span><span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="k">struct</span> <span class="n">rb_node</span><span class="p">;</span>
+    <span class="k">class</span> <span class="nc">node_iterator</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">typedef</span>  <span class="n">node_iterator</span> <span class="n">iterator</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="k">const</span> <span class="n">node_iterator</span> <span class="n">const_iterator</span><span class="p">;</span>    <span class="n">RB_Tree</span><span class="p">();</span>
     <span class="o">~</span><span class="n">RB_Tree</span><span class="p">();</span>
     <span class="n">iterator</span> <span class="n">begin</span><span class="p">();</span>
-    <span class="n">iterator</span> <span class="k">end</span><span class="p">();</span>
+    <span class="n">iterator</span> <span class="n">end</span><span class="p">();</span>
     <span class="n">iterator</span> <span class="n">insert</span><span class="p">(</span><span class="n">Type</span> <span class="n">value</span><span class="p">);</span>    
     <span class="n">iterator</span> <span class="n">eraser</span><span class="p">(</span><span class="n">iterator</span> <span class="n">iter</span><span class="p">);</span>
-<span class="n">private</span><span class="p">:</span>
+<span class="k">private</span><span class="o">:</span>
     <span class="n">rb_node</span><span class="o">*</span> <span class="n">_root</span><span class="p">;</span>
-<span class="n">public</span><span class="p">:</span>
-    <span class="n">static</span> <span class="n">rb_node</span><span class="o">*</span> <span class="n">_nil</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">static</span> <span class="n">rb_node</span><span class="o">*</span> <span class="n">_nil</span><span class="p">;</span>
 </pre></div>
 
 
-</p>
-
-<p>具体的实现代码，你可以下载[RB_Tree.hpp][]</p>
-</p>
-
-<p>当然还应该定义更多的接口，比方重载一个模板函数insert
-能够接受一对迭代器，将迭代器中间的数据插入到红黑树中，等等。</p>
-</p>
-
-<p>值得注意的是，该封装实现，是以学习以及练习为目的的，所以有很多本应有但确没有实现的接口。另一个原因则是这段时间太过忙碌。</p>
-</p>
-
-<p>如果将上面提到的迭代器类与之前在<a href="http://www.roading.org/?p=649">仿STL
-的二叉搜索树的C++实现</a>中的迭代器比较，其实发现，它们提供的是一样的操作，所以完全可以将红黑树和二叉搜索树的结点类抽象出来，让迭代器类针对其抽象类实现，这样一来这一个迭代器模板类就会适用于几乎整个由二叉搜索树派生而来的数据结构了，将会大大提高代码的复用性。当然这个工作我没有做。</p>
-</p>
+<p>具体的实现代码，你可以下载<a href="https://github.com/M-Adoo/Algorithm/blob/master/Coding/rbTree.hpp">RB_Tree.hpp</a></p>
+<p>当然还应该定义更多的接口，比方重载一个模板函数insert能够接受一对迭代器，将迭代器中间的
+数据插入到红黑树中，等等。</p>
+<p>值得注意的是，该封装实现，是以学习以及练习为目的的，所以有很多本应有但确没有实现的接口。
+另一个原因则是这段时间太过忙碌。</p>
+<p>如果将上面提到的迭代器类与之前在<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E4%BB%BFstl-%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84c%E5%AE%9E%E7%8E%B0.html">仿STL的二叉搜索树的C++实现</a>中的迭代器比较，其实发现，
+它们提供的是一样的操作，所以完全可以将红黑树和二叉搜索树的结点类抽象出来，让迭代器类针
+对其抽象类实现，这样一来这一个迭代器模板类就会适用于几乎整个由二叉搜索树派生而来的数据
+结构了，将会大大提高代码的复用性。当然这个工作我没有做。</p>
 		  <p style= "text-align:right;"><em>
-		  Sat 31 December 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周六 31 十二月 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html">本文原链</a>)</em></p>
@@ -348,12 +326,8 @@ iterator_trait ，但毫无疑问继承的话可以写更少的代码.声明如�
 		<ul class="related-articles">
 		
 		
-		
-		
-		
-		
 		   
-		   <li><a title="斐波那契堆(Fibonacci Heaps)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html">斐波那契堆(Fibonacci Heaps)</a></li>
+		   <li><a title="斐波那契堆的C++实现" href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html">斐波那契堆的C++实现</a></li>
 		   
 		
 		
@@ -374,19 +348,27 @@ iterator_trait ，但毫无疑问继承的话可以写更少的代码.声明如�
 		
 		
 		
-		
-		
-		
-		
-		
+		   
+		   <li><a title="B-树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">B-树的C++实现</a></li>
+		   
 		
 		
 		
 		
 		
 		   
-		   <li><a title="最长公共子序列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html">最长公共子序列</a></li>
+		   <li><a title="算法导论——平摊分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html">算法导论——平摊分析</a></li>
 		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -408,18 +390,14 @@ iterator_trait ，但毫无疑问继承的话可以写更少的代码.声明如�
 		
 		
 		
-		
-		
-		
-		
 		   
-		   <li><a title="非递归不用栈遍历搜索二叉树" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html">非递归不用栈遍历搜索二叉树</a></li>
+		   <li><a title="Chapter 13 Red-Black trees (红黑树)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-13-red-black-trees-%e7%ba%a2%e9%bb%91%e6%a0%91.html">Chapter 13 Red-Black trees (红黑树)</a></li>
 		   
 		
 		
 		
 		   
-		   <li><a title="仿STL 的二叉搜索树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">仿STL 的二叉搜索树的C++实现</a></li>
+		   <li><a title="Radix Tree 基数树" href="http://www.roading.org/algorithm/introductiontoalgorithm/radix-tree-%e5%9f%ba%e6%95%b0%e6%a0%91.html">Radix Tree 基数树</a></li>
 		   
 		
 		
@@ -428,48 +406,20 @@ iterator_trait ，但毫无疑问继承的话可以写更少的代码.声明如�
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		   
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 2" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html">Chapter 12 二叉搜索树(Binary Search Tree) 2</a></li>
+		   
 		
 		
 		
 		   
-		   <li><a title="哈希表的C++模板实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html">哈希表的C++模板实现</a></li>
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 1" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html">Chapter 12 二叉搜索树(Binary Search Tree) 1</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Solution of CLRS 11.1 exercises" href="http://www.roading.org/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html">Solution of CLRS 11.1 exercises</a></li>
 		   
 		
 		
@@ -486,8 +436,50 @@ iterator_trait ，但毫无疑问继承的话可以写更少的代码.声明如�
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		   
-		   <li><a title="第十章 Elementary Data Structures" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html">第十章 Elementary Data Structures</a></li>
+		   <li><a title="Chapter 10 Exercises and Problems (2)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html">Chapter 10 Exercises and Problems (2)</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 10 Exercises（1）" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html">Chapter 10 Exercises（1）</a></li>
 		   
 		
 		
@@ -502,9 +494,7 @@ iterator_trait ，但毫无疑问继承的话可以写更少的代码.声明如�
 		
 		
 		
-		   
-		   <li><a title="第八章（4） 桶排序（Bucket sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html">第八章（4） 桶排序（Bucket sort）</a></li>
-		   
+		
 		
 		
 		
@@ -514,9 +504,6 @@ iterator_trait ，但毫无疑问继承的话可以写更少的代码.声明如�
 		
 		
 		
-		   
-		   <li><a title="算法导论 第八章(2) 计数排序(Counting Sort)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html">算法导论 第八章(2) 计数排序(Counting Sort)</a></li>
-		   
 		
 		
 		
@@ -526,19 +513,6 @@ iterator_trait ，但毫无疑问继承的话可以写更少的代码.声明如�
 		
 		
 		
-		
-		
-		   
-		   <li><a title="第七章（2） 快速排序 课后7.4-5" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html">第七章（2） 快速排序 课后7.4-5</a></li>
-		   
-		
-		
-		
-		
-		
-		   
-		   <li><a title="第七章（1） 快速排序" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html">第七章（1） 快速排序</a></li>
-		   
 		
 		
 		
@@ -549,16 +523,14 @@ iterator_trait ，但毫无疑问继承的话可以写更少的代码.声明如�
 		
 		
 		   
-		   <li><a title="利用堆来建立优先级队列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%88%a9%e7%94%a8%e5%a0%86%e6%9d%a5%e5%bb%ba%e7%ab%8b%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97.html">利用堆来建立优先级队列</a></li>
+		   <li><a title="算法导论6-3 young tableaus" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba6-3-young-tableaus.html">算法导论6-3 young tableaus</a></li>
 		   
 		
 		
 		
 		
 		
-		   
-		   <li><a title="算法导论之堆排序及其C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html">算法导论之堆排序及其C++实现</a></li>
-		   
+		
 		
 		
 		
@@ -569,6 +541,8 @@ iterator_trait ，但毫无疑问继承的话可以写更少的代码.声明如�
 		   
 		   <li><a title="排序之插入排序与合并排序-C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%8f%92%e5%85%a5%e6%8e%92%e5%ba%8f-insertionsort-c%e5%ae%9e%e7%8e%b0.html">排序之插入排序与合并排序-C++实现</a></li>
 		   
+		
+		
 		
 		
 		

@@ -57,44 +57,6 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -177,6 +139,48 @@
 					
 				
 					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 			</ul>
 			<div class="clear"></div>
@@ -199,7 +203,7 @@
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-10-17T20:38:00">
-                Mon 17 October 2011
+                周一 17 十月 2011
         </abbr>
         
         <address class="article_author">
@@ -238,7 +242,7 @@ medians）。可以先考虑几个问题：</span></p>
 <p><span style="font-family: 宋体">具体实现略。</span></p>
 <h2><span style="font-family: 宋体">9.2以期望复杂度为线性获取第i个统计顺序量</span></h2>
 <p><span style="font-family: 宋体">很显然我们通过排序来获取第i个统计顺序量，这种方法无疑简单护脑。但是毫无疑问的一点是，以排序来获取第i个统计量的话，这其中肯定有“浪费”，因为我们获取了一些我们不需要的信息。
-所以，我们可以更优秀的算法，其期望复杂度为Θ(n) ，最坏复杂度为Θ(n^2^)
+所以，我们可以更优秀的算法，其期望复杂度为Θ(n) ，最坏复杂度为Θ(n<sup>2</sup>)
 。</span></p>
 <p><span style="font-family: 宋体">在这儿我们再一次用到“分治”思想，与</span><a href="http://www.roading.org/?p=175"><span style="font-family: 宋体">快速排序</span></a><span style="font-family: 宋体">类似,我们先利用一个中枢值将一组数分为两部分,一部分都大于中枢值,另一部分都小于中枢值。然后判断出要求的统计量在哪部分，另一部分则可以抛弃——以此达到缩小问题规模的目的，依此递归。</span></p>
 <h3><span style="font-family: 宋体">伪代码为：</span></h3>
@@ -246,7 +250,7 @@ medians）。可以先考虑几个问题：</span></p>
 <p><span style="font-family: 宋体">函数RANDOMIZED-PARTITION(A, p, r
 )为随机快排的辅助函数，其功能为在其目标数组A的第p个到第r个元素之间，随机选取一个数作为中枢值，并以此将p-r分为两部分，并返回其中枢值下标。参见</span><a href="http://www.roading.org/?p=175"><span style="font-family: 宋体">快速排序</span></a><span style="font-family: 宋体">。</span></p>
 <h3><span style="font-family: 宋体">C++实现：</span></h3>
-<p>~~~~ {.brush:cpp}
+<p><sub></sub><sub></sub> {.brush:cpp}
 //RadomizedSelect
 //by Adoo  2011/10/17#ifndef RADOMIZEDSELECT</p>
 <h1>define RADOMIZEDSELECT</h1>
@@ -386,7 +390,7 @@ Select(A,p,r,i)
 
 <p>[![image3_thumb5][]]: http://www.roading.org/wp-content/uploads/2011/11/image3_thumb5.png</p>
 		  <p style= "text-align:right;"><em>
-		  Mon 17 October 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周一 17 十月 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html">本文原链</a>)</em></p>
@@ -508,10 +512,6 @@ Select(A,p,r,i)
 		
 		
 		
-		   
-		   <li><a title="Solution of CLRS 11.1 exercises" href="http://www.roading.org/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html">Solution of CLRS 11.1 exercises</a></li>
-		   
-		
 		
 		
 		
@@ -629,10 +629,6 @@ Select(A,p,r,i)
 		
 		
 		
-		
-		   
-		   <li><a title="算法导论6-3 young tableaus" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba6-3-young-tableaus.html">算法导论6-3 young tableaus</a></li>
-		   
 		
 		
 		

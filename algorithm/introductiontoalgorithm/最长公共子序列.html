@@ -57,44 +57,6 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -177,6 +139,48 @@
 					
 				
 					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 			</ul>
 			<div class="clear"></div>
@@ -199,7 +203,7 @@
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2012-03-22T12:57:00">
-                Thu 22 March 2012
+                周四 22 三月 2012
         </abbr>
         
         <address class="article_author">
@@ -227,43 +231,43 @@ Longgest Common Subsequence，可以缩写为
 LCS。求最长公共子序列是一个很有用的问题，它可以用来分析两段序列的相似度，比方可以用来分析DNA串的相似度，也可以分析两段文字的相似度，来判断是否剽窃，等等。</p>
 <p>举一个实例来说，假如有序列X&lt;A,B,C,B,D,A,B>和序列Y&lt;B,D,C,A,B,A>，那么他们的最长公共子序列为&lt;B,C,D,B>。</p>
 <h3><strong>动态规划法求最长公共子序列</strong></h3>
-<p>求最长公共子序列最直接最暴力的一种方法当然是枚举出两个序列所有的子序列，然后从中找出所有的公共子序列，再选出所有公共子序列中最长的那个。不过这种粗暴的做法是很低效的，假如两个序列的长度分别为m和n,因为它们分别有2^m^和2^n^个子序列，那么这个算法的时间复杂度将是指数级别的O(2^m+n^)，对于长一些的序列这种方法是不实际的。撇开这种方法不谈，我们将关注另一种方法——用动态规划策略来求最长公共子路径问题。</p>
+<p>求最长公共子序列最直接最暴力的一种方法当然是枚举出两个序列所有的子序列，然后从中找出所有的公共子序列，再选出所有公共子序列中最长的那个。不过这种粗暴的做法是很低效的，假如两个序列的长度分别为m和n,因为它们分别有2<sup>m</sup>和2<sup>n</sup>个子序列，那么这个算法的时间复杂度将是指数级别的O(2<sup>m+n</sup>)，对于长一些的序列这种方法是不实际的。撇开这种方法不谈，我们将关注另一种方法——用动态规划策略来求最长公共子路径问题。</p>
 <h4>第一步：描述问题的最优子结构</h4>
 <p>之前一篇笔记有总结到，动态规划算法的运用有两个必要条件，一是问题包含最优子结构，二是有重叠子问题。第一步我们要做的便是证明LCS问题确实包含有最优子结构。定理15.1说明LCS包含有最优子结构，原书的证明已经清楚明了，下面引用原书的定理15.1证明：</p>
 <blockquote>
 <h4>Theorem 15.1: (Optimal substructure of an LCS)</h4>
-<p>Let <em>X</em> = 〈<em>x</em>~1~, <em>x</em>~2~, ..., <em>x~m~</em>〉 and <em>Y</em> = 〈<em>y</em>~1~, <em>y</em>~2~,
-..., <em>y~n~</em>〉 be sequences, and let <em>Z</em> = 〈<em>z</em>~1~, <em>z</em>~2~, ...,
-<em>z~k~</em>〉 be any LCS of <em>X</em> and <em>Y</em>.</p>
+<p>Let <em>X</em> = 〈<em>x</em><sub>1</sub>, <em>x</em><sub>2</sub>, ..., <em>x<sub>m</sub></em>〉 and <em>Y</em> = 〈<em>y</em><sub>1</sub>, <em>y</em><sub>2</sub>,
+..., <em>y<sub>n</sub></em>〉 be sequences, and let <em>Z</em> = 〈<em>z</em><sub>1</sub>, <em>z</em><sub>2</sub>, ...,
+<em>z<sub>k</sub></em>〉 be any LCS of <em>X</em> and <em>Y</em>.</p>
 <ul>
-<li>If <em>x~m~</em> = <em>y~n~</em>, then <em>z~k~</em> = <em>x~m~</em> = <em>y~n~</em> and <em>Z</em>~<em>k</em>-1~
-    is an LCS of <em>X</em>~<em>m</em>-1~ and <em>Y</em>~<em>n</em>-1~.</li>
-<li>If <em>x~m~</em> ≠ <em>y~n~</em>, then <em>z~k~</em> ≠ <em>x~m~</em> implies that <em>Z</em> is an
-    LCS of <em>X</em>~<em>m</em>-1~ and <em>Y</em>.</li>
-<li>If <em>x~m~</em> ≠ <em>y~n~</em>, then <em>z~k~</em> ≠ <em>y~n~</em> implies that <em>Z</em> is an
-    LCS of <em>X</em> and <em>Y</em>~<em>n</em>-1~.</li>
+<li>If <em>x<sub>m</sub></em> = <em>y<sub>n</sub></em>, then <em>z<sub>k</sub></em> = <em>x<sub>m</sub></em> = <em>y<sub>n</sub></em> and <em>Z</em><sub><em>k</em>-1</sub>
+    is an LCS of <em>X</em><sub><em>m</em>-1</sub> and <em>Y</em><sub><em>n</em>-1</sub>.</li>
+<li>If <em>x<sub>m</sub></em> ≠ <em>y<sub>n</sub></em>, then <em>z<sub>k</sub></em> ≠ <em>x<sub>m</sub></em> implies that <em>Z</em> is an
+    LCS of <em>X</em><sub><em>m</em>-1</sub> and <em>Y</em>.</li>
+<li>If <em>x<sub>m</sub></em> ≠ <em>y<sub>n</sub></em>, then <em>z<sub>k</sub></em> ≠ <em>y<sub>n</sub></em> implies that <em>Z</em> is an
+    LCS of <em>X</em> and <em>Y</em><sub><em>n</em>-1</sub>.</li>
 </ul>
-<p><strong><em>Proof</em></strong> (1) If <em>z~k~</em> ≠ <em>x~m~</em>, then we could append <em>x~m~</em> =
-<em>y~n~</em> to <em>Z</em> to obtain a common subsequence of <em>X</em> and <em>Y</em> of length
+<p><strong><em>Proof</em></strong> (1) If <em>z<sub>k</sub></em> ≠ <em>x<sub>m</sub></em>, then we could append <em>x<sub>m</sub></em> =
+<em>y<sub>n</sub></em> to <em>Z</em> to obtain a common subsequence of <em>X</em> and <em>Y</em> of length
 <em>k</em> + 1, contradicting the supposition that <em>Z</em> is a <em>longest</em> common
-subsequence of <em>X</em> and <em>Y</em> . Thus, we must have <em>z~k~</em> = <em>x~m~</em> =
-<em>y~n~</em>. <a name="1088"></a><a name="IDX-352"></a>Now, the prefix
-<em>Z</em>~<em>k</em>-1~ is a length-(<em>k</em> - 1) common subsequence of <em>X</em>~<em>m</em>-1~ and
-<em>Y</em>~<em>n</em>-1~. We wish to show that it is an LCS. Suppose for the purpose
-of contradiction that there is a common subsequence <em>W</em> of <em>X</em>~<em>m</em>-1~
-and <em>Y</em>~<em>n</em>-1~ with length greater than <em>k</em> - 1. Then, appending
-<em>x~m~</em> = <em>y~n~</em> to <em>W</em> produces a common subsequence of <em>X</em> and <em>Y</em>
+subsequence of <em>X</em> and <em>Y</em> . Thus, we must have <em>z<sub>k</sub></em> = <em>x<sub>m</sub></em> =
+<em>y<sub>n</sub></em>. <a name="1088"></a><a name="IDX-352"></a>Now, the prefix
+<em>Z</em><sub><em>k</em>-1</sub> is a length-(<em>k</em> - 1) common subsequence of <em>X</em><sub><em>m</em>-1</sub> and
+<em>Y</em><sub><em>n</em>-1</sub>. We wish to show that it is an LCS. Suppose for the purpose
+of contradiction that there is a common subsequence <em>W</em> of <em>X</em><sub><em>m</em>-1</sub>
+and <em>Y</em><sub><em>n</em>-1</sub> with length greater than <em>k</em> - 1. Then, appending
+<em>x<sub>m</sub></em> = <em>y<sub>n</sub></em> to <em>W</em> produces a common subsequence of <em>X</em> and <em>Y</em>
 whose length is greater than <em>k</em>, which is a contradiction.</p>
-<p>(2) If <em>z~k~</em> ≠ <em>x~m~</em>, then <em>Z</em> is a common subsequence of
-<em>X</em>~<em>m</em>-1~ and <em>Y</em>. If there were a common subsequence <em>W</em> of
-<em>X</em>~<em>m</em>-1~ and <em>Y</em> with length greater than <em>k</em>, then <em>W</em> would also
-be a common subsequence of <em>X~m~</em> and <em>Y</em> , contradicting the
+<p>(2) If <em>z<sub>k</sub></em> ≠ <em>x<sub>m</sub></em>, then <em>Z</em> is a common subsequence of
+<em>X</em><sub><em>m</em>-1</sub> and <em>Y</em>. If there were a common subsequence <em>W</em> of
+<em>X</em><sub><em>m</em>-1</sub> and <em>Y</em> with length greater than <em>k</em>, then <em>W</em> would also
+be a common subsequence of <em>X<sub>m</sub></em> and <em>Y</em> , contradicting the
 assumption that <em>Z</em> is an LCS of <em>X</em> and <em>Y</em>.</p>
 <p>(3) The proof is symmetric to (2).</p>
 </blockquote>
 <h4>第二步：一个递归解</h4>
-<p>由定理15.1可以看出，找序列X和序列Y的LCS,我们有可能需要找出X和Y~m-1~的LCS，以及X~n-1~和Y~m~的LCS。而这两个子问题，都拥有一个共同的子子问题,便是求X~n-1~和Y~m-1~的LCS。依次类推，还有很多其他的子问题会共有许多其他的子子问题。这就满足了动态规划的第二点条件，拥有重叠的子问题。</p>
-<p>定义c[i, j]为X~i~和Y+的LCS长度，根据定理15.1可以得出下面的递归式：
+<p>由定理15.1可以看出，找序列X和序列Y的LCS,我们有可能需要找出X和Y<sub>m-1</sub>的LCS，以及X<sub>n-1</sub>和Y<sub>m</sub>的LCS。而这两个子问题，都拥有一个共同的子子问题,便是求X<sub>n-1</sub>和Y<sub>m-1</sub>的LCS。依次类推，还有很多其他的子问题会共有许多其他的子子问题。这就满足了动态规划的第二点条件，拥有重叠的子问题。</p>
+<p>定义c[i, j]为X<sub>i</sub>和Y+的LCS长度，根据定理15.1可以得出下面的递归式：
 <img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb11.png" title="image" /></p>
 <h4>第三步：计算LCS的长度</h4>
 <p>利用第二步的递归式15.9，可以很容易写出计算LCS长度的递归求解程序，但这种方式并不比我们一开始提到的最简单粗暴的方法快（有可能还要慢），它同样是指数级的复杂度。</p>
@@ -295,15 +299,15 @@ assumption that <em>Z</em> is an LCS of <em>X</em> and <em>Y</em>.</p>
 <p><span style="font-family: 楷体"></span></p>
 </p>
 
-<p><span style="font-family: 楷体">说明：右图是将表b和表c的信息合二为一的显示，d第i行和第j列所指方块，记录了c[i,j]和b[i,j]中的信息。我们通过那些箭头来获得问题的最优子问题的路径，路径上的<span style="color: #006080">"↖"</span>表示X~i~=Y~i~,所以为LCS上的一个字母。</span></p>
+<p><span style="font-family: 楷体">说明：右图是将表b和表c的信息合二为一的显示，d第i行和第j列所指方块，记录了c[i,j]和b[i,j]中的信息。我们通过那些箭头来获得问题的最优子问题的路径，路径上的<span style="color: #006080">"↖"</span>表示X<sub>i</sub>=Y<sub>i</sub>,所以为LCS上的一个字母。</span></p>
 </p>
 
 <h4>第四步：构建LCS</h4>
 </p>
 
-<p>通过表b我们可以很快的构建出<em>X</em> = 〈<em>x</em>~1~, <em>x</em>~2~, ..., <em>x~m~</em>〉和<em>Y</em> =
-〈<em>y</em>~1~, <em>y</em>~2~, ...,
-<em>y~n~</em>〉的LCS。可以从b[m,n]开始跟踪路径，当b[i,j]为"<span style="color: #006080">↖"</span>时，输出当前字母。考虑到时从后往前追踪的，所以求出来的LCS将是反向的，所以在我们下面的递归伪码中，将先递归再输出。以下为伪码：</p>
+<p>通过表b我们可以很快的构建出<em>X</em> = 〈<em>x</em><sub>1</sub>, <em>x</em><sub>2</sub>, ..., <em>x<sub>m</sub></em>〉和<em>Y</em> =
+〈<em>y</em><sub>1</sub>, <em>y</em><sub>2</sub>, ...,
+<em>y<sub>n</sub></em>〉的LCS。可以从b[m,n]开始跟踪路径，当b[i,j]为"<span style="color: #006080">↖"</span>时，输出当前字母。考虑到时从后往前追踪的，所以求出来的LCS将是反向的，所以在我们下面的递归伪码中，将先递归再输出。以下为伪码：</p>
 <div class="codehilite"><pre><span class="n">PRINT</span><span class="o">-</span><span class="n">LCS</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="nb">i</span><span class="p">,</span> <span class="nb">j</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">i</span> <span class="o">==</span> 0 <span class="n">or</span> <span class="nb">j</span> <span class="o">==</span> 0
     <span class="k">return</span> 
@@ -470,7 +474,7 @@ assumption that <em>Z</em> is an LCS of <em>X</em> and <em>Y</em>.</p>
 <p><em>2010/3/22 by Adoo | homepage:www.roading.org</em></p>
 </p>
 		  <p style= "text-align:right;"><em>
-		  Thu 22 March 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周四 22 三月 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html">本文原链</a>)</em></p>
@@ -547,10 +551,6 @@ assumption that <em>Z</em> is an LCS of <em>X</em> and <em>Y</em>.</p>
 		
 		
 		
-		
-		   
-		   <li><a title="C++实现红黑树，仿STL封装" href="http://www.roading.org/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html">C++实现红黑树，仿STL封装</a></li>
-		   
 		
 		
 		
@@ -654,10 +654,6 @@ assumption that <em>Z</em> is an LCS of <em>X</em> and <em>Y</em>.</p>
 		
 		
 		
-		   
-		   <li><a title="第八章（3） 基数排序（Radix Sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html">第八章（3） 基数排序（Radix Sort）</a></li>
-		   
-		
 		
 		
 		   
@@ -692,8 +688,6 @@ assumption that <em>Z</em> is an LCS of <em>X</em> and <em>Y</em>.</p>
 		
 		
 		
-		
-		
 		   
 		   <li><a title="利用堆来建立优先级队列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%88%a9%e7%94%a8%e5%a0%86%e6%9d%a5%e5%bb%ba%e7%ab%8b%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97.html">利用堆来建立优先级队列</a></li>
 		   
@@ -712,9 +706,7 @@ assumption that <em>Z</em> is an LCS of <em>X</em> and <em>Y</em>.</p>
 		
 		
 		
-		   
-		   <li><a title="排序之插入排序与合并排序-C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%8f%92%e5%85%a5%e6%8e%92%e5%ba%8f-insertionsort-c%e5%ae%9e%e7%8e%b0.html">排序之插入排序与合并排序-C++实现</a></li>
-		   
+		
 		
 		
 		

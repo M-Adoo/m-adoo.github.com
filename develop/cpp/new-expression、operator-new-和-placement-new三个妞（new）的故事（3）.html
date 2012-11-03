@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>new expression、operator new 和 placement new——三个“妞（new）”的故事（3）</title>
+        <title>new expression、operator new和placement new——三个“妞（new）”的故事（3）</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
         
@@ -39,44 +39,6 @@
 				
 		        </ul>
 			<ul id="nav-tags">
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -177,6 +139,48 @@
 					
 				
 					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 			</ul>
 			<div class="clear"></div>
@@ -187,7 +191,7 @@
 
 <a href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a> »
 
-new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（3）
+new expression、operator new和placement new——三个“妞（new）”的故事（3）
 </div>
  
 		</nav>
@@ -195,11 +199,11 @@ new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（
 
         
     <div class="article-page">
-	<h1>new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（3）</h1>
+	<h1>new expression、operator new和placement new——三个“妞（new）”的故事（3）</h1>
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-12-05T15:49:00">
-                Mon 05 December 2011
+                周一 05 十二月 2011
         </abbr>
         
         <address class="article_author">
@@ -207,11 +211,13 @@ new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
@@ -219,109 +225,66 @@ new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（
 	
 	
 </div><!-- /.post-info -->
-	      <p><font face="微软雅黑"><em>引言：之前虽然一直知道有new expression、operator
-new 和 placement new
-，但对于这三个“new”,却不甚了了，这些天从《深度探索C++对象模型》读到new
-和delete，特意结合《C++
-Primer》写下这篇笔记，以作总结。三个虽然都是“妞”（new），但每个妞都不相同各有各的特点，各有各的风味，本文重点在于总结比较这三个
-“妞”，但期间也不忘提一提推倒这三个“妞”的哥们——delete。</em></font></p>
-<h2>placement operator new</h2>
-<p>placement operator new
-用来在指定地址上构造对象，要注意的是，它并不分配内存，仅仅是对指定地址调用构造函数。其调用方式如下：</p>
-<div class="codehilite"><pre><span class="n">point</span> <span class="o">*</span><span class="n">pt</span><span class="p">=</span><span class="n">new</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="n">point3d</span><span class="p">;</span>
+	      <h3>placement operator new</h3>
+<p>placement operator new用来在指定地址上构造对象，要注意的是，它并不分配内存，仅仅是
+对指定地址调用构造函数。其调用方式如下：</p>
+<div class="codehilite"><pre><span class="n">point</span> <span class="o">*</span><span class="n">pt</span><span class="o">=</span><span class="k">new</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="n">point3d</span><span class="p">;</span>
 </pre></div>
 
 
-</p>
-
-<p>观其名字可知，它是 operator new
-的一个重载版本。它的实现方式异常简单，传回一个指针即可：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">void</span><span class="o">*</span> <span class="n">operator</span> <span class="n">new</span><span class="p">(</span><span class="n">site_t</span><span class="p">,</span><span class="n">void</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>
+<p>观其名字可知，它是operator new的一个重载版本。它的实现方式异常简单，传回一个指针即
+可：</p>
+<div class="codehilite"><pre><span class="kt">void</span><span class="o">*</span> <span class="k">operator</span> <span class="k">new</span><span class="p">(</span><span class="n">site_t</span><span class="p">,</span><span class="kt">void</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
 
-</p>
-
-<p>不必要惊讶于它的简单，《深度探索C++对象模型》中Lippman
-告诉我们，它有另一半重要的工作是被扩充而来。我在想，扩充一个类中定义的
-placement operator new 还好说，但是要如何扩充一个库中提供的 placement
-operator
-new呢？毕竟它要放之四海而皆准，我原以为这其中有什么高超的技巧。后来我则坚信根本就没有什么扩充，placement
-operator new 也并不强大。</p>
-</p>
-
+<p>不必要惊讶于它的简单，《深度探索C++对象模型》中Lippman告诉我们，它有另一半重要的工
+作是被扩充而来。我在想，扩充一个类中定义的placement operator new还好说，但是要如何
+扩充一个库中提供的placement operator new呢？毕竟它要放之四海而皆准，我原以为这其中
+有什么高超的技巧。后来我则坚信根本就没有什么扩充，placement operator new 也并不强
+大。</p>
 <p>我先明确调用了 placement operator new ：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">point</span> <span class="o">*</span><span class="n">pt</span><span class="p">=(</span><span class="n">point</span><span class="o">*</span><span class="p">)</span><span class="n">operator</span> <span class="n">new</span><span class="p">(</span><span class="n">sizeof</span><span class="p">(</span><span class="n">point</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span> <span class="p">;</span>
+<div class="codehilite"><pre><span class="n">point</span> <span class="o">*</span><span class="n">pt</span><span class="o">=</span><span class="p">(</span><span class="n">point</span><span class="o">*</span><span class="p">)</span><span class="k">operator</span> <span class="k">new</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">point</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span> <span class="p">;</span>
 </pre></div>
 
 
-</p>
-
-<p>如我所料，输出结果显示（我在 point 的默认构造函数和 placement operator new
-中间各输出一句不同的话），此时 point
-的默认构造函数并不会被调用。然后我通过new expression
+<p>如我所料，输出结果显示（我在<code>point</code>的默认构造函数和placement operator new中间各输
+出一句不同的话），此时 point的默认构造函数并不会被调用。然后我通过new expression
 的方式来间接调用placement operator new：</p>
-<p></p>
-<p></p>
 <div class="codehilite"><pre><span class="n">point</span> <span class="o">*</span><span class="n">pt</span><span class="p">=</span><span class="n">new</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="n">point</span><span class="p">();</span>
 </pre></div>
 
 
-</p>
-
-<p>这个时候 point 的默认的构造函数被调用了。可见 placement operator new
-并没有什么奇特的地方，它与一般的 operator new
-不同处在于，它不会申请内存。它也不会在指定的地址调用构造函数，而调用构造函数的的全部原因在于
-new expression 总是先调用一个匹配参数的 operator new
-然后再调用指定类型的匹配参数的构造函数，而说到底 placement operator new
+<p>这个时候 point 的默认的构造函数被调用了。可见 placement operator new并没有什么奇特
+的地方，它与一般的operator new不同处在于，它不会申请内存。它也不会在指定的地址调用
+构造函数，而调用构造函数的的全部原因在于new expression总是先调用一个匹配参数的
+operator new然后再调用指定类型的匹配参数的构造函数，而说到底 placement operator new
 也是一个 operator new。</p>
-</p>
-
-<p>通过一个 placement operator new 构建的一个对象，如果你使用 delete
-来撤销对象，那么其内存也被回收，如果想保存内存而析构对象，好的办法是显示调用其析构函数。</p>
-</p>
-
+<p>通过一个placement operator new构建的一个对象，如果你使用delete来撤销对象，那么其内
+存也被回收，如果想保存内存而析构对象，好的办法是显示调用其析构函数。</p>
 <p>看一份代码：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">struct</span> <span class="n">Base</span> <span class="p">{</span> <span class="n">int</span> <span class="nb">j</span><span class="p">;</span> <span class="n">virtual</span> <span class="n">void</span> <span class="n">f</span><span class="p">();</span> <span class="p">};</span>
-<span class="n">struct</span> <span class="n">Derived</span> <span class="p">:</span> <span class="n">Base</span> <span class="p">{</span> <span class="n">void</span> <span class="n">f</span><span class="p">();</span> <span class="p">};</span>  
+<div class="codehilite"><pre><span class="k">struct</span> <span class="n">Base</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">j</span><span class="p">;</span> <span class="k">virtual</span> <span class="kt">void</span> <span class="n">f</span><span class="p">();</span> <span class="p">};</span>
+<span class="k">struct</span> <span class="n">Derived</span> <span class="o">:</span> <span class="n">Base</span> <span class="p">{</span> <span class="kt">void</span> <span class="n">f</span><span class="p">();</span> <span class="p">};</span>
 
-<span class="n">void</span> <span class="n">fooBar</span><span class="p">()</span> <span class="p">{</span>  
+<span class="kt">void</span> <span class="n">fooBar</span><span class="p">()</span> <span class="p">{</span>  
    <span class="n">Base</span> <span class="n">b</span><span class="p">;</span>  
-   <span class="n">b</span><span class="p">.</span><span class="n">f</span><span class="p">();</span> <span class="o">//</span> <span class="n">Base</span><span class="p">::</span><span class="n">f</span><span class="p">()</span> <span class="n">invoked</span>  
+   <span class="n">b</span><span class="p">.</span><span class="n">f</span><span class="p">();</span> <span class="c1">// Base::f() invoked  </span>
    <span class="n">b</span><span class="p">.</span><span class="o">~</span><span class="n">Base</span><span class="p">();</span>  
-   <span class="n">new</span> <span class="p">(</span> <span class="o">&amp;</span><span class="n">b</span> <span class="p">)</span> <span class="n">Derived</span><span class="p">;</span> <span class="o">//</span> 1  
-   <span class="n">b</span><span class="p">.</span><span class="n">f</span><span class="p">();</span> <span class="o">//</span> <span class="n">which</span> <span class="n">f</span><span class="p">()</span> <span class="n">invoked</span>?  
-<span class="p">}</span>  
+   <span class="k">new</span> <span class="p">(</span> <span class="o">&amp;</span><span class="n">b</span> <span class="p">)</span> <span class="n">Derived</span><span class="p">;</span> <span class="c1">// 1  </span>
+   <span class="n">b</span><span class="p">.</span><span class="n">f</span><span class="p">();</span> <span class="c1">// which f() invoked?  </span>
+<span class="p">}</span>
 </pre></div>
 
 
-</p>
-
-<p>上述两个类的大小相同，因此将Derived 对象放在 Base
-对象中是安全的，但是在最后一句代码中 b.f()调用的是哪一个类的f()。答案是
-Base::f() 的。虽然此时b中存储的实际上是一个Derived
-对象，但是，通过一个对象来调用虚函数，将被静态决议出来，虚函数机制不会被启用。</p>
-</p>
-
+<p>上述两个类的大小相同，因此将Derived对象放在 Base对象中是安全的，但是在最后一句代码
+中 b.f()调用的是哪一个类的f()。答案是Base::f() 的。虽然此时b中存储的实际上是一个
+Derived对象，但是，通过一个对象来调用虚函数，将被静态决议出来，虚函数机制不会被启用。</p>
 <p>参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。</p>
-</p>
-
-<p><em><font face="微软雅黑">欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。</font></em></p>
-</p>
-
-<p><em>2011/12/5 By Adoo | Homepage:</em><a href="http://www.roading.org"><em>www.roading.org</em></a></p>
-</p>
 		  <p style= "text-align:right;"><em>
-		  Mon 05 December 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周一 05 十二月 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html">本文原链</a>)</em></p>
@@ -424,7 +387,7 @@ Base::f() 的。虽然此时b中存储的实际上是一个Derived
 		
 		
 		   
-		   <li><a title="EH &amp; RTTI" href="http://www.roading.org/develop/cpp/eh-rtti.html">EH &amp; RTTI</a></li>
+		   <li><a title="EH & RTTI" href="http://www.roading.org/develop/cpp/eh-rtti.html">EH & RTTI</a></li>
 		   
 		
 		
@@ -447,18 +410,18 @@ Base::f() 的。虽然此时b中存储的实际上是一个Derived
 		
 		
 		
-		   <li class="selected">new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（3）</li>
+		   <li class="selected">new expression、operator new和placement new——三个“妞（new）”的故事（3）</li>
 		
 		
 		
 		   
-		   <li><a title="new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（2）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html">new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（2）</a></li>
+		   <li><a title="new expression、operator new和placement new——三个妞（new）的故事（2）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html">new expression、operator new和placement new——三个妞（new）的故事（2）</a></li>
 		   
 		
 		
 		
 		   
-		   <li><a title="new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（1）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html">new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（1）</a></li>
+		   <li><a title="new expression、operator new 和 placement new——三个妞（new）的故事（1）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html">new expression、operator new 和 placement new——三个妞（new）的故事（1）</a></li>
 		   
 		
 		

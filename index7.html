@@ -57,44 +57,6 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -177,6 +139,48 @@
 					
 				
 					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 			</ul>
 			<div class="clear"></div>
@@ -206,7 +210,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-01T22:04:00">
-                Thu 01 December 2011
+                周四 01 十二月 2011
         </abbr>
         
         <address class="article_author">
@@ -259,7 +263,7 @@ Point 贴上Plain ...</p>
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-30T16:04:00">
-                Wed 30 November 2011
+                周三 30 十一月 2011
         </abbr>
         
         <address class="article_author">
@@ -305,7 +309,7 @@ Point 贴上Plain ...</p>
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-29T19:50:00">
-                Tue 29 November 2011
+                周二 29 十一月 2011
         </abbr>
         
         <address class="article_author">
@@ -356,7 +360,7 @@ class的指针（或引用），寻址出一个derived class object”的意思�
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-27T15:14:00">
-                Sun 27 November 2011
+                周日 27 十一月 2011
         </abbr>
         
         <address class="article_author">
@@ -402,7 +406,7 @@ class的指针（或引用），寻址出一个derived class object”的意思�
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-24T13:00:00">
-                Thu 24 November 2011
+                周四 24 十一月 2011
         </abbr>
         
         <address class="article_author">
@@ -451,7 +455,7 @@ class的指针（或引用），寻址出一个derived class object”的意思�
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-24T12:42:00">
-                Thu 24 November 2011
+                周四 24 十一月 2011
         </abbr>
         
         <address class="article_author">
@@ -459,7 +463,7 @@ class的指针（或引用），寻址出一个derived class object”的意思�
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;Memory alignment&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;Memory alignment&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
@@ -467,18 +471,20 @@ class的指针（或引用），寻址出一个derived class object”的意思�
 	          
 		<a title="permalink to Memory alignment" href="http://www.roading.org/tag/memory-alignment.html">Memory alignment</a>
 	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	          
 	    </abbr>
 	
 	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-                <ul>
-<li>本文所有内容在一个建立在一个前提下：使用VC编译器。着重点在于：VC的内存对齐准则；同样的数据，不同的排列有不同的大小，另外在有虚函数或虚拟继承情况下又有如何影响？</li>
-<li>同时学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。</li>
-</ul>
-<div align="right">
-*2011/11/20 By Adoo | Homepage:*[*www.roading.org ...</div>
+                <p>本文所有内容在建立在一个前提下：使用VC编译器。着重点在于：VC的内存对齐准则；同样的数据，
+不同的排列有不同的大小，另外在有虚函数或虚拟继承情况下又有如何影响？</p>
+<h3>内存对齐？！What？Why?</h3>
+<p>对于一台32位的机器来说如何才能发挥它的最佳存取效率呢？当然是每次都读4字节（32bit）,
+这样才可以让它的bus处于最高效率。实际上它也是这么做的，即使你只需要一个字节，它也是
+读一个机器字长（这儿是32bit）。更重要的是 ...</p>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/vc%e5%86%85%e5%ad%98%e5%af%b9%e9%bd%90%e5%87%86%e5%88%99%ef%bc%88memory-alignment%ef%bc%89.html" rel="bookmark"
                            title="Permalink to VC内存对齐准则（Memory alignment）">Read more→</a>	
 		<div class="clear"></div>
@@ -500,7 +506,7 @@ class的指针（或引用），寻址出一个derived class object”的意思�
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-24T12:41:00">
-                Thu 24 November 2011
+                周四 24 十一月 2011
         </abbr>
         
         <address class="article_author">
@@ -508,11 +514,13 @@ class的指针（或引用），寻址出一个derived class object”的意思�
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
@@ -520,12 +528,15 @@ class的指针（或引用），寻址出一个derived class object”的意思�
 	
 	
 </div><!-- /.post-info -->
-                <ul>
-<li>本文为Lippman《深度探索C++对象模型》第三章——Data 语意学（The
-    Semantics of Data） 之笔记。 主要关于C++类对象的内存大小。</li>
-<li>同时学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。</li>
-</ul>
-<p><em>2011/11/19 ...</em></p>
+                <h3>一个实例引出的思考</h3>
+<div class="codehilite"><pre><span class="k">class</span> <span class="nc">X</span><span class="p">{};</span>
+<span class="k">class</span> <span class="nc">Y</span><span class="o">:</span><span class="k">virtual</span> <span class="k">public</span> <span class="n">X</span><span class="p">{};</span>
+<span class="k">class</span> <span class="nc">Z</span><span class="o">:</span><span class="k">virtual</span> <span class="k">public</span> <span class="n">X</span><span class="p">{};</span>
+<span class="k">class</span> <span class="nc">A</span><span class="o">:</span><span class="k">public</span> <span class="n">Y</span><span class="p">,</span> <span class="k">public</span> <span class="n">Z</span><span class="p">{};</span>
+</pre></div>
+
+
+<p>猜猜sizeof上面各个类都为多少 ...</p>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e7%b1%bb%e5%af%b9%e8%b1%a1%e7%9a%84%e5%a4%a7%e5%b0%8f.html" rel="bookmark"
                            title="Permalink to C++类对象的大小">Read more→</a>	
 		<div class="clear"></div>

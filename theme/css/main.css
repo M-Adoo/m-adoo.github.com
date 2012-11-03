@@ -412,6 +412,7 @@ div.clear { clear: both; }
 /************tweet
 *************************/
 ul.tweets{
+list-style: none;
 border:solid;
 border-color:#eee;
 border-width:1px;

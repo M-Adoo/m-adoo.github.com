@@ -161,43 +161,43 @@ Longgest Common Subsequence，可以缩写为
 LCS。求最长公共子序列是一个很有用的问题，它可以用来分析两段序列的相似度，比方可以用来分析DNA串的相似度，也可以分析两段文字的相似度，来判断是否剽窃，等等。&lt;/p&gt;
 &lt;p&gt;举一个实例来说，假如有序列X&amp;lt;A,B,C,B,D,A,B&gt;和序列Y&amp;lt;B,D,C,A,B,A&gt;，那么他们的最长公共子序列为&amp;lt;B,C,D,B&gt;。&lt;/p&gt;
 &lt;h3&gt;&lt;strong&gt;动态规划法求最长公共子序列&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;求最长公共子序列最直接最暴力的一种方法当然是枚举出两个序列所有的子序列，然后从中找出所有的公共子序列，再选出所有公共子序列中最长的那个。不过这种粗暴的做法是很低效的，假如两个序列的长度分别为m和n,因为它们分别有2^m^和2^n^个子序列，那么这个算法的时间复杂度将是指数级别的O(2^m+n^)，对于长一些的序列这种方法是不实际的。撇开这种方法不谈，我们将关注另一种方法——用动态规划策略来求最长公共子路径问题。&lt;/p&gt;
+&lt;p&gt;求最长公共子序列最直接最暴力的一种方法当然是枚举出两个序列所有的子序列，然后从中找出所有的公共子序列，再选出所有公共子序列中最长的那个。不过这种粗暴的做法是很低效的，假如两个序列的长度分别为m和n,因为它们分别有2&lt;sup&gt;m&lt;/sup&gt;和2&lt;sup&gt;n&lt;/sup&gt;个子序列，那么这个算法的时间复杂度将是指数级别的O(2&lt;sup&gt;m+n&lt;/sup&gt;)，对于长一些的序列这种方法是不实际的。撇开这种方法不谈，我们将关注另一种方法——用动态规划策略来求最长公共子路径问题。&lt;/p&gt;
 &lt;h4&gt;第一步：描述问题的最优子结构&lt;/h4&gt;
 &lt;p&gt;之前一篇笔记有总结到，动态规划算法的运用有两个必要条件，一是问题包含最优子结构，二是有重叠子问题。第一步我们要做的便是证明LCS问题确实包含有最优子结构。定理15.1说明LCS包含有最优子结构，原书的证明已经清楚明了，下面引用原书的定理15.1证明：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;h4&gt;Theorem 15.1: (Optimal substructure of an LCS)&lt;/h4&gt;
-&lt;p&gt;Let &lt;em&gt;X&lt;/em&gt; = 〈&lt;em&gt;x&lt;/em&gt;~1~, &lt;em&gt;x&lt;/em&gt;~2~, ..., &lt;em&gt;x~m~&lt;/em&gt;〉 and &lt;em&gt;Y&lt;/em&gt; = 〈&lt;em&gt;y&lt;/em&gt;~1~, &lt;em&gt;y&lt;/em&gt;~2~,
-..., &lt;em&gt;y~n~&lt;/em&gt;〉 be sequences, and let &lt;em&gt;Z&lt;/em&gt; = 〈&lt;em&gt;z&lt;/em&gt;~1~, &lt;em&gt;z&lt;/em&gt;~2~, ...,
-&lt;em&gt;z~k~&lt;/em&gt;〉 be any LCS of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Let &lt;em&gt;X&lt;/em&gt; = 〈&lt;em&gt;x&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;em&gt;x&lt;/em&gt;&lt;sub&gt;2&lt;/sub&gt;, ..., &lt;em&gt;x&lt;sub&gt;m&lt;/sub&gt;&lt;/em&gt;〉 and &lt;em&gt;Y&lt;/em&gt; = 〈&lt;em&gt;y&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;em&gt;y&lt;/em&gt;&lt;sub&gt;2&lt;/sub&gt;,
+..., &lt;em&gt;y&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt;〉 be sequences, and let &lt;em&gt;Z&lt;/em&gt; = 〈&lt;em&gt;z&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;em&gt;z&lt;/em&gt;&lt;sub&gt;2&lt;/sub&gt;, ...,
+&lt;em&gt;z&lt;sub&gt;k&lt;/sub&gt;&lt;/em&gt;〉 be any LCS of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt;.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;If &lt;em&gt;x~m~&lt;/em&gt; = &lt;em&gt;y~n~&lt;/em&gt;, then &lt;em&gt;z~k~&lt;/em&gt; = &lt;em&gt;x~m~&lt;/em&gt; = &lt;em&gt;y~n~&lt;/em&gt; and &lt;em&gt;Z&lt;/em&gt;~&lt;em&gt;k&lt;/em&gt;-1~
-    is an LCS of &lt;em&gt;X&lt;/em&gt;~&lt;em&gt;m&lt;/em&gt;-1~ and &lt;em&gt;Y&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;-1~.&lt;/li&gt;
-&lt;li&gt;If &lt;em&gt;x~m~&lt;/em&gt; ≠ &lt;em&gt;y~n~&lt;/em&gt;, then &lt;em&gt;z~k~&lt;/em&gt; ≠ &lt;em&gt;x~m~&lt;/em&gt; implies that &lt;em&gt;Z&lt;/em&gt; is an
-    LCS of &lt;em&gt;X&lt;/em&gt;~&lt;em&gt;m&lt;/em&gt;-1~ and &lt;em&gt;Y&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;If &lt;em&gt;x~m~&lt;/em&gt; ≠ &lt;em&gt;y~n~&lt;/em&gt;, then &lt;em&gt;z~k~&lt;/em&gt; ≠ &lt;em&gt;y~n~&lt;/em&gt; implies that &lt;em&gt;Z&lt;/em&gt; is an
-    LCS of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;-1~.&lt;/li&gt;
+&lt;li&gt;If &lt;em&gt;x&lt;sub&gt;m&lt;/sub&gt;&lt;/em&gt; = &lt;em&gt;y&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt;, then &lt;em&gt;z&lt;sub&gt;k&lt;/sub&gt;&lt;/em&gt; = &lt;em&gt;x&lt;sub&gt;m&lt;/sub&gt;&lt;/em&gt; = &lt;em&gt;y&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt; and &lt;em&gt;Z&lt;/em&gt;&lt;sub&gt;&lt;em&gt;k&lt;/em&gt;-1&lt;/sub&gt;
+    is an LCS of &lt;em&gt;X&lt;/em&gt;&lt;sub&gt;&lt;em&gt;m&lt;/em&gt;-1&lt;/sub&gt; and &lt;em&gt;Y&lt;/em&gt;&lt;sub&gt;&lt;em&gt;n&lt;/em&gt;-1&lt;/sub&gt;.&lt;/li&gt;
+&lt;li&gt;If &lt;em&gt;x&lt;sub&gt;m&lt;/sub&gt;&lt;/em&gt; ≠ &lt;em&gt;y&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt;, then &lt;em&gt;z&lt;sub&gt;k&lt;/sub&gt;&lt;/em&gt; ≠ &lt;em&gt;x&lt;sub&gt;m&lt;/sub&gt;&lt;/em&gt; implies that &lt;em&gt;Z&lt;/em&gt; is an
+    LCS of &lt;em&gt;X&lt;/em&gt;&lt;sub&gt;&lt;em&gt;m&lt;/em&gt;-1&lt;/sub&gt; and &lt;em&gt;Y&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;If &lt;em&gt;x&lt;sub&gt;m&lt;/sub&gt;&lt;/em&gt; ≠ &lt;em&gt;y&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt;, then &lt;em&gt;z&lt;sub&gt;k&lt;/sub&gt;&lt;/em&gt; ≠ &lt;em&gt;y&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt; implies that &lt;em&gt;Z&lt;/em&gt; is an
+    LCS of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt;&lt;sub&gt;&lt;em&gt;n&lt;/em&gt;-1&lt;/sub&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Proof&lt;/em&gt;&lt;/strong&gt; (1) If &lt;em&gt;z~k~&lt;/em&gt; ≠ &lt;em&gt;x~m~&lt;/em&gt;, then we could append &lt;em&gt;x~m~&lt;/em&gt; =
-&lt;em&gt;y~n~&lt;/em&gt; to &lt;em&gt;Z&lt;/em&gt; to obtain a common subsequence of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt; of length
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Proof&lt;/em&gt;&lt;/strong&gt; (1) If &lt;em&gt;z&lt;sub&gt;k&lt;/sub&gt;&lt;/em&gt; ≠ &lt;em&gt;x&lt;sub&gt;m&lt;/sub&gt;&lt;/em&gt;, then we could append &lt;em&gt;x&lt;sub&gt;m&lt;/sub&gt;&lt;/em&gt; =
+&lt;em&gt;y&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt; to &lt;em&gt;Z&lt;/em&gt; to obtain a common subsequence of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt; of length
 &lt;em&gt;k&lt;/em&gt; + 1, contradicting the supposition that &lt;em&gt;Z&lt;/em&gt; is a &lt;em&gt;longest&lt;/em&gt; common
-subsequence of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt; . Thus, we must have &lt;em&gt;z~k~&lt;/em&gt; = &lt;em&gt;x~m~&lt;/em&gt; =
-&lt;em&gt;y~n~&lt;/em&gt;. &lt;a name="1088"&gt;&lt;/a&gt;&lt;a name="IDX-352"&gt;&lt;/a&gt;Now, the prefix
-&lt;em&gt;Z&lt;/em&gt;~&lt;em&gt;k&lt;/em&gt;-1~ is a length-(&lt;em&gt;k&lt;/em&gt; - 1) common subsequence of &lt;em&gt;X&lt;/em&gt;~&lt;em&gt;m&lt;/em&gt;-1~ and
-&lt;em&gt;Y&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;-1~. We wish to show that it is an LCS. Suppose for the purpose
-of contradiction that there is a common subsequence &lt;em&gt;W&lt;/em&gt; of &lt;em&gt;X&lt;/em&gt;~&lt;em&gt;m&lt;/em&gt;-1~
-and &lt;em&gt;Y&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;-1~ with length greater than &lt;em&gt;k&lt;/em&gt; - 1. Then, appending
-&lt;em&gt;x~m~&lt;/em&gt; = &lt;em&gt;y~n~&lt;/em&gt; to &lt;em&gt;W&lt;/em&gt; produces a common subsequence of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt;
+subsequence of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt; . Thus, we must have &lt;em&gt;z&lt;sub&gt;k&lt;/sub&gt;&lt;/em&gt; = &lt;em&gt;x&lt;sub&gt;m&lt;/sub&gt;&lt;/em&gt; =
+&lt;em&gt;y&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt;. &lt;a name="1088"&gt;&lt;/a&gt;&lt;a name="IDX-352"&gt;&lt;/a&gt;Now, the prefix
+&lt;em&gt;Z&lt;/em&gt;&lt;sub&gt;&lt;em&gt;k&lt;/em&gt;-1&lt;/sub&gt; is a length-(&lt;em&gt;k&lt;/em&gt; - 1) common subsequence of &lt;em&gt;X&lt;/em&gt;&lt;sub&gt;&lt;em&gt;m&lt;/em&gt;-1&lt;/sub&gt; and
+&lt;em&gt;Y&lt;/em&gt;&lt;sub&gt;&lt;em&gt;n&lt;/em&gt;-1&lt;/sub&gt;. We wish to show that it is an LCS. Suppose for the purpose
+of contradiction that there is a common subsequence &lt;em&gt;W&lt;/em&gt; of &lt;em&gt;X&lt;/em&gt;&lt;sub&gt;&lt;em&gt;m&lt;/em&gt;-1&lt;/sub&gt;
+and &lt;em&gt;Y&lt;/em&gt;&lt;sub&gt;&lt;em&gt;n&lt;/em&gt;-1&lt;/sub&gt; with length greater than &lt;em&gt;k&lt;/em&gt; - 1. Then, appending
+&lt;em&gt;x&lt;sub&gt;m&lt;/sub&gt;&lt;/em&gt; = &lt;em&gt;y&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt; to &lt;em&gt;W&lt;/em&gt; produces a common subsequence of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt;
 whose length is greater than &lt;em&gt;k&lt;/em&gt;, which is a contradiction.&lt;/p&gt;
-&lt;p&gt;(2) If &lt;em&gt;z~k~&lt;/em&gt; ≠ &lt;em&gt;x~m~&lt;/em&gt;, then &lt;em&gt;Z&lt;/em&gt; is a common subsequence of
-&lt;em&gt;X&lt;/em&gt;~&lt;em&gt;m&lt;/em&gt;-1~ and &lt;em&gt;Y&lt;/em&gt;. If there were a common subsequence &lt;em&gt;W&lt;/em&gt; of
-&lt;em&gt;X&lt;/em&gt;~&lt;em&gt;m&lt;/em&gt;-1~ and &lt;em&gt;Y&lt;/em&gt; with length greater than &lt;em&gt;k&lt;/em&gt;, then &lt;em&gt;W&lt;/em&gt; would also
-be a common subsequence of &lt;em&gt;X~m~&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt; , contradicting the
+&lt;p&gt;(2) If &lt;em&gt;z&lt;sub&gt;k&lt;/sub&gt;&lt;/em&gt; ≠ &lt;em&gt;x&lt;sub&gt;m&lt;/sub&gt;&lt;/em&gt;, then &lt;em&gt;Z&lt;/em&gt; is a common subsequence of
+&lt;em&gt;X&lt;/em&gt;&lt;sub&gt;&lt;em&gt;m&lt;/em&gt;-1&lt;/sub&gt; and &lt;em&gt;Y&lt;/em&gt;. If there were a common subsequence &lt;em&gt;W&lt;/em&gt; of
+&lt;em&gt;X&lt;/em&gt;&lt;sub&gt;&lt;em&gt;m&lt;/em&gt;-1&lt;/sub&gt; and &lt;em&gt;Y&lt;/em&gt; with length greater than &lt;em&gt;k&lt;/em&gt;, then &lt;em&gt;W&lt;/em&gt; would also
+be a common subsequence of &lt;em&gt;X&lt;sub&gt;m&lt;/sub&gt;&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt; , contradicting the
 assumption that &lt;em&gt;Z&lt;/em&gt; is an LCS of &lt;em&gt;X&lt;/em&gt; and &lt;em&gt;Y&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;(3) The proof is symmetric to (2).&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h4&gt;第二步：一个递归解&lt;/h4&gt;
-&lt;p&gt;由定理15.1可以看出，找序列X和序列Y的LCS,我们有可能需要找出X和Y~m-1~的LCS，以及X~n-1~和Y~m~的LCS。而这两个子问题，都拥有一个共同的子子问题,便是求X~n-1~和Y~m-1~的LCS。依次类推，还有很多其他的子问题会共有许多其他的子子问题。这就满足了动态规划的第二点条件，拥有重叠的子问题。&lt;/p&gt;
-&lt;p&gt;定义c[i, j]为X~i~和Y+的LCS长度，根据定理15.1可以得出下面的递归式：
+&lt;p&gt;由定理15.1可以看出，找序列X和序列Y的LCS,我们有可能需要找出X和Y&lt;sub&gt;m-1&lt;/sub&gt;的LCS，以及X&lt;sub&gt;n-1&lt;/sub&gt;和Y&lt;sub&gt;m&lt;/sub&gt;的LCS。而这两个子问题，都拥有一个共同的子子问题,便是求X&lt;sub&gt;n-1&lt;/sub&gt;和Y&lt;sub&gt;m-1&lt;/sub&gt;的LCS。依次类推，还有很多其他的子问题会共有许多其他的子子问题。这就满足了动态规划的第二点条件，拥有重叠的子问题。&lt;/p&gt;
+&lt;p&gt;定义c[i, j]为X&lt;sub&gt;i&lt;/sub&gt;和Y+的LCS长度，根据定理15.1可以得出下面的递归式：
 &lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb11.png" title="image" /&gt;&lt;/p&gt;
 &lt;h4&gt;第三步：计算LCS的长度&lt;/h4&gt;
 &lt;p&gt;利用第二步的递归式15.9，可以很容易写出计算LCS长度的递归求解程序，但这种方式并不比我们一开始提到的最简单粗暴的方法快（有可能还要慢），它同样是指数级的复杂度。&lt;/p&gt;
@@ -229,15 +229,15 @@ assumption that &lt;em&gt;Z&lt;/em&gt; is an LCS of &lt;em&gt;X&lt;/em&gt; and &
 &lt;p&gt;&lt;span style="font-family: 楷体"&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;/p&gt;
 
-&lt;p&gt;&lt;span style="font-family: 楷体"&gt;说明：右图是将表b和表c的信息合二为一的显示，d第i行和第j列所指方块，记录了c[i,j]和b[i,j]中的信息。我们通过那些箭头来获得问题的最优子问题的路径，路径上的&lt;span style="color: #006080"&gt;"↖"&lt;/span&gt;表示X~i~=Y~i~,所以为LCS上的一个字母。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: 楷体"&gt;说明：右图是将表b和表c的信息合二为一的显示，d第i行和第j列所指方块，记录了c[i,j]和b[i,j]中的信息。我们通过那些箭头来获得问题的最优子问题的路径，路径上的&lt;span style="color: #006080"&gt;"↖"&lt;/span&gt;表示X&lt;sub&gt;i&lt;/sub&gt;=Y&lt;sub&gt;i&lt;/sub&gt;,所以为LCS上的一个字母。&lt;/span&gt;&lt;/p&gt;
 &lt;/p&gt;
 
 &lt;h4&gt;第四步：构建LCS&lt;/h4&gt;
 &lt;/p&gt;
 
-&lt;p&gt;通过表b我们可以很快的构建出&lt;em&gt;X&lt;/em&gt; = 〈&lt;em&gt;x&lt;/em&gt;~1~, &lt;em&gt;x&lt;/em&gt;~2~, ..., &lt;em&gt;x~m~&lt;/em&gt;〉和&lt;em&gt;Y&lt;/em&gt; =
-〈&lt;em&gt;y&lt;/em&gt;~1~, &lt;em&gt;y&lt;/em&gt;~2~, ...,
-&lt;em&gt;y~n~&lt;/em&gt;〉的LCS。可以从b[m,n]开始跟踪路径，当b[i,j]为"&lt;span style="color: #006080"&gt;↖"&lt;/span&gt;时，输出当前字母。考虑到时从后往前追踪的，所以求出来的LCS将是反向的，所以在我们下面的递归伪码中，将先递归再输出。以下为伪码：&lt;/p&gt;
+&lt;p&gt;通过表b我们可以很快的构建出&lt;em&gt;X&lt;/em&gt; = 〈&lt;em&gt;x&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;em&gt;x&lt;/em&gt;&lt;sub&gt;2&lt;/sub&gt;, ..., &lt;em&gt;x&lt;sub&gt;m&lt;/sub&gt;&lt;/em&gt;〉和&lt;em&gt;Y&lt;/em&gt; =
+〈&lt;em&gt;y&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;em&gt;y&lt;/em&gt;&lt;sub&gt;2&lt;/sub&gt;, ...,
+&lt;em&gt;y&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt;〉的LCS。可以从b[m,n]开始跟踪路径，当b[i,j]为"&lt;span style="color: #006080"&gt;↖"&lt;/span&gt;时，输出当前字母。考虑到时从后往前追踪的，所以求出来的LCS将是反向的，所以在我们下面的递归伪码中，将先递归再输出。以下为伪码：&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PRINT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;LCS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; 0 &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="nb"&gt;j&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; 0
     &lt;span class="k"&gt;return&lt;/span&gt; 
@@ -402,110 +402,7 @@ assumption that &lt;em&gt;Z&lt;/em&gt; is an LCS of &lt;em&gt;X&lt;/em&gt; and &
 &lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;2010/3/22 by Adoo | homepage:www.roading.org&lt;/em&gt;&lt;/p&gt;
-&lt;/p&gt;</summary><category term="dynamic programming"></category><category term="LCS"></category></entry><entry><title>C++实现红黑树，仿STL封装</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html" rel="alternate"></link><updated>2011-12-31T20:37:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-31:/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html</id><summary type="html">&lt;ul&gt;
-&lt;li&gt;摘要：在[&lt;em&gt;Chapter 13 Red-Black trees
-    (红黑树)&lt;/em&gt;][]这篇笔记中对红黑树的各种操作都有较详尽的伪码，相信使用C++来实现也并不是难事，我要做的是，在实现的基础上要进行一定的封装。当然风格嘛，自然参照STL，最终的结果就是要实现一个STL风格的红黑树模板。&lt;/li&gt;
-&lt;li&gt;学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div align="right"&gt;
-*2011/12/31 By Adoo | Homepage:*[*www.roading.org*][]
-
-&lt;/div&gt;
-
-&lt;div align="left"&gt;
-
-* * * * *
-
-&lt;/div&gt;
-
-&lt;p&gt;在C++泛型编程中两个重要的概念即是容器和迭代器。我的目的则是要实现一个与STL中的其他容器类似，但是以红黑树为基础的容器
-RB_Tree。当然，实际上STL中的
-map、multimap、set、multiset其基础结构就是红黑树。在这儿、我们主要尝试自己封装一个红黑树试试。&lt;/p&gt;
-&lt;p&gt;无论如何,从实现来讲，一个rb_node的类模板是需要的，不过它将作为 RB_Tree
-类中的一个嵌套类，因为RB_Tree容器的使用者并不需要知道，rb_node实现。rb_node的实现：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="n"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;RB_Tree&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;rb_node&lt;/span&gt;
-&lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;Type&lt;/span&gt; &lt;span class="n"&gt;_value&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="n"&gt;rb_node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_left&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="n"&gt;rb_node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="n"&gt;rb_node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_parent&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="n"&gt;RB_Color&lt;/span&gt; &lt;span class="n"&gt;_color&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-            &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;_value&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="p"&gt;()),&lt;/span&gt;&lt;span class="n"&gt;_left&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;_parent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;_color&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;red&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="p"&gt;{};&lt;/span&gt;
-    &lt;span class="p"&gt;};&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;span style="color: blue"&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;/p&gt;
-
-&lt;p&gt;其次，要定义一个供 RB_Tree容器使用的迭代器，为了拥有 iterator_trait
-它将继承自 std::iterator，当然完全可以自己通过宏定义来实现
-iterator_trait ，但毫无疑问继承的话可以写更少的代码.声明如下：&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;RB_Tree&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;node_iterator&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
-    &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;bidirectional_iterator_tag&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="n"&gt;public&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;node_iterator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;_node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;){};&lt;/span&gt;
-    &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="n"&gt;const&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt; –&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="n"&gt;const&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; 
-    &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="p"&gt;();&lt;/span&gt;     
-    &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
-    &lt;span class="n"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;r_iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
-    &lt;span class="n"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt; !&lt;span class="p"&gt;=(&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;r_iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
-    &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;pointer&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; 
-    &lt;span class="o"&gt;//&lt;/span&gt;…省略很多种运算符重载 
-&lt;span class="n"&gt;private&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;_node&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;};&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/p&gt;
-
-&lt;p&gt;最后就是RB_Tree 这个容器了类了，大体上是这样：&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;RB_Tree&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="n"&gt;private&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="n"&gt;public&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;typedef&lt;/span&gt;  &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="n"&gt;typedef&lt;/span&gt; &lt;span class="n"&gt;const&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;const_iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="n"&gt;RB_Tree&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-    &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;RB_Tree&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;    
-    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;eraser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="n"&gt;private&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;_root&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="n"&gt;public&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;static&lt;/span&gt; &lt;span class="n"&gt;rb_node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;_nil&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/p&gt;
-
-&lt;p&gt;具体的实现代码，你可以下载[RB_Tree.hpp][]&lt;/p&gt;
-&lt;/p&gt;
-
-&lt;p&gt;当然还应该定义更多的接口，比方重载一个模板函数insert
-能够接受一对迭代器，将迭代器中间的数据插入到红黑树中，等等。&lt;/p&gt;
-&lt;/p&gt;
-
-&lt;p&gt;值得注意的是，该封装实现，是以学习以及练习为目的的，所以有很多本应有但确没有实现的接口。另一个原因则是这段时间太过忙碌。&lt;/p&gt;
-&lt;/p&gt;
-
-&lt;p&gt;如果将上面提到的迭代器类与之前在&lt;a href="http://www.roading.org/?p=649"&gt;仿STL
-的二叉搜索树的C++实现&lt;/a&gt;中的迭代器比较，其实发现，它们提供的是一样的操作，所以完全可以将红黑树和二叉搜索树的结点类抽象出来，让迭代器类针对其抽象类实现，这样一来这一个迭代器模板类就会适用于几乎整个由二叉搜索树派生而来的数据结构了，将会大大提高代码的复用性。当然这个工作我没有做。&lt;/p&gt;
-&lt;/p&gt;</summary><category term="c++"></category><category term="red black trees"></category></entry><entry><title>非递归不用栈遍历搜索二叉树</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html" rel="alternate"></link><updated>2011-12-21T14:45:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-21:/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html</id><summary type="html">&lt;ul&gt;
+&lt;/p&gt;</summary><category term="dynamic programming"></category><category term="LCS"></category></entry><entry><title>非递归不用栈遍历搜索二叉树</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html" rel="alternate"></link><updated>2011-12-21T14:45:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-21:/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;摘要：使用非递归的方式来遍历二叉树，同时也是对《算法导论》课后习题
     12.1-3 的解答。&lt;/li&gt;
 &lt;li&gt;学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/li&gt;
@@ -900,237 +797,7 @@ by Adoo &lt;br /&gt;
   [![wps_clip_image-2118[7]][]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-21187.png
   [![wps_clip_image-2294][]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-2294.png
   [&lt;br /&gt;
- ]: http://1.roading.sinaapp.com/2011/10/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89/bucket-sort-code/&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category><category term="桶排序"></category></entry><entry><title>第八章（3） 基数排序（Radix Sort）</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html" rel="alternate"></link><updated>2011-10-02T16:37:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-10-02:/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html</id><summary type="html">&lt;h3&gt;算法模型&lt;/h3&gt;
-&lt;p&gt;基数排序是一种用在老式穿卡机上的算法。至于穿卡机是怎么使用基数排序的，你可以参考算法导论第八章的描述。&lt;/p&gt;
-&lt;p&gt;在之前两种比较排序——合并排序与快速排序中我们使用一种“分而治之”的策略，基数排序则使用另一种与之有有异曲同工之妙的策略。无论是合并排序还是快速排序，我们讲究的是在数组级别的“分而治之”；而基数排序我们讲究的是在元素级别的“分而治之”，例如我们将一个三位数分成，个位，十位，百位三部分。&lt;/p&gt;
-&lt;p&gt;我们先来看一个实例，假如，我们要对七个三位数来进行排序，依次对其个位，十位，百位进行排序，如下图：&lt;/p&gt;
-&lt;p&gt;[![wps_clip_image-1844][]][]&lt;/p&gt;
-&lt;p&gt;[&lt;br /&gt;
-][]&lt;/p&gt;
-&lt;p&gt;很显然，每一位的数的大小都在[0，9]中，对于每一位的排序用计数排序再适合不过。&lt;/p&gt;
-&lt;h3&gt;算法复杂度&lt;/h3&gt;
-&lt;p&gt;对于n个d位数而言,如果基数排序的Stable
-Sort（注1）的算法复杂度为θ(n+k)，那么其本身的算法复杂度为θ(dn+kd)。这个就不用证明了。&lt;/p&gt;
-&lt;h3&gt;进阶&lt;/h3&gt;
-&lt;p&gt;到目前为止，基数排序似乎并不是太实用。首先，你发现好像位数是个麻烦事，比如一组数中间，既有是一位的，也有十位的，这时候似乎就不好用了；其次，如果一列数中间有负数，似乎也死翘翘了。还有就是，这哥们能排浮点数吗？&lt;/p&gt;
-&lt;p&gt;当你看到某些教程或者文章的时候，作者会郑重提醒你，排序的数必须是整数，而且整数还不够还要必须是正数。其实对于负数也是可以的，对于实数也同样是可以的，在后面我会给出一个C++实现的对整数（正负数不论）进行基数排序的代码。&lt;/p&gt;
-&lt;p&gt;其实，基数排序排序关键还是基于位，对于我们来讲讲位是基于十进制的。但对于计算机来讲，什么八进制，十进制，十六进制都是浮云，最实在的还是二进制。所以对于我们来讲int型5和55555两个数的位数是不一样的，一个一位，一个五位，但对于计算机来讲他们的位数是一样的，都是32位。&lt;/p&gt;
-&lt;p&gt;当然，基于二进制的时候我们不是按一位一位来排，我们要按几位几位来排，选多少位最合适？在选多少位之前，我们先总结一条定理。&lt;/p&gt;
-&lt;p&gt;定理：对于n个b-bit位的元素和一任意正数r&amp;lt;=b（r代表选取的位数），在Stable
-Sort的时间复杂度为θ(n+k)的情况下，基数排序的时间复杂度为θ((b/r)(n+2^r^))。&lt;/p&gt;
-&lt;p&gt;证明：每一次对r位进行排序，则总共进行b/r次Stable
-Sort排序。每一次选r位，显然k=2的r次方。所以θ(d（n+k）)=θ((b/r)(n+2^r^))。 &lt;br /&gt;
-算法导论给出说明：当b&amp;lt;
-lgn时，r=b可以得到最小复杂度；当b&gt;=lgn时，r=lgn有最小复杂度。原谅我不能给出数学上的证明。&lt;/p&gt;
-&lt;h3&gt;实例&lt;/h3&gt;
-&lt;p&gt;回到之前说的关于有负数的时候怎么排序的问题上来，我们要注意的一点事和I负数在内存中存储的是补码。也就是说在我们基于二进制来进行排序的时候负数是用其补码来排序的而不是本身，所以经过基数排序以后会得出这样的序列，所有的正数在一边，所有的负数在一边，正数的一边是有序的，负数的一边也是有序的。但是正数的一边本应该是负数的位置，而负数的一边本应该是正数的位置。比方，我们对3，2，5，-1，-4，-2，-3排序后的结果会是：2，3，5，-4，-3，-2，-1.显然对于这样一个序列，只要在排序后将正数序列和负数序列互换位置就可以了。&lt;/p&gt;
-&lt;p&gt;对整数进行基数排序的C++代码：&lt;/p&gt;
-&lt;p&gt;~~~~ {.brush:bash}
-//RadixSort.h
-//By Adoo
-//2011/10/2#ifndef RADIX_SORT&lt;/p&gt;
-&lt;h1&gt;define RADIX_SORT&lt;/h1&gt;
-&lt;h1&gt;include&lt;deque&gt;&lt;/h1&gt;
-&lt;h1&gt;include&lt;iterator&gt;template&lt;typename InIt&gt;&lt;/h1&gt;
-&lt;p&gt;void RadixSort(InIt BegIt,InIt EndIt )
-{
-    int byte=8&lt;em&gt;sizeof(&lt;/em&gt;BegIt);
-    int count=std::distance (BegIt,EndIt);
-    int size=std::log(double(count))/std::log(double(2));
-    size=byte&lt;size ? byte : size;
-    int from=1;  do
-    {
-        RadixCounting(BegIt,EndIt,from,size);
-        from+=size;
-    }while(from&lt;byte);    for(auto index=BegIt;index!=EndIt; ++index)
-    {
-        if(*index&lt;0)
-        {
-            std::vector&lt; std::iterator_traits&lt;InIt&gt;::value_type &amp;gt; vec(index,EndIt);
-            vec.insert(vec.end(),BegIt,index);
-            std::copy(vec.begin(),vec.end(),BegIt);
-            return;
-        }
-    }};template&lt;typename InIt&gt;
-void RadixCounting(InIt BegIt,InIt EndIt ,const int From, const int Size)
-{//counting sort the elements form BegIt to EndIt base on the Size bits from From;   //the counter
-    int capa=std::pow(double(2),Size);
-    std::vector&lt;int&gt; Counter(capa,0);  int clip=capa-1;
-    for(auto Index=BegIt;Index!=EndIt;++Index)
-        ++Counter[((&lt;em&gt;Index)&amp;gt;&amp;gt;From-1)&amp;amp;clip];    for(int i=1;i!=capa;++i)
-        Counter[i]+=Counter[i-1];    std::vector&lt;int&gt; Result(Counter[capa-1],0);
-    for(std::reverse_iterator&lt;InIt&gt; RIter(EndIt),REnd(BegIt); RIter!=REnd ;++RIter)
-    {
-        int index=((&lt;/em&gt;RIter)&amp;gt;&amp;gt;From-1)&amp;clip;
-        Result[ Counter[index]-- -1]=*RIter;
-    }
-    std::copy(Result.begin(),Result.end(),BegIt);
-}#endif
-~~~~&lt;/p&gt;
-&lt;/p&gt;
-
-&lt;p&gt;对于浮点数呢？（尾数，指数...）。 &lt;br /&gt;
-基数排序虽然是线性排序，但在实际应用中它反而有可能比快速排序要慢，因为其常数因子可能远大于快速排序的常数因子。例如，在性能较差的机器上，快速排序在Cache的利用效率上要比基数排序高很多。在内存空间紧张的情况下，应当选择快速排序类的原地排序算法。&lt;/p&gt;
-&lt;p&gt;我做了一个小小的测试。&lt;/p&gt;
-&lt;/p&gt;
-
-&lt;table style="border-bottom-style: none; border-left-style: none; border-collapse: collapse; border-top-style: none; border-right-style: none; mso-border-alt: solid windowtext .5pt; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt" class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0"&gt;
-&lt;tbody&gt;
-&lt;tr style="height: 20.5pt; mso-yfti-irow: 0; mso-yfti-firstrow: yes"&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; height: 20.5pt; border-top: windowtext 1pt solid; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt" valign="top" width="61"&gt;
-&lt;span style="font-family: 宋体; mso-bidi-font-size: 10.5pt; mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-family: 宋体; mso-ansi-language: zh-cn"&gt;数据量&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; height: 20.5pt; border-left-color: windowtext; border-top: windowtext 1pt solid; border-left-width: 1pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt" valign="top" width="79"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;RadixSort&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; height: 20.5pt; border-left-color: windowtext; border-top: windowtext 1pt solid; border-left-width: 1pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt" valign="top" width="85"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;QiuckSort&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;tr style="height: 18.9pt; mso-yfti-irow: 1"&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 18.9pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;1k&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 18.9pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;15&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 18.9pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;16&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;tr style="height: 18.25pt; mso-yfti-irow: 2"&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;10k&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;125&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;265&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;tr style="height: 18.25pt; mso-yfti-irow: 3"&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;50k&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;672&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;1469&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;tr style="height: 17.4pt; mso-yfti-irow: 4"&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 17.4pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;100k&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 17.4pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;922&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 17.4pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;3141&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;tr style="height: 18.25pt; mso-yfti-irow: 5"&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;500k&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;4975&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 18.25pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;19125&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;tr style="height: 19.15pt; mso-yfti-irow: 6; mso-yfti-lastrow: yes"&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; border-left: windowtext 1pt solid; padding-bottom: 0cm; border-top-color: windowtext; padding-left: 5.4pt; width: 45.5pt; padding-right: 5.4pt; border-top-width: 1pt; height: 19.15pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="61"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;1000k&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 59.15pt; padding-right: 5.4pt; border-top-style: none; height: 19.15pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="79"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;11844&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;td style="border-bottom: windowtext 1pt solid; padding-bottom: 0cm; border-left-style: none; padding-left: 5.4pt; width: 63.8pt; padding-right: 5.4pt; border-top-style: none; height: 19.15pt; border-right: windowtext 1pt solid; padding-top: 0cm; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt" valign="top" width="85"&gt;
-&lt;span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: calibri; mso-bidi-font-family: calibri; mso-ascii-font-family: calibri; mso-fareast-font-family: 宋体" lang="EN-US"&gt;36025&lt;/span&gt;
-
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;/p&gt;
-
-&lt;p&gt;（单位：毫秒） &lt;br /&gt;
-对同一组随机数，基数排序和快排分别测试五次取平均值。Cpu：E5200,内存：4G。100万后的数据测不下去了，cpu太慢，不知道等多久，不同的机器上，应该有很多差别。&lt;/p&gt;
-&lt;/p&gt;
-
-&lt;p&gt;www.roading.org &lt;br /&gt;
-by Adoo&lt;/p&gt;
-&lt;p&gt;2011/10/2&lt;/p&gt;
-&lt;/p&gt;
-
-&lt;p&gt;[![wps_clip_image-1844][]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-1844.png
-  [&lt;br /&gt;
- ]: http://1.roading.sinaapp.com/2011/10/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89/radixsortmodel/&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category><category term="快速排序"></category></entry><entry><title>算法导论 第八章(2) 计数排序(Counting Sort)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html" rel="alternate"></link><updated>2011-09-30T21:54:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-09-30:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html</id><summary type="html">&lt;p&gt;与比较排序注重于元素之间的比较不同，计数排序专注于找准自己的位置，而不关心自己比谁小，比谁大。其核心在于，对于任意一个属于数组A的元素x，统计出在A中有多少个元素小于等于x,以确定x的位置。例如，有10个元素小于等于a那么a就应该排在第11位。&lt;/p&gt;
+ ]: http://1.roading.sinaapp.com/2011/10/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89/bucket-sort-code/&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category><category term="桶排序"></category></entry><entry><title>算法导论 第八章(2) 计数排序(Counting Sort)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html" rel="alternate"></link><updated>2011-09-30T21:54:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-09-30:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html</id><summary type="html">&lt;p&gt;与比较排序注重于元素之间的比较不同，计数排序专注于找准自己的位置，而不关心自己比谁小，比谁大。其核心在于，对于任意一个属于数组A的元素x，统计出在A中有多少个元素小于等于x,以确定x的位置。例如，有10个元素小于等于a那么a就应该排在第11位。&lt;/p&gt;
 &lt;h3&gt;算法模型：&lt;/h3&gt;
 &lt;p&gt;假设对数组A[n]进行排序,A[n]中任意一元素x∈[0，k)。我们需要两个辅助数组，一个为B[k],我们用来记录统计信息，另一个为C[n],用来储存排序结果。&lt;/p&gt;
 &lt;ol&gt;
@@ -1151,7 +818,7 @@ lg
 n）；若你心中自有定位，看淡争先落后，便自能泰然自若，其路也轻松（线性）。特别是在我们学习技术的时候，若我们总在与人比较，又或者总计较于技术间好坏的争论，就会落了下乘，重要的在于找准自己的定位。当然，回到技术层面，并不是说非比较排序就一定比比较排序好，具体分析下一篇算法导论心得——基数排序（Radix
 Sort）会讲到。&lt;/p&gt;
 &lt;h3&gt;C++实现&lt;/h3&gt;
-&lt;p&gt;~~~~ {.brush:cpp}&lt;/p&gt;
+&lt;p&gt;&lt;sub&gt;&lt;/sub&gt;&lt;sub&gt;&lt;/sub&gt; {.brush:cpp}&lt;/p&gt;
 &lt;h1&gt;ifndef COUNTING_SORT&lt;/h1&gt;
 &lt;h1&gt;define COUNTING_SORT&lt;/h1&gt;
 &lt;h1&gt;include&lt;vector&gt;&lt;/h1&gt;
@@ -1172,7 +839,7 @@ void CountingSort(InputIter BegIter,InputIter EndIter,OutIter OutputIter, const 
     std::copy(Result.begin (),Result.end (),OutputIter);
 }&lt;/p&gt;
 &lt;h1&gt;endif&lt;/h1&gt;
-&lt;p&gt;~~~~&lt;/p&gt;
+&lt;p&gt;&lt;sub&gt;&lt;/sub&gt;&lt;sub&gt;&lt;/sub&gt;&lt;/p&gt;
 &lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;2011/9/30 by Adoo | homepage:&lt;/em&gt;&lt;a href="http://www.roading.org/"&gt;&lt;em&gt;www.roading.org&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
@@ -1180,4 +847,62 @@ void CountingSort(InputIter BegIter,InputIter EndIter,OutIter OutputIter, const 
 
 &lt;p&gt;[![wps_clip_image-1380][]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-1380.png
   [&lt;br /&gt;
- ]: http://1.roading.sinaapp.com/?attachment_id=237&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category><category term="计数排序"></category></entry></feed>
+ ]: http://1.roading.sinaapp.com/?attachment_id=237&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category><category term="计数排序"></category></entry><entry><title>第七章（2） 快速排序 课后7.4-5</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html" rel="alternate"></link><updated>2011-09-27T12:00:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-09-27:/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html</id><summary type="html">&lt;p&gt;题目：7.4-5 &lt;br /&gt;
+We can improve the running time of quicksort in practice by taking
+advantage of thefast running time of insertion sort when its input is
+“nearly” sorted. Upon calling quicksort on a subarray with fewer than k
+elements, let it simply return without sorting the subarray. After the
+top-level call to quicksort returns, run insertion sort on the entire
+array to finish the sorting process. Argue that this sorting algorithm
+run in O(&lt;em&gt;nk&lt;/em&gt;+ &lt;em&gt;n&lt;/em&gt;lg(&lt;em&gt;n/k&lt;/em&gt;)) expected time.How should we pick k, both in
+theory and in practice?&lt;/p&gt;
+&lt;p&gt;解答:当每一个小分段为k个元素时，分段的数目&lt;em&gt;count=n/k&lt;/em&gt;;显然，要得到count个分段，要经过lg
+count =lg n/k 次递归。所以快排的复杂度为 O(&lt;em&gt;n&lt;/em&gt;
+lg（&lt;em&gt;n/k&lt;/em&gt;）)。因为快排之后，整个序列段是近似有序的，只是各个小段之间的元素无序。也就是说，进行插入排序的时候，各小段的元素的比较不会超出本段。所以相当于对&lt;em&gt;n/k&lt;/em&gt;个小段进行插入排序，其复杂度为
+n/k O(k平方)=O(nk).所以整个时间复杂度为O(nlg(n/k) + nk)。 &lt;br /&gt;
+关于k的选取，我一直没有头绪，与瘟疫青年以及小兵的讨论也没有得出结果，最后小兵给我提供了一个答案的链接，非常感谢。&lt;/p&gt;
+&lt;p&gt;答案的内容为：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb3.png" title="image" /&gt;][] &lt;br /&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.roading.org"&gt;www.roading.org&lt;/a&gt; &lt;br /&gt;
+by Adoo &lt;br /&gt;
+2011/9/27&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb3.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2011/11/image3.png&lt;/p&gt;</summary><category term="7.4-5"></category><category term="Introduction to algorithm"></category><category term="快速排序"></category></entry><entry><title>第七章（1） 快速排序</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html" rel="alternate"></link><updated>2011-09-25T15:59:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-09-25:/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html</id><summary type="html">&lt;p&gt;
+快速排序（Quick
+Sort）在最坏的情况下它的时间复杂度是O（n2），最佳情况下它的时间复杂度是在O(n\*lgn).即使如此，但快速排序往往是实际应用中的排序算法的最佳选择，因为它隐含的常数因子非常小。
+快排是又一个化整为零，各个击破策略的又一个经典应用。与合并排序（Merge
+Sort）有一点不同。合并排序的是直接按数目不断递归划分成小段，然后又层层合并有序段，得出有序结果（[合并排序][]）。而快排，则是按照一个中枢轴（pivot）来划分，即凡是大于中枢轴的分为一段，凡是小于等于中枢轴的分为另一段，对这两段又进行快排，显然当迭代到底的时候，排序就完成了。
+来看代码：
+
+~~~~ {.brush:cpp}
+template
+void QuickSort(Iter BegIter, Iter EndIter)
+{
+    if(std::distance(BegIter,EndIter)&gt;1)
+    {//if betwen BegIter and EndIter not only one element;
+        Iter Apart=Partition(BegIter,EndIter);
+        QuickSort(BegIter,Apart);
+        std::advance(Apart,1);
+        QuickSort(Apart,EndIter);
+    }
+}
+
+wzxhzdk:0
+
+代码中中枢轴为序列的最后一个元素。这段代码的目的在于，将m个大于中枢轴的元素，放到前m个位置，并将中枢轴放在第m+1个位置，自然大于等于中枢轴的n-m-1个元素就在后n-m-1个位置。
+**关于中枢轴的选择**
+快排的效率很大程度上依赖于中枢轴的选择，因为中枢轴影响了序列的划分，而序列的划分决定着递归的次数。
+当我们选择某一个相对固定的位置来作为中枢轴的时候，就很有可能陷入最坏情况，比方上面的实现代码，若是待排序的序列已经是有序的，那么就会陷入最坏情况。或是待排序的序列接近有序，那么久会陷入接近最坏情况。于是引出了一种改良的快速排序，随机快速排序。
+**随机快速排序**
+随机快速排序与快速排序的唯一区别在于，随机快速排序的每一次中枢轴的选择是随机的，而不像快速排序一样是有相对固定位置的。因为中枢轴的是随机的，所以你很难有这么好的运气，每次递归都碰到了最坏情况。
+随机快速排序避免了最坏情况，但它何尝不是以可能失去最好情况为代价的呢？我想，对于快速排序的优化，应该考虑更多的实际情况。
+关于随机快速排序，在独酌的博客，我与博主进行了探讨：[http://www.cnblogs.com/chinazhangjie/archive/2010/12/09/1901491.html\#commentform][]
+
+[www.roading.org][] by Adoo 2011/9/25
+
+&lt;/p&gt;
+
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cnblogs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;chinazhangjie&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;archive&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;2010&lt;span class="o"&gt;/&lt;/span&gt;12&lt;span class="o"&gt;/&lt;/span&gt;09&lt;span class="o"&gt;/&lt;/span&gt;1901491&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;#&lt;span class="n"&gt;commentform&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category><category term="Quick Sort"></category><category term="随机快速排序"></category></entry></feed>

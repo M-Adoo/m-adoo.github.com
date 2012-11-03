@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>new expression、operator new 和 placement new——三个“妞（new）”的故事（2）</title>
+        <title>new expression、operator new和placement new——三个妞（new）的故事（2）</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
         
@@ -39,44 +39,6 @@
 				
 		        </ul>
 			<ul id="nav-tags">
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -177,6 +139,48 @@
 					
 				
 					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 			</ul>
 			<div class="clear"></div>
@@ -187,7 +191,7 @@
 
 <a href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a> »
 
-new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（2）
+new expression、operator new和placement new——三个妞（new）的故事（2）
 </div>
  
 		</nav>
@@ -195,11 +199,11 @@ new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（
 
         
     <div class="article-page">
-	<h1>new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（2）</h1>
+	<h1>new expression、operator new和placement new——三个妞（new）的故事（2）</h1>
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-12-05T15:19:00">
-                Mon 05 December 2011
+                周一 05 十二月 2011
         </abbr>
         
         <address class="article_author">
@@ -207,11 +211,13 @@ new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
@@ -219,155 +225,102 @@ new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（
 	
 	
 </div><!-- /.post-info -->
-	      <p><em><font face="微软雅黑">引言：之前虽然一直知道有new expression、operator
-new 和 placement new
-，但对于这三个“new”,却不甚了了，这些天从《深度探索C++对象模型》读到new
-和delete，特意结合《C++
-Primer》写下这篇笔记，以作总结。三个虽然都是“妞”（new），但每个妞都不相同各有各的特点，各有各的风味，本文重点在于总结比较这三个
-“妞”，但期间也不忘提一提推倒这三个“妞”的哥们——delete。 </font></em></p>
-<h3>两个 delete 后的问题</h3>
-<div align="left">
-最近在网上看到两个关于指针 delete 后的问题。第一种情况：
-
-wzxhzdk:0
-
-</div>
-
-</p>
-
-<p>第二种情况：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre>   <span class="n">int</span><span class="o">*</span> <span class="n">p</span><span class="p">=</span><span class="n">new</span> <span class="n">int</span> <span class="p">;</span>
-   <span class="n">delete</span> <span class="n">p</span><span class="p">;</span>
-   <span class="o">*</span><span class="n">p</span><span class="p">=</span>5<span class="p">;</span>     <span class="o">//</span><span class="n">delete</span>后对 <span class="o">*</span><span class="n">p</span> 进行再赋值居然也可以（他的平台上运行并没有引发什么错误）？
+	      <h3>两个 delete 后的问题</h3>
+<p>最近在网上看到两个关于指针 delete 后的问题。第一种情况：</p>
+<div class="codehilite"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">;</span>
+<span class="k">delete</span> <span class="n">p</span><span class="p">;</span>
+<span class="k">delete</span> <span class="n">p</span><span class="p">;</span><span class="c1">// p为什么能delete两次，而程序运行的时候还不报错。</span>
 </pre></div>
 
 
-</p>
+<p>第二种情况：</p>
+<div class="codehilite"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span> <span class="p">;</span>
+<span class="k">delete</span> <span class="n">p</span><span class="p">;</span>
+<span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>     <span class="c1">//delete后对*p进行再赋值居然也可以（他的平台上运行并没有引发什么错误）？</span>
+</pre></div>
 
-<p>在回答这两个问题之前，我们先想想 delete p; 这一语句意味着什么？ p
-指向一个地址，以该地址为起始地址保存有一个int
-变量（虽然该变量并没有进行初始化），delete p 之后 p
-所指向的地址空间被释放，也就是说这个 int 变量的生命结束，但是 p
-仍旧是一个合法的指针，它仍旧指向原来的地址，而且该地址仍旧代表着一个合法的程序空间。与
-delete
-之前唯一的不同是，你已经丧失了那快程序空间的所有权。这带来一个什么样的问题？你租了一间储物室（<span style="color: blue">int</span>*
-p=<span style="color: blue">new int </span>;
-），后来退租了（<span style="color: blue">delete </span>p;
-），但你却保存了出入该储物室的钥匙（指针
-p）没有归还。拥有这片钥匙，你或许什么都不做，这自然没有问题。但是：</p>
-</p>
 
-<p>你或许出于好心，又跑过去告诉房东，“Hi！这储物室已经退租了（第一种情况）”。哦噢，会发生什么？我们假设此时这个房子已经有了新的租客。愚笨的房东直接相信了你的话，认为这个储物室空着，把它又租给新的人。于是一间只能给一个人用的储物室，却租给了两个人，再之后各种难以预料的情况就会发生。</p>
-</p>
-
-<p>又或许，你很无耻，你虽然退租，但却想用你的钥匙依旧享有储物室的使用权（第二种情况），结果呢，你存在这间储物室的东西可能会被现在的租客丢掉，而你也可能把他的东西丢掉，腾出空间来放你的。</p>
-</p>
-
-<p>回到上面的程序上来，毫无疑问的是上面的程序在语法上来讲是合乎规范的，但是暗藏着很大的逻辑错误，不论你对一块已经释放的内存再度
-delete ，还是再度给它赋值，都暗含着很大的危险，因为当你 delete
-后，就代表着将这块内存归还。而这块被归还的内存很可能已经被再度分配出去，此时不论是你再度
-delete
-还是重新赋值，都将破坏其它代码的数据，同时你存储在其中的数据也很容易被覆盖。至于报不报错，崩不崩溃，这取决于有一个怎么样的“房东”，聪明且负责的“房东”会阻止你上述的行为——终止你的程序，懒惰的房东，则听之任之。</p>
-</p>
-
-<p>上述情况下的指针p
-被称为野指针——指向了一块“垃圾内存”，或者说指向了一块不应该读写的内存。避免野指针的好方法是，当一个指针变为野指针的时候，马上赋值为NULL，其缘由在于，你可以很容易的判断一个指针是否为NULL,却难以抉择其是否为野指针。而且，delete
+<p>在回答这两个问题之前，我们先想想delete p; 这一语句意味着什么？p指向一个地址，以该
+地址为起始地址保存有一个<code>int</code>变量（虽然该变量并没有进行初始化），<code>delete p</code>之后<code>p</code>
+所指向的地址空间被释放，也就是说这个<code>int</code>变量的生命结束，但是<code>p</code>仍旧是一个合法的指
+针，它仍旧指向原来的地址，而且该地址仍旧代表着一个合法的程序空间。与<code>delete</code>之前唯
+一的不同是，你已经丧失了那快程序空间的所有权。这带来一个什么样的问题？你租了一间储
+物室（<code>int* p = new int;</code>），后来退租了（<code>delete p;</code>），但你却保存了出入该储物室的
+钥匙（指针<code>p</code>）没有归还。拥有这片钥匙，你或许什么都不做，这自然没有问题。但是：</p>
+<p>你或许出于好心，又跑过去告诉房东，“Hi！这储物室已经退租了（第一种情况）”。哦噢，会
+发生什么？我们假设此时这个房子已经有了新的租客。愚笨的房东直接相信了你的话，认为这
+个储物室空着，把它又租给新的人。于是一间只能给一个人用的储物室，却租给了两个人，再
+之后各种难以预料的情况就会发生。</p>
+<p>又或许，你很无耻，你虽然退租，但却想用你的钥匙依旧享有储物室的使用权（第二种情况），
+结果呢，你存在这间储物室的东西可能会被现在的租客丢掉，而你也可能把他的东西丢掉，腾
+出空间来放你的。</p>
+<p>回到上面的程序上来，毫无疑问的是上面的程序在语法上来讲是合乎规范的，但是暗藏着很大
+的逻辑错误，不论你对一块已经释放的内存再度<code>delete</code>，还是再度给它赋值，都暗含着很大
+的危险，因为当你delete后，就代表着将这块内存归还。而这块被归还的内存很可能已经被再
+度分配出去，此时不论是你再度<code>delete</code>还是重新赋值，都将破坏其它代码的数据，同时你存
+储在其中的数据也很容易被覆盖。至于报不报错，崩不崩溃，这取决于有一个怎么样的“房东”，
+聪明且负责的“房东”会阻止你上述的行为——终止你的程序，懒惰的房东，则听之任之。</p>
+<p>上述情况下的指针p被称为野指针——指向了一块“垃圾内存”，或者说指向了一块不应该读写的
+内存。避免野指针的好方法是，当一个指针变为野指针的时候，马上赋值为<code>NULL</code>，其缘由在
+于，你可以很容易的判断一个指针是否为<code>NULL</code>,却难以抉择其是否为野指针。而且，<code>delete</code>
 一个空指针，不会做任何操作，因此总是安全的。</p>
-</p>
-
 <h3>不用一个基类指针指向派生类数组？</h3>
-</p>
-
-<p>《深度探索C++
-对象模型》中指出，不要用一个基类指针指向派生类的数组。因为在他的cfront中的vec_delete是根据被删除指针的类型来调用析构函数——也就是说虚函数机制，在这儿不起作用了。照这样的思路来说，对一个派生类的数组依次调用其基类的析构函数，显然大多时候不能正确析构——派生类一般大于其基类。但是我感兴趣的一点是，这么多年过去了，这样一个不太合理的设计是否有所改进呢？说它不太合理是，以C++编程者的思路，在这样一种情况下，它应该支持多态，而且在这种情况下支持多态并不需要太复杂的机制和代价。我在vc++
-2008 和 vc++ 2010 下的结果是：是的，有与cfront不同，它支持多态。</p>
-</p>
-
+<p>《深度探索C++对象模型》中指出，不要用一个基类指针指向派生类的数组。因为在他的
+cfront中的<code>vec_delete</code>是根据被删除指针的类型来调用析构函数——也就是说虚函数机制在这
+儿不起作用了。照这样的思路来说，对一个派生类的数组依次调用其基类的析构函数，显然大
+多时候不能正确析构——派生类一般大于其基类。但是我感兴趣的一点是，这么多年过去了，这
+样一个不太合理的设计是否有所改进呢？说它不太合理是，以C++编程者的思路，在这样一种情
+况下，它应该支持多态，而且在这种情况下支持多态并不需要太复杂的机制和代价。我在vc++
+2008和vc++ 2010下的结果是：是的，有与cfront不同，它支持多态。</p>
 <p>我的测试代码如下：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">class</span> <span class="n">point</span><span class="p">{</span>
-<span class="n">public</span><span class="p">:</span>
-       <span class="n">virtual</span> <span class="o">~</span><span class="n">point</span><span class="p">(){</span>
-           <span class="n">std</span><span class="p">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span>&quot;<span class="n">point</span><span class="p">::</span><span class="o">~</span><span class="n">point</span><span class="p">()</span>&quot;<span class="o">&lt;&lt;</span><span class="n">std</span><span class="p">::</span><span class="n">endl</span><span class="p">;</span>
+<div class="codehilite"><pre><span class="k">class</span> <span class="nc">point</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+       <span class="k">virtual</span> <span class="o">~</span><span class="n">point</span><span class="p">(){</span>
+           <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;point::~point()&quot;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
        <span class="p">}</span>
-<span class="n">private</span><span class="p">:</span>
-    <span class="n">int</span>  <span class="n">a</span><span class="p">;</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="kt">int</span>  <span class="n">a</span><span class="p">;</span>
 <span class="p">};</span>
-<span class="n">class</span> <span class="n">point3d</span><span class="p">:</span><span class="n">public</span> <span class="n">point</span><span class="p">{</span>
-<span class="n">public</span><span class="p">:</span>
-    <span class="n">virtual</span> <span class="o">~</span><span class="n">point3d</span><span class="p">()</span>
+<span class="k">class</span> <span class="nc">point3d</span><span class="o">:</span><span class="k">public</span> <span class="n">point</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">point3d</span><span class="p">()</span>
        <span class="p">{</span>
-            <span class="n">std</span><span class="p">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span>&quot;<span class="n">point3d</span><span class="p">::</span><span class="o">~</span><span class="n">point3d</span><span class="p">()</span>&quot;<span class="o">&lt;&lt;</span><span class="n">std</span><span class="p">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;point3d::~point3d()&quot;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
        <span class="p">}</span>
-<span class="n">private</span><span class="p">:</span>
-    <span class="n">int</span> <span class="n">b</span><span class="p">;</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
 <span class="p">};</span>
-<span class="n">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="n">point</span> <span class="o">*</span><span class="n">p</span><span class="p">=</span><span class="n">new</span> <span class="n">point3d</span><span class="p">[</span>2<span class="p">];</span>
-    <span class="n">delete</span><span class="p">[]</span> <span class="n">p</span><span class="p">;</span>
-    <span class="n">system</span><span class="p">(</span>&quot;<span class="n">pause</span>&quot;<span class="p">);</span>
+    <span class="n">point</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="k">new</span> <span class="n">point3d</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="k">delete</span><span class="p">[]</span> <span class="n">p</span><span class="p">;</span>
+    <span class="n">system</span><span class="p">(</span><span class="s">&quot;pause&quot;</span><span class="p">);</span>
 <span class="p">}</span> <span class="p">;</span>
 </pre></div>
 
 
-</p>
-
 <p>输出的结果，也令人满意：</p>
-</p>
-
-<p>[<img alt="image" src="http://www.roading.org/wp-content/uploads/2011/12/image_thumb1.png" title="image" />][]</p>
-</p>
-
-</p>
-
-</p>
-
-</p>
-
-</p>
-
+<p><img alt="VC输出的结果" src="http://www.roading.org/images/2011-12/image_thumb1.png" /></p>
 <p>确实调用了派生类的析构函数，而非基类的析构函数。</p>
-</p>
-
-<p>即使如此，是否能安心的使用一个基类指针指向派生类数组？我不太安心！——对于基类的析构函数是否为虚函数没有把握。所以最好还是不要把一个基类的指针指向派生类数组。非得这么做？那么我认为
-delete 的时候将之类类型转换为派生类就差不多了，可以这样:</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">delete</span><span class="p">[]</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="n">point3d</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<p>即使如此，是否能安心的使用一个基类指针指向派生类数组？我不太安心！——对于基类的析构
+函数是否为虚函数没有把握。所以最好还是不要把一个基类的指针指向派生类数组。非得这么
+做？那么我认为<code>delete</code>的时候将之类类型转换为派生类就差不多了，可以这样:</p>
+<div class="codehilite"><pre><span class="k">delete</span><span class="p">[]</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">point3d</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
 </pre></div>
 
-
-</p>
 
 <p>似乎不必要像Lippman说的这样：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="k">for</span> <span class="p">(</span> <span class="n">int</span> <span class="n">ix</span> <span class="p">=</span> 0<span class="p">;</span> <span class="n">ix</span> <span class="o">&lt;</span> <span class="n">elem_count</span><span class="p">;</span> <span class="o">++</span><span class="n">ix</span> <span class="p">)</span> 
+<div class="codehilite"><pre><span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">ix</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">ix</span> <span class="o">&lt;</span> <span class="n">elem_count</span><span class="p">;</span> <span class="o">++</span><span class="n">ix</span> <span class="p">)</span> 
 <span class="p">{</span>  
-   <span class="n">Point3d</span> <span class="o">*</span><span class="n">p</span> <span class="p">=</span> <span class="o">&amp;</span><span class="p">((</span><span class="n">Point3d</span><span class="o">*</span><span class="p">)</span><span class="n">ptr</span><span class="p">)[</span> <span class="n">ix</span> <span class="p">];</span>  
-   <span class="n">delete</span> <span class="n">p</span><span class="p">;</span>  
-<span class="p">}</span>  
+   <span class="n">Point3d</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">((</span><span class="n">Point3d</span><span class="o">*</span><span class="p">)</span><span class="n">ptr</span><span class="p">)[</span> <span class="n">ix</span> <span class="p">];</span>  
+   <span class="k">delete</span> <span class="n">p</span><span class="p">;</span>  
+<span class="p">}</span>
 </pre></div>
 
 
-</p>
-
 <p>参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。</p>
-</p>
-
-<p><em><font face="微软雅黑">欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。</font></em></p>
-</p>
-
-<p><em>2011/12/2 By Adoo | Homepage:</em><a href="http://www.roading.org"><em>www.roading.org</em></a></p>
-</p>
-
-<p>[<img alt="image" src="http://www.roading.org/wp-content/uploads/2011/12/image_thumb1.png" title="image" />]: http://www.roading.org/wp-content/uploads/2011/12/image1.png</p>
 		  <p style= "text-align:right;"><em>
-		  Mon 05 December 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周一 05 十二月 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html">本文原链</a>)</em></p>
@@ -470,7 +423,7 @@ delete 的时候将之类类型转换为派生类就差不多了，可以这样:
 		
 		
 		   
-		   <li><a title="EH &amp; RTTI" href="http://www.roading.org/develop/cpp/eh-rtti.html">EH &amp; RTTI</a></li>
+		   <li><a title="EH & RTTI" href="http://www.roading.org/develop/cpp/eh-rtti.html">EH & RTTI</a></li>
 		   
 		
 		
@@ -494,17 +447,17 @@ delete 的时候将之类类型转换为派生类就差不多了，可以这样:
 		
 		
 		   
-		   <li><a title="new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（3）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html">new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（3）</a></li>
+		   <li><a title="new expression、operator new和placement new——三个“妞（new）”的故事（3）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html">new expression、operator new和placement new——三个“妞（new）”的故事（3）</a></li>
 		   
 		
 		
 		
-		   <li class="selected">new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（2）</li>
+		   <li class="selected">new expression、operator new和placement new——三个妞（new）的故事（2）</li>
 		
 		
 		
 		   
-		   <li><a title="new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（1）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html">new expression、operator new 和 placement new&#8212;&#8212;三个&#8220;妞（new）&#8221;的故事（1）</a></li>
+		   <li><a title="new expression、operator new 和 placement new——三个妞（new）的故事（1）" href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html">new expression、operator new 和 placement new——三个妞（new）的故事（1）</a></li>
 		   
 		
 		
