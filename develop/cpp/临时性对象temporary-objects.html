@@ -43,74 +43,74 @@
 					
 				
 					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
     					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
     					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 					
 				
@@ -203,7 +203,7 @@
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-12-06T17:48:00">
-                周二 06 十二月 2011
+                Tue 06 December 2011
         </abbr>
         
         <address class="article_author">
@@ -211,11 +211,13 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
@@ -223,199 +225,96 @@
 	
 	
 </div><!-- /.post-info -->
-	      <ul>
-<li>摘要：本文为《深度探索C++对象模型》第六章——执行期语意学（Runtime
-    Semantics）笔记之一，主要内容包括临时性对象的创建和临时性对象的生命周期。</li>
-<li>学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。</li>
-</ul>
-<div align="right">
-*2011/12/6 By Adoo | Homepage:*[*www.roading.org*][]
-
-</div>
-
-<div align="left">
-
-* * * * *
-
-</div>
-
-<h3>何时生成临时对象</h3>
+	      <h3>何时生成临时对象</h3>
 <p>对于一个下面这样的程序片段：</p>
 <div class="codehilite"><pre><span class="n">T</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
-<span class="n">T</span> <span class="n">c</span><span class="p">=</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
+<span class="n">T</span> <span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
 </pre></div>
 
 
-</p>
-
-<p>死板一点来讲，它应当产生一个临时对象用来存储 a+b
-的结果，然后以临时对象作为初值调用拷贝构造函数初始化对象c。而实际上编译器更愿意直接调用拷贝构造函数的方式将
-a+b
-的值放到c中，这样就不需要临时对象，和它的构造函数和拷贝构造函数的调用了。</p>
-</p>
-
-<p>更进一步，如果 operator +
-的定义符合NRV优化的条件，那么NRV优化的开启，将使得拷贝构造函数的调用和
-named object
-的析构函数都免了。期间详情可以参见”<a href="http://www.roading.org/?p=544">NRV优化</a>”。也就是说对于上面那种情形在我们的代码中是不产生临时对象的。但是对于一个情况非常类似的赋值操作语句，却有很大的差别，那个临时变量是不能省的:</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">c</span><span class="p">=</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
-</pre></div>
-
-
-</p>
-
-<p>不能忽略临时对象，反而导致如下结果：</p>
-<p></p>
-<p></p>
+<p>死板一点来讲，它应当产生一个临时对象用来存储a+b的结果，然后以临时对
+象作为初值调用拷贝构造函数初始化对象c。而实际上编译器更愿意直接调用
+拷贝构造函数的方式将a+b的值放到c中，这样就不需要临时对象，和它的构造
+函数和拷贝构造函数的调用了。</p>
+<p>更进一步，如果operator +的定义符合NRV优化的条件，那么NRV优化的开启，
+将使得拷贝构造函数的调用和named object的析构函数都免了。期间详情可
+以参见”<a href="http://www.roading.org/?p=544">NRV优化</a>”。也就是说对于上面那种情形在我们的代码中是不产生
+临时对象的。但是对于一个情况非常类似的赋值操作语句<code>c = a+b</code>，却有很
+大的差别，那个临时变量是不能省的</p>
+<p>不能忽略临时对象，反而导致如下过程：</p>
 <div class="codehilite"><pre><span class="c1">// Pseudo C++ code  </span>
 <span class="c1">// T temp = a + b;  </span>
 <span class="no">T</span> <span class="n">temp</span><span class="p">;</span>  
-<span class="n">a</span><span class="p">.</span><span class="n">operator</span><span class="o">+</span><span class="p">(</span> <span class="n">temp</span><span class="p">,</span> <span class="n">b</span> <span class="p">);</span> <span class="c1">// 【1】 1 </span>
+<span class="n">a</span><span class="p">.</span><span class="n">operator</span><span class="o">+</span><span class="p">(</span> <span class="n">temp</span><span class="p">,</span> <span class="n">b</span> <span class="p">);</span>     <span class="c1">// @1 [^注1]</span>
 
 <span class="c1">// c = temp  </span>
-<span class="n">c</span><span class="p">.</span><span class="n">operator</span> <span class="o">=</span><span class="p">(</span> <span class="n">temp</span> <span class="p">);</span> <span class="c1">// 2  </span>
-<span class="n">temp</span><span class="p">.</span><span class="no">T</span><span class="o">::~</span><span class="no">T</span><span class="p">();</span>  
+<span class="n">c</span><span class="p">.</span><span class="n">operator</span> <span class="o">=</span><span class="p">(</span> <span class="n">temp</span> <span class="p">);</span>       <span class="c1">// @2  </span>
+<span class="n">temp</span><span class="p">.</span><span class="no">T</span><span class="o">::~</span><span class="no">T</span><span class="p">();</span>
 </pre></div>
 
 
-</p>
-
-<p>在代码 1
-处，表明以拷贝构造函数或NRV方式将结果保存的临时对象中。为什么不能省略那个临时对象，比如直接这样：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">c</span><span class="p">.</span><span class="n">T</span><span class="p">::</span><span class="o">~</span><span class="n">T</span><span class="p">();</span>
-<span class="n">c</span><span class="p">.</span><span class="n">T</span><span class="p">::</span><span class="n">T</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">);</span>
+<p>在代码@1处，表明以拷贝构造函数或NRV方式将结果保存的临时对象中。为什
+么不能省略那个临时对象，比如直接这样：</p>
+<div class="codehilite"><pre><span class="n">c</span><span class="p">.</span><span class="n">T</span><span class="o">::~</span><span class="n">T</span><span class="p">();</span>
+<span class="n">c</span><span class="p">.</span><span class="n">T</span><span class="o">::</span><span class="n">T</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">);</span>
 </pre></div>
 
 
-</p>
-
-<p>这不是更高效，更简洁的方式吗？不行，其原因在于，
-拷贝构造函数、析构函数以及赋值操作符都可以有使用证提供，没有人能保证，析构函数加拷贝构造函数的组合和赋值操作符具有相同的含义。所以：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">T</span> <span class="n">c</span><span class="p">=</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
-</pre></div>
-
-
-</p>
-
-<p>总是比下面的操作更有效率：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">c</span><span class="p">=</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
-</pre></div>
-
-
-</p>
-
-<p>对于一个没有出现目标对象的表达式：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
-</pre></div>
-
-
-</p>
-
-<p>那么产生一个临时对象来存储运算结果，则是非常必要的。</p>
-</p>
-
+<p>这不是更高效，更简洁的方式吗？不行，其原因在于，拷贝构造函数、析构
+函数以及赋值操作符都可以由使用者提供，没有人能保证，析构函数加拷贝
+构造函数的组合和赋值操作符具有相同的含义。所以：<code>T c=a+b</code>总是比
+<code>c = a + b</code>更有效率。</p>
+<p>对于一个没有出现目标对象的表达式<code>a + b</code>,那么产生一个临时对象来存储
+运算结果，则是非常必要的。</p>
 <h3>临时对象的生命周期</h3>
-</p>
-
-<p>很多时候，产生临时对象是必不可少的，但是何时摧毁一个临时对象才是最佳行为呢？过早或过晚都不太适合，过早有可能使得程序错误，过晚的话又使得资源没有得到及时回收。对于下面的程序：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">string</span> <span class="n">s1</span><span class="p">(</span>&quot;<span class="n">hello</span> &quot;<span class="p">),</span> <span class="n">s2</span><span class="p">(</span>&quot;<span class="n">world</span> &quot;<span class="p">),</span><span class="n">s3</span><span class="p">(</span>&quot;<span class="n">by</span> <span class="n">Adoo</span>&quot;<span class="p">);</span>
-<span class="n">std</span><span class="p">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">s1</span><span class="o">+</span><span class="n">s2</span><span class="o">+</span><span class="n">s3</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="p">::</span><span class="n">endl</span><span class="p">;</span>
+<p>很多时候，产生临时对象是必不可少的，但是何时摧毁一个临时对象才是最
+佳行为呢？过早或过晚都不太适合，过早有可能使得程序错误，过晚的话又
+使得资源没有得到及时回收。对于下面的程序：</p>
+<div class="codehilite"><pre><span class="n">string</span> <span class="n">s1</span><span class="p">(</span><span class="s">&quot;hello &quot;</span><span class="p">),</span> <span class="n">s2</span><span class="p">(</span><span class="s">&quot;world &quot;</span><span class="p">),</span><span class="n">s3</span><span class="p">(</span><span class="s">&quot;by Adoo&quot;</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">s1</span><span class="o">+</span><span class="n">s2</span><span class="o">+</span><span class="n">s3</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 
 
-</p>
-
-<p>显然保存 s1+s2
-结果的临时对象，如果在与s3进行加法之前析构，将会带来大麻烦。与是C++
-标准中有一条：</p>
-</p>
-
+<p>显然保存<code>s1+s2</code>结果的临时对象，如果在与s3进行加法之前析构，将会带来
+大麻烦。于是C++标准中有一条：</p>
 <ul>
-<li>临时性对象的摧毁应当作为造成产生这个临时对象的完整表达式的最后一个步骤。</li>
+<li>临时性对象的摧毁应当作为造成产生这个临时对象的完整表达式的最后
+一个步骤。</li>
 </ul>
-</p>
-
-<p>完整的表达式，是指涵括的表达式中最外围的那个。我们再看上面那个字符串相加的表达式，当计算完成，而cout还未调用，此时我们析构掉存储最终结果的临时对象，岂不悲剧。其实上面的规定还有两个例外：</p>
-</p>
-
+<p>完整的表达式，是指涵括的表达式中最外围的那个。我们再看上面那个字符
+串相加的表达式，当计算完成，而cout还未调用，此时我们析构掉存储最终
+结果的临时对象，岂不悲剧。其实上面的规定还有两个例外：</p>
 <ol>
-<li>凡含有表达式执行结果的临时性对象，应该保存到 Object
-    的初始化操作完成为止。</li>
-<li>如果临时性对象被绑定与一个引用，临时对象将残留，直至被初始化的引用的生命结束，或直到临时对象的生命周期结束——视哪一种情况先达到，对应于这种情况：</li>
+<li>凡含有表达式执行结果的临时性对象，应该保存到Object的初始化操作
+    完成为止。</li>
+<li>
+<p>如果临时性对象被绑定与一个引用，临时对象将残留，直至被初始化的
+    引用的生命结束，或直到临时对象的生命周期结束——视哪一种情况先达
+    到，对应于这种情况：</p>
+<div class="codehilite"><pre><span class="o">::</span><span class="n">string</span> <span class="n">s1</span><span class="p">(</span><span class="s">&quot;hello &quot;</span><span class="p">);</span>
+<span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="o">=</span><span class="n">s1</span><span class="o">+</span><span class="s">&quot;world&quot;</span><span class="p">;</span>
+</pre></div>
+
+
+</li>
 </ol>
-<div class="codehilite"><pre><span class="n">std</span><span class="p">::</span><span class="n">string</span> <span class="n">s1</span><span class="p">(</span>&quot;<span class="n">hello</span> &quot;<span class="p">);</span>
-<span class="n">std</span><span class="p">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">=</span><span class="n">s1</span><span class="o">+</span>&quot;<span class="n">world</span>&quot;<span class="p">;</span>
-</pre></div>
-
-
-</p>
-
-</p>
-
-<p>注【1】：侯捷认为此处为 Lippman 的错误，他认为应该
-temp.<span style="color: blue">operator</span>+( a, b );
-但我以为是侯捷并没有理解 Lippman 的意思，回顾一下,《深度探索对象模型》2.3
-讲到的返回值初始化(Return Value
-Initialization)——返回值将作为一个额外的参数提供给函数，来传回函数内部的值，也就是说对于一个
-operator + 操作符：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">T</span> <span class="n">T</span><span class="p">::</span><span class="n">operator</span><span class="o">+</span> <span class="p">(</span><span class="n">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">right</span><span class="p">);</span>
-</pre></div>
-
-
-</p>
-
-<p>将转化为：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">void</span> <span class="n">T</span><span class="p">::</span><span class="n">operator</span><span class="o">+</span> <span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">result</span> <span class="p">,</span><span class="n">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">right</span><span class="p">);</span>
-</pre></div>
-
-
-</p>
-
-<p>所以</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">temp</span><span class="p">=</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
-</pre></div>
-
-
-</p>
-
-<p>是</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">a</span><span class="p">.</span><span class="n">operator</span><span class="o">+</span><span class="p">(</span> <span class="n">temp</span><span class="p">,</span> <span class="n">b</span> <span class="p">);</span>   
-</pre></div>
-
-
-<p>还是：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">temp</span><span class="p">.</span><span class="n">operator</span><span class="o">+</span><span class="p">(</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">);</span>   
-</pre></div>
-
-
-</p>
-
-<p>自然不言而喻。</p>
-</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:注1">
+<p>侯捷认为此处为 Lippman 的错误，他认为应该为
+<code>temp.operator + ( a, b )</code>但我以为是侯捷并没有理解Lippman的意思，回
+顾一下,《深度探索对象模型》2.3讲到的返回值初始化(Return Value 
+Initialization)——返回值将作为一个额外的参数提供给函数，来传回函数内
+部的值，也就是说对于一个 operator + 操作符
+<code>T T::operator+ (const T&amp; right)</code>将转化为
+<code>void T::operator+ (T &amp;result ,const T&amp; right)</code>所以<code>temp=a+b</code>是
+<code>a.operator+( temp, b )</code>还是<code>temp.operator+( a, b )</code>自然不言而喻。&#160;<a href="#fnref:注1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 		  <p style= "text-align:right;"><em>
-		  周二 06 十二月 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  Tue 06 December 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//develop/cpp/%e4%b8%b4%e6%97%b6%e6%80%a7%e5%af%b9%e8%b1%a1temporary-objects.html">本文原链</a>)</em></p>

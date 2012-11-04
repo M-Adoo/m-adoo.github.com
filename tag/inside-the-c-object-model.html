@@ -43,74 +43,74 @@
 					
 				
 					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
     					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
     					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 					
 				
@@ -202,7 +202,7 @@
                     <h1 class="entry-title"><a  title="Permalink to 《深度探索C++对象模型》笔记汇总" href="http://www.roading.org//develop/cpp/%e3%80%8a%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b%e3%80%8b%e7%ac%94%e8%ae%b0%e6%b1%87%e6%80%bb.html">《深度探索C++对象模型》笔记汇总</a></h1> 
                     <div class="post-info">
         <abbr class="published" title="2011-12-09T22:03:00">
-                周五 09 十二月 2011
+                Fri 09 December 2011
         </abbr>
         
         <address class="article_author">
@@ -273,7 +273,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-09T21:39:00">
-                周五 09 十二月 2011
+                Fri 09 December 2011
         </abbr>
         
         <address class="article_author">
@@ -316,7 +316,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-08T22:24:00">
-                周四 08 十二月 2011
+                Thu 08 December 2011
         </abbr>
         
         <address class="article_author">
@@ -365,7 +365,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-07T17:00:00">
-                周三 07 十二月 2011
+                Wed 07 December 2011
         </abbr>
         
         <address class="article_author">
@@ -416,7 +416,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-06T17:48:00">
-                周二 06 十二月 2011
+                Tue 06 December 2011
         </abbr>
         
         <address class="article_author">
@@ -424,11 +424,13 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
@@ -436,13 +438,17 @@
 	
 	
 </div><!-- /.post-info -->
-                <ul>
-<li>摘要：本文为《深度探索C++对象模型》第六章——执行期语意学（Runtime
-    Semantics）笔记之一，主要内容包括临时性对象的创建和临时性对象的生命周期。</li>
-<li>学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。</li>
-</ul>
-<div align="right">
-*2011/12/6 By Adoo | Homepage ...</div>
+                <h3>何时生成临时对象</h3>
+<p>对于一个下面这样的程序片段：</p>
+<div class="codehilite"><pre><span class="n">T</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+<span class="n">T</span> <span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
+</pre></div>
+
+
+<p>死板一点来讲，它应当产生一个临时对象用来存储a+b的结果，然后以临时对
+象作为初值调用拷贝构造函数初始化对象c。而实际上编译器更愿意直接调用
+拷贝构造函数的方式将a+b的值放到c中，这样就不需要临时对象，和它的构造
+函数和拷贝构造函数的调用了 ...</p>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/%e4%b8%b4%e6%97%b6%e6%80%a7%e5%af%b9%e8%b1%a1temporary-objects.html" rel="bookmark"
                            title="Permalink to 临时性对象(Temporary Objects)">Read more→</a>	
 		<div class="clear"></div>
@@ -464,7 +470,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-06T13:35:00">
-                周二 06 十二月 2011
+                Tue 06 December 2011
         </abbr>
         
         <address class="article_author">
@@ -517,7 +523,7 @@ Semantics）笔记之一，主要内容包括三种情况下的对象构造和�
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-05T15:49:00">
-                周一 05 十二月 2011
+                Mon 05 December 2011
         </abbr>
         
         <address class="article_author">

@@ -43,74 +43,74 @@
 					
 				
 					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
     					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
     					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 					
 				
@@ -189,7 +189,7 @@
 <div class="crumbs">
 <a href="http://www.roading.org" title ="Back to homepage">Home</a> »
 
-<a href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a> »
+<a href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a> »
 
 仿STL 的二叉搜索树的C++实现
 </div>
@@ -203,7 +203,7 @@
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-12-17T23:37:00">
-                周六 17 十二月 2011
+                Sat 17 December 2011
         </abbr>
         
         <address class="article_author">
@@ -211,147 +211,125 @@
         </address>
         		
 	
-	    <abbr title="binary search tree&nbsp;&nbsp;c++&nbsp;&nbsp;Introduction to algorithm&nbsp;&nbsp;stl&nbsp;&nbsp;">
+	    <abbr title="binary search tree&nbsp;&nbsp;c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;stl&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to binary search tree" href="http://www.roading.org/tag/binary-search-tree.html">binary search tree</a>
 	          
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
-		<a title="permalink to Introduction to algorithm" href="http://www.roading.org/tag/introduction-to-algorithm.html">Introduction to algorithm</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 	          
 		<a title="permalink to stl" href="http://www.roading.org/tag/stl.html">stl</a>
 	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to 算法导论" href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-	      <ul>
-<li>摘要：看完导论的 Chapter 12 binary search tree 后，不忘 C++
-    实现一下这个数据结构，学习算法的时候也锻炼下 C++
-    的编码能力。另则，若按照STL的风格来封装搜索二叉树，一是可以培养良好的编程风格，也能好好体会
-    STL 的设计思想。</li>
-<li>学习之作难免浅薄，欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。</li>
-</ul>
-<div align="right">
-*2011/12/17 By Adoo | Homepage:*[*www.roading.org*][]
-
-</div>
-
-<div align="right">
-
-* * * * *
-
-</div>
-
-<p>看完导论的 Chapter 12 binary search tree 后，不忘 C++
-实现一下这个数据结构，学习算法的时候也锻炼下
-C++的编码能力。另则，若按照STL的风格来封装搜索二叉树，一是可以培养良好的编程风格，也能好好体会
-STL 的设计思想。</p>
-<p>模型： BST模板类中有两个嵌套模板类，一个为节点模板，一个为迭代器的模板。</p>
+	      <p>看完导论的Chapter 12 binary search tree后，不忘用C++实现一下这个
+数据结构，学习算法的时候也锻炼下C++的编码能力。另则，若按照STL的
+风格来封装搜索二叉树，一是可以培养良好的编程风格，也能好好体会STL
+的设计思想。</p>
+<p>模型：BST模板类中有两个嵌套模板类，一个为节点模板，一个为迭代器的
+模板。</p>
 <p>编写的时候也订了三条原则：</p>
 <ul>
 <li>效率优先</li>
 <li>接口都通过迭代器操作，不以指针直接进行操作。</li>
-<li>节省时间，毕竟是学习之作，并不是所有应该实现的接口我都实现，只实现一些基本的。</li>
+<li>节省时间，毕竟是学习之作，并不是所有应该实现的接口我都实现，
+    只实现一些基本的。</li>
 </ul>
 <p>如果你看到下面声明的接口中有很多显而易见的不合理之处，比方 BST
-类居然没有接受一对迭代器的构造函数构造，也没有重载接受一对迭代器版本的insert
-函数,一个双向迭代器类重载了自增操作符，却没有重载自减操作符…，凡此种种，请不要惊讶以为此行的目的在于对数据结构的学习，以及学习
-STL 的设计思想，而不在于做重复的工作，下面是关于仿 STL 的
-二叉搜索树的C++我实现了的部分的声明，如果你想看看实现的源码，请<a href="https://skydrive.live.com/redir.aspx?cid=23ad8997f219f41d&amp;resid=23AD8997F219F41D!418&amp;parid=23AD8997F219F41D!417">点击下载(bst.hpp)。</a></p>
+类居然没有接受一对迭代器的构造函数构造，也没有重载接受一对迭代
+器版本的insert函数,一个双向迭代器类重载了自增操作符，却没有重载
+自减操作符…，凡此种种，请不要惊讶以为此行的目的在于对数据结构的
+学习，以及学习STL的设计思想，而不在于做重复的工作，下面是关于仿
+STL的二叉搜索树的C++我实现了的部分的声明，如果你想看看实现的源码，
+请<a href="https://github.com/M-Adoo/Algorithm/blob/master/Coding/bst.hpp">点击我</a></p>
 <div class="codehilite"><pre><span class="c1">//BST.hpp     A data structure which be called  binary search tree </span>
 <span class="c1">//  2011/12/17   By Adoo</span>
 <span class="c1">// homepage:  http://www.roading.org</span>
-<span class="p">#</span><span class="n">ifndef</span> <span class="no">BST_HPP</span>
-<span class="p">#</span><span class="n">define</span> <span class="no">BST_HPP</span>
-<span class="p">#</span><span class="k">include</span><span class="o">&lt;</span><span class="n">iterator</span><span class="o">&gt;</span><span class="c1">// The binary search tree template</span>
-<span class="n">template</span><span class="o">&lt;</span><span class="n">typename</span> <span class="no">T</span><span class="o">&gt;</span>
-<span class="k">class</span> <span class="no">BST</span><span class="p">{</span>
+<span class="cp">#ifndef BST_HPP</span>
+<span class="cp">#define BST_HPP</span>
+<span class="cp">#include&lt;iterator&gt;</span><span class="c1">// The binary search tree template</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">BST</span><span class="p">{</span>
 <span class="k">protected</span><span class="o">:</span>
     <span class="k">struct</span> <span class="n">node</span><span class="p">;</span>
-    <span class="k">class</span> <span class="n">node_iterator</span><span class="p">;</span><span class="nl">public:</span>
+    <span class="k">class</span> <span class="nc">node_iterator</span><span class="p">;</span><span class="k">public</span><span class="o">:</span>
     <span class="k">typedef</span> <span class="n">node_iterator</span> <span class="n">iterator</span><span class="p">;</span>
     <span class="k">typedef</span> <span class="k">const</span> <span class="n">node_iterator</span> <span class="n">const_iterator</span><span class="p">;</span>
-     <span class="no">BST</span><span class="p">();</span>
-    <span class="n">iterator</span> <span class="k">begin</span><span class="p">();</span>
-    <span class="n">iterator</span> <span class="k">end</span><span class="p">();</span>
-    <span class="n">iterator</span> <span class="n">find</span><span class="p">(</span><span class="no">T</span> <span class="n">value</span><span class="p">);</span>
-    <span class="n">iterator</span> <span class="n">insert</span><span class="p">(</span><span class="no">T</span> <span class="n">value</span><span class="p">);</span>
-    <span class="n">template</span><span class="o">&lt;</span><span class="n">typename</span> <span class="n">iter_type</span><span class="o">&gt;</span>
+     <span class="n">BST</span><span class="p">();</span>
+    <span class="n">iterator</span> <span class="n">begin</span><span class="p">();</span>
+    <span class="n">iterator</span> <span class="n">end</span><span class="p">();</span>
+    <span class="n">iterator</span> <span class="n">find</span><span class="p">(</span><span class="n">T</span> <span class="n">value</span><span class="p">);</span>
+    <span class="n">iterator</span> <span class="n">insert</span><span class="p">(</span><span class="n">T</span> <span class="n">value</span><span class="p">);</span>
+    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">iter_type</span><span class="o">&gt;</span>
     <span class="n">iterator</span> <span class="n">insert</span><span class="p">(</span><span class="n">iter_type</span> <span class="n">iter</span><span class="p">);</span>
-    <span class="k">void</span>  <span class="n">eraser</span><span class="p">(</span><span class="n">iterator</span> <span class="n">iter</span><span class="p">);</span>
-    <span class="k">void</span> <span class="n">eraser</span><span class="p">(</span><span class="n">iterator</span> <span class="n">ibeg</span><span class="p">,</span> <span class="n">iterator</span> <span class="n">iend</span><span class="p">);</span>
-    <span class="k">int</span> <span class="n">eraser</span><span class="p">(</span><span class="no">T</span> <span class="n">value</span><span class="p">);</span> 
-    <span class="o">~</span>  <span class="no">BST</span><span class="p">();</span>
+    <span class="kt">void</span>  <span class="n">eraser</span><span class="p">(</span><span class="n">iterator</span> <span class="n">iter</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="n">eraser</span><span class="p">(</span><span class="n">iterator</span> <span class="n">ibeg</span><span class="p">,</span> <span class="n">iterator</span> <span class="n">iend</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">eraser</span><span class="p">(</span><span class="n">T</span> <span class="n">value</span><span class="p">);</span> 
+    <span class="o">~</span>  <span class="n">BST</span><span class="p">();</span>
 
-<span class="nl">private:</span>
+<span class="k">private</span><span class="o">:</span>
     <span class="n">node</span><span class="o">*</span>  <span class="n">_root</span><span class="p">;</span>
 <span class="p">};</span>
 <span class="c1">//The node for binary search tree</span>
-<span class="n">template</span><span class="o">&lt;</span><span class="n">typename</span> <span class="no">T</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="no">BST</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;::</span><span class="n">node</span><span class="p">{</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">BST</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">node</span><span class="p">{</span>
     <span class="n">node</span><span class="p">();</span>
-    <span class="no">T</span>  <span class="n">_value</span><span class="p">;</span>
+    <span class="n">T</span>  <span class="n">_value</span><span class="p">;</span>
     <span class="n">node</span>  <span class="o">*</span><span class="n">_left</span><span class="p">;</span>
     <span class="n">node</span>  <span class="o">*</span><span class="n">_right</span><span class="p">;</span>
     <span class="n">node</span>  <span class="o">*</span><span class="n">_parent</span><span class="p">;</span>
     <span class="c1">// I should implement some override operator at here , but  I omit these. </span>
-<span class="p">};</span><span class="n">template</span><span class="o">&lt;</span><span class="n">typename</span> <span class="no">T</span><span class="o">&gt;</span>
-<span class="k">class</span> <span class="no">BST</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;::</span><span class="nl">node_iterator:</span> 
-    <span class="n">public</span> <span class="n">std</span><span class="o">::</span><span class="n">iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">bidirectional_iterator_tag</span> <span class="p">,</span><span class="n">node</span><span class="o">&gt;</span>
+<span class="p">};</span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">BST</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="nl">node_iterator:</span> 
+    <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">bidirectional_iterator_tag</span> <span class="p">,</span><span class="n">node</span><span class="o">&gt;</span>
 <span class="p">{</span>
-<span class="nl">public:</span>
+<span class="k">public</span><span class="o">:</span>
     <span class="n">node_iterator</span><span class="p">(</span><span class="n">node</span><span class="o">*</span> <span class="n">n</span><span class="p">);</span>
-    <span class="no">T</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">*</span> <span class="p">();</span>
-    <span class="n">node</span><span class="o">*</span> <span class="n">operator</span> <span class="o">-&gt;</span><span class="p">();</span>
-    <span class="n">node_iterator</span> <span class="n">operator</span><span class="o">++</span> <span class="p">();</span>
-    <span class="n">node_iterator</span> <span class="n">operator</span><span class="o">++</span><span class="p">(</span><span class="k">int</span><span class="p">);</span>
+    <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">*</span> <span class="p">();</span>
+    <span class="n">node</span><span class="o">*</span> <span class="k">operator</span> <span class="o">-&gt;</span><span class="p">();</span>
+    <span class="n">node_iterator</span> <span class="k">operator</span><span class="o">++</span> <span class="p">();</span>
+    <span class="n">node_iterator</span> <span class="k">operator</span><span class="o">++</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
     <span class="n">node_iterator</span> <span class="n">min</span><span class="p">();</span>
-    <span class="n">bool</span> <span class="n">operator</span> <span class="o">==</span><span class="p">(</span> <span class="n">node_iterator</span> <span class="n">r_iter</span><span class="p">);</span>
-    <span class="n">bool</span> <span class="n">operator</span> <span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">node_iterator</span> <span class="n">r_iter</span><span class="p">);</span>
+    <span class="kt">bool</span> <span class="k">operator</span> <span class="o">==</span><span class="p">(</span> <span class="n">node_iterator</span> <span class="n">r_iter</span><span class="p">);</span>
+    <span class="kt">bool</span> <span class="k">operator</span> <span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">node_iterator</span> <span class="n">r_iter</span><span class="p">);</span>
     <span class="n">node</span><span class="o">*</span> <span class="n">pointer</span><span class="p">();</span>
-<span class="nl">private:</span>
+<span class="k">private</span><span class="o">:</span>
     <span class="n">node</span><span class="o">*</span> <span class="n">_node</span><span class="p">;</span>
 <span class="p">};</span>
-<span class="p">#</span><span class="n">endif</span>
+<span class="cp">#endif</span>
 </pre></div>
 
 
-</p>
-
-<p>上述部分的实现,使得我们可以类似使用 STL 中的容器一样来操作 BST
-了，当然还应该实现更多的函数以及操作符来提供更多的支持，但就上面实现的那些而言，我们已经可以做类似如下的操作了：</p>
-<p></p>
-<p></p>
+<p>上述部分的实现,使得我们可以类似使用STL中的容器一样来操作BST
+了，当然还应该实现更多的函数以及操作符来提供更多的支持，但就
+上面实现的那些而言，我们已经可以做类似如下的操作了：</p>
 <div class="codehilite"><pre><span class="c1">//用特定的迭代器来遍历 BST</span>
-<span class="k">for</span><span class="p">(</span><span class="no">BST</span><span class="o">&lt;</span><span class="k">int</span><span class="o">&gt;::</span><span class="n">iterator</span>  <span class="n">iter</span><span class="o">=</span><span class="no">B</span><span class="p">.</span><span class="k">begin</span><span class="p">();</span> <span class="n">iter</span> <span class="o">!=</span> <span class="no">B</span><span class="p">.</span><span class="k">end</span><span class="p">();</span> <span class="o">++</span><span class="n">iter</span><span class="p">)</span>
+<span class="k">for</span><span class="p">(</span><span class="n">BST</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">iterator</span>  <span class="n">iter</span><span class="o">=</span><span class="n">B</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">iter</span> <span class="o">!=</span> <span class="n">B</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">iter</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">cout</span><span class="o">&lt;&lt;*</span><span class="n">iter</span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
 
-</p>
-
 <p>接受值类型匹配的其它类型的迭代器来作为插入：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">BST</span><span class="o">&lt;</span><span class="n">int</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
-<span class="k">for</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">int</span><span class="o">&gt;</span><span class="p">::</span><span class="n">iterator</span>   <span class="n">iter</span><span class="p">=</span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">iter</span>!<span class="p">=</span><span class="n">vec</span><span class="p">.</span><span class="k">end</span><span class="p">()</span> <span class="p">;</span> <span class="o">++</span><span class="n">iter</span><span class="p">)</span>
+<div class="codehilite"><pre><span class="n">BST</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">iterator</span>   <span class="n">iter</span><span class="o">=</span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">iter</span><span class="o">!=</span><span class="n">vec</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="p">;</span> <span class="o">++</span><span class="n">iter</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
 
-</p>
-
 <p>…总之，目的是让BST使用起来与STL 一样的风格。</p>
-</p>
 		  <p style= "text-align:right;"><em>
-		  周六 17 十二月 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  Sat 17 December 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">本文原链</a>)</em></p>
@@ -375,12 +353,8 @@ STL 的设计思想，而不在于做重复的工作，下面是关于仿 STL �
 		<ul class="related-articles">
 		
 		
-		
-		
-		
-		
 		   
-		   <li><a title="斐波那契堆(Fibonacci Heaps)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html">斐波那契堆(Fibonacci Heaps)</a></li>
+		   <li><a title="斐波那契堆的C++实现" href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html">斐波那契堆的C++实现</a></li>
 		   
 		
 		
@@ -401,18 +375,16 @@ STL 的设计思想，而不在于做重复的工作，下面是关于仿 STL �
 		
 		
 		
-		
-		
-		
-		
-		
+		   
+		   <li><a title="B-树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">B-树的C++实现</a></li>
+		   
 		
 		
 		
 		
 		
 		   
-		   <li><a title="最长公共子序列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html">最长公共子序列</a></li>
+		   <li><a title="算法导论——平摊分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html">算法导论——平摊分析</a></li>
 		   
 		
 		
@@ -437,9 +409,27 @@ STL 的设计思想，而不在于做重复的工作，下面是关于仿 STL �
 		
 		
 		
+		
+		
+		
+		
 		   
-		   <li><a title="非递归不用栈遍历搜索二叉树" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html">非递归不用栈遍历搜索二叉树</a></li>
+		   <li><a title="C++实现红黑树，仿STL封装" href="http://www.roading.org/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html">C++实现红黑树，仿STL封装</a></li>
 		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 13 Red-Black trees (红黑树)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-13-red-black-trees-%e7%ba%a2%e9%bb%91%e6%a0%91.html">Chapter 13 Red-Black trees (红黑树)</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Radix Tree 基数树" href="http://www.roading.org/algorithm/introductiontoalgorithm/radix-tree-%e5%9f%ba%e6%95%b0%e6%a0%91.html">Radix Tree 基数树</a></li>
+		   
+		
+		
 		
 		
 		
@@ -447,6 +437,28 @@ STL 的设计思想，而不在于做重复的工作，下面是关于仿 STL �
 		
 		
 		
+		   
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 2" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html">Chapter 12 二叉搜索树(Binary Search Tree) 2</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 1" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html">Chapter 12 二叉搜索树(Binary Search Tree) 1</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Solution of CLRS 11.1 exercises" href="http://www.roading.org/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html">Solution of CLRS 11.1 exercises</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -492,7 +504,41 @@ STL 的设计思想，而不在于做重复的工作，下面是关于仿 STL �
 		
 		
 		   
-		   <li><a title="哈希表的C++模板实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html">哈希表的C++模板实现</a></li>
+		   <li><a title="Chapter 10 Exercises and Problems (2)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html">Chapter 10 Exercises and Problems (2)</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 10 Exercises（1）" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html">Chapter 10 Exercises（1）</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="第八章（3） 基数排序（Radix Sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html">第八章（3） 基数排序（Radix Sort）</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="《算法导论》笔记汇总" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e7%b4%a2%e5%bc%95%e8%a1%a8.html">《算法导论》笔记汇总</a></li>
 		   
 		
 		
@@ -510,7 +556,7 @@ STL 的设计思想，而不在于做重复的工作，下面是关于仿 STL �
 		
 		
 		   
-		   <li><a title="第十章 Elementary Data Structures" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html">第十章 Elementary Data Structures</a></li>
+		   <li><a title="算法导论6-3 young tableaus" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba6-3-young-tableaus.html">算法导论6-3 young tableaus</a></li>
 		   
 		
 		
@@ -526,60 +572,8 @@ STL 的设计思想，而不在于做重复的工作，下面是关于仿 STL �
 		
 		
 		   
-		   <li><a title="第八章（4） 桶排序（Bucket sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html">第八章（4） 桶排序（Bucket sort）</a></li>
+		   <li><a title="排序之插入排序与合并排序-C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%8f%92%e5%85%a5%e6%8e%92%e5%ba%8f-insertionsort-c%e5%ae%9e%e7%8e%b0.html">排序之插入排序与合并排序-C++实现</a></li>
 		   
-		
-		
-		
-		
-		
-		   
-		   <li><a title="算法导论 第八章(2) 计数排序(Counting Sort)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html">算法导论 第八章(2) 计数排序(Counting Sort)</a></li>
-		   
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		   
-		   <li><a title="第七章（2） 快速排序 课后7.4-5" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html">第七章（2） 快速排序 课后7.4-5</a></li>
-		   
-		
-		
-		
-		
-		
-		   
-		   <li><a title="第七章（1） 快速排序" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html">第七章（1） 快速排序</a></li>
-		   
-		
-		
-		
-		
-		
-		
-		
-		   
-		   <li><a title="利用堆来建立优先级队列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%88%a9%e7%94%a8%e5%a0%86%e6%9d%a5%e5%bb%ba%e7%ab%8b%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97.html">利用堆来建立优先级队列</a></li>
-		   
-		
-		
-		
-		
-		
-		   
-		   <li><a title="算法导论之堆排序及其C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html">算法导论之堆排序及其C++实现</a></li>
-		   
-		
-		
-		
-		
 		
 		
 		

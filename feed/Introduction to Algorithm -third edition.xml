@@ -925,7 +925,105 @@ ability to contain large ranges of values with a few exceptions is
 particularly suited to the hierarchical organization of &lt;a href="http://en.wikipedia.org/wiki/IP_address"&gt;IP addresses&lt;/a&gt;
 They are also used for &lt;a href="http://en.wikipedia.org/wiki/Inverted_index"&gt;inverted indexes&lt;/a&gt; of text documents in &lt;a href="http://en.wikipedia.org/wiki/Information_retrieval"&gt;information retrieval&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;无奈的是，上面列举的几个应用方面我都不太熟悉。只好先标记，留待以后发掘吧。&lt;/p&gt;</summary><category term="Problem"></category><category term="radix tree"></category><category term="笔记"></category></entry><entry><title>Chapter 12 二叉搜索树(Binary Search Tree) 2</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html" rel="alternate"></link><updated>2011-12-15T21:39:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-15:/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html</id><summary type="html">&lt;h3&gt;前驱和后继(Successor and predecessor)&lt;/h3&gt;
+&lt;p&gt;无奈的是，上面列举的几个应用方面我都不太熟悉。只好先标记，留待以后发掘吧。&lt;/p&gt;</summary><category term="Problem"></category><category term="radix tree"></category><category term="笔记"></category></entry><entry><title>仿STL 的二叉搜索树的C++实现</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="alternate"></link><updated>2011-12-17T23:37:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-17:/algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html</id><summary type="html">&lt;p&gt;看完导论的Chapter 12 binary search tree后，不忘用C++实现一下这个
+数据结构，学习算法的时候也锻炼下C++的编码能力。另则，若按照STL的
+风格来封装搜索二叉树，一是可以培养良好的编程风格，也能好好体会STL
+的设计思想。&lt;/p&gt;
+&lt;p&gt;模型：BST模板类中有两个嵌套模板类，一个为节点模板，一个为迭代器的
+模板。&lt;/p&gt;
+&lt;p&gt;编写的时候也订了三条原则：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;效率优先&lt;/li&gt;
+&lt;li&gt;接口都通过迭代器操作，不以指针直接进行操作。&lt;/li&gt;
+&lt;li&gt;节省时间，毕竟是学习之作，并不是所有应该实现的接口我都实现，
+    只实现一些基本的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果你看到下面声明的接口中有很多显而易见的不合理之处，比方 BST
+类居然没有接受一对迭代器的构造函数构造，也没有重载接受一对迭代
+器版本的insert函数,一个双向迭代器类重载了自增操作符，却没有重载
+自减操作符…，凡此种种，请不要惊讶以为此行的目的在于对数据结构的
+学习，以及学习STL的设计思想，而不在于做重复的工作，下面是关于仿
+STL的二叉搜索树的C++我实现了的部分的声明，如果你想看看实现的源码，
+请&lt;a href="https://github.com/M-Adoo/Algorithm/blob/master/Coding/bst.hpp"&gt;点击我&lt;/a&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//BST.hpp     A data structure which be called  binary search tree &lt;/span&gt;
+&lt;span class="c1"&gt;//  2011/12/17   By Adoo&lt;/span&gt;
+&lt;span class="c1"&gt;// homepage:  http://www.roading.org&lt;/span&gt;
+&lt;span class="cp"&gt;#ifndef BST_HPP&lt;/span&gt;
+&lt;span class="cp"&gt;#define BST_HPP&lt;/span&gt;
+&lt;span class="cp"&gt;#include&amp;lt;iterator&amp;gt;&lt;/span&gt;&lt;span class="c1"&gt;// The binary search tree template&lt;/span&gt;
+&lt;span class="k"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;BST&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;protected&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;node_iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;typedef&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;typedef&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;const_iterator&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+     &lt;span class="n"&gt;BST&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;iter_type&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iter_type&lt;/span&gt; &lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="kt"&gt;void&lt;/span&gt;  &lt;span class="n"&gt;eraser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;eraser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;ibeg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;iend&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;eraser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+    &lt;span class="o"&gt;~&lt;/span&gt;  &lt;span class="n"&gt;BST&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+&lt;span class="k"&gt;private&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;  &lt;span class="n"&gt;_root&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;span class="c1"&gt;//The node for binary search tree&lt;/span&gt;
+&lt;span class="k"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;BST&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;T&lt;/span&gt;  &lt;span class="n"&gt;_value&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_left&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_parent&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// I should implement some override operator at here , but  I omit these. &lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;&lt;span class="k"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;BST&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="nl"&gt;node_iterator:&lt;/span&gt; 
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;bidirectional_iterator_tag&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;r_iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;node_iterator&lt;/span&gt; &lt;span class="n"&gt;r_iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;pointer&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="k"&gt;private&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;_node&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;span class="cp"&gt;#endif&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上述部分的实现,使得我们可以类似使用STL中的容器一样来操作BST
+了，当然还应该实现更多的函数以及操作符来提供更多的支持，但就
+上面实现的那些而言，我们已经可以做类似如下的操作了：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//用特定的迭代器来遍历 BST&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BST&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;  &lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="n"&gt;iter&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;cout&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;*&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;接受值类型匹配的其它类型的迭代器来作为插入：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;BST&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vector&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;   &lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;vec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="n"&gt;vec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;…总之，目的是让BST使用起来与STL 一样的风格。&lt;/p&gt;</summary><category term="binary search tree"></category><category term="c++"></category><category term="算法导论"></category><category term="stl"></category><category term="笔记"></category></entry><entry><title>Chapter 12 二叉搜索树(Binary Search Tree) 2</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html" rel="alternate"></link><updated>2011-12-15T21:39:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-15:/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html</id><summary type="html">&lt;h3&gt;前驱和后继(Successor and predecessor)&lt;/h3&gt;
 &lt;p&gt;所谓前驱和后继(也许这么翻译，并不太正确，姑且这么叫)是指，指定元素在所有元素顺序排列模式下的前一个元素或后一个元素。&lt;/p&gt;
 &lt;p&gt;要获取一个二叉搜索树中指定结点的后继的直观的办法是，找到所有比指定结点大的结点中最小的。根据二叉搜索树的属性，找比某结点大的元素，可以往两个两个方向走：&lt;/p&gt;
 &lt;ol&gt;
@@ -1146,74 +1244,4 @@ the huge array is valid or not.)&lt;/p&gt;
 否相等即可以。相等表示该数据是要找的数据，否则不是。显而易见，通过这个数据结构模
 型来进行SEARCH, INSERT都为&lt;em&gt;O&lt;/em&gt;(1)。至于DELETE 操作，需要将被删除的数据在栈中的key
 与栈顶存储的key交换后再删除，同样可以达到&lt;em&gt;O&lt;/em&gt;(1)，要注意的是删除过程中，需要更新与
-原栈顶中key相关元素的索引。&lt;/p&gt;</summary><category term="bit vector"></category><category term="Exercises"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>Chapter 10 Exercises and Problems (2)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html" rel="alternate"></link><updated>2011-11-06T17:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-11-06:/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html</id><summary type="html">&lt;h3&gt;Exercises 10.3-4&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;It is often desirable to keep all elements of a doubly linked list compact &amp;gt;in storage, using, for example, the first &lt;em&gt;m&lt;/em&gt; index locations in the &amp;gt;multiple-array representation. (This is the case in a paged, virtual-memory &amp;gt;computing environment.) Explain how the procedures ALLOCATE-OBJECT and FREE-&amp;gt;OBJECT can be implemented so that therepresentation is compact. Assume that &amp;gt;there are no pointers to elements of the linked list outside the list &amp;gt;itself. (&lt;em&gt;Hint:&lt;/em&gt; Use the array implementation of a stack.)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solutions:&lt;/strong&gt;
-用栈来管理空闲资源，并且使得链表的内存紧凑，这表明栈中的空闲资源也是紧凑的，因为若空闲资源不是紧凑的，那分配出去的资源肯定也不是紧凑的。其次，这个栈每一次出栈的资源必然是位置最靠近已分配资源的，这也就是说明该栈中存储的所有空闲资源在位置上是有序的。总而言之，这个问题实质是要我们这样做：对于该双向链表的资源的管理，总是分配最靠近双向链表的空闲资源，而回收时总是回收位置最靠近空闲资源栈的资源。&lt;/p&gt;
-&lt;p&gt;具体操作为，对于资源分配，直接出栈即可。对于资源回收，应当先将其交换到位置最靠近资源回收栈的节点再回收。&lt;/p&gt;
-&lt;p&gt;资源分配的伪代码：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;Allocate_Object&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Stack&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;free&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
-         &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;overflow&amp;quot;&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;free&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;资源回收的伪代码：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;Free_Object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;last_node&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Top&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;free&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
-    &lt;span class="c1"&gt;//remove the x &lt;/span&gt;
-    &lt;span class="n"&gt;List_Delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="c1"&gt;//replace last_node by x&lt;/span&gt;
-    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;last_node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;
-    &lt;span class="n"&gt;last_node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prev&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-    &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prev&lt;/span&gt;
-    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
-    &lt;span class="c1"&gt;//free last_node;&lt;/span&gt;
-    &lt;span class="n"&gt;Push&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;free&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h3&gt;Exercises 10.3-5&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Let &lt;em&gt;L&lt;/em&gt; be a doubly linked list of length &lt;em&gt;m&lt;/em&gt; stored in arrays &lt;em&gt;key&lt;/em&gt;,
-&lt;em&gt;prev&lt;/em&gt;, and &lt;em&gt;next&lt;/em&gt; of length &lt;em&gt;n&lt;/em&gt;. Suppose that these arrays are managed
-by ALLOCATE-OBJECT and FREE-OBJECT procedures that keep a doubly linked
-free list &lt;em&gt;F&lt;/em&gt;. Suppose further that of the &lt;em&gt;n&lt;/em&gt; items, exactly &lt;em&gt;m&lt;/em&gt; are on
-list &lt;em&gt;L&lt;/em&gt; and &lt;em&gt;n-m&lt;/em&gt; are on the free list. Write a procedure
-COMPACTIFY-LIST(&lt;em&gt;L&lt;/em&gt;, &lt;em&gt;F&lt;/em&gt;) that, given the list &lt;em&gt;L&lt;/em&gt; and the free list
-&lt;em&gt;F&lt;/em&gt;, moves the items in &lt;em&gt;L&lt;/em&gt; so that they occupy array positions 1,
-2,..., &lt;em&gt;m&lt;/em&gt; and adjusts the free list &lt;em&gt;F&lt;/em&gt; so that it remains correct,
-occupying array positions &lt;em&gt;m&lt;/em&gt; + 1, &lt;em&gt;m&lt;/em&gt; + 2,..., &lt;em&gt;n&lt;/em&gt;. The running time of
-your procedure should be Θ(&lt;em&gt;m&lt;/em&gt;), and it should use only a constant
-amount of extra space. Give a careful argument for the correctness of
-your procedure.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solutions：&lt;/strong&gt;遍历双向链表，依次将它的节点交换到数组的前m个位置即可，在交换时需要提供一个额外的节点。&lt;/p&gt;
-&lt;h3&gt;Problems 10-2: Mergeable heaps using linked lists&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;A &lt;strong&gt;&lt;em&gt;mergeable heap&lt;/em&gt;&lt;/strong&gt; supports the following operations: MAKE-HEAP
-(which creates an empty mergeable heap), INSERT, MINIMUM, EXTRACT-MIN,
-and UNION&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;.Show how to implement mergeable heaps using linked lists in
-each of the following cases. Try to make each operation as efficient as
-possible. Analyze the running time of each operation in terms of the
-size of the dynamic set(s) being operated on.
-1.  Lists are sorted.
-2.  Lists are unsorted.
-3.  Lists are unsorted, and dynamic sets to be merged are disjoint.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;em&gt;Solution:&lt;/em&gt;*想了快一个小时，没找到什么思路，留待高手来教我。&lt;/p&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:1"&gt;
-&lt;p&gt;Because we have defined a mergeable heap to support MINIMUM and
-EXTRACT-MIN, we can also refer to it as a &lt;strong&gt;&lt;em&gt;mergeable min-heap&lt;/em&gt;&lt;/strong&gt;.
-Alternatively, if it supported MAXIMUM and EXTRACT-MAX, it would be a
-&lt;strong&gt;&lt;em&gt;mergeable max-heap&lt;/em&gt;&lt;/strong&gt;.&amp;#160;&lt;a href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</summary><category term="Exercises"></category><category term="算法导论"></category></entry></feed>
+原栈顶中key相关元素的索引。&lt;/p&gt;</summary><category term="bit vector"></category><category term="Exercises"></category><category term="算法导论"></category><category term="笔记"></category></entry></feed>
