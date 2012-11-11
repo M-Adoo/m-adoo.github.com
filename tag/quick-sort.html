@@ -55,48 +55,46 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
     					
 				
 					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
     					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -210,122 +208,69 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Introduction to algorithm&nbsp;&nbsp;Quick Sort&nbsp;&nbsp;快速排序&nbsp;&nbsp;随机快速排序&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;Quick Sort&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
-		<a title="permalink to Introduction to algorithm" href="http://www.roading.org/tag/introduction-to-algorithm.html">Introduction to algorithm</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 	          
 		<a title="permalink to Quick Sort" href="http://www.roading.org/tag/quick-sort.html">Quick Sort</a>
 	          
-		<a title="permalink to 快速排序" href="http://www.roading.org/tag/kuai-su-pai-xu.html">快速排序</a>
-	          
-		<a title="permalink to 随机快速排序" href="http://www.roading.org/tag/sui-ji-kuai-su-pai-xu.html">随机快速排序</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to Introduction to Algorithm -thrid edition" href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-		    <p>今天在网上看到独酌逸醉关于快排的博客，在随机快排与快排就效率上有一些讨论，引发了我更深入的思考，于是今天晚上花了三个小时，进行实际验证，并作出记录。欢迎大家也加入讨论。
-与独酌的讨论在：<a href="">http://www.cnblogs.com/chinazhangjie/archive/2010/12/09/1901491.html</a></p>
-<h2>1.随机快排并不能带来很多性能提升</h2>
-<p>随机五组数据，每组数据为两万个，每组数据分别用随机快排与快排各执行五次求平均值。
-下面为数据记录（单位 毫秒）：</p>
-<table border="0" cellspacing="0" cellpadding="0">
+		    <p>今天在网上看到独酌逸醉关于快排的博客，在随机快排与快排就效率上有一些讨论，
+引发了我更深入的思考，于是今天晚上花了三个小时，进行实际验证，并作出记录。
+欢迎大家也加入讨论。与独酌的讨<a href="http://www.cnblogs.com/chinazhangjie/archive/2010/12/09/1901491.html">这儿</a>[ # 1.随机快排并不能带来绝对性能提升</p>
+<p>随机五组数据，每组数据为两万个，每组数据分别用随机快排与快排各执行五次求
+平均值。下面为数据记录（单位 毫秒）：</p>
+<table>
+<thead>
+<tr>
+<th>组名</th>
+<th>选用排序方法</th>
+<th>第一次</th>
+<th>第二次</th>
+<th>第三次</th>
+<th>第四次</th>
+<th>第五次</th>
+<th>平均值</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td width="58">
-</td>
-<td width="127">
-</td>
-<td width="58">
-第一次
-
-</td>
-<td width="58">
-第二次
-
-</td>
-<td width="58">
-第三次
-
-</td>
-<td width="58">
-第四次
-
-</td>
-<td width="58">
-第五次
-
-</td>
-<td width="58">
-平均值
-
-</td>
+<td>第一组</td>
+<td>RandomQuicSort</td>
+<td>484</td>
+<td>469</td>
+<td>484</td>
+<td>485</td>
+<td>484</td>
+<td>481.2</td>
 </tr>
 <tr>
-<td rowspan="2" width="58">
-第一组
-
-</td>
-<td width="127">
-RandomQuicSort
-
-</td>
-<td width="58">
-484
-
-</td>
-<td width="58">
-469
-
-</td>
-<td width="58">
-484
-
-</td>
-<td width="58">
-485
-
-</td>
-<td width="58">
-484
-
-</td>
-<td width="58">
-481.2
-
-</td>
+<td></td>
+<td>QuickSort</td>
+<td>484</td>
+<td>485</td>
+<td>484</td>
+<td>485</td>
+<td>484</td>
+<td>484.4</td>
 </tr>
 <tr>
-<td width="127">
-QuicSort
-
-</td>
-<td width="58">
-484
-
-</td>
-<td width="58">
-485
-
-</td>
-<td width="58">
-484
-
-</td>
-<td width="58">
-485
-
-</td>
-<td width="58">
-484
-
-</td>
-<td width="58">
-484.4 ...</td></tr></tbody></table>
+<td>第二组</td>
+<td>RandomQuicSort</td>
+<td>469</td>
+<td>469</td>
+<td>453</td>
+<td>453</td>
+<td>469 ...</td></tr></tbody></table>
 		    <a class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%bf%ab%e6%8e%92%e4%b8%8e%e9%9a%8f%e6%9c%ba%e5%bf%ab%e6%8e%92%e6%95%88%e7%8e%87%e5%88%86%e6%9e%90.html" rel="bookmark"
                            title="Permalink to 快排与随机快排效率分析">Read more→</a>	
                 </article>
@@ -349,7 +294,7 @@ QuicSort
             <li><article class="hentry">    
                 <header>
                     <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html" rel="bookmark"
-                           title="Permalink to 第七章（1） 快速排序">第七章（1） 快速排序</a></h1>
+                           title="Permalink to 快速排序及C++实现">快速排序及C++实现</a></h1>
                 </header>
                 
                 <div class="entry-content">
@@ -363,11 +308,11 @@ QuicSort
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Introduction to algorithm&nbsp;&nbsp;Quick Sort&nbsp;&nbsp;随机快速排序&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;Quick Sort&nbsp;&nbsp;随机快速排序&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
-		<a title="permalink to Introduction to algorithm" href="http://www.roading.org/tag/introduction-to-algorithm.html">Introduction to algorithm</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 	          
 		<a title="permalink to Quick Sort" href="http://www.roading.org/tag/quick-sort.html">Quick Sort</a>
 	          
@@ -375,17 +320,17 @@ QuicSort
 	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to 算法导论" href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-                <p>
-快速排序（Quick
-Sort）在最坏的情况下它的时间复杂度是O（n2），最佳情况下它的时间复杂度是在O(n\*lgn).即使如此，但快速排序往往是实际应用中的排序算法的最佳选择，因为它隐含的常数因子非常小。
-快排是又一个化整为零，各个击破策略的又一个经典应用。与合并排序（Merge
-Sort）有一点不同。合并排序的是直接按数目不断递归划分成小段，然后又层层合并有序段，得出有序结果 ...</p>
+                <p>快速排序（QuickSort）在最坏的情况下它的时间复杂度是O（n2），最佳情况下它的
+时间复杂度是为O(n*lgn).即使如此，但快速排序往往是实际应用中的排序算法的最
+佳选择，因为它隐含的常数因子非常小。</p>
+<p>快排是又一个化整为零，各个击破策略的又一个经典应用。与合并排序（Merge
+Sort）有一点不同。合并排序的是直接按数目不断递归划分成小段，然后又层层合并 ...</p>
                  <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html" rel="bookmark"
-                           title="Permalink to 第七章（1） 快速排序">Read more→</a>	
+                           title="Permalink to 快速排序及C++实现">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>

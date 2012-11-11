@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Adoo's blog - Medians</title>
+        <title>Adoo's blog - DP</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
         
@@ -55,48 +55,46 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
     					
 				
 					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
     					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -199,10 +197,10 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a  title="Permalink to 第九章 中位数和顺序统计量（Medians and Order Statistic）" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html">第九章 中位数和顺序统计量（Medians and Order Statistic）</a></h1> 
+                    <h1 class="entry-title"><a  title="Permalink to 动态规划基础" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html">动态规划基础</a></h1> 
                     <div class="post-info">
-        <abbr class="published" title="2011-10-17T20:38:00">
-                Mon 17 October 2011
+        <abbr class="published" title="2012-03-19T17:47:00">
+                Mon 19 March 2012
         </abbr>
         
         <address class="article_author">
@@ -210,36 +208,40 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Introduction to algorithm&nbsp;&nbsp;Medians&nbsp;&nbsp;Order Statistic&nbsp;&nbsp;">
+	    <abbr title="dynamic programming&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;DP&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to dynamic programming" href="http://www.roading.org/tag/dynamic-programming.html">dynamic programming</a>
 	          
-		<a title="permalink to Introduction to algorithm" href="http://www.roading.org/tag/introduction-to-algorithm.html">Introduction to algorithm</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 	          
-		<a title="permalink to Medians" href="http://www.roading.org/tag/medians.html">Medians</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
-		<a title="permalink to Order Statistic" href="http://www.roading.org/tag/order-statistic.html">Order Statistic</a>
+		<a title="permalink to DP" href="http://www.roading.org/tag/dp.html">DP</a>
 	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to Introduction to Algorithm -thrid edition" href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-		    <h2><span style="font-family: 宋体">概览</span></h2>
-<p><span style="font-family: 宋体">本章主要讲的是如何来获取顺序统计量（Order
-statistic）,所为第i个顺序统计量即是指在一组数种第i小的元素，中位数即是大小位于一组数中间的那个数，如果一组数为偶数个，则有两个中位数，大的叫大中位数（upper
-medians 姑且这么翻译吧），小的叫小中位数（lower
-medians）。可以先考虑几个问题：</span></p>
-<p><span style="font-family: 宋体">1.获取最大或者最小的元素，要比较多少次？</span></p>
-<p><span style="font-family: 宋体">2.同时获取最大或最小的元素，要比较多少次？</span></p>
-<p><span style="font-family: 宋体">3.通过排序来获取顺序统计量的话，是否合理？</span></p>
-<h2><span style="font-family: 宋体">9.1最大值，最小值问题</span></h2>
-<p><span style="font-family: 宋体">获取最大值或者最小值，可以通过一次遍历比较获得。对于规模为n的一组数，需要进行n-1次比较。且这已经是最优方法，因为除了最小的数本身，其它剩余的数都必然要与一个比它更小的数比较一次（不然如何能知道它自己不是最小的数？）。</span></p>
-<h3><span style="font-family: 宋体">同时获取最大值和最小值</span></h3>
-<p><span style="font-family: 宋体">我们可以简单的通过n-1次比较来获得最小值或最大值，那么如果同时获取最大值我们是不是需要进行2n-2次比较呢?看起来2n-2次比较似乎不错了，毕竟它已经是一个线性复杂度的算法了，但是我们其实可以做的更好。只需要3n/2次比较我们就可以得出最大值和最小值，同样还是一个线性复杂度的算法，但其效率可以提高到将近原来的1.333倍。其具体做法是：不直接进行关于最大值最小值的比较，而是先将n个数分对 ...</span></p>
-		    <a class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 第九章 中位数和顺序统计量（Medians and Order Statistic）">Read more→</a>	
+		    <p>前一篇笔记有过一个动态编程的实例——<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89rod-cutting.html">rod cutting</a>。这篇笔记主要了解动态
+规划的基础理论和弄清楚何时运用动态规划。对于何时来运用动态规划来寻得问
+题的解，取决于两个重要因素：最优子结构和重叠子问题。</p>
+<h3>最优子结构(Optimal substructure)</h3>
+<p>如果一个问题的最优解包含了它子问题的最优解，那么这个问题具有最优子结构。
+当一个问题包含有最优子结构时，往往暗示着这个问题应该使用动态规划来解决
+（当然，也可能意味着贪心算法是一种好的的解决办法，这一点会在16章讨论到）
+。</p>
+<p>可以依照一个共同的模式来发现最优子结构：</p>
+<blockquote>
+<ol>
+<li>You show that a solution to the problem consists of a makeing
+   a choice. … <br />
+</li>
+<li>You suppose that for a given porblem, you are given the choice 
+   that lead to an ...</li></ol></blockquote>
+		    <a class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html" rel="bookmark"
+                           title="Permalink to 动态规划基础">Read more→</a>	
                 </article>
 		<div class="clear"></div>
                 
@@ -251,7 +253,7 @@ medians）。可以先考虑几个问题：</span></p>
 
 
 
-    <li class="active"><a href="http://www.roading.org/tag/medians.html">1</a></li>
+    <li class="active"><a href="http://www.roading.org/tag/dp.html">1</a></li>
 
 
 

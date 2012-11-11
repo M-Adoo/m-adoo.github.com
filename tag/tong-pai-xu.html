@@ -55,48 +55,46 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
     					
 				
 					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
     					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -199,7 +197,7 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a  title="Permalink to 第八章（4） 桶排序（Bucket sort）" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html">第八章（4） 桶排序（Bucket sort）</a></h1> 
+                    <h1 class="entry-title"><a  title="Permalink to 桶排序（Bucket sort）" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html">桶排序（Bucket sort）</a></h1> 
                     <div class="post-info">
         <abbr class="published" title="2011-10-04T14:23:00">
                 Tue 04 October 2011
@@ -210,39 +208,43 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Introduction to algorithm&nbsp;&nbsp;桶排序&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;桶排序&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
-		<a title="permalink to Introduction to algorithm" href="http://www.roading.org/tag/introduction-to-algorithm.html">Introduction to algorithm</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 	          
 		<a title="permalink to 桶排序" href="http://www.roading.org/tag/tong-pai-xu.html">桶排序</a>
 	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to 算法导论" href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 	
 	
 </div><!-- /.post-info -->
 		    <h3>算法模型</h3>
-<p>1.桶排序假设待排序的一组数统一的分布在一个范围中，并将这一范围划分成几个子范围，也就是桶。</p>
-<p>2.将待排序的一组数，分档规入这些子桶。并将桶中的数据进行排序。</p>
-<p>3.将各个桶中的数据有序的合并起来。</p>
-<p>仔细想一想，这是不是一种“分治”策略呢？再仔细想一想，计数排序是不是桶排序的一种特化呢？</p>
+<ol>
+<li>桶排序假设待排序的一组数统一的分布在一个范围中，并将这一范围划分成几个
+    子范围，也就是桶。</li>
+<li>将待排序的一组数，分档规入这些子桶。并将桶中的数据进行排序。</li>
+<li>将各个桶中的数据有序的合并起来。</li>
+</ol>
+<p>仔细想一想，这是不是一种“分治”策略呢？再仔细想一想，计数排序是不是桶排序的
+一种特化呢？</p>
 <h3>复杂度：</h3>
-<p>很显然桶排序的时间复杂度，取决与对各个桶之间数据进行排序的时间复杂度，因为其它部分部分的时间复杂度都为O(n);很显然，桶划分的越小，各个桶之间的数据越少，排序所用的时间也会越少。但相应的空间消耗就会增大。</p>
-<p>可以证明，即使选用插入排序作为桶内排序的方法，桶排序的平均时间复杂度为线性。具体证明，请参考算法导论。其空间复杂度也为线性。</p>
-<h3><strong>示意图：</strong></h3>
-<p>[![wps_clip_image-2118[7]][]][]</p>
+<p>很显然桶排序的时间复杂度，取决与对各个桶之间数据进行排序的时间复杂度，因为
+其它部分的时间复杂度都为O(n);很显然，桶划分的越小，各个桶之间的数据越少，排
+序所用的时间也会越少。但相应的空间消耗就会增大。</p>
+<p>可以证明，即使选用插入排序作为桶内排序的方法，桶排序的平均时间复杂度为线性。
+具体证明，请参考算法导论。其空间复杂度也为线性。</p>
+<h3>示意图</h3>
+<p><img alt="bucket-sort" src="http://www.roading.org/images/2011-10/wps_clip_image-21187_thumb.png" /></p>
 <p>伪代码：</p>
-<p>[![wps_clip_image-2294][]][]</p>
-<p>[<br />
-][]</p>
-<h3>与基数排序排序的比较</h3>
-<p>基数排序与桶排序都为线性复杂度的排序算法，基数排序排序更稳定，但它的系数更大。桶排序的时间复杂度，与待排序的数组的分布有关，最差情况下可以为O(n的平方)。</p>
-<p>总的来讲，以个人观点，基数排序与桶排序虽然复杂度为线性，但她们同时都会有各种限制 ...</p>
+<div class="codehilite"><pre><span class="n">Bucket</span><span class="o">-</span><span class="n">Sort</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">let</span> <span class="n">B</span><span class="p">[</span><span class="mf">0.</span><span class="p">.</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="n">be</span> <span class="n">a</span> <span class="n">new</span> <span class="n">array</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A ...</span></pre></div>
 		    <a class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 第八章（4） 桶排序（Bucket sort）">Read more→</a>	
+                           title="Permalink to 桶排序（Bucket sort）">Read more→</a>	
                 </article>
 		<div class="clear"></div>
                 

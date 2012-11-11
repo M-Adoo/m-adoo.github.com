@@ -55,48 +55,46 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
     					
 				
 					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
     					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -200,6 +198,106 @@
             
                 <section id="content" class="body">
                     <ul id="posts-list">
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/%e5%87%a0%e7%82%b9%e7%b1%bb%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99.html" rel="bookmark"
+                           title="Permalink to 几点类设计原则">几点类设计原则</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-30T16:04:00">
+                Wed 30 November 2011
+        </abbr>
+        
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+        		
+	
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+	          
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	          
+	    </abbr>
+	
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+	
+	
+</div><!-- /.post-info -->
+                <p><strong>1.即使是一个抽象基类，如果它有非静态数据成员，也应该给它提供一
+个带参数的构造函数</strong>，来初始化它的数据成员。或许你可以通过其派生
+类来初始化它的数据成员（假如nostatic data member为publish或
+protected）,但这样做的后果则是破坏了数据的封装性，使类的维护和修
+改更加困难。由此引申，类的data member应当被初始化，且只在其构造函
+数或其member ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%87%a0%e7%82%b9%e7%b1%bb%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99.html" rel="bookmark"
+                           title="Permalink to 几点类设计原则">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/c%e4%b9%8b%e8%99%9a%e5%87%bd%e6%95%b0virtual-member-functions.html" rel="bookmark"
+                           title="Permalink to C++之虚函数(Virtual Member Functions)">C++之虚函数(Virtual Member Functions)</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-29T19:50:00">
+                Tue 29 November 2011
+        </abbr>
+        
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+        		
+	
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+	          
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	          
+	    </abbr>
+	
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+	
+	
+</div><!-- /.post-info -->
+                <p>《深度探索C++对象模型》是这样来说多态的:</p>
+<blockquote>
+<p>在C++中,多态表示“以一个public base
+class的指针（或引用），寻址出一个derived class object”的意思。</p>
+</blockquote>
+<h3>消极多态与积极多态</h3>
+<p>用基类指针来寻址继承类的对象，我们可以这样：</p>
+<div class="codehilite"><pre><span class="n">Point</span> <span class="n">ptr</span><span class="o">=</span><span class="k">new ...</span></pre></div>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e4%b9%8b%e8%99%9a%e5%87%bd%e6%95%b0virtual-member-functions.html" rel="bookmark"
+                           title="Permalink to C++之虚函数(Virtual Member Functions)">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+        
+        
+            
+
+        
+         
             
             <li><article class="hentry">    
                 <header>
@@ -345,6 +443,100 @@
             </article></li>
         
         
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html" rel="bookmark"
+                           title="Permalink to Chapter 10 Exercises（1）">Chapter 10 Exercises（1）</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-05T14:49:00">
+                Sat 05 November 2011
+        </abbr>
+        
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+        		
+	
+	    <abbr title="Exercises&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to Exercises" href="http://www.roading.org/tag/exercises.html">Exercises</a>
+	          
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	          
+	    </abbr>
+	
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+	
+	
+</div><!-- /.post-info -->
+                <h3>Exercises 10.1-2★</h3>
+<blockquote>
+<p>Explain how to implement two stacks in one array <em>A</em>[<em>1</em> ‥ <em>n</em>] in such a
+way that ...</p></blockquote>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html" rel="bookmark"
+                           title="Permalink to Chapter 10 Exercises（1）">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0%e4%b9%a0%e9%a2%98%e9%80%89%e5%81%9a.html" rel="bookmark"
+                           title="Permalink to 第九章习题选做">第九章习题选做</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-10-19T15:35:00">
+                Wed 19 October 2011
+        </abbr>
+        
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+        		
+	
+	    <abbr title="算法导论&nbsp;&nbsp;习题&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+	          
+		<a title="permalink to 习题" href="http://www.roading.org/tag/xi-ti.html">习题</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	          
+	    </abbr>
+	
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+	
+	
+</div><!-- /.post-info -->
+                <h3>Exercise 9.1-1</h3>
+<blockquote>
+<p>Show that the second smallest of n elements can be found with  n + ⌈log n⌉ − 2
+comparisons ...</p></blockquote>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0%e4%b9%a0%e9%a2%98%e9%80%89%e5%81%9a.html" rel="bookmark"
+                           title="Permalink to 第九章习题选做">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+        
+        
             </ul><!-- /#posts-list -->
             
                 <div class="pagination">
@@ -364,10 +556,12 @@
 
     <li class="active"><a href="http://www.roading.org/tag/bi-ji4.html">4</a></li>
 
+    <li class=""><a href="http://www.roading.org/tag/bi-ji5.html">5</a></li>
 
 
 
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+    <li class="next"><a href="http://www.roading.org/tag/bi-ji5.html">Next &rarr;</a></li>
 
 
 </ul>

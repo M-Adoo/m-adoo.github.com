@@ -55,48 +55,46 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
     					
 				
 					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
     					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -199,161 +197,8 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a  title="Permalink to 快排与随机快排效率分析" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%bf%ab%e6%8e%92%e4%b8%8e%e9%9a%8f%e6%9c%ba%e5%bf%ab%e6%8e%92%e6%95%88%e7%8e%87%e5%88%86%e6%9e%90.html">快排与随机快排效率分析</a></h1> 
+                    <h1 class="entry-title"><a  title="Permalink to 快速排序及C++实现" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html">快速排序及C++实现</a></h1> 
                     <div class="post-info">
-        <abbr class="published" title="2011-09-25T23:55:00">
-                Sun 25 September 2011
-        </abbr>
-        
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-        		
-	
-	    <abbr title="c++&nbsp;&nbsp;Introduction to algorithm&nbsp;&nbsp;Quick Sort&nbsp;&nbsp;快速排序&nbsp;&nbsp;随机快速排序&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-	          
-		<a title="permalink to Introduction to algorithm" href="http://www.roading.org/tag/introduction-to-algorithm.html">Introduction to algorithm</a>
-	          
-		<a title="permalink to Quick Sort" href="http://www.roading.org/tag/quick-sort.html">Quick Sort</a>
-	          
-		<a title="permalink to 快速排序" href="http://www.roading.org/tag/kuai-su-pai-xu.html">快速排序</a>
-	          
-		<a title="permalink to 随机快速排序" href="http://www.roading.org/tag/sui-ji-kuai-su-pai-xu.html">随机快速排序</a>
-	          
-	    </abbr>
-	
-	<abbr>In <a title="permalink to Introduction to Algorithm -thrid edition" href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a></abbr>
-	
-	
-</div><!-- /.post-info -->
-		    <p>今天在网上看到独酌逸醉关于快排的博客，在随机快排与快排就效率上有一些讨论，引发了我更深入的思考，于是今天晚上花了三个小时，进行实际验证，并作出记录。欢迎大家也加入讨论。
-与独酌的讨论在：<a href="">http://www.cnblogs.com/chinazhangjie/archive/2010/12/09/1901491.html</a></p>
-<h2>1.随机快排并不能带来很多性能提升</h2>
-<p>随机五组数据，每组数据为两万个，每组数据分别用随机快排与快排各执行五次求平均值。
-下面为数据记录（单位 毫秒）：</p>
-<table border="0" cellspacing="0" cellpadding="0">
-<tbody>
-<tr>
-<td width="58">
-</td>
-<td width="127">
-</td>
-<td width="58">
-第一次
-
-</td>
-<td width="58">
-第二次
-
-</td>
-<td width="58">
-第三次
-
-</td>
-<td width="58">
-第四次
-
-</td>
-<td width="58">
-第五次
-
-</td>
-<td width="58">
-平均值
-
-</td>
-</tr>
-<tr>
-<td rowspan="2" width="58">
-第一组
-
-</td>
-<td width="127">
-RandomQuicSort
-
-</td>
-<td width="58">
-484
-
-</td>
-<td width="58">
-469
-
-</td>
-<td width="58">
-484
-
-</td>
-<td width="58">
-485
-
-</td>
-<td width="58">
-484
-
-</td>
-<td width="58">
-481.2
-
-</td>
-</tr>
-<tr>
-<td width="127">
-QuicSort
-
-</td>
-<td width="58">
-484
-
-</td>
-<td width="58">
-485
-
-</td>
-<td width="58">
-484
-
-</td>
-<td width="58">
-485
-
-</td>
-<td width="58">
-484
-
-</td>
-<td width="58">
-484.4 ...</td></tr></tbody></table>
-		    <a class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%bf%ab%e6%8e%92%e4%b8%8e%e9%9a%8f%e6%9c%ba%e5%bf%ab%e6%8e%92%e6%95%88%e7%8e%87%e5%88%86%e6%9e%90.html" rel="bookmark"
-                           title="Permalink to 快排与随机快排效率分析">Read more→</a>	
-                </article>
-		<div class="clear"></div>
-                
-            </aside><!-- /#featured -->
-            
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ul id="posts-list" class="hfeed">
-            
-        
-        
-        
-            
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html" rel="bookmark"
-                           title="Permalink to 第七章（1） 快速排序">第七章（1） 快速排序</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <div class="post-info">
         <abbr class="published" title="2011-09-25T15:59:00">
                 Sun 25 September 2011
         </abbr>
@@ -363,11 +208,11 @@ QuicSort
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Introduction to algorithm&nbsp;&nbsp;Quick Sort&nbsp;&nbsp;随机快速排序&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;Quick Sort&nbsp;&nbsp;随机快速排序&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
-		<a title="permalink to Introduction to algorithm" href="http://www.roading.org/tag/introduction-to-algorithm.html">Introduction to algorithm</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 	          
 		<a title="permalink to Quick Sort" href="http://www.roading.org/tag/quick-sort.html">Quick Sort</a>
 	          
@@ -375,25 +220,30 @@ QuicSort
 	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to 算法导论" href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-                <p>
-快速排序（Quick
-Sort）在最坏的情况下它的时间复杂度是O（n2），最佳情况下它的时间复杂度是在O(n\*lgn).即使如此，但快速排序往往是实际应用中的排序算法的最佳选择，因为它隐含的常数因子非常小。
-快排是又一个化整为零，各个击破策略的又一个经典应用。与合并排序（Merge
-Sort）有一点不同。合并排序的是直接按数目不断递归划分成小段，然后又层层合并有序段，得出有序结果 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html" rel="bookmark"
-                           title="Permalink to 第七章（1） 快速排序">Read more→</a>	
+		    <p>快速排序（QuickSort）在最坏的情况下它的时间复杂度是O（n2），最佳情况下它的
+时间复杂度是为O(n*lgn).即使如此，但快速排序往往是实际应用中的排序算法的最
+佳选择，因为它隐含的常数因子非常小。</p>
+<p>快排是又一个化整为零，各个击破策略的又一个经典应用。与合并排序（Merge
+Sort）有一点不同。合并排序的是直接按数目不断递归划分成小段，然后又层层合并
+有序段，得出有序结果（<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F-insertionsort-c%E5%AE%9E%E7%8E%B0.html">合并排序</a>）。而快排，则是按照一个中枢轴（pivot）
+来划分，即凡是大于中枢轴的分为一段，凡是小于等于中枢轴的分为另一段，对这两
+段又进行快排，显然当迭代到底的时候，排序就完成了。</p>
+<p>来看C++代码：</p>
+<div class="codehilite"><pre><span class="k">template</span>
+<span class="kt">void</span> <span class="n">QuickSort</span><span class="p">(</span><span class="n">Iter</span> <span class="n">BegIter</span><span class="p">,</span> <span class="n">Iter</span> <span class="n">EndIter</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">distance</span><span class="p">(</span><span class="n">BegIter</span><span class="p">,</span><span class="n">EndIter</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span><span class="c1">//if betwen ...</span></pre></div>
+		    <a class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html" rel="bookmark"
+                           title="Permalink to 快速排序及C++实现">Read more→</a>	
+                </article>
 		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-            </ul><!-- /#posts-list -->
-            
-                <div class="pagination">
+                
+                    <div class="pagination">
 <ul>
 
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -411,6 +261,13 @@ Sort）有一点不同。合并排序的是直接按数目不断递归划分成�
 
 </ul>
 </div>
+                
+            </aside><!-- /#featured -->
+            
+        
+        
+        
+            </ul><!-- /#posts-list -->
             
             </section><!-- /#content -->
         

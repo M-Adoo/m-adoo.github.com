@@ -55,48 +55,46 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
     					
 				
 					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
     					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -189,7 +187,7 @@
 <div class="crumbs">
 <a href="http://www.roading.org" title ="Back to homepage">Home</a> »
 
-<a href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a> »
+<a href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a> »
 
 利用堆来建立优先级队列
 </div>
@@ -211,94 +209,90 @@
         </address>
         		
 	
-	    <abbr title="Adoo&nbsp;&nbsp;c++&nbsp;&nbsp;Heap&nbsp;&nbsp;Introduction to algorithm&nbsp;&nbsp;优先级队列&nbsp;&nbsp;">
+	    <abbr title="算法导论&nbsp;&nbsp;c++&nbsp;&nbsp;优先级队列&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to Adoo" href="http://www.roading.org/tag/adoo.html">Adoo</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 	          
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-	          
-		<a title="permalink to Heap" href="http://www.roading.org/tag/heap.html">Heap</a>
-	          
-		<a title="permalink to Introduction to algorithm" href="http://www.roading.org/tag/introduction-to-algorithm.html">Introduction to algorithm</a>
 	          
 		<a title="permalink to 优先级队列" href="http://www.roading.org/tag/you-xian-ji-dui-lie.html">优先级队列</a>
 	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to 算法导论" href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-	      <p>堆除了用来排序，还可以有很多其他用途，本文利用堆来建立一个优先级队列（关于堆的介绍可以看前一篇博文<a href="http://www.roading.org/2011/09/%e5%a0%86%e6%8e%92%e5%ba%8f/" title="堆排序">堆排序</a>）。我们对比一下堆与优先级队列，堆的根元素，总是整个堆中的最大或最小元素（最大还是最小，取决于大堆还是小堆）；而优先级队列呢，它要求我们从优先级队列取对象的时候，取的总是优先级最高的那一个。不难发现，假若我们以优先级来建大堆，那么优先级最高的对象总在根节点。那么不管是向队列中增加对象还是从队列中取出对象，我们只要维持这个堆，就可以确保，队列中优先级最高的元素在根节点。</p>
-<p>当我们要从优先级队列取出对象的时候，我们是不是直接拿掉根结点呢？下面的代码可以看出不是的。</p>
+	      <p>堆除了用来排序，还可以有很多其他用途，本文利用堆来建立一个优先级队列
+（关于堆的介绍可以看前一篇博文<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E5%A0%86%E6%8E%92%E5%BA%8F.html">堆排序</a>）。对比一下堆与优先级队列，
+堆的根元素，总是整个堆中的最大或最小元素（最大还是最小，取决于大堆还是
+小堆）；而优先级队列呢，它要求我们从优先级队列取对象的时候，取的总是优
+先级最高的那一个。不难发现，假若我们以优先级来建大堆，那么优先级最高的
+对象总在根节点。那么不管是向队列中增加对象还是从队列中取出对象，我们只
+要维持这个堆，就可以确保，队列中优先级最高的元素在根节点。</p>
+<p>当我们要从优先级队列取出对象的时候，我们是不是直接拿掉根结点呢？下面的
+代码可以看出不是的。</p>
 <div class="codehilite"><pre><span class="c1">//PriorityQueue.h</span>
-<span class="c1">//By Adoo   2011/9/19</span>
-<span class="c1">//when I learning Introduction To Algorithm</span>
-<span class="p">#</span><span class="n">pragma</span> <span class="n">once</span>
-<span class="p">#</span><span class="k">include</span><span class="s">&quot;HeapSort.h&quot;</span>
-<span class="p">#</span><span class="k">include</span><span class="o">&lt;</span><span class="n">deque</span><span class="o">&gt;</span>
-<span class="p">#</span><span class="k">include</span><span class="o">&lt;</span><span class="n">numeric</span><span class="o">&gt;</span>
-<span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="n">template</span><span class="o">&lt;</span><span class="n">typename</span> <span class="no">T</span><span class="o">&gt;</span>
-<span class="k">class</span> <span class="n">PriorityQueue</span>
-<span class="p">{</span><span class="nl">public:</span>
-    <span class="n">PriorityQueue</span><span class="p">(</span><span class="k">void</span><span class="p">){};</span>
-    <span class="o">~</span><span class="n">PriorityQueue</span><span class="p">(</span><span class="k">void</span><span class="p">){};</span>    <span class="k">void</span> <span class="n">Add</span><span class="p">(</span><span class="k">const</span> <span class="no">T</span><span class="o">&amp;</span> <span class="n">value</span> <span class="p">)</span>
+
+<span class="cp">#pragma once</span>
+<span class="cp">#include&quot;HeapSort.h&quot;</span>
+<span class="cp">#include&lt;deque&gt;</span>
+<span class="cp">#include&lt;numeric&gt;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">PriorityQueue</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">PriorityQueue</span><span class="p">(</span><span class="kt">void</span><span class="p">){};</span>
+    <span class="o">~</span><span class="n">PriorityQueue</span><span class="p">(</span><span class="kt">void</span><span class="p">){};</span>    
+    <span class="kt">void</span> <span class="n">Add</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">value</span> <span class="p">)</span>
     <span class="p">{</span>
         <span class="n">data</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
-        <span class="n">auto</span> <span class="n">position</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="k">end</span> <span class="p">()</span><span class="o">-</span><span class="mh">1</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">position</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">end</span> <span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
         <span class="c1">//mantain the heap property</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">position</span><span class="o">&gt;</span><span class="n">data</span><span class="p">.</span><span class="k">begin</span> <span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="n">position</span><span class="o">&gt;*</span><span class="n">parent</span><span class="p">(</span><span class="n">position</span><span class="p">))</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">position</span><span class="o">&gt;</span><span class="n">data</span><span class="p">.</span><span class="n">begin</span> <span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="n">position</span><span class="o">&gt;*</span><span class="n">parent</span><span class="p">(</span><span class="n">position</span><span class="p">))</span>
         <span class="p">{</span>
             <span class="n">swap</span><span class="p">(</span><span class="o">*</span><span class="n">parent</span><span class="p">(</span><span class="n">position</span><span class="p">),</span><span class="o">*</span><span class="n">position</span><span class="p">);</span>
             <span class="n">position</span><span class="o">=</span><span class="n">parent</span><span class="p">(</span><span class="n">position</span><span class="p">);</span>
         <span class="p">}</span>
-    <span class="p">};</span>    <span class="no">T</span> <span class="n">Get</span><span class="p">(</span><span class="k">void</span><span class="p">)</span>
+    <span class="p">};</span>
+
+    <span class="n">T</span> <span class="n">Get</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="k">if</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
-            <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="k">int</span><span class="o">&gt;::</span><span class="n">min</span> <span class="p">();</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">.</span><span class="k">begin</span><span class="p">(),</span><span class="o">*</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="k">end</span><span class="p">()</span><span class="o">-</span><span class="mh">1</span><span class="p">));</span>
-        <span class="no">T</span> <span class="n">result</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+            <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">min</span> <span class="p">();</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="o">*</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+        <span class="n">T</span> <span class="n">result</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
         <span class="n">data</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
         <span class="c1">//mantain the heap property</span>
-        <span class="n">MaxHeapfy</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="k">begin</span> <span class="p">(),</span><span class="n">data</span><span class="p">.</span><span class="k">end</span> <span class="p">(),</span><span class="n">data</span><span class="p">.</span><span class="k">begin</span> <span class="p">());</span>
+        <span class="n">MaxHeapfy</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">begin</span> <span class="p">(),</span><span class="n">data</span><span class="p">.</span><span class="n">end</span> <span class="p">(),</span><span class="n">data</span><span class="p">.</span><span class="n">begin</span> <span class="p">());</span>
         <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
     <span class="p">}</span>
-<span class="nl">private:</span>
-    <span class="n">typename</span> <span class="n">deque</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">parent</span><span class="p">(</span><span class="n">typename</span> <span class="k">const</span> <span class="n">deque</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;::</span><span class="n">iterator</span><span class="o">&amp;</span> <span class="n">last</span><span class="p">)</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="k">typename</span> <span class="n">deque</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">parent</span><span class="p">(</span><span class="k">typename</span> <span class="k">const</span> <span class="n">deque</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">iterator</span><span class="o">&amp;</span> <span class="n">last</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="k">return</span>  <span class="n">data</span><span class="p">.</span><span class="k">begin</span> <span class="p">()</span><span class="o">+</span><span class="p">(</span><span class="n">last</span><span class="o">-</span><span class="n">data</span><span class="p">.</span><span class="k">begin</span> <span class="p">())</span><span class="o">/</span><span class="mh">2</span><span class="p">;</span>
+        <span class="k">return</span>  <span class="n">data</span><span class="p">.</span><span class="n">begin</span> <span class="p">()</span><span class="o">+</span><span class="p">(</span><span class="n">last</span><span class="o">-</span><span class="n">data</span><span class="p">.</span><span class="n">begin</span> <span class="p">())</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="n">deque</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span>  <span class="n">data</span><span class="p">;</span>
+    <span class="n">deque</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>  <span class="n">data</span><span class="p">;</span>
 <span class="p">};</span>
 </pre></div>
 
 
-</p>
-
-<p>注：函数MaxHeapfy为头文件HeapSort.h中的函数，HeapSort.h在上一篇博文<a href="http://www.roading.org/2011/09/%e5%a0%86%e6%8e%92%e5%ba%8f/" title="堆排序">堆排序</a>中实现</p>
-</p>
-
-<p>回到代码支前的一个问题：当我们要从优先级队列取出对象的时候，我们是不是直接拿掉根结点呢？</p>
-</p>
-
-<p>代码中我们看到，在我们取根结点之前，我们先将根节点与最后一个叶子交换，再取出根结点。不单取的时候如此，插入的时候也是如此，在Get函数中，插入对象的时候，将其添加在末尾，为什么是添加到末尾而不是添加到中间或是添加到最前面呢？</p>
-</p>
-
-<p>这样做的原因就是：进行增加和删除操作的时候，只有在末尾进行才不会破环整个堆的结构，才不会破会其他节点的堆属性。例如在要取出根节点的时候，假如直接删除根节点，那么整个二叉树，就要进行重构，所有节点的堆属性也可能会被破坏。但是若将根结点交换到末尾，再删除，那就只有根结点的堆属性被破坏了，其它结点，并没有影响，这样维护起堆的代价就小了很多。增添的时候也是一样的道理。</p>
-</p>
-
-<p>总结：当我们在对堆执行带有结构破坏性的操作的时候，我们因该尽量将该操作置换到堆的末尾来进行。我想这一思想也可以推广到其他类似的数据结构上。</p>
-</p>
-
+<p>注意，函数MaxHeapfy为头文件HeapSort.h中的函数，HeapSort.h在<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E5%A0%86%E6%8E%92%E5%BA%8F.html">堆排序</a>中实现</p>
+<p>回到代码支前的一个问题：当我们要从优先级队列取出对象的时候，我们是不是直接
+拿掉根结点呢？实际上，在取根结点之前，我是先将根节点与最后一个叶子交换，再
+取出根结点。不单取的时候如此，插入的时候也是如此，插入对象的时候，将其添加
+在末尾，为什么是添加到末尾而不是添加到中间或是添加到最前面呢？</p>
+<p>这样做的原因就是：进行增加和删除操作的时候，只有在末尾进行才不会破环整个堆
+的结构，才不会破会其他节点的堆属性。例如在要取出根节点的时候，假如直接删除
+根节点，那么整个二叉树，就要进行重构，所有节点的堆属性也可能会被破坏。但是
+若将根结点交换到末尾，再删除，那就只有根结点的堆属性被破坏了，其它结点，并
+没有影响，这样维护起堆的代价就小了很多。增添的时候也是一样的道理。</p>
+<p>总结：当对堆执行带有结构破坏性的操作的时候，因该尽量将该操作置换到堆的末尾
+来进行。我想这一思想也可以推广到其他类似的数据结构上。</p>
 <p>参考：introduction to algorithm –third edition</p>
-</p>
-
-<p><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。</em></p>
-</p>
-
-<p><em>2011/9/20 by Adoo | homepage:</em><a href="http://www.roading.org/"><em>www.roading.org</em></a></p>
-</p>
 		  <p style= "text-align:right;"><em>
 		  Tue 20 September 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
@@ -324,12 +318,8 @@
 		<ul class="related-articles">
 		
 		
-		
-		
-		
-		
 		   
-		   <li><a title="斐波那契堆(Fibonacci Heaps)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html">斐波那契堆(Fibonacci Heaps)</a></li>
+		   <li><a title="斐波那契堆的C++实现" href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html">斐波那契堆的C++实现</a></li>
 		   
 		
 		
@@ -350,18 +340,16 @@
 		
 		
 		
-		
-		
-		
-		
-		
+		   
+		   <li><a title="B-树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">B-树的C++实现</a></li>
+		   
 		
 		
 		
 		
 		
 		   
-		   <li><a title="最长公共子序列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html">最长公共子序列</a></li>
+		   <li><a title="算法导论——平摊分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html">算法导论——平摊分析</a></li>
 		   
 		
 		
@@ -376,18 +364,14 @@
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
+		   
+		   <li><a title="动态规划基础" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html">动态规划基础</a></li>
+		   
 		
 		
 		
 		   
-		   <li><a title="非递归不用栈遍历搜索二叉树" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html">非递归不用栈遍历搜索二叉树</a></li>
+		   <li><a title="动态规划笔记（1）——Rod cutting" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html">动态规划笔记（1）——Rod cutting</a></li>
 		   
 		
 		
@@ -402,6 +386,62 @@
 		
 		
 		
+		   
+		   <li><a title="C++实现红黑树，仿STL封装" href="http://www.roading.org/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html">C++实现红黑树，仿STL封装</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 13 Red-Black trees (红黑树)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-13-red-black-trees-%e7%ba%a2%e9%bb%91%e6%a0%91.html">Chapter 13 Red-Black trees (红黑树)</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Radix Tree 基数树" href="http://www.roading.org/algorithm/introductiontoalgorithm/radix-tree-%e5%9f%ba%e6%95%b0%e6%a0%91.html">Radix Tree 基数树</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="仿STL 的二叉搜索树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">仿STL 的二叉搜索树的C++实现</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 2" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html">Chapter 12 二叉搜索树(Binary Search Tree) 2</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 1" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html">Chapter 12 二叉搜索树(Binary Search Tree) 1</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Solution of CLRS 11.1 exercises" href="http://www.roading.org/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html">Solution of CLRS 11.1 exercises</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -439,20 +479,14 @@
 		
 		
 		   
-		   <li><a title="哈希表的C++模板实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html">哈希表的C++模板实现</a></li>
+		   <li><a title="Chapter 10 Exercises and Problems (2)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html">Chapter 10 Exercises and Problems (2)</a></li>
 		   
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		   
+		   <li><a title="Chapter 10 Exercises（1）" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html">Chapter 10 Exercises（1）</a></li>
+		   
 		
 		
 		
@@ -464,7 +498,43 @@
 		
 		
 		
+		   
+		   <li><a title="第九章习题选做" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0%e4%b9%a0%e9%a2%98%e9%80%89%e5%81%9a.html">第九章习题选做</a></li>
+		   
 		
+		
+		
+		   
+		   <li><a title="第九章 中位数和顺序统计量（Medians and Order Statistic）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html">第九章 中位数和顺序统计量（Medians and Order Statistic）</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="第八章（5） 习题 8-4 8-5 8-7" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%885%ef%bc%89-%e4%b9%a0%e9%a2%98-8-4-8-5-8-7.html">第八章（5） 习题 8-4 8-5 8-7</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="桶排序（Bucket sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html">桶排序（Bucket sort）</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="第八章（3） 基数排序（Radix Sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html">第八章（3） 基数排序（Radix Sort）</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="《算法导论》笔记汇总" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e7%b4%a2%e5%bc%95%e8%a1%a8.html">《算法导论》笔记汇总</a></li>
+		   
 		
 		
 		
@@ -473,40 +543,32 @@
 		
 		
 		   
-		   <li><a title="第八章（4） 桶排序（Bucket sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html">第八章（4） 桶排序（Bucket sort）</a></li>
+		   <li><a title="比较排序在最坏情况下时间复杂度为Ω(nlgn)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%881%ef%bc%89-%e6%af%94%e8%be%83%e6%8e%92%e5%ba%8f%e5%9c%a8%e6%9c%80%e5%9d%8f%e6%83%85%e5%86%b5%e4%b8%8b%e6%97%b6%e9%97%b4.html">比较排序在最坏情况下时间复杂度为Ω(nlgn)</a></li>
 		   
 		
 		
 		
-		
-		
 		   
-		   <li><a title="算法导论 第八章(2) 计数排序(Counting Sort)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html">算法导论 第八章(2) 计数排序(Counting Sort)</a></li>
+		   <li><a title="快速排序课后7.4-5" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html">快速排序课后7.4-5</a></li>
 		   
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
 		   
-		   <li><a title="第七章（2） 快速排序 课后7.4-5" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html">第七章（2） 快速排序 课后7.4-5</a></li>
+		   <li><a title="快排与随机快排效率分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%bf%ab%e6%8e%92%e4%b8%8e%e9%9a%8f%e6%9c%ba%e5%bf%ab%e6%8e%92%e6%95%88%e7%8e%87%e5%88%86%e6%9e%90.html">快排与随机快排效率分析</a></li>
 		   
 		
 		
 		
-		
-		
 		   
-		   <li><a title="第七章（1） 快速排序" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html">第七章（1） 快速排序</a></li>
+		   <li><a title="快速排序及C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html">快速排序及C++实现</a></li>
 		   
 		
 		
+		
+		   
+		   <li><a title="算法导论6-3 young tableaus" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba6-3-young-tableaus.html">算法导论6-3 young tableaus</a></li>
+		   
 		
 		
 		
@@ -516,15 +578,15 @@
 		
 		
 		
+		
+		
+		
+		
+		
+		
 		   
-		   <li><a title="算法导论之堆排序及其C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html">算法导论之堆排序及其C++实现</a></li>
+		   <li><a title="排序之插入排序与合并排序-C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%8f%92%e5%85%a5%e6%8e%92%e5%ba%8f-insertionsort-c%e5%ae%9e%e7%8e%b0.html">排序之插入排序与合并排序-C++实现</a></li>
 		   
-		
-		
-		
-		
-		
-		
 		
 		
 		

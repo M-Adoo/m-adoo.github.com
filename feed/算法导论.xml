@@ -627,55 +627,7 @@ no stack but assumes that two pointers can be tested for equality.)
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category></entry><entry><title>第十章 Elementary Data Structures</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html" rel="alternate"></link><updated>2011-10-26T22:23:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-10-26:/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html</id><summary type="html">&lt;h3&gt;&lt;span style="font-weight: bold"&gt;10.1 栈和队列&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;栈是一个后进先出的数据结构，看到《算法导论》关于栈的部分，又让我想起了当初在看严蔚敏的数据结构教科书的时候对栈的一个形象理解。我当初将这样理解栈：栈就相当于往一个桶中方与其直径相同的饼，最先放进去的在最下面，最后才能拿出来。而最后放进去的饼，总在最上面，可以最先拿到。栈简称为LIFO(last
-in first
-out).关于栈的应用，我印象比较深刻的是路径的记录，大一的时候写一个迷宫程序，就是用栈来记录路径。&lt;/p&gt;
-&lt;p&gt;队列的概念还要简单一些，队列数据结构，与我们生活中的队列一样，讲究的是一个先来后到。如同超市的收银队列，先来的先付帐，先出收银口.&lt;/p&gt;
-&lt;p&gt;关于具体的实现就省略了.&lt;/p&gt;
-&lt;h3&gt;&lt;span style="font-weight: bold"&gt;10.2链表&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;线性表由节点组成,每个节点除了存储信息的数据部分,还会由一个或两个指针,来指向它的前一个节点或后一个节点.看张图吧:&lt;/p&gt;
-&lt;p&gt;[![image_thumb7][]][]&lt;/p&gt;
-&lt;h3&gt;10.3实现对象和指针&lt;/h3&gt;
-&lt;h3&gt;略&lt;/h3&gt;
-&lt;h3&gt;10.4有根树&lt;/h3&gt;
-&lt;h3&gt;略&lt;/h3&gt;
-&lt;p&gt;最后发现这一章没有什么好记的,明天做下题目的笔记吧.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://www.roading.org"&gt;www.roading.org&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;by Adoo&lt;/p&gt;
-&lt;p&gt;2011/10/26&lt;/p&gt;
-&lt;/p&gt;
-
-&lt;p&gt;[![image_thumb7][]]: http://www.roading.org/wp-content/uploads/2011/11/image_thumb7.png&lt;/p&gt;</summary><category term="Introduction to algorithm"></category></entry><entry><title>第八章（4） 桶排序（Bucket sort）</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html" rel="alternate"></link><updated>2011-10-04T14:23:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-10-04:/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html</id><summary type="html">&lt;h3&gt;算法模型&lt;/h3&gt;
-&lt;p&gt;1.桶排序假设待排序的一组数统一的分布在一个范围中，并将这一范围划分成几个子范围，也就是桶。&lt;/p&gt;
-&lt;p&gt;2.将待排序的一组数，分档规入这些子桶。并将桶中的数据进行排序。&lt;/p&gt;
-&lt;p&gt;3.将各个桶中的数据有序的合并起来。&lt;/p&gt;
-&lt;p&gt;仔细想一想，这是不是一种“分治”策略呢？再仔细想一想，计数排序是不是桶排序的一种特化呢？&lt;/p&gt;
-&lt;h3&gt;复杂度：&lt;/h3&gt;
-&lt;p&gt;很显然桶排序的时间复杂度，取决与对各个桶之间数据进行排序的时间复杂度，因为其它部分部分的时间复杂度都为O(n);很显然，桶划分的越小，各个桶之间的数据越少，排序所用的时间也会越少。但相应的空间消耗就会增大。&lt;/p&gt;
-&lt;p&gt;可以证明，即使选用插入排序作为桶内排序的方法，桶排序的平均时间复杂度为线性。具体证明，请参考算法导论。其空间复杂度也为线性。&lt;/p&gt;
-&lt;h3&gt;&lt;strong&gt;示意图：&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;[![wps_clip_image-2118[7]][]][]&lt;/p&gt;
-&lt;p&gt;伪代码：&lt;/p&gt;
-&lt;p&gt;[![wps_clip_image-2294][]][]&lt;/p&gt;
-&lt;p&gt;[&lt;br /&gt;
-][]&lt;/p&gt;
-&lt;h3&gt;与基数排序排序的比较&lt;/h3&gt;
-&lt;p&gt;基数排序与桶排序都为线性复杂度的排序算法，基数排序排序更稳定，但它的系数更大。桶排序的时间复杂度，与待排序的数组的分布有关，最差情况下可以为O(n的平方)。&lt;/p&gt;
-&lt;p&gt;总的来讲，以个人观点，基数排序与桶排序虽然复杂度为线性，但她们同时都会有各种限制，其灵活性上有欠缺，相较于原地排序其空间要求也更高。所以有一利，总有一弊。但是，当我们的待排序数组具备一些基数排序与桶排序要求的特性，且空间上又比较富裕时，桶排序与基数排序不失为最佳选择。&lt;/p&gt;
-&lt;h3&gt;实例&lt;/h3&gt;
-&lt;p&gt;略&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://www.roading.org"&gt;www.roading.org&lt;/a&gt; &lt;br /&gt;
-by Adoo &lt;br /&gt;
-2011/10/4&lt;/p&gt;
-&lt;/p&gt;
-
-&lt;p&gt;[wps_clip_image-2118[7]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-21187_thumb.png
-    "wps_clip_image-2118[7]"
-  [![wps_clip_image-2118[7]][]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-21187.png
-  [![wps_clip_image-2294][]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-2294.png
-  [&lt;br /&gt;
- ]: http://1.roading.sinaapp.com/2011/10/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89/bucket-sort-code/&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category><category term="桶排序"></category></entry><entry><title>算法导论 第八章(2) 计数排序(Counting Sort)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html" rel="alternate"></link><updated>2011-09-30T21:54:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-09-30:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html</id><summary type="html">&lt;p&gt;与比较排序注重于元素之间的比较不同，计数排序专注于找准自己的位置，而不关心自己比谁小，比谁大。其核心在于，对于任意一个属于数组A的元素x，统计出在A中有多少个元素小于等于x,以确定x的位置。例如，有10个元素小于等于a那么a就应该排在第11位。&lt;/p&gt;
+&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category></entry><entry><title>算法导论 第八章(2) 计数排序(Counting Sort)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html" rel="alternate"></link><updated>2011-09-30T21:54:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-09-30:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html</id><summary type="html">&lt;p&gt;与比较排序注重于元素之间的比较不同，计数排序专注于找准自己的位置，而不关心自己比谁小，比谁大。其核心在于，对于任意一个属于数组A的元素x，统计出在A中有多少个元素小于等于x,以确定x的位置。例如，有10个元素小于等于a那么a就应该排在第11位。&lt;/p&gt;
 &lt;h3&gt;算法模型：&lt;/h3&gt;
 &lt;p&gt;假设对数组A[n]进行排序,A[n]中任意一元素x∈[0，k)。我们需要两个辅助数组，一个为B[k],我们用来记录统计信息，另一个为C[n],用来储存排序结果。&lt;/p&gt;
 &lt;ol&gt;
@@ -725,131 +677,112 @@ void CountingSort(InputIter BegIter,InputIter EndIter,OutIter OutputIter, const 
 
 &lt;p&gt;[![wps_clip_image-1380][]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-1380.png
   [&lt;br /&gt;
- ]: http://1.roading.sinaapp.com/?attachment_id=237&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category><category term="计数排序"></category></entry><entry><title>第七章（2） 快速排序 课后7.4-5</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html" rel="alternate"></link><updated>2011-09-27T12:00:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-09-27:/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html</id><summary type="html">&lt;p&gt;题目：7.4-5 &lt;br /&gt;
-We can improve the running time of quicksort in practice by taking
-advantage of thefast running time of insertion sort when its input is
-“nearly” sorted. Upon calling quicksort on a subarray with fewer than k
-elements, let it simply return without sorting the subarray. After the
-top-level call to quicksort returns, run insertion sort on the entire
-array to finish the sorting process. Argue that this sorting algorithm
-run in O(&lt;em&gt;nk&lt;/em&gt;+ &lt;em&gt;n&lt;/em&gt;lg(&lt;em&gt;n/k&lt;/em&gt;)) expected time.How should we pick k, both in
-theory and in practice?&lt;/p&gt;
-&lt;p&gt;解答:当每一个小分段为k个元素时，分段的数目&lt;em&gt;count=n/k&lt;/em&gt;;显然，要得到count个分段，要经过lg
-count =lg n/k 次递归。所以快排的复杂度为 O(&lt;em&gt;n&lt;/em&gt;
-lg（&lt;em&gt;n/k&lt;/em&gt;）)。因为快排之后，整个序列段是近似有序的，只是各个小段之间的元素无序。也就是说，进行插入排序的时候，各小段的元素的比较不会超出本段。所以相当于对&lt;em&gt;n/k&lt;/em&gt;个小段进行插入排序，其复杂度为
-n/k O(k平方)=O(nk).所以整个时间复杂度为O(nlg(n/k) + nk)。 &lt;br /&gt;
-关于k的选取，我一直没有头绪，与瘟疫青年以及小兵的讨论也没有得出结果，最后小兵给我提供了一个答案的链接，非常感谢。&lt;/p&gt;
-&lt;p&gt;答案的内容为：&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb3.png" title="image" /&gt;][] &lt;br /&gt;
-&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://www.roading.org"&gt;www.roading.org&lt;/a&gt; &lt;br /&gt;
-by Adoo &lt;br /&gt;
-2011/9/27&lt;/p&gt;
-&lt;/p&gt;
-
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb3.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2011/11/image3.png&lt;/p&gt;</summary><category term="7.4-5"></category><category term="Introduction to algorithm"></category><category term="快速排序"></category></entry><entry><title>第七章（1） 快速排序</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html" rel="alternate"></link><updated>2011-09-25T15:59:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-09-25:/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html</id><summary type="html">&lt;p&gt;
-快速排序（Quick
-Sort）在最坏的情况下它的时间复杂度是O（n2），最佳情况下它的时间复杂度是在O(n\*lgn).即使如此，但快速排序往往是实际应用中的排序算法的最佳选择，因为它隐含的常数因子非常小。
-快排是又一个化整为零，各个击破策略的又一个经典应用。与合并排序（Merge
-Sort）有一点不同。合并排序的是直接按数目不断递归划分成小段，然后又层层合并有序段，得出有序结果（[合并排序][]）。而快排，则是按照一个中枢轴（pivot）来划分，即凡是大于中枢轴的分为一段，凡是小于等于中枢轴的分为另一段，对这两段又进行快排，显然当迭代到底的时候，排序就完成了。
-来看代码：
-
-~~~~ {.brush:cpp}
-template
-void QuickSort(Iter BegIter, Iter EndIter)
-{
-    if(std::distance(BegIter,EndIter)&gt;1)
-    {//if betwen BegIter and EndIter not only one element;
-        Iter Apart=Partition(BegIter,EndIter);
-        QuickSort(BegIter,Apart);
-        std::advance(Apart,1);
-        QuickSort(Apart,EndIter);
-    }
-}
-
-wzxhzdk:0
-
-代码中中枢轴为序列的最后一个元素。这段代码的目的在于，将m个大于中枢轴的元素，放到前m个位置，并将中枢轴放在第m+1个位置，自然大于等于中枢轴的n-m-1个元素就在后n-m-1个位置。
-**关于中枢轴的选择**
-快排的效率很大程度上依赖于中枢轴的选择，因为中枢轴影响了序列的划分，而序列的划分决定着递归的次数。
-当我们选择某一个相对固定的位置来作为中枢轴的时候，就很有可能陷入最坏情况，比方上面的实现代码，若是待排序的序列已经是有序的，那么就会陷入最坏情况。或是待排序的序列接近有序，那么久会陷入接近最坏情况。于是引出了一种改良的快速排序，随机快速排序。
-**随机快速排序**
-随机快速排序与快速排序的唯一区别在于，随机快速排序的每一次中枢轴的选择是随机的，而不像快速排序一样是有相对固定位置的。因为中枢轴的是随机的，所以你很难有这么好的运气，每次递归都碰到了最坏情况。
-随机快速排序避免了最坏情况，但它何尝不是以可能失去最好情况为代价的呢？我想，对于快速排序的优化，应该考虑更多的实际情况。
-关于随机快速排序，在独酌的博客，我与博主进行了探讨：[http://www.cnblogs.com/chinazhangjie/archive/2010/12/09/1901491.html\#commentform][]
-
-[www.roading.org][] by Adoo 2011/9/25
-
-&lt;/p&gt;
-
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cnblogs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;chinazhangjie&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;archive&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;2010&lt;span class="o"&gt;/&lt;/span&gt;12&lt;span class="o"&gt;/&lt;/span&gt;09&lt;span class="o"&gt;/&lt;/span&gt;1901491&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;#&lt;span class="n"&gt;commentform&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category><category term="Quick Sort"></category><category term="随机快速排序"></category></entry><entry><title>利用堆来建立优先级队列</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%88%a9%e7%94%a8%e5%a0%86%e6%9d%a5%e5%bb%ba%e7%ab%8b%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97.html" rel="alternate"></link><updated>2011-09-20T11:55:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-09-20:/algorithm/introductiontoalgorithm/%e5%88%a9%e7%94%a8%e5%a0%86%e6%9d%a5%e5%bb%ba%e7%ab%8b%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97.html</id><summary type="html">&lt;p&gt;堆除了用来排序，还可以有很多其他用途，本文利用堆来建立一个优先级队列（关于堆的介绍可以看前一篇博文&lt;a href="http://www.roading.org/2011/09/%e5%a0%86%e6%8e%92%e5%ba%8f/" title="堆排序"&gt;堆排序&lt;/a&gt;）。我们对比一下堆与优先级队列，堆的根元素，总是整个堆中的最大或最小元素（最大还是最小，取决于大堆还是小堆）；而优先级队列呢，它要求我们从优先级队列取对象的时候，取的总是优先级最高的那一个。不难发现，假若我们以优先级来建大堆，那么优先级最高的对象总在根节点。那么不管是向队列中增加对象还是从队列中取出对象，我们只要维持这个堆，就可以确保，队列中优先级最高的元素在根节点。&lt;/p&gt;
-&lt;p&gt;当我们要从优先级队列取出对象的时候，我们是不是直接拿掉根结点呢？下面的代码可以看出不是的。&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//PriorityQueue.h&lt;/span&gt;
-&lt;span class="c1"&gt;//By Adoo   2011/9/19&lt;/span&gt;
-&lt;span class="c1"&gt;//when I learning Introduction To Algorithm&lt;/span&gt;
-&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;pragma&lt;/span&gt; &lt;span class="n"&gt;once&lt;/span&gt;
-&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="k"&gt;include&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;HeapSort.h&amp;quot;&lt;/span&gt;
-&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="k"&gt;include&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;deque&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="k"&gt;include&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="n"&gt;using&lt;/span&gt; &lt;span class="n"&gt;namespace&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="no"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="n"&gt;PriorityQueue&lt;/span&gt;
-&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nl"&gt;public:&lt;/span&gt;
-    &lt;span class="n"&gt;PriorityQueue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;void&lt;/span&gt;&lt;span class="p"&gt;){};&lt;/span&gt;
-    &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;PriorityQueue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;void&lt;/span&gt;&lt;span class="p"&gt;){};&lt;/span&gt;    &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;Add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="no"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+ ]: http://1.roading.sinaapp.com/?attachment_id=237&lt;/p&gt;</summary><category term="c++"></category><category term="Introduction to algorithm"></category><category term="计数排序"></category></entry><entry><title>算法导论之堆排序及其C++实现</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html" rel="alternate"></link><updated>2011-09-13T19:12:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-09-13:/algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html</id><summary type="html">&lt;p&gt;堆即是一个可以看作为完全二叉树的数组。《算法导论》第三版这样定义：&lt;em&gt;The
+(binary) heap data structure is an array object that we can view as a
+nearly completely binary
+tree.&lt;/em&gt;我将之理解为只要一个序列可以看作为一个完全二叉树，它又满足堆的性质，那么它就可以称之为一个堆。——一个数组可以看成一个完全二叉树，将第一个数看作根结点，第二和第三个数看作第一个数的左孩子和右孩子，…，将第&lt;em&gt;2n&lt;/em&gt;
+和第&lt;em&gt;2n+1&lt;/em&gt; 个数看作是第n个数的两个孩子。&lt;/p&gt;
+&lt;p&gt;堆可以分为大堆和小堆，所谓堆属性是指结点应总是大于它的孩子，此为大堆属性。对于小堆来讲则反之。也就是说堆的根结点总是存储着最大或最小的数，当一个完全二叉树中所有的结点都满足堆属性时此完全二叉树就可以看作为一个堆。&lt;/p&gt;
+&lt;p&gt;总的来讲，堆排序的要诀在于堆的一个特性——堆的根结点总是存储着最大或最小的数。假使我们能将一组数建堆，那么只需要不断的在取出根结点和维持堆属性这两步中不断循环就可以完成排序了。&lt;/p&gt;
+&lt;p&gt;我们看堆排序的实现代码（使用的是大堆）：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Iter&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;void&lt;/span&gt; &lt;span class="n"&gt;HeapSort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Iter&lt;/span&gt; &lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Iter&lt;/span&gt; &lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;BuildMaxHeap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;we&lt;/span&gt; &lt;span class="n"&gt;always&lt;/span&gt; &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;largest&lt;/span&gt; &lt;span class="n"&gt;element&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;put&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;then&lt;/span&gt; &lt;span class="n"&gt;shrink&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;heap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt; &lt;span class="n"&gt;heap&lt;/span&gt; &lt;span class="n"&gt;again&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="n"&gt;EndIter&lt;/span&gt;!&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push_back&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-        &lt;span class="n"&gt;auto&lt;/span&gt; &lt;span class="n"&gt;position&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="c1"&gt;//mantain the heap property&lt;/span&gt;
-        &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;position&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;begin&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;position&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;*&lt;/span&gt;&lt;span class="n"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;position&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-        &lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="n"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;position&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;position&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-            &lt;span class="n"&gt;position&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;position&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-        &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="p"&gt;};&lt;/span&gt;    &lt;span class="no"&gt;T&lt;/span&gt; &lt;span class="n"&gt;Get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;void&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
-            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;numeric_limits&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;int&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="p"&gt;();&lt;/span&gt;
-        &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
-        &lt;span class="no"&gt;T&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;back&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-        &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop_back&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-        &lt;span class="c1"&gt;//mantain the heap property&lt;/span&gt;
-        &lt;span class="n"&gt;MaxHeapfy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;begin&lt;/span&gt; &lt;span class="p"&gt;(),&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="p"&gt;(),&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;begin&lt;/span&gt; &lt;span class="p"&gt;());&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;MaxHeapfy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="nl"&gt;private:&lt;/span&gt;
-    &lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;deque&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="no"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;deque&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="no"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt;  &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;begin&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;begin&lt;/span&gt; &lt;span class="p"&gt;())&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mh"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;deque&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="no"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;  &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/p&gt;
 
-&lt;p&gt;注：函数MaxHeapfy为头文件HeapSort.h中的函数，HeapSort.h在上一篇博文&lt;a href="http://www.roading.org/2011/09/%e5%a0%86%e6%8e%92%e5%ba%8f/" title="堆排序"&gt;堆排序&lt;/a&gt;中实现&lt;/p&gt;
+&lt;p&gt;BuildMaxHeap用来建堆，而MaxHeapfy用来维持堆属性，它们的实现将在下文交代，这里先不去管它。HeapSort代码的思路很简单，&lt;font color="#0080c0"&gt;总是把根结点交换到堆的最后再取出(交换到最后相当于从堆中取出，因为每一次循环堆都要向前缩短1)。&lt;/font&gt;此时新的根结点点并不满足堆属性，所以我们要重新维护堆属性，调用MaxHeapfy就是为了这个目的。因为堆的根结点、点是这个堆的最大元素，所以每次我们都取到了当前堆的最大元素，一次遍历后就得到了排好序的序列。需要注意的一点是，根据C++标准库的惯例，EndIter指向最后一个元素的下一个位置，所以在for循环中第一句先--EndIter。很显然该函数的时间复杂度为
+O(BuildHeap)+O( n*O(MaxHeapfy) )。&lt;/p&gt;
 &lt;/p&gt;
 
-&lt;p&gt;回到代码支前的一个问题：当我们要从优先级队列取出对象的时候，我们是不是直接拿掉根结点呢？&lt;/p&gt;
+&lt;p&gt;上述代码中将根结点换到最后叶子再取出是一个要注意的小细节，这样做的妙处在于只破坏了根结点的对属性，而不破坏其它任何结点的属性。对一个堆进行删除操作时，这样的做法很好的减小了复杂度。&lt;/p&gt;
 &lt;/p&gt;
 
-&lt;p&gt;代码中我们看到，在我们取根结点之前，我们先将根节点与最后一个叶子交换，再取出根结点。不单取的时候如此，插入的时候也是如此，在Get函数中，插入对象的时候，将其添加在末尾，为什么是添加到末尾而不是添加到中间或是添加到最前面呢？&lt;/p&gt;
+&lt;p&gt;我们还有两个函数没有实现，先来说说维持堆属性的MaxHeapfy；这个函数假定结点的左子树和右子树都是堆，那么对指定节点调用MaxHeapfy以后，以指定结点为根结点的子树也会成为堆。C++
+的实现如下。&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;Iter&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;void&lt;/span&gt; &lt;span class="n"&gt;MaxHeapfy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Iter&lt;/span&gt;  &lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Iter&lt;/span&gt; &lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Iter&lt;/span&gt; &lt;span class="n"&gt;Position&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;    
+&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;Left&lt;/span&gt; &lt;span class="n"&gt;child&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;Right&lt;/span&gt; &lt;span class="n"&gt;child&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;Iter&lt;/span&gt; &lt;span class="n"&gt;LIter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Position&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;Iter&lt;/span&gt; &lt;span class="n"&gt;RIter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Position&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;size_t&lt;/span&gt;  &lt;span class="n"&gt;Index&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;distance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Position&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;we&lt;/span&gt; &lt;span class="n"&gt;must&lt;/span&gt; &lt;span class="n"&gt;check&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;iterator&lt;/span&gt; &lt;span class="n"&gt;will&lt;/span&gt; &lt;span class="n"&gt;out&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;range&lt;/span&gt; &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="n"&gt;we&lt;/span&gt; &lt;span class="n"&gt;opera&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Index&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;distance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Position&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;advance&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;LIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Index&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;advance&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;RIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Index&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;1&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;largest&lt;/span&gt; &lt;span class="n"&gt;element&lt;/span&gt;  &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Position&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;his&lt;/span&gt; &lt;span class="n"&gt;childrens&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;Iter&lt;/span&gt; &lt;span class="n"&gt;Largest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Position&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;LIter&lt;/span&gt;！?&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;*&lt;/span&gt;&lt;span class="n"&gt;LIter&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;*&lt;/span&gt;&lt;span class="n"&gt;Largest&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;Largest&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;LIter&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;RIter&lt;/span&gt;！?&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;*&lt;/span&gt;&lt;span class="n"&gt;RIter&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;*&lt;/span&gt;&lt;span class="n"&gt;Largest&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;Largest&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;RIter&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Largest&lt;/span&gt;!&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Position&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;swap&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;Position&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;Largest&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;MaxHeapfy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Largest&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;a href="http://11011.net/software/vspaste"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/p&gt;
 
-&lt;p&gt;这样做的原因就是：进行增加和删除操作的时候，只有在末尾进行才不会破环整个堆的结构，才不会破会其他节点的堆属性。例如在要取出根节点的时候，假如直接删除根节点，那么整个二叉树，就要进行重构，所有节点的堆属性也可能会被破坏。但是若将根结点交换到末尾，再删除，那就只有根结点的堆属性被破坏了，其它结点，并没有影响，这样维护起堆的代价就小了很多。增添的时候也是一样的道理。&lt;/p&gt;
+&lt;p&gt;代码看上去有点长，但其实思路也很简单，先分别获得Position的左孩子和右孩子，然后对比Position与它的孩子的大小，假如它的孩子比它大，那么取其中最大值与它交换，并对存储最大值的孩子调用MaxHeapfy,因为交换以后有可能破坏了它的堆属性。因为是完全二叉树，所以这个递归的最大深度为lg
+n. 所以该函数的时间复杂度为O（lg n）。&lt;/p&gt;
 &lt;/p&gt;
 
-&lt;p&gt;总结：当我们在对堆执行带有结构破坏性的操作的时候，我们因该尽量将该操作置换到堆的末尾来进行。我想这一思想也可以推广到其他类似的数据结构上。&lt;/p&gt;
+&lt;p&gt;需要注意的是上面对迭代器的操作不使用+,-而是使用distance()和advance()，主要是考虑到非随机迭代器没有定义+，-操作的问题。这也是为了证实我之前说的堆排序不一定要使用连续内存，当然这时候的时间复杂度已经不一样了，因为对于非随机迭代器，distance()和advance()的复杂度将不会是1，这儿不多说这个问题。另外多说一句，为什么一定要对迭代器进行检查。&lt;em&gt;The
+C++ Standard
+Library&lt;/em&gt;上说对于迭代器越界问题C++并没有定义，所以不同编译器对于这个问题实现不同，VC++
+2010在里试图越界操作的时候会中断程序，不论你有没有对迭代器进行解引用。&lt;/p&gt;
 &lt;/p&gt;
 
-&lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;
+&lt;p&gt;到了这儿，对于BuildMaxHeap的实现是不是在简单不过呢？我们只要从堆的最后一个结点开始调用MaxHeapfy就可以了。代码如下：&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;void&lt;/span&gt; &lt;span class="n"&gt;BuildMaxHeap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;const&lt;/span&gt; &lt;span class="n"&gt;Iter&lt;/span&gt; &lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Iter&lt;/span&gt; &lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;Iter&lt;/span&gt; &lt;span class="n"&gt;Iter1&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;MaxHeapfy&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt; &lt;span class="n"&gt;internal&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;heap&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;advance&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Iter1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;distance&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;2&lt;span class="p"&gt;);&lt;/span&gt; 
+        &lt;span class="n"&gt;Iter1&lt;/span&gt;!&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;BegIter&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;Iter1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;MaxHeapfy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Iter1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;MaxHeapfy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BegIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;EndIter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Iter1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;a href="http://11011.net/software/vspaste"&gt;&lt;/a&gt;&lt;a href="http://11011.net/software/vspaste"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;参考：introduction to algorithm –third edition |
+&lt;em&gt;&lt;font color="#0080c0"&gt;2012/4/15 修订&lt;/font&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。&lt;/em&gt;&lt;/p&gt;
 &lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;2011/9/20 by Adoo | homepage:&lt;/em&gt;&lt;a href="http://www.roading.org/"&gt;&lt;em&gt;www.roading.org&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/p&gt;</summary><category term="Adoo"></category><category term="c++"></category><category term="Heap"></category><category term="Introduction to algorithm"></category><category term="优先级队列"></category></entry></feed>
+&lt;p&gt;2011/9/21&lt;em&gt;by Adoo | homepage:&lt;/em&gt;&lt;a href="http://www.roading.org/"&gt;&lt;em&gt;www.roading.org&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/p&gt;</summary><category term="c++"></category><category term="Heap"></category><category term="Heap Sort"></category></entry></feed>

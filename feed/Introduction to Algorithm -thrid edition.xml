@@ -568,116 +568,7 @@ element, its total time can be expressed using as O(&lt;em&gt;n&lt;/em&gt; log &
 &lt;p&gt;问题来自算法导论，参考博客：&lt;a href="http://ripcrixalis.blog.com/"&gt;Rip's Infernal Majesty&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;2010/3/22 by Adoo | homepage:www.roading.org&lt;/em&gt;&lt;/p&gt;
-&lt;/p&gt;</summary><category term="LIS"></category></entry><entry><title>动态规划基础</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html" rel="alternate"></link><updated>2012-03-19T17:47:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-19:/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html</id><summary type="html">&lt;p&gt;前一篇笔记有过一个动态编程的实例——&lt;a href="http://www.roading.org/?p=792"&gt;rod
-cutting&lt;/a&gt;。这篇笔记主要了解动态规划的基础理论和弄清楚何时运用动态规划。对于何时来运用动态规划来寻得问题的解，取决于两个重要因素：最优子结构和重叠子问题。&lt;/p&gt;
-&lt;h3&gt;最优子结构(Optimal substructure)&lt;/h3&gt;
-&lt;p&gt;如果一个问题的最优解包含了它子问题的最优解，那么这个问题具有最优子结构。&lt;span style="background-color: #ffffff; color: #4f81bd"&gt;当一个问题包含有最优子结构时，往往暗示着这个问题应该使用动态规划来解决（当然，也可能意味着贪心算法是一种好的的解决办法，这一点会在16章讨论到）&lt;/span&gt;。&lt;/p&gt;
-&lt;p&gt;可以依照一个共同的模式来发现最优子结构：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;\1. You show that a solution to the problem consists of a makeing a
-choice. … &lt;br /&gt;
-2. You suppose that for a given porblem, you are given the choice that
-lead to an optimal solution. … &lt;br /&gt;
-3. Given this choice, you determine which subproblem ensue and how to
-best charatcerize the resulting space of subproblems. … &lt;br /&gt;
-4. You show that the solutions to the subproblems used within an
-optimal solutionsto the problem must themselves be optimal by using a
-“cut and paste” technique. …&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;用无权最短路径和无权最长路径两个例子，来演示这个模型。&lt;/p&gt;
-&lt;p&gt;假设有图 G=(V,E)，且u,v∈V.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;无权最短路径&lt;/strong&gt;：找出u到v的无权最短路径。假定u,v
-是不同点(相同就没什么好讨论了)。我们先假设 w 是u-&gt;v 最短路径 p
-上的一个点(第二步，做一个选择，并假设它导致最优解)，于是最短路径 p
-可以分为两段子路径,子路径p&lt;sub&gt;1&lt;/sub&gt;为u-&gt;w;子路径p&lt;sub&gt;2&lt;/sub&gt;为w-&gt;v(第三步，描述子问题空间)。显然，p&lt;sub&gt;1&lt;/sub&gt;与p&lt;sub&gt;2&lt;/sub&gt;也必须是各自子路径的最短路径，不然最短路径p&amp;lt;p&lt;sub&gt;1&lt;/sub&gt;+p&lt;sub&gt;2&lt;/sub&gt;的长度,这与p=p&lt;sub&gt;1&lt;/sub&gt;+p&lt;sub&gt;2&lt;/sub&gt;矛盾。于是第四点得证。也就是说这个问题有最优子结构。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;无权最长路径&lt;/strong&gt;：找出u到v的无权最长路径，当然这条路径不能包含环路。同样的办法先假设
-w 是u-&gt;v 最长路径 p
-上的一个点，因此可以得出子路径p&lt;sub&gt;1&lt;/sub&gt;和p2，有p=p&lt;sub&gt;1&lt;/sub&gt;+p&lt;sub&gt;2&lt;/sub&gt;。那么这时p1和p2一定是u-&gt;w与w-&gt;v的最长子路径吗？不是的，我们看下图这种情况：&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb10.png" title="image" /&gt;][]&lt;/p&gt;
-&lt;p&gt;u-&gt;w的最长路径为：u-&gt;v-&gt;s-&gt;w.&lt;/p&gt;
-&lt;p&gt;w-&gt;v的最长路径为： w-&gt;u-&gt;v.&lt;/p&gt;
-&lt;p&gt;假如p1和p2是u-&gt;w与w-&gt;v的最长子路径，那么p=u-&gt;v-&gt;s-&gt;w-&gt;u-&gt;v。这个时候p显然不是最长路径，因为环路形成了。所以这个问题不包含最优子结构。&lt;/p&gt;
-&lt;p&gt;感觉上两个问题非常类似，但是为什么结果却截然相反呢？区别在于第一个问题的子问题是相互独立，而第二个问题的子问题之间却互有依赖关系——p1和p2如果被独立看待，就有可能产生环路。&lt;/p&gt;
-&lt;h3&gt;&lt;strong&gt;重叠子问题(Overlapping subproblems)&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;使用动态规划求解的第二个必要因素是子问题必须“很小”。也就是说递归算法不能总是产生新的子问题，动态规划求解的意义在于，它记录子问题的解，使得子问题可以只计算一遍，如果总是产生新的子问题，那么也就失去了使用动态规划的意义，因为记录下的子问题的解，不被再用到。&lt;/p&gt;
-&lt;p&gt;这儿可以比较一下动态规划和分治思想，两者虽然都是将问题分割为子问题，但又有很大的不同，分治思想的主要目的在于减小问题的规模，而动态规划则主要为了减少重复的计算。因此，动态规划适用于子问题重叠且独立的情况。&lt;/p&gt;
-&lt;p&gt;动态规划一般采用自下向上的模式，其实自顶而下也是一种选择，如&lt;a href="http://www.roading.org/?p=792"&gt;rod
-cutting&lt;/a&gt;
-中就有这种解法。常规的自顶向下有很差的效率，加入“备忘录”记录之后，其实与自下而上复杂度是一样的。也就是说动态规划中采用自顶向下和自下而上的复杂度是一样的，但通常自下而上，用有更高的效率，因为它采用的是迭代的方法，而自顶而下用的则是递归。但是，当问题中的一些子问题是完全不用求解的时候，那么自顶而下可能是一种更好的选择。&lt;/p&gt;
-&lt;p&gt;动态规划算法的运行时间取决于两个因素的积：一是有多少个子问题，二则是每一个子问题我们有多少选择。&lt;/p&gt;
-&lt;p&gt;总结：动态规划算法的运用有两个必要条件，一是问题包含最优子结构，二是有重叠子问题。第一点保证求解的正确性，第二点则是代价问题。简而言之，我认为当问题含有&lt;span style="color: #ff0000"&gt;独立重叠&lt;/span&gt;的子问题时，往往意味着该使用动态规划。子问题独立，应该可以保证存有最优子结构。&lt;/p&gt;
-&lt;p&gt;参考：算法导论第三版&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/em&gt;&lt;/p&gt;
-&lt;div align="right"&gt;
-*2012/3/19 By Adoo | Homepage:*[*www.roading.org*][]
-
-&lt;/div&gt;
-
-&lt;/p&gt;
-
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb10.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image10.png&lt;/p&gt;</summary><category term="dynamic programming，elements，DP"></category></entry><entry><title>动态规划笔记（1）——Rod cutting</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html" rel="alternate"></link><updated>2012-03-08T12:16:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-08:/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html</id><summary type="html">&lt;p&gt;动态规划（dynamic programming
-）,与“分治思想”有些相似，都是利用将问题分为子问题，并通过合并子问题的解来获得整个问题的解。于“分治”的不同之处在于，对于一个相同的子问题动态规划算法不会计算第二次，其实现原理是将每一个计算过的子问题的值保存在一个表中。&lt;/p&gt;
-&lt;p&gt;动态规划一般被用于解决“最优解”问题。编写动态规划算法可以按照以下四个步骤(引自原文)：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;font size="1"&gt;1. Characterize the structure of an optimal solution. &lt;br /&gt;
-2. Recursively define the value of an optimal solution. &lt;br /&gt;
-3. Compute the value of an optimal solution, typically in a bottom-up
-fashion. &lt;br /&gt;
-4. Construct an optimal solution from computed information.&lt;/font&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;前三步可以求出最优解的值，如果仅是为了求出最优解的值，第四步可省略。第四步用来获得最优解，这种时候通常要在第三步时维持一些额外的数据信息。&lt;/p&gt;
-&lt;h3&gt;Rod cutting&lt;/h3&gt;
-&lt;p&gt;简单的理论之后，看一个切棒子(Rod cutting
-，撇脚的翻译)的具体问题。问题如下：给你一根长
-&lt;em&gt;n&lt;/em&gt;英尺的棒子和一份关于该棒子的价目表如下（其中 &lt;em&gt;i =
-1,2,3,…,n&lt;/em&gt;），请问如何将这根棒子卖出最高的价格，可以对棒子进行切割。&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb.png" title="image" /&gt;][]&lt;/p&gt;
-&lt;h4&gt;常规的解法&lt;/h4&gt;
-&lt;p&gt;假设最优的切割方法是切为 k 段, 1&amp;lt;=k&amp;lt;=n, 切割的方式为：&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb1.png" title="image" /&gt;][]&lt;/p&gt;
-&lt;p&gt;则其总价格为：&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb2.png" title="image" /&gt;][]&lt;/p&gt;
-&lt;p&gt;不像杂乱的切法，我们可以想象这样一种切法，每一刀切下去之后将棒子分为左右两段，而下一刀总从右段下手，依此类推。那么：&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb3.png" title="image" /&gt;][]&lt;/p&gt;
-&lt;p&gt;根据上述公式，可以很容易的写出相应的代码：&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb4.png" title="image" /&gt;][]&lt;/p&gt;
-&lt;p&gt;这段代码提供两个参数 。p 是一个数组，它存储着一份价目表，而 n
-则表示要切割的棒子的长度。当 n 不大时上述的算法或许简单管用，但是一旦 n
-稍大，运行时间将会成几何倍数增加。为什么会这样慢？其一，是因为其复杂度达到
-O(2&lt;sup&gt;n&lt;/sup&gt;),另外则由于递归的次数太多了(多达2&lt;sup&gt;n-1&lt;/sup&gt;次)。&lt;/p&gt;
-&lt;p&gt;仔细观察不难发现，上述算法做了太多的重复工作，比方Cut-Rod(p,n),要递归调用Cut-Rod(p,
-n-i), 其中 i=1,2,…,n。但对于其中Cut-Rod(p,n)中递归调用的 Cut-Rod(p,
-n-1)又要重复计算 Cut-Rod(p,n-i-1)。&lt;/p&gt;
-&lt;p&gt;对于上述情况动态规划就能派上用场了。&lt;/p&gt;
-&lt;h3&gt;用动态规划算法来切棒子&lt;/h3&gt;
-&lt;p&gt;动态规划的想法很简单，利用一个表来存储子问题的解。只有表中没有这个子问题的解的时候，才真正去求这个子问题的解并将该解保存到表中，否则直接用表中的解。&lt;/p&gt;
-&lt;p&gt;一般有自顶向下和自下而上两种记忆法来实现动态规划。&lt;/p&gt;
-&lt;p&gt;自顶而下：&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb5.png" title="image" /&gt;][]&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb6.png" title="image" /&gt;][]&lt;/p&gt;
-&lt;p&gt;自上而下：&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb7.png" title="image" /&gt;][]&lt;/p&gt;
-&lt;p&gt;上述的方法都只求出了最优的值，其解决方案并没有记录下来。也就是说对于切棒子这个问题来说，只求出了最大的总价格，至于怎么切才能卖出这样的价钱并没有解决。要想获得切法，则需要一个额外的数组来存取一些分割信息。&lt;/p&gt;
-&lt;p&gt;具体扩展后的伪码如下：&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb8.png" title="image" /&gt;][]&lt;/p&gt;
-&lt;p&gt;上面代码中数组 s 用 s[i] 记录了长度为 i
-的棒子的最优切法的第一部分长度，这一点让我颇受启发。利用数组 s
-可以轻易输出最优解法：&lt;/p&gt;
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb9.png" title="image" /&gt;][]&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;&lt;font face="微软雅黑"&gt;欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。&lt;/font&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;2012/3/8 By Adoo | Homepage:&lt;/em&gt;&lt;a href="http://www.roading.org"&gt;&lt;em&gt;www.roading.org&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/p&gt;
-
-&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image.png
-  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb1.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image1.png
-  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb2.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image2.png
-  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb3.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image3.png
-  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb4.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image4.png
-  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb5.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image5.png
-  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb6.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image6.png
-  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb7.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image7.png
-  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb8.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image8.png
-  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb9.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2012/03/image9.png&lt;/p&gt;</summary><category term="dynamic programming"></category><category term="rod cutting"></category></entry><entry><title>扩展数据结构</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%89%a9%e5%b1%95%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.html" rel="alternate"></link><updated>2012-01-05T16:08:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-01-05:/algorithm/introductiontoalgorithm/%e6%89%a9%e5%b1%95%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.html</id><summary type="html">&lt;p&gt;&lt;em&gt;&lt;font face="黑体"&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/p&gt;</summary><category term="LIS"></category></entry><entry><title>扩展数据结构</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%89%a9%e5%b1%95%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.html" rel="alternate"></link><updated>2012-01-05T16:08:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-01-05:/algorithm/introductiontoalgorithm/%e6%89%a9%e5%b1%95%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.html</id><summary type="html">&lt;p&gt;&lt;em&gt;&lt;font face="黑体"&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;div&gt;
 摘要：在一般的应用中，极少有可能要构建一种全新的数据结构，大部分情况下会使用一些已有的数据结构，或者已有的数据结构进行扩展，以使得其能支持特殊的功能。当然即便是扩展也需要做一些工作。
 
@@ -938,4 +829,51 @@ clustering）吧。但是要想填满整个哈希表的话，那么在c&lt;sub&g
 &lt;/p&gt;
 
 &lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb1.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2011/11/image1.png
-  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb6.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2011/11/image6.png&lt;/p&gt;</summary><category term="hash tables"></category><category term="Introduction to algorithm"></category></entry></feed>
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb6.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2011/11/image6.png&lt;/p&gt;</summary><category term="hash tables"></category><category term="Introduction to algorithm"></category></entry><entry><title>哈希表（1）</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html" rel="alternate"></link><updated>2011-11-08T22:18:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-11-08:/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html</id><summary type="html">&lt;p&gt;引文：&lt;/p&gt;
+&lt;p&gt;本文参考&lt;em&gt;Introduction To Algorithm ——third
+edition&lt;/em&gt;第十一章，置于文首，以表对作者敬意。主要介绍直接寻址表，哈希表，三种哈希函数
+——乘法函数，除法函数，全域函数。你可以将本文当做一篇算法导论的笔记，也可以将它当作Adoo对算法导论的理解加讲解。欢迎提出任何建议。同时学习之作难免浅薄，恳请有识之士斧正。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;2011/11/8 By Adoo | Homepage:&lt;/em&gt;&lt;a href="http://www.roading.org"&gt;&lt;em&gt;www.roading.org&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3&gt;直接寻址表（Direct-address tables）&lt;/h3&gt;
+&lt;p&gt;假设有一组元素，每个元素的Key值都包含在范围U={0,1,2,3,…m-1}中。如果这个值m不是太大，且这一组元素的Key值都不相同，我们用key值来直接决定元素或指向元素指针的存储位置（slot,我将其翻译为位置而不是狭缝，槽或…），这就是直接寻址表。如下图：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;从左图看到，对于一个元素Key值为2的元素，指向它的指针被存储在下标为2的位置中。key值为3的被存储在小标为三的位置…&lt;/p&gt;
+&lt;p&gt;你也可以直接将元素存储在直接寻址表中，而不是存储它的指针。这一切视情况而定，比方当元素的附属数据比较多的情况下，我想存储它的指针应该更为合理；反之，存储元素本身应该更易管理。&lt;/p&gt;
+&lt;p&gt;直接寻指表虽然有逻辑简单，查询存储速度快等优点，但缺点也显而易见：假如U的范围非常大的话，那么建一张这样的直接寻址表的话，不知需内存几何？另外，对于一个U
+的范围偏大，而实际的元素个数又很少的话，其内存的利用率就令人发指了。再暴力点，直接给它两个key相同的元素呢？&lt;/p&gt;
+&lt;p&gt;…于是我们就引出了哈希表。&lt;/p&gt;
+&lt;h3&gt;哈希表（Hash tables）&lt;/h3&gt;
+&lt;p&gt;与直接寻址表Key为k的元素存储在位置k不同，哈希表让Key
+为k的元素存储在位置为h(k)的位置。我们将h称为哈希函数，将h(k)称为哈希值。而恰是这么一种规则，使得哈希表的大小往往远远小于U的范围大小。因为我们可以定义一个函数值的范围比较适合的哈希函数嘛。再看一张图：&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image9_thumb.png" title="image" /&gt;][]&lt;/p&gt;
+&lt;p&gt;可以看到左图并非是直接映射，而是按照一定的规则令来映射Key值,这个规则当然就是哈希函数。&lt;/p&gt;
+&lt;p&gt;不过可以看到，哈希函数同时带来了一个问题，那就是两个或多个不同的Key有可能被映射到同一个位置，我们把这一问题称为碰撞（collision）,下篇文章会给出解决方案。其实左图中已经给出了一种解决方案——用链表来解决。&lt;/p&gt;
+&lt;h3&gt;哈希函数&lt;/h3&gt;
+&lt;p&gt;一个好的哈希函数：每一个key都有相等几率哈希到哈希表中m个位置中的一个，独立于任何其它已哈希的Key。但这仅是一种理想情况，难以把握。尽可能的使不同的key哈希到同一个位置。&lt;/p&gt;
+&lt;p&gt;key的转换，大部分情况下，我们都是用自然数来作为Key,假如我们的key不是自然数，我们将使用某种方法将它转化为自然数。比如如果key=”pt”可以利用它的ASCALL码将其转换为自然数，比方p(112)+t(116)*2=344.&lt;/p&gt;
+&lt;p&gt;下面介绍的三种函数，前两种(除法哈希法，乘法哈希法)为启发式函数（heuristic
+function）,第三种（全域哈希法）使用随机技术。实际应用中我们往往使用启发式函数。&lt;/p&gt;
+&lt;h4&gt;除法哈希&lt;/h4&gt;
+&lt;p&gt;如果我们要把一个Key为k的元素映射到大小为m的哈希表中去，则可以利用m除k的余数来确定位置。那么哈希函数就是：h(k)=&lt;em&gt;k&lt;/em&gt;mod
+&lt;em&gt;m。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;关于m的选择我们应当避免一些值，置于这些值是什么，算法导论没有指出，但给了我们一个不错的例子：&lt;/p&gt;
+&lt;p&gt;比方，m不应当是2的幂，因为若m=2&lt;sup&gt;p&lt;/sup&gt;,那么h(k)仅仅是k的低p位，也就是说k的哈希值仅依赖于k的低p位而与其他位没有关系。除非低p位的各种排列概率相等，否则最好选择使得哈希值依赖于k的所有位的数。不错的选择是选一个与2的整数次幂不太接近的整数，至于为什么，有待证明。&lt;/p&gt;
+&lt;h4&gt;乘法哈希&lt;/h4&gt;
+&lt;p&gt;乘法哈希则是令key与一个常小数A(0&amp;lt;A&amp;lt;1)相乘，取其小数部分再与m相乘来获取Key在大小为m的哈希表中的位置。哈希函数为：&lt;em&gt;h&lt;/em&gt;(&lt;em&gt;k&lt;/em&gt;)
+= ⌊&lt;em&gt;m&lt;/em&gt;(&lt;em&gt;kA&lt;/em&gt; mod 1)⌋。&lt;/p&gt;
+&lt;p&gt;乘法哈希有一个好处是，对于m的选值没有太多的要求。CLRS说一般选择一个值为2的幂的数，究其原因在于，这样方便实现在大部分计算机上实现哈希函数，我相信对于任何一种高级语言实现这样的哈希函数都非常简单，所以这一点，谁管他！&lt;/p&gt;
+&lt;p&gt;虽然最佳的A值与数据的特征有关，但是Knuth说[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb2.png" title="image" /&gt;][]是个不错的值，但其原因，我是想管管不了，估计需要查一番资料，别深究。&lt;/p&gt;
+&lt;h4&gt;全域哈希（Universal hashing）&lt;/h4&gt;
+&lt;p&gt;假使我们的对手已经模特了我们的哈希规则，很好，它将选择一组数,使得这一组数全部映射到同一位置，这就操蛋了。我们虽有办法解决碰撞的问题（下一篇文章会讲到），但是哈希表的效率将大打折扣，哈希表将变成链表，甚至更慢，完全失去了它的查找优势。问题在于任何一个哈希函数都会有这样一种最坏情况，要彻底解决这个问题并不容易，唯一有效的办法是，我们随机的选一个哈希函数，使之独立于key，这就是全域哈希。&lt;/p&gt;
+&lt;p&gt;其基本思想是，在执行之前随即地从一组哈希函数中选择一个作为哈希函数使用。&lt;/p&gt;
+&lt;h4&gt;设计全域哈希函数类&lt;/h4&gt;
+&lt;p&gt;选一个够大的质数p,且p大于任意一个key。另有两系数a∈{0, 1, ..., &lt;em&gt;p&lt;/em&gt; -
+1},b∈{1, 2, ..., &lt;em&gt;p&lt;/em&gt; - 1}.&lt;/p&gt;
+&lt;p&gt;哈希函数为[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb3.png" title="image" /&gt;][]对于任意的a,b可以组成p(p-1)个不同的哈希函数。OK.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2011/11/image.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image9_thumb.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2011/11/image9.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb2.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2011/11/image2.png
+  [&lt;img alt="image" src="http://www.roading.org/wp-content/uploads/2011/11/image_thumb3.png" title="image" /&gt;]: http://www.roading.org/wp-content/uploads/2011/11/image3.png&lt;/p&gt;</summary><category term="hash tables"></category><category term="Introduction to algorithm"></category></entry></feed>

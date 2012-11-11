@@ -55,48 +55,46 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
     					
 				
 					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
     					
-				
-					
-				
-					
-				
-					
 				
 					
 				
@@ -234,7 +232,7 @@
 例如我们将一个三位数分成，个位，十位，百位三部分。</p>
 <p>我们先来看一个实例，假如，我们要对七个三位数来进行排序，依次对其个位，十位，
 百位进行排序，如下图：</p>
-<p><img alt="" src="http://www.roading.org/images/2011-11/wps_clip_image-1844_thumb.png" /></p>
+<p><img alt="" src="http://www.roading.org/images/2011-10/wps_clip_image-1844_thumb.png" /></p>
 <p>很显然，每一位的数的大小都在[0，9]中，对于每一位的排序用<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA-%E7%AC%AC%E5%85%AB%E7%AB%A02-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8Fcounting-sort.html">计数排序</a>再适合不过。</p>
 <h3>算法复杂度</h3>
 <p>对于n个d位数而言,如果<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA-%E7%AC%AC%E5%85%AB%E7%AB%A02-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8Fcounting-sort.html">计数排序</a>的Stable Sort<sup id="fnref:注1"><a href="#fn:注1" rel="footnote">1</a></sup>的算法复杂度为θ(n+k)，那么
@@ -270,21 +268,29 @@
 <p>对整数进行基数排序的C++代码：</p>
 <div class="codehilite"><pre><span class="c1">//RadixSort.h</span>
 <span class="c1">//By Adoo</span>
-<span class="c1">//2011/10/2#ifndef RADIX_SORT</span>
+<span class="c1">//2011/10/2</span>
+
+<span class="cp">#ifndef RADIX_SORT</span>
 <span class="cp">#define RADIX_SORT</span>
 <span class="cp">#include&lt;deque&gt;</span>
-<span class="cp">#include&lt;iterator&gt;template&lt;typename InIt&gt;</span>
+<span class="cp">#include&lt;iterator&gt;</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">InIt</span><span class="o">&gt;</span>
 <span class="kt">void</span> <span class="n">RadixSort</span><span class="p">(</span><span class="n">InIt</span> <span class="n">BegIt</span><span class="p">,</span><span class="n">InIt</span> <span class="n">EndIt</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="kt">int</span> <span class="n">byte</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">BegIt</span><span class="p">);</span>
     <span class="kt">int</span> <span class="n">count</span><span class="o">=</span><span class="n">std</span><span class="o">::</span><span class="n">distance</span> <span class="p">(</span><span class="n">BegIt</span><span class="p">,</span><span class="n">EndIt</span><span class="p">);</span>
     <span class="kt">int</span> <span class="n">size</span><span class="o">=</span><span class="n">std</span><span class="o">::</span><span class="n">log</span><span class="p">(</span><span class="kt">double</span><span class="p">(</span><span class="n">count</span><span class="p">))</span><span class="o">/</span><span class="n">std</span><span class="o">::</span><span class="n">log</span><span class="p">(</span><span class="kt">double</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
     <span class="n">size</span><span class="o">=</span><span class="n">byte</span><span class="o">&lt;</span><span class="n">size</span> <span class="o">?</span> <span class="n">byte</span> <span class="o">:</span> <span class="n">size</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">from</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>  <span class="k">do</span>
+    <span class="kt">int</span> <span class="n">from</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">do</span>
     <span class="p">{</span>
         <span class="n">RadixCounting</span><span class="p">(</span><span class="n">BegIt</span><span class="p">,</span><span class="n">EndIt</span><span class="p">,</span><span class="n">from</span><span class="p">,</span><span class="n">size</span><span class="p">);</span>
         <span class="n">from</span><span class="o">+=</span><span class="n">size</span><span class="p">;</span>
-    <span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="n">from</span><span class="o">&lt;</span><span class="n">byte</span><span class="p">);</span>    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">index</span><span class="o">=</span><span class="n">BegIt</span><span class="p">;</span><span class="n">index</span><span class="o">!=</span><span class="n">EndIt</span><span class="p">;</span> <span class="o">++</span><span class="n">index</span><span class="p">)</span>
+    <span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="n">from</span><span class="o">&lt;</span><span class="n">byte</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">index</span><span class="o">=</span><span class="n">BegIt</span><span class="p">;</span><span class="n">index</span><span class="o">!=</span><span class="n">EndIt</span><span class="p">;</span> <span class="o">++</span><span class="n">index</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">index</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
         <span class="p">{</span>
@@ -293,21 +299,35 @@
             <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">vec</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="n">BegIt</span><span class="p">);</span>
             <span class="k">return</span><span class="p">;</span>
         <span class="p">}</span>
-    <span class="p">}};</span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">InIt</span><span class="o">&gt;</span>
+    <span class="p">}</span>
+
+<span class="p">};</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">InIt</span><span class="o">&gt;</span>
 <span class="kt">void</span> <span class="n">RadixCounting</span><span class="p">(</span><span class="n">InIt</span> <span class="n">BegIt</span><span class="p">,</span><span class="n">InIt</span> <span class="n">EndIt</span> <span class="p">,</span><span class="k">const</span> <span class="kt">int</span> <span class="n">From</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">Size</span><span class="p">)</span>
-<span class="p">{</span><span class="c1">//counting sort the elements form BegIt to EndIt base on the Size bits from From;   //the counter</span>
+<span class="p">{</span><span class="c1">//counting sort the elements form BegIt to EndIt base on the Size bits from From;</span>
+
+    <span class="c1">//the counter</span>
     <span class="kt">int</span> <span class="n">capa</span><span class="o">=</span><span class="n">std</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="kt">double</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">Size</span><span class="p">);</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">Counter</span><span class="p">(</span><span class="n">capa</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>  <span class="kt">int</span> <span class="n">clip</span><span class="o">=</span><span class="n">capa</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="err">`</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">Counter</span><span class="p">(</span><span class="n">capa</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">clip</span><span class="o">=</span><span class="n">capa</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">Index</span><span class="o">=</span><span class="n">BegIt</span><span class="p">;</span><span class="n">Index</span><span class="o">!=</span><span class="n">EndIt</span><span class="p">;</span><span class="o">++</span><span class="n">Index</span><span class="p">)</span>
-        <span class="o">++</span><span class="n">Counter</span><span class="p">[((</span><span class="o">*</span><span class="n">Index</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="n">From</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="n">clip</span><span class="p">];</span>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">!=</span><span class="n">capa</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">Counter</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">Counter</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">Result</span><span class="p">(</span><span class="n">Counter</span><span class="p">[</span><span class="n">capa</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">0</span><span class="p">);</span>
+        <span class="o">++</span><span class="n">Counter</span><span class="p">[((</span><span class="o">*</span><span class="n">Index</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="n">From</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="n">clip</span><span class="p">];</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">!=</span><span class="n">capa</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">Counter</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">Counter</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">Result</span><span class="p">(</span><span class="n">Counter</span><span class="p">[</span><span class="n">capa</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">0</span><span class="p">);</span>
     <span class="k">for</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">reverse_iterator</span><span class="o">&lt;</span><span class="n">InIt</span><span class="o">&gt;</span> <span class="n">RIter</span><span class="p">(</span><span class="n">EndIt</span><span class="p">),</span><span class="n">REnd</span><span class="p">(</span><span class="n">BegIt</span><span class="p">);</span> <span class="n">RIter</span><span class="o">!=</span><span class="n">REnd</span> <span class="p">;</span><span class="o">++</span><span class="n">RIter</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="p">((</span><span class="o">*</span><span class="n">RIter</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="n">From</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="n">clip</span><span class="p">;</span>
         <span class="n">Result</span><span class="p">[</span> <span class="n">Counter</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">--</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=*</span><span class="n">RIter</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">Result</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">Result</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="n">BegIt</span><span class="p">);</span>
-<span class="p">}</span><span class="err">#</span><span class="n">endif</span>
+<span class="p">}</span>
+
+<span class="cp">#endif</span>
 </pre></div>
 
 
@@ -441,7 +461,15 @@
 		
 		
 		
+		   
+		   <li><a title="动态规划基础" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html">动态规划基础</a></li>
+		   
 		
+		
+		
+		   
+		   <li><a title="动态规划笔记（1）——Rod cutting" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html">动态规划笔记（1）——Rod cutting</a></li>
+		   
 		
 		
 		
@@ -559,17 +587,37 @@
 		
 		
 		
+		   
+		   <li><a title="第十章 Elementary Data Structures" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html">第十章 Elementary Data Structures</a></li>
+		   
 		
 		
 		
 		
 		
+		   
+		   <li><a title="第九章习题选做" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0%e4%b9%a0%e9%a2%98%e9%80%89%e5%81%9a.html">第九章习题选做</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="第九章 中位数和顺序统计量（Medians and Order Statistic）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html">第九章 中位数和顺序统计量（Medians and Order Statistic）</a></li>
+		   
 		
 		
 		
 		
 		
+		   
+		   <li><a title="第八章（5） 习题 8-4 8-5 8-7" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%885%ef%bc%89-%e4%b9%a0%e9%a2%98-8-4-8-5-8-7.html">第八章（5） 习题 8-4 8-5 8-7</a></li>
+		   
 		
+		
+		
+		   
+		   <li><a title="桶排序（Bucket sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html">桶排序（Bucket sort）</a></li>
+		   
 		
 		
 		
@@ -589,11 +637,27 @@
 		
 		
 		
+		   
+		   <li><a title="比较排序在最坏情况下时间复杂度为Ω(nlgn)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%881%ef%bc%89-%e6%af%94%e8%be%83%e6%8e%92%e5%ba%8f%e5%9c%a8%e6%9c%80%e5%9d%8f%e6%83%85%e5%86%b5%e4%b8%8b%e6%97%b6%e9%97%b4.html">比较排序在最坏情况下时间复杂度为Ω(nlgn)</a></li>
+		   
 		
 		
 		
+		   
+		   <li><a title="快速排序课后7.4-5" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html">快速排序课后7.4-5</a></li>
+		   
 		
 		
+		
+		   
+		   <li><a title="快排与随机快排效率分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%bf%ab%e6%8e%92%e4%b8%8e%e9%9a%8f%e6%9c%ba%e5%bf%ab%e6%8e%92%e6%95%88%e7%8e%87%e5%88%86%e6%9e%90.html">快排与随机快排效率分析</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="快速排序及C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html">快速排序及C++实现</a></li>
+		   
 		
 		
 		
@@ -602,6 +666,10 @@
 		   
 		
 		
+		
+		   
+		   <li><a title="利用堆来建立优先级队列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%88%a9%e7%94%a8%e5%a0%86%e6%9d%a5%e5%bb%ba%e7%ab%8b%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97.html">利用堆来建立优先级队列</a></li>
+		   
 		
 		
 		
