@@ -55,8 +55,20 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
-    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 					
 				
@@ -147,32 +159,8 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+    					
 				
 					
 				
@@ -197,10 +185,10 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a  title="Permalink to 哈希表（Hash Tables）（2）" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html">哈希表（Hash Tables）（2）</a></h1> 
+                    <h1 class="entry-title"><a  title="Permalink to 哈希表的C++模板实现" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html">哈希表的C++模板实现</a></h1> 
                     <div class="post-info">
-        <abbr class="published" title="2011-11-09T15:59:00">
-                Wed 09 November 2011
+        <abbr class="published" title="2011-11-13T16:36:00">
+                Sun 13 November 2011
         </abbr>
         
         <address class="article_author">
@@ -208,31 +196,35 @@
         </address>
         		
 	
-	    <abbr title="hash tables&nbsp;&nbsp;Introduction to algorithm&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;hash tables&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
-		<a title="permalink to Introduction to algorithm" href="http://www.roading.org/tag/introduction-to-algorithm.html">Introduction to algorithm</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+	          
+		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
 	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to Introduction to Algorithm -thrid edition" href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-		    <p>引文：</p>
-<p>本文参考<em>Introduction To Algorithm ——third
-edition</em>第十一章，置于文首，以表对作者敬意。主要介绍哈希表两种碰撞的解决方法——链表和开放地址法（Open
-addressing），开放地址的三种探查方法——线性探查（Linear
-probing）、二次探查（Quadratic probing）、双重哈希（Double
-hashing），以及完全哈希(Perfect
-hashing)。你可以将本文当做一篇算法导论的笔记，也可以将它当作Adoo对算法导论的理解加讲解。若你也在度算法导论或对算法有兴趣，欢迎交流。同时学习之作难免浅薄，恳请有识之士斧正。</p>
-<p><em>2011/11/9 By Adoo | Homepage:</em><a href="http://www.roading.org"><em>www.roading.org</em></a></p>
-<hr />
-<h2>解决碰撞</h2>
-<p>解决碰撞无非两种思路：使得一个位置能存储多个元素，此其一；不限定一个元素只能存储到一个位置，既然要去到地方挤不下，那便换个地方，此其二 ...</p>
-		    <a class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 哈希表（Hash Tables）（2）">Read more→</a>	
+		    <p>采用引用计数来解决指针管理问题。开放地址、双重哈希来解决碰撞和探测问题，
+实现了哈希表的创建、查找、插入，复制控制，[]操作符… 但总觉得欠缺点什么。</p>
+<p>源码：</p>
+<div class="codehilite"><pre><span class="c1">//hash.h </span>
+<span class="c1">//2011/11/13   By Adoo</span>
+<span class="cp">#ifndef  HASH_H</span>
+<span class="cp">#define HASH_H</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">type</span><span class="p">,</span><span class="k">typename</span> <span class="kt">long</span> <span class="p">(</span><span class="o">*</span><span class="n">count_key</span><span class="p">)(</span><span class="n">type</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">hash</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+     <span class="n">hash</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="k">const</span> <span class="n">type</span> <span class="n">empty</span><span class="p">,</span> <span class="k">const</span> <span class="n">type</span> <span class="n">deleted</span><span class="p">)</span><span class="o">:</span><span class="n">_size</span><span class="p">(</span><span class="n">size</span><span class="p">),</span>  
+        <span class="n">_ref_count</span><span class="p">(</span><span class="k">new</span> <span class="n">std</span><span class="o">::</span><span class="n">size_t</span> <span class="p">(</span><span class="mi">1</span><span class="p">)),</span><span class="n">table</span><span class="p">(</span><span class="nb">NULL ...</span></pre></div>
+		    <a class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 哈希表的C++模板实现">Read more→</a>	
                 </article>
 		<div class="clear"></div>
                 
@@ -244,6 +236,58 @@ hashing)。你可以将本文当做一篇算法导论的笔记，也可以将它
                     <ul id="posts-list" class="hfeed">
             
         
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 哈希表（Hash Tables）（2）">哈希表（Hash Tables）（2）</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-09T15:59:00">
+                Wed 09 November 2011
+        </abbr>
+        
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+        		
+	
+	    <abbr title="hash tables&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
+	          
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	          
+	    </abbr>
+	
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+	
+	
+</div><!-- /.post-info -->
+                <h3>解决碰撞</h3>
+<p>解决碰撞无非两种思路：使得一个位置能存储多个元素，此其一；不限定一个元素
+只能存储到一个位置，既然要去到地方挤不下，那便换个地方，此其二。下文给出
+对应两种思路将的两种方法。</p>
+<h3>用链表解决碰撞</h3>
+<p>既然要使得一个位置能存储多个元素，我们便将要存储到这一位置的多个元素串成
+链表，并存储链表头，是为链表解决碰撞法。如图：</p>
+<p><img alt="" src="http://www.roading.org/images/2011-11/image_thumb1.png" /></p>
+<p>这个方法简单明了，但是效率方面可能要打折扣 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 哈希表（Hash Tables）（2）">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
         
         
             
@@ -268,22 +312,26 @@ hashing)。你可以将本文当做一篇算法导论的笔记，也可以将它
         </address>
         		
 	
-	    <abbr title="hash tables&nbsp;&nbsp;Introduction to algorithm&nbsp;&nbsp;">
+	    <abbr title="hash tables&nbsp;&nbsp;算法导论&nbsp;&nbsp;散列表&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
 	          
-		<a title="permalink to Introduction to algorithm" href="http://www.roading.org/tag/introduction-to-algorithm.html">Introduction to algorithm</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+	          
+		<a title="permalink to 散列表" href="http://www.roading.org/tag/san-lie-biao.html">散列表</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to Introduction to Algorithm -thrid edition" href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-                <p>引文：</p>
-<p>本文参考<em>Introduction To Algorithm ——third
-edition</em>第十一章，置于文首，以表对作者敬意。主要介绍直接寻址表，哈希表，三种哈希函数
-——乘法函数，除法函数，全域函数。你可以将本文当做一篇算法导论的笔记，也可以将它当作Adoo对算法导论的理解加讲解。欢迎提出任何建议。同时学习之作难免浅薄 ...</p>
+                <h3>直接寻址表（Direct-address tables）</h3>
+<p>假设有一组元素，每个元素的Key值都包含在范围U={0,1,2,3,…m-1}中。如果这个
+值m不是太大，且这一组元素的Key值都不相同，我们用key值来直接决定元素或指
+向元素指针的存储位置（slot,我将其翻译为位置而不是狭缝，槽或…），这就是直 ...</p>
                  <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html" rel="bookmark"
                            title="Permalink to 哈希表（1）">Read more→</a>	
 		<div class="clear"></div>
@@ -332,9 +380,13 @@ edition</em>第十一章，置于文首，以表对作者敬意。主要介绍�
 	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edition.xml" 
 		title="Subscribe for Introduction to Algorithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
-             <li ><a href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a>
-	         <a href="http://www.roading.org/feed/Introduction to Algorithm -thrid edition.xml" 
-		title="Subscribe for Introduction to Algorithm -thrid edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/introduction-to-algorithm-third-edtion.html">Introduction to Algorithm -third edtion</a>
+	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edtion.xml" 
+		title="Subscribe for Introduction to Algorithm -third edtion" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+        
+             <li ><a href="http://www.roading.org/category/introduction-to-alogrithm-third-edition.html">Introduction to Alogrithm -third edition</a>
+	         <a href="http://www.roading.org/feed/Introduction to Alogrithm -third edition.xml" 
+		title="Subscribe for Introduction to Alogrithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
              <li ><a href="http://www.roading.org/category/metro.html">Metro</a>
 	         <a href="http://www.roading.org/feed/Metro.xml" 
@@ -347,10 +399,6 @@ edition</em>第十一章，置于文首，以表对作者敬意。主要介绍�
              <li ><a href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a>
 	         <a href="http://www.roading.org/feed/深度探索C++对象模型.xml" 
 		title="Subscribe for 深度探索C++对象模型" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
-        
-             <li ><a href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a>
-	         <a href="http://www.roading.org/feed/算法导论.xml" 
-		title="Subscribe for 算法导论" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
              <li ><a href="http://www.roading.org/category/sui-bi.html">随笔</a>
 	         <a href="http://www.roading.org/feed/随笔.xml" 

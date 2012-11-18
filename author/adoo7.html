@@ -55,8 +55,20 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
-    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 					
 				
@@ -147,32 +159,8 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+    					
 				
 					
 				
@@ -466,11 +454,13 @@ protected）,但这样做的后果则是破坏了数据的封装性，使类的�
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
@@ -478,12 +468,14 @@ protected）,但这样做的后果则是破坏了数据的封装性，使类的�
 	
 	
 </div><!-- /.post-info -->
-                <p>摘要：</p>
-<ul>
-<li>本文主要关于C++ 命名返回值优化（Named return value 优化）和
-    成员初始化队列（Member Initialization List）的那点事。</li>
-<li>参考Lippman《深度探索C++对象模型》(侯捷译)第二章。你可以将之视为Adoo关于其的笔记。</li>
-<li>无论如何欢迎你提出建议以及与我交流 ...</li></ul>
+                <h3>命名返回值优化</h3>
+<p>对于一个如<code>foo()</code>这样的函数，它的每一个返回分支都返回相同的对象，编译器
+有可能对其做Named return Value优化（下文都简称NRV优化），方法是以一个参
+数<code>result</code>取代返回对象。</p>
+<p><code>foo()</code>的原型：</p>
+<div class="codehilite"><pre><span class="n">X</span> <span class="n">foo</span><span class="p">()</span> 
+<span class="p">{</span> 
+    <span class="n">X</span> <span class="n">xx ...</span></pre></div>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%91%bd%e5%90%8d%e8%bf%94%e5%9b%9e%e5%80%bc%e4%bc%98%e5%8c%96%e5%92%8c%e6%88%90%e5%91%98%e5%88%9d%e5%a7%8b%e5%8c%96%e9%98%9f%e5%88%97.html" rel="bookmark"
                            title="Permalink to 命名返回值优化和成员初始化队列">Read more→</a>	
 		<div class="clear"></div>
@@ -513,11 +505,13 @@ protected）,但这样做的后果则是破坏了数据的封装性，使类的�
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
@@ -525,18 +519,18 @@ protected）,但这样做的后果则是破坏了数据的封装性，使类的�
 	
 	
 </div><!-- /.post-info -->
-                <p><em>摘要：本文为《深度探索C++对象模型》第六章——执行期语意学（Runtime
-Semantics）笔记之一，主要内容包括三种情况下的对象构造和解构——全局对象、局部静态对象和对象数组。</em></p>
-<p>一般而言，构造函数被安插在对象的定义处，而析构函数被安插在对象生命周期结束前：</p>
-<div align="left">
-
-wzxhzdk:0
-
-</div>
-
+                <p>一般而言，构造函数被安插在对象的定义处，而析构函数被安插在对象生命
+周期结束前：</p>
+<p>:::C++
+  // Pseudo C++ Code<br />
+  {<br />
+     Point point;<br />
+     // point.Point::Point() 一般被安插在这儿<br />
+     ...<br />
+     // point.Point::~Point() 一般被安插在这儿 
+  }<br />
 </p>
-
-<p>当代码有一个以上的离开点的时候，析构函数则必须放在对象被构造之后的每一个离开点之前。因此 ...</p>
+<p>当代码有一个以上的离开点的时候，析构函数则必须放在对象被构造之后的每 ...</p>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="bookmark"
                            title="Permalink to 对象的构造和析构">Read more→</a>	
 		<div class="clear"></div>
@@ -606,9 +600,13 @@ Semantics）笔记之一，主要内容包括三种情况下的对象构造和�
 	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edition.xml" 
 		title="Subscribe for Introduction to Algorithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
-             <li ><a href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a>
-	         <a href="http://www.roading.org/feed/Introduction to Algorithm -thrid edition.xml" 
-		title="Subscribe for Introduction to Algorithm -thrid edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/introduction-to-algorithm-third-edtion.html">Introduction to Algorithm -third edtion</a>
+	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edtion.xml" 
+		title="Subscribe for Introduction to Algorithm -third edtion" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+        
+             <li ><a href="http://www.roading.org/category/introduction-to-alogrithm-third-edition.html">Introduction to Alogrithm -third edition</a>
+	         <a href="http://www.roading.org/feed/Introduction to Alogrithm -third edition.xml" 
+		title="Subscribe for Introduction to Alogrithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
              <li ><a href="http://www.roading.org/category/metro.html">Metro</a>
 	         <a href="http://www.roading.org/feed/Metro.xml" 
@@ -621,10 +619,6 @@ Semantics）笔记之一，主要内容包括三种情况下的对象构造和�
              <li ><a href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a>
 	         <a href="http://www.roading.org/feed/深度探索C++对象模型.xml" 
 		title="Subscribe for 深度探索C++对象模型" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
-        
-             <li ><a href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a>
-	         <a href="http://www.roading.org/feed/算法导论.xml" 
-		title="Subscribe for 算法导论" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
              <li ><a href="http://www.roading.org/category/sui-bi.html">随笔</a>
 	         <a href="http://www.roading.org/feed/随笔.xml" 

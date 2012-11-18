@@ -55,8 +55,20 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
-    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 					
 				
@@ -147,32 +159,8 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+    					
 				
 					
 				
@@ -265,7 +253,7 @@
             <li><article class="hentry">    
                 <header>
                     <h1><a href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html" rel="bookmark"
-                           title="Permalink to 总结——亦为引言">总结&#8212;&#8212;亦为引言</a></h1>
+                           title="Permalink to 总结·亦为引言">总结·亦为引言</a></h1>
                 </header>
                 
                 <div class="entry-content">
@@ -279,11 +267,9 @@
         </address>
         		
 	
-	    <abbr title="Inside The C++ Object Model&nbsp;&nbsp;总结&nbsp;&nbsp;">
+	    <abbr title="Inside The C++ Object Model&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-	          
-		<a title="permalink to 总结" href="http://www.roading.org/tag/zong-jie.html">总结</a>
 	          
 	    </abbr>
 	
@@ -291,10 +277,13 @@
 	
 	
 </div><!-- /.post-info -->
-                <p>《深度探索C++对象模型》终于在昨天写完了最后一篇笔记，前前后后花费了一个月左右，期间学到了很多，很感激书的作者和译者。之后的日子，可以将精力转回《算法导论》和一些非技术类的书上来了。</p>
-<p>11月11号开始看《深度探索C++对象模型》一书，到二十八号看完，共计花费了十八天。不过到做完全书的笔记则是昨天的事了。期间也算是反复阅读，中英文版本对照，虽然不能说事深掘至微末 ...</p>
+                <p>《深度探索C++对象模型》终于在昨天写完了最后一篇笔记，前前后后花费了一个
+月左右，期间学到了很多，很感激书的作者和译者。之后的日子，可以将精力转
+回《算法导论》和一些非技术类的书上来了。</p>
+<p>11月11号开始看《深度探索C++对象模型》一书，到二十八号看完，共计花费了十
+八天。不过到做完全书的笔记则是昨天的事了 ...</p>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html" rel="bookmark"
-                           title="Permalink to 总结——亦为引言">Read more→</a>	
+                           title="Permalink to 总结·亦为引言">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -371,13 +360,11 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;template&nbsp;&nbsp;template instantiation&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;template instantiation&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-	          
-		<a title="permalink to template" href="http://www.roading.org/tag/template.html">template</a>
 	          
 		<a title="permalink to template instantiation" href="http://www.roading.org/tag/template-instantiation.html">template instantiation</a>
 	          
@@ -388,11 +375,14 @@
 	
 </div><!-- /.post-info -->
                 <h3>模板的实例化</h3>
-<p>一个模板只有被使用到，才会被实例化，否则不会被实例化。对于一个实例化后的模板来说，未被调用的成员函数将不会被实例化，只有成员函数被使用时，C++
-标准才要求实例化他们。其原因，有两点：</p>
+<p>一个模板只有被使用到，才会被实例化，否则不会被实例化。对于一个实例化
+后的模板来说，未被调用的成员函数将不会被实例化，只有成员函数被使用时，
+C++标准才要求实例化他们。其原因，有两点：</p>
 <ul>
-<li>空间和时间效率的考虑，如果模板类中有100个成员函数，对某个特定类型只有2个函数会被使用，针对另一个特定类型只会使用3个，那么如果将剩余的195个函数实例化将浪费大量的时间和空间。</li>
-<li>使模板有最大的适用性。并不是实例化出来的每个类型都支持所有模板的全部成员函数所需要的元算符。如果只实例化那些真正被使用的成员函数的话，那么原本在编译期有错误的类型也能够得到支持 ...</li></ul>
+<li>空间和时间效率的考虑，如果模板类中有100个成员函数，对某个特定类型
+    只有2个函数会被使用，针对另一个特定类型只会使用3个，那么如果将剩
+    余的195个函数实例化将浪费大量的时间和空间。</li>
+<li>使模板有最大的适用性 ...</li></ul>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html" rel="bookmark"
                            title="Permalink to 模板二事">Read more→</a>	
 		<div class="clear"></div>
@@ -476,11 +466,13 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
@@ -488,18 +480,18 @@
 	
 	
 </div><!-- /.post-info -->
-                <p><em>摘要：本文为《深度探索C++对象模型》第六章——执行期语意学（Runtime
-Semantics）笔记之一，主要内容包括三种情况下的对象构造和解构——全局对象、局部静态对象和对象数组。</em></p>
-<p>一般而言，构造函数被安插在对象的定义处，而析构函数被安插在对象生命周期结束前：</p>
-<div align="left">
-
-wzxhzdk:0
-
-</div>
-
+                <p>一般而言，构造函数被安插在对象的定义处，而析构函数被安插在对象生命
+周期结束前：</p>
+<p>:::C++
+  // Pseudo C++ Code<br />
+  {<br />
+     Point point;<br />
+     // point.Point::Point() 一般被安插在这儿<br />
+     ...<br />
+     // point.Point::~Point() 一般被安插在这儿 
+  }<br />
 </p>
-
-<p>当代码有一个以上的离开点的时候，析构函数则必须放在对象被构造之后的每一个离开点之前。因此 ...</p>
+<p>当代码有一个以上的离开点的时候，析构函数则必须放在对象被构造之后的每 ...</p>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="bookmark"
                            title="Permalink to 对象的构造和析构">Read more→</a>	
 		<div class="clear"></div>
@@ -603,9 +595,13 @@ Semantics）笔记之一，主要内容包括三种情况下的对象构造和�
 	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edition.xml" 
 		title="Subscribe for Introduction to Algorithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
-             <li ><a href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a>
-	         <a href="http://www.roading.org/feed/Introduction to Algorithm -thrid edition.xml" 
-		title="Subscribe for Introduction to Algorithm -thrid edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/introduction-to-algorithm-third-edtion.html">Introduction to Algorithm -third edtion</a>
+	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edtion.xml" 
+		title="Subscribe for Introduction to Algorithm -third edtion" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+        
+             <li ><a href="http://www.roading.org/category/introduction-to-alogrithm-third-edition.html">Introduction to Alogrithm -third edition</a>
+	         <a href="http://www.roading.org/feed/Introduction to Alogrithm -third edition.xml" 
+		title="Subscribe for Introduction to Alogrithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
              <li ><a href="http://www.roading.org/category/metro.html">Metro</a>
 	         <a href="http://www.roading.org/feed/Metro.xml" 
@@ -618,10 +614,6 @@ Semantics）笔记之一，主要内容包括三种情况下的对象构造和�
              <li class="active"><a href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a>
 	         <a href="http://www.roading.org/feed/深度探索C++对象模型.xml" 
 		title="Subscribe for 深度探索C++对象模型" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
-        
-             <li ><a href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a>
-	         <a href="http://www.roading.org/feed/算法导论.xml" 
-		title="Subscribe for 算法导论" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
              <li ><a href="http://www.roading.org/category/sui-bi.html">随笔</a>
 	         <a href="http://www.roading.org/feed/随笔.xml" 

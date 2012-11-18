@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>算法导论——赫夫曼编码</title>
+        <title>赫夫曼编码</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
         
@@ -55,8 +55,20 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
-    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 					
 				
@@ -147,32 +159,8 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+    					
 				
 					
 				
@@ -187,9 +175,9 @@
 <div class="crumbs">
 <a href="http://www.roading.org" title ="Back to homepage">Home</a> »
 
-<a href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a> »
+<a href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a> »
 
-算法导论&#8212;&#8212;赫夫曼编码
+赫夫曼编码
 </div>
  
 		</nav>
@@ -197,7 +185,7 @@
 
         
     <div class="article-page">
-	<h1>算法导论&#8212;&#8212;赫夫曼编码</h1>
+	<h1>赫夫曼编码</h1>
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2012-03-28T16:01:00">
@@ -209,64 +197,133 @@
         </address>
         		
 	
-	    <abbr title="greedy algorithm&nbsp;&nbsp;huffman codes&nbsp;&nbsp;">
+	    <abbr title="huffman codes&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to greedy algorithm" href="http://www.roading.org/tag/greedy-algorithm.html">greedy algorithm</a>
-	          
 		<a title="permalink to huffman codes" href="http://www.roading.org/tag/huffman-codes.html">huffman codes</a>
+	          
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to Introduction to Algorithm -thrid edition" href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-	      <p>赫夫曼编码(huffman
-codes)是一种非常有用的数据压缩方法，通常能将数据压缩20%\~90%。从具体问题出发，假设我们有一包含10000个字符的文件，这些字符仅由6个不同的字符组成，就设这6个字符分别为“abcdef”，下面的表给出了这6个字符在整个文件中的占比，和两种不同的编码方式。</p>
-<hr />
-<div class="codehilite"><pre>                         <span class="n">a</span>     <span class="n">b</span>     <span class="n">c</span>     <span class="n">d</span>     <span class="n">e</span>      <span class="n">f</span>
+	      <p>赫夫曼编码(huffman codes)是一种非常有用的数据压缩方法，通常能将数据压
+缩20%\~90%。从具体问题出发，假设我们有一包含10000个字符的文件，这些字
+符仅由6个不同的字符组成，就设这6个字符分别为“abcdef”，下面的表给出了
+这6个字符在整个文件中的占比，和两种不同的编码方式。</p>
+<table>
+<thead>
+<tr>
+<th>--------------</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+<th>e</th>
+<th>f</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frequency (in thousands)</td>
+<td>45</td>
+<td>13</td>
+<td>12</td>
+<td>10</td>
+<td>9</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Fixed-length codeword</td>
+<td>000</td>
+<td>001</td>
+<td>010</td>
+<td>011</td>
+<td>100</td>
+<td>101</td>
+</tr>
+<tr>
+<td>Variable-length codeword</td>
+<td>0</td>
+<td>101</td>
+<td>100</td>
+<td>111</td>
+<td>1101</td>
+<td>1100</td>
+</tr>
+</tbody>
+</table>
+<p>上例中固定长度的编码方式最少需要三位。那么整个文件的长度大小为300,000
+bits，而对于可变长度的编码方式其使用大小为：</p>
+<p>(45 * 1 + 13 * 3 + 12 * 3 + 16 * 3 + 9 * 4 + 5 * 4) · 1,000 = 224,000
+bits</p>
+<p>使用第二种编码方式能比第一种方式节约大约25%的空间。上述变长编码的方式实
+际上是一种名为<strong>前缀编码</strong>的编码方式。</p>
+<h3>前缀编码</h3>
+<p>如果某种编码方案中，没有一个编码会是其它编码的前缀，则称这种编码方案为
+前缀编码。有一条已证明的结论，任何由字符编码技术所获得的最佳压缩数据，
+也可以由前缀编码来获得。</p>
+<p>前缀编码的编码很容易，只需将文件中的字符用对应的编码表示即可。解码也容
+易完成，因为其性质，可以直接从头至尾按编码与字符的对应关系翻译即可。</p>
+<p>在解码过程中，为了方便和提高效率，可以用一颗二叉树来提供帮助。在这棵二
+叉树中，0表示往左走，1表示往右走。字符则被放置在树的叶子上。所以从根节
+点到叶子的路径表示了该字符的编码。这样一颗树对于解码时很有帮助的。下图
+是上面的例子中的两种编码对应的二叉树：</p>
+<p><img alt="" src="http://www.roading.org/images/2012-03/image_thumb22.png" /></p>
+<h3>赫夫曼编码</h3>
+<p>赫夫曼编码是指赫夫曼提供的一种构建最优前缀编码的方法。其方法是总选取权
+重最小的两个结点<em>x</em>和<em>y</em>合并成一个结点<em>z</em>,并用<em>z</em>代替它们，再从中选出两
+个权重最小的结点…如是反复。图解：</p>
+<p><img alt="" src="http://www.roading.org/images/2012-03/image3_thumb.png" /></p>
+<h3>伪码:</h3>
+<div class="codehilite"><pre><span class="n">HUFFMAN</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="o">|</span><span class="n">C</span><span class="o">|</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">C</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">allocate</span> <span class="n">a</span> <span class="n">new</span> <span class="n">node</span> <span class="n">z</span>
+        <span class="n">z</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">x</span> <span class="o">=</span> <span class="n">EXTRACT</span><span class="o">-</span><span class="n">MIN</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+        <span class="n">z</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">y</span> <span class="o">=</span> <span class="n">EXTRACT</span><span class="o">-</span><span class="n">MIN</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+        <span class="n">z</span><span class="p">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">freq</span> <span class="o">+</span> <span class="n">y</span><span class="p">.</span><span class="n">freq</span>
+        <span class="n">INSERT</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">EXTRACT</span><span class="o">-</span><span class="n">MIN</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span> <span class="c1">// retrun the root of the tree</span>
 </pre></div>
 
 
-<p>Frequency (in thousands)   45    13    12    10    9      5
-  Fixed-length codeword      000   001   010   011   100    101
-  Variable-length codeword   0     101   100   111   1101   1100</p>
-<hr />
-<p></p>
-上例中固定长度的编码方式最少需要三位。那么整个文件的长度大小为300,000
-bits，而对于可变长度的编码方式其使用大小为：</p>
-<p>(45 · 1 + 13 · 3 + 12 · 3 + 16 · 3 + 9 · 4 + 5 · 4) · 1,000 = 224,000
-bits</p>
-<p>使用第二种编码方式能比第一种方式节约大约25%的空间。上述变长编码的方式实际上是一种名为<strong>前缀编码</strong>的编码方式。</p>
-<h3>前缀编码</h3>
-<p>如果某种编码方案中，没有一个编码会是其它编码的前缀，则称这种编码方案为前缀编码。有一条已证明的结论，任何由字符编码技术所获得的最佳压缩数据，也可以由前缀编码来获得。</p>
-<p>前缀编码的编码很容易，只需将文件中的字符用对应的编码表示即可。解码也容易完成，因为其性质，可以直接从头至尾按编码与字符的对应关系翻译即可。</p>
-<p>在解码过程中，为了方便和提高效率，可以用一颗二叉树来提供帮助。在这棵二叉树中，0表示往左走，1表示往右走。字符则被放置在树的叶子上。所以从根节点到叶子的路径表示了该字符的编码。这样一颗树对于解码时很有帮助的。下图是上面的例子中的两种编码对应的二叉树：[<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb22.png" title="image" />][]</p>
-<h3>赫夫曼编码</h3>
-<p>赫夫曼编码是指赫夫曼提供的一种构建最优前缀编码的方法。其方法是总选取权重最小的两个结点<em>x</em>和<em>y</em>合并成一个结点<em>z</em>,并用<em>z</em>代替它们，再从中选出两个权重最小的结点…如是反复。图解：[<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image3_thumb.png" title="image" />][]</p>
-<h3>伪码:</h3>
-<p>[<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb24.png" title="image" />][]</p>
 <h3>赫夫曼编码的正确性</h3>
 <p>证明赫夫曼编码的正确性需证明贪心算法的两要素：</p>
 <ul>
-<li><font face="Georgia"><font color="#555555" size="2">具有最优子结构</font></font></li>
-<li><font face="Georgia"><font color="#555555" size="2">贪心选择性质</font></font></li>
+<li>具有最优子结构</li>
+<li>贪心选择性质</li>
 </ul>
-<p>ps:<font face="楷体">本来按照之前些笔记的思路该记下证明过程的。但今天就不写了，我免不了要吐槽几句。一直以来，我是很不喜欢也很少做笔记的，我更愿意的方式是在书旁边的空白处写点理解感想之类的，潦潦草草，信手涂鸦。大一大二的时候因为看技术方面的书籍多是从图书馆借来。特别是《C++
-primer》
-这本书，被我借了两年，期间续借了又续借。刚开始看书的时候，是很期待从上面看到点什么前辈心得的，当然上面除了很少处的一两段短线之外，并没有什么其它前辈手迹。我有这种心理，因此遗憾之余也并没有介意在书上留下点东西。期间我涂涂画画写了不少东西，起初我不以为意，但后来还了书后，这本书恰巧又被我的同学ZWL借去。我从他手中偶然看到这本书，又随手翻了翻我以前写在其中的小记，个中有不少错误之处，有的是因为笔误，有的是因为刚开始看时理解的浅薄，这令我无比汗颜。我于是想最好还是不要在借来的书上乱写。到不是为了爱惜书籍，虽然，太多人很高尚的认为不要在图书馆中借来的书上写画，但我仍固执的以为，书被翻烂了写烂了才最能体现它的价值。我所顾忌的一是恐误了后来人，二是那些心得，虽然写了，却再难翻看了。</font></p>
-<p><font face="楷体">再到后来会偶尔用本子记下一点心得，但确实麻烦难了。因为我看书一直以来的习惯决定了，那些个笔记心得难成体系，太随意了，太散了。如果不是附在原文旁边，我自己翻看，也没觉得有多大用处。另外一点在于，我向来对于笔记本这些东西保存不善，指不定哪天丢了，或撕了——我喜欢用质量差的作业本写字，那些漂亮的笔记本反而让我写不习惯，因此我的笔记本和作业本还有草稿本完全是一路货色。</font></p>
-<p><font face="楷体">到看算法导论的时候，我开始萌生了要系统记一记笔记的想法。
-我原来写这个笔记的初衷在于，一是要囊括要点，二是能写一些书本之外的理解，更重要的是我想这些笔记能够简明易懂，使我以后不用频频翻看原书。不过发现自己的水平也就能勉强读懂这本书，原来的目的自然只达到了十之一二。</font></p>
-<p><font face="楷体">这本书的笔记我还是会将它写完，但有些无谓的地方将不会多浪费笔墨。</font></p>
-<p><font face="楷体">每个人都有自己的做事原则，我的原则是做一件事，要有一个明确的理由，放弃一件在做的事也要有一个明确的理由。</font></p>
-<p><em>欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。</em></p>
-<p><em>2010/3/28 by Adoo | homepage: <a href="http://www.roading.org/">www.roading.org</a></em></p>
-</p>
-
-<p>[<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb22.png" title="image" />]: http://www.roading.org/wp-content/uploads/2012/03/image22.png
-  [<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image3_thumb.png" title="image" />]: http://www.roading.org/wp-content/uploads/2012/03/image31.png
-  [<img alt="image" src="http://www.roading.org/wp-content/uploads/2012/03/image_thumb24.png" title="image" />]: http://www.roading.org/wp-content/uploads/2012/03/image24.png</p>
+<p>本来按照之前些笔记的思路该记下证明过程的。但今天就不写了，我免不了要吐槽
+几句。一直以来，我是很不喜欢也很少做笔记的，我更愿意的方式是在书旁边的空
+白处写点理解感想之类的，潦潦草草，信手涂鸦。大一大二的时候因为看技术方面
+的书籍多是从图书馆借来。特别是《C++ primer》这本书，被我借了两年，期间续
+借了又续借。刚开始看书的时候，是很期待从上面看到点什么前辈心得的，当然上
+面除了很少处的一两段短线之外，并没有什么其它前辈手迹。我有这种心理，因此
+遗憾之余也并没有介意在书上留下点东西。期间我涂涂画画写了不少东西，起初我
+不以为意，但后来还了书后，这本书恰巧又被我的同学ZWL借去。我从他手中偶然看
+到这本书，又随手翻了翻我以前写在其中的小记，个中有不少错误之处，有的是因
+为笔误，有的是因为刚开始看时理解的浅薄，这令我无比汗颜。我于是想最好还是
+不要在借来的书上乱写。到不是为了爱惜书籍，虽然，太多人很高尚的认为不要在
+图书馆中借来的书上写画，但我仍固执的以为，书被翻烂了写烂了才最能体现它的
+价值。我所顾忌的一是恐误了后来人，二是那些心得，虽然写了，却再难翻看了。</p>
+<p>再到后来会偶尔用本子记下一点心得，但确实麻烦难了。因为我看书一直以来的习
+惯决定了，那些个笔记心得难成体系，太随意了，太散了。如果不是附在原文旁边，
+我自己翻看，也没觉得有多大用处。另外一点在于，我向来对于笔记本这些东西保
+存不善，指不定哪天丢了，或撕了——我喜欢用质量差的作业本写字，那些漂亮的笔
+记本反而让我写不习惯，因此我的笔记本和作业本还有草稿本完全是一路货色。</p>
+<p>到看算法导论的时候，我开始萌生了要系统记一记笔记的想法。我原来写这个笔记的
+初衷在于，一是要囊括要点，二是能写一些书本之外的理解，更重要的是我想这些笔
+记能够简明易懂，使我以后不用频频翻看原书。不过发现自己的水平也就能勉强读懂
+这本书，原来的目的自然只达到了十之一二。</p>
+<p>这本书的笔记我还是会将它写完，但有些无谓的地方将不会多浪费笔墨。</p>
+<p>每个人都有自己的做事原则，我的原则是做一件事，要有一个明确的理由，放弃一件
+在做的事也要有一个明确的理由。</p>
 		  <p style= "text-align:right;"><em>
 		  Wed 28 March 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
@@ -292,7 +349,9 @@ primer》
 		<ul class="related-articles">
 		
 		
-		
+		   
+		   <li><a title="斐波那契堆的C++实现" href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html">斐波那契堆的C++实现</a></li>
+		   
 		
 		
 		
@@ -313,19 +372,29 @@ primer》
 		
 		
 		   
-		   <li><a title="算法导论&#8212;&#8212;B-trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html">算法导论&#8212;&#8212;B-trees</a></li>
+		   <li><a title="B-树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">B-树的C++实现</a></li>
 		   
 		
 		
 		
-		
-		
-		   <li class="selected">算法导论&#8212;&#8212;赫夫曼编码</li>
+		   
+		   <li><a title="算法导论——B-trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html">算法导论——B-trees</a></li>
+		   
 		
 		
 		
 		   
-		   <li><a title="算法导论&#8212;&#8212;贪心算法" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html">算法导论&#8212;&#8212;贪心算法</a></li>
+		   <li><a title="算法导论——平摊分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html">算法导论——平摊分析</a></li>
+		   
+		
+		
+		
+		   <li class="selected">赫夫曼编码</li>
+		
+		
+		
+		   
+		   <li><a title="贪心算法" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html">贪心算法</a></li>
 		   
 		
 		
@@ -342,9 +411,21 @@ primer》
 		
 		
 		
+		   
+		   <li><a title="最长公共子序列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html">最长公共子序列</a></li>
+		   
 		
 		
 		
+		   
+		   <li><a title="动态规划基础" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html">动态规划基础</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="动态规划笔记（1）——Rod cutting" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html">动态规划笔记（1）——Rod cutting</a></li>
+		   
 		
 		
 		
@@ -366,6 +447,51 @@ primer》
 		
 		
 		
+		   
+		   <li><a title="C++实现红黑树，仿STL封装" href="http://www.roading.org/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html">C++实现红黑树，仿STL封装</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 13 Red-Black trees (红黑树)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-13-red-black-trees-%e7%ba%a2%e9%bb%91%e6%a0%91.html">Chapter 13 Red-Black trees (红黑树)</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Radix Tree 基数树" href="http://www.roading.org/algorithm/introductiontoalgorithm/radix-tree-%e5%9f%ba%e6%95%b0%e6%a0%91.html">Radix Tree 基数树</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="非递归不用栈遍历搜索二叉树" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html">非递归不用栈遍历搜索二叉树</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="仿STL 的二叉搜索树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">仿STL 的二叉搜索树的C++实现</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 2" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html">Chapter 12 二叉搜索树(Binary Search Tree) 2</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 1" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html">Chapter 12 二叉搜索树(Binary Search Tree) 1</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Solution of CLRS 11.1 exercises" href="http://www.roading.org/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html">Solution of CLRS 11.1 exercises</a></li>
+		   
 		
 		
 		
@@ -407,18 +533,9 @@ primer》
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		   
+		   <li><a title="哈希表的C++模板实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html">哈希表的C++模板实现</a></li>
+		   
 		
 		
 		
@@ -438,6 +555,63 @@ primer》
 		
 		
 		
+		   
+		   <li><a title="Chapter 10 Exercises and Problems (2)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html">Chapter 10 Exercises and Problems (2)</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 10 Exercises（1）" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html">Chapter 10 Exercises（1）</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="第十章 Elementary Data Structures" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html">第十章 Elementary Data Structures</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="第九章习题选做" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0%e4%b9%a0%e9%a2%98%e9%80%89%e5%81%9a.html">第九章习题选做</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="第九章 中位数和顺序统计量（Medians and Order Statistic）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html">第九章 中位数和顺序统计量（Medians and Order Statistic）</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="第八章（5） 习题 8-4 8-5 8-7" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%885%ef%bc%89-%e4%b9%a0%e9%a2%98-8-4-8-5-8-7.html">第八章（5） 习题 8-4 8-5 8-7</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="桶排序（Bucket sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html">桶排序（Bucket sort）</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="第八章（3） 基数排序（Radix Sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html">第八章（3） 基数排序（Radix Sort）</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="《算法导论》笔记汇总" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e7%b4%a2%e5%bc%95%e8%a1%a8.html">《算法导论》笔记汇总</a></li>
+		   
 		
 		
 		
@@ -445,6 +619,47 @@ primer》
 		
 		
 		
+		   
+		   <li><a title="比较排序在最坏情况下时间复杂度为Ω(nlgn)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%881%ef%bc%89-%e6%af%94%e8%be%83%e6%8e%92%e5%ba%8f%e5%9c%a8%e6%9c%80%e5%9d%8f%e6%83%85%e5%86%b5%e4%b8%8b%e6%97%b6%e9%97%b4.html">比较排序在最坏情况下时间复杂度为Ω(nlgn)</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="快速排序课后7.4-5" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html">快速排序课后7.4-5</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="快排与随机快排效率分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%bf%ab%e6%8e%92%e4%b8%8e%e9%9a%8f%e6%9c%ba%e5%bf%ab%e6%8e%92%e6%95%88%e7%8e%87%e5%88%86%e6%9e%90.html">快排与随机快排效率分析</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="快速排序及C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html">快速排序及C++实现</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="算法导论6-3 young tableaus" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba6-3-young-tableaus.html">算法导论6-3 young tableaus</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="利用堆来建立优先级队列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%88%a9%e7%94%a8%e5%a0%86%e6%9d%a5%e5%bb%ba%e7%ab%8b%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97.html">利用堆来建立优先级队列</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="堆排序及其C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html">堆排序及其C++实现</a></li>
+		   
 		
 		
 		
@@ -452,39 +667,9 @@ primer》
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		   
+		   <li><a title="排序之插入排序与合并排序-C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%8f%92%e5%85%a5%e6%8e%92%e5%ba%8f-insertionsort-c%e5%ae%9e%e7%8e%b0.html">排序之插入排序与合并排序-C++实现</a></li>
+		   
 		
 		
 		

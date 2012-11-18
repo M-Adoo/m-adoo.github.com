@@ -55,8 +55,20 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
-    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 					
 				
@@ -147,32 +159,8 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+    					
 				
 					
 				
@@ -209,11 +197,13 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
@@ -222,154 +212,94 @@
 	
 </div><!-- /.post-info -->
 	      <p>一种所谓的Plain OI’Data声明形式：</p>
-<div class="codehilite"><pre><span class="n">struct</span> <span class="n">Point</span> <span class="p">{</span>
-    <span class="n">float</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-
-
-</p>
-
-<p>概念上来讲，对于一段这样的C++代码：
-编译器会为之合成一个默认构造函数、复制构造函数、析构函数、赋值操作符。然而实际上编译器会分析这段代码，并给
-Point 贴上Plain OI’Data
-标签。编译器在此后对于Point的处理与在C中完全一样,也就是说上述的函数都不会被合成。可见概念上应当由编译器合成的函数，并不一定会合成，编译器只有在必要的时候才会合成它们。
-由此一来，原本在观念上应该调用这些函数的地方实质上不会调用，而是用其它的方法来完成上面的功能，比方复制控制会用bitwise
-copy。</p>
-</p>
-
-<h2>对象构造语意学</h2>
-</p>
-
+<p>:::C++
+  struct Point {
+      float x,y,z;
+  };</p>
+<p>概念上来讲，对于一段这样的C++代码,编译器会为之合成一个默认构造函数、
+复制构造函数、析构函数、赋值操作符。然而实际上编译器会分析这段代码，
+并给<code>Point</code>贴上Plain OI’Data标签。编译器在此后对于<code>Point</code>的处理与在
+C中完全一样,也就是说上述的函数都不会被合成。可见概念上应当由编译器
+合成的函数，并不一定会合成，编译器只有在必要的时候才会合成它们。由此
+一来，原本在观念上应该调用这些函数的地方实质上不会调用，而是用其它的
+方法来完成上面的功能，比方复制控制会用bitwise copy。</p>
+<h3>对象构造语意学</h3>
 <p>无继承情况下的对象构造：略。</p>
-</p>
-
 <h3>单继承体系下的对象构造</h3>
-</p>
-
-<p>对于简单定义的一个对象：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre><span class="n">T</span> <span class="n">object</span><span class="p">;</span>
-</pre></div>
-
-
-</p>
-
-<p>很明显它的默认构造函数会被调用（被编译器合成的或用户提供的）。但是一个构造函数究竟做了什么，就显得比较复杂了——编译器给了它很多的隐藏代码。编译器一般会做如下扩充操作<sup>【1】</sup>：</p>
-</p>
-
+<p>对于简单定义的一个对象<code>T object;</code>,很明显它的默认构造函数会被调用（被
+编译器合成的或用户提供的）。但是一个构造函数究竟做了什么，就显得比较
+复杂了——编译器给了它很多的隐藏代码。编译器一般会做如下扩充操作<sup id="fnref:注1"><a href="#fn:注1" rel="footnote">1</a></sup>：</p>
 <ol>
-<li>
-<p>调用所有虚基类的构造函数，从左到右，从最深到最浅：</p>
-<ul>
-<li>如果该类被列于成员初始化列表中，任何明确明确指定的参数，都应该被传递过来。若没有列入成员初始化列表中，虚基类的一个默认构造函数被调用（有的话）。</li>
-<li>此外，要保证虚基类的偏移量在执行期可存取，对于使用vbptr来实现虚基类的编译器来说，满足这点要求就是对vbptr的初始化。</li>
-<li>然而，只有在类对象代表着“most-derived
-    class”时，这些构造函数才可能会被调用。一些支持这个行为的代码会被放进去<sup>【2】</sup><font color="#a5a5a5">(直观点说就是，虚基类的构造由最外层类控制)。
-    </font></li>
+<li>调用所有虚基类的构造函数，从左到右，从最深到最浅：<ul>
+<li>如果该类被列于成员初始化列表中，任何明确明确指定的参数，都应
+    该被传递过来。若没有列入成员初始化列表中，虚基类的一个默认构
+    造函数被调用（有的话）。</li>
+<li>此外，要保证虚基类的偏移量在执行期可存取，对于使用vbptr来实现
+    虚基类的编译器来说，满足这点要求就是对vbptr的初始化。</li>
+<li>然而，只有在类对象代表着“most-derived class”时，这些构造函数才
+    可能会被调用。一些支持这个行为的代码会被放进去<sup id="fnref:注2"><a href="#fn:注2" rel="footnote">2</a></sup>（直观点说
+    就是，虚基类的构造由最外层类控制)。</li>
 </ul>
 </li>
-<li>
-<p>调用所有基类构造函数，依声明顺序：</p>
-<ul>
-<li>如果该基类被列入了成员初始化队列，那么所有明确指定的参数，应该被传递过来。</li>
+<li>调用所有基类构造函数，依声明顺序：<ul>
+<li>如果该基类被列入了成员初始化队列，那么所有明确指定的参数，应该
+    被传递过来。</li>
 <li>没有列入的话，那么调用其默认构造函数，如果有的话。</li>
 <li>如果该基类是第二顺位或之后的基类，this 指针必须被调整。</li>
 </ul>
 </li>
-<li>
-<p>正确初始化vptr,如果有的话。</p>
-</li>
-<li>调用没有出现在初始化成员列表中的member object
-    的默认构造函数，如果有的话。</li>
-<li>记录在成员初始化队列中的数据成员初始化操作以声明的顺序被放进构造函数中。</li>
+<li>正确初始化vptr,如果有的话。</li>
+<li>调用没有出现在初始化成员列表中的member object的默认构造函数，如果
+    有的话。</li>
+<li>记录在成员初始化队列中的数据成员初始化操作以声明的顺序被放进构造函
+    数中。</li>
 </ol>
-</p>
-
 <h3>虚拟继承下的构造抑制</h3>
-</p>
-
 <p>有如下继承体系：</p>
-</p>
-
-<p>[<img alt="image" src="http://www.roading.org/wp-content/uploads/2011/12/image_thumb.png" title="image" />][]</p>
-</p>
-
-<p>根据c++ 语法，Point 的初始化应有 most-derived class
-来施行。也就是说当Vertex3d 为 most-derived class
-的时候，应当由它的构造函数来调用Point的构造函数初始化Point
-子对象，Vertex3d的子对象的构造函数对于Point的调用则应当抑制。如果没有抑制会怎么样?
-当我们定义：</p>
-<p></p>
-<p></p>
-<div class="codehilite"><pre>   <span class="n">Vertex3d</span> <span class="n">cv</span><span class="p">;</span>
-</pre></div>
-
-
-</p>
-
-<p>时，Vertex3d 的构造函数中调用Point
-的构造函数、而随之调用它的子对象，Point3d 和
-Vertex的构造函数中也调用了Point的构造函数。先不说，对于同一个子对象进行三次初始化是否有效率，更重要的是，这将不可避免的带来错误。由Vertex3d指定的子对象Point的值，会被覆盖掉。</p>
-</p>
-
-<p>编译器通常使用一个条件变量来表示是否为most-derived
-class,各构造函数根据这个条件变量来决定是否调用虚基类的构造函数，因此通过控制这个条件变量，就可以抑制非most-derived
-class调用虚基类的构造函数。当然也有其它的方法来做同样的事。</p>
-</p>
-
-<h2>对象复制语意学</h2>
-</p>
-
+<p><img alt="image" src="http://www.roading.org/images/2011-12/image_thumb.png" /></p>
+<p>根据c++ 语法，Point 的初始化应有most-derived class来施行。也就是说当
+Vertex3d为most-derived class的时候，应当由它的构造函数来调用Point的构
+造函数初始化Point子对象，Vertex3d的子对象的构造函数对于Point的调用则
+应当抑制。如果没有抑制会怎么样?当我们定义<code>Vertex3d cv;</code>时，Vertex3d的
+构造函数中调用Point的构造函数、而随之调用它的子对象，Point3d和Vertex的
+构造函数中也调用了Point的构造函数。先不说，对于同一个子对象进行三次初
+始化是否有效率，更重要的是，这将不可避免的带来错误。由Vertex3d指定的子
+对象Point的值，会被覆盖掉。</p>
+<p>编译器通常使用一个条件变量来表示是否为most-derived class,各构造函数根
+据这个条件变量来决定是否调用虚基类的构造函数，因此通过控制这个条件变量，
+就可以抑制非most-derived class调用虚基类的构造函数。当然也有其它的方法
+来做同样的事。</p>
+<h3>对象复制语意学</h3>
 <p>设计一个类，并考虑到要以一个对象指定给另一个对象时，有三种选择：</p>
-</p>
-
 <ul>
-<li>什么都不做，采用编译器提供默认行为（bitwise copy
-    或者由编译器合成一个）。</li>
+<li>什么都不做，采用编译器提供默认行为（bitwise copy或者由编译器合成
+    一个）。</li>
 <li>自己提供一个赋值运算符操作。</li>
 <li>明确拒绝将一个对象指定给另一个对象。</li>
 </ul>
-</p>
-
-<p>对于第三点，只要将赋值操作符声明为private，且不定义它就可以了。对于第二点，只有在第一点的行为不安全或不正确，或你特别想往其中插入点东西的时候。</p>
-</p>
-
-<p>以下四种情况 copy assignment
-operator(还是用它的英文名，感觉顺畅点)，不具有bitwise copy
-语意，也就是说这些情况下，编译器要合成copy assignment operator
-而不能依靠bitwise copy
-来完成赋值操作，这四种情况与构造函数、<a href="http://www.roading.org/?p=541">拷贝构造函数</a>的情况类似，原因可以参考它们的。四种情况如下：</p>
-</p>
-
+<p>对于第三点，只要将赋值操作符声明为private，且不定义它就可以了。对于第
+二点，只有在第一点的行为不安全或不正确，或你特别想往其中插入点东西的时
+候。</p>
+<p>以下四种情况 copy assignment operator(还是用它的英文名，感觉顺畅点)，不
+具有bitwise copy语意，也就是说这些情况下，编译器要合成copy assignment 
+operator而不能依靠bitwise copy来完成赋值操作，这四种情况与构造函数、
+<a href="http://www.roading.org/develop/cpp/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%EF%BC%88copy-constuctor%EF%BC%89.html">拷贝构造函数</a>的情况类似，原因可以参考它们的。四种情况如下：</p>
 <ul>
-<li>类包含有定义了copy assignment operator 的 class object 成员。</li>
-<li>类的基类有 copy assignment operator 。</li>
-<li>类声明有任何虚函数的时候（问题同样会出现在由继承类对象向基类对象拷贝的时候）。</li>
+<li>类包含有定义了copy assignment operator的class object成员。</li>
+<li>类的基类有copy assignment operator。</li>
+<li>类声明有任何虚函数的时候（问题同样会出现在由继承类对象向基类对象拷贝
+    的时候）。</li>
 <li>当class继承体系中有虚基类时。</li>
 </ul>
-</p>
-
-<p>在虚拟继承情况下，copy assignment opertator
-会遇到一个不可避免的问题，virtual base class subobject
-的复制行为会发生多次，与前面说到的在虚拟继承情况下虚基类被构造多次是一个意思，不同的是在这里不能抑制非most-derived
+<p>在虚拟继承情况下，copy assignment opertator会遇到一个不可避免的问题，
+virtual base class subobject的复制行为会发生多次，与前面说到的在虚拟继承
+情况下虚基类被构造多次是一个意思，不同的是在这里不能抑制非most-derived 
 class 对virtual base class 的赋值行为。</p>
-</p>
-
 <p>安全的做法是把虚基类的赋值放在最后，避免被覆盖。</p>
-</p>
-
-<h2>对象析构语意学</h2>
-</p>
-
-<p>只有在基类拥有析构函数，或者object member
-拥有析构函数的时候，编译器在为类合成析构函数，否则都被视为不需要。</p>
-</p>
-
+<h3>对象析构语意学</h3>
+<p>只有在基类拥有析构函数，或者object member拥有析构函数的时候，编译器才为类
+合成析构函数，否则都被视为不需要。</p>
 <p>析构的顺序正好与构造相反：</p>
-</p>
-
 <ul>
 <li>本身的析构函数被执行。</li>
 <li>以声明的相反顺序调用member object 的析构函数，如果有的话。</li>
@@ -378,47 +308,35 @@ class 对virtual base class 的赋值行为。</p>
 <li>如果当前类是 most-derived
     class，那么以构造的相反顺序调用虚基类的析构函数。</li>
 </ul>
-</p>
-
-</p>
-
-<p><strong>注1</strong>：下面的叙述顺序看似与原书的顺序不一样。实际顺序并没有被调整，很多个“在此之前”的叙述并不适合我，我喜欢很直白的方式，按顺序来。书中的方式在于，从最浅显的步骤入手，然后告诉你，做这步之前，你还该做点什么。</p>
-</p>
-
-<p><strong>注2：</strong>这一点上我参考英文版后，感觉侯大大的翻译并没有完全表达Lippman的原意，所以，我以对原文的理解写下这点。Lippman的原文为：</p>
-<p></p>
-<p></p>
+<p>侯捷的译文为：</p>
+<blockquote>
+<p>如果class object是最底层（most-derived）的class,其constructors可能被调用；
+某些用以支持这个行为的机制必须被放进来。</p>
+</blockquote>
+<p>我认为，Lippman在这一句上要说的是，虚基类的构造函数只能由most-derived class
+调用，而为了支持这一机制，需要插入一些代码来抑制非most-derived class对虚基类
+构造函数的调用。同时说一点，5.4的标题个人以为应该译为“对象的效率”而非“对象的
+功能”——原标题为：Object Efficency。</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:注1">
+<p>下面的叙述顺序看似与原书的顺序不一样。实际顺序并没有被调整，很多个
+    “在此之前”的叙述并不适合我，我喜欢很直白的方式，按顺序来。书中的方
+    式在于，从最浅显的步骤入手，然后告诉你，做这步之前，你还该做点什么。&#160;<a href="#fnref:注1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:注2">
+<p>**这一点上我参考英文版后，感觉侯大大的翻译并没有完全表达Lippman的原
+    意，所以，我以对原文的理解写下这点。Lippman的原文为：</p>
 <blockquote>
 <p>These constructors, however, may be invoked if, and only if, the class
 object represents the "most-derived class." Some mechanism supporting
 this must be put into place.</p>
 </blockquote>
-</p>
-
-<p>侯捷的译文为：</p>
-<p></p>
-<p></p>
-<blockquote>
-<p>如果class object
-是最底层（most-derived）的class,其constructors可能被调用；某些用以支持这个行为的机制必须被放进来。</p>
-</blockquote>
-</p>
-
-<p>我认为，Lippman才这一句上要说的是，虚基类的构造函数只能由 most-derived
-class调用，而为了支持这一机制，需要插入一些代码来抑制非most-derived
-class对虚基类构造函数的调用。同时说一点，5.4的标题个人以为应该译为
-“对象的效率”而非“对象的功能”——原标题为：Object Efficency。</p>
-</p>
-
-</p>
-
-<p><em>欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。</em></p>
-</p>
-
-<p><em>2011/12/1 By Adoo | Homepage:</em><a href="http://www.roading.org"><em>www.roading.org</em></a></p>
-</p>
-
-<p>[<img alt="image" src="http://www.roading.org/wp-content/uploads/2011/12/image_thumb.png" title="image" />]: http://www.roading.org/wp-content/uploads/2011/12/image.png</p>
+<p><a href="#fnref:注2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 		  <p style= "text-align:right;"><em>
 		  Thu 01 December 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
@@ -517,7 +435,7 @@ class对虚基类构造函数的调用。同时说一点，5.4的标题个人以
 		
 		
 		   
-		   <li><a title="总结&#8212;&#8212;亦为引言" href="http://www.roading.org/develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html">总结&#8212;&#8212;亦为引言</a></li>
+		   <li><a title="总结·亦为引言" href="http://www.roading.org/develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html">总结·亦为引言</a></li>
 		   
 		
 		

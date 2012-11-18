@@ -55,8 +55,20 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
-    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 					
 				
@@ -147,32 +159,8 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+    					
 				
 					
 				
@@ -319,11 +307,13 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
@@ -331,12 +321,14 @@
 	
 	
 </div><!-- /.post-info -->
-                <p>摘要：</p>
-<ul>
-<li>本文主要关于C++ 命名返回值优化（Named return value 优化）和
-    成员初始化队列（Member Initialization List）的那点事。</li>
-<li>参考Lippman《深度探索C++对象模型》(侯捷译)第二章。你可以将之视为Adoo关于其的笔记。</li>
-<li>无论如何欢迎你提出建议以及与我交流 ...</li></ul>
+                <h3>命名返回值优化</h3>
+<p>对于一个如<code>foo()</code>这样的函数，它的每一个返回分支都返回相同的对象，编译器
+有可能对其做Named return Value优化（下文都简称NRV优化），方法是以一个参
+数<code>result</code>取代返回对象。</p>
+<p><code>foo()</code>的原型：</p>
+<div class="codehilite"><pre><span class="n">X</span> <span class="n">foo</span><span class="p">()</span> 
+<span class="p">{</span> 
+    <span class="n">X</span> <span class="n">xx ...</span></pre></div>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%91%bd%e5%90%8d%e8%bf%94%e5%9b%9e%e5%80%bc%e4%bc%98%e5%8c%96%e5%92%8c%e6%88%90%e5%91%98%e5%88%9d%e5%a7%8b%e5%8c%96%e9%98%9f%e5%88%97.html" rel="bookmark"
                            title="Permalink to 命名返回值优化和成员初始化队列">Read more→</a>	
 		<div class="clear"></div>
@@ -366,11 +358,13 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
@@ -378,13 +372,14 @@
 	
 	
 </div><!-- /.post-info -->
-                <p>摘要：</p>
-<ul>
-<li>1.什么是拷贝构造函数。2.拷贝构造函数何时被调用。3.编译器何时合成拷贝构造函数。</li>
-<li>本文参考Lippman《深度探索C++对象模型》(侯捷译)第二章。你可以将之视为Adoo关于其的笔记。</li>
-<li>无论如何欢迎你提出建议以及与我交流。同时学习之作难免浅薄，恳请斧正。</li>
-</ul>
-<p><em>2011/11/15 By ...</em></p>
+                <h3>拷贝构造函数（copy constuctor）</h3>
+<p>通常C++初级程序员会认为当一个类为没有定义拷贝构造函数的时候，编译器会
+为其合成一个，答案是否定的。编译器只有在必要的时候在合成拷贝构造函数。
+那么编译器什么时候合成，什么时候不合成，合成的拷贝构造函数在不同情况下
+分别如何工作呢？这是本文的重点。</p>
+<h3>拷贝构造函数的定义</h3>
+<p>有一个参数的类型是其类类型的构造函数是为拷贝构造函数。如下：</p>
+<div class="codehilite"><pre><span class="n">X</span><span class="p">::</span><span class="n">X</span><span class="p">(</span> <span class="n">const ...</span></pre></div>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%8b%b7%e8%b4%9d%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%ef%bc%88copy-constuctor%ef%bc%89.html" rel="bookmark"
                            title="Permalink to 拷贝构造函数（copy constuctor）">Read more→</a>	
 		<div class="clear"></div>
@@ -414,9 +409,11 @@
         </address>
         		
 	
-	    <abbr title="Inside The C++ Object Model&nbsp;&nbsp;">
+	    <abbr title="Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
@@ -424,9 +421,15 @@
 	
 	
 </div><!-- /.post-info -->
-                <p>引文：</p>
-<p>本文参考lippman
-的《深度探索C++对象模型》侯捷之第二章，置于文首，以表对作者译者敬意。主要包括：编译器何时为我们创建默认构造函数、不同情况下编译器生成的默认构造函数做了一些什么？编译器会在构造函数中加入一点什么代码！你可以将本文当做一篇关于《深度探索C++对象模型》的笔记，也可以将它当作Adoo对《深度探索C++对象模型》的理解加讲解 ...</p>
+                <p>通常很多C++程序员存在两种误解：</p>
+<ul>
+<li>没有定义默认构造函数的类都会被编译器生成一个默认构造函数。</li>
+<li>编译器生成的默认构造函数会明确初始化类中每一个数据成员。</li>
+</ul>
+<p>在读《深度探索C++对象模型》之前，我一直停留在上述二种误解上，所幸的是
+Lippman为我破除了藩篱。下面的部分我将随《深度探索C++对象模型》对C++默
+认构造函数一探究竟。</p>
+<p>C++标准规定：如果类的设计者并未为类定义任何构造函数 ...</p>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%85%a5c%e9%bb%98%e8%ae%a4%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0.html" rel="bookmark"
                            title="Permalink to 深入C++构造函数">Read more→</a>	
 		<div class="clear"></div>
@@ -527,9 +530,13 @@
 	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edition.xml" 
 		title="Subscribe for Introduction to Algorithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
-             <li ><a href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a>
-	         <a href="http://www.roading.org/feed/Introduction to Algorithm -thrid edition.xml" 
-		title="Subscribe for Introduction to Algorithm -thrid edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/introduction-to-algorithm-third-edtion.html">Introduction to Algorithm -third edtion</a>
+	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edtion.xml" 
+		title="Subscribe for Introduction to Algorithm -third edtion" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+        
+             <li ><a href="http://www.roading.org/category/introduction-to-alogrithm-third-edition.html">Introduction to Alogrithm -third edition</a>
+	         <a href="http://www.roading.org/feed/Introduction to Alogrithm -third edition.xml" 
+		title="Subscribe for Introduction to Alogrithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
              <li ><a href="http://www.roading.org/category/metro.html">Metro</a>
 	         <a href="http://www.roading.org/feed/Metro.xml" 
@@ -542,10 +549,6 @@
              <li class="active"><a href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a>
 	         <a href="http://www.roading.org/feed/深度探索C++对象模型.xml" 
 		title="Subscribe for 深度探索C++对象模型" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
-        
-             <li ><a href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a>
-	         <a href="http://www.roading.org/feed/算法导论.xml" 
-		title="Subscribe for 算法导论" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
              <li ><a href="http://www.roading.org/category/sui-bi.html">随笔</a>
 	         <a href="http://www.roading.org/feed/随笔.xml" 

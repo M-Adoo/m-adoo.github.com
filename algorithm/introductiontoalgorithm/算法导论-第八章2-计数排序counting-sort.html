@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>算法导论 第八章(2) 计数排序(Counting Sort)</title>
+        <title>计数排序(Counting Sort)</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
         
@@ -55,8 +55,20 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
-    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 					
 				
@@ -147,32 +159,8 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+    					
 				
 					
 				
@@ -187,9 +175,9 @@
 <div class="crumbs">
 <a href="http://www.roading.org" title ="Back to homepage">Home</a> »
 
-<a href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a> »
+<a href="http://www.roading.org/category/introduction-to-algorithm-third-edtion.html">Introduction to Algorithm -third edtion</a> »
 
-算法导论 第八章(2) 计数排序(Counting Sort)
+计数排序(Counting Sort)
 </div>
  
 		</nav>
@@ -197,7 +185,7 @@
 
         
     <div class="article-page">
-	<h1>算法导论 第八章(2) 计数排序(Counting Sort)</h1>
+	<h1>计数排序(Counting Sort)</h1>
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-09-30T21:54:00">
@@ -209,71 +197,85 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Introduction to algorithm&nbsp;&nbsp;计数排序&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Introduction to algorithm&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
 		<a title="permalink to Introduction to algorithm" href="http://www.roading.org/tag/introduction-to-algorithm.html">Introduction to algorithm</a>
 	          
-		<a title="permalink to 计数排序" href="http://www.roading.org/tag/ji-shu-pai-xu.html">计数排序</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to 算法导论" href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edtion" href="http://www.roading.org/category/introduction-to-algorithm-third-edtion.html">Introduction to Algorithm -third edtion</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-	      <p>与比较排序注重于元素之间的比较不同，计数排序专注于找准自己的位置，而不关心自己比谁小，比谁大。其核心在于，对于任意一个属于数组A的元素x，统计出在A中有多少个元素小于等于x,以确定x的位置。例如，有10个元素小于等于a那么a就应该排在第11位。</p>
+	      <p>与比较排序注重于元素之间的比较不同，计数排序专注于找准自己的位置，而不关心
+自己比谁小，比谁大。其核心在于，对于任意一个属于数组A的元素x，统计出在A中有
+多少个元素小于等于x,以确定x的位置。例如，有10个元素小于等于a那么a就应该排在
+第11位。</p>
 <h3>算法模型：</h3>
-<p>假设对数组A[n]进行排序,A[n]中任意一元素x∈[0，k)。我们需要两个辅助数组，一个为B[k],我们用来记录统计信息，另一个为C[n],用来储存排序结果。</p>
+<p>假设对数组A[n]进行排序,A[n]中任意一元素x∈[0，k)。我们需要两个辅助数组，一个
+为B[k],我们用来记录统计信息，另一个为C[n],用来储存排序结果。</p>
 <ol>
 <li>用下标i迭代数组A，用B[i]记录A中等于i的元素个数。</li>
 <li>迭代数组B，用B[i]记录小于等于i的元素的个数。</li>
 <li>根据B中的统计信息，将A中的元素放到C中合适的位置。</li>
 </ol>
 <p>来看伪代码：</p>
-<p>[![wps_clip_image-1380][]][]</p>
-<p>[<br />
-][] <br />
-注意：第十行从后向前迭代能保护相等元素的相对位置，12行减1也是因为考虑到相等的元素。</p>
+<div class="codehilite"><pre><span class="n">COUNTING</span><span class="o">-</span><span class="n">SORT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">k</span> 
+        <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">A</span><span class="p">.</span><span class="n">length</span>
+        <span class="n">C</span><span class="p">[</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="c1">//C[i] now contains the number of elements equal to i</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">k</span> 
+        <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="c1">//C[i] now contains the number of elements less than or equal to i</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">lenght</span> <span class="n">downto</span> <span class="mi">1</span> 
+        <span class="n">B</span><span class="p">[</span><span class="n">C</span><span class="p">[</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]]]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">C</span><span class="p">[</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">-</span> <span class="mi">1</span>
+</pre></div>
+
+
+<p>注意：第十行从后向前迭代能保护相等元素的相对位置，12行减1也是因为考虑到相等的
+元素。</p>
 <h3>时间复杂度</h3>
-<p>计数排序具有线性复杂度，与任何一个比较排序相比，其复杂度都要低很多。 <br />
-Θ（k）+Θ(n)+Θ(k)+Θ(n)=Θ(k+n)。</p>
-<p>容我说道一下人生：人生如同排序，若你执着与世人较高较低，便总有烦劳忧愁，其路也弯曲（n
-lg
-n）；若你心中自有定位，看淡争先落后，便自能泰然自若，其路也轻松（线性）。特别是在我们学习技术的时候，若我们总在与人比较，又或者总计较于技术间好坏的争论，就会落了下乘，重要的在于找准自己的定位。当然，回到技术层面，并不是说非比较排序就一定比比较排序好，具体分析下一篇算法导论心得——基数排序（Radix
-Sort）会讲到。</p>
+<p>计数排序具有线性复杂度，与任何一个比较排序相比，其复杂度都要低很多。</p>
+<p>Θ（k）+Θ(n)+Θ(k)+Θ(n)=Θ(k+n)。</p>
+<p>容我说道一下人生：人生如同排序，若你执着与世人较高较低，便总有烦劳忧愁，其路
+也弯曲（nlgn）；若你心中自有定位，看淡争先落后，便自能泰然自若，其路也轻松
+（线性）。特别是在我们学习技术的时候，若我们总在与人比较，又或者总计较于技术
+间好坏的争论，就会落了下乘，重要的在于找准自己的定位。当然，回到技术层面，并
+不是说非比较排序就一定比比较排序好，具体分析下一篇算法导论心得——基数排序
+（Radix Sort）会讲到。</p>
 <h3>C++实现</h3>
-<p><sub></sub><sub></sub> {.brush:cpp}</p>
-<h1>ifndef COUNTING_SORT</h1>
-<h1>define COUNTING_SORT</h1>
-<h1>include<vector></h1>
-<p>template <typename InputIter,typename OutIter>
-void CountingSort(InputIter BegIter,InputIter EndIter,OutIter OutputIter, const int Boundary)
-{
-    //the counter
-    std::vector<int> Counter(Boundary,0);  for(auto Index=BegIter;Index!=EndIter;++Index)
-        ++Counter[<em>Index];
-    // Counter[] holds the number of input element equal to </em>index;  for(int i=1;i!=Boundary;++i)
-        Counter[i]+=Counter[i-1];
-    //Now Counter[] contains the number of elements less than or eaual to i  std::vector<int> Result(Counter[Boundary-1],0);
-    for(std::reverse_iterator<InputIter> RIter(EndIter),REnd(BegIter); RIter!=REnd ;++RIter)
-    {
-        Result[Counter[<em>RIter]-1]=</em>RIter;
-        --Counter[*RIter];
-    }
-    std::copy(Result.begin (),Result.end (),OutputIter);
-}</p>
-<h1>endif</h1>
-<p><sub></sub><sub></sub></p>
-</p>
-
-<p><em>2011/9/30 by Adoo | homepage:</em><a href="http://www.roading.org/"><em>www.roading.org</em></a></p>
-</p>
-
-<p>[![wps_clip_image-1380][]]: http://www.roading.org/wp-content/uploads/2011/11/wps_clip_image-1380.png
-  [<br />
- ]: http://1.roading.sinaapp.com/?attachment_id=237</p>
+<div class="codehilite"><pre><span class="cp">#ifndef COUNTING_SORT</span>
+<span class="cp">#define COUNTING_SORT</span>
+<span class="cp">#include&lt;vector&gt;</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">InputIter</span><span class="p">,</span><span class="k">typename</span> <span class="n">OutIter</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">CountingSort</span><span class="p">(</span><span class="n">InputIter</span> <span class="n">BegIter</span><span class="p">,</span><span class="n">InputIter</span> <span class="n">EndIter</span><span class="p">,</span>
+    <span class="n">OutIter</span> <span class="n">OutputIter</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">Boundary</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//the counter</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">Counter</span><span class="p">(</span><span class="n">Boundary</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>  
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">Index</span><span class="o">=</span><span class="n">BegIter</span><span class="p">;</span><span class="n">Index</span><span class="o">!=</span><span class="n">EndIter</span><span class="p">;</span><span class="o">++</span><span class="n">Index</span><span class="p">)</span>
+        <span class="o">++</span><span class="n">Counter</span><span class="p">[</span><span class="o">*</span><span class="n">Index</span><span class="p">];</span>
+    <span class="c1">// Counter[] holds the number of input element equal to *index;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">!=</span><span class="n">Boundary</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">Counter</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">Counter</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+    <span class="c1">//Now Counter[] contains the number of elements less than or eaual to i</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">Result</span><span class="p">(</span><span class="n">Counter</span><span class="p">[</span><span class="n">Boundary</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">reverse_iterator</span><span class="o">&lt;</span><span class="n">InputIter</span><span class="o">&gt;</span> <span class="n">RIter</span><span class="p">(</span><span class="n">EndIter</span><span class="p">),</span><span class="n">REnd</span><span class="p">(</span><span class="n">BegIter</span><span class="p">);</span> <span class="n">RIter</span><span class="o">!=</span><span class="n">REnd</span> <span class="p">;</span><span class="o">++</span><span class="n">RIter</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Result</span><span class="p">[</span><span class="n">Counter</span><span class="p">[</span><span class="o">*</span><span class="n">RIter</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=*</span><span class="n">RIter</span><span class="p">;</span>
+        <span class="o">--</span><span class="n">Counter</span><span class="p">[</span><span class="o">*</span><span class="n">RIter</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">Result</span><span class="p">.</span><span class="n">begin</span> <span class="p">(),</span><span class="n">Result</span><span class="p">.</span><span class="n">end</span> <span class="p">(),</span><span class="n">OutputIter</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
 		  <p style= "text-align:right;"><em>
 		  Fri 30 September 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
@@ -303,9 +305,6 @@ void CountingSort(InputIter BegIter,InputIter EndIter,OutIter OutputIter, const 
 		
 		
 		
-		   
-		   <li><a title="斐波那契堆(Fibonacci Heaps)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html">斐波那契堆(Fibonacci Heaps)</a></li>
-		   
 		
 		
 		
@@ -335,9 +334,6 @@ void CountingSort(InputIter BegIter,InputIter EndIter,OutIter OutputIter, const 
 		
 		
 		
-		   
-		   <li><a title="最长公共子序列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html">最长公共子序列</a></li>
-		   
 		
 		
 		
@@ -361,9 +357,6 @@ void CountingSort(InputIter BegIter,InputIter EndIter,OutIter OutputIter, const 
 		
 		
 		
-		   
-		   <li><a title="非递归不用栈遍历搜索二叉树" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html">非递归不用栈遍历搜索二叉树</a></li>
-		   
 		
 		
 		
@@ -413,9 +406,6 @@ void CountingSort(InputIter BegIter,InputIter EndIter,OutIter OutputIter, const 
 		
 		
 		
-		   
-		   <li><a title="哈希表的C++模板实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html">哈希表的C++模板实现</a></li>
-		   
 		
 		
 		
@@ -443,11 +433,11 @@ void CountingSort(InputIter BegIter,InputIter EndIter,OutIter OutputIter, const 
 		
 		
 		
+		   <li class="selected">计数排序(Counting Sort)</li>
 		
 		
 		
 		
-		   <li class="selected">算法导论 第八章(2) 计数排序(Counting Sort)</li>
 		
 		
 		
@@ -466,14 +456,6 @@ void CountingSort(InputIter BegIter,InputIter EndIter,OutIter OutputIter, const 
 		
 		
 		
-		
-		
-		
-		
-		
-		   
-		   <li><a title="算法导论之堆排序及其C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html">算法导论之堆排序及其C++实现</a></li>
-		   
 		
 		
 		

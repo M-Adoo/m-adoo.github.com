@@ -55,8 +55,20 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
-    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 					
 				
@@ -147,32 +159,8 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+    					
 				
 					
 				
@@ -197,7 +185,7 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a  title="Permalink to 算法导论之堆排序及其C++实现" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html">算法导论之堆排序及其C++实现</a></h1> 
+                    <h1 class="entry-title"><a  title="Permalink to 堆排序及其C++实现" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html">堆排序及其C++实现</a></h1> 
                     <div class="post-info">
         <abbr class="published" title="2011-09-13T19:12:00">
                 Tue 13 September 2011
@@ -208,31 +196,39 @@
         </address>
         		
 	
-	    <abbr title="c++&nbsp;&nbsp;Heap&nbsp;&nbsp;Heap Sort&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;Heap Sort&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 	          
-		<a title="permalink to Heap" href="http://www.roading.org/tag/heap.html">Heap</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 	          
 		<a title="permalink to Heap Sort" href="http://www.roading.org/tag/heap-sort.html">Heap Sort</a>
 	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to 算法导论" href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-		    <p>堆即是一个可以看作为完全二叉树的数组。《算法导论》第三版这样定义：<em>The
-(binary) heap data structure is an array object that we can view as a
-nearly completely binary
-tree.</em>我将之理解为只要一个序列可以看作为一个完全二叉树，它又满足堆的性质，那么它就可以称之为一个堆。——一个数组可以看成一个完全二叉树，将第一个数看作根结点，第二和第三个数看作第一个数的左孩子和右孩子，…，将第<em>2n</em>
-和第<em>2n+1</em> 个数看作是第n个数的两个孩子。</p>
-<p>堆可以分为大堆和小堆，所谓堆属性是指结点应总是大于它的孩子，此为大堆属性。对于小堆来讲则反之。也就是说堆的根结点总是存储着最大或最小的数，当一个完全二叉树中所有的结点都满足堆属性时此完全二叉树就可以看作为一个堆。</p>
-<p>总的来讲，堆排序的要诀在于堆的一个特性——堆的根结点总是存储着最大或最小的数。假使我们能将一组数建堆，那么只需要不断的在取出根结点和维持堆属性这两步中不断循环就可以完成排序了。</p>
-<p>我们看堆排序的实现代码（使用的是大堆）：</p>
-<div class="codehilite"><pre><span class="n">template</span><span class="o">&lt;</span><span class="n">typename</span> <span class="n">Iter ...</span></pre></div>
+		    <p>堆即是一个可以看作为完全二叉树的数组。《算法导论》第三版这样定义：</p>
+<blockquote>
+<p>*The(binary) heap data structure is an array object that we can view
+as a nearly completely binary tree.</p>
+</blockquote>
+<p>只要一个序列可以看作为一个完全二叉树，它又满足堆的性质，那么它就可以称
+之为一个堆。——一个数组可以这样看成一个完全二叉树，将第一个数看作根结点，
+第二和第三个数看作第一个数的左孩子和右孩子，…，将第<em>2n</em>和第<em>2n+1</em>数看作
+是第n个数的两个孩子。</p>
+<p>堆可以分为大堆和小堆，所谓堆属性是指结点应总是大于它的孩子，此为大堆属性。
+对于小堆来讲则反之。也就是说堆的根结点总是存储着最大或最小的数，当一个完
+全二叉树中所有的结点都满足堆属性时此完全二叉树就可以看作为一个堆。</p>
+<p>总的来讲，堆排序的要诀在于堆的一个特性——堆的根结点总是存储着最大或最小的
+数。假使我们能将一组数建堆，那么只需要不断的在取出根结点和维持堆属性这两
+步中不断循环就可以完成排序了 ...</p>
 		    <a class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html" rel="bookmark"
-                           title="Permalink to 算法导论之堆排序及其C++实现">Read more→</a>	
+                           title="Permalink to 堆排序及其C++实现">Read more→</a>	
                 </article>
 		<div class="clear"></div>
                 
@@ -282,9 +278,13 @@ tree.</em>我将之理解为只要一个序列可以看作为一个完全二叉�
 	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edition.xml" 
 		title="Subscribe for Introduction to Algorithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
-             <li ><a href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a>
-	         <a href="http://www.roading.org/feed/Introduction to Algorithm -thrid edition.xml" 
-		title="Subscribe for Introduction to Algorithm -thrid edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/introduction-to-algorithm-third-edtion.html">Introduction to Algorithm -third edtion</a>
+	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edtion.xml" 
+		title="Subscribe for Introduction to Algorithm -third edtion" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+        
+             <li ><a href="http://www.roading.org/category/introduction-to-alogrithm-third-edition.html">Introduction to Alogrithm -third edition</a>
+	         <a href="http://www.roading.org/feed/Introduction to Alogrithm -third edition.xml" 
+		title="Subscribe for Introduction to Alogrithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
              <li ><a href="http://www.roading.org/category/metro.html">Metro</a>
 	         <a href="http://www.roading.org/feed/Metro.xml" 
@@ -297,10 +297,6 @@ tree.</em>我将之理解为只要一个序列可以看作为一个完全二叉�
              <li ><a href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a>
 	         <a href="http://www.roading.org/feed/深度探索C++对象模型.xml" 
 		title="Subscribe for 深度探索C++对象模型" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
-        
-             <li ><a href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a>
-	         <a href="http://www.roading.org/feed/算法导论.xml" 
-		title="Subscribe for 算法导论" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
              <li ><a href="http://www.roading.org/category/sui-bi.html">随笔</a>
 	         <a href="http://www.roading.org/feed/随笔.xml" 

@@ -55,8 +55,20 @@
 					
 				
 					
-       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
-    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 					
 				
@@ -147,32 +159,8 @@
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+    					
 				
 					
 				
@@ -208,48 +196,34 @@
         </address>
         		
 	
-	    <abbr title="Introduction to algorithm&nbsp;&nbsp;Order Statistic tree&nbsp;&nbsp;">
+	    <abbr title="算法导论&nbsp;&nbsp;Order Statistic tree&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to Introduction to algorithm" href="http://www.roading.org/tag/introduction-to-algorithm.html">Introduction to algorithm</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 	          
 		<a title="permalink to Order Statistic tree" href="http://www.roading.org/tag/order-statistic-tree.html">Order Statistic tree</a>
 	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	          
 	    </abbr>
 	
-	<abbr>In <a title="permalink to Introduction to Algorithm -thrid edition" href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 	
 	
 </div><!-- /.post-info -->
-		    <p><em><font face="黑体"></em></p>
-<div>
-摘要：在一般的应用中，极少有可能要构建一种全新的数据结构，大部分情况下会使用一些已有的数据结构，或者已有的数据结构进行扩展，以使得其能支持特殊的功能。当然即便是扩展也需要做一些工作。
-
-</div>
-
-<div align="right">
-欢迎你与我交流探讨，若有错误疏漏之处，恳请指正。
-
-</div>
-
-<p></font></em></p>
-<div align="right">
-*2012/1/5 By Adoo | Homepage:*[*www.roading.org*][]
-
-<div align="right">
-
-* * * * *
-
-</div>
-
-</div>
-
-<h3>动态顺序统计(Dynamic oder statistics)</h3>
-<p>关于顺序统计这个问题，在<a href="http://www.roading.org/?p=350">《第九章 中位数和顺序统计量（Medians and Order
-Statistic）》</a>介绍了在<em>O</em>(<em>n</em>)时间内获取一组数据中第
-<em>i</em>小的数据。在算导第十四章介绍了另外一种方式来求第
-<em>i</em>小的数据，它的算法复杂度为<em>O</em>(lg
-<em>n</em>)，但却要依赖于另外一种数据结构顺序统计树(order statistic tree)。</p>
-<p>顺序统计树，是从红黑树扩展而来 ...</p>
+		    <p>在一般的应用中，极少有可能要构建一种全新的数据结构，大部分情况下会使用
+一些已有的数据结构，或者已有的数据结构进行扩展，以使得其能支持特殊的功
+能。当然即便是扩展也需要做一些工作。</p>
+<h3>动态顺序统计(Dynamic order statistics)</h3>
+<p>关于顺序统计这个问题，在<a href="http://www.roading.org/?p=350">中位数和顺序统计量</a>介绍了在<em>O</em>(<em>n</em>)时间内获
+取一组数据中第<em>i</em>小的数据。在算导第十四章介绍了另外一种方式来求第<em>i</em>小
+的数据，它的算法复杂度为<em>O</em>(lg<em>n</em>)，但却要依赖于另外一种数据结构顺序统
+计树(order statistic tree)。</p>
+<p>顺序统计树，是从红黑树扩展而来。相较于红黑树，一个顺序统计树的结点<em>x</em>，
+比一个红黑树的结点要多拥有一个字段size 。size为以<em>x</em>为根结点的子树所包
+含的所有结点的数目(也包括x本身)。一棵顺序统计树如下图所示：</p>
+<p><img alt="" src="http://www.roading.org/algorithm/introductiontoalgorithm/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E4%B8%AD%E4%BD%8D%E6%95%B0%E5%92%8C%E9%A1%BA%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%EF%BC%88medians-and-order-statistic%EF%BC%89.html" /></p>
+<p>不难得出一条结论：</p>
+<p><strong><em> x.size ...</em></strong></p>
 		    <a class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%89%a9%e5%b1%95%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.html" rel="bookmark"
                            title="Permalink to 扩展数据结构">Read more→</a>	
                 </article>
@@ -301,9 +275,13 @@ Statistic）》</a>介绍了在<em>O</em>(<em>n</em>)时间内获取一组数据
 	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edition.xml" 
 		title="Subscribe for Introduction to Algorithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
-             <li ><a href="http://www.roading.org/category/introduction-to-algorithm-thrid-edition.html">Introduction to Algorithm -thrid edition</a>
-	         <a href="http://www.roading.org/feed/Introduction to Algorithm -thrid edition.xml" 
-		title="Subscribe for Introduction to Algorithm -thrid edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/introduction-to-algorithm-third-edtion.html">Introduction to Algorithm -third edtion</a>
+	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edtion.xml" 
+		title="Subscribe for Introduction to Algorithm -third edtion" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+        
+             <li ><a href="http://www.roading.org/category/introduction-to-alogrithm-third-edition.html">Introduction to Alogrithm -third edition</a>
+	         <a href="http://www.roading.org/feed/Introduction to Alogrithm -third edition.xml" 
+		title="Subscribe for Introduction to Alogrithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
              <li ><a href="http://www.roading.org/category/metro.html">Metro</a>
 	         <a href="http://www.roading.org/feed/Metro.xml" 
@@ -316,10 +294,6 @@ Statistic）》</a>介绍了在<em>O</em>(<em>n</em>)时间内获取一组数据
              <li ><a href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a>
 	         <a href="http://www.roading.org/feed/深度探索C++对象模型.xml" 
 		title="Subscribe for 深度探索C++对象模型" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
-        
-             <li ><a href="http://www.roading.org/category/suan-fa-dao-lun.html">算法导论</a>
-	         <a href="http://www.roading.org/feed/算法导论.xml" 
-		title="Subscribe for 算法导论" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
         
              <li ><a href="http://www.roading.org/category/sui-bi.html">随笔</a>
 	         <a href="http://www.roading.org/feed/随笔.xml" 
