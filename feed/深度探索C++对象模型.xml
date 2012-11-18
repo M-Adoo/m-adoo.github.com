@@ -679,24 +679,17 @@ class 对virtual base class 的赋值行为。&lt;/p&gt;
 &lt;li&gt;以声明的相反顺序调用member object 的析构函数，如果有的话。&lt;/li&gt;
 &lt;li&gt;重设vptr 指向适当的基类的虚函数表，如果有的话。&lt;/li&gt;
 &lt;li&gt;以声明相反的顺序调用上一层的析构函数，如果有的话。&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;如果当前类是 most-derived
-    class，那么以构造的相反顺序调用虚基类的析构函数。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;侯捷的译文为：&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;如果当前类是 most-derived
+    class，那么以构造的相反顺序调用虚基类的析构函数。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
 &lt;p&gt;如果class object是最底层（most-derived）的class,其constructors可能被调用；
-某些用以支持这个行为的机制必须被放进来。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;我认为，Lippman在这一句上要说的是，虚基类的构造函数只能由most-derived class
+某些用以支持这个行为的机制必须被放进来。
+-   我认为，Lippman在这一句上要说的是，虚基类的构造函数只能由most-derived class
 调用，而为了支持这一机制，需要插入一些代码来抑制非most-derived class对虚基类
 构造函数的调用。同时说一点，5.4的标题个人以为应该译为“对象的效率”而非“对象的
-功能”——原标题为：Object Efficency。&lt;/li&gt;
-&lt;/ul&gt;
+功能”——原标题为：Object Efficency。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;div class="footnote"&gt;
 &lt;hr /&gt;
 &lt;ol&gt;
@@ -711,7 +704,8 @@ class 对virtual base class 的赋值行为。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;These constructors, however, may be invoked if, and only if, the class
 object represents the "most-derived class." Some mechanism supporting
-this must be put into place.&lt;/p&gt;
+this must be put into place.
+-   侯捷的译文为：&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;a href="#fnref:注2" rev="footnote" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
