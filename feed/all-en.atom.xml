@@ -256,7 +256,13 @@
     &lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;endif&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="算法导论"></category><category term="Fibonacci heaps"></category><category term="笔记"></category></entry><entry><title>载酒买花年少事，浑不似，旧心情</title><link href="http://www.roading.org//essaies/lonely.html" rel="alternate"></link><updated>2012-09-14T00:00:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-09-14:/essaies/lonely.html</id><summary type="html">&lt;p&gt;当我打开记事本想写点什么的时候，写一个怎样的题目却让我犯难。难在我
+&lt;/pre&gt;&lt;/div&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Mon 01 October 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="算法导论"></category><category term="Fibonacci heaps"></category><category term="笔记"></category></entry><entry><title>载酒买花年少事，浑不似，旧心情</title><link href="http://www.roading.org//essaies/lonely.html" rel="alternate"></link><updated>2012-09-14T00:00:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-09-14:/essaies/lonely.html</id><summary type="html">&lt;p&gt;当我打开记事本想写点什么的时候，写一个怎样的题目却让我犯难。难在我
 并无什么特别的要求，标题党？我不需要夺人眼球。做点概括？我也并没有
 要具体写点什么东西。我想大概这篇短文并不需要一个标题。不过，鉴于这
 个世界有这么多长着脑袋却并没有什么用处的脑残们，我认为我的这篇短文
@@ -282,7 +288,13 @@
 抹轻笑，并不能算得了多大的难处。只是假如硬要在浮华的世界中寻找清静，
 却并不容易真的得到内心的安宁。&lt;/p&gt;
 &lt;p&gt;大概每个人都需要一个哑巴辛格当朋友，他总用睿智的眼神告诉你他能理解
-你所说，却从不言语。&lt;/p&gt;</summary><category term="随笔"></category></entry><entry><title>斐波那契堆(Fibonacci Heaps)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html" rel="alternate"></link><updated>2012-07-30T22:33:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-07-30:/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html</id><summary type="html">&lt;h3&gt;概览&lt;/h3&gt;
+你所说，却从不言语。&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Fri 14 September 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/essaies/lonely.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="随笔"></category></entry><entry><title>斐波那契堆(Fibonacci Heaps)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html" rel="alternate"></link><updated>2012-07-30T22:33:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-07-30:/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html</id><summary type="html">&lt;h3&gt;概览&lt;/h3&gt;
 &lt;p&gt;斐波那契堆是由一组最小堆有序树组成，其中的每棵树都必须符合最小堆属性。
 简单点，斐波那契堆是由一组有点特别的树组成。除了两个与元素删除有关的
 操作（EXTRACT-MIN和DELETE）之外，它的其它操作都能在常数时间内完成。可
@@ -428,7 +440,13 @@ applications that manage large amounts of data.&lt;/p&gt;
 &lt;p&gt;它说呢，鉴于斐波那契堆的复杂性和常数因子可能较大，除了某些管理大数据的应用，
 人们还宁愿用二叉堆。话说回来，它又说了，说斐波那契堆还是有蛮多理论研究价值
 的&lt;img alt="咬牙切齿" src="http://www.roading.org/images/2012-07/wlEmoticon-baringteethsmile.png" /&gt;。&lt;/p&gt;
-&lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;</summary><category term="algorithm"></category><category term="算法导论"></category><category term="笔记"></category><category term="fibonacci heaps"></category></entry><entry><title>Python 基础入门笔记(5)</title><link href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html" rel="alternate"></link><updated>2012-05-03T16:05:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-05-03:/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html</id><summary type="html">&lt;h3&gt;Pickle&lt;/h3&gt;
+&lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Mon 30 July 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="algorithm"></category><category term="算法导论"></category><category term="笔记"></category><category term="fibonacci heaps"></category></entry><entry><title>Python 基础入门笔记(5)</title><link href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html" rel="alternate"></link><updated>2012-05-03T16:05:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-05-03:/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html</id><summary type="html">&lt;h3&gt;Pickle&lt;/h3&gt;
 &lt;p&gt;python 支持一些常见模式的文件处理方式，通过read 、readline或 write
 函数来读写文件，同时它还支持几种模式的读写方式，这些并没有什么特别的，略去不说。
 不过python的文件处理还有一个非常有用的功能——Pickle。&lt;/p&gt;
@@ -483,7 +501,13 @@ python 。老实说，这本书我是认为不值得写什么笔记的，但它�
 ，让我决定要深入学习一下它。但近来琐事缠身，是抽不出时间来系统的学习python 的。
 至于何时能安排出比较系统的时间来学习 python？一两个月之后，又或许是半年之后，亦未可知。
 于是才有了写点笔记的打算，留待真正开始学习python的时候能够快速的温习一下。&lt;/p&gt;
-&lt;p&gt;参考：a byte of python –v1.92(for python 3.0)&lt;/p&gt;</summary><category term="python"></category><category term="笔记"></category></entry><entry><title>Python 基础入门笔记(4)</title><link href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b04.html" rel="alternate"></link><updated>2012-05-02T17:12:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-05-02:/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b04.html</id><summary type="html">&lt;p&gt;作为一门面向对象语言，类和对象是 python的一个重要的概念。关于什么是面向对象和什么是面向对象过程，这里不做赘言。
+&lt;p&gt;参考：a byte of python –v1.92(for python 3.0)&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Thu 03 May 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="python"></category><category term="笔记"></category></entry><entry><title>Python 基础入门笔记(4)</title><link href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b04.html" rel="alternate"></link><updated>2012-05-02T17:12:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-05-02:/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b04.html</id><summary type="html">&lt;p&gt;作为一门面向对象语言，类和对象是 python的一个重要的概念。关于什么是面向对象和什么是面向对象过程，这里不做赘言。
 面向对象基本思想上python 并没有和C++有太大异同，这里主要对一些语法和细节上的东西做一些记录。但 python 与 C++
 在对象的范围上有很大不同， python的对象定义更广义——&lt;strong&gt;python认为万物皆对象，即便类也是一个对象&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;在 python中数据成员被称为字段(fields)，而函数成员被称为方法。依照我一贯的理解，数据成员用来描述对象的属性，而函数成员可以被看作对象的行为。&lt;/p&gt;
@@ -539,7 +563,13 @@ del 语句删除相应的对象。&lt;/p&gt;
     如果是多继承则将基类之间用逗号隔开。&lt;/li&gt;
 &lt;li&gt;还是关于继承，如果继承类没有定义自己的__init__方法，那么会继承基类的__init__方法，如果继承类定义了__init__方法，那么在继承类的__init__方法中基类的__init__方法并不会被自动调用，必须显示调用它，这是与C++不同的。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;参考：a byte of python –v1.92(for python 3.0)&lt;/p&gt;</summary><category term="python"></category><category term="面向对象"></category><category term="笔记"></category></entry><entry><title>Python 基础入门笔记(3)——内建数据结构</title><link href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b03.html" rel="alternate"></link><updated>2012-05-01T15:11:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-05-01:/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b03.html</id><summary type="html">&lt;p&gt;Python 有四个内建的数据结构——list、tuple、dictionary、set。&lt;/p&gt;
+&lt;p&gt;参考：a byte of python –v1.92(for python 3.0)&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Wed 02 May 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b04.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="python"></category><category term="面向对象"></category><category term="笔记"></category></entry><entry><title>Python 基础入门笔记(3)——内建数据结构</title><link href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b03.html" rel="alternate"></link><updated>2012-05-01T15:11:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-05-01:/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b03.html</id><summary type="html">&lt;p&gt;Python 有四个内建的数据结构——list、tuple、dictionary、set。&lt;/p&gt;
 &lt;h3&gt;列表（List）&lt;/h3&gt;
 &lt;p&gt;list 是一个可以在其中存储一系列项目的数据结构。list
 的项目之间需用逗号分开，并用一对中括号括将所有的项目括起来，以表明这是一个
@@ -644,7 +674,13 @@ list 。下例用以展示 list 的一些基本操作：&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;参考：a byte of python –v1.92(for python 3.0)&lt;/p&gt;</summary><category term="data structure"></category><category term="python"></category><category term="笔记"></category></entry><entry><title>Python 基础入门笔记(2)——函数、模块和包</title><link href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html" rel="alternate"></link><updated>2012-04-29T15:27:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-29:/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html</id><summary type="html">&lt;p&gt;函数、模块和包对于代码的复用都有非常重要的意义，当然面向对象中的类其实在代码的复用性上也有举足轻重的地位。前天睡前看了《a byte of python》中关于函数、模块和包的这个部分，今天又查了查官网文档以及网上的其它一些资料，把一些疑惑给解决。现在写一下关于这部分的笔记，用以加强记忆同时以备后用。&lt;/p&gt;
+&lt;p&gt;参考：a byte of python –v1.92(for python 3.0)&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Tue 01 May 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b03.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="data structure"></category><category term="python"></category><category term="笔记"></category></entry><entry><title>Python 基础入门笔记(2)——函数、模块和包</title><link href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html" rel="alternate"></link><updated>2012-04-29T15:27:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-29:/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html</id><summary type="html">&lt;p&gt;函数、模块和包对于代码的复用都有非常重要的意义，当然面向对象中的类其实在代码的复用性上也有举足轻重的地位。前天睡前看了《a byte of python》中关于函数、模块和包的这个部分，今天又查了查官网文档以及网上的其它一些资料，把一些疑惑给解决。现在写一下关于这部分的笔记，用以加强记忆同时以备后用。&lt;/p&gt;
 &lt;h3&gt;函数&lt;/h3&gt;
 &lt;p&gt;python 中用关键字def来定义函数。一个完整的函数定义应该以关键字def
 开始后面紧跟着函数名和用括号括起来的形参列表，并以一个冒号作为该行的结尾，紧跟着则是函数的代码块。实例：&lt;/p&gt;
@@ -728,14 +764,26 @@ sys.path。&lt;/p&gt;
 
 
 &lt;p&gt;那么，from package import * 只会导入mould1、moudle2和moudle3三个模块。&lt;/p&gt;
-&lt;p&gt;参考：a byte of python –v1.92(for python 3.0) 以及pyhon.org关于python3.2的很小部分文档。以及这篇博客：&lt;a href="http://pydoing.blogspot.com/2011/02/python-package.html"&gt;http://pydoing.blogspot.com/2011/02/python-package.html&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category><category term="代码组织"></category><category term="笔记"></category></entry><entry><title>都废</title><link href="http://www.roading.org//essaies/sadcity.html" rel="alternate"></link><updated>2012-04-26T14:31:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-26:/essaies/sadcity.html</id><summary type="html">&lt;p&gt;《废都》，便是迷醉于欲望之中，却又无法抽身自救的那么一群人组成。即便是尼姑庵的慧明亦脱不出肉欲
+&lt;p&gt;参考：a byte of python –v1.92(for python 3.0) 以及pyhon.org关于python3.2的很小部分文档。以及这篇博客：&lt;a href="http://pydoing.blogspot.com/2011/02/python-package.html"&gt;http://pydoing.blogspot.com/2011/02/python-package.html&lt;/a&gt;&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Sun 29 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="python"></category><category term="代码组织"></category><category term="笔记"></category></entry><entry><title>都废</title><link href="http://www.roading.org//essaies/sadcity.html" rel="alternate"></link><updated>2012-04-26T14:31:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-26:/essaies/sadcity.html</id><summary type="html">&lt;p&gt;《废都》，便是迷醉于欲望之中，却又无法抽身自救的那么一群人组成。即便是尼姑庵的慧明亦脱不出肉欲
 、权欲的高墙。大概世道如此，现实并不是人们掉进了欲望的天坑，反而是，欲望便如已然合围的高墙，人生而就在墙内。不是陷入了，而是逃不出。&lt;/p&gt;
 &lt;p&gt;便如《废都》演变到最后，这些人或死了、又或走了。死了的人固然逃出了欲望的樊笼，走了的人却尚未完成自救。诚然、庄之蝶最终放弃了背负了的声名，好似看淡了一切，悄然踏上了驶往南方的火车。而实质却是截然相反的，他并没有逃脱那一切，因他没有做任何一丁点抗争，不过是走到了绝地后的另谋他路罢了。他与周敏最终坐上了同一辆离开西京的火车，离开西京并不是他们幡然醒悟了，而是他们都面临了同样的困境——在追逐欲望的过程中面临了难以挽回的局面。周敏费尽心机也没有保全他在杂志社的工作，而庄之蝶更是跌进了谷底，失去了一切。他们是在这样一种情况下离开的，无需割舍任何一点东西。所以他们今天或许离开了西京，但却保不准哪天要入了南京了。&lt;/p&gt;
 &lt;p&gt;庄之蝶外头有那么多女人，却又未必真得了爱情。庄之蝶身材矮小，其貌不扬，要说他的那些女人们三下两次的便都和他上了床是爱情，我是不信的。与其说，她们是爱上了庄之蝶，不如说她们爱上的是“大作家庄之蝶”。反过来看呢，庄之蝶也不过仅是爱上了这些年轻美妙的肉体。阿灿的自毁容貌或许叫庄之蝶内疚与感动了，却也止步于此。唐婉儿最终的处境或许也叫庄之蝶煎熬难受了，不过是因为庄之蝶还有一颗良善之心罢了。我想庄之蝶与唐婉儿、柳月、阿灿之间是并没有一场爱情的，顶多也只是有很多场偷情。&lt;/p&gt;
 &lt;p&gt;看罢《废都》，羡慕完庄之蝶的艳福之后、我又对他非常不耻。不耻周敏对他执师之礼，他却上了人家有实无名的老婆？不耻他间接害死了朋友龚靖元。不耻他亏待了赵京五…&lt;/p&gt;
 &lt;p&gt;我始终不能明白，庄之蝶是有一颗良善之心的，又为何总做出上述不耻之事?末了，我却明白了，世道如此啊。这威武圣朝，现世亿万民众，或达官显贵，或平民布衣，莫不在这万丈红尘中翻滚，莫不为利欲如此行事。便拿害死了龚靖元说事，乘龚靖元之危买得了他的收藏或许是不道义的。但你见同赵京五谋划这事的时候，赵京五有丝毫内疚？诓骗压价龚小乙的时候，赵京五有丝毫手软？赵京五不是魔头，实在是这种事情在这个时段在这个地方太过平常，所有局中人都为警觉到严重的后果而已。&lt;/p&gt;
 &lt;p&gt;庄之蝶是坏人吗？不！我想庄之蝶是个好人，这世道能有一副热肠、能有一颗良心已经是殊为不易。&lt;/p&gt;
-&lt;p&gt;临近文末，我仿佛听到了庄之蝶丈母娘的喋喋呓语：都废了、都废了、都废…&lt;/p&gt;</summary><category term="随笔"></category></entry><entry><title>Python 基础入门笔记(1)</title><link href="http://www.roading.org//develop/python/python-%e8%af%ad%e6%b3%95%e5%9f%ba%e7%a1%80%e7%ac%94%e8%ae%b01.html" rel="alternate"></link><updated>2012-04-24T17:25:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-24:/develop/python/python-%e8%af%ad%e6%b3%95%e5%9f%ba%e7%a1%80%e7%ac%94%e8%ae%b01.html</id><summary type="html">&lt;h3&gt;内建类型&lt;/h3&gt;
+&lt;p&gt;临近文末，我仿佛听到了庄之蝶丈母娘的喋喋呓语：都废了、都废了、都废…&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Thu 26 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/essaies/sadcity.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="随笔"></category></entry><entry><title>Python 基础入门笔记(1)</title><link href="http://www.roading.org//develop/python/python-%e8%af%ad%e6%b3%95%e5%9f%ba%e7%a1%80%e7%ac%94%e8%ae%b01.html" rel="alternate"></link><updated>2012-04-24T17:25:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-24:/develop/python/python-%e8%af%ad%e6%b3%95%e5%9f%ba%e7%a1%80%e7%ac%94%e8%ae%b01.html</id><summary type="html">&lt;h3&gt;内建类型&lt;/h3&gt;
 &lt;p&gt;python 中提供的内建类型大概与C++中提供的相仿，却更简洁。&lt;/p&gt;
 &lt;p&gt;数值方面的内建类型有整型、浮点型、和复数类型三种。在C++中虽然也有复数类型，但却是由标准库提供的。另外，python中整数的表示就是整形，没有如C++中的长整型短整形之说。浮点数的表示也没有浮点型和双精度型的区分。&lt;/p&gt;
 &lt;p&gt;字符串则可以分为字符串(string)和原生字符串(raw string)两种类型。可以如同
@@ -856,7 +904,13 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
 &lt;p&gt;从语法上来讲，for与while给了我一些不同的感觉，虽然都是循环控制语句，但给人的感觉是while更趋向于条件控制的循环，而for则更倾向于迭代循环。&lt;/p&gt;
 &lt;p&gt;python中也有break与continue语句与C++中的没有区别。要注意的是如果循环是以break语句跳出的话，那么else分支也会被跳过。&lt;/p&gt;
 &lt;p&gt;注：这篇笔记我主要重点记录一些 python在语法上与C++的一些异同点，以及我认为自己需要留意的地方，所以他仅仅是一篇笔记。&lt;/p&gt;
-&lt;p&gt;参考：a byte of python –v1.92(for python 3.0) 以及pyhon.org关于python3.2的很小部分文档。&lt;/p&gt;</summary><category term="python"></category><category term="笔记"></category></entry><entry><title>B-树的C++实现</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="alternate"></link><updated>2012-04-19T22:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-19:/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html</id><summary type="html">&lt;p&gt;与之前实现哈希表、红黑树…这些数据结构和算法不同，B-trees的实现不再追求模仿STL，因此没有实现b-trees自己的迭代器。这些天温习之前的笔记的过程中意识到了一个问题，所有这些的数据结构毕竟只是作为练习之用，而不是出于作为以后使用的库的目的。故应当以逻辑清晰为第一要务。B-trees的实现是转变的一个开始，以后关于算法导论中的算法和数据结构的实现力求立足与算法本身而不是C++的淫技。&lt;/p&gt;
+&lt;p&gt;参考：a byte of python –v1.92(for python 3.0) 以及pyhon.org关于python3.2的很小部分文档。&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Tue 24 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/python/python-%e8%af%ad%e6%b3%95%e5%9f%ba%e7%a1%80%e7%ac%94%e8%ae%b01.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="python"></category><category term="笔记"></category></entry><entry><title>B-树的C++实现</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="alternate"></link><updated>2012-04-19T22:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-19:/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html</id><summary type="html">&lt;p&gt;与之前实现哈希表、红黑树…这些数据结构和算法不同，B-trees的实现不再追求模仿STL，因此没有实现b-trees自己的迭代器。这些天温习之前的笔记的过程中意识到了一个问题，所有这些的数据结构毕竟只是作为练习之用，而不是出于作为以后使用的库的目的。故应当以逻辑清晰为第一要务。B-trees的实现是转变的一个开始，以后关于算法导论中的算法和数据结构的实现力求立足与算法本身而不是C++的淫技。&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//*******************************************&lt;/span&gt;
 &lt;span class="c1"&gt;//B-trees.cpp   2012/4/18 by Adoo&lt;/span&gt;
 &lt;span class="c1"&gt;//@brief: 本文件为b-trees的C++实现。&lt;/span&gt;
@@ -1121,4 +1175,10 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;degree&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 &lt;span class="p"&gt;};&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="B-trees"></category><category term="c++"></category><category term="算法导论"></category><category term="笔记"></category></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Thu 19 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="B-trees"></category><category term="c++"></category><category term="算法导论"></category><category term="笔记"></category></entry></feed>

@@ -224,7 +224,13 @@ Rectangle {
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;参考资料：&lt;a href="http://qt.nokia.com/learning/online/training/materials/qt-essentials-qt-quick-edition"&gt;Qt Quick for C++ Developers&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</summary><category term="qml"></category><category term="QT"></category><category term="qt quick"></category><category term="笔记"></category></entry><entry><title>Qt Quick 笔记（1）：初识 Qt Quick</title><link href="http://www.roading.org//develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html" rel="alternate"></link><updated>2012-02-23T16:45:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-02-23:/develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html</id><summary type="html">&lt;h3&gt;废语开篇&lt;/h3&gt;
+&lt;/blockquote&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Fri 24 February 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/Qt/about-ui.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="qml"></category><category term="QT"></category><category term="qt quick"></category><category term="笔记"></category></entry><entry><title>Qt Quick 笔记（1）：初识 Qt Quick</title><link href="http://www.roading.org//develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html" rel="alternate"></link><updated>2012-02-23T16:45:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-02-23:/develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html</id><summary type="html">&lt;h3&gt;废语开篇&lt;/h3&gt;
 &lt;p&gt;在大二的时候思索着学习一界面库，为此煞费脑经。其中有试过十来天的Qt学习,不过最后为
 WPF而沦陷，确实WPF界面与逻辑的分离让我很是向往。不过可惜的是WPF并不原生支持与C++
 的交互，以致我不得不学习一些C# 。又四处求医问药——获得native code与manage code交互
@@ -277,4 +283,10 @@ C++相同，可以用 “//”与“/* … */ ”两种形式。&lt;/p&gt;
     Text 、InputText…&lt;/li&gt;
 &lt;li&gt;不可见元素有states、transitions…&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;元素拥有一些属性，同时属性用以描述元素。当然，也可以对元素扩展一些自定义的属性。&lt;/p&gt;</summary><category term="qml"></category><category term="QT"></category><category term="qt quick"></category></entry></feed>
+&lt;p&gt;元素拥有一些属性，同时属性用以描述元素。当然，也可以对元素扩展一些自定义的属性。&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Thu 23 February 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="qml"></category><category term="QT"></category><category term="qt quick"></category></entry></feed>

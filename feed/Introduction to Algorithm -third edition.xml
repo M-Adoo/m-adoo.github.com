@@ -256,7 +256,13 @@
     &lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;endif&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="算法导论"></category><category term="Fibonacci heaps"></category><category term="笔记"></category></entry><entry><title>斐波那契堆(Fibonacci Heaps)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html" rel="alternate"></link><updated>2012-07-30T22:33:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-07-30:/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html</id><summary type="html">&lt;h3&gt;概览&lt;/h3&gt;
+&lt;/pre&gt;&lt;/div&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Mon 01 October 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="算法导论"></category><category term="Fibonacci heaps"></category><category term="笔记"></category></entry><entry><title>斐波那契堆(Fibonacci Heaps)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html" rel="alternate"></link><updated>2012-07-30T22:33:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-07-30:/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html</id><summary type="html">&lt;h3&gt;概览&lt;/h3&gt;
 &lt;p&gt;斐波那契堆是由一组最小堆有序树组成，其中的每棵树都必须符合最小堆属性。
 简单点，斐波那契堆是由一组有点特别的树组成。除了两个与元素删除有关的
 操作（EXTRACT-MIN和DELETE）之外，它的其它操作都能在常数时间内完成。可
@@ -402,7 +408,13 @@ applications that manage large amounts of data.&lt;/p&gt;
 &lt;p&gt;它说呢，鉴于斐波那契堆的复杂性和常数因子可能较大，除了某些管理大数据的应用，
 人们还宁愿用二叉堆。话说回来，它又说了，说斐波那契堆还是有蛮多理论研究价值
 的&lt;img alt="咬牙切齿" src="http://www.roading.org/images/2012-07/wlEmoticon-baringteethsmile.png" /&gt;。&lt;/p&gt;
-&lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;</summary><category term="algorithm"></category><category term="算法导论"></category><category term="笔记"></category><category term="fibonacci heaps"></category></entry><entry><title>B-树的C++实现</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="alternate"></link><updated>2012-04-19T22:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-19:/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html</id><summary type="html">&lt;p&gt;与之前实现哈希表、红黑树…这些数据结构和算法不同，B-trees的实现不再追求模仿STL，因此没有实现b-trees自己的迭代器。这些天温习之前的笔记的过程中意识到了一个问题，所有这些的数据结构毕竟只是作为练习之用，而不是出于作为以后使用的库的目的。故应当以逻辑清晰为第一要务。B-trees的实现是转变的一个开始，以后关于算法导论中的算法和数据结构的实现力求立足与算法本身而不是C++的淫技。&lt;/p&gt;
+&lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Mon 30 July 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="algorithm"></category><category term="算法导论"></category><category term="笔记"></category><category term="fibonacci heaps"></category></entry><entry><title>B-树的C++实现</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="alternate"></link><updated>2012-04-19T22:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-19:/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html</id><summary type="html">&lt;p&gt;与之前实现哈希表、红黑树…这些数据结构和算法不同，B-trees的实现不再追求模仿STL，因此没有实现b-trees自己的迭代器。这些天温习之前的笔记的过程中意识到了一个问题，所有这些的数据结构毕竟只是作为练习之用，而不是出于作为以后使用的库的目的。故应当以逻辑清晰为第一要务。B-trees的实现是转变的一个开始，以后关于算法导论中的算法和数据结构的实现力求立足与算法本身而不是C++的淫技。&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//*******************************************&lt;/span&gt;
 &lt;span class="c1"&gt;//B-trees.cpp   2012/4/18 by Adoo&lt;/span&gt;
 &lt;span class="c1"&gt;//@brief: 本文件为b-trees的C++实现。&lt;/span&gt;
@@ -667,7 +679,13 @@ applications that manage large amounts of data.&lt;/p&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;degree&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 &lt;span class="p"&gt;};&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="B-trees"></category><category term="c++"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>算法导论——B-trees</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html" rel="alternate"></link><updated>2012-04-15T22:23:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-15:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html</id><summary type="html">&lt;p&gt;B-trees(叫“B树”还是“B-树”？我还是用它的英文名吧)，是一种为磁盘或
+&lt;/pre&gt;&lt;/div&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Thu 19 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="B-trees"></category><category term="c++"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>算法导论——B-trees</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html" rel="alternate"></link><updated>2012-04-15T22:23:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-15:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html</id><summary type="html">&lt;p&gt;B-trees(叫“B树”还是“B-树”？我还是用它的英文名吧)，是一种为磁盘或
 其它辅存设备而设计的平衡树。它与红黑树有些类似，但是在节省IO操作
 上比红黑树表现的更好。很多数据库系统会用B-trees或它的变形来存储
 信息。&lt;/p&gt;
@@ -865,7 +883,13 @@ applications that manage large amounts of data.&lt;/p&gt;
 &lt;p&gt;如果是叶子，直接删除。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;</summary><category term="B-trees"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>算法导论——平摊分析</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html" rel="alternate"></link><updated>2012-03-29T15:52:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-29:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html</id><summary type="html">&lt;p&gt;平摊分析(Amortized Analysis)将数据结构的不同操作放到一起来考虑，而不是仅对某种操作的单一考虑。在平摊分析中，不会涉及概率问题。平摊分析可以用来证明，在一系列操作中，即使某个操作代价很大，但平均代价仍是很小的。本文记录三种平摊分析最常用的技术。&lt;/p&gt;
+&lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Sun 15 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="B-trees"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>算法导论——平摊分析</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html" rel="alternate"></link><updated>2012-03-29T15:52:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-29:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html</id><summary type="html">&lt;p&gt;平摊分析(Amortized Analysis)将数据结构的不同操作放到一起来考虑，而不是仅对某种操作的单一考虑。在平摊分析中，不会涉及概率问题。平摊分析可以用来证明，在一系列操作中，即使某个操作代价很大，但平均代价仍是很小的。本文记录三种平摊分析最常用的技术。&lt;/p&gt;
 &lt;h3&gt;聚集分析(Aggregate analysis)&lt;/h3&gt;
 &lt;p&gt;在聚集分析中，要证明&lt;em&gt;n&lt;/em&gt;个操作(可以是不同种类的操作)构成的操作序列在最坏情况下用时&lt;em&gt;T&lt;/em&gt; (&lt;em&gt;n&lt;/em&gt;),因此每个操作的平均时间为&lt;em&gt;T&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)/&lt;em&gt;n&lt;/em&gt;，在平摊分析中，平均代价被指派为平摊代价。看下面一个栈操作的实例。&lt;/p&gt;
 &lt;p&gt;对于栈操作，PUSH，POP的时间复杂度都是&lt;em&gt;O&lt;/em&gt;(1)。我们给栈添加一种新的操作——MULTIPOP(&lt;em&gt;S&lt;/em&gt;,&lt;em&gt;k&lt;/em&gt;)，如果栈中对象足够，它会出栈&lt;em&gt;k&lt;/em&gt;个对象，否则弹出栈中全部对象。这个操作的复杂度为&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)。其伪码如下：&lt;/p&gt;
@@ -908,7 +932,13 @@ applications that manage large amounts of data.&lt;/p&gt;
 &lt;p&gt;在这儿k'= min(&lt;em&gt;k&lt;/em&gt;,&lt;em&gt;s&lt;/em&gt;)，直接表达的意思是不能令栈中的对象数目为负，而就势能方法来说，它表述了一点原则就是，这一次操作不能令栈的势能为负。&amp;#160;&lt;a href="#fnref:注1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary><category term="Amortized Analysis"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>赫夫曼编码</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html" rel="alternate"></link><updated>2012-03-28T16:01:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-28:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html</id><summary type="html">&lt;p&gt;赫夫曼编码(huffman codes)是一种非常有用的数据压缩方法，通常能将数据压
+&lt;/div&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Thu 29 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="Amortized Analysis"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>赫夫曼编码</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html" rel="alternate"></link><updated>2012-03-28T16:01:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-28:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html</id><summary type="html">&lt;p&gt;赫夫曼编码(huffman codes)是一种非常有用的数据压缩方法，通常能将数据压
 缩20%\~90%。从具体问题出发，假设我们有一包含10000个字符的文件，这些字
 符仅由6个不同的字符组成，就设这6个字符分别为“abcdef”，下面的表给出了
 这6个字符在整个文件中的占比，和两种不同的编码方式。&lt;/p&gt;
@@ -1020,7 +1050,13 @@ bits&lt;/p&gt;
 这本书，原来的目的自然只达到了十之一二。&lt;/p&gt;
 &lt;p&gt;这本书的笔记我还是会将它写完，但有些无谓的地方将不会多浪费笔墨。&lt;/p&gt;
 &lt;p&gt;每个人都有自己的做事原则，我的原则是做一件事，要有一个明确的理由，放弃一件
-在做的事也要有一个明确的理由。&lt;/p&gt;</summary><category term="huffman codes"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>贪心算法</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html" rel="alternate"></link><updated>2012-03-27T16:46:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-27:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html</id><summary type="html">&lt;p&gt;与动态规划相同贪心算法通过做出一系列选择来构建出问题的最优解，不同的是贪心算法
+在做的事也要有一个明确的理由。&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Wed 28 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="huffman codes"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>贪心算法</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html" rel="alternate"></link><updated>2012-03-27T16:46:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-27:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html</id><summary type="html">&lt;p&gt;与动态规划相同贪心算法通过做出一系列选择来构建出问题的最优解，不同的是贪心算法
 并不会全局考虑各种选择，它只做当前看起来最佳的选择。如君所见，贪心算法企图用每
 一步的最优解来构建出整个问题的最优解。这并不能保证总能构建出最优解，但它通常能
 做到。我们可以先看一个具体的问题——活动安排问题。&lt;/p&gt;
@@ -1191,7 +1227,13 @@ knapsack problem, taking the items in order of greatest value per
 pound yields an optimal solution.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;0-1背包不能用贪心策略来求解，但动态规划确实使用它的。&lt;/p&gt;
-&lt;p&gt;参考： introduction to algorithm –third edition&lt;/p&gt;</summary><category term="c++"></category><category term="greedy algorithm"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>最优二叉查找树</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html" rel="alternate"></link><updated>2012-03-26T11:56:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-26:/algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html</id><summary type="html">&lt;p&gt;假如我们要设计一个简单的程序将一段英文翻译成法语，那么就需要为每个
+&lt;p&gt;参考： introduction to algorithm –third edition&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Tue 27 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="c++"></category><category term="greedy algorithm"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>最优二叉查找树</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html" rel="alternate"></link><updated>2012-03-26T11:56:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-26:/algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html</id><summary type="html">&lt;p&gt;假如我们要设计一个简单的程序将一段英文翻译成法语，那么就需要为每个
 英语单词找到对应的法语单词，简单的做法是在单词库中对每个单词进行遍
 历查找。更快一点的做法是，我们可以将单词库建成一颗平衡二叉搜索树
 ——用英文单词做Key,对应的法语单词做附属信息。第二种方法，虽然可以保
@@ -1327,7 +1369,13 @@ OPTIMAL-BST(p, q, n)
              &lt;span class="n"&gt;print_optimal_bst&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;    
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="c++"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>最长单调子序列问题</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html" rel="alternate"></link><updated>2012-03-22T17:19:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-22:/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html</id><summary type="html">&lt;h5&gt;Exercises 15.4-5&lt;/h5&gt;
+&lt;/pre&gt;&lt;/div&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Mon 26 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="c++"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>最长单调子序列问题</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html" rel="alternate"></link><updated>2012-03-22T17:19:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-22:/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html</id><summary type="html">&lt;h5&gt;Exercises 15.4-5&lt;/h5&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Give an &lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;&lt;sup&gt;2&lt;/sup&gt;)-time algorithm to find the longest monotonically
 increasing subsequence of a sequence of &lt;em&gt;n&lt;/em&gt; numbers。&lt;/p&gt;
@@ -1386,7 +1434,13 @@ in X[P[M[L]]], etc. Thus, the sequence has the form &lt;br /&gt;
 Because the algorithm performs a single binary search per sequence
 element, its total time can be expressed using as O(&lt;em&gt;n&lt;/em&gt; log &lt;em&gt;n&lt;/em&gt;).&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;问题来自算法导论，参考博客：&lt;a href="http://ripcrixalis.blog.com/"&gt;Rip's Infernal Majesty&lt;/a&gt;&lt;/p&gt;</summary><category term="LIS"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>最长公共子序列</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html" rel="alternate"></link><updated>2012-03-22T12:57:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-22:/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html</id><summary type="html">&lt;h3&gt;概念&lt;/h3&gt;
+&lt;p&gt;问题来自算法导论，参考博客：&lt;a href="http://ripcrixalis.blog.com/"&gt;Rip's Infernal Majesty&lt;/a&gt;&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Thu 22 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="LIS"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>最长公共子序列</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html" rel="alternate"></link><updated>2012-03-22T12:57:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-22:/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html</id><summary type="html">&lt;h3&gt;概念&lt;/h3&gt;
 &lt;p&gt;序列的&lt;strong&gt;子序列&lt;/strong&gt;，可以由从这个序列中去掉0个或多个元素而得来。所以子序列
 可以是由其父序列中不连续的元素组成，但相对顺序不能改变。&lt;strong&gt;公共子序列&lt;/strong&gt;指
 的是,假如序列Z既是X的子序列，又是序列Y的子序列，那么称Z为X和Y的公共子序
@@ -1668,4 +1722,10 @@ d第i行和第j列所指方块，记录了c[i,j]和b[i,j]中的信息。我们�
 加。&lt;/p&gt;
 &lt;p&gt;要注意的一点是，测试的时候要把程序的栈空间调大一些，不然自顶而下的方式，可能
 很快就爆栈了。&lt;/p&gt;
-&lt;p&gt;参考： introduction to algorithm –third edition&lt;/p&gt;</summary><category term="dynamic programming"></category><category term="LCS"></category><category term="算法导论"></category><category term="笔记"></category></entry></feed>
+&lt;p&gt;参考： introduction to algorithm –third edition&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Thu 22 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="dynamic programming"></category><category term="LCS"></category><category term="算法导论"></category><category term="笔记"></category></entry></feed>

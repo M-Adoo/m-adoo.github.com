@@ -40,7 +40,13 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/%E6%A8%A1%E6%9D%BF%E4%BA%8C%E4%BA%8B.html"&gt;18. 模板二事&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/eh-rtti.html"&gt;19. EH &amp;amp; RTTI&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry><entry><title>总结·亦为引言</title><link href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html" rel="alternate"></link><updated>2011-12-09T21:39:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-09:/develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html</id><summary type="html">&lt;p&gt;《深度探索C++对象模型》终于在昨天写完了最后一篇笔记，前前后后花费了一个
+&lt;/ul&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Fri 09 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/cpp/%e3%80%8a%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b%e3%80%8b%e7%ac%94%e8%ae%b0%e6%b1%87%e6%80%bb.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry><entry><title>总结·亦为引言</title><link href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html" rel="alternate"></link><updated>2011-12-09T21:39:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-09:/develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html</id><summary type="html">&lt;p&gt;《深度探索C++对象模型》终于在昨天写完了最后一篇笔记，前前后后花费了一个
 月左右，期间学到了很多，很感激书的作者和译者。之后的日子，可以将精力转
 回《算法导论》和一些非技术类的书上来了。&lt;/p&gt;
 &lt;p&gt;11月11号开始看《深度探索C++对象模型》一书，到二十八号看完，共计花费了十
@@ -56,7 +62,13 @@
 译者侯捷一一指正。但或许正因为这个原因，无端膨胀了译者的自信，毕竟指点
 一个大师的错误是一件如此刺激的事情。这无端膨胀的自信，同样带来了一些问
 题——一些原本正确之处，被做了错误的更正。可见，于技术学习来说，谨慎谦虚，
-何其重要。&lt;/p&gt;</summary><category term="Inside The C++ Object Model"></category></entry><entry><title>EH &amp; RTTI</title><link href="http://www.roading.org//develop/cpp/eh-rtti.html" rel="alternate"></link><updated>2011-12-08T22:24:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-08:/develop/cpp/eh-rtti.html</id><summary type="html">&lt;h3&gt;异常处理(Exception Handling)&lt;/h3&gt;
+何其重要。&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Fri 09 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="Inside The C++ Object Model"></category></entry><entry><title>EH &amp; RTTI</title><link href="http://www.roading.org//develop/cpp/eh-rtti.html" rel="alternate"></link><updated>2011-12-08T22:24:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-08:/develop/cpp/eh-rtti.html</id><summary type="html">&lt;h3&gt;异常处理(Exception Handling)&lt;/h3&gt;
 &lt;p&gt;C++的 exception handling 有三个主要的子句组成：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;一个throw子句。它在程序的某处丢出一个exception，被丢出的exception可以是内建类
@@ -117,7 +129,13 @@ delete之间的代码抛出了异常，那么将导致本该进行的unlock或de
 引用不行。关于3，虽然第一点指出RTTI只支持多态类，但&lt;code&gt;typeid&lt;/code&gt;和&lt;code&gt;type_info&lt;/code&gt;同样可用于
 内建类型及所有非多态类。与多态类的差别在于，非多态类的&lt;code&gt;type_info&lt;/code&gt;对象是静态取得(所
 以不能叫“执行期类型识别”)，而多态类的是在执行期获得。&lt;/p&gt;
-&lt;p&gt;参考：深度探索C++对象模型&lt;/p&gt;</summary><category term="EH"></category><category term="Inside The C++ Object Model"></category><category term="RTTI"></category></entry><entry><title>模板二事</title><link href="http://www.roading.org//develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html" rel="alternate"></link><updated>2011-12-07T17:00:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-07:/develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html</id><summary type="html">&lt;h3&gt;模板的实例化&lt;/h3&gt;
+&lt;p&gt;参考：深度探索C++对象模型&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Thu 08 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/cpp/eh-rtti.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="EH"></category><category term="Inside The C++ Object Model"></category><category term="RTTI"></category></entry><entry><title>模板二事</title><link href="http://www.roading.org//develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html" rel="alternate"></link><updated>2011-12-07T17:00:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-07:/develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html</id><summary type="html">&lt;h3&gt;模板的实例化&lt;/h3&gt;
 &lt;p&gt;一个模板只有被使用到，才会被实例化，否则不会被实例化。对于一个实例化
 后的模板来说，未被调用的成员函数将不会被实例化，只有成员函数被使用时，
 C++标准才要求实例化他们。其原因，有两点：&lt;/p&gt;
@@ -221,7 +239,13 @@ instantiation”来决定name.&lt;/p&gt;
 早在模板定义时被决议出来，那就该轮到模板的使用者hold不住了。当然所上完
 全属一家之言，呸，连一家之言都不算，怎么敢自称“家”。如有不同理解，可当
 我一派胡言，如果你聊发善心，可以对我赐教一二，当聆听受教。&lt;/p&gt;
-&lt;p&gt;参考：深度探索C++对象模型&lt;/p&gt;</summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="template instantiation"></category></entry><entry><title>临时性对象(Temporary Objects)</title><link href="http://www.roading.org//develop/cpp/%e4%b8%b4%e6%97%b6%e6%80%a7%e5%af%b9%e8%b1%a1temporary-objects.html" rel="alternate"></link><updated>2011-12-06T17:48:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-06:/develop/cpp/%e4%b8%b4%e6%97%b6%e6%80%a7%e5%af%b9%e8%b1%a1temporary-objects.html</id><summary type="html">&lt;h3&gt;何时生成临时对象&lt;/h3&gt;
+&lt;p&gt;参考：深度探索C++对象模型&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Wed 07 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="template instantiation"></category></entry><entry><title>临时性对象(Temporary Objects)</title><link href="http://www.roading.org//develop/cpp/%e4%b8%b4%e6%97%b6%e6%80%a7%e5%af%b9%e8%b1%a1temporary-objects.html" rel="alternate"></link><updated>2011-12-06T17:48:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-06:/develop/cpp/%e4%b8%b4%e6%97%b6%e6%80%a7%e5%af%b9%e8%b1%a1temporary-objects.html</id><summary type="html">&lt;h3&gt;何时生成临时对象&lt;/h3&gt;
 &lt;p&gt;对于一个下面这样的程序片段：&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -308,7 +332,13 @@ Initialization)——返回值将作为一个额外的参数提供给函数，�
 &lt;code&gt;a.operator+( temp, b )&lt;/code&gt;还是&lt;code&gt;temp.operator+( a, b )&lt;/code&gt;自然不言而喻。&amp;#160;&lt;a href="#fnref:注1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry><entry><title>对象的构造和析构</title><link href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="alternate"></link><updated>2011-12-06T13:35:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-06:/develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html</id><summary type="html">&lt;p&gt;一般而言，构造函数被安插在对象的定义处，而析构函数被安插在对象生命
+&lt;/div&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Tue 06 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/cpp/%e4%b8%b4%e6%97%b6%e6%80%a7%e5%af%b9%e8%b1%a1temporary-objects.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry><entry><title>对象的构造和析构</title><link href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="alternate"></link><updated>2011-12-06T13:35:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-06:/develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html</id><summary type="html">&lt;p&gt;一般而言，构造函数被安插在对象的定义处，而析构函数被安插在对象生命
 周期结束前：&lt;/p&gt;
 &lt;p&gt;:::C++
   // Pseudo C++ Code&lt;br /&gt;
@@ -377,7 +407,13 @@ mat_identity的构造函数只有在第一次被调用时在被施行，而在�
     一个或多个函数来完成任务。这些函数完成什么功能，大概都能猜得出来。
     而关于细节，不必要死扣了，每个编译器肯定都有些许差别。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。&lt;/p&gt;</summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry><entry><title>new expression、operator new和placement new——三个“妞（new）”的故事（3）</title><link href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html" rel="alternate"></link><updated>2011-12-05T15:49:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-05:/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html</id><summary type="html">&lt;h3&gt;placement operator new&lt;/h3&gt;
+&lt;p&gt;参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Tue 06 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry><entry><title>new expression、operator new和placement new——三个“妞（new）”的故事（3）</title><link href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html" rel="alternate"></link><updated>2011-12-05T15:49:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-05:/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html</id><summary type="html">&lt;h3&gt;placement operator new&lt;/h3&gt;
 &lt;p&gt;placement operator new用来在指定地址上构造对象，要注意的是，它并不分配内存，仅仅是
 对指定地址调用构造函数。其调用方式如下：&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;point&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;pt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;point3d&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -434,7 +470,13 @@ operator new然后再调用指定类型的匹配参数的构造函数，而说�
 &lt;p&gt;上述两个类的大小相同，因此将Derived对象放在 Base对象中是安全的，但是在最后一句代码
 中 b.f()调用的是哪一个类的f()。答案是Base::f() 的。虽然此时b中存储的实际上是一个
 Derived对象，但是，通过一个对象来调用虚函数，将被静态决议出来，虚函数机制不会被启用。&lt;/p&gt;
-&lt;p&gt;参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。&lt;/p&gt;</summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry><entry><title>new expression、operator new和placement new——三个妞（new）的故事（2）</title><link href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html" rel="alternate"></link><updated>2011-12-05T15:19:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-05:/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html</id><summary type="html">&lt;h3&gt;两个 delete 后的问题&lt;/h3&gt;
+&lt;p&gt;参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Mon 05 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry><entry><title>new expression、operator new和placement new——三个妞（new）的故事（2）</title><link href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html" rel="alternate"></link><updated>2011-12-05T15:19:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-05:/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html</id><summary type="html">&lt;h3&gt;两个 delete 后的问题&lt;/h3&gt;
 &lt;p&gt;最近在网上看到两个关于指针 delete 后的问题。第一种情况：&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;delete&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -527,7 +569,13 @@ cfront中的&lt;code&gt;vec_delete&lt;/code&gt;是根据被删除指针的类型
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。&lt;/p&gt;</summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry><entry><title>new expression、operator new 和 placement new——三个妞（new）的故事（1）</title><link href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html" rel="alternate"></link><updated>2011-12-02T23:35:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-02:/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html</id><summary type="html">&lt;p&gt;之前虽然一直知道有new expression、operator new和placement new，但对于这三个“new”,
+&lt;p&gt;参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Mon 05 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry><entry><title>new expression、operator new 和 placement new——三个妞（new）的故事（1）</title><link href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html" rel="alternate"></link><updated>2011-12-02T23:35:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-02:/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html</id><summary type="html">&lt;p&gt;之前虽然一直知道有new expression、operator new和placement new，但对于这三个“new”,
 却不甚了了，这些天从《深度探索C++对象模型》读到new和delete，特意结合《C++ Primer》
 写下这篇笔记，以作总结。三个虽然都是“妞”（new），但每个妞都不相同各有各的特点，各
 有各的风味，本文重点在于总结比较这三个“妞”，但期间也不忘提一提推倒这三个“妞”的哥们
@@ -585,7 +633,13 @@ new expression分配内存。&lt;/p&gt;
 数来分配内存，而不是operator new内存。但我在VC ++ 2010 上测试的结果却是，不论有没
 有构造函数，new expression都是调用operator new来分配内存，并在此之后，调用默认构
 造函数逐个初始化它们，而不调用所谓的&lt;code&gt;vec_new()&lt;/code&gt;，也许cfront确实离我们有点遥远。&lt;/p&gt;
-&lt;p&gt;参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。&lt;/p&gt;</summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry><entry><title>构造、复制、析构语意学</title><link href="http://www.roading.org//develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html" rel="alternate"></link><updated>2011-12-01T22:04:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-01:/develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html</id><summary type="html">&lt;p&gt;一种所谓的Plain OI’Data声明形式：&lt;/p&gt;
+&lt;p&gt;参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Fri 02 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry><entry><title>构造、复制、析构语意学</title><link href="http://www.roading.org//develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html" rel="alternate"></link><updated>2011-12-01T22:04:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-01:/develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html</id><summary type="html">&lt;p&gt;一种所谓的Plain OI’Data声明形式：&lt;/p&gt;
 &lt;p&gt;:::C++
   struct Point {
       float x,y,z;
@@ -709,4 +763,10 @@ this must be put into place.
 功能”——原标题为：Object Efficency。&amp;#160;&lt;a href="#fnref:注2" rev="footnote" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry></feed>
+&lt;/div&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          Thu 01 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry></feed>
