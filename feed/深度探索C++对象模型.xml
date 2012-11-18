@@ -691,12 +691,14 @@ class 对virtual base class 的赋值行为。&lt;/p&gt;
     式在于，从最浅显的步骤入手，然后告诉你，做这步之前，你还该做点什么。&amp;#160;&lt;a href="#fnref:注1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn:注2"&gt;
+&lt;blockquote&gt;
 &lt;p&gt;这一点上我参考英文版后，感觉侯大大的翻译并没有完全表达Lippman的原意，
-    所以，我以对原文的理解写下这点。Lippman的原文为：&lt;/p&gt;
+所以，我以对原文的理解写下这点。Lippman的原文为：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;These constructors, however, may be invoked if, and only if, the class
 object represents the "most-derived class." Some mechanism supporting
 this must be put into place.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;侯捷的译文为：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;如果class object是最底层（most-derived）的class,其constructors可能被调用；
