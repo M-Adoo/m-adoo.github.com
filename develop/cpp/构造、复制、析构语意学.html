@@ -53,34 +53,34 @@
 					
 				
 					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
     					
 				
 					
 				
 					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
     					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
 				
 					
 				
@@ -308,6 +308,15 @@ class 对virtual base class 的赋值行为。</p>
 <li>如果当前类是 most-derived
     class，那么以构造的相反顺序调用虚基类的析构函数。</li>
 </ul>
+<p>侯捷的译文为：</p>
+<blockquote>
+<p>如果class object是最底层（most-derived）的class,其constructors可能被调用；
+某些用以支持这个行为的机制必须被放进来。</p>
+</blockquote>
+<p>我认为，Lippman在这一句上要说的是，虚基类的构造函数只能由most-derived class
+调用，而为了支持这一机制，需要插入一些代码来抑制非most-derived class对虚基类
+构造函数的调用。同时说一点，5.4的标题个人以为应该译为“对象的效率”而非“对象的
+功能”——原标题为：Object Efficency。</p>
 <div class="footnote">
 <hr />
 <ol>
@@ -318,22 +327,12 @@ class 对virtual base class 的赋值行为。</p>
 </li>
 <li id="fn:注2">
 <p>这一点上我参考英文版后，感觉侯大大的翻译并没有完全表达Lippman的原意，
-    所以，我以对原文的理解写下这点。Lippman的原文为：
-    &gt; These constructors, however, may be invoked if, and only if, the class
-    &gt; object represents the "most-derived class." Some mechanism supporting
-    &gt; this must be put into place.</p>
-<div class="codehilite"><pre>侯捷的译文为：
-
-<span class="o">&gt;</span> 如果<span class="n">class</span> <span class="n">object</span>是最底层（<span class="n">most</span><span class="o">-</span><span class="n">derived</span>）的<span class="n">class</span><span class="p">,</span>其<span class="n">constructors</span>可能被调用；
-<span class="o">&gt;</span> 某些用以支持这个行为的机制必须被放进来。
-
-我认为，<span class="n">Lippman</span>在这一句上要说的是，虚基类的构造函数只能由<span class="n">most</span><span class="o">-</span><span class="n">derived</span> <span class="n">class</span>
-调用，而为了支持这一机制，需要插入一些代码来抑制非<span class="n">most</span><span class="o">-</span><span class="n">derived</span> <span class="n">class</span>对虚基类
-构造函数的调用。同时说一点，5<span class="p">.</span>4的标题个人以为应该译为“对象的效率”而非“对象的
-功能”——原标题为：<span class="n">Object</span> <span class="n">Efficency</span>。
-</pre></div>
-
-
+    所以，我以对原文的理解写下这点。Lippman的原文为：</p>
+<blockquote>
+<p>These constructors, however, may be invoked if, and only if, the class
+object represents the "most-derived class." Some mechanism supporting
+this must be put into place.</p>
+</blockquote>
 <p><a href="#fnref:注2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
