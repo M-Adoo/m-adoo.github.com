@@ -10,10 +10,10 @@
 @import url("pygment.css");
 /* Body */
 body {
-    background: white; /*#F5F4EF;*/
-    color: #333;
+    background: #ffffff; /*#F5F4EF;*/
+    color: #222;
     font-size:14px;
-    font-family:'Comic Sans MS', Verdana, SimSun, Arial;
+    font-family: 'Comic Sans MS', Verdana, Consolas,'Hiragino Sans GB', SimSun, Arial;
     line-height:22px;
     margin: 0 auto;	
     padding:0;
@@ -48,20 +48,26 @@ color:#888;
 {
 color:#000;
 text-shadow: 1pt 1pt 3px #111;
-background:white;
+background:#ffffff;
 }
 #nav-pages a:hover, #nav-tags a:hover,
 #footer a:hover
 {
 color:#000;
 text-shadow: 1pt 1pt 1px #111;
-background:white;
+background:#ffffff;
+}
+
+.social a 
+{
+margin-left:8px;
 }
 
 .crumbs a, .categories a:hover, .relative-articles a:hover,
-.recent-articles a:hover, .ds-top-threads a:hover{
+.recent-articles a:hover, .ds-top-threads a:hover, .social a:hover
+{
 color:#000;
-background:white;
+background:#ffffff;
 }
 
 .crumbs a:hover{
@@ -73,7 +79,7 @@ h4 a:hover, h5 a:hover, h6 a:hover
 {
 color:#6090aF;
 text-shadow: 1pt 1pt 3px #666;
-background:white;
+background:#ffffff;
 }
 
 .post-info a{ margin-right:5px;}
@@ -87,12 +93,6 @@ margin:-5px 0 20px 0;
 /******Basic Setting
 ***********************/
 img {border:none;}
-
-ul{
-list-style:none;
-	margin:0pt;
-	padding:0;
-}
 
 h1,h2,h3,h4,h5,h6{
 margin-bottom:10px;
@@ -122,32 +122,51 @@ h6{
 font-size:15px;
 }
 
+.index-sidebar ul, .sidebar ul,
+.index-content ul, #footer ul,
+#banner ul
+{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
 hr{border: 1px solid #e8e8e8;}
 
 blockquote {
-font-family:Consolas, Courier;
+font-family:'Segoe ui', Verdana;
 margin: 0 0 15px 15px;
 padding:0pt;
 padding-left:12px;
-border: 1px solid #e8e8e8; 
-border-width: 0 0 0 1px;
-color:#666;
-font-style: italic; 
-line-height:11pt;
+border: 1px solid #e0e0e0; 
+border-width: 0 0 0 2px;
+color:#444;
+font-style: italic;
+font-size:13px;
+line-height:19px;
 }
 
 pre{
-font-family:Consolas, Courier;
+font-family:Consolas,'Segoe ui', Verdana;
 margin-top:20px;
 border:solid;
 border-color:#d0d0d0;
-border-width:1pt;
-padding:10pt;
+border-width:1pX;
+padding:15px;
 border-radius:5pt;
-color:#000;
-line-height:12pt;
+font-size:13px;
+line-height:20px;
 }
 
+code
+{
+font-family:Consolas, Verdana;
+border:solid;
+border-color:#d0d0d0;
+border-width:1px;
+border-radius:3px;
+background-color:#f0f0dd;
+}
 legend{
 text-align: left;
 }
@@ -187,7 +206,6 @@ padding:0;
 	#header-search-form input.gsc-input {
           width:180px;
 	  float:right;
-	  font-family: inherit;
 	  border: 1px solid #ccc;
 	  font-size: 12px;
 	}
@@ -236,21 +254,21 @@ width: 65%;
 min-width:400px;
 padding-left:1%;
 }
-.index-content p, .content p{font-family:Consolas, Courier;}
+
 .content{
 border:solid;
 border-width:0px;
 border-left-width:1px;
-border-color:#f4f4f4;
-padding-top:22px;
+border-color:#e0e0e0;
+margin-top:22px;
 }
 
 .sidebar, .index-sidebar
 {
-width:30%;
+width:32%;
 float:left;
 margin:0px;
-padding-right:2%;
+margin-right:1%;
 margin-top:40px;
 }
 
@@ -271,6 +289,10 @@ text-overflow:ellipsis;
 white-space:nowrap;
 width: 150px;
 float:right;
+}
+
+.post-info address{
+font-style: normal;
 }
 
 .categories, .relative-articles, .recetnt-articles, .ds-top-threads{
@@ -316,6 +338,7 @@ transition: all 0.25s linear;
 
 .tabmenu li:hover{
 background:#DB7100;
+cursor: pointer;
 }
 
 .tabmenu li.selected{
@@ -327,21 +350,28 @@ display:none;
 }
 
 .tag{
+text-align:center;
 width:450px;
 min-width:200px;
 max-width:500px;
 margin:50px;
 }
-.tag li{
-line-height:25px;
+.tag span{
+line-height:1.8;
 display:inline;
 border:solid;
-border-radius:2px;
-border-width:1px;
-border-color:#ddd;
+border-radius: 5px;
+border-width:2px;
+border-color:#6090af;
+margin:2px;
+white-space:nowrap;
 }
 
-
+.tag-1{font-size:24px; }
+.tag-2{font-size:22px; }
+.tag-3{font-size:20px; }
+.tag-4{font-size:18px; }
+.tag-5{font-szie:16px; }
 
 /*pagination
 /*************************/
@@ -373,7 +403,6 @@ filter:alpha(opacity=60); /* For IE8 and earlier */
 .categories img:hover, .social img:hover{
 opacity:1.0;
 }
-.social ul li{display: inline; margin-right:10px;}
 
 div.clear { clear: both; }
 .right{float:right;}
@@ -383,6 +412,7 @@ div.clear { clear: both; }
 /************tweet
 *************************/
 ul.tweets{
+list-style: none;
 border:solid;
 border-color:#eee;
 border-width:1px;
