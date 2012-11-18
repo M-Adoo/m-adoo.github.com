@@ -692,12 +692,11 @@ class 对virtual base class 的赋值行为。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn:注2"&gt;
 &lt;p&gt;这一点上我参考英文版后，感觉侯大大的翻译并没有完全表达Lippman的原意，
-    所以，我以对原文的理解写下这点。Lippman的原文为：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;These&lt;/span&gt; &lt;span class="n"&gt;constructors&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;however&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;may&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;invoked&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;only&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;class&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;object&lt;/span&gt; &lt;span class="n"&gt;represents&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &amp;quot;&lt;span class="n"&gt;most&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;derived&lt;/span&gt; &lt;span class="n"&gt;class&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&amp;quot; &lt;span class="n"&gt;Some&lt;/span&gt; &lt;span class="n"&gt;mechanism&lt;/span&gt; &lt;span class="n"&gt;supporting&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;must&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;put&lt;/span&gt; &lt;span class="n"&gt;into&lt;/span&gt; &lt;span class="n"&gt;place&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-
-侯捷的译文为：
+    所以，我以对原文的理解写下这点。Lippman的原文为：
+    &amp;gt; These constructors, however, may be invoked if, and only if, the class
+    &amp;gt; object represents the "most-derived class." Some mechanism supporting
+    &amp;gt; this must be put into place.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;侯捷的译文为：
 
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; 如果&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;object&lt;/span&gt;是最底层（&lt;span class="n"&gt;most&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;derived&lt;/span&gt;）的&lt;span class="n"&gt;class&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;其&lt;span class="n"&gt;constructors&lt;/span&gt;可能被调用；
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; 某些用以支持这个行为的机制必须被放进来。
