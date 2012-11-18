@@ -682,15 +682,6 @@ class 对virtual base class 的赋值行为。&lt;/p&gt;
 &lt;li&gt;如果当前类是 most-derived
     class，那么以构造的相反顺序调用虚基类的析构函数。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;侯捷的译文为：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;如果class object是最底层（most-derived）的class,其constructors可能被调用；
-某些用以支持这个行为的机制必须被放进来。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;我认为，Lippman在这一句上要说的是，虚基类的构造函数只能由most-derived class
-调用，而为了支持这一机制，需要插入一些代码来抑制非most-derived class对虚基类
-构造函数的调用。同时说一点，5.4的标题个人以为应该译为“对象的效率”而非“对象的
-功能”——原标题为：Object Efficency。&lt;/p&gt;
 &lt;div class="footnote"&gt;
 &lt;hr /&gt;
 &lt;ol&gt;
@@ -700,13 +691,24 @@ class 对virtual base class 的赋值行为。&lt;/p&gt;
     式在于，从最浅显的步骤入手，然后告诉你，做这步之前，你还该做点什么。&amp;#160;&lt;a href="#fnref:注1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn:注2"&gt;
-&lt;p&gt;**这一点上我参考英文版后，感觉侯大大的翻译并没有完全表达Lippman的原
-    意，所以，我以对原文的理解写下这点。Lippman的原文为：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;These constructors, however, may be invoked if, and only if, the class
-object represents the "most-derived class." Some mechanism supporting
-this must be put into place.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;这一点上我参考英文版后，感觉侯大大的翻译并没有完全表达Lippman的原意，
+    所以，我以对原文的理解写下这点。Lippman的原文为：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;These&lt;/span&gt; &lt;span class="n"&gt;constructors&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;however&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;may&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;invoked&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;only&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;class&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;object&lt;/span&gt; &lt;span class="n"&gt;represents&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &amp;quot;&lt;span class="n"&gt;most&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;derived&lt;/span&gt; &lt;span class="n"&gt;class&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&amp;quot; &lt;span class="n"&gt;Some&lt;/span&gt; &lt;span class="n"&gt;mechanism&lt;/span&gt; &lt;span class="n"&gt;supporting&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;must&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;put&lt;/span&gt; &lt;span class="n"&gt;into&lt;/span&gt; &lt;span class="n"&gt;place&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+侯捷的译文为：
+
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; 如果&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;object&lt;/span&gt;是最底层（&lt;span class="n"&gt;most&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;derived&lt;/span&gt;）的&lt;span class="n"&gt;class&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;其&lt;span class="n"&gt;constructors&lt;/span&gt;可能被调用；
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; 某些用以支持这个行为的机制必须被放进来。
+
+我认为，&lt;span class="n"&gt;Lippman&lt;/span&gt;在这一句上要说的是，虚基类的构造函数只能由&lt;span class="n"&gt;most&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;derived&lt;/span&gt; &lt;span class="n"&gt;class&lt;/span&gt;
+调用，而为了支持这一机制，需要插入一些代码来抑制非&lt;span class="n"&gt;most&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;derived&lt;/span&gt; &lt;span class="n"&gt;class&lt;/span&gt;对虚基类
+构造函数的调用。同时说一点，5&lt;span class="p"&gt;.&lt;/span&gt;4的标题个人以为应该译为“对象的效率”而非“对象的
+功能”——原标题为：&lt;span class="n"&gt;Object&lt;/span&gt; &lt;span class="n"&gt;Efficency&lt;/span&gt;。
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;&lt;a href="#fnref:注2" rev="footnote" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
