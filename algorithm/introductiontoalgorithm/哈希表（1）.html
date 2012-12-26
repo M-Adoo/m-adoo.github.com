@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>哈希表（1）</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
+        
+        <link href="http://www.roading.org/feed/index.xml" type="application/atom+xml" rel="alternate" title="Adoo's blog Atom Feed" />
+        
+        
+        <link href="http://www.roading.org/feed/all.rss" type="application/rss+xml" rel="alternate" title="Adoo's blog RSS Feed" />
+        
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <div id="siteinfo"><a id="sitename" rel="nofollow" href="http://www.roading.org">Adoo's blog </a><span id="subsitename"> 怀理想主义，行务实之道。</span></div>
+
+		
+			
+<div id="header-search-form">
+<gcse:searchbox-only>Loading...</gcse:searchbox-only>
+</div>
+
+		
+                <div class="clear"></div>
+		<nav>
+			<ul id= "nav-pages">
+				
+				
+				    <li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
+				
+				    <li><a href="http://www.roading.org/pages/links.html">links</a></li>
+				
+				    <li><a href="http://www.roading.org/pages/message.html">Message</a></li>
+				
+				    <li><a href = "http://www.roading.org/tweets.html">Tweets</a></li>
+				    <li><a href="http://www.roading.org/archives.html">Archive</a></li>
+				
+		        </ul>
+			<ul id="nav-tags">
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+    					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+			</ul>
+			<div class="clear"></div>
+			<hr>
+			
+<div class="crumbs">
+<a href="http://www.roading.org" title ="Back to homepage">Home</a> »
+
+<a href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a> »
+
+哈希表（1）
+</div>
+ 
+		</nav>
+	</header><!-- /#banner -->
+
+        
+    <div class="article-page">
+	<h1>哈希表（1）</h1>
+	<div class="content">
+	      <div class="post-info">
+        <abbr class="published" title="2011-11-08T22:18:00">
+                Tue 08 November 2011
+        </abbr>
+        
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+        		
+	
+	    <abbr title="hash tables&nbsp;&nbsp;算法导论&nbsp;&nbsp;散列表&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
+	          
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+	          
+		<a title="permalink to 散列表" href="http://www.roading.org/tag/san-lie-biao.html">散列表</a>
+	          
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	          
+	    </abbr>
+	
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+	
+	
+</div><!-- /.post-info -->
+	      <h3>直接寻址表（Direct-address tables）</h3>
+<p>假设有一组元素，每个元素的Key值都包含在范围U={0,1,2,3,…m-1}中。如果这个
+值m不是太大，且这一组元素的Key值都不相同，我们用key值来直接决定元素或指
+向元素指针的存储位置（slot,我将其翻译为位置而不是狭缝，槽或…），这就是直
+接寻址表。如下图：</p>
+<p><img alt="direct-address-tables" src="http://www.roading.org/images/2011-11/image_thumb.png" /></p>
+<p>从左图看到，对于一个元素Key值为2的元素，指向它的指针被存储在下标为2的位
+置中。key值为3的被存储在小标为三的位置…</p>
+<p>你也可以直接将元素存储在直接寻址表中，而不是存储它的指针。这一切视情况而
+定，比方当元素的附属数据比较多的情况下，我想存储它的指针应该更为合理；反
+之，存储元素本身应该更易管理。</p>
+<p>直接寻指表虽然有逻辑简单，查询存储速度快等优点，但缺点也显而易见：假如U的
+范围非常大的话，那么建一张这样的直接寻址表的话，不知需内存几何？另外，对
+于一个U的范围偏大，而实际的元素个数又很少的话，其内存的利用率就令人发指了。
+再暴力点，直接给它两个key相同的元素呢？</p>
+<p>…于是我们就引出了哈希表。</p>
+<h3>哈希表（Hash tables）</h3>
+<p>与直接寻址表Key为k的元素存储在位置k不同，哈希表让Key为k的元素存储在位置为
+h(k)的位置。我们将h称为哈希函数，将h(k)称为哈希值。而恰是这么一种规则，使
+得哈希表的大小往往远远小于U的范围大小。因为我们可以定义一个函数值的范围比
+较适合的哈希函数嘛。再看一张图：</p>
+<p><img alt="" src="http://www.roading.org/images/2011-11/image9_thumb.png" /></p>
+<p>可以看到上图并非是直接映射，而是按照一定的规则令来映射Key值,这个规则当然就
+是哈希函数。</p>
+<p>不过可以看到，哈希函数同时带来了一个问题，那就是两个或多个不同的Key有可能被
+映射到同一个位置，我们把这一问题称为碰撞（collision）,下篇文章会给出解决方
+案。其实左图中已经给出了一种解决方案——用链表来解决。</p>
+<h3>哈希函数</h3>
+<p>一个好的哈希函数：每一个key都有相等几率哈希到哈希表中m个位置中的一个，独立
+于任何其它已哈希的Key。但这仅是一种理想情况，难以把握。尽可能的使不同的key
+哈希到同一个位置。</p>
+<p>key的转换，大部分情况下，我们都是用自然数来作为Key,假如我们的key不是自然数，
+我们将使用某种方法将它转化为自然数。比如如果key=”pt”可以利用它的ASCALL码将
+其转换为自然数，比方p(112)+t(116)*2=344.</p>
+<p>下面介绍的三种函数，前两种(除法哈希法，乘法哈希法)为启发式函数（heuristic
+function）,第三种（全域哈希法）使用随机技术。实际应用中我们往往使用启发式
+函数。</p>
+<h4>除法哈希</h4>
+<p>如果我们要把一个Key为k的元素映射到大小为m的哈希表中去，则可以利用m除k的余数
+来确定位置。那么哈希函数就是：h(k)=<em>k</em>mod<em>m</em>。</p>
+<p>关于m的选择我们应当避免一些值，置于这些值是什么，算法导论没有指出，但给了我
+们一个不错的例子：</p>
+<p>比方，m不应当是2的幂，因为若m=2<sup>p</sup>,那么h(k)仅仅是k的低p位，也就是说k的哈希值
+仅依赖于k的低p位而与其他位没有关系。除非低p位的各种排列概率相等，否则最好选择
+使得哈希值依赖于k的所有位的数。不错的选择是选一个与2的整数次幂不太接近的整数，
+至于为什么，有待证明。</p>
+<h4>乘法哈希</h4>
+<p>乘法哈希则是令key与一个常小数A(0&lt;A&lt;1)相乘，取其小数部分再与m相乘来获取Key在大
+小为m的哈希表中的位置。哈希函数为：<em>h</em>(<em>k</em>)= ⌊<em>m</em>(<em>kA</em> mod 1)⌋。</p>
+<p>乘法哈希有一个好处是，对于m的选值没有太多的要求。CLRS说一般选择一个值为2的幂的
+数，究其原因在于，这样方便实现在大部分计算机上实现哈希函数，我相信对于任何一种
+高级语言实现这样的哈希函数都非常简单，所以这一点，谁管他！</p>
+<p>虽然最佳的A值与数据的特征有关，但是Knuth说<img alt="" src="http://www.roading.org/images/2011-11/image4.png" />是个不错的值，但其原因，我是想
+管管不了，估计需要查一番资料，别深究。</p>
+<h4>全域哈希（Universal hashing）</h4>
+<p>假使我们的对手已经模特了我们的哈希规则，很好，它将选择一组数,使得这一组数全部映
+射到同一位置，这就操蛋了。我们虽有办法解决碰撞的问题（下一篇文章会讲到），但是哈
+希表的效率将大打折扣，哈希表将变成链表，甚至更慢，完全失去了它的查找优势。问题在
+于任何一个哈希函数都会有这样一种最坏情况，要彻底解决这个问题并不容易，唯一有效的
+办法是，我们随机的选一个哈希函数，使之独立于key，这就是全域哈希。</p>
+<p>其基本思想是，在执行之前随即地从一组哈希函数中选择一个作为哈希函数使用。</p>
+<h4>设计全域哈希函数类</h4>
+<p>选一个够大的质数p,且p大于任意一个key。另有两系数a∈{0, 1, ..., <em>p</em> - 1},
+b∈{1, 2, ..., <em>p</em> - 1}.</p>
+<p>哈希函数为对于任意的a,b可以组成p(p-1)个不同的哈希函数中一个。OK.</p>
+<p>本文参考： Introduction To Algorithm ——third edition</p>
+		  <p style= "text-align:right;"><em>
+		  Tue 08 November 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
+		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html">本文原链</a>)</em></p>
+	    <span class = "left">Share this with your friends:</span>
+	    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+		<a class="bds_tsina"></a>
+		<a class="bds_qzone"></a>
+		<a class="bds_tqq"></a>
+		<a class="bds_douban"></a>
+		<a class="bds_taobao"></a>
+		<a class="bds_renren"></a>
+		<a class="bds_kaixin001"></a>
+		<a class="bds_twi"></a>
+		<a class="bds_copy"></a>
+	    </div>     
+	<div class="ds-thread"></div>
+	</div>
+        <div class="sidebar">
+		<div id="relative-articles">
+		<h3>Related Posts</h3>
+		<ul class="related-articles">
+		
+		
+		
+		
+		   
+		   <li><a title="斐波那契堆的C++实现" href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html">斐波那契堆的C++实现</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="斐波那契堆(Fibonacci Heaps)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html">斐波那契堆(Fibonacci Heaps)</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="B-树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">B-树的C++实现</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="算法导论——B-trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html">算法导论——B-trees</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="算法导论——平摊分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html">算法导论——平摊分析</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="赫夫曼编码" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html">赫夫曼编码</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="贪心算法" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html">贪心算法</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="最优二叉查找树" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html">最优二叉查找树</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="最长单调子序列问题" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html">最长单调子序列问题</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="最长公共子序列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html">最长公共子序列</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="动态规划基础" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html">动态规划基础</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="动态规划笔记（1）——Rod cutting" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html">动态规划笔记（1）——Rod cutting</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="扩展数据结构" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%89%a9%e5%b1%95%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.html">扩展数据结构</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="在没有父指针情况下的红黑树插入操作" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%9c%a8%e6%b2%a1%e6%9c%89%e7%88%b6%e6%8c%87%e9%92%88%e6%83%85%e5%86%b5%e4%b8%8b%e7%9a%84%e7%ba%a2%e9%bb%91%e6%a0%91%e6%8f%92%e5%85%a5%e6%93%8d%e4%bd%9c.html">在没有父指针情况下的红黑树插入操作</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="C++实现红黑树，仿STL封装" href="http://www.roading.org/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html">C++实现红黑树，仿STL封装</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 13 Red-Black trees (红黑树)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-13-red-black-trees-%e7%ba%a2%e9%bb%91%e6%a0%91.html">Chapter 13 Red-Black trees (红黑树)</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Radix Tree 基数树" href="http://www.roading.org/algorithm/introductiontoalgorithm/radix-tree-%e5%9f%ba%e6%95%b0%e6%a0%91.html">Radix Tree 基数树</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="非递归不用栈遍历搜索二叉树" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html">非递归不用栈遍历搜索二叉树</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="仿STL 的二叉搜索树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">仿STL 的二叉搜索树的C++实现</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 2" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html">Chapter 12 二叉搜索树(Binary Search Tree) 2</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 1" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html">Chapter 12 二叉搜索树(Binary Search Tree) 1</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Solution of CLRS 11.1 exercises" href="http://www.roading.org/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html">Solution of CLRS 11.1 exercises</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="哈希表的C++模板实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html">哈希表的C++模板实现</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="哈希表（Hash Tables）（2）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html">哈希表（Hash Tables）（2）</a></li>
+		   
+		
+		
+		
+		   <li class="selected">哈希表（1）</li>
+		
+		
+		
+		   
+		   <li><a title="Chapter 10 Exercises and Problems (2)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html">Chapter 10 Exercises and Problems (2)</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="Chapter 10 Exercises（1）" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html">Chapter 10 Exercises（1）</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="第十章 Elementary Data Structures" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html">第十章 Elementary Data Structures</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="第九章习题选做" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0%e4%b9%a0%e9%a2%98%e9%80%89%e5%81%9a.html">第九章习题选做</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="第九章 中位数和顺序统计量（Medians and Order Statistic）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html">第九章 中位数和顺序统计量（Medians and Order Statistic）</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="第八章（5） 习题 8-4 8-5 8-7" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%885%ef%bc%89-%e4%b9%a0%e9%a2%98-8-4-8-5-8-7.html">第八章（5） 习题 8-4 8-5 8-7</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="桶排序（Bucket sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html">桶排序（Bucket sort）</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="第八章（3） 基数排序（Radix Sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html">第八章（3） 基数排序（Radix Sort）</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="计数排序(Counting Sort)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html">计数排序(Counting Sort)</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="《算法导论》笔记汇总" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e7%b4%a2%e5%bc%95%e8%a1%a8.html">《算法导论》笔记汇总</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="比较排序在最坏情况下时间复杂度为Ω(nlgn)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%881%ef%bc%89-%e6%af%94%e8%be%83%e6%8e%92%e5%ba%8f%e5%9c%a8%e6%9c%80%e5%9d%8f%e6%83%85%e5%86%b5%e4%b8%8b%e6%97%b6%e9%97%b4.html">比较排序在最坏情况下时间复杂度为Ω(nlgn)</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="快速排序课后7.4-5" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html">快速排序课后7.4-5</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="快排与随机快排效率分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%bf%ab%e6%8e%92%e4%b8%8e%e9%9a%8f%e6%9c%ba%e5%bf%ab%e6%8e%92%e6%95%88%e7%8e%87%e5%88%86%e6%9e%90.html">快排与随机快排效率分析</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="快速排序及C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html">快速排序及C++实现</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="算法导论6-3 young tableaus" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba6-3-young-tableaus.html">算法导论6-3 young tableaus</a></li>
+		   
+		
+		
+		
+		   
+		   <li><a title="利用堆来建立优先级队列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%88%a9%e7%94%a8%e5%a0%86%e6%9d%a5%e5%bb%ba%e7%ab%8b%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97.html">利用堆来建立优先级队列</a></li>
+		   
+		
+		
+		
+		
+		
+		   
+		   <li><a title="堆排序及其C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html">堆排序及其C++实现</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		   
+		   <li><a title="排序之插入排序与合并排序-C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%8f%92%e5%85%a5%e6%8e%92%e5%ba%8f-insertionsort-c%e5%ae%9e%e7%8e%b0.html">排序之插入排序与合并排序-C++实现</a></li>
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		</ul>
+		</div>
+		
+<h3>Contact me</h3>
+<div class="social">
+	<span style="font-size:15px">I'm here:</span>	
+	<a href="http://www.roading.org/feed/index.xml" type="application/atom+xml" title="Atom feed" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a>
+	
+
+	
+	<a href="http://twitter.com/Monkey_Adoo" title="@Monkey_Adoo"><img src="http://www.roading.org/theme/images/icons/twitter.png"></img></a>
+	
+	<a href="http://weibo.com/boringMonkey" title="@M-Adoo"><img src="http://www.roading.org/theme/images/icons/weibo.png"></img></a>
+	
+	<a href="http://douban.com/people/Monkey_Adoo" title="Adoo"><img src="http://www.roading.org/theme/images/icons/douban.png"></img></a>
+	
+	
+	<a rea="tomail" title="Adoo@outlook.com" href="mailto:Adoo@outlook.com"><img src="http://www.roading.org/theme/images/icons/email.png"></img></a>
+	
+	</div><!-- /.social -->
+	
+	</div>
+	</div>
+
+<div class="clear"></div>
+ <div id="footer">
+	<a class="right" href="#banner"  titile="Back to Top" rel="nofollow" title="Back to top">Top↑</a>
+	<ul id="footer-nav" class="right">
+	
+		<li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
+	
+		<li><a href="http://www.roading.org/pages/links.html">links</a></li>
+	
+		<li><a href="http://www.roading.org/pages/message.html">Message</a></li>
+	
+		<li><a href="http://www.roading.org/archives.html">Archive</a></li>
+	</ul>
+	<div class="clear"></div>
+	<p>Theme designed by Adoo. Powered by Pelican. &copy; 2011-2012</p>
+       </div>
+
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"adoo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+
+
+<!-- Google Search -->
+
+<script>
+  (function() {
+    var cx = '014593096765008582725:vpqn4f4zw88';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+	'//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-29709820-1");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+
+
+<!-- 百度分享 -->
+<script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+</script>
+<!-- Baidu Button END -->
+
+</body>
+</html>
