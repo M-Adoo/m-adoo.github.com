@@ -4,186 +4,37 @@
         <title>Qt Quick 笔记（2）——用户界面相关</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
-        
         <link href="http://www.roading.org/feed/index.xml" type="application/atom+xml" rel="alternate" title="Adoo's blog Atom Feed" />
-        
-        
         <link href="http://www.roading.org/feed/all.rss" type="application/rss+xml" rel="alternate" title="Adoo's blog RSS Feed" />
-        
 </head>
-
 <body id="index" class="home">
         <header id="banner" class="body">
                 <div id="siteinfo"><a id="sitename" rel="nofollow" href="http://www.roading.org">Adoo's blog </a><span id="subsitename"> 怀理想主义，行务实之道。</span></div>
-
-		
-			
 <div id="header-search-form">
 <gcse:searchbox-only>Loading...</gcse:searchbox-only>
 </div>
-
-		
                 <div class="clear"></div>
 		<nav>
 			<ul id= "nav-pages">
-				
-				
 				    <li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
-				
 				    <li><a href="http://www.roading.org/pages/links.html">links</a></li>
-				
 				    <li><a href="http://www.roading.org/pages/message.html">Message</a></li>
-				
 				    <li><a href = "http://www.roading.org/tweets.html">Tweets</a></li>
 				    <li><a href="http://www.roading.org/archives.html">Archive</a></li>
-				
 		        </ul>
 			<ul id="nav-tags">
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
 			</ul>
 			<div class="clear"></div>
 			<hr>
-			
 <div class="crumbs">
 <a href="http://www.roading.org" title ="Back to homepage">Home</a> »
-
 <a href="http://www.roading.org/category/qt.html">QT</a> »
-
 Qt Quick 笔记（2）——用户界面相关
 </div>
- 
 		</nav>
 	</header><!-- /#banner -->
-
-        
     <div class="article-page">
 	<h1>Qt Quick 笔记（2）——用户界面相关</h1>
 	<div class="content">
@@ -191,50 +42,38 @@ Qt Quick 笔记（2）——用户界面相关
         <abbr class="published" title="2012-02-24T15:34:00">
                 Fri 24 February 2012
         </abbr>
-        
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-        		
-	
 	    <abbr title="qml&nbsp;&nbsp;QT&nbsp;&nbsp;qt quick&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to qml" href="http://www.roading.org/tag/qml.html">qml</a>
-	          
 		<a title="permalink to QT" href="http://www.roading.org/tag/qt.html">QT</a>
-	          
 		<a title="permalink to qt quick" href="http://www.roading.org/tag/qt-quick.html">qt quick</a>
-	          
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	          
 	    </abbr>
-	
 	<abbr>In <a title="permalink to QT" href="http://www.roading.org/category/qt.html">QT</a></abbr>
-	
-	
 </div><!-- /.post-info -->
 	      <h3>Nested ELements</h3>
 <p>在QML中的 UI 元素是以树形结构组织的,因此“<em>Elements are often nested</em>”——也就是说，
 一个元素可以包含很多个其它元素。</p>
 <p>一个例子：</p>
-<div class="codehilite"><pre><span class="n">import</span> <span class="n">QtQuick</span> 1<span class="p">.</span>1 
-<span class="n">Rectangle</span><span class="p">{</span>
-    <span class="n">width</span><span class="p">:</span> 400 <span class="p">;</span> <span class="n">height</span><span class="p">:</span> 300
-    <span class="n">color</span><span class="p">:</span>&quot;<span class="n">gray</span>&quot;
-    <span class="n">Rectangle</span><span class="p">{</span>
-        <span class="n">x</span><span class="p">:</span>50<span class="p">;</span> <span class="n">y</span><span class="p">:</span> 50
-        <span class="n">width</span><span class="p">:</span>300<span class="p">;</span> <span class="n">height</span><span class="p">:</span> 200
-        <span class="n">color</span><span class="p">:</span> &quot;<span class="n">lightblue</span>&quot;
-        <span class="n">Rectangle</span><span class="p">{</span>
-            <span class="n">x</span><span class="p">:</span>50 <span class="p">;</span> <span class="n">y</span><span class="p">:</span> 50
-            <span class="n">width</span><span class="p">:</span> 200 <span class="p">;</span> <span class="n">height</span><span class="p">:</span> 100<span class="p">;</span>
-            <span class="n">color</span><span class="p">:</span>&quot;<span class="n">red</span>&quot;
+<div class="codehilite"><pre><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">1.1</span> 
+<span class="nx">Rectangle</span><span class="p">{</span>
+    <span class="k">width:</span> <span class="mi">400</span> <span class="p">;</span> <span class="k">height:</span> <span class="mi">300</span>
+    <span class="k">color:</span><span class="s2">&quot;gray&quot;</span>
+    <span class="nx">Rectangle</span><span class="p">{</span>
+        <span class="k">x:</span><span class="mi">50</span><span class="p">;</span> <span class="k">y:</span> <span class="mi">50</span>
+        <span class="k">width:</span><span class="mi">300</span><span class="p">;</span> <span class="k">height:</span> <span class="mi">200</span>
+        <span class="k">color:</span> <span class="s2">&quot;lightblue&quot;</span>
+        <span class="nx">Rectangle</span><span class="p">{</span>
+            <span class="k">x:</span><span class="mi">50</span> <span class="p">;</span> <span class="k">y:</span> <span class="mi">50</span>
+            <span class="k">width:</span> <span class="mi">200</span> <span class="p">;</span> <span class="k">height:</span> <span class="mi">100</span><span class="p">;</span>
+            <span class="k">color:</span><span class="s2">&quot;red&quot;</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
-
 <p>上例中浅蓝色和红色的矩形都是“Nested Element”，通过右边的显示效果可以看出，每一个
 “Nested Element”设定的位置都是相对于父元素的，而不是绝对位置。</p>
 <h3>Graphical Elements</h3>
@@ -246,77 +85,69 @@ Qt Quick 笔记（2）——用户界面相关
 <li>直接用一个6位的十六进制字符串来表示：例如<code>#ff00ff</code>，六位中每两位代表三原色中
     的一种，其顺序为红绿蓝。</li>
 <li>使用一个函数来进行设置。如：Qt.rgba(0, 0.75, 0 , 1)。其中四个参数的范围应该
-    都在0到1之间。前三个参数表示三原色，后一个参数表示<strong>不</strong>透明度。<br />
-</li>
+    都在0到1之间。前三个参数表示三原色，后一个参数表示<strong>不</strong>透明度。  </li>
 </ul>
 <p>三种方法的实例：</p>
-<div class="codehilite"><pre><span class="n">import</span> <span class="n">QtQuick</span> 1<span class="p">.</span>1 
-<span class="n">Item</span><span class="p">{</span>
-    <span class="n">width</span><span class="p">:</span>150<span class="p">;</span>  <span class="n">height</span><span class="p">:</span> 50
-    <span class="n">Rectangle</span><span class="p">{</span>
-        <span class="n">width</span><span class="p">:</span>50<span class="p">;</span> <span class="n">height</span><span class="p">:</span> 50
-        <span class="n">color</span><span class="p">:</span> &quot;<span class="n">red</span>&quot;
+<div class="codehilite"><pre><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">1.1</span> 
+<span class="nx">Item</span><span class="p">{</span>
+    <span class="k">width:</span><span class="mi">150</span><span class="p">;</span>  <span class="k">height:</span> <span class="mi">50</span>
+    <span class="nx">Rectangle</span><span class="p">{</span>
+        <span class="k">width:</span><span class="mi">50</span><span class="p">;</span> <span class="k">height:</span> <span class="mi">50</span>
+        <span class="k">color:</span> <span class="s2">&quot;red&quot;</span>
     <span class="p">}</span>
-    <span class="n">Rectangle</span><span class="p">{</span>
-        <span class="n">x</span><span class="p">:</span>50 <span class="p">;</span> <span class="n">y</span><span class="p">:</span>0
-        <span class="n">width</span><span class="p">:</span> 50 <span class="p">;</span> <span class="n">height</span><span class="p">:</span>50<span class="p">;</span>
-        <span class="n">color</span><span class="p">:</span> &quot;#00<span class="n">ff00</span>&quot;
+    <span class="nx">Rectangle</span><span class="p">{</span>
+        <span class="k">x:</span><span class="mi">50</span> <span class="p">;</span> <span class="k">y:</span><span class="mi">0</span>
+        <span class="k">width:</span> <span class="mi">50</span> <span class="p">;</span> <span class="k">height:</span><span class="mi">50</span><span class="p">;</span>
+        <span class="k">color:</span> <span class="s2">&quot;#00ff00&quot;</span>
     <span class="p">}</span>
-    <span class="n">Rectangle</span><span class="p">{</span>
-        <span class="n">x</span><span class="p">:</span>100 <span class="p">;</span> <span class="n">y</span><span class="p">:</span> 0
-        <span class="n">width</span><span class="p">:</span> 50 <span class="p">;</span> <span class="n">height</span><span class="p">:</span> 50<span class="p">;</span>
-        <span class="n">color</span><span class="p">:</span><span class="n">Qt</span><span class="p">.</span><span class="n">rgba</span><span class="p">(</span>0<span class="p">,</span>0<span class="p">,</span>1<span class="p">,</span>1<span class="p">)</span>
+    <span class="nx">Rectangle</span><span class="p">{</span>
+        <span class="k">x:</span><span class="mi">100</span> <span class="p">;</span> <span class="k">y:</span> <span class="mi">0</span>
+        <span class="k">width:</span> <span class="mi">50</span> <span class="p">;</span> <span class="k">height:</span> <span class="mi">50</span><span class="p">;</span>
+        <span class="k">color:</span><span class="nx">Qt</span><span class="p">.</span><span class="nx">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
-
 <h4>Images</h4>
 <p>可以看下面一个关于图像的实例，这个实例将呈现一幅图片，并且在点击图片的时候会将图
 片放大两倍并以右下角为轴心旋转45度。</p>
-<div class="codehilite"><pre><span class="n">import</span> <span class="n">QtQuick</span> 1<span class="p">.</span>1
-<span class="n">Rectangle</span> <span class="p">{</span>
-    <span class="n">width</span><span class="p">:</span> 200 <span class="p">;</span> <span class="n">height</span><span class="p">:</span> 200
-    <span class="n">color</span><span class="p">:</span> &quot;<span class="n">gray</span>&quot;
-   <span class="n">Image</span><span class="p">{</span>
-       <span class="n">anchors</span><span class="p">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span>
-       <span class="n">source</span><span class="p">:</span> &quot;<span class="p">.</span><span class="o">./</span>捕获<span class="p">.</span><span class="n">PNG</span>&quot;
-       <span class="n">transformOrigin</span><span class="p">:</span> <span class="n">Item</span><span class="p">.</span><span class="n">Center</span>
-       <span class="n">MouseArea</span><span class="p">{</span>
-           <span class="n">anchors</span><span class="p">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
-           <span class="n">onClicked</span><span class="p">:</span> <span class="p">{</span>
-               <span class="n">parent</span><span class="p">.</span><span class="n">scale</span><span class="p">=</span>2
-               <span class="n">parent</span><span class="p">.</span><span class="n">rotation</span><span class="p">=</span>45
+<div class="codehilite"><pre><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">1.1</span>
+<span class="nx">Rectangle</span> <span class="p">{</span>
+    <span class="k">width:</span> <span class="mi">200</span> <span class="p">;</span> <span class="k">height:</span> <span class="mi">200</span>
+    <span class="k">color:</span> <span class="s2">&quot;gray&quot;</span>
+   <span class="nx">Image</span><span class="p">{</span>
+       <span class="k">anchors.centerIn:</span> <span class="nx">parent</span>
+       <span class="k">source:</span> <span class="s2">&quot;../捕获.PNG&quot;</span>
+       <span class="k">transformOrigin:</span> <span class="nx">Item</span><span class="p">.</span><span class="nx">Center</span>
+       <span class="nx">MouseArea</span><span class="p">{</span>
+           <span class="k">anchors.fill:</span> <span class="nx">parent</span>
+           <span class="k">onClicked:</span> <span class="p">{</span>
+               <span class="nx">parent</span><span class="p">.</span><span class="nx">scale</span><span class="o">=</span><span class="mi">2</span>
+               <span class="nx">parent</span><span class="p">.</span><span class="nx">rotation</span><span class="o">=</span><span class="mi">45</span>
            <span class="p">}</span>
        <span class="p">}</span>
    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
-
 <p>Image的长宽由图像决定。其路径用source来设定，可以用绝对路径也可以使用相对路径，
 当然网路图片也是可以的。”../”表示父级目录。用scale来设定放大的倍数，用
-tansformOrigin 来设定旋转的轴心。rotation可以用来设定旋转的度数。<br />
-</p>
+tansformOrigin 来设定旋转的轴心。rotation可以用来设定旋转的度数。  </p>
 <h4>Gradient</h4>
 <p>实例：</p>
-<div class="codehilite"><pre><span class="n">import</span> <span class="n">QtQuick</span> 1<span class="p">.</span>1
-<span class="n">Rectangle</span> <span class="p">{</span>
-    <span class="n">width</span><span class="p">:</span> 200 <span class="p">;</span> <span class="n">height</span><span class="p">:</span> 400
-    <span class="n">gradient</span><span class="p">:</span> <span class="n">Gradient</span><span class="p">{</span>
-        <span class="n">GradientStop</span><span class="p">{</span>
-            <span class="n">position</span><span class="p">:</span> 0<span class="p">.</span>0
-            <span class="n">color</span><span class="p">:</span> &quot;<span class="n">blue</span>&quot;
+<div class="codehilite"><pre><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">1.1</span>
+<span class="nx">Rectangle</span> <span class="p">{</span>
+    <span class="k">width:</span> <span class="mi">200</span> <span class="p">;</span> <span class="k">height:</span> <span class="mi">400</span>
+    <span class="k">gradient:</span> <span class="nx">Gradient</span><span class="p">{</span>
+        <span class="nx">GradientStop</span><span class="p">{</span>
+            <span class="k">position:</span> <span class="mf">0.0</span>
+            <span class="k">color:</span> <span class="s2">&quot;blue&quot;</span>
         <span class="p">}</span>
-        <span class="n">GradientStop</span><span class="p">{</span>
-            <span class="n">position</span><span class="p">:</span> 1<span class="p">.</span>0
-            <span class="n">color</span><span class="p">:</span>  &quot;<span class="n">black</span>&quot;
+        <span class="nx">GradientStop</span><span class="p">{</span>
+            <span class="k">position:</span> <span class="mf">1.0</span>
+            <span class="k">color:</span>  <span class="s2">&quot;black&quot;</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
-
 <p>如上例所示，可以用一个gradient属性来设置渐变。用Gradient来作为其值。Gradient可以
 包含一个或更多的GradientStop 。每一个GradientStop包含一个position属性和一个color
 属性。position属性的值，只能从0到1。</p>
@@ -326,36 +157,32 @@ tansformOrigin 来设定旋转的轴心。rotation可以用来设定旋转的度
 <h3>文本</h3>
 <p>qml中的文本既可以用来呈现文本，同时也能进行文本的输入。</p>
 <p>用 Text 来简单呈现文本：</p>
-<div class="codehilite"><pre>import QtQuick 1.1
-Rectangle {
-    width: 200 ; height: 100
-    color: &quot;gray&quot;
-    Text{
-        text: &quot;<span class="nt">&lt;h1&gt;</span>我本将心向明月，奈何明月照沟渠。<span class="nt">&lt;/h1&gt;</span>&quot;
-        font.family: &quot;楷体&quot;
-        color:&quot;white&quot;
-    }
-}
-</pre></div>
-
-
-<p>Text 支持简单的文本呈现，同时它也支持富文本的显示。如上例中我就用了
-<code>&lt;h1&gt;…&lt;/h1&gt;</code>这对标签。</p>
-<p>用 TextInput 来接受文本的录入：</p>
-<div class="codehilite"><pre><span class="n">import</span> <span class="n">QtQuick</span> 1<span class="p">.</span>1
-<span class="n">Rectangle</span><span class="p">{</span>
-    <span class="n">width</span><span class="p">:</span> 300<span class="p">;</span> <span class="n">height</span><span class="p">:</span> 200<span class="p">;</span>
-    <span class="n">color</span><span class="p">:</span>&quot;<span class="n">black</span>&quot;
-    <span class="n">TextInput</span><span class="p">{</span>
-        <span class="n">color</span><span class="p">:</span> &quot;<span class="n">white</span>&quot;
-        <span class="n">width</span><span class="p">:</span> 200<span class="p">;</span>
-        <span class="n">font</span><span class="p">.</span><span class="n">pixelSize</span><span class="p">:</span> 16
-        <span class="n">text</span><span class="p">:</span>&quot;举杯邀明月，对影成三人<span class="p">...</span>&quot;
+<div class="codehilite"><pre><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">1.1</span>
+<span class="nx">Rectangle</span> <span class="p">{</span>
+    <span class="k">width:</span> <span class="mi">200</span> <span class="p">;</span> <span class="k">height:</span> <span class="mi">100</span>
+    <span class="k">color:</span> <span class="s2">&quot;gray&quot;</span>
+    <span class="nx">Text</span><span class="p">{</span>
+        <span class="k">text:</span> <span class="s2">&quot;&lt;h1&gt;我本将心向明月，奈何明月照沟渠。&lt;/h1&gt;&quot;</span>
+        <span class="k">font.family:</span> <span class="s2">&quot;楷体&quot;</span>
+        <span class="k">color:</span><span class="s2">&quot;white&quot;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
-
+<p>Text 支持简单的文本呈现，同时它也支持富文本的显示。如上例中我就用了
+<code>&lt;h1&gt;…&lt;/h1&gt;</code>这对标签。</p>
+<p>用 TextInput 来接受文本的录入：</p>
+<div class="codehilite"><pre><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">1.1</span>
+<span class="nx">Rectangle</span><span class="p">{</span>
+    <span class="k">width:</span> <span class="mi">300</span><span class="p">;</span> <span class="k">height:</span> <span class="mi">200</span><span class="p">;</span>
+    <span class="k">color:</span><span class="s2">&quot;black&quot;</span>
+    <span class="nx">TextInput</span><span class="p">{</span>
+        <span class="k">color:</span> <span class="s2">&quot;white&quot;</span>
+        <span class="k">width:</span> <span class="mi">200</span><span class="p">;</span>
+        <span class="k">font.pixelSize:</span> <span class="mi">16</span>
+        <span class="k">text:</span><span class="s2">&quot;举杯邀明月，对影成三人...&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 <p>一个很简单的文本输入控件，没有任何的装饰。如果没有设置它的宽度的时候，其宽度会
 随着字串的长度而改变。</p>
 <h3>Anchors</h3>
@@ -364,19 +191,17 @@ Rectangle {
 <p>位置示意图：(另外还有centerIn和fill)</p>
 <p><img alt="位置示意图" src="http://www.roading.org/images/2012-02/image_thumb8.png" /></p>
 <p>一个实例：直接关联到其父</p>
-<div class="codehilite"><pre><span class="n">import</span> <span class="n">QtQuick</span> 1<span class="p">.</span>1
-<span class="n">Rectangle</span> <span class="p">{</span>
-    <span class="n">width</span><span class="p">:</span> 200 <span class="p">;</span>    <span class="n">height</span><span class="p">:</span> 150
-    <span class="n">color</span><span class="p">:</span> &quot;<span class="n">lightblue</span>&quot;
-    <span class="n">Rectangle</span><span class="p">{</span>
-        <span class="n">width</span><span class="p">:</span> 50<span class="p">;</span>  <span class="n">height</span><span class="p">:</span> 50
-        <span class="n">color</span><span class="p">:</span>&quot;<span class="n">gray</span>&quot;
-        <span class="n">anchors</span><span class="p">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span>
+<div class="codehilite"><pre><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">1.1</span>
+<span class="nx">Rectangle</span> <span class="p">{</span>
+    <span class="k">width:</span> <span class="mi">200</span> <span class="p">;</span>    <span class="k">height:</span> <span class="mi">150</span>
+    <span class="k">color:</span> <span class="s2">&quot;lightblue&quot;</span>
+    <span class="nx">Rectangle</span><span class="p">{</span>
+        <span class="k">width:</span> <span class="mi">50</span><span class="p">;</span>  <span class="k">height:</span> <span class="mi">50</span>
+        <span class="k">color:</span><span class="s2">&quot;gray&quot;</span>
+        <span class="k">anchors.centerIn:</span> <span class="nx">parent</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
-
 <p>也可以关联到其父亲的Anchors,此时这样写:<code>anchors.right: parent.right</code>不需要(也不
 能)这样：<code>anchors.right : parent.anchors.right</code></p>
 <p>Anchors 也可以用来对边缘留白,示意图如下：</p>
@@ -462,224 +287,33 @@ Rectangle {
 		<div id="relative-articles">
 		<h3>Related Posts</h3>
 		<ul class="related-articles">
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		   <li class="selected">Qt Quick 笔记（2）——用户界面相关</li>
-		
-		
-		
-		   
 		   <li><a title="Qt Quick 笔记（1）：初识 Qt Quick" href="http://www.roading.org/develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html">Qt Quick 笔记（1）：初识 Qt Quick</a></li>
-		   
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		</ul>
 		</div>
-		
 <h3>Contact me</h3>
 <div class="social">
 	<span style="font-size:15px">I'm here:</span>	
 	<a href="http://www.roading.org/feed/index.xml" type="application/atom+xml" title="Atom feed" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a>
-	
-
-	
 	<a href="http://twitter.com/Monkey_Adoo" title="@Monkey_Adoo"><img src="http://www.roading.org/theme/images/icons/twitter.png"></img></a>
-	
 	<a href="http://weibo.com/boringMonkey" title="@M-Adoo"><img src="http://www.roading.org/theme/images/icons/weibo.png"></img></a>
-	
 	<a href="http://douban.com/people/Monkey_Adoo" title="Adoo"><img src="http://www.roading.org/theme/images/icons/douban.png"></img></a>
-	
-	
 	<a rea="tomail" title="Adoo@outlook.com" href="mailto:Adoo@outlook.com"><img src="http://www.roading.org/theme/images/icons/email.png"></img></a>
-	
 	</div><!-- /.social -->
-	
 	</div>
 	</div>
-
 <div class="clear"></div>
  <div id="footer">
 	<a class="right" href="#banner"  titile="Back to Top" rel="nofollow" title="Back to top">Top↑</a>
 	<ul id="footer-nav" class="right">
-	
 		<li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
-	
 		<li><a href="http://www.roading.org/pages/links.html">links</a></li>
-	
 		<li><a href="http://www.roading.org/pages/message.html">Message</a></li>
-	
 		<li><a href="http://www.roading.org/archives.html">Archive</a></li>
 	</ul>
 	<div class="clear"></div>
 	<p>Theme designed by Adoo. Powered by Pelican. &copy; 2011-2012</p>
        </div>
-
 	<script type="text/javascript">
 	var duoshuoQuery = {short_name:"adoo"};
 	(function() {
@@ -690,10 +324,7 @@ Rectangle {
 		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
 	})();
 	</script>
-
-
 <!-- Google Search -->
-
 <script>
   (function() {
     var cx = '014593096765008582725:vpqn4f4zw88';
@@ -703,10 +334,7 @@ Rectangle {
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
   })();
 </script>
-
-
 <!-- Google Analytics -->
-
     <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -716,8 +344,6 @@ Rectangle {
         var pageTracker = _gat._getTracker("UA-29709820-1");
     pageTracker._trackPageview();
     } catch(err) {}</script>
-
-
 <!-- 百度分享 -->
 <script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
 <script type="text/javascript" id="bdshell_js"></script>
@@ -725,6 +351,5 @@ Rectangle {
 	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
 </script>
 <!-- Baidu Button END -->
-
 </body>
 </html>

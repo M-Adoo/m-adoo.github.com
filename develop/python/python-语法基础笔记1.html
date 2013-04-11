@@ -4,186 +4,37 @@
         <title>Python 基础入门笔记(1)</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
-        
         <link href="http://www.roading.org/feed/index.xml" type="application/atom+xml" rel="alternate" title="Adoo's blog Atom Feed" />
-        
-        
         <link href="http://www.roading.org/feed/all.rss" type="application/rss+xml" rel="alternate" title="Adoo's blog RSS Feed" />
-        
 </head>
-
 <body id="index" class="home">
         <header id="banner" class="body">
                 <div id="siteinfo"><a id="sitename" rel="nofollow" href="http://www.roading.org">Adoo's blog </a><span id="subsitename"> 怀理想主义，行务实之道。</span></div>
-
-		
-			
 <div id="header-search-form">
 <gcse:searchbox-only>Loading...</gcse:searchbox-only>
 </div>
-
-		
                 <div class="clear"></div>
 		<nav>
 			<ul id= "nav-pages">
-				
-				
 				    <li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
-				
 				    <li><a href="http://www.roading.org/pages/links.html">links</a></li>
-				
 				    <li><a href="http://www.roading.org/pages/message.html">Message</a></li>
-				
 				    <li><a href = "http://www.roading.org/tweets.html">Tweets</a></li>
 				    <li><a href="http://www.roading.org/archives.html">Archive</a></li>
-				
 		        </ul>
 			<ul id="nav-tags">
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
 			</ul>
 			<div class="clear"></div>
 			<hr>
-			
 <div class="crumbs">
 <a href="http://www.roading.org" title ="Back to homepage">Home</a> »
-
 <a href="http://www.roading.org/category/a-byte-of-python.html">A byte of python</a> »
-
 Python 基础入门笔记(1)
 </div>
- 
 		</nav>
 	</header><!-- /#banner -->
-
-        
     <div class="article-page">
 	<h1>Python 基础入门笔记(1)</h1>
 	<div class="content">
@@ -191,23 +42,15 @@ Python 基础入门笔记(1)
         <abbr class="published" title="2012-04-24T17:25:00">
                 Tue 24 April 2012
         </abbr>
-        
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-        		
-	
 	    <abbr title="python&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to python" href="http://www.roading.org/tag/python.html">python</a>
-	          
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	          
 	    </abbr>
-	
 	<abbr>In <a title="permalink to A byte of python" href="http://www.roading.org/category/a-byte-of-python.html">A byte of python</a></abbr>
-	
-	
 </div><!-- /.post-info -->
 	      <h3>内建类型</h3>
 <p>python 中提供的内建类型大概与C++中提供的相仿，却更简洁。</p>
@@ -222,8 +65,6 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
 <span class="sd">he said &quot;My name is ***&quot;</span>
 <span class="sd">&#39;&#39;&#39;</span>
 </pre></div>
-
-
 <p>上面介绍有单引号、双引号、三引号三种引号。当用其中一种来指定一个字符串时，可以在字符串中直接使用另外两种引号，例如上面的多行字符串中可以直接使用
 <code>"</code>，而无需写成 <code>/"</code>。这是因为字符串可以找到正确的结尾，而不会被提前截断。</p>
 <p>字符串无需再赘言，原生字符串可以在字符串之前加上一个r或者R来表示，例如<code>r'\nThis is a raw string'</code>。原生字符串不会对字符串进行任何特殊处理，例如<code>r'\nThis is a raw string'</code>中的<code>\n</code>不会被转义处理，而是直接代表<code>\</code>和<code>n</code>两个字符。</p>
@@ -236,8 +77,6 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
 <span class="n">i</span><span class="o">=</span><span class="mi">5</span>
 <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
-
-
 <p>python中一切事物皆为对象，即便是内建类型也是对象，这是与C++不同的。</p>
 <h3>代码书写约定</h3>
 <p>python
@@ -249,8 +88,6 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
 <span class="n">This</span> <span class="k">continue</span> <span class="n">the</span> <span class="n">string</span><span class="s">&#39;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
-
-
 <p>当行中使用了圆括号、方括号或波形括号的时候，不需要用<code>\\</code>来连接多行,这种情况被称为隐式行连接。</p>
 <p>缩进：每行开始的缩进在python中相当重要，python中并不用大括号或者begin、end类似的关键词来界定语句块，缩进才是它的标准。换言之，行首的缩进量决定了语句的分组，同一层级的语句必须要有相同的缩进量。python支持空格符和制表符来表示缩进，但确保只使用其中一种来表示缩进，千万不要混搭使用。</p>
 <h3>表达式</h3>
@@ -286,8 +123,6 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
 <span class="k">else</span><span class="p">:</span><span class="err">  </span>
    <span class="k">print</span><span class="p">(</span><span class="s">&quot;no it is a little lower than that&quot;</span><span class="p">)</span>
 </pre></div>
-
-
 <p>实际上相当于：</p>
 <div class="codehilite"><pre><span class="n">number</span> <span class="o">=</span> <span class="mi">22</span>
 <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter a number:&quot;</span><span class="p">))</span>
@@ -299,8 +134,6 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
     <span class="k">else</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s">&quot;no it is a little lower than that&quot;</span><span class="p">)</span>
 </pre></div>
-
-
 <p>要注意两点：
 <em>   判断表达式不需要括号;
 </em>   每一个分支语句之前需要冒号。</p>
@@ -317,16 +150,12 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
 <span class="k">else</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s">&quot;The while loop is over.&quot;</span><span class="p">)</span>
 </pre></div>
-
-
 <p>for循环的实例：</p>
 <div class="codehilite"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="s">&quot;i:{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s">&quot;the for loop is over&quot;</span><span class="p">)</span>
 </pre></div>
-
-
 <p>从语法上来讲，for与while给了我一些不同的感觉，虽然都是循环控制语句，但给人的感觉是while更趋向于条件控制的循环，而for则更倾向于迭代循环。</p>
 <p>python中也有break与continue语句与C++中的没有区别。要注意的是如果循环是以break语句跳出的话，那么else分支也会被跳过。</p>
 <p>注：这篇笔记我主要重点记录一些 python在语法上与C++的一些异同点，以及我认为自己需要留意的地方，所以他仅仅是一篇笔记。</p>
@@ -354,236 +183,36 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
 		<div id="relative-articles">
 		<h3>Related Posts</h3>
 		<ul class="related-articles">
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		   
 		   <li><a title="Python 基础入门笔记(5)" href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html">Python 基础入门笔记(5)</a></li>
-		   
-		
-		
-		
-		   
 		   <li><a title="Python 基础入门笔记(4)" href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b04.html">Python 基础入门笔记(4)</a></li>
-		   
-		
-		
-		
-		   
 		   <li><a title="Python 基础入门笔记(3)&#8212;&#8212;内建数据结构" href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b03.html">Python 基础入门笔记(3)&#8212;&#8212;内建数据结构</a></li>
-		   
-		
-		
-		
-		   
 		   <li><a title="Python 基础入门笔记(2)——函数、模块和包" href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html">Python 基础入门笔记(2)——函数、模块和包</a></li>
-		   
-		
-		
-		
-		
-		
 		   <li class="selected">Python 基础入门笔记(1)</li>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		</ul>
 		</div>
-		
 <h3>Contact me</h3>
 <div class="social">
 	<span style="font-size:15px">I'm here:</span>	
 	<a href="http://www.roading.org/feed/index.xml" type="application/atom+xml" title="Atom feed" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a>
-	
-
-	
 	<a href="http://twitter.com/Monkey_Adoo" title="@Monkey_Adoo"><img src="http://www.roading.org/theme/images/icons/twitter.png"></img></a>
-	
 	<a href="http://weibo.com/boringMonkey" title="@M-Adoo"><img src="http://www.roading.org/theme/images/icons/weibo.png"></img></a>
-	
 	<a href="http://douban.com/people/Monkey_Adoo" title="Adoo"><img src="http://www.roading.org/theme/images/icons/douban.png"></img></a>
-	
-	
 	<a rea="tomail" title="Adoo@outlook.com" href="mailto:Adoo@outlook.com"><img src="http://www.roading.org/theme/images/icons/email.png"></img></a>
-	
 	</div><!-- /.social -->
-	
 	</div>
 	</div>
-
 <div class="clear"></div>
  <div id="footer">
 	<a class="right" href="#banner"  titile="Back to Top" rel="nofollow" title="Back to top">Top↑</a>
 	<ul id="footer-nav" class="right">
-	
 		<li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
-	
 		<li><a href="http://www.roading.org/pages/links.html">links</a></li>
-	
 		<li><a href="http://www.roading.org/pages/message.html">Message</a></li>
-	
 		<li><a href="http://www.roading.org/archives.html">Archive</a></li>
 	</ul>
 	<div class="clear"></div>
 	<p>Theme designed by Adoo. Powered by Pelican. &copy; 2011-2012</p>
        </div>
-
 	<script type="text/javascript">
 	var duoshuoQuery = {short_name:"adoo"};
 	(function() {
@@ -594,10 +223,7 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
 		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
 	})();
 	</script>
-
-
 <!-- Google Search -->
-
 <script>
   (function() {
     var cx = '014593096765008582725:vpqn4f4zw88';
@@ -607,10 +233,7 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
   })();
 </script>
-
-
 <!-- Google Analytics -->
-
     <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -620,8 +243,6 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
         var pageTracker = _gat._getTracker("UA-29709820-1");
     pageTracker._trackPageview();
     } catch(err) {}</script>
-
-
 <!-- 百度分享 -->
 <script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
 <script type="text/javascript" id="bdshell_js"></script>
@@ -629,6 +250,5 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
 	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
 </script>
 <!-- Baidu Button END -->
-
 </body>
 </html>

@@ -3,18 +3,18 @@
 &lt;p&gt;在QML中的 UI 元素是以树形结构组织的,因此“&lt;em&gt;Elements are often nested&lt;/em&gt;”——也就是说，
 一个元素可以包含很多个其它元素。&lt;/p&gt;
 &lt;p&gt;一个例子：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;QtQuick&lt;/span&gt; 1&lt;span class="p"&gt;.&lt;/span&gt;1 
-&lt;span class="n"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 400 &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 300
-    &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&amp;quot;&lt;span class="n"&gt;gray&lt;/span&gt;&amp;quot;
-    &lt;span class="n"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;50&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 50
-        &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;300&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 200
-        &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &amp;quot;&lt;span class="n"&gt;lightblue&lt;/span&gt;&amp;quot;
-        &lt;span class="n"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;50 &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 50
-            &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 200 &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 100&lt;span class="p"&gt;;&lt;/span&gt;
-            &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&amp;quot;&lt;span class="n"&gt;red&lt;/span&gt;&amp;quot;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt; 
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;400&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;300&lt;/span&gt;
+    &lt;span class="k"&gt;color:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;gray&amp;quot;&lt;/span&gt;
+    &lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;x:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;y:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+        &lt;span class="k"&gt;width:&lt;/span&gt;&lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;lightblue&amp;quot;&lt;/span&gt;
+        &lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;x:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;y:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+            &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;color:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;
         &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
@@ -32,26 +32,25 @@
 &lt;li&gt;直接用一个6位的十六进制字符串来表示：例如&lt;code&gt;#ff00ff&lt;/code&gt;，六位中每两位代表三原色中
     的一种，其顺序为红绿蓝。&lt;/li&gt;
 &lt;li&gt;使用一个函数来进行设置。如：Qt.rgba(0, 0.75, 0 , 1)。其中四个参数的范围应该
-    都在0到1之间。前三个参数表示三原色，后一个参数表示&lt;strong&gt;不&lt;/strong&gt;透明度。&lt;br /&gt;
-&lt;/li&gt;
+    都在0到1之间。前三个参数表示三原色，后一个参数表示&lt;strong&gt;不&lt;/strong&gt;透明度。  &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;三种方法的实例：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;QtQuick&lt;/span&gt; 1&lt;span class="p"&gt;.&lt;/span&gt;1 
-&lt;span class="n"&gt;Item&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;150&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 50
-    &lt;span class="n"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;50&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 50
-        &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &amp;quot;&lt;span class="n"&gt;red&lt;/span&gt;&amp;quot;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt; 
+&lt;span class="nx"&gt;Item&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt;&lt;span class="mi"&gt;150&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+    &lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;width:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;50 &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;0
-        &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 50 &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;50&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &amp;quot;#00&lt;span class="n"&gt;ff00&lt;/span&gt;&amp;quot;
+    &lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;x:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;y:&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;#00ff00&amp;quot;&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;100 &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 0
-        &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 50 &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 50&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;Qt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rgba&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;0&lt;span class="p"&gt;,&lt;/span&gt;0&lt;span class="p"&gt;,&lt;/span&gt;1&lt;span class="p"&gt;,&lt;/span&gt;1&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;x:&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;y:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt;&lt;span class="nx"&gt;Qt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;rgba&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -60,19 +59,19 @@
 &lt;h4&gt;Images&lt;/h4&gt;
 &lt;p&gt;可以看下面一个关于图像的实例，这个实例将呈现一幅图片，并且在点击图片的时候会将图
 片放大两倍并以右下角为轴心旋转45度。&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;QtQuick&lt;/span&gt; 1&lt;span class="p"&gt;.&lt;/span&gt;1
-&lt;span class="n"&gt;Rectangle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 200 &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 200
-    &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &amp;quot;&lt;span class="n"&gt;gray&lt;/span&gt;&amp;quot;
-   &lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-       &lt;span class="n"&gt;anchors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;centerIn&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;parent&lt;/span&gt;
-       &lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &amp;quot;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;./&lt;/span&gt;捕获&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PNG&lt;/span&gt;&amp;quot;
-       &lt;span class="n"&gt;transformOrigin&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Item&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Center&lt;/span&gt;
-       &lt;span class="n"&gt;MouseArea&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-           &lt;span class="n"&gt;anchors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fill&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;parent&lt;/span&gt;
-           &lt;span class="n"&gt;onClicked&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-               &lt;span class="n"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;scale&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;2
-               &lt;span class="n"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rotation&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;45
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;
+    &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;gray&amp;quot;&lt;/span&gt;
+   &lt;span class="nx"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+       &lt;span class="k"&gt;anchors.centerIn:&lt;/span&gt; &lt;span class="nx"&gt;parent&lt;/span&gt;
+       &lt;span class="k"&gt;source:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;../捕获.PNG&amp;quot;&lt;/span&gt;
+       &lt;span class="k"&gt;transformOrigin:&lt;/span&gt; &lt;span class="nx"&gt;Item&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Center&lt;/span&gt;
+       &lt;span class="nx"&gt;MouseArea&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+           &lt;span class="k"&gt;anchors.fill:&lt;/span&gt; &lt;span class="nx"&gt;parent&lt;/span&gt;
+           &lt;span class="k"&gt;onClicked:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+               &lt;span class="nx"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;scale&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+               &lt;span class="nx"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;rotation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;
            &lt;span class="p"&gt;}&lt;/span&gt;
        &lt;span class="p"&gt;}&lt;/span&gt;
    &lt;span class="p"&gt;}&lt;/span&gt;
@@ -82,21 +81,20 @@
 
 &lt;p&gt;Image的长宽由图像决定。其路径用source来设定，可以用绝对路径也可以使用相对路径，
 当然网路图片也是可以的。”../”表示父级目录。用scale来设定放大的倍数，用
-tansformOrigin 来设定旋转的轴心。rotation可以用来设定旋转的度数。&lt;br /&gt;
-&lt;/p&gt;
+tansformOrigin 来设定旋转的轴心。rotation可以用来设定旋转的度数。  &lt;/p&gt;
 &lt;h4&gt;Gradient&lt;/h4&gt;
 &lt;p&gt;实例：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;QtQuick&lt;/span&gt; 1&lt;span class="p"&gt;.&lt;/span&gt;1
-&lt;span class="n"&gt;Rectangle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 200 &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 400
-    &lt;span class="n"&gt;gradient&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Gradient&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;GradientStop&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="n"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 0&lt;span class="p"&gt;.&lt;/span&gt;0
-            &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &amp;quot;&lt;span class="n"&gt;blue&lt;/span&gt;&amp;quot;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;400&lt;/span&gt;
+    &lt;span class="k"&gt;gradient:&lt;/span&gt; &lt;span class="nx"&gt;Gradient&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;GradientStop&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;position:&lt;/span&gt; &lt;span class="mf"&gt;0.0&lt;/span&gt;
+            &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;
         &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="n"&gt;GradientStop&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="n"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 1&lt;span class="p"&gt;.&lt;/span&gt;0
-            &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &amp;quot;&lt;span class="n"&gt;black&lt;/span&gt;&amp;quot;
+        &lt;span class="nx"&gt;GradientStop&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;position:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;
+            &lt;span class="k"&gt;color:&lt;/span&gt;  &lt;span class="s2"&gt;&amp;quot;black&amp;quot;&lt;/span&gt;
         &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
@@ -112,31 +110,31 @@ tansformOrigin 来设定旋转的轴心。rotation可以用来设定旋转的度
 &lt;h3&gt;文本&lt;/h3&gt;
 &lt;p&gt;qml中的文本既可以用来呈现文本，同时也能进行文本的输入。&lt;/p&gt;
 &lt;p&gt;用 Text 来简单呈现文本：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;import QtQuick 1.1
-Rectangle {
-    width: 200 ; height: 100
-    color: &amp;quot;gray&amp;quot;
-    Text{
-        text: &amp;quot;&lt;span class="nt"&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;我本将心向明月，奈何明月照沟渠。&lt;span class="nt"&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;&amp;quot;
-        font.family: &amp;quot;楷体&amp;quot;
-        color:&amp;quot;white&amp;quot;
-    }
-}
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
+    &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;gray&amp;quot;&lt;/span&gt;
+    &lt;span class="nx"&gt;Text&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;text:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;h1&amp;gt;我本将心向明月，奈何明月照沟渠。&amp;lt;/h1&amp;gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;font.family:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;楷体&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;white&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Text 支持简单的文本呈现，同时它也支持富文本的显示。如上例中我就用了
 &lt;code&gt;&amp;lt;h1&amp;gt;…&amp;lt;/h1&amp;gt;&lt;/code&gt;这对标签。&lt;/p&gt;
 &lt;p&gt;用 TextInput 来接受文本的录入：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;QtQuick&lt;/span&gt; 1&lt;span class="p"&gt;.&lt;/span&gt;1
-&lt;span class="n"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 300&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 200&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&amp;quot;&lt;span class="n"&gt;black&lt;/span&gt;&amp;quot;
-    &lt;span class="n"&gt;TextInput&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &amp;quot;&lt;span class="n"&gt;white&lt;/span&gt;&amp;quot;
-        &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 200&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="n"&gt;font&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pixelSize&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 16
-        &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&amp;quot;举杯邀明月，对影成三人&lt;span class="p"&gt;...&lt;/span&gt;&amp;quot;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;color:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;black&amp;quot;&lt;/span&gt;
+    &lt;span class="nx"&gt;TextInput&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;white&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;font.pixelSize:&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;
+        &lt;span class="k"&gt;text:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;举杯邀明月，对影成三人...&amp;quot;&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -150,14 +148,14 @@ Rectangle {
 &lt;p&gt;位置示意图：(另外还有centerIn和fill)&lt;/p&gt;
 &lt;p&gt;&lt;img alt="位置示意图" src="http://www.roading.org/images/2012-02/image_thumb8.png" /&gt;&lt;/p&gt;
 &lt;p&gt;一个实例：直接关联到其父&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;QtQuick&lt;/span&gt; 1&lt;span class="p"&gt;.&lt;/span&gt;1
-&lt;span class="n"&gt;Rectangle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 200 &lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 150
-    &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &amp;quot;&lt;span class="n"&gt;lightblue&lt;/span&gt;&amp;quot;
-    &lt;span class="n"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 50&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 50
-        &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&amp;quot;&lt;span class="n"&gt;gray&lt;/span&gt;&amp;quot;
-        &lt;span class="n"&gt;anchors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;centerIn&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;parent&lt;/span&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;150&lt;/span&gt;
+    &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;lightblue&amp;quot;&lt;/span&gt;
+    &lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;gray&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;anchors.centerIn:&lt;/span&gt; &lt;span class="nx"&gt;parent&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -260,10 +258,10 @@ designers to work together to create animated, touch-enabled UIs and application
 qml的世界中，UI元素被组织成树形结构，UI元素可以包含其许多子元素，但却只有一个父
 亲。&lt;/p&gt;
 &lt;p&gt;一个简单的例子：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;QtQuick&lt;/span&gt; 1&lt;span class="p"&gt;.&lt;/span&gt;1
-&lt;span class="n"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 200&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 150
-    &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &amp;quot;&lt;span class="n"&gt;lightblue&lt;/span&gt;&amp;quot;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;150&lt;/span&gt;
+    &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;lightblue&amp;quot;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 

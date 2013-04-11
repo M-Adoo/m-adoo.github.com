@@ -4,186 +4,37 @@
         <title>Qt Quick 笔记（1）：初识 Qt Quick</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
-        
         <link href="http://www.roading.org/feed/index.xml" type="application/atom+xml" rel="alternate" title="Adoo's blog Atom Feed" />
-        
-        
         <link href="http://www.roading.org/feed/all.rss" type="application/rss+xml" rel="alternate" title="Adoo's blog RSS Feed" />
-        
 </head>
-
 <body id="index" class="home">
         <header id="banner" class="body">
                 <div id="siteinfo"><a id="sitename" rel="nofollow" href="http://www.roading.org">Adoo's blog </a><span id="subsitename"> 怀理想主义，行务实之道。</span></div>
-
-		
-			
 <div id="header-search-form">
 <gcse:searchbox-only>Loading...</gcse:searchbox-only>
 </div>
-
-		
                 <div class="clear"></div>
 		<nav>
 			<ul id= "nav-pages">
-				
-				
 				    <li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
-				
 				    <li><a href="http://www.roading.org/pages/links.html">links</a></li>
-				
 				    <li><a href="http://www.roading.org/pages/message.html">Message</a></li>
-				
 				    <li><a href = "http://www.roading.org/tweets.html">Tweets</a></li>
 				    <li><a href="http://www.roading.org/archives.html">Archive</a></li>
-				
 		        </ul>
 			<ul id="nav-tags">
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-    					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
-					
-				
 			</ul>
 			<div class="clear"></div>
 			<hr>
-			
 <div class="crumbs">
 <a href="http://www.roading.org" title ="Back to homepage">Home</a> »
-
 <a href="http://www.roading.org/category/qt.html">QT</a> »
-
 Qt Quick 笔记（1）：初识 Qt Quick
 </div>
- 
 		</nav>
 	</header><!-- /#banner -->
-
-        
     <div class="article-page">
 	<h1>Qt Quick 笔记（1）：初识 Qt Quick</h1>
 	<div class="content">
@@ -191,25 +42,16 @@ Qt Quick 笔记（1）：初识 Qt Quick
         <abbr class="published" title="2012-02-23T16:45:00">
                 Thu 23 February 2012
         </abbr>
-        
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-        		
-	
 	    <abbr title="qml&nbsp;&nbsp;QT&nbsp;&nbsp;qt quick&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to qml" href="http://www.roading.org/tag/qml.html">qml</a>
-	          
 		<a title="permalink to QT" href="http://www.roading.org/tag/qt.html">QT</a>
-	          
 		<a title="permalink to qt quick" href="http://www.roading.org/tag/qt-quick.html">qt quick</a>
-	          
 	    </abbr>
-	
 	<abbr>In <a title="permalink to QT" href="http://www.roading.org/category/qt.html">QT</a></abbr>
-	
-	
 </div><!-- /.post-info -->
 	      <h3>废语开篇</h3>
 <p>在大二的时候思索着学习一界面库，为此煞费脑经。其中有试过十来天的Qt学习,不过最后为
@@ -241,14 +83,12 @@ designers to work together to create animated, touch-enabled UIs and application
 qml的世界中，UI元素被组织成树形结构，UI元素可以包含其许多子元素，但却只有一个父
 亲。</p>
 <p>一个简单的例子：</p>
-<div class="codehilite"><pre><span class="n">import</span> <span class="n">QtQuick</span> 1<span class="p">.</span>1
-<span class="n">Rectangle</span><span class="p">{</span>
-    <span class="n">width</span><span class="p">:</span> 200<span class="p">;</span> <span class="n">height</span><span class="p">:</span> 150
-    <span class="n">color</span><span class="p">:</span> &quot;<span class="n">lightblue</span>&quot;
+<div class="codehilite"><pre><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">1.1</span>
+<span class="nx">Rectangle</span><span class="p">{</span>
+    <span class="k">width:</span> <span class="mi">200</span><span class="p">;</span> <span class="k">height:</span> <span class="mi">150</span>
+    <span class="k">color:</span> <span class="s2">&quot;lightblue&quot;</span>
 <span class="p">}</span>
 </pre></div>
-
-
 <p>上面的代码声明了一个矩形，并设定了它的长宽以及颜色，其效果图如下。</p>
 <p><img alt="示意图" src="http://www.roading.org/images/2012-02/image_thumb.png" /></p>
 <p>import可以用来导入相关模块，这儿要使用Qt quick的功能，自然要导入相关模块。后面跟的
@@ -288,224 +128,33 @@ C++相同，可以用 “//”与“/* … */ ”两种形式。</p>
 		<div id="relative-articles">
 		<h3>Related Posts</h3>
 		<ul class="related-articles">
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		   
 		   <li><a title="Qt Quick 笔记（2）——用户界面相关" href="http://www.roading.org/Qt/about-ui.html">Qt Quick 笔记（2）——用户界面相关</a></li>
-		   
-		
-		
-		
 		   <li class="selected">Qt Quick 笔记（1）：初识 Qt Quick</li>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		</ul>
 		</div>
-		
 <h3>Contact me</h3>
 <div class="social">
 	<span style="font-size:15px">I'm here:</span>	
 	<a href="http://www.roading.org/feed/index.xml" type="application/atom+xml" title="Atom feed" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a>
-	
-
-	
 	<a href="http://twitter.com/Monkey_Adoo" title="@Monkey_Adoo"><img src="http://www.roading.org/theme/images/icons/twitter.png"></img></a>
-	
 	<a href="http://weibo.com/boringMonkey" title="@M-Adoo"><img src="http://www.roading.org/theme/images/icons/weibo.png"></img></a>
-	
 	<a href="http://douban.com/people/Monkey_Adoo" title="Adoo"><img src="http://www.roading.org/theme/images/icons/douban.png"></img></a>
-	
-	
 	<a rea="tomail" title="Adoo@outlook.com" href="mailto:Adoo@outlook.com"><img src="http://www.roading.org/theme/images/icons/email.png"></img></a>
-	
 	</div><!-- /.social -->
-	
 	</div>
 	</div>
-
 <div class="clear"></div>
  <div id="footer">
 	<a class="right" href="#banner"  titile="Back to Top" rel="nofollow" title="Back to top">Top↑</a>
 	<ul id="footer-nav" class="right">
-	
 		<li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
-	
 		<li><a href="http://www.roading.org/pages/links.html">links</a></li>
-	
 		<li><a href="http://www.roading.org/pages/message.html">Message</a></li>
-	
 		<li><a href="http://www.roading.org/archives.html">Archive</a></li>
 	</ul>
 	<div class="clear"></div>
 	<p>Theme designed by Adoo. Powered by Pelican. &copy; 2011-2012</p>
        </div>
-
 	<script type="text/javascript">
 	var duoshuoQuery = {short_name:"adoo"};
 	(function() {
@@ -516,10 +165,7 @@ C++相同，可以用 “//”与“/* … */ ”两种形式。</p>
 		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
 	})();
 	</script>
-
-
 <!-- Google Search -->
-
 <script>
   (function() {
     var cx = '014593096765008582725:vpqn4f4zw88';
@@ -529,10 +175,7 @@ C++相同，可以用 “//”与“/* … */ ”两种形式。</p>
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
   })();
 </script>
-
-
 <!-- Google Analytics -->
-
     <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -542,8 +185,6 @@ C++相同，可以用 “//”与“/* … */ ”两种形式。</p>
         var pageTracker = _gat._getTracker("UA-29709820-1");
     pageTracker._trackPageview();
     } catch(err) {}</script>
-
-
 <!-- 百度分享 -->
 <script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
 <script type="text/javascript" id="bdshell_js"></script>
@@ -551,6 +192,5 @@ C++相同，可以用 “//”与“/* … */ ”两种形式。</p>
 	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
 </script>
 <!-- Baidu Button END -->
-
 </body>
 </html>
