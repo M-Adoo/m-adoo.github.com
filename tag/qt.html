@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Adoo's blog - 代码组织</title>
+        <title>Adoo's blog - QT</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
         <link href="http://www.roading.org/feed/index.xml" type="application/atom+xml" rel="alternate" title="Adoo's blog Atom Feed" />
@@ -33,48 +33,92 @@
 <div class="index-content">       
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a  title="Permalink to Python 基础入门笔记(2)——函数、模块和包" href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html">Python 基础入门笔记(2)——函数、模块和包</a></h1> 
+                    <h1 class="entry-title"><a  title="Permalink to Qt Quick 笔记（2）——用户界面相关" href="http://www.roading.org//Qt/about-ui.html">Qt Quick 笔记（2）——用户界面相关</a></h1> 
                     <div class="post-info">
-        <abbr class="published" title="2012-04-29T15:27:00">
-                周日 29 四月 2012
+        <abbr class="published" title="2012-02-24T15:34:00">
+                周五 24 二月 2012
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="python&nbsp;&nbsp;代码组织&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="qml&nbsp;&nbsp;QT&nbsp;&nbsp;qt quick&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to python" href="http://www.roading.org/tag/python.html">python</a>
-		<a title="permalink to 代码组织" href="http://www.roading.org/tag/dai-ma-zu-zhi.html">代码组织</a>
+		<a title="permalink to qml" href="http://www.roading.org/tag/qml.html">qml</a>
+		<a title="permalink to QT" href="http://www.roading.org/tag/qt.html">QT</a>
+		<a title="permalink to qt quick" href="http://www.roading.org/tag/qt-quick.html">qt quick</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
-	<abbr>In <a title="permalink to A byte of python" href="http://www.roading.org/category/a-byte-of-python.html">A byte of python</a></abbr>
+	<abbr>In <a title="permalink to QT" href="http://www.roading.org/category/qt.html">QT</a></abbr>
 </div><!-- /.post-info -->
-		    <p>函数、模块和包对于代码的复用都有非常重要的意义，当然面向对象中的类其实在代码的复用性上也有举足轻重的地位。前天睡前看了《a byte of python》中关于函数、模块和包的这个部分，今天又查了查官网文档以及网上的其它一些资料，把一些疑惑给解决。现在写一下关于这部分的笔记，用以加强记忆同时以备后用。</p>
-<h3>函数</h3>
-<p>python 中用关键字def来定义函数。一个完整的函数定义应该以关键字def
-开始后面紧跟着函数名和用括号括起来的形参列表，并以一个冒号作为该行的结尾，紧跟着则是函数的代码块。实例：</p>
-<div class="codehilite"><pre><span class="k">def</span> <span class="nf">printMax</span><span class="p">(</span><span class="n">a</span> <span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="s">&#39;is maximin&#39;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">a</span><span class="o">==</span><span class="n">b</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="s">&#39;is equal to&#39;</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="s">&#39;is maximum&#39;</span><span class="p">)</span>
+		    <h3>Nested ELements</h3>
+<p>在QML中的 UI 元素是以树形结构组织的,因此“<em>Elements are often nested</em>”——也就是说，
+一个元素可以包含很多个其它元素。</p>
+<p>一个例子：</p>
+<div class="codehilite"><pre><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">1.1</span> 
+<span class="nx">Rectangle</span><span class="p">{</span>
+    <span class="k">width:</span> <span class="mi">400</span> <span class="p">;</span> <span class="k">height:</span> <span class="mi">300</span>
+    <span class="k">color:</span><span class="s2">&quot;gray&quot;</span>
+    <span class="nx">Rectangle</span><span class="p">{</span>
+        <span class="k">x:</span><span class="mi">50</span><span class="p">;</span> <span class="k">y:</span> <span class="mi">50</span>
+        <span class="k">width:</span><span class="mi">300</span><span class="p">;</span> <span class="k">height:</span> <span class="mi">200</span>
+        <span class="k">color:</span> <span class="s2">&quot;lightblue&quot;</span>
+        <span class="nx">Rectangle</span><span class="p">{</span>
+            <span class="k">x:</span><span class="mi">50</span> <span class="p">;</span> <span class="k">y:</span> <span class="mi">50</span>
+            <span class="k">width:</span> <span class="mi">200</span> <span class="p">;</span> <span class="k">height:</span> <span class="mi">100</span><span class="p">;</span>
+            <span class="k">color:</span><span class="s2">&quot;red&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
-<p><strong>Python同样支持为参数提供一个默认值</strong>，函数在调用时有默认值的形参是可选的，也就是说这样的参数可以不用给它提供实参 ...</p>
-		    <a class="read-more" href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html" rel="bookmark"
-                           title="Permalink to Python 基础入门笔记(2)——函数、模块和包">Read more→</a>	
+<p>上例中浅蓝色和红色的矩形都是“Nested Element”，通过右边的显示效果可以看出 ...</p>
+		    <a class="read-more" href="http://www.roading.org//Qt/about-ui.html" rel="bookmark"
+                           title="Permalink to Qt Quick 笔记（2）——用户界面相关">Read more→</a>	
                 </article>
 		<div class="clear"></div>
-                    <div class="pagination">
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ul id="posts-list" class="hfeed">
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html" rel="bookmark"
+                           title="Permalink to Qt Quick 笔记（1）：初识 Qt Quick">Qt Quick 笔记（1）：初识 Qt Quick</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2012-02-23T16:45:00">
+                周四 23 二月 2012
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="qml&nbsp;&nbsp;QT&nbsp;&nbsp;qt quick&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to qml" href="http://www.roading.org/tag/qml.html">qml</a>
+		<a title="permalink to QT" href="http://www.roading.org/tag/qt.html">QT</a>
+		<a title="permalink to qt quick" href="http://www.roading.org/tag/qt-quick.html">qt quick</a>
+	    </abbr>
+	<abbr>In <a title="permalink to QT" href="http://www.roading.org/category/qt.html">QT</a></abbr>
+</div><!-- /.post-info -->
+                <h3>废语开篇</h3>
+<p>在大二的时候思索着学习一界面库，为此煞费脑经。其中有试过十来天的Qt学习,不过最后为
+WPF而沦陷，确实WPF界面与逻辑的分离让我很是向往。不过可惜的是WPF并不原生支持与C++
+的交互，以致我不得不学习一些C# 。又四处求医问药——获得native code与manage code交互
+的良方。这之间寻寻觅觅，虽然也算终于达成所愿——可以用C++与WPF 来完成一些小程序编写 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html" rel="bookmark"
+                           title="Permalink to Qt Quick 笔记（1）：初识 Qt Quick">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            </ul><!-- /#posts-list -->
+                <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-    <li class="active"><a href="http://www.roading.org/tag/dai-ma-zu-zhi.html">1</a></li>
+    <li class="active"><a href="http://www.roading.org/tag/qt.html">1</a></li>
     <li class="next disabled"><a href="#">&rarr; Next</a></li>
 </ul>
 </div>
-            </aside><!-- /#featured -->
-            </ul><!-- /#posts-list -->
             </section><!-- /#content -->
 </div>
 <div class="index-sidebar">

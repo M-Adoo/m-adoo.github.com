@@ -533,86 +533,292 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/python/python-%e8%af%ad%e6%b3%95%e5%9f%ba%e7%a1%80%e7%ac%94%e8%ae%b01.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="python"></category><category term="笔记"></category></entry><entry><title>文化太监</title><link href="http://www.roading.org//essaies/culture-eunuch.html" rel="alternate"></link><updated>2012-01-07T11:50:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-01-07:/essaies/culture-eunuch.html</id><summary type="html">&lt;p&gt;捡起《北回归线》脱落的最后一页看完，不免有一些默然。这没有什么值得奇怪的地方
-，看过的很多书都曾有这样的感觉。但这一次却又有一点不一样，它更像是一种静默中
-的歇斯底里。有一种不吐不快，吐了也不能畅快的无力。这他妈的发慌发堵的感觉。&lt;/p&gt;
-&lt;p&gt;老实说，看之前我已经做好了领略它到底有多淫秽，多龌龊的打算。毕竟它原是一本西
-方的禁书，毕竟它原是一本在一群精力旺盛的兵痞间传阅的黄书，它理当应该很黄色，
-应该能让这群士兵在无人的角落都成为单手“炮兵”。一直到看完最后一个字，我才大呼
-受骗，这哪可能被当做黄书。它不但不淫秽，简直很纯洁。后来我又醒悟过来，既然是
-中文版，必然在出版之前已经完成“净身”。&lt;/p&gt;
-&lt;p&gt;受儿时的各类古装局，特别是满清局毒害，使我有这样一个认识：向来执刀给人净身的
-人需是太监。我不在意我这个认知是否正确，便如同我不关心出版《北回归线》中文版
-的人民出版社是不是太监一般。让我在意的是，我在这其中得出的一个结论——有些东西
-，便如同男人裆下那玩意，即便它有多令人恶心、淫秽、邪恶…它依然是那么重要，缺之
-不可。展现一副裸体不应该是什么禁忌，将一副男性裸体断根或女性裸体切除乳房才有
-违人道。我猜测《北回归线》在中国便受到了如此酷刑。&lt;/p&gt;
-&lt;p&gt;《北回归线》是一具生疮流脓的裸体，出版者大概以为这样一个样子太过可怖，因此切
-除了他狰狞的阳具，却不知如此一来更丑陋且显虚伪。&lt;/p&gt;
-&lt;p&gt;我用支离破碎的时间，看完了这本情节凌乱的书。即使刚刚看完，我却不能将之前后串
-联起来。但我能确信的是这确实是一本好书。这并不是一句人云亦云的恭维话，也不是
-为了掩盖自己见识浅薄智力低微而闪烁其词的含糊语。看这本书的过程中，便似有一般
-小锤悬于心脏之上，它不时就会在你的心房或心室敲打一下，让你不禁颤抖。&lt;/p&gt;
-&lt;p&gt;我问自己要不要完整的反刍式的将这本书再看一遍？我想，算了吧。我深知，书中能体
-味到的，远不啻如此。虽然我看到的不过皮毛，甚至不足十之一二，虽然这也确实是一
-本值得一看的书。合上书本，我并不打算再看一遍了。一如书中所说：&lt;/p&gt;
+        </summary><category term="python"></category><category term="笔记"></category></entry><entry><title>Qt Quick 笔记（2）——用户界面相关</title><link href="http://www.roading.org//Qt/about-ui.html" rel="alternate"></link><updated>2012-02-24T15:34:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-02-24:/Qt/about-ui.html</id><summary type="html">&lt;h3&gt;Nested ELements&lt;/h3&gt;
+&lt;p&gt;在QML中的 UI 元素是以树形结构组织的,因此“&lt;em&gt;Elements are often nested&lt;/em&gt;”——也就是说，
+一个元素可以包含很多个其它元素。&lt;/p&gt;
+&lt;p&gt;一个例子：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt; 
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;400&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;300&lt;/span&gt;
+    &lt;span class="k"&gt;color:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;gray&amp;quot;&lt;/span&gt;
+    &lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;x:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;y:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+        &lt;span class="k"&gt;width:&lt;/span&gt;&lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;lightblue&amp;quot;&lt;/span&gt;
+        &lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;x:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;y:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+            &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;color:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上例中浅蓝色和红色的矩形都是“Nested Element”，通过右边的显示效果可以看出，每一个
+“Nested Element”设定的位置都是相对于父元素的，而不是绝对位置。&lt;/p&gt;
+&lt;h3&gt;Graphical Elements&lt;/h3&gt;
+&lt;p&gt;三种要讨论的元素： Colors, gradients and images。通过这三种元素可以创建起具有吸
+引力的 UI 。&lt;/p&gt;
+&lt;h4&gt;Colors:可以用三种方式来设置：&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;直接用一个颜色名字的字符串来表示：例如 "red","blue"",lightblue"…&lt;/li&gt;
+&lt;li&gt;直接用一个6位的十六进制字符串来表示：例如&lt;code&gt;#ff00ff&lt;/code&gt;，六位中每两位代表三原色中
+    的一种，其顺序为红绿蓝。&lt;/li&gt;
+&lt;li&gt;使用一个函数来进行设置。如：Qt.rgba(0, 0.75, 0 , 1)。其中四个参数的范围应该
+    都在0到1之间。前三个参数表示三原色，后一个参数表示&lt;strong&gt;不&lt;/strong&gt;透明度。  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;三种方法的实例：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt; 
+&lt;span class="nx"&gt;Item&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt;&lt;span class="mi"&gt;150&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+    &lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;width:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;x:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;y:&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;#00ff00&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;x:&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;y:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt;&lt;span class="nx"&gt;Qt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;rgba&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;Images&lt;/h4&gt;
+&lt;p&gt;可以看下面一个关于图像的实例，这个实例将呈现一幅图片，并且在点击图片的时候会将图
+片放大两倍并以右下角为轴心旋转45度。&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;
+    &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;gray&amp;quot;&lt;/span&gt;
+   &lt;span class="nx"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+       &lt;span class="k"&gt;anchors.centerIn:&lt;/span&gt; &lt;span class="nx"&gt;parent&lt;/span&gt;
+       &lt;span class="k"&gt;source:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;../捕获.PNG&amp;quot;&lt;/span&gt;
+       &lt;span class="k"&gt;transformOrigin:&lt;/span&gt; &lt;span class="nx"&gt;Item&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Center&lt;/span&gt;
+       &lt;span class="nx"&gt;MouseArea&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+           &lt;span class="k"&gt;anchors.fill:&lt;/span&gt; &lt;span class="nx"&gt;parent&lt;/span&gt;
+           &lt;span class="k"&gt;onClicked:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+               &lt;span class="nx"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;scale&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+               &lt;span class="nx"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;rotation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;
+           &lt;span class="p"&gt;}&lt;/span&gt;
+       &lt;span class="p"&gt;}&lt;/span&gt;
+   &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Image的长宽由图像决定。其路径用source来设定，可以用绝对路径也可以使用相对路径，
+当然网路图片也是可以的。”../”表示父级目录。用scale来设定放大的倍数，用
+tansformOrigin 来设定旋转的轴心。rotation可以用来设定旋转的度数。  &lt;/p&gt;
+&lt;h4&gt;Gradient&lt;/h4&gt;
+&lt;p&gt;实例：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;400&lt;/span&gt;
+    &lt;span class="k"&gt;gradient:&lt;/span&gt; &lt;span class="nx"&gt;Gradient&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;GradientStop&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;position:&lt;/span&gt; &lt;span class="mf"&gt;0.0&lt;/span&gt;
+            &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="nx"&gt;GradientStop&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;position:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;
+            &lt;span class="k"&gt;color:&lt;/span&gt;  &lt;span class="s2"&gt;&amp;quot;black&amp;quot;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如上例所示，可以用一个gradient属性来设置渐变。用Gradient来作为其值。Gradient可以
+包含一个或更多的GradientStop 。每一个GradientStop包含一个position属性和一个color
+属性。position属性的值，只能从0到1。&lt;/p&gt;
+&lt;p&gt;设置gradient属性后，color属性将被覆盖掉。&lt;/p&gt;
+&lt;p&gt;官方推荐使用渐变的图片来代替gradient，因为gradient会占用大量的cpu，并且渐变的效
+果可能并没有你期望的那么生动。&lt;/p&gt;
+&lt;h3&gt;文本&lt;/h3&gt;
+&lt;p&gt;qml中的文本既可以用来呈现文本，同时也能进行文本的输入。&lt;/p&gt;
+&lt;p&gt;用 Text 来简单呈现文本：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
+    &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;gray&amp;quot;&lt;/span&gt;
+    &lt;span class="nx"&gt;Text&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;text:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;h1&amp;gt;我本将心向明月，奈何明月照沟渠。&amp;lt;/h1&amp;gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;font.family:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;楷体&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;white&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Text 支持简单的文本呈现，同时它也支持富文本的显示。如上例中我就用了
+&lt;code&gt;&amp;lt;h1&amp;gt;…&amp;lt;/h1&amp;gt;&lt;/code&gt;这对标签。&lt;/p&gt;
+&lt;p&gt;用 TextInput 来接受文本的录入：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;color:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;black&amp;quot;&lt;/span&gt;
+    &lt;span class="nx"&gt;TextInput&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;white&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;font.pixelSize:&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;
+        &lt;span class="k"&gt;text:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;举杯邀明月，对影成三人...&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;一个很简单的文本输入控件，没有任何的装饰。如果没有设置它的宽度的时候，其宽度会
+随着字串的长度而改变。&lt;/p&gt;
+&lt;h3&gt;Anchors&lt;/h3&gt;
+&lt;p&gt;我们知道可以用x与y属性来确定元素相对于其父亲的位置。使用Anchors则是另外一个重要
+的布局手段，Anchors 主要用来定位和对齐元素。&lt;/p&gt;
+&lt;p&gt;位置示意图：(另外还有centerIn和fill)&lt;/p&gt;
+&lt;p&gt;&lt;img alt="位置示意图" src="http://www.roading.org/images/2012-02/image_thumb8.png" /&gt;&lt;/p&gt;
+&lt;p&gt;一个实例：直接关联到其父&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;150&lt;/span&gt;
+    &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;lightblue&amp;quot;&lt;/span&gt;
+    &lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+        &lt;span class="k"&gt;color:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;gray&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;anchors.centerIn:&lt;/span&gt; &lt;span class="nx"&gt;parent&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;也可以关联到其父亲的Anchors,此时这样写:&lt;code&gt;anchors.right: parent.right&lt;/code&gt;不需要(也不
+能)这样：&lt;code&gt;anchors.right : parent.anchors.right&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Anchors 也可以用来对边缘留白,示意图如下：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2012-02/image_thumb10.png" /&gt;&lt;/p&gt;
+&lt;p&gt;用法则与上面的 right ,left 之类的如出一辙。&lt;/p&gt;
+&lt;p&gt;摘录一段关于 Anchors 的忠告，以及使用策略。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;他们所处的世界同每一个地方一样，发生的事情多半是屎尿垃圾，同任何一个垃圾桶
-一样脏，只是他们能有幸盖上桶盖。&lt;/p&gt;
+&lt;h4&gt;Hints and Tips – Anchors&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Anchors can only be used with parent and sibling items&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Anchors work on constraints&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;some items need to have well-defined positions and sizes&lt;/li&gt;
+&lt;li&gt;items without default sizes should be anchored to fixed
+    orwell-defined items&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Anchors creates dependencies on geometries of other items&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;creates an order in which geometries are calculated&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;avoid creating circular dependencies&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;e.g., parent!child!parent&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Margins are only used if the corresponding anchors are used&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;e.g.,leftMarginneedsleftto be defined&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Strategies for Use – Anchors&lt;/h4&gt;
+&lt;p&gt;Identify item with different roles in the user interface:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Fixed items&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;make sure these have id properties defined&lt;/li&gt;
+&lt;li&gt;unless these items can easily be referenced as parent items&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Items that dominate the user interface&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;make sure these have id properties defined&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Items that react to size changes of the dominant items&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;give these anchors that refer to the dominant or fixed items&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;参考资料：&lt;a href="http://qt.nokia.com/learning/online/training/materials/qt-essentials-qt-quick-edition"&gt;Qt Quick for C++ Developers&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;这个世界黑暗的角落太多，揭露丑陋、人性、黑暗的作品或作者更不胜枚举。但能点亮
-希望光芒的呢？我明白我想要重读的不是展现黑暗的世界，不是冷漠的一瞥，不是感叹
-绝望的挣扎。我想要反复阅读的是能道出希望之所在的作品。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周六 07 一月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周五 24 二月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
-          (&lt;a href="http://www.roading.org/essaies/culture-eunuch.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="随笔"></category><category term="北回归线"></category></entry><entry><title>又到离别时</title><link href="http://www.roading.org//essaies/leave.html" rel="alternate"></link><updated>2011-12-10T14:25:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-10:/essaies/leave.html</id><summary type="html">&lt;p&gt;前几天毕业后的工作已经决定下来，前两天《深度探索C++对象模型》的学习也已
-经了结。手头事情忙得差不多的时候，一回头不禁感叹，又是一季离别，年后大学
-也算结束了。当然，或许你是以拿到毕业证作为一段生涯的句点，那自然不是，这
-只能说认知上有些差别。&lt;/p&gt;
-&lt;p&gt;说到工作的事，首先要很谢谢熊哥的内荐，免了我舟车劳顿、颠沛奔波的辛苦。虽
-然程序不少，但是能仅仅打几通电话、收发几封邮件、写两段代码来决定工作，比
-之奔走求职确实是一件轻松太多的事情。我原来已经拿定主意年后南下找工作，不
-过既然可以不用奔波，公司又让我满意，我自然安心下来。我虽然一开始就决定明
-年才开始求职的行程，不过中途经不住各位同学都已经签约的诱惑。有去试过两家
-公司，一家叫深信服，另一家叫龙通。毫无疑问，这是两次失败的经历。&lt;/p&gt;
-&lt;p&gt;虽然两次失败的经历对我来说并没有太多的遗憾，但是还是收获有一些经验。深信
-服是在笔试的时候被刷的，本来笔试被刷，没有什么可谈，无非自己实力欠缺。但
-我却犯了一些天真的错误。其一是笔试迟到了将近半个小时，不过考官还是让我们
-进去了，虽然最后时间不缺，但显然对它缺乏重视——实际上我本来不打算参加笔试
-的。其二在于，我天真的不把它当一场考试，选择题部分，我甚至没有在显眼的地
-方写上我的答案，仅仅在每个错误的选项旁边，写下四五个字的注释，诸如此类随
-意的做法，我也不记得试卷上有多少，何况深信服的题量之大，足有十页。考完之
-后，我还颇有自信，甚至坚持在熊哥和旺X那里过夜，等待面试通知。&lt;/p&gt;
-&lt;p&gt;如果说深信服得到了一些教训的话，龙通的那次面试则是纯粹浪费时间了，通过笔
-试后，大概是第四天去长沙参加了龙通的面试，面试我的是两个小伙，估计比我大
-不了几岁，和其中一个胖点的相谈甚欢(应该是人力，我却一直和他讲技术)，到另
-外一个瘦点的来面具体技术的时候，却把我镇住了——居然边上网找题目，边问我。
-问的问题很简单，但我都很慎重的作答。我自信对他所问，都有把握——除了其中两
-个。一个为函数指针的使用问题，他问我函数指针使用时需不需要解引用，我答他
-可以不用，当我刚开口要说一说为什么可以用也可以不用时。他似乎一副不必改口
-的样子，直接告诉我进入下一题，我自然没有抢白解释。另一个问题，他问我用过
-什么样的进程间通信方式，我答他我只用过套接字。他又问我进程通信有几种方式
-，这题我当时没答上。其实最让人不能接受的问题在于，当我说出期望薪资是5k
-的时候，我明显看到那两小子有点轻笑的味道，好像在说我不知天高地厚。姑且不
-论5k的薪水到底是多是少，要知道他们宣讲的时候说的待遇是4.8k-6.8k，我说5k
-绝对合理，当然后来在网上查了下龙通签人的薪水，估计他们宣讲时的薪水含有不
-少水分。后来又问我转不转java，去不去南京，我都表示不会考虑。&lt;/p&gt;
-&lt;p&gt;起笔之时，并没有打算讲求职琐事，写到此处，才发觉占了大量篇幅，气氛全无…&lt;/p&gt;
-&lt;p&gt;当跑题跑了数公里之外的时候，我们再校正回来。&lt;/p&gt;
-&lt;h3&gt;再续离别时&lt;/h3&gt;
-&lt;p&gt;散席时，总不必表现的太过伤感，再尽兴的聚会，也总有离席散客之时，但倘若缘
-分尚在，情分依旧，欢聚重逢，把酒高欢的时刻总不会少。&lt;/p&gt;
-&lt;p&gt;我本来打算想营造点伤感的气氛，但无赖虽然可以预见有一份离别的伤感，但毕竟
-这份伤感却还未到来，谁叫我这人只能提前享受快乐，却无法预支悲伤。更何况，
-最近这几个月我又过的太过恰意，一段手上有几本欲罢不能的好书，脚下经常能踢
-几场酣畅淋漓的爽球，偶尔还可以把酒高歌，有时亦可以静坐垂钓，更甚至，明天
-凌晨五点的世纪大战，细哥还会电话叫我起床看球。这样的生活，又哪能期待更多。&lt;/p&gt;
+          (&lt;a href="http://www.roading.org/Qt/about-ui.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="qml"></category><category term="QT"></category><category term="qt quick"></category><category term="笔记"></category></entry><entry><title>Qt Quick 笔记（1）：初识 Qt Quick</title><link href="http://www.roading.org//develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html" rel="alternate"></link><updated>2012-02-23T16:45:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-02-23:/develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html</id><summary type="html">&lt;h3&gt;废语开篇&lt;/h3&gt;
+&lt;p&gt;在大二的时候思索着学习一界面库，为此煞费脑经。其中有试过十来天的Qt学习,不过最后为
+WPF而沦陷，确实WPF界面与逻辑的分离让我很是向往。不过可惜的是WPF并不原生支持与C++
+的交互，以致我不得不学习一些C# 。又四处求医问药——获得native code与manage code交互
+的良方。这之间寻寻觅觅，虽然也算终于达成所愿——可以用C++与WPF 来完成一些小程序编写
+了。但是这注定是一种非主流的配置，主流与否，我虽然不在意。只是结果并不如我想的那般
+理想。用C++与WPF来开发并没有带来效率的提升以及逻辑的简化——这些成本都被转移到了他们
+之间的交互上，更大的成本其实在于学习的代价——C#、C++/cli 、P/invoke… 有意思的是似乎
+转了一圈，又要回到QT上来。为什么要回到QT? 没有太多理由——公司用的最主要的界面库就是
+Qt。当然这一切并未有让我有哪怕些须遗憾。我一直坚信，所有的弯路都有其价值。何况win8
+确切会支持C++与xaml的交互——我已经尝试了一下。但是对于相关的系统学习可能要推后一些了。
+而Qt会是接下来不短一段时间的主旋律了。不过可喜之处在于，Qt Quick 甚合我意。&lt;/p&gt;
+&lt;h3&gt;What is Qt Quick ？&lt;/h3&gt;
+&lt;p&gt;看一下诺基亚的介绍：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Qt Quick is a UI creation technology designed to enable developers and UI 
+designers to work together to create animated, touch-enabled UIs and applications.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;简而言之，Qt Quick将界面与逻辑很好的分离。&lt;a href="http://qt.nokia.com/products/library/qt-quick"&gt;更多…&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Qt Quick有以下组成部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;QML: 一种用来撰写界面的声明式语言，很简单，很像CSS.&lt;/li&gt;
+&lt;li&gt;Qt Viewer: 用来加载qml文件。&lt;/li&gt;
+&lt;li&gt;Qt Declarative Module:一个 Qt 库中的新模块，用它可以很好的使得QML与 C++交互。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;What is QML?&lt;/h3&gt;
+&lt;p&gt;qml是一种被设计为用来描述用户界面的声明式语言：包括用户界面的摸样和以及行为。在
+qml的世界中，UI元素被组织成树形结构，UI元素可以包含其许多子元素，但却只有一个父
+亲。&lt;/p&gt;
+&lt;p&gt;一个简单的例子：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QtQuick&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="nx"&gt;Rectangle&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;width:&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height:&lt;/span&gt; &lt;span class="mi"&gt;150&lt;/span&gt;
+    &lt;span class="k"&gt;color:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;lightblue&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上面的代码声明了一个矩形，并设定了它的长宽以及颜色，其效果图如下。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="示意图" src="http://www.roading.org/images/2012-02/image_thumb.png" /&gt;&lt;/p&gt;
+&lt;p&gt;import可以用来导入相关模块，这儿要使用Qt quick的功能，自然要导入相关模块。后面跟的
+1.1是版本号。规定版本号的优势在于可以只导入对应的版本。因此程序中只能使用对应版本的
+功能。这样一来就可以使得程序不受旧版本或新版本的影响。在新版本发布后也保存了对旧版
+本的支持。&lt;/p&gt;
+&lt;p&gt;声明了一个Rectangle元素，紧接着的{}表示在其中的属性都属于描述Rectangle。可直接用属
+性的名字和值来设定属性：&lt;code&gt;name: value&lt;/code&gt;。属性之间用换行符或分号来分隔。注释的方式与
+C++相同，可以用 “//”与“/* … */ ”两种形式。&lt;/p&gt;
+&lt;p&gt;QML中的元素（elements）可以分为可视化元素和不可见元素：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;所有的可视化元素都继承自item, 它们一般都有关于位置和尺寸的属性。像Recatangle 、
+    Text 、InputText…&lt;/li&gt;
+&lt;li&gt;不可见元素有states、transitions…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;元素拥有一些属性，同时属性用以描述元素。当然，也可以对元素扩展一些自定义的属性。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周六 10 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周四 23 二月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
-          (&lt;a href="http://www.roading.org/essaies/leave.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="随笔"></category></entry></feed>
+          (&lt;a href="http://www.roading.org/develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="qml"></category><category term="QT"></category><category term="qt quick"></category></entry></feed>

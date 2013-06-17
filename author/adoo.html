@@ -33,8 +33,121 @@
 <div class="index-content">       
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a  title="Permalink to Python 基础入门笔记(2)——函数、模块和包" href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html">Python 基础入门笔记(2)——函数、模块和包</a></h1> 
+                    <h1 class="entry-title"><a  title="Permalink to Qt Quick 笔记（2）——用户界面相关" href="http://www.roading.org//Qt/about-ui.html">Qt Quick 笔记（2）——用户界面相关</a></h1> 
                     <div class="post-info">
+        <abbr class="published" title="2012-02-24T15:34:00">
+                周五 24 二月 2012
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="qml&nbsp;&nbsp;QT&nbsp;&nbsp;qt quick&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to qml" href="http://www.roading.org/tag/qml.html">qml</a>
+		<a title="permalink to QT" href="http://www.roading.org/tag/qt.html">QT</a>
+		<a title="permalink to qt quick" href="http://www.roading.org/tag/qt-quick.html">qt quick</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to QT" href="http://www.roading.org/category/qt.html">QT</a></abbr>
+</div><!-- /.post-info -->
+		    <h3>Nested ELements</h3>
+<p>在QML中的 UI 元素是以树形结构组织的,因此“<em>Elements are often nested</em>”——也就是说，
+一个元素可以包含很多个其它元素。</p>
+<p>一个例子：</p>
+<div class="codehilite"><pre><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">1.1</span> 
+<span class="nx">Rectangle</span><span class="p">{</span>
+    <span class="k">width:</span> <span class="mi">400</span> <span class="p">;</span> <span class="k">height:</span> <span class="mi">300</span>
+    <span class="k">color:</span><span class="s2">&quot;gray&quot;</span>
+    <span class="nx">Rectangle</span><span class="p">{</span>
+        <span class="k">x:</span><span class="mi">50</span><span class="p">;</span> <span class="k">y:</span> <span class="mi">50</span>
+        <span class="k">width:</span><span class="mi">300</span><span class="p">;</span> <span class="k">height:</span> <span class="mi">200</span>
+        <span class="k">color:</span> <span class="s2">&quot;lightblue&quot;</span>
+        <span class="nx">Rectangle</span><span class="p">{</span>
+            <span class="k">x:</span><span class="mi">50</span> <span class="p">;</span> <span class="k">y:</span> <span class="mi">50</span>
+            <span class="k">width:</span> <span class="mi">200</span> <span class="p">;</span> <span class="k">height:</span> <span class="mi">100</span><span class="p">;</span>
+            <span class="k">color:</span><span class="s2">&quot;red&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>上例中浅蓝色和红色的矩形都是“Nested Element”，通过右边的显示效果可以看出 ...</p>
+		    <a class="read-more" href="http://www.roading.org//Qt/about-ui.html" rel="bookmark"
+                           title="Permalink to Qt Quick 笔记（2）——用户界面相关">Read more→</a>	
+                </article>
+		<div class="clear"></div>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ul id="posts-list" class="hfeed">
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/metro/windows-8-%e5%88%9d%e4%bd%93%e9%aa%8c.html" rel="bookmark"
+                           title="Permalink to Windows 8 初体验">Windows 8 初体验</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-09-16T14:08:00">
+                周五 16 九月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;windows 8&nbsp;&nbsp;xaml&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to windows 8" href="http://www.roading.org/tag/windows-8.html">windows 8</a>
+		<a title="permalink to xaml" href="http://www.roading.org/tag/xaml.html">xaml</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Metro" href="http://www.roading.org/category/metro.html">Metro</a></abbr>
+</div><!-- /.post-info -->
+                <p>几个月前，就已经对windows8很期待。主要是因为听说xaml将支持C++。14号刚放出下载链接就
+赶去下下来，准备一探究竟。不过当天好哥们磊子过来了，于是和小庄同学，磊子我自己三个
+人，一起到球场上肆意了一个下午，晚上喝酒聊天，已经忘掉这回事了。昨天又停电一天，到今
+天才有机会体验下windows 8。 第一件事自然是打开Windows 8预览版自带的visual studio ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/metro/windows-8-%e5%88%9d%e4%bd%93%e9%aa%8c.html" rel="bookmark"
+                           title="Permalink to Windows 8 初体验">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html" rel="bookmark"
+                           title="Permalink to Qt Quick 笔记（1）：初识 Qt Quick">Qt Quick 笔记（1）：初识 Qt Quick</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2012-02-23T16:45:00">
+                周四 23 二月 2012
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="qml&nbsp;&nbsp;QT&nbsp;&nbsp;qt quick&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to qml" href="http://www.roading.org/tag/qml.html">qml</a>
+		<a title="permalink to QT" href="http://www.roading.org/tag/qt.html">QT</a>
+		<a title="permalink to qt quick" href="http://www.roading.org/tag/qt-quick.html">qt quick</a>
+	    </abbr>
+	<abbr>In <a title="permalink to QT" href="http://www.roading.org/category/qt.html">QT</a></abbr>
+</div><!-- /.post-info -->
+                <h3>废语开篇</h3>
+<p>在大二的时候思索着学习一界面库，为此煞费脑经。其中有试过十来天的Qt学习,不过最后为
+WPF而沦陷，确实WPF界面与逻辑的分离让我很是向往。不过可惜的是WPF并不原生支持与C++
+的交互，以致我不得不学习一些C# 。又四处求医问药——获得native code与manage code交互
+的良方。这之间寻寻觅觅，虽然也算终于达成所愿——可以用C++与WPF 来完成一些小程序编写 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html" rel="bookmark"
+                           title="Permalink to Qt Quick 笔记（1）：初识 Qt Quick">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html" rel="bookmark"
+                           title="Permalink to Python 基础入门笔记(2)——函数、模块和包">Python 基础入门笔记(2)——函数、模块和包</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
         <abbr class="published" title="2012-04-29T15:27:00">
                 周日 29 四月 2012
         </abbr>
@@ -49,28 +162,15 @@
 	    </abbr>
 	<abbr>In <a title="permalink to A byte of python" href="http://www.roading.org/category/a-byte-of-python.html">A byte of python</a></abbr>
 </div><!-- /.post-info -->
-		    <p>函数、模块和包对于代码的复用都有非常重要的意义，当然面向对象中的类其实在代码的复用性上也有举足轻重的地位。前天睡前看了《a byte of python》中关于函数、模块和包的这个部分，今天又查了查官网文档以及网上的其它一些资料，把一些疑惑给解决。现在写一下关于这部分的笔记，用以加强记忆同时以备后用。</p>
+                <p>函数、模块和包对于代码的复用都有非常重要的意义，当然面向对象中的类其实在代码的复用性上也有举足轻重的地位。前天睡前看了《a byte of python》中关于函数、模块和包的这个部分，今天又查了查官网文档以及网上的其它一些资料，把一些疑惑给解决。现在写一下关于这部分的笔记，用以加强记忆同时以备后用。</p>
 <h3>函数</h3>
 <p>python 中用关键字def来定义函数。一个完整的函数定义应该以关键字def
-开始后面紧跟着函数名和用括号括起来的形参列表，并以一个冒号作为该行的结尾，紧跟着则是函数的代码块。实例：</p>
-<div class="codehilite"><pre><span class="k">def</span> <span class="nf">printMax</span><span class="p">(</span><span class="n">a</span> <span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="s">&#39;is maximin&#39;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">a</span><span class="o">==</span><span class="n">b</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="s">&#39;is equal to&#39;</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="s">&#39;is maximum&#39;</span><span class="p">)</span>
-</pre></div>
-<p><strong>Python同样支持为参数提供一个默认值</strong>，函数在调用时有默认值的形参是可选的，也就是说这样的参数可以不用给它提供实参 ...</p>
-		    <a class="read-more" href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html" rel="bookmark"
+开始后面紧跟着函数名和用括号括起来的形参列表，并以一个冒号作为该行的结尾 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html" rel="bookmark"
                            title="Permalink to Python 基础入门笔记(2)——函数、模块和包">Read more→</a>	
-                </article>
 		<div class="clear"></div>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ul id="posts-list" class="hfeed">
+                </div><!-- /.entry-content -->
+            </article></li>
             <li><article class="hentry">    
                 <header>
                     <h1><a href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b03.html" rel="bookmark"
@@ -166,96 +266,6 @@ list 。下例用以展示 list 的一些基本操作：</p>
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/python/python-%e8%af%ad%e6%b3%95%e5%9f%ba%e7%a1%80%e7%ac%94%e8%ae%b01.html" rel="bookmark"
-                           title="Permalink to Python 基础入门笔记(1)">Python 基础入门笔记(1)</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2012-04-24T17:25:00">
-                周二 24 四月 2012
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="python&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to python" href="http://www.roading.org/tag/python.html">python</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to A byte of python" href="http://www.roading.org/category/a-byte-of-python.html">A byte of python</a></abbr>
-</div><!-- /.post-info -->
-                <h3>内建类型</h3>
-<p>python 中提供的内建类型大概与C++中提供的相仿，却更简洁。</p>
-<p>数值方面的内建类型有整型、浮点型、和复数类型三种。在C++中虽然也有复数类型，但却是由标准库提供的。另外，python中整数的表示就是整形，没有如C++中的长整型短整形之说。浮点数的表示也没有浮点型和双精度型的区分。</p>
-<p>字符串则可以分为字符串(string)和原生字符串(raw ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/python/python-%e8%af%ad%e6%b3%95%e5%9f%ba%e7%a1%80%e7%ac%94%e8%ae%b01.html" rel="bookmark"
-                           title="Permalink to Python 基础入门笔记(1)">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//essaies/Tropic-of-Cancer.html" rel="bookmark"
-                           title="Permalink to 在北回归线上远望">在北回归线上远望</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-10-25T21:40:00">
-                周二 25 十月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="随笔&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to 随笔" href="http://www.roading.org/tag/sui-bi.html">随笔</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 随笔" href="http://www.roading.org/category/sui-bi.html">随笔</a></abbr>
-</div><!-- /.post-info -->
-                <p>在某处看到这样一句话：“我对生活的要求无外乎几本书，几场梦，几个女人而已。”
-我虽然有看书过目即忘的陋习，但总喜欢查一查看到中意的话的出处，原因在于看到
-一句中意的话，我若不去拜读一下该话的原著，便有可能错过一部中意的作品。我深
-知，在这样一个伟大的时代，能让人中意一回却是多么艰难。可见，我尚处在一种从
-书中找快慰的状态……</p>
-<p>我并未有多么认同这句话，但起码我不反感，因为范诺登仅仅说出其所想 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//essaies/Tropic-of-Cancer.html" rel="bookmark"
-                           title="Permalink to 在北回归线上远望">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//essaies/culture-eunuch.html" rel="bookmark"
-                           title="Permalink to 文化太监">文化太监</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2012-01-07T11:50:00">
-                周六 07 一月 2012
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="随笔&nbsp;&nbsp;北回归线&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to 随笔" href="http://www.roading.org/tag/sui-bi.html">随笔</a>
-		<a title="permalink to 北回归线" href="http://www.roading.org/tag/bei-hui-gui-xian.html">北回归线</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 随笔" href="http://www.roading.org/category/sui-bi.html">随笔</a></abbr>
-</div><!-- /.post-info -->
-                <p>捡起《北回归线》脱落的最后一页看完，不免有一些默然。这没有什么值得奇怪的地方
-，看过的很多书都曾有这样的感觉。但这一次却又有一点不一样，它更像是一种静默中
-的歇斯底里。有一种不吐不快，吐了也不能畅快的无力。这他妈的发慌发堵的感觉。</p>
-<p>老实说，看之前我已经做好了领略它到底有多淫秽，多龌龊的打算。毕竟它原是一本西
-方的禁书，毕竟它原是一本在一群精力旺盛的兵痞间传阅的黄书，它理当应该很黄色，
-应该能让这群士兵在无人的角落都成为单手 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//essaies/culture-eunuch.html" rel="bookmark"
-                           title="Permalink to 文化太监">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
             </ul><!-- /#posts-list -->
                 <div class="pagination">
 <ul>
@@ -263,6 +273,7 @@ list 。下例用以展示 list 的一些基本操作：</p>
     <li class="active"><a href="http://www.roading.org/author/adoo.html">1</a></li>
     <li class=""><a href="http://www.roading.org/author/adoo2.html">2</a></li>
     <li class=""><a href="http://www.roading.org/author/adoo3.html">3</a></li>
+    <li class=""><a href="http://www.roading.org/author/adoo4.html">4</a></li>
     <li class="next"><a href="http://www.roading.org/author/adoo2.html">Next &rarr;</a></li>
 </ul>
 </div>
@@ -275,6 +286,12 @@ list 。下例用以展示 list 的一些基本操作：</p>
              <li ><a href="http://www.roading.org/category/a-byte-of-python.html">A byte of python</a>
 	         <a href="http://www.roading.org/feed/A byte of python.xml" 
 		title="Subscribe for A byte of python" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/metro.html">Metro</a>
+	         <a href="http://www.roading.org/feed/Metro.xml" 
+		title="Subscribe for Metro" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/qt.html">QT</a>
+	         <a href="http://www.roading.org/feed/QT.xml" 
+		title="Subscribe for QT" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
              <li ><a href="http://www.roading.org/category/sui-bi.html">随笔</a>
 	         <a href="http://www.roading.org/feed/随笔.xml" 
 		title="Subscribe for 随笔" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
