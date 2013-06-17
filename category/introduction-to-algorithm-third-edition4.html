@@ -35,229 +35,218 @@
                     <ul id="posts-list">
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 第九章 中位数和顺序统计量（Medians and Order Statistic）">第九章 中位数和顺序统计量（Medians and Order Statistic）</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html" rel="bookmark"
+                           title="Permalink to Chapter 12 二叉搜索树(Binary Search Tree) 1">Chapter 12 二叉搜索树(Binary Search Tree) 1</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-10-17T20:38:00">
-                周一 17 十月 2011
+        <abbr class="published" title="2011-12-15T16:41:00">
+                周四 15 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;Order Statistic&nbsp;&nbsp;">
+	    <abbr title="binary search tree&nbsp;&nbsp;inorder tree walk&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-		<a title="permalink to Order Statistic" href="http://www.roading.org/tag/order-statistic.html">Order Statistic</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <h3>概览</h3>
-<p>本章主要讲的是如何来获取顺序统计量（Order statistic）,所谓第i个顺序统计量即
-是指在一组数中的第i小的元素，中位数即是大小位于一组数中间的那个数，如果一组
-数为偶数个，则有两个中位数，大的叫大中位数（upper medians 姑且这么翻译吧），
-小的叫小中位数（lower medians）。可以先考虑几个问题：</p>
-<ol>
-<li>获取最大或者最小的元素，要比较多少次 ...</li></ol>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 第九章 中位数和顺序统计量（Medians and Order Statistic）">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%885%ef%bc%89-%e4%b9%a0%e9%a2%98-8-4-8-5-8-7.html" rel="bookmark"
-                           title="Permalink to 第八章（5） 习题 8-4 8-5 8-7">第八章（5） 习题 8-4 8-5 8-7</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-10-05T21:33:00">
-                周三 05 十月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="Average sorting&nbsp;&nbsp;算法导论&nbsp;&nbsp;water jugs&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to Average sorting" href="http://www.roading.org/tag/average-sorting.html">Average sorting</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to water jugs" href="http://www.roading.org/tag/water-jugs.html">water jugs</a>
+		<a title="permalink to binary search tree" href="http://www.roading.org/tag/binary-search-tree.html">binary search tree</a>
+		<a title="permalink to inorder tree walk" href="http://www.roading.org/tag/inorder-tree-walk.html">inorder tree walk</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
 	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <h3>8-4 Water jugs</h3>
+                <h3>何为二叉搜索树？</h3>
 <blockquote>
-<p>Suppose that you are given n red and n blue water jugs, all of different
-shapes andsizes ...</p></blockquote>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%885%ef%bc%89-%e4%b9%a0%e9%a2%98-8-4-8-5-8-7.html" rel="bookmark"
-                           title="Permalink to 第八章（5） 习题 8-4 8-5 8-7">Read more→</a>	
+<p>Such a tree can be represented by a linked data structure in which
+each node is an object. In ...</p></blockquote>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html" rel="bookmark"
+                           title="Permalink to Chapter 12 二叉搜索树(Binary Search Tree) 1">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 桶排序（Bucket sort）">桶排序（Bucket sort）</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html" rel="bookmark"
+                           title="Permalink to Solution of CLRS 11.1 exercises">Solution of CLRS 11.1 exercises</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-10-04T14:23:00">
-                周二 04 十月 2011
+        <abbr class="published" title="2011-12-14T14:43:00">
+                周三 14 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;桶排序&nbsp;&nbsp;">
+	    <abbr title="bit vector&nbsp;&nbsp;Exercises&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to bit vector" href="http://www.roading.org/tag/bit-vector.html">bit vector</a>
+		<a title="permalink to Exercises" href="http://www.roading.org/tag/exercises.html">Exercises</a>
 		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to 桶排序" href="http://www.roading.org/tag/tong-pai-xu.html">桶排序</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <h3>算法模型</h3>
-<ol>
-<li>桶排序假设待排序的一组数统一的分布在一个范围中，并将这一范围划分成几个
-    子范围，也就是桶。</li>
-<li>将待排序的一组数，分档规入这些子桶。并将桶中的数据进行排序。</li>
-<li>将各个桶中的数据有序的合并起来。</li>
-</ol>
-<p>仔细想一想，这是不是一种“分治”策略呢？再仔细想一想，计数排序是不是桶排序的
-一种特化呢？</p>
-<h3>复杂度：</h3>
-<p>很显然桶排序的时间复杂度，取决与对各个桶之间数据进行排序的时间复杂度，因为 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 桶排序（Bucket sort）">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 第八章（3） 基数排序（Radix Sort）">第八章（3） 基数排序（Radix Sort）</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-10-02T16:37:00">
-                周日 02 十月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;快速排序&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to 快速排序" href="http://www.roading.org/tag/kuai-su-pai-xu.html">快速排序</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <h3>算法模型</h3>
-<p>基数排序是一种用在老式穿卡机上的算法。至于穿卡机是怎么使用基数排序的，你可以
-参考算法导论第八章的描述。</p>
-<p>在之前两种比较排序——合并排序与快速排序中我们使用一种“分而治之”的策略，基数排
-序则使用另一种与之有有异曲同工之妙的策略。无论是合并排序还是快速排序，我们讲
-究的是在数组级别的“分而治之”；而基数排序我们讲究的是在元素级别的“分而治之”，
-例如我们将一个三位数分成，个位，十位 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 第八章（3） 基数排序（Radix Sort）">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html" rel="bookmark"
-                           title="Permalink to 快速排序课后7.4-5">快速排序课后7.4-5</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-09-27T12:00:00">
-                周二 27 九月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="7.4-5&nbsp;&nbsp;算法导论&nbsp;&nbsp;快速排序&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to 7.4-5" href="http://www.roading.org/tag/74-5.html">7.4-5</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to 快速排序" href="http://www.roading.org/tag/kuai-su-pai-xu.html">快速排序</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <h3>7.4-5</h3>
-<blockquote>
-<p>We can improve the running time of quicksort in practice by taking
-advantage of thefast running time of ...</p></blockquote>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html" rel="bookmark"
-                           title="Permalink to 快速排序课后7.4-5">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html" rel="bookmark"
-                           title="Permalink to 快速排序及C++实现">快速排序及C++实现</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-09-25T15:59:00">
-                周日 25 九月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;Quick Sort&nbsp;&nbsp;随机快速排序&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to Quick Sort" href="http://www.roading.org/tag/quick-sort.html">Quick Sort</a>
-		<a title="permalink to 随机快速排序" href="http://www.roading.org/tag/sui-ji-kuai-su-pai-xu.html">随机快速排序</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <p>快速排序（QuickSort）在最坏的情况下它的时间复杂度是O（n2），最佳情况下它的
-时间复杂度是为O(n*lgn).即使如此，但快速排序往往是实际应用中的排序算法的最
-佳选择，因为它隐含的常数因子非常小。</p>
-<p>快排是又一个化整为零，各个击破策略的又一个经典应用。与合并排序（Merge
-Sort）有一点不同。合并排序的是直接按数目不断递归划分成小段，然后又层层合并 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html" rel="bookmark"
-                           title="Permalink to 快速排序及C++实现">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html" rel="bookmark"
-                           title="Permalink to 堆排序及其C++实现">堆排序及其C++实现</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-09-13T19:12:00">
-                周二 13 九月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;Heap Sort&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to Heap Sort" href="http://www.roading.org/tag/heap-sort.html">Heap Sort</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
 	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <p>堆即是一个可以看作为完全二叉树的数组。《算法导论》第三版这样定义：</p>
+                <h3>Exercises 11.1-2</h3>
 <blockquote>
-<p>*The(binary) heap data structure is an array object that we can view
-as a nearly completely ...</p></blockquote>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html" rel="bookmark"
-                           title="Permalink to 堆排序及其C++实现">Read more→</a>	
+<p>A <strong><em>bit vector</em></strong> is simply an array of bits (0's and 1's). A bit vector ...</p></blockquote>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html" rel="bookmark"
+                           title="Permalink to Solution of CLRS 11.1 exercises">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 哈希表的C++模板实现">哈希表的C++模板实现</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-13T16:36:00">
+                周日 13 十一月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;hash tables&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <p>采用引用计数来解决指针管理问题。开放地址、双重哈希来解决碰撞和探测问题，
+实现了哈希表的创建、查找、插入，复制控制，[]操作符… 但总觉得欠缺点什么。</p>
+<p>源码：</p>
+<div class="codehilite"><pre><span class="c1">//hash.h </span>
+<span class="c1">//2011/11/13   By Adoo</span>
+<span class="cp">#ifndef  HASH_H</span>
+<span class="cp">#define ...</span></pre></div>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 哈希表的C++模板实现">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 哈希表（Hash Tables）（2）">哈希表（Hash Tables）（2）</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-09T15:59:00">
+                周三 09 十一月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="hash tables&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <h3>解决碰撞</h3>
+<p>解决碰撞无非两种思路：使得一个位置能存储多个元素，此其一；不限定一个元素
+只能存储到一个位置，既然要去到地方挤不下，那便换个地方，此其二。下文给出
+对应两种思路将的两种方法。</p>
+<h3>用链表解决碰撞</h3>
+<p>既然要使得一个位置能存储多个元素，我们便将要存储到这一位置的多个元素串成
+链表，并存储链表头，是为链表解决碰撞法。如图：</p>
+<p><img alt="" src="http://www.roading.org/images/2011-11/image_thumb1.png" /></p>
+<p>这个方法简单明了，但是效率方面可能要打折扣 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 哈希表（Hash Tables）（2）">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 哈希表（1）">哈希表（1）</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-08T22:18:00">
+                周二 08 十一月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="hash tables&nbsp;&nbsp;算法导论&nbsp;&nbsp;散列表&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to 散列表" href="http://www.roading.org/tag/san-lie-biao.html">散列表</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <h3>直接寻址表（Direct-address tables）</h3>
+<p>假设有一组元素，每个元素的Key值都包含在范围U={0,1,2,3,…m-1}中。如果这个
+值m不是太大，且这一组元素的Key值都不相同，我们用key值来直接决定元素或指
+向元素指针的存储位置（slot,我将其翻译为位置而不是狭缝，槽或…），这就是直 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 哈希表（1）">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html" rel="bookmark"
+                           title="Permalink to Chapter 10 Exercises and Problems (2)">Chapter 10 Exercises and Problems (2)</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-06T17:28:00">
+                周日 06 十一月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="Exercises&nbsp;&nbsp;算法导论&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to Exercises" href="http://www.roading.org/tag/exercises.html">Exercises</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <h3>Exercises 10.3-4</h3>
+<blockquote>
+<p>It is often desirable to keep all elements of a doubly linked list compact &gt;in storage, using ...</p></blockquote>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html" rel="bookmark"
+                           title="Permalink to Chapter 10 Exercises and Problems (2)">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html" rel="bookmark"
+                           title="Permalink to Chapter 10 Exercises（1）">Chapter 10 Exercises（1）</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-05T14:49:00">
+                周六 05 十一月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="Exercises&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to Exercises" href="http://www.roading.org/tag/exercises.html">Exercises</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <h3>Exercises 10.1-2★</h3>
+<blockquote>
+<p>Explain how to implement two stacks in one array <em>A</em>[<em>1</em> ‥ <em>n</em>] in such a
+way that ...</p></blockquote>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html" rel="bookmark"
+                           title="Permalink to Chapter 10 Exercises（1）">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -270,6 +259,8 @@ as a nearly completely ...</p></blockquote>
     <li class=""><a href="http://www.roading.org/category/introduction-to-algorithm-third-edition3.html">3</a></li>
     <li class="active"><a href="http://www.roading.org/category/introduction-to-algorithm-third-edition4.html">4</a></li>
     <li class=""><a href="http://www.roading.org/category/introduction-to-algorithm-third-edition5.html">5</a></li>
+    <li class=""><a href="http://www.roading.org/category/introduction-to-algorithm-third-edition6.html">6</a></li>
+    <li class=""><a href="http://www.roading.org/category/introduction-to-algorithm-third-edition7.html">7</a></li>
     <li class="next"><a href="http://www.roading.org/category/introduction-to-algorithm-third-edition5.html">Next &rarr;</a></li>
 </ul>
 </div>

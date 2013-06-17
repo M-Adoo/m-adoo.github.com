@@ -35,6 +35,72 @@
                     <ul id="posts-list">
             <li><article class="hentry">    
                 <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/vc%e5%86%85%e5%ad%98%e5%af%b9%e9%bd%90%e5%87%86%e5%88%99%ef%bc%88memory-alignment%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to VC内存对齐准则（Memory alignment）">VC内存对齐准则（Memory alignment）</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-24T12:42:00">
+                周四 24 十一月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;Memory alignment&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to Memory alignment" href="http://www.roading.org/tag/memory-alignment.html">Memory alignment</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <p>本文所有内容在建立在一个前提下：使用VC编译器。着重点在于：VC的内存对齐准则；同样的数据，
+不同的排列有不同的大小，另外在有虚函数或虚拟继承情况下又有如何影响？</p>
+<h3>内存对齐？！What？Why?</h3>
+<p>对于一台32位的机器来说如何才能发挥它的最佳存取效率呢？当然是每次都读4字节（32bit）,
+这样才可以让它的bus处于最高效率。实际上它也是这么做的，即使你只需要一个字节，它也是
+读一个机器字长（这儿是32bit）。更重要的是 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/vc%e5%86%85%e5%ad%98%e5%af%b9%e9%bd%90%e5%87%86%e5%88%99%ef%bc%88memory-alignment%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to VC内存对齐准则（Memory alignment）">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/c%e7%b1%bb%e5%af%b9%e8%b1%a1%e7%9a%84%e5%a4%a7%e5%b0%8f.html" rel="bookmark"
+                           title="Permalink to C++类对象的大小">C++类对象的大小</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-24T12:41:00">
+                周四 24 十一月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <h3>一个实例引出的思考</h3>
+<div class="codehilite"><pre><span class="k">class</span> <span class="nc">X</span><span class="p">{};</span>
+<span class="k">class</span> <span class="nc">Y</span><span class="o">:</span><span class="k">virtual</span> <span class="k">public</span> <span class="n">X</span><span class="p">{};</span>
+<span class="k">class</span> <span class="nc">Z</span><span class="o">:</span><span class="k">virtual</span> <span class="k">public</span> <span class="n">X</span><span class="p">{};</span>
+<span class="k">class</span> <span class="nc">A</span><span class="o">:</span><span class="k">public</span> <span class="n">Y</span><span class="p">,</span> <span class="k">public</span> <span class="n">Z</span><span class="p">{};</span>
+</pre></div>
+<p>猜猜sizeof上面各个类都为多少 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e7%b1%bb%e5%af%b9%e8%b1%a1%e7%9a%84%e5%a4%a7%e5%b0%8f.html" rel="bookmark"
+                           title="Permalink to C++类对象的大小">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
                     <h1><a href="http://www.roading.org//develop/cpp/%e5%91%bd%e5%90%8d%e8%bf%94%e5%9b%9e%e5%80%bc%e4%bc%98%e5%8c%96%e5%92%8c%e6%88%90%e5%91%98%e5%88%9d%e5%a7%8b%e5%8c%96%e9%98%9f%e5%88%97.html" rel="bookmark"
                            title="Permalink to 命名返回值优化和成员初始化队列">命名返回值优化和成员初始化队列</a></h1>
                 </header>
@@ -199,76 +265,6 @@
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 桶排序（Bucket sort）">桶排序（Bucket sort）</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-10-04T14:23:00">
-                周二 04 十月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;桶排序&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to 桶排序" href="http://www.roading.org/tag/tong-pai-xu.html">桶排序</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <h3>算法模型</h3>
-<ol>
-<li>桶排序假设待排序的一组数统一的分布在一个范围中，并将这一范围划分成几个
-    子范围，也就是桶。</li>
-<li>将待排序的一组数，分档规入这些子桶。并将桶中的数据进行排序。</li>
-<li>将各个桶中的数据有序的合并起来。</li>
-</ol>
-<p>仔细想一想，这是不是一种“分治”策略呢？再仔细想一想，计数排序是不是桶排序的
-一种特化呢？</p>
-<h3>复杂度：</h3>
-<p>很显然桶排序的时间复杂度，取决与对各个桶之间数据进行排序的时间复杂度，因为 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 桶排序（Bucket sort）">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 第八章（3） 基数排序（Radix Sort）">第八章（3） 基数排序（Radix Sort）</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-10-02T16:37:00">
-                周日 02 十月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;快速排序&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to 快速排序" href="http://www.roading.org/tag/kuai-su-pai-xu.html">快速排序</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <h3>算法模型</h3>
-<p>基数排序是一种用在老式穿卡机上的算法。至于穿卡机是怎么使用基数排序的，你可以
-参考算法导论第八章的描述。</p>
-<p>在之前两种比较排序——合并排序与快速排序中我们使用一种“分而治之”的策略，基数排
-序则使用另一种与之有有异曲同工之妙的策略。无论是合并排序还是快速排序，我们讲
-究的是在数组级别的“分而治之”；而基数排序我们讲究的是在元素级别的“分而治之”，
-例如我们将一个三位数分成，个位，十位 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 第八章（3） 基数排序（Radix Sort）">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
             </ul><!-- /#posts-list -->
                 <div class="pagination">
 <ul>
@@ -277,6 +273,7 @@
     <li class=""><a href="http://www.roading.org/tag/c2.html">2</a></li>
     <li class="active"><a href="http://www.roading.org/tag/c3.html">3</a></li>
     <li class=""><a href="http://www.roading.org/tag/c4.html">4</a></li>
+    <li class=""><a href="http://www.roading.org/tag/c5.html">5</a></li>
     <li class="next"><a href="http://www.roading.org/tag/c4.html">Next &rarr;</a></li>
 </ul>
 </div>

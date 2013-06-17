@@ -35,233 +35,226 @@
                     <ul id="posts-list">
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e5%91%bd%e5%90%8d%e8%bf%94%e5%9b%9e%e5%80%bc%e4%bc%98%e5%8c%96%e5%92%8c%e6%88%90%e5%91%98%e5%88%9d%e5%a7%8b%e5%8c%96%e9%98%9f%e5%88%97.html" rel="bookmark"
-                           title="Permalink to 命名返回值优化和成员初始化队列">命名返回值优化和成员初始化队列</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to new expression、operator new和placement new——三个妞（new）的故事（2）">new expression、operator new和placement new——三个妞（new）的故事（2）</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-11-24T12:40:00">
+        <abbr class="published" title="2011-12-05T15:19:00">
+                周一 05 十二月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <h3>两个 delete 后的问题</h3>
+<p>最近在网上看到两个关于指针 delete 后的问题。第一种情况：</p>
+<div class="codehilite"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">;</span>
+<span class="k">delete</span> <span class="n">p</span><span class="p">;</span>
+<span class="k">delete</span> <span class="n">p</span><span class="p">;</span><span class="c1">// p为什么能delete两次，而程序运行的时候还不报错。</span>
+</pre></div>
+<p>第二种情况：</p>
+<div class="codehilite"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">p ...</span></pre></div>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to new expression、operator new和placement new——三个妞（new）的故事（2）">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to new expression、operator new 和 placement new——三个妞（new）的故事（1）">new expression、operator new 和 placement new——三个妞（new）的故事（1）</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-12-02T23:35:00">
+                周五 02 十二月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <p>之前虽然一直知道有new expression、operator new和placement new，但对于这三个“new”,
+却不甚了了，这些天从《深度探索C++对象模型》读到new和delete，特意结合《C++ Primer》
+写下这篇笔记，以作总结。三个虽然都是“妞”（new ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to new expression、operator new 和 placement new——三个妞（new）的故事（1）">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html" rel="bookmark"
+                           title="Permalink to 构造、复制、析构语意学">构造、复制、析构语意学</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-12-01T22:04:00">
+                周四 01 十二月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <p>一种所谓的Plain OI’Data声明形式：</p>
+<p>:::C++
+  struct Point {
+      float x,y,z;
+  };</p>
+<p>概念上来讲，对于一段这样的C++代码,编译器会为之合成一个默认构造函数、
+复制构造函数、析构函数、赋值操作符。然而实际上编译器会分析这段代码，
+并给<code>Point ...</code></p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html" rel="bookmark"
+                           title="Permalink to 构造、复制、析构语意学">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/%e5%87%a0%e7%82%b9%e7%b1%bb%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99.html" rel="bookmark"
+                           title="Permalink to 几点类设计原则">几点类设计原则</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-30T16:04:00">
+                周三 30 十一月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <p><strong>1.即使是一个抽象基类，如果它有非静态数据成员，也应该给它提供一
+个带参数的构造函数</strong>，来初始化它的数据成员。或许你可以通过其派生
+类来初始化它的数据成员（假如nostatic data member为publish或
+protected）,但这样做的后果则是破坏了数据的封装性，使类的维护和修
+改更加困难。由此引申，类的data member应当被初始化，且只在其构造函
+数或其member ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%87%a0%e7%82%b9%e7%b1%bb%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99.html" rel="bookmark"
+                           title="Permalink to 几点类设计原则">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/c%e4%b9%8b%e8%99%9a%e5%87%bd%e6%95%b0virtual-member-functions.html" rel="bookmark"
+                           title="Permalink to C++之虚函数(Virtual Member Functions)">C++之虚函数(Virtual Member Functions)</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-29T19:50:00">
+                周二 29 十一月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <p>《深度探索C++对象模型》是这样来说多态的:</p>
+<blockquote>
+<p>在C++中,多态表示“以一个public base
+class的指针（或引用），寻址出一个derived class object”的意思。</p>
+</blockquote>
+<h3>消极多态与积极多态</h3>
+<p>用基类指针来寻址继承类的对象，我们可以这样：</p>
+<div class="codehilite"><pre><span class="n">Point</span> <span class="n">ptr</span><span class="o">=</span><span class="k">new ...</span></pre></div>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e4%b9%8b%e8%99%9a%e5%87%bd%e6%95%b0virtual-member-functions.html" rel="bookmark"
+                           title="Permalink to C++之虚函数(Virtual Member Functions)">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/c%e4%b9%8b%e6%88%90%e5%91%98%e5%87%bd%e6%95%b0%e8%b0%83%e7%94%a8.html" rel="bookmark"
+                           title="Permalink to C++之成员函数调用">C++之成员函数调用</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-27T15:14:00">
+                周日 27 十一月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <p>c++支持三种类型的成员函数，分别为static,nostatic,virtual。每一种调用方式都不尽相同。</p>
+<h3>非静态成员函数（Nonstatic Member Functions）</h3>
+<p>保证nostatic member function至少必须和一般的nonmember function有相同的效率是C++的设计准则之一。事实上在c++中非静态成员函数（nostatic member function ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e4%b9%8b%e6%88%90%e5%91%98%e5%87%bd%e6%95%b0%e8%b0%83%e7%94%a8.html" rel="bookmark"
+                           title="Permalink to C++之成员函数调用">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/c%e5%af%b9%e8%b1%a1%e7%9a%84%e6%95%b0%e6%8d%ae%e6%88%90%e5%91%98.html" rel="bookmark"
+                           title="Permalink to C++对象的数据成员">C++对象的数据成员</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-24T13:00:00">
                 周四 24 十一月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="Inside The C++ Object Model&nbsp;&nbsp;data object&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+		<a title="permalink to data object" href="http://www.roading.org/tag/data-object.html">data object</a>
 	    </abbr>
 	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 </div><!-- /.post-info -->
-                <h3>命名返回值优化</h3>
-<p>对于一个如<code>foo()</code>这样的函数，它的每一个返回分支都返回相同的对象，编译器
-有可能对其做Named return Value优化（下文都简称NRV优化），方法是以一个参
-数<code>result</code>取代返回对象。</p>
-<p><code>foo()</code>的原型：</p>
-<div class="codehilite"><pre><span class="n">X</span> <span class="nf">foo</span><span class="p">()</span> 
-<span class="p">{</span> 
-    <span class="n">X</span> <span class="n">xx ...</span></pre></div>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%91%bd%e5%90%8d%e8%bf%94%e5%9b%9e%e5%80%bc%e4%bc%98%e5%8c%96%e5%92%8c%e6%88%90%e5%91%98%e5%88%9d%e5%a7%8b%e5%8c%96%e9%98%9f%e5%88%97.html" rel="bookmark"
-                           title="Permalink to 命名返回值优化和成员初始化队列">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e6%8b%b7%e8%b4%9d%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%ef%bc%88copy-constuctor%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 拷贝构造函数（copy constuctor）">拷贝构造函数（copy constuctor）</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-11-15T19:44:00">
-                周二 15 十一月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
-</div><!-- /.post-info -->
-                <h3>拷贝构造函数（copy constuctor）</h3>
-<p>通常C++初级程序员会认为当一个类为没有定义拷贝构造函数的时候，编译器会
-为其合成一个，答案是否定的。编译器只有在必要的时候在合成拷贝构造函数。
-那么编译器什么时候合成，什么时候不合成，合成的拷贝构造函数在不同情况下
-分别如何工作呢？这是本文的重点。</p>
-<h3>拷贝构造函数的定义</h3>
-<p>有一个参数的类型是其类类型的构造函数是为拷贝构造函数。如下：</p>
-<div class="codehilite"><pre><span class="n">X</span><span class="o">::</span><span class="n">X</span><span class="p">(</span> <span class="k">const ...</span></pre></div>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%8b%b7%e8%b4%9d%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%ef%bc%88copy-constuctor%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 拷贝构造函数（copy constuctor）">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
-                           title="Permalink to 哈希表的C++模板实现">哈希表的C++模板实现</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-11-13T16:36:00">
-                周日 13 十一月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;hash tables&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <p>采用引用计数来解决指针管理问题。开放地址、双重哈希来解决碰撞和探测问题，
-实现了哈希表的创建、查找、插入，复制控制，[]操作符… 但总觉得欠缺点什么。</p>
-<p>源码：</p>
-<div class="codehilite"><pre><span class="c1">//hash.h </span>
-<span class="c1">//2011/11/13   By Adoo</span>
-<span class="cp">#ifndef  HASH_H</span>
-<span class="cp">#define ...</span></pre></div>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
-                           title="Permalink to 哈希表的C++模板实现">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%85%a5c%e9%bb%98%e8%ae%a4%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0.html" rel="bookmark"
-                           title="Permalink to 深入C++构造函数">深入C++构造函数</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-11-12T22:15:00">
-                周六 12 十一月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
-</div><!-- /.post-info -->
-                <p>通常很多C++程序员存在两种误解：</p>
+                <h3>数据成员的布局</h3>
+<p>对于一个类来说它的对象中只存放非静态的数据成员,但是除此之外，编译器为了实现virtual功能还会合成一些其它成员插入到对象中。我们来看看这些成员的布局。</p>
+<h3>C++ 标准的规定</h3>
 <ul>
-<li>没有定义默认构造函数的类都会被编译器生成一个默认构造函数。</li>
-<li>编译器生成的默认构造函数会明确初始化类中每一个数据成员。</li>
-</ul>
-<p>在读《深度探索C++对象模型》之前，我一直停留在上述二种误解上，所幸的是
-Lippman为我破除了藩篱。下面的部分我将随《深度探索C++对象模型》对C++默
-认构造函数一探究竟。</p>
-<p>C++标准规定：如果类的设计者并未为类定义任何构造函数 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%85%a5c%e9%bb%98%e8%ae%a4%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0.html" rel="bookmark"
-                           title="Permalink to 深入C++构造函数">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/c%e5%af%b9%e8%b1%a1%e9%9d%a2%e9%9d%a2%e8%a7%82.html" rel="bookmark"
-                           title="Permalink to C++对象面面观">C++对象面面观</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-11-11T19:36:00">
-                周五 11 十一月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
-</div><!-- /.post-info -->
-                <p>学习C++应该看过不少关于C与C++的口水贴，以及关于各种对比C与C++效率比较的帖子，
-最有影响力的恐怕当属linus对C++的炮轰——《<a href="http://blog.csdn.net/turingbook/article/details/1775488">糟糕程序员的垃圾语言</a>》。但无论如
-何，我正喜欢着这样一种垃圾，我当然对linus充满敬意，但这不妨碍我口食垃圾而对其
-仰慕。</p>
-<p>无需太在意站在山巅的巨人们的言论，每个人都有不同的道路来追求真理。与其听着Linus
-的嗤笑之声，不妨跟随Lippman一起探索C++对象模型的 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e5%af%b9%e8%b1%a1%e9%9d%a2%e9%9d%a2%e8%a7%82.html" rel="bookmark"
-                           title="Permalink to C++对象面面观">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 哈希表（Hash Tables）（2）">哈希表（Hash Tables）（2）</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-11-09T15:59:00">
-                周三 09 十一月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="hash tables&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <h3>解决碰撞</h3>
-<p>解决碰撞无非两种思路：使得一个位置能存储多个元素，此其一；不限定一个元素
-只能存储到一个位置，既然要去到地方挤不下，那便换个地方，此其二。下文给出
-对应两种思路将的两种方法。</p>
-<h3>用链表解决碰撞</h3>
-<p>既然要使得一个位置能存储多个元素，我们便将要存储到这一位置的多个元素串成
-链表，并存储链表头，是为链表解决碰撞法。如图：</p>
-<p><img alt="" src="http://www.roading.org/images/2011-11/image_thumb1.png" /></p>
-<p>这个方法简单明了，但是效率方面可能要打折扣 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 哈希表（Hash Tables）（2）">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 哈希表（1）">哈希表（1）</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-11-08T22:18:00">
-                周二 08 十一月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="hash tables&nbsp;&nbsp;算法导论&nbsp;&nbsp;散列表&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to 散列表" href="http://www.roading.org/tag/san-lie-biao.html">散列表</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <h3>直接寻址表（Direct-address tables）</h3>
-<p>假设有一组元素，每个元素的Key值都包含在范围U={0,1,2,3,…m-1}中。如果这个
-值m不是太大，且这一组元素的Key值都不相同，我们用key值来直接决定元素或指
-向元素指针的存储位置（slot,我将其翻译为位置而不是狭缝，槽或…），这就是直 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 哈希表（1）">Read more→</a>	
+<li>在同一个Access Section（也就是private,public,protected片段）中，
+    要求较晚出现的数据成员处在较大的内存中。这意味着同一个片段中的数据成员并不需要紧密相连，编译器所做的成员对齐就是一个例子。</li>
+<li>允许编译器将多个Acess Section的顺序自由排列，而不必在乎它们的声明
+    次序 ...</li></ul>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e5%af%b9%e8%b1%a1%e7%9a%84%e6%95%b0%e6%8d%ae%e6%88%90%e5%91%98.html" rel="bookmark"
+                           title="Permalink to C++对象的数据成员">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>

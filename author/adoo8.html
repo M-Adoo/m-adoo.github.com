@@ -35,13 +35,13 @@
                     <ul id="posts-list">
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to new expression、operator new和placement new——三个“妞（new）”的故事（3）">new expression、operator new和placement new——三个“妞（new）”的故事（3）</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="bookmark"
+                           title="Permalink to 对象的构造和析构">对象的构造和析构</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-12-05T15:49:00">
-                周一 05 十二月 2011
+        <abbr class="published" title="2011-12-06T13:35:00">
+                周二 06 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -54,203 +54,214 @@
 	    </abbr>
 	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 </div><!-- /.post-info -->
-                <h3>placement operator new</h3>
-<p>placement operator new用来在指定地址上构造对象，要注意的是，它并不分配内存，仅仅是
-对指定地址调用构造函数。其调用方式如下：</p>
-<div class="codehilite"><pre><span class="n">point</span> <span class="o">*</span><span class="n">pt</span><span class="o">=</span><span class="k">new</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="n">point3d</span><span class="p">;</span>
-</pre></div>
-<p>观其名字可知，它是operator new的一个重载版本。它的实现方式异常简单 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to new expression、operator new和placement new——三个“妞（new）”的故事（3）">Read more→</a>	
+                <p>一般而言，构造函数被安插在对象的定义处，而析构函数被安插在对象生命
+周期结束前：</p>
+<p>:::C++
+  // Pseudo C++ Code<br />
+  {<br />
+     Point point;<br />
+     // point.Point::Point() 一般被安插在这儿<br />
+     ...<br />
+     // point.Point::~Point() 一般被安插在这儿 
+  }  </p>
+<p>当代码有一个以上的离开点的时候，析构函数则必须放在对象被构造之后的每 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="bookmark"
+                           title="Permalink to 对象的构造和析构">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html" rel="bookmark"
-                           title="Permalink to Qt Quick 笔记（1）：初识 Qt Quick">Qt Quick 笔记（1）：初识 Qt Quick</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/%e6%8b%b7%e8%b4%9d%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%ef%bc%88copy-constuctor%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 拷贝构造函数（copy constuctor）">拷贝构造函数（copy constuctor）</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2012-02-23T16:45:00">
-                周四 23 二月 2012
+        <abbr class="published" title="2011-11-15T19:44:00">
+                周二 15 十一月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="qml&nbsp;&nbsp;QT&nbsp;&nbsp;qt quick&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to qml" href="http://www.roading.org/tag/qml.html">qml</a>
-		<a title="permalink to QT" href="http://www.roading.org/tag/qt.html">QT</a>
-		<a title="permalink to qt quick" href="http://www.roading.org/tag/qt-quick.html">qt quick</a>
-	    </abbr>
-	<abbr>In <a title="permalink to QT" href="http://www.roading.org/category/qt.html">QT</a></abbr>
-</div><!-- /.post-info -->
-                <h3>废语开篇</h3>
-<p>在大二的时候思索着学习一界面库，为此煞费脑经。其中有试过十来天的Qt学习,不过最后为
-WPF而沦陷，确实WPF界面与逻辑的分离让我很是向往。不过可惜的是WPF并不原生支持与C++
-的交互，以致我不得不学习一些C# 。又四处求医问药——获得native code与manage code交互
-的良方。这之间寻寻觅觅，虽然也算终于达成所愿——可以用C++与WPF 来完成一些小程序编写 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html" rel="bookmark"
-                           title="Permalink to Qt Quick 笔记（1）：初识 Qt Quick">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/vc%e5%86%85%e5%ad%98%e5%af%b9%e9%bd%90%e5%87%86%e5%88%99%ef%bc%88memory-alignment%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to VC内存对齐准则（Memory alignment）">VC内存对齐准则（Memory alignment）</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-11-24T12:42:00">
-                周四 24 十一月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;Memory alignment&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to Memory alignment" href="http://www.roading.org/tag/memory-alignment.html">Memory alignment</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
 	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 </div><!-- /.post-info -->
-                <p>本文所有内容在建立在一个前提下：使用VC编译器。着重点在于：VC的内存对齐准则；同样的数据，
-不同的排列有不同的大小，另外在有虚函数或虚拟继承情况下又有如何影响？</p>
-<h3>内存对齐？！What？Why?</h3>
-<p>对于一台32位的机器来说如何才能发挥它的最佳存取效率呢？当然是每次都读4字节（32bit）,
-这样才可以让它的bus处于最高效率。实际上它也是这么做的，即使你只需要一个字节，它也是
-读一个机器字长（这儿是32bit）。更重要的是 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/vc%e5%86%85%e5%ad%98%e5%af%b9%e9%bd%90%e5%87%86%e5%88%99%ef%bc%88memory-alignment%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to VC内存对齐准则（Memory alignment）">Read more→</a>	
+                <h3>拷贝构造函数（copy constuctor）</h3>
+<p>通常C++初级程序员会认为当一个类为没有定义拷贝构造函数的时候，编译器会
+为其合成一个，答案是否定的。编译器只有在必要的时候在合成拷贝构造函数。
+那么编译器什么时候合成，什么时候不合成，合成的拷贝构造函数在不同情况下
+分别如何工作呢？这是本文的重点。</p>
+<h3>拷贝构造函数的定义</h3>
+<p>有一个参数的类型是其类类型的构造函数是为拷贝构造函数。如下：</p>
+<div class="codehilite"><pre><span class="n">X</span><span class="o">::</span><span class="n">X</span><span class="p">(</span> <span class="k">const ...</span></pre></div>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%8b%b7%e8%b4%9d%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%ef%bc%88copy-constuctor%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 拷贝构造函数（copy constuctor）">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html" rel="bookmark"
-                           title="Permalink to Python 基础入门笔记(2)——函数、模块和包">Python 基础入门笔记(2)——函数、模块和包</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html" rel="bookmark"
+                           title="Permalink to 构造、复制、析构语意学">构造、复制、析构语意学</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2012-04-29T15:27:00">
-                周日 29 四月 2012
+        <abbr class="published" title="2011-12-01T22:04:00">
+                周四 01 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="python&nbsp;&nbsp;代码组织&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to python" href="http://www.roading.org/tag/python.html">python</a>
-		<a title="permalink to 代码组织" href="http://www.roading.org/tag/dai-ma-zu-zhi.html">代码组织</a>
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
-	<abbr>In <a title="permalink to A byte of python" href="http://www.roading.org/category/a-byte-of-python.html">A byte of python</a></abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 </div><!-- /.post-info -->
-                <p>函数、模块和包对于代码的复用都有非常重要的意义，当然面向对象中的类其实在代码的复用性上也有举足轻重的地位。前天睡前看了《a byte of python》中关于函数、模块和包的这个部分，今天又查了查官网文档以及网上的其它一些资料，把一些疑惑给解决。现在写一下关于这部分的笔记，用以加强记忆同时以备后用。</p>
-<h3>函数</h3>
-<p>python 中用关键字def来定义函数。一个完整的函数定义应该以关键字def
-开始后面紧跟着函数名和用括号括起来的形参列表，并以一个冒号作为该行的结尾 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html" rel="bookmark"
-                           title="Permalink to Python 基础入门笔记(2)——函数、模块和包">Read more→</a>	
+                <p>一种所谓的Plain OI’Data声明形式：</p>
+<p>:::C++
+  struct Point {
+      float x,y,z;
+  };</p>
+<p>概念上来讲，对于一段这样的C++代码,编译器会为之合成一个默认构造函数、
+复制构造函数、析构函数、赋值操作符。然而实际上编译器会分析这段代码，
+并给<code>Point ...</code></p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html" rel="bookmark"
+                           title="Permalink to 构造、复制、析构语意学">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b03.html" rel="bookmark"
-                           title="Permalink to Python 基础入门笔记(3)——内建数据结构">Python 基础入门笔记(3)&#8212;&#8212;内建数据结构</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html" rel="bookmark"
+                           title="Permalink to 模板二事">模板二事</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2012-05-01T15:11:00">
-                周二 01 五月 2012
+        <abbr class="published" title="2011-12-07T17:00:00">
+                周三 07 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="data structure&nbsp;&nbsp;python&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;template instantiation&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to data structure" href="http://www.roading.org/tag/data-structure.html">data structure</a>
-		<a title="permalink to python" href="http://www.roading.org/tag/python.html">python</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to template instantiation" href="http://www.roading.org/tag/template-instantiation.html">template instantiation</a>
 	    </abbr>
-	<abbr>In <a title="permalink to A byte of python" href="http://www.roading.org/category/a-byte-of-python.html">A byte of python</a></abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 </div><!-- /.post-info -->
-                <p>Python 有四个内建的数据结构——list、tuple、dictionary、set。</p>
-<h3>列表（List）</h3>
-<p>list 是一个可以在其中存储一系列项目的数据结构。list
-的项目之间需用逗号分开，并用一对中括号括将所有的项目括起来，以表明这是一个
-list 。下例用以展示 list 的一些基本操作：</p>
-<div class="codehilite"><pre><span class="c">#定义一个 list ...</span></pre></div>
-                 <a  class="read-more" href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b03.html" rel="bookmark"
-                           title="Permalink to Python 基础入门笔记(3)——内建数据结构">Read more→</a>	
+                <h3>模板的实例化</h3>
+<p>一个模板只有被使用到，才会被实例化，否则不会被实例化。对于一个实例化
+后的模板来说，未被调用的成员函数将不会被实例化，只有成员函数被使用时，
+C++标准才要求实例化他们。其原因，有两点：</p>
+<ul>
+<li>空间和时间效率的考虑，如果模板类中有100个成员函数，对某个特定类型
+    只有2个函数会被使用，针对另一个特定类型只会使用3个，那么如果将剩
+    余的195个函数实例化将浪费大量的时间和空间。</li>
+<li>使模板有最大的适用性 ...</li></ul>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html" rel="bookmark"
+                           title="Permalink to 模板二事">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b04.html" rel="bookmark"
-                           title="Permalink to Python 基础入门笔记(4)">Python 基础入门笔记(4)</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%85%a5c%e9%bb%98%e8%ae%a4%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0.html" rel="bookmark"
+                           title="Permalink to 深入C++构造函数">深入C++构造函数</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2012-05-02T17:12:00">
-                周三 02 五月 2012
+        <abbr class="published" title="2011-11-12T22:15:00">
+                周六 12 十一月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="python&nbsp;&nbsp;面向对象&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to python" href="http://www.roading.org/tag/python.html">python</a>
-		<a title="permalink to 面向对象" href="http://www.roading.org/tag/mian-xiang-dui-xiang.html">面向对象</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
-	<abbr>In <a title="permalink to A byte of python" href="http://www.roading.org/category/a-byte-of-python.html">A byte of python</a></abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 </div><!-- /.post-info -->
-                <p>作为一门面向对象语言，类和对象是 python的一个重要的概念。关于什么是面向对象和什么是面向对象过程，这里不做赘言。
-面向对象基本思想上python 并没有和C++有太大异同，这里主要对一些语法和细节上的东西做一些记录。但 python 与 C++
-在对象的范围上有很大不同， python的对象定义更广义——<strong>python认为万物皆对象，即便类也是一个对象</strong>。</p>
-<p>在 python中数据成员被称为字段(fields ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b04.html" rel="bookmark"
-                           title="Permalink to Python 基础入门笔记(4)">Read more→</a>	
+                <p>通常很多C++程序员存在两种误解：</p>
+<ul>
+<li>没有定义默认构造函数的类都会被编译器生成一个默认构造函数。</li>
+<li>编译器生成的默认构造函数会明确初始化类中每一个数据成员。</li>
+</ul>
+<p>在读《深度探索C++对象模型》之前，我一直停留在上述二种误解上，所幸的是
+Lippman为我破除了藩篱。下面的部分我将随《深度探索C++对象模型》对C++默
+认构造函数一探究竟。</p>
+<p>C++标准规定：如果类的设计者并未为类定义任何构造函数 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%85%a5c%e9%bb%98%e8%ae%a4%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0.html" rel="bookmark"
+                           title="Permalink to 深入C++构造函数">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html" rel="bookmark"
-                           title="Permalink to Python 基础入门笔记(5)">Python 基础入门笔记(5)</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html" rel="bookmark"
+                           title="Permalink to 总结·亦为引言">总结·亦为引言</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2012-05-03T16:05:00">
-                周四 03 五月 2012
+        <abbr class="published" title="2011-12-09T21:39:00">
+                周五 09 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="python&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="Inside The C++ Object Model&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to python" href="http://www.roading.org/tag/python.html">python</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <p>《深度探索C++对象模型》终于在昨天写完了最后一篇笔记，前前后后花费了一个
+月左右，期间学到了很多，很感激书的作者和译者。之后的日子，可以将精力转
+回《算法导论》和一些非技术类的书上来了。</p>
+<p>11月11号开始看《深度探索C++对象模型》一书，到二十八号看完，共计花费了十
+八天。不过到做完全书的笔记则是昨天的事了 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html" rel="bookmark"
+                           title="Permalink to 总结·亦为引言">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/c%e4%b9%8b%e6%88%90%e5%91%98%e5%87%bd%e6%95%b0%e8%b0%83%e7%94%a8.html" rel="bookmark"
+                           title="Permalink to C++之成员函数调用">C++之成员函数调用</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-27T15:14:00">
+                周日 27 十一月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
-	<abbr>In <a title="permalink to A byte of python" href="http://www.roading.org/category/a-byte-of-python.html">A byte of python</a></abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 </div><!-- /.post-info -->
-                <h3>Pickle</h3>
-<p>python 支持一些常见模式的文件处理方式，通过read 、readline或 write
-函数来读写文件，同时它还支持几种模式的读写方式，这些并没有什么特别的，略去不说。
-不过python的文件处理还有一个非常有用的功能——Pickle。</p>
-<p>Pickle是python标准库提供的一个模块，它能将任意对象存储到一个文件中，
-并还能从这个文件中恢复这个对象，比如：</p>
-<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">pickle</span>
-<span class="n">fruitlist</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;apple ...</span></pre></div>
-                 <a  class="read-more" href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html" rel="bookmark"
-                           title="Permalink to Python 基础入门笔记(5)">Read more→</a>	
+                <p>c++支持三种类型的成员函数，分别为static,nostatic,virtual。每一种调用方式都不尽相同。</p>
+<h3>非静态成员函数（Nonstatic Member Functions）</h3>
+<p>保证nostatic member function至少必须和一般的nonmember function有相同的效率是C++的设计准则之一。事实上在c++中非静态成员函数（nostatic member function ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e4%b9%8b%e6%88%90%e5%91%98%e5%87%bd%e6%95%b0%e8%b0%83%e7%94%a8.html" rel="bookmark"
+                           title="Permalink to C++之成员函数调用">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -258,7 +269,6 @@ list 。下例用以展示 list 的一些基本操作：</p>
                 <div class="pagination">
 <ul>
     <li class="prev"><a href="http://www.roading.org/author/adoo7.html">&larr; Previous</a></li>
-		<li class=""><a href="http://www.roading.org/author/adoo3.html">3</a></li>
 		<li class=""><a href="http://www.roading.org/author/adoo4.html">4</a></li>
 		<li class=""><a href="http://www.roading.org/author/adoo5.html">5</a></li>
 		<li class=""><a href="http://www.roading.org/author/adoo6.html">6</a></li>
@@ -267,6 +277,7 @@ list 。下例用以展示 list 的一些基本操作：</p>
 		<li class=""><a href="http://www.roading.org/author/adoo9.html">9</a></li>
 		<li class=""><a href="http://www.roading.org/author/adoo10.html">10</a></li>
 		<li class=""><a href="http://www.roading.org/author/adoo11.html">11</a></li>
+		<li class=""><a href="http://www.roading.org/author/adoo12.html">12</a></li>
     <li class="next"><a href="http://www.roading.org/author/adoo9.html">Next &rarr;</a></li>
 </ul>
 </div>

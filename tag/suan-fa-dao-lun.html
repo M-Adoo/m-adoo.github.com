@@ -175,100 +175,100 @@ INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html" rel="bookmark"
-                           title="Permalink to 动态规划基础">动态规划基础</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html" rel="bookmark"
+                           title="Permalink to 算法导论——B-trees">算法导论——B-trees</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2012-03-19T17:47:00">
-                周一 19 三月 2012
+        <abbr class="published" title="2012-04-15T22:23:00">
+                周日 15 四月 2012
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="dynamic programming&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;DP&nbsp;&nbsp;">
+	    <abbr title="B-trees&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to dynamic programming" href="http://www.roading.org/tag/dynamic-programming.html">dynamic programming</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-		<a title="permalink to DP" href="http://www.roading.org/tag/dp.html">DP</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <p>前一篇笔记有过一个动态编程的实例——<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89rod-cutting.html">rod cutting</a>。这篇笔记主要了解动态
-规划的基础理论和弄清楚何时运用动态规划。对于何时来运用动态规划来寻得问
-题的解，取决于两个重要因素：最优子结构和重叠子问题。</p>
-<h3>最优子结构(Optimal substructure)</h3>
-<p>如果一个问题的最优解包含了它子问题的最优解，那么这个问题具有最优子结构。
-当一个问题包含有最优子结构时，往往暗示着这个问题应该使用动态规划来解决
-（当然，也可能意味着贪心算法是一种好的的解决办法，这一点会在16章讨论到）
-。</p>
-<p>可以依照一个共同的模式来发现最优子结构 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html" rel="bookmark"
-                           title="Permalink to 动态规划基础">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html" rel="bookmark"
-                           title="Permalink to 动态规划笔记（1）——Rod cutting">动态规划笔记（1）——Rod cutting</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2012-03-08T12:16:00">
-                周四 08 三月 2012
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="dynamic programming&nbsp;&nbsp;rod cutting&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to dynamic programming" href="http://www.roading.org/tag/dynamic-programming.html">dynamic programming</a>
-		<a title="permalink to rod cutting" href="http://www.roading.org/tag/rod-cutting.html">rod cutting</a>
+		<a title="permalink to B-trees" href="http://www.roading.org/tag/b-trees.html">B-trees</a>
 		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
 	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <p>动态规划（dynamic programming）,与“分治思想”有些相似，都是利用将问题分
-为子问题，并通过合并子问题的解来获得整个问题的解。于“分治”的不同之处在
-于，对于一个相同的子问题动态规划算法不会计算第二次，其实现原理是将每一
-个计算过的子问题的值保存在一个表中。</p>
-<p>动态规划一般被用于解决“最优解”问题。编写动态规划算法可以按照以下四个步 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html" rel="bookmark"
-                           title="Permalink to 动态规划笔记（1）——Rod cutting">Read more→</a>	
+                <p>B-trees(叫“B树”还是“B-树”？我还是用它的英文名吧)，是一种为磁盘或
+其它辅存设备而设计的平衡树。它与红黑树有些类似，但是在节省IO操作
+上比红黑树表现的更好。很多数据库系统会用B-trees或它的变形来存储
+信息。</p>
+<p>B-trees的特点是，一个结点可以有n个关键字，这些关键字把一段数据划
+分成n+1段，对应n+1个孩子 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html" rel="bookmark"
+                           title="Permalink to 算法导论——B-trees">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html" rel="bookmark"
-                           title="Permalink to C++实现红黑树，仿STL封装">C++实现红黑树，仿STL封装</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html" rel="bookmark"
+                           title="Permalink to 算法导论——平摊分析">算法导论——平摊分析</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-12-31T20:37:00">
-                周六 31 十二月 2011
+        <abbr class="published" title="2012-03-29T15:52:00">
+                周四 29 三月 2012
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="red black trees&nbsp;&nbsp;算法导论&nbsp;&nbsp;C++&nbsp;&nbsp;">
+	    <abbr title="Amortized Analysis&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to red black trees" href="http://www.roading.org/tag/red-black-trees.html">red black trees</a>
+		<a title="permalink to Amortized Analysis" href="http://www.roading.org/tag/amortized-analysis.html">Amortized Analysis</a>
 		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to C++" href="http://www.roading.org/tag/c.html">C++</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
 	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <p>在[<em>Chapter 13 Red-Black trees(红黑树)</em>][]这篇笔记中对红黑树的各种操作都有较详尽的伪码，
-相信使用C++来实现也并不是难事，我要做的是，在实现的基础上要进行一定的封装。当然风格嘛，
-自然参照STL，最终的结果就是要实现一个STL风格的红黑树模板。</p>
-<p>在C++泛型编程中两个重要的概念即是容器和迭代器。我的目的则是要实现一个与STL中的其他容器
-类似，但是以红黑树为基础的容器<code>RB_Tree ...</code></p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html" rel="bookmark"
-                           title="Permalink to C++实现红黑树，仿STL封装">Read more→</a>	
+                <p>平摊分析(Amortized Analysis)将数据结构的不同操作放到一起来考虑，而不是仅对某种操作的单一考虑。在平摊分析中，不会涉及概率问题。平摊分析可以用来证明，在一系列操作中，即使某个操作代价很大，但平均代价仍是很小的。本文记录三种平摊分析最常用的技术。</p>
+<h3>聚集分析(Aggregate analysis)</h3>
+<p>在聚集分析中，要证明<em>n</em>个操作(可以是不同种类的操作 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html" rel="bookmark"
+                           title="Permalink to 算法导论——平摊分析">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html" rel="bookmark"
+                           title="Permalink to 赫夫曼编码">赫夫曼编码</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2012-03-28T16:01:00">
+                周三 28 三月 2012
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="huffman codes&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to huffman codes" href="http://www.roading.org/tag/huffman-codes.html">huffman codes</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <p>赫夫曼编码(huffman codes)是一种非常有用的数据压缩方法，通常能将数据压
+缩20%\~90%。从具体问题出发，假设我们有一包含10000个字符的文件，这些字
+符仅由6个不同的字符组成，就设这6个字符分别为“abcdef”，下面的表给出了
+这6个字符在整个文件中的占比，和两种不同的编码方式。</p>
+<table>
+<thead>
+<tr>
+<th>--------------</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d ...</th></tr></thead></table>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html" rel="bookmark"
+                           title="Permalink to 赫夫曼编码">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -280,6 +280,8 @@ INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在
     <li class=""><a href="http://www.roading.org/tag/suan-fa-dao-lun2.html">2</a></li>
     <li class=""><a href="http://www.roading.org/tag/suan-fa-dao-lun3.html">3</a></li>
     <li class=""><a href="http://www.roading.org/tag/suan-fa-dao-lun4.html">4</a></li>
+    <li class=""><a href="http://www.roading.org/tag/suan-fa-dao-lun5.html">5</a></li>
+    <li class=""><a href="http://www.roading.org/tag/suan-fa-dao-lun6.html">6</a></li>
     <li class="next"><a href="http://www.roading.org/tag/suan-fa-dao-lun2.html">Next &rarr;</a></li>
 </ul>
 </div>
