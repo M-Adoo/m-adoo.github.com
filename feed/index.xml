@@ -53,11 +53,11 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 一个数据结构的规模，而且每个操作在每一级递归上只产生一次新的递归调用，那么
 对于一个大小为\( u \)的数据结构的操作有：
 \[ T(u) = T(\sqrt{u}) + O(1) \]
-令\( m = \lg{u} \), 有\( u = 2&lt;sup m="m"&gt;{m} \)。那么可以有：
-\[ T(2&lt;/sup&gt;) = T(2&lt;sup m="m"&gt;{m/2}) + O(1)\]
+令\( m = \lg{u} \), 有\( u = 2&lt;sup 2m="2m"&gt;{2m} \)。那么可以有：
+\[ T(2&lt;/sup&gt;) = T(2&lt;sup 2m="2m"&gt;{m/2}) + O(1)\]
 设\( S(m) = T(2&lt;/sup&gt;)\),可得新方程：
 \[ S(m) = S(m/2) + O(1)\] 
-可以得出\( S(m) = O(\lg m) \),回到\( T(u) \)上来，那么\( T(u) = T(2^{m})
+可以得出\( S(m) = O(\lg m) \),回到\( T(u) \)上来，那么\( T(u) = T(2^{2m})
 = S(m) = O(\lg m) = O(\lg{\lg u}) \)。&lt;/p&gt;
 &lt;p&gt;这个假设说明如果我们能够以递归方式以开平方的规模来缩小数据的规模大小，并在每
 一级递归上花费\( O(1)\)的时间的话，我们这个假设的数据结构的操作的复杂度将
@@ -129,8 +129,8 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 
 &lt;p&gt;复杂度
 \[ T(u) = 2T(\sqrt u) + O(1)\]
-设\( u = 2&lt;sup m="m"&gt;{m}\)
-\[ T(2&lt;/sup&gt;) = 2T(2&lt;sup m="m"&gt;{m/2}) + O(1)\]
+设\( u = 2&lt;sup 2m="2m"&gt;{2m}\)
+\[ T(2&lt;/sup&gt;) = 2T(2&lt;sup 2m="2m"&gt;{m/2}) + O(1)\]
 设\(S(m) = T(2&lt;/sup&gt;)\),得：
 \[S(m) = 2S(m/2) + O(1)\]
 \[T(u) = S(m) = \theta(m) = \theta(lg u)\]&lt;/p&gt;
