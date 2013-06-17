@@ -77,11 +77,11 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
     这种时候，&lt;em&gt;proto-vEB(u)&lt;/em&gt;包含两个属性&lt;ul&gt;
 &lt;li&gt;一个名为&lt;em&gt;summary&lt;/em&gt;指向&lt;em&gt;proto-vEB(\(\sqrt u\))&lt;/em&gt;的指针。&lt;/li&gt;
 &lt;li&gt;一个\( \sqrt{u} \)大的指针数组\( cluster[0...1] \)，其中每一个指
-针指向一个&lt;em&gt;proto-vEB(u)&lt;/em&gt;。&lt;/li&gt;
+针指向一个&lt;em&gt;proto-vEB&lt;/em&gt;(\( \sqrt u \))。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;如果&lt;em&gt;cluster&lt;/em&gt;的第&lt;em&gt;i&lt;/em&gt;个指针所指向的数据结构代表的集合含有元素，那么&lt;em&gt;i&lt;/em&gt;也
-    存在于&lt;em&gt;summary&lt;/em&gt;所指向的集合中，否则&lt;em&gt;i&lt;/em&gt;也不存在与&lt;em&gt;summary&lt;/em&gt;中。&lt;/li&gt;
+&lt;li&gt;如果&lt;em&gt;cluster&lt;/em&gt;的第&lt;em&gt;i&lt;/em&gt;个指针所指向的的集合含有元素，那么&lt;em&gt;i&lt;/em&gt;也   存在于
+    &lt;em&gt;summary&lt;/em&gt;所指向的集合中，否则&lt;em&gt;i&lt;/em&gt;也不存在与&lt;em&gt;summary&lt;/em&gt;中。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;对于一个\( u = 16 \)的集合\( \lbrace 2,3,4,5,7,14,15 \rbrace \)情况就是
 下面这样的：&lt;/p&gt;
@@ -165,7 +165,7 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 \[ = 2T(\sqrt u) + \theta(\lg u)\]
 用与前文类似的方法可以化得\( T(u) = \theta(\lg u\lg\lg u) \)&lt;/p&gt;
 &lt;h4&gt;插入元素&lt;/h4&gt;
-&lt;p&gt;一路向下递归插入，并将&lt;em&gt;summary&lt;/em&gt;设置相应的值为1即可。伪码：&lt;/p&gt;
+&lt;p&gt;一路向下递归插入，并将&lt;em&gt;summary&lt;/em&gt;相应设为1即可。伪码：&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
         &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
@@ -180,18 +180,19 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 即\(\theta(\lg u)\)&lt;/p&gt;
 &lt;h4&gt;删除元素&lt;/h4&gt;
 &lt;p&gt;相对于插入，删除要麻烦一点，因为不能直接从&lt;em&gt;summary&lt;/em&gt;中删除元素。要确保相对应
-的cluser所代表的子集不包含任何元素，探查一个&lt;em&gt;proto-VEB&lt;/em&gt;是否只包含一个元素，
-以目前的结构可以有几种方式，但没有一种快于\(\theta(\lg u)\)的方式。也就是
-说PROTO-VEB-DELETE注定要超过\(\theta(\lg u)\)。这儿先别急着实现&lt;em&gt;proto-VEB&lt;/em&gt;
-的删除元素的操作，先来回顾一下所有的基本操作我们都已经分析过一遍了。拿最大值
-、最小值很慢，拿前驱、后继很慢，插入删除也要比预期的慢，似乎除了MEMBER操作，
-所有的操作都很慢，但是仔细分析发现，找前驱慢是因为取最小值太慢了，找后继慢
-是因为取最大值太慢了。插入慢是因为要额外对&lt;em&gt;summary&lt;/em&gt;执行一次插入，删除慢是因
-为对这个结构的判空慢，实际上插入和删除慢是因为同一个问题，没法快速知道一个
-&lt;em&gt;proto-VEB&lt;/em&gt;的size。归根结底，这些操作慢的症结在于，没法快速知道最大值最小值，
-因为知道最大值最小值以后，size便能在\(\theta(1)\)之内得到了。既然如痴，我
-们不如直接将最大值，最小值直接记录在proto-VEB的结构中。Van Emde Boas Trees的
-最终模型就得到了，给&lt;em&gt;proto-VEB&lt;/em&gt;添加记录最大值和最小值的两个属性。&lt;/p&gt;
+的&lt;em&gt;cluser&lt;/em&gt;所代表的子集不包含任何元素才能在&lt;em&gt;smmary&lt;/em&gt;中置0。探查一个&lt;em&gt;proto-VEB&lt;/em&gt;
+是否只包含一个元素，以目前的结构可以有几种方式，但没有一种快于
+\(\theta(\lg u)\)的方式。也就是说PROTO-VEB-DELETE注定要超过
+\(\theta(\lg u)\)。这儿先别急着实现&lt;em&gt;proto-VEB&lt;/em&gt;的删除操作，先来回顾一下，所
+有的基本操作我们都已经分析过一遍了。拿最大值、最小值很慢，拿前驱、后继很慢，
+插入删除也要比预期的慢，似乎除了MEMBER操作，所有的操作都很慢，但是仔细分析发
+现，找前驱慢是因为取最小值太慢了，找后继慢是因为取最大值太慢了。插入慢是因为
+要额外对&lt;em&gt;summary&lt;/em&gt;执行一次插入，删除慢是因为对这个结构的判空慢，实际上插入和删
+除慢是因为同一个问题，没法快速知道一个&lt;em&gt;proto-VEB&lt;/em&gt;的尺寸和极限值。归根结底，这
+些操作慢的症结在于，没法快速知道最大值最小值，因为知道最大值最小值以后，尺寸便
+能在\(\theta(1)\)之内得到了。既然如此，我们不如直接将最大值，最小值直接记录
+在proto-VEB的结构中。Van Emde Boas Trees的最终模型就得到了，给&lt;em&gt;proto-VEB&lt;/em&gt;添加
+记录最大值和最小值的两个属性。&lt;/p&gt;
 &lt;h3&gt;The van Emde Boas tree&lt;/h3&gt;
 &lt;p&gt;先约定，将van Emde Boas tree简称为&lt;em&gt;vEb&lt;/em&gt;。&lt;/p&gt;
 &lt;p&gt;在给proto-VEB加上&lt;em&gt;min&lt;/em&gt;和&lt;em&gt;max&lt;/em&gt;两个属性之前,还得有一个问题要解决，&lt;em&gt;proto-VEB&lt;/em&gt;
@@ -209,11 +210,11 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 &lt;li&gt;对于\(u = 2\)的&lt;em&gt;VEB&lt;/em&gt;来说，不需要数组\(A[0..1]\)了，因为&lt;em&gt;min&lt;/em&gt;和&lt;em&gt;max&lt;/em&gt;
     足以来记录两个值。&lt;/li&gt;
 &lt;li&gt;对于\(u &amp;gt; 2\)的&lt;em&gt;VEB&lt;/em&gt;来说，&lt;em&gt;min&lt;/em&gt;不储存在任何一个&lt;em&gt;cluster&lt;/em&gt;中，但是&lt;em&gt;max&lt;/em&gt;
-    值要，为什么这么做，可以让在空集合中插入元素和删除集合众唯一元素的操作
+    值要，为什么这么做，可以让在空集合中插入元素和删除集合中唯一元素的操作
     都为\(O(1)\)。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;重新定义一下几个方法：
-\[high(x) = \lfloor x \sqrt[\downarrow] u \rfloor\]
+\[high(x) = \lfloor x / \sqrt[\downarrow] u \rfloor\]
 \[low(x) = x \mod \sqrt[\downarrow] u\]
 \[index(x, y) = x \sqrt[\uparrow] u + y\]&lt;/p&gt;
 &lt;p&gt;现在，vEB的结构应该是这样的：&lt;/p&gt;
@@ -251,7 +252,7 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;
     &lt;span class="k"&gt;else&lt;/span&gt;
         &lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;low&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MAXMIUN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;low&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt; &lt;span class="n"&gt;nad&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;low&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt; &lt;span class="n"&gt;nad&lt;/span&gt; &lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;low&lt;/span&gt;
             &lt;span class="n"&gt;offset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SUCCESSOR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; &lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
             &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;offset&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="k"&gt;else&lt;/span&gt;
@@ -316,12 +317,12 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 
 
 &lt;p&gt;综合分析上面的几个操作，除了删除操作以外其它几个操作每一次递归调用都只产生
-一次新的递归调用，根据前文的\( T(u) = T(\sqrt{u}) + O(1) \)公式，很显然
-除了删除操作，些操作都是\(O(\lg \lg u)\)。再仔细看下删除操作的第二次递归
-调用(在第16行)我们会发现,假如这一次递归被调到，那么必然&lt;em&gt;x&lt;/em&gt;所在的cluster只
-包含一个元素，这种情况下第一次递归调用(在第14行)只花费常数时间(只执行1-3行
-代码)，也就是说如果第二个递归调用发生，那么第一个递归调用会在常熟时间内完
-成。所以删除操作还是符合公式\( T(u) = T(\sqrt{u}) + O(1) \)。&lt;/p&gt;
+一次新的递归调用。根据前文的\( T(u) = T(\sqrt{u}) + O(1) \)公式，些操作
+都是\(O(\lg \lg u)\)。再仔细看下删除操作的第二次递归调用(在第16行)我们会
+发现,假如这一次递归被调到，那么必然&lt;em&gt;x&lt;/em&gt;所在的cluster只包含一个元素，这种情
+况下第一次递归调用(在第14行)只花费常数时间(只执行1-3行代码)，换言之，第二
+个递归调用发生的情况下，第一个递归调用必然能在常熟时间内完成。所以删除操作
+还是符合公式\( T(u) = T(\sqrt{u}) + O(1) \)。&lt;/p&gt;
 &lt;h3&gt;小结&lt;/h3&gt;
 &lt;p&gt;Van Emde Boas Tree空间的大小依赖于\(u\)的大小而不是数据的规模，另外创建
 一个Van Emde Boas Tree初始化的时间估计不会太少。当然这些都是可以优化的问

@@ -130,11 +130,11 @@ of constant height</strong>怎么样，一路递归下去情况会如何?</p>
     这种时候，<em>proto-vEB(u)</em>包含两个属性<ul>
 <li>一个名为<em>summary</em>指向<em>proto-vEB(\(\sqrt u\))</em>的指针。</li>
 <li>一个\( \sqrt{u} \)大的指针数组\( cluster[0...1] \)，其中每一个指
-针指向一个<em>proto-vEB(u)</em>。</li>
+针指向一个<em>proto-vEB</em>(\( \sqrt u \))。</li>
 </ul>
 </li>
-<li>如果<em>cluster</em>的第<em>i</em>个指针所指向的数据结构代表的集合含有元素，那么<em>i</em>也
-    存在于<em>summary</em>所指向的集合中，否则<em>i</em>也不存在与<em>summary</em>中。</li>
+<li>如果<em>cluster</em>的第<em>i</em>个指针所指向的的集合含有元素，那么<em>i</em>也   存在于
+    <em>summary</em>所指向的集合中，否则<em>i</em>也不存在与<em>summary</em>中。</li>
 </ul>
 <p>对于一个\( u = 16 \)的集合\( \lbrace 2,3,4,5,7,14,15 \rbrace \)情况就是
 下面这样的：</p>
@@ -212,7 +212,7 @@ of constant height</strong>怎么样，一路递归下去情况会如何?</p>
 \[ = 2T(\sqrt u) + \theta(\lg u)\]
 用与前文类似的方法可以化得\( T(u) = \theta(\lg u\lg\lg u) \)</p>
 <h4>插入元素</h4>
-<p>一路向下递归插入，并将<em>summary</em>设置相应的值为1即可。伪码：</p>
+<p>一路向下递归插入，并将<em>summary</em>相应设为1即可。伪码：</p>
 <div class="codehilite"><pre><span class="n">PROTO</span><span class="o">-</span><span class="n">VEB</span><span class="o">-</span><span class="n">INSERT</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">u</span> <span class="o">==</span> <span class="mi">2</span>
         <span class="n">V</span><span class="p">.</span><span class="n">A</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
@@ -225,18 +225,19 @@ of constant height</strong>怎么样，一路递归下去情况会如何?</p>
 即\(\theta(\lg u)\)</p>
 <h4>删除元素</h4>
 <p>相对于插入，删除要麻烦一点，因为不能直接从<em>summary</em>中删除元素。要确保相对应
-的cluser所代表的子集不包含任何元素，探查一个<em>proto-VEB</em>是否只包含一个元素，
-以目前的结构可以有几种方式，但没有一种快于\(\theta(\lg u)\)的方式。也就是
-说PROTO-VEB-DELETE注定要超过\(\theta(\lg u)\)。这儿先别急着实现<em>proto-VEB</em>
-的删除元素的操作，先来回顾一下所有的基本操作我们都已经分析过一遍了。拿最大值
-、最小值很慢，拿前驱、后继很慢，插入删除也要比预期的慢，似乎除了MEMBER操作，
-所有的操作都很慢，但是仔细分析发现，找前驱慢是因为取最小值太慢了，找后继慢
-是因为取最大值太慢了。插入慢是因为要额外对<em>summary</em>执行一次插入，删除慢是因
-为对这个结构的判空慢，实际上插入和删除慢是因为同一个问题，没法快速知道一个
-<em>proto-VEB</em>的size。归根结底，这些操作慢的症结在于，没法快速知道最大值最小值，
-因为知道最大值最小值以后，size便能在\(\theta(1)\)之内得到了。既然如痴，我
-们不如直接将最大值，最小值直接记录在proto-VEB的结构中。Van Emde Boas Trees的
-最终模型就得到了，给<em>proto-VEB</em>添加记录最大值和最小值的两个属性。</p>
+的<em>cluser</em>所代表的子集不包含任何元素才能在<em>smmary</em>中置0。探查一个<em>proto-VEB</em>
+是否只包含一个元素，以目前的结构可以有几种方式，但没有一种快于
+\(\theta(\lg u)\)的方式。也就是说PROTO-VEB-DELETE注定要超过
+\(\theta(\lg u)\)。这儿先别急着实现<em>proto-VEB</em>的删除操作，先来回顾一下，所
+有的基本操作我们都已经分析过一遍了。拿最大值、最小值很慢，拿前驱、后继很慢，
+插入删除也要比预期的慢，似乎除了MEMBER操作，所有的操作都很慢，但是仔细分析发
+现，找前驱慢是因为取最小值太慢了，找后继慢是因为取最大值太慢了。插入慢是因为
+要额外对<em>summary</em>执行一次插入，删除慢是因为对这个结构的判空慢，实际上插入和删
+除慢是因为同一个问题，没法快速知道一个<em>proto-VEB</em>的尺寸和极限值。归根结底，这
+些操作慢的症结在于，没法快速知道最大值最小值，因为知道最大值最小值以后，尺寸便
+能在\(\theta(1)\)之内得到了。既然如此，我们不如直接将最大值，最小值直接记录
+在proto-VEB的结构中。Van Emde Boas Trees的最终模型就得到了，给<em>proto-VEB</em>添加
+记录最大值和最小值的两个属性。</p>
 <h3>The van Emde Boas tree</h3>
 <p>先约定，将van Emde Boas tree简称为<em>vEb</em>。</p>
 <p>在给proto-VEB加上<em>min</em>和<em>max</em>两个属性之前,还得有一个问题要解决，<em>proto-VEB</em>
@@ -254,11 +255,11 @@ of constant height</strong>怎么样，一路递归下去情况会如何?</p>
 <li>对于\(u = 2\)的<em>VEB</em>来说，不需要数组\(A[0..1]\)了，因为<em>min</em>和<em>max</em>
     足以来记录两个值。</li>
 <li>对于\(u &gt; 2\)的<em>VEB</em>来说，<em>min</em>不储存在任何一个<em>cluster</em>中，但是<em>max</em>
-    值要，为什么这么做，可以让在空集合中插入元素和删除集合众唯一元素的操作
+    值要，为什么这么做，可以让在空集合中插入元素和删除集合中唯一元素的操作
     都为\(O(1)\)。</li>
 </ul>
 <p>重新定义一下几个方法：
-\[high(x) = \lfloor x \sqrt[\downarrow] u \rfloor\]
+\[high(x) = \lfloor x / \sqrt[\downarrow] u \rfloor\]
 \[low(x) = x \mod \sqrt[\downarrow] u\]
 \[index(x, y) = x \sqrt[\uparrow] u + y\]</p>
 <p>现在，vEB的结构应该是这样的：</p>
@@ -291,7 +292,7 @@ of constant height</strong>怎么样，一路递归下去情况会如何?</p>
         <span class="k">return</span> <span class="n">v</span><span class="p">.</span><span class="n">min</span>
     <span class="k">else</span>
         <span class="n">max</span><span class="o">-</span><span class="n">low</span> <span class="o">=</span> <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MAXMIUN</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">high</span><span class="p">](</span><span class="n">x</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">max</span><span class="o">-</span><span class="n">low</span> <span class="o">!=</span> <span class="n">NIL</span> <span class="n">nad</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">V</span><span class="p">.</span><span class="n">max</span>
+        <span class="k">if</span> <span class="n">max</span><span class="o">-</span><span class="n">low</span> <span class="o">!=</span> <span class="n">NIL</span> <span class="n">nad</span> <span class="n">low</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">max</span><span class="o">-</span><span class="n">low</span>
             <span class="n">offset</span> <span class="o">=</span> <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">SUCCESSOR</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span> <span class="n">low</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
             <span class="k">return</span> <span class="n">index</span><span class="p">(</span><span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">offset</span><span class="p">)</span>
         <span class="k">else</span>
@@ -348,12 +349,12 @@ of constant height</strong>怎么样，一路递归下去情况会如何?</p>
                 <span class="n">V</span><span class="p">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">index</span><span class="p">(</span><span class="n">summary</span><span class="o">-</span><span class="n">max</span><span class="p">,</span> <span class="n">vEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MAXMIMUN</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">summary</span><span class="o">-</span><span class="n">max</span><span class="p">]))</span>
 </pre></div>
 <p>综合分析上面的几个操作，除了删除操作以外其它几个操作每一次递归调用都只产生
-一次新的递归调用，根据前文的\( T(u) = T(\sqrt{u}) + O(1) \)公式，很显然
-除了删除操作，些操作都是\(O(\lg \lg u)\)。再仔细看下删除操作的第二次递归
-调用(在第16行)我们会发现,假如这一次递归被调到，那么必然<em>x</em>所在的cluster只
-包含一个元素，这种情况下第一次递归调用(在第14行)只花费常数时间(只执行1-3行
-代码)，也就是说如果第二个递归调用发生，那么第一个递归调用会在常熟时间内完
-成。所以删除操作还是符合公式\( T(u) = T(\sqrt{u}) + O(1) \)。</p>
+一次新的递归调用。根据前文的\( T(u) = T(\sqrt{u}) + O(1) \)公式，些操作
+都是\(O(\lg \lg u)\)。再仔细看下删除操作的第二次递归调用(在第16行)我们会
+发现,假如这一次递归被调到，那么必然<em>x</em>所在的cluster只包含一个元素，这种情
+况下第一次递归调用(在第14行)只花费常数时间(只执行1-3行代码)，换言之，第二
+个递归调用发生的情况下，第一个递归调用必然能在常熟时间内完成。所以删除操作
+还是符合公式\( T(u) = T(\sqrt{u}) + O(1) \)。</p>
 <h3>小结</h3>
 <p>Van Emde Boas Tree空间的大小依赖于\(u\)的大小而不是数据的规模，另外创建
 一个Van Emde Boas Tree初始化的时间估计不会太少。当然这些都是可以优化的问
