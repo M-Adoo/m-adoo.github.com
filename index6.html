@@ -35,6 +35,39 @@
                     <ul id="posts-list">
             <li><article class="hentry">    
                 <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/vc%e5%86%85%e5%ad%98%e5%af%b9%e9%bd%90%e5%87%86%e5%88%99%ef%bc%88memory-alignment%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to VC内存对齐准则（Memory alignment）">VC内存对齐准则（Memory alignment）</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-24T12:42:00">
+                周四 24 十一月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;Memory alignment&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to Memory alignment" href="http://www.roading.org/tag/memory-alignment.html">Memory alignment</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <p>本文所有内容在建立在一个前提下：使用VC编译器。着重点在于：VC的内存对齐准则；同样的数据，
+不同的排列有不同的大小，另外在有虚函数或虚拟继承情况下又有如何影响？</p>
+<h3>内存对齐？！What？Why?</h3>
+<p>对于一台32位的机器来说如何才能发挥它的最佳存取效率呢？当然是每次都读4字节（32bit）,
+这样才可以让它的bus处于最高效率。实际上它也是这么做的，即使你只需要一个字节，它也是
+读一个机器字长（这儿是32bit）。更重要的是 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/vc%e5%86%85%e5%ad%98%e5%af%b9%e9%bd%90%e5%87%86%e5%88%99%ef%bc%88memory-alignment%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to VC内存对齐准则（Memory alignment）">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
                     <h1><a href="http://www.roading.org//develop/cpp/c%e7%b1%bb%e5%af%b9%e8%b1%a1%e7%9a%84%e5%a4%a7%e5%b0%8f.html" rel="bookmark"
                            title="Permalink to C++类对象的大小">C++类对象的大小</a></h1>
                 </header>
@@ -224,36 +257,6 @@ Lippman为我破除了藩篱。下面的部分我将随《深度探索C++对象�
 <p>It is often desirable to keep all elements of a doubly linked list compact &gt;in storage, using ...</p></blockquote>
                  <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html" rel="bookmark"
                            title="Permalink to Chapter 10 Exercises and Problems (2)">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html" rel="bookmark"
-                           title="Permalink to Chapter 10 Exercises（1）">Chapter 10 Exercises（1）</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-11-05T14:49:00">
-                周六 05 十一月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="Exercises&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to Exercises" href="http://www.roading.org/tag/exercises.html">Exercises</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <h3>Exercises 10.1-2★</h3>
-<blockquote>
-<p>Explain how to implement two stacks in one array <em>A</em>[<em>1</em> ‥ <em>n</em>] in such a
-way that ...</p></blockquote>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html" rel="bookmark"
-                           title="Permalink to Chapter 10 Exercises（1）">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>

@@ -533,6 +533,340 @@
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="B-trees"></category><category term="c++"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>B-树的C++实现</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="alternate"></link><updated>2012-04-19T22:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-19:/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html</id><summary type="html">&lt;p&gt;van Emde Boas trees 支持所有优先级优先级队列的操作，并且巧妙的是它对于SEARCH,
+INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在最坏复
+杂度\( O(\lg{\lg n}) \)之内。不过有些限制的是，所有的Kye值都必须在\( 0 
+\dots n-1  \)之间，且不能有重复值。换言之，他的算法复杂度不由数据的规模有多
+大而决定，而由key值的取值范围而决定。&lt;/p&gt;
+&lt;p&gt;算导上这一章的讲述方式我非常喜欢，循序渐进，从最基础最简单的一个结构开始，最
+终演化成Van Emde Boas trees，这样的方式更能让人捕捉到发明人思路发展的一个演
+变过程，毫无疑问，这一章得多记点笔记。&lt;/p&gt;
+&lt;h3&gt;基础方法&lt;/h3&gt;
+&lt;p&gt;这部分会有三种方法来存储动态集合，尽管它们没有一个能达到\( O(\lg\lg u) \),
+但是通过这三种方法却能让我们得到理解Van Emde Boas trees的真知灼见。&lt;/p&gt;
+&lt;h4&gt;Direct Address&lt;/h4&gt;
+&lt;p&gt;Direct Addressing提供一种最简单的方法来存储一组数据。Direct Addressing直接用
+一个大小为\( u \)的位数组\( A[0..u-1] \)来存储这组属于集合\( \lbrace 0,
+1,2,...,u-1 \rbrace \)的数。如果这组数中有\( x \),那么\( A[x] \)的值存
+1，否则存0。&lt;/p&gt;
+&lt;p&gt;这种简单粗暴的方法，显然不能达到预期。对于INSERT、DELETE、MEMBER这些操作复杂
+度在\( O(1) \)内。而对于MINIMUM、MAXMIMUM、SUCCESSOR、PREDECESSOR这些操作
+每一个都要\( \theta(u) \)。我们不妨对Direct Addressing进行改进一下。几个
+\( \theta(u) \)的操作皆因必须对数组进行迭代才能得到结果的缘故。那么如果我
+们在Direct Addressing之上建立一棵二叉树想必有所改善。&lt;/p&gt;
+&lt;h4&gt;Superimposing a binary tree structure&lt;/h4&gt;
+&lt;p&gt;为了提高几个操作的效率，我们的数据结构由一个数组，演变成了下面的结构：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="binary_tree_array" src="htt://www.roading.org/images/2013-06/binary_tree_array.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;二叉树中的结点存储着0或1，当两个孩子中有一个为1时它为1，只有当两个孩子都为0
+的时候它才为0。&lt;/p&gt;
+&lt;p&gt;在Direct Addressing中花费\( \theta(u) \)的操作，依赖于那棵二叉树现在都有了
+一个上限\( O(\lg{u}) \)。但这个上限还并不理想，不然我们不如使用一棵红黑树，
+好歹人家还是\( O(\lg{n}) \)的上限。如果把这棵树的高度降低，说不定是一个突
+破口，姑且试试。&lt;/p&gt;
+&lt;h4&gt;Superimposing a tree of constant height&lt;/h4&gt;
+&lt;p&gt;要降低树的高度，我们可以直接通过增加树的度数来实现，将二叉树将变为多叉树。
+假设全域的大小是\( u = 2^{2k} \),其中\( k \)是一个整数，那么\( \sqrt{u}
+\)也是一个整数。&lt;/p&gt;
+&lt;p&gt;和在位数组上建立一棵二叉树不同，现在我们在位数组上建立一棵度数为\( \sqrt{u}
+\)的树，如下图(a)。这棵树的高度是2。树中的每个结点存储了各子树的逻辑与结果。&lt;/p&gt;
+&lt;p&gt;如下图(b)所示，可以将那些结点看作是一个数组\( summary[0..\sqrt{u}-1] \),当
+且仅当\( A[i\sqrt{u}..(i+1)\sqrt{u}-1] \)含1,\( summary[i] \)才为1。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="constant_height_tree_array" src="http://www.roading.org/images/2013-06/constant_height_tree_array.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;我们把\( A \)中的\( \sqrt{u} \)位的子数组称为&lt;strong&gt;簇&lt;/strong&gt;，对于一个给定值\( x 
+\),位\( A[x] \)存在于第\( \lfloor x/\sqrt{u}\rfloor \)个簇中。现在INSERT
+将在\( O(1) \)内完成——对于插入一个\( x \),分别将\( A[x] \)和\(\lfloor x/
+\sqrt{u}\rfloor \)设为1。对于MINIMUM、MAXIMUM、SUCCESSOR、PREDECESSOR和DELETE
+这些操作将花费\( O(\sqrt{u}) \)。具体操作不做赘述。&lt;/p&gt;
+&lt;p&gt;比起&lt;strong&gt;Superimposing a binary tree&lt;/strong&gt;，现在的结构似乎反而更糟了，前者最差劲的
+操作也只要\( \lg{u} \),现在都要\( \sqrt{u} \)了，但是透过这个结构带来了
+一点新的想法，如果我们把数组\( summary \)也变作一个&lt;strong&gt;Superimposinga tree
+of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&lt;/p&gt;
+&lt;h3&gt;A recursive structure&lt;/h3&gt;
+&lt;p&gt;前面用\( sqrt{u} \)度数的树给了我们一个启示，假如我们能够把问题的规模以开
+平方的规模缩小的话，会有一个什么效果？假设我们能做到以开平方的规模递归减小
+一个数据结构的规模，而且每个操作在每一级递归上只产生一次新的递归调用，那么
+对于一个大小为\( u \)的数据结构的操作有：
+\[ T(u) = T(\sqrt{u}) + O(1) \]
+令\( m = \lg{u} \), 有\( u = 2&lt;sup&gt;m \)。那么可以有：
+\[ T(2&lt;/sup&gt;m) = T(2&lt;sup&gt;{m/2}) + O(1)\]
+设\( S(m) = T(2&lt;/sup&gt;m)\),可得新方程：
+\[ S(m) = S(m/2) + O(1)\] 
+可以得出\( S(m) = O(\lg m) \),回到\( T(u) \)上来，那么\( T(u) = T(2^m)
+= S(m) = O(\lg m) = O(\lg{\lg u}) \)。&lt;/p&gt;
+&lt;p&gt;这个假设说明如果我们能够以递归方式以开平方的规模来缩小数据的规模大小，并在每
+一级递归上花费\( O(1)\)的时间的话，我们这个假设的数据结构的操作的复杂度将
+是\( O(\lg{\lg u}) \)。&lt;/p&gt;
+&lt;p&gt;围绕方程 \( T(u) = T(\sqrt{u} + O(1)) \),我没来设计一个递归的数据结构，以
+开平方的规模来减小每一次递归的大小。当然，我们可能不能一步达到让所有的操作都
+达到\( O(\lg{\lg u}) \),但是我们还是可以先设计出一个原型。自\( u \)起，
+我们用一个\( \sqrt{u} = u&lt;sup 1_4="1/4"&gt;{1/2}\)项的数据结构来持有\( u&lt;/sup&gt; \)项的数据
+结构，以\( u&lt;sup 1_8="1/8"&gt;{1/4} \)项的的数据结构递归持有\( u&lt;/sup&gt; \)项的数据结构，以
+\( u&lt;sup&gt;{1/8} \)项的数据结构递归持有...，一直到数据结构的大小为2。在这里为了
+简单起见，假设\( u=2&lt;/sup&gt;{2&lt;sup 1_2="1/2"&gt;k} \)，如此，\( u&lt;/sup&gt;，u&lt;sup 1_8="1/8"&gt;{1/4},u&lt;/sup&gt;,... \)
+都为整数。&lt;/p&gt;
+&lt;p&gt;对于一个全域为\( \lbrace 0,1,2,...u-1 \rbrace \)的van Emde Boas数据结构为
+原型，我们简称为&lt;em&gt;proto-vEB(u)&lt;/em&gt;。它遵循以下这些规则：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果\( u = 2\),那么已是基础大小，那么它包含两个标志位\( A[0...1]\)&lt;/li&gt;
+&lt;li&gt;否则，\( u = 2&lt;sup&gt;{2&lt;/sup&gt;k} \), 且整数\( k \geq 1\), 所以\(  u \geq 4 \)
+    这种时候，&lt;em&gt;proto-vEB(u)&lt;/em&gt;包含两个属性&lt;ul&gt;
+&lt;li&gt;一个名为&lt;em&gt;summary&lt;/em&gt;指向&lt;em&gt;proto-vEB(\(\sqrt u\))&lt;/em&gt;的指针。&lt;/li&gt;
+&lt;li&gt;一个\( \sqrt{u} \)大的指针数组\( cluster[0...1] \)，其中每一个指
+针指向一个&lt;em&gt;proto-vEB(u)&lt;/em&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;如果&lt;em&gt;cluster&lt;/em&gt;的第&lt;em&gt;i&lt;/em&gt;个指针所指向的数据结构代表的集合含有元素，那么&lt;em&gt;i&lt;/em&gt;也
+    存在于&lt;em&gt;summary&lt;/em&gt;所指向的集合中，否则&lt;em&gt;i&lt;/em&gt;也不存在与&lt;em&gt;summary&lt;/em&gt;中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于一个\( u = 16 \)的集合\( \lbrace 2,3,4,5,7,14,15 \rbrace \)情况就是
+下面这样的：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="proto_van_emde_boas" src="http://www.roading.org/images/2013-06/proto_van_emde_boas.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;em&gt;proto-VEB(u)&lt;/em&gt;中，一个给定值\(x\),那么他应该储存在&lt;em&gt;proto-VEB(u)&lt;/em&gt;中&lt;em&gt;cluster&lt;/em&gt;
+的第\( \lfloor{x}/\sqrt{u} \rfloor\)个指针指向的&lt;em&gt;proto-VEB(\( \sqrt{u} \))&lt;/em&gt;
+的第\( x \mod \sqrt{u} \)个值。鉴于此，在分析各项操作之前，先定义几个有用
+的工具函数：
+\[ high(x) = \lfloor{x} / \sqrt{u} \rfloor \]
+\[ low(x) = x \mod \sqrt{u} \]
+\[ index(x, y) = x\sqrt{u} + y \]&lt;/p&gt;
+&lt;h4&gt;判断一个值是否存在&lt;/h4&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MEMBER&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MEMBER&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; &lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;一个简单的递归查找，很显然，\( T(u) = T(\sqrt u + O(1)\),无疑复杂度为
+\( O(\lg\lg u) \)。&lt;/p&gt;
+&lt;h4&gt;找最小值&lt;/h4&gt;
+&lt;p&gt;从&lt;em&gt;summary&lt;/em&gt;中得到最小值&lt;em&gt;i&lt;/em&gt;，那么最小值必定存在于\(cluster[i]\)所表示的集
+合中，在从\(cluster[i]\)表示的集合中得到最小值，结合&lt;em&gt;i&lt;/em&gt;值可以得到全局的最
+小值。伪码：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUMN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUM&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+            &lt;span class="n"&gt;offset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;offset&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;复杂度
+\[ T(u) = 2T(\sqrt u) + O(1)\]
+设\( u = 2&lt;sup&gt;m\)
+\[ T(2&lt;/sup&gt;m) = 2T(2&lt;sup&gt;{m/2}) + O(1)\]
+设\(S(m) = T(2&lt;/sup&gt;m)\),得：
+\[S(m) = 2S(m/2) + O(1)\]
+\[T(u) = S(m) = \theta(m) = \theta(lg u)\]&lt;/p&gt;
+&lt;h4&gt;找&lt;em&gt;x&lt;/em&gt;的后继&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;从&lt;em&gt;x&lt;/em&gt;所在的子集中找后继&lt;/li&gt;
+&lt;li&gt;找不到的话，先从&lt;em&gt;summary&lt;/em&gt;中得到下一个子集的索引，从下一个子集中找最小值。&lt;/li&gt;
+&lt;li&gt;转换成全局的值。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;伪码：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SUCCESSOR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; 
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="n"&gt;offset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SUCCESSOR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; &lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;offset&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;retuen&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;offset&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+            &lt;span class="n"&gt;succ&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SUCCESSOR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;succ&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+                &lt;span class="n"&gt;offset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUM&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;succ&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;succ&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;offset&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;复杂度:
+\[ T(u) = 2T(\sqrt u) + \theta(\lg{\sqrt u})\]
+\[ = 2T(\sqrt u) + \theta(\lg u)\]
+用与前文类似的方法可以化得\( T(u) = \theta(\lg u\lg\lg u) \)&lt;/p&gt;
+&lt;h4&gt;插入元素&lt;/h4&gt;
+&lt;p&gt;一路向下递归插入，并将&lt;em&gt;summary&lt;/em&gt;设置相应的值为1即可。伪码：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; &lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;复杂度和PROTO-VEB-MINIMUN一样
+\[ T(u) = 2T(\sqrt u) + O(1)\]
+即\(\theta(\lg u)\)&lt;/p&gt;
+&lt;h4&gt;删除元素&lt;/h4&gt;
+&lt;p&gt;相对于插入，删除要麻烦一点，因为不能直接从&lt;em&gt;summary&lt;/em&gt;中删除元素。要确保相对应
+的cluser所代表的子集不包含任何元素，探查一个&lt;em&gt;proto-VEB&lt;/em&gt;是否只包含一个元素，
+以目前的结构可以有几种方式，但没有一种快于\(\theta(\lg u)\)的方式。也就是
+说PROTO-VEB-DELETE注定要超过\(\theta(\lg u)\)。这儿先别急着实现&lt;em&gt;proto-VEB&lt;/em&gt;
+的删除元素的操作，先来回顾一下所有的基本操作我们都已经分析过一遍了。拿最大值
+、最小值很慢，拿前驱、后继很慢，插入删除也要比预期的慢，似乎除了MEMBER操作，
+所有的操作都很慢，但是仔细分析发现，找前驱慢是因为取最小值太慢了，找后继慢
+是因为取最大值太慢了。插入慢是因为要额外对&lt;em&gt;summary&lt;/em&gt;执行一次插入，删除慢是因
+为对这个结构的判空慢，实际上插入和删除慢是因为同一个问题，没法快速知道一个
+&lt;em&gt;proto-VEB&lt;/em&gt;的size。归根结底，这些操作慢的症结在于，没法快速知道最大值最小值，
+因为知道最大值最小值以后，size便能在\(\theta(1)\)之内得到了。既然如痴，我
+们不如直接将最大值，最小值直接记录在proto-VEB的结构中。Van Emde Boas Trees的
+最终模型就得到了，给&lt;em&gt;proto-VEB&lt;/em&gt;添加记录最大值和最小值的两个属性。&lt;/p&gt;
+&lt;h3&gt;The van Emde Boas tree&lt;/h3&gt;
+&lt;p&gt;先约定，将van Emde Boas tree简称为&lt;em&gt;vEb&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;在给proto-VEB加上&lt;em&gt;min&lt;/em&gt;和&lt;em&gt;max&lt;/em&gt;两个属性之前,还得有一个问题要解决，&lt;em&gt;proto-VEB&lt;/em&gt;
+要求\(u = 2&lt;sup&gt;{2&lt;/sup&gt;k}\)，这个要求显然有点太过苛刻了，现在我们把这个范围放宽到
+\(u = 2^k\)。放宽要面对的第一个问题就是\(\sqrt u\)不一定是整数了，解决的
+办法便是，我们的规模不再要求以开平方的规模来缩小了，而是以接近开平方的规模
+缩小，简言之，原来将&lt;em&gt;proto-VEB(u)&lt;/em&gt;分解为\(\sqrt u\)个&lt;em&gt;proto-VEB&lt;/em&gt;(\(\sqrt u\)),
+现在则是将&lt;em&gt;vEB&lt;/em&gt;(u)分解成\(\lceil (\lg u)/2 \rceil\)个
+&lt;em&gt;vEB&lt;/em&gt;(\(\lfloor (\lg u)/2 \rfloor\))。直观起见，将\(\lceil (\lg u)/2 \rceil\)
+用\(\sqrt[\uparrow] u\)表示,将\(\lfloor (\lg u)/2 \rfloor\)以
+\(\sqrt[\downarrow] u\)表示，\(u = {\sqrt[\uparrow] u} \cdot {\sqrt[\downarrow] u}\).&lt;/p&gt;
+&lt;p&gt;相较于&lt;em&gt;proto-VEB&lt;/em&gt;结构上有以下两个变化：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;增加&lt;em&gt;min&lt;/em&gt;和&lt;em&gt;max&lt;/em&gt;两个属性&lt;/li&gt;
+&lt;li&gt;对于\(u = 2\)的&lt;em&gt;VEB&lt;/em&gt;来说，不需要数组\(A[0..1]\)了，因为&lt;em&gt;min&lt;/em&gt;和&lt;em&gt;max&lt;/em&gt;
+    足以来记录两个值。&lt;/li&gt;
+&lt;li&gt;对于\(u &amp;gt; 2\)的&lt;em&gt;VEB&lt;/em&gt;来说，&lt;em&gt;min&lt;/em&gt;不储存在任何一个&lt;em&gt;cluster&lt;/em&gt;中，但是&lt;em&gt;max&lt;/em&gt;
+    值要，为什么这么做，可以让在空集合中插入元素和删除集合众唯一元素的操作
+    都为\(O(1)\)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;重新定义一下几个方法：
+\[high(x) = \lfloor x \sqrt[\downarrow] u \rfloor\]
+\[low(x) = x \mod \sqrt[\downarrow] u\]
+\[index(x, y) = x \sqrt[\uparrow] u + y\]&lt;/p&gt;
+&lt;p&gt;现在，vEB的结构应该是这样的：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="veb_struct" src="http://www.roading.org/images/2013-06/veb_struct.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;一个具体的例子:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="veb_example" src="http://www.roading.org/images/2013-06/veb_example.jpg" /&gt;&lt;/p&gt;
+&lt;h4&gt;最大值和最小值&lt;/h4&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;
+
+&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MAXIMUM&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;判断一个值是否存在&lt;/h4&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MEMBER&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;TRUE&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;FALSE&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MEMBER&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; &lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;后继&lt;/h4&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SUCCESSOR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; 
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;low&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MAXMIUN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;low&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt; &lt;span class="n"&gt;nad&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;
+            &lt;span class="n"&gt;offset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SUCCESSOR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; &lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;offset&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+            &lt;span class="n"&gt;succ&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SUCCESSOR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;succ&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;
+                &lt;span class="n"&gt;offset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;succ&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;succ&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;offset&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;前驱&lt;/h4&gt;
+&lt;p&gt;略。&lt;/p&gt;
+&lt;h4&gt;插入元素&lt;/h4&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;EMPTY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+    &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+
+&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+        &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;EMPTY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;
+        &lt;span class="n"&gt;exchange&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+                &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+                &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;EMPTY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; &lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;
+                &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; &lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt; 
+            &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;删除元素&lt;/h3&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;DELETE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;
+        &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+        &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+            &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+            &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;
+            &lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+            &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+        &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;DELETE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; &lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+            &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;DELETE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;
+            &lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MAXIMUN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+                &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;
+                &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;vEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MAXMIMUN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;综合分析上面的几个操作，除了删除操作以外其它几个操作每一次递归调用都只产生
+一次新的递归调用，根据前文的\( T(u) = T(\sqrt{u}) + O(1) \)公式，很显然
+除了删除操作，些操作都是\(O(\lg \lg u)\)。再仔细看下删除操作的第二次递归
+调用(在第16行)我们会发现,假如这一次递归被调到，那么必然&lt;em&gt;x&lt;/em&gt;所在的cluster只
+包含一个元素，这种情况下第一次递归调用(在第14行)只花费常数时间(只执行1-3行
+代码)，也就是说如果第二个递归调用发生，那么第一个递归调用会在常熟时间内完
+成。所以删除操作还是符合公式\( T(u) = T(\sqrt{u}) + O(1) \)。&lt;/p&gt;
+&lt;h3&gt;小结&lt;/h3&gt;
+&lt;p&gt;Van Emde Boas Tree空间的大小依赖于\(u\)的大小而不是数据的规模，另外创建
+一个Van Emde Boas Tree初始化的时间估计不会太少。当然这些都是可以优化的问
+题。&lt;/p&gt;
+&lt;p&gt;本文参考： Introduction To Algorithm ——third edition&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          周四 19 四月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
         </summary><category term="B-trees"></category><category term="c++"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>C++实现红黑树，仿STL封装</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html" rel="alternate"></link><updated>2011-12-31T20:37:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-31:/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html</id><summary type="html">&lt;p&gt;在[&lt;em&gt;Chapter 13 Red-Black trees(红黑树)&lt;/em&gt;][]这篇笔记中对红黑树的各种操作都有较详尽的伪码，
 相信使用C++来实现也并不是难事，我要做的是，在实现的基础上要进行一定的封装。当然风格嘛，
 自然参照STL，最终的结果就是要实现一个STL风格的红黑树模板。&lt;/p&gt;
@@ -1227,93 +1561,4 @@ Alternatively, if it supported MAXIMUM and EXTRACT-MAX, it would be a
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="Exercises"></category><category term="算法导论"></category></entry><entry><title>Chapter 10 Exercises（1）</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html" rel="alternate"></link><updated>2011-11-05T14:49:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-11-05:/algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html</id><summary type="html">&lt;h3&gt;Exercises 10.1-2★&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Explain how to implement two stacks in one array &lt;em&gt;A&lt;/em&gt;[&lt;em&gt;1&lt;/em&gt; ‥ &lt;em&gt;n&lt;/em&gt;] in such a
-way that neither stack overflows unless the total number of elements in
-both stacks together is &lt;em&gt;n&lt;/em&gt;. The PUSH and POP operations should run in
-&lt;em&gt;O&lt;/em&gt;(1) time.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;令两个栈的栈底为一个数组的两端，这样的话可以充分利用整个数组，直到两个栈顶相遇。关键在于怎么样来判断两个栈顶是否相遇，两种思路。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;思路一&lt;/strong&gt;：设置哨兵（Sentinel）：在栈顶的下一个位置存储一个特殊值来作为警戒线，这如同告诉另一个栈，到这个地方就是我的领地了，别再过来，哨兵随着栈的大小而移动，需要注意的是哨兵在移动到新的位置的过程中，需将原来的哨兵撤销。示图：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2011-11/2ad0ba5fcd7b_thumb.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;这种方式哨兵需占有两个空间，实际的空间利用为n-2而不是n.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;思路二&lt;/strong&gt;：与思路一相反，思路二将所有的未利用空间全部标记为“未利用空间”——用无穷表示。栈的任何一次Pop操作以后，都需将原来的栈顶标记为未使用空间。在Push操作之前，先判断栈顶之后的元素是否为未使用空间。如下图示：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2011-11/11_thumb.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;两种不同的思路，恰恰如同大国奉行的国土攻守政策，思路一主防——凡是我过领土，派兵进驻边境，阻止外国倾入。思路二主攻——凡是无主领地，我便派兵占领。南海问题是一种怎么样的政策？&lt;/p&gt;
-&lt;h3&gt;Exercises 10.1-6★&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Show how to implement a queue using two stacks. Analyze the running time
-of the queue operations.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solutions:&lt;/strong&gt;我将这个问题概括为桶饼模型：给俩个与饼同大的小桶，往桶中放饼，要求你在拿饼的时候将先放进去的饼给拿出来。很显然，先放的饼在桶底，无法直接拿出，我们只能借助于另一个桶——把桶中的饼到往另一个桶中，原来桶底的饼就到了最上面，可以直接拿到了。&lt;/p&gt;
-&lt;p&gt;完整的步骤为：将一个桶设为放饼桶，另一个桶设为取饼桶。所有的放饼操作都在放饼桶进行，并保证放饼之前，所有的饼已经都在放饼桶，若不在将取饼桶的饼倒入放饼桶，所有的取饼操作都在取饼桶进行，取饼之前将放饼桶的饼倒入取饼桶。&lt;/p&gt;
-&lt;p&gt;以此模型类推，Dequeue和EnQueue操作的复杂度都为O(n).当连续进行Dequeue或连续进行EnQueue操作时，它们的复杂度为1。&lt;/p&gt;
-&lt;h3&gt;Exercises 10.1-7★&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Show how to implement a stack using two queues. Analyze the running time
-of the stack operations.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;我一开始在纸上划了几个图，想快速找出方法，但总想不到可行办法，其实无形中忽略了问题的本质。栈的本质在于后进先出，抓住这一点问题就很快解决了。这个题的实质就是要得到队列的最后一个元素，那么我们直接拿出前n-1不就可以了。&lt;/p&gt;
-&lt;p&gt;具体步骤：
-1.  对于插入操作，将数据插入到有数据的那一个队列，若两队列都没有，随便插入一个队列。
-2.  对于出栈操作，将有数据的一个队列中的数据一个个第拿出放入另一个队列，直到拿到最后一个，该数就是要出栈的数。&lt;/p&gt;
-&lt;p&gt;算法复杂度，入栈复杂度为O(1),出栈复杂度O(n)。&lt;/p&gt;
-&lt;h3&gt;Exercises 10.2-7★&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Give a Θ(&lt;em&gt;n&lt;/em&gt;)-time nonrecursive procedure that reverses a singly linked list &amp;gt;of &lt;em&gt;n&lt;/em&gt; elements. The procedure should use no more than constant storage &amp;gt;beyond that needed for the list itself.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Soulutions:&lt;/strong&gt;在深信服笔试的时候好像做过这个题目，今天看到了特意再做一遍。要在&lt;em&gt;O&lt;/em&gt;(n)的时间用非递归的方法使得单向线性表转向，要求空间复杂度为&lt;em&gt;O&lt;/em&gt;(1)。反向嘛，所有的节点next指针指向前面的节点即可。但是有一点要注意的是将next指向它之前的节点的话，会有信息丢失，也就是说，此时你不知道了原来的next指向哪个节点了，迭代就无法继续，所以我们要用另外的空间来保存这些信息。&lt;/p&gt;
-&lt;p&gt;伪代码：
-    :::C
-    ReverseList(L)
-        if(L.head == NIL || L.head-&amp;gt;next == NIL)
-            return L; 
-        Pre_OP = L.head; //the previous node of the opera node; 
-        Op=head-&amp;gt;next; //Op contain the opera node 
-        Pre_OP-&amp;gt;next=NIL; //let the head point to the NIL,then head be the tail&lt;br /&gt;
-        while(Op!= NIL) 
-            Next_OP = Op-&amp;gt;next
-            Op-&amp;gt;next =Pre_OP
-            L.head = Op
-            Pre_op = Op 
-            Op = Next_OP&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;retutn&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h3&gt;Exercises 10.2-8: ★&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Explain how to implement doubly linked lists using only one pointer
-value &lt;em&gt;np&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;] per item instead of the usual two (&lt;em&gt;next&lt;/em&gt; and &lt;em&gt;prev&lt;/em&gt;).
-Assume that all pointer values can be interpreted as &lt;em&gt;k&lt;/em&gt;-bit integers,
-and define &lt;em&gt;np&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;] to be &lt;em&gt;np&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;] = &lt;em&gt;next&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;] XOR &lt;em&gt;prev&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;], the
-&lt;em&gt;k&lt;/em&gt;-bit "exclusive-or" of &lt;em&gt;next&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;] and &lt;em&gt;prev&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;]. (The value NIL is
-represented by 0.) Be sure to describe what information is needed to
-access the head of the list. Show how to implement the SEARCH, INSERT,
-and DELETE operations on such a list. Also show how to reverse such a
-list in &lt;em&gt;O&lt;/em&gt;(1) time.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;这个题目比较有意思，用一个指针来实现一个双向链表。通常来讲我们实现一个双向链表每个节点有两个指针。在这儿的一个指针其实存储的是两个指针的信息——next和pre两个指针的按位异或。问题的关键在于如何将np解析成pre和next指针，这样我们就将问题转化为了一个普通的双向链表了。&lt;/p&gt;
-&lt;p&gt;由于是按位异或操作，只要将pre与next中任意一个与np进行一次按位异或操作就可以得到另一个了。而head的pre为0，那么可以得到head的next指针了，而&lt;code&gt;head-&amp;gt;next-&amp;gt;pre==head&lt;/code&gt;,那么&lt;code&gt;head-&amp;gt;next-&amp;gt;next==head XOR head-&amp;gt;next-&amp;gt;np&lt;/code&gt;，依次类推。这样就可以实现对这个一个指针的双向链表进行遍历了。需要的信息仅为指向表头的指针。&lt;/p&gt;
-&lt;p&gt;Search函数的伪代码：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;Search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt; 
-    &lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;XOR&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt; 
-    &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="n"&gt;NIL&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;XOR&lt;/span&gt; &lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;
-        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
-        &lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; 
-&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Delete与Insert操作的伪代码略。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;show how to reverse such a list in O(1)
-time.&lt;/em&gt;在没有存储尾节点的情况下在O(1)时间内似乎无法办到，如果有存储尾节点的话，这倒是好办，直接head与tail交换即可（也可能我没有理解好题意）。&lt;/p&gt;
-          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周六 05 十一月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
-          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
-          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="Exercises"></category><category term="算法导论"></category><category term="笔记"></category></entry></feed>
+        </summary><category term="Exercises"></category><category term="算法导论"></category></entry></feed>
