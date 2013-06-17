@@ -53,23 +53,22 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 一个数据结构的规模，而且每个操作在每一级递归上只产生一次新的递归调用，那么
 对于一个大小为\( u \)的数据结构的操作有：
 \[ T(u) = T(\sqrt{u}) + O(1) \]
-令\( m = \lg{u} \), 有\( u = 2&lt;sup 2m="2m"&gt;{2m} \)。那么可以有：
-\[ T(2&lt;/sup&gt;) = T(2&lt;sup 2m="2m"&gt;{m/2}) + O(1)\]
-设\( S(m) = T(2&lt;/sup&gt;)\),可得新方程：
+令\( m = \lg{u} \), 有\( u = 2&lt;sup&gt;m \)。那么可以有：
+\[ T(2&lt;/sup&gt;m) = T(2&lt;sup&gt;{m/2}) + O(1)\]
+设\( S(m) = T(2&lt;/sup&gt;m)\),可得新方程：
 \[ S(m) = S(m/2) + O(1)\] 
-可以得出\( S(m) = O(\lg m) \),回到\( T(u) \)上来，那么\( T(u) = T(2^{2m})
+可以得出\( S(m) = O(\lg m) \),回到\( T(u) \)上来，那么\( T(u) = T(2^m)
 = S(m) = O(\lg m) = O(\lg{\lg u}) \)。&lt;/p&gt;
 &lt;p&gt;这个假设说明如果我们能够以递归方式以开平方的规模来缩小数据的规模大小，并在每
 一级递归上花费\( O(1)\)的时间的话，我们这个假设的数据结构的操作的复杂度将
 是\( O(\lg{\lg u}) \)。&lt;/p&gt;
-&lt;p&gt;围绕方程 \( T(u) = T(\sqrt{u} + O(1)) \),我没来设计一个递归的数据结构，以
+&lt;p&gt;围绕方程 \( T(u) = T(\sqrt{u} + O(1)) \),我们来设计一个递归的数据结构，以
 开平方的规模来减小每一次递归的大小。当然，我们可能不能一步达到让所有的操作都
 达到\( O(\lg{\lg u}) \),但是我们还是可以先设计出一个原型。自\( u \)起，
-我们用一个\( \sqrt{u} = u&lt;sup 1_4="1/4"&gt;{1/2}\)项的数据结构来持有\( u&lt;/sup&gt; \)项的数据
-结构，以\( u&lt;sup 1_8="1/8"&gt;{1/4} \)项的的数据结构递归持有\( u&lt;/sup&gt; \)项的数据结构，以
-\( u&lt;sup&gt;{1/8} \)项的数据结构递归持有...，一直到数据结构的大小为2。在这里为了
-简单起见，假设\( u=2&lt;/sup&gt;{2&lt;sup 1_2="1/2"&gt;k} \)，如此，\( u&lt;/sup&gt;，u&lt;sup 1_8="1/8"&gt;{1/4},u&lt;/sup&gt;,... \)
-都为整数。&lt;/p&gt;
+我们用一个\( \sqrt{u} = u&lt;sup 1_4="1/4"&gt;{1/2}\)项的数据结构来持有\( u&lt;/sup&gt; \)项的，以
+\( u&lt;sup 1_8="1/8"&gt;{1/4} \)项的递归持有\( u&lt;/sup&gt; \)项的，以\( u&lt;sup&gt;{1/8} \)项的递归持
+有...，一直到数据结构的大小为2。在这里为了简单起见，假设\( u=2&lt;/sup&gt;{2&lt;sup 1_2="1/2"&gt;k} \)，
+如此，\( u&lt;/sup&gt;，u&lt;sup 1_8="1/8"&gt;{1/4},u&lt;/sup&gt;,... \)都为整数。&lt;/p&gt;
 &lt;p&gt;对于一个全域为\( \lbrace 0,1,2,...u-1 \rbrace \)的van Emde Boas数据结构为
 原型，我们简称为&lt;em&gt;proto-vEB(u)&lt;/em&gt;。它遵循以下这些规则：&lt;/p&gt;
 &lt;ul&gt;
@@ -129,9 +128,9 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 
 &lt;p&gt;复杂度
 \[ T(u) = 2T(\sqrt u) + O(1)\]
-设\( u = 2&lt;sup 2m="2m"&gt;{2m}\)
-\[ T(2&lt;/sup&gt;) = 2T(2&lt;sup 2m="2m"&gt;{m/2}) + O(1)\]
-设\(S(m) = T(2&lt;/sup&gt;)\),得：
+设\( u = 2&lt;sup&gt;m\)
+\[ T(2&lt;/sup&gt;m) = 2T(2&lt;sup&gt;{m/2}) + O(1)\]
+设\(S(m) = T(2&lt;/sup&gt;m)\),得：
 \[S(m) = 2S(m/2) + O(1)\]
 \[T(u) = S(m) = \theta(m) = \theta(lg u)\]&lt;/p&gt;
 &lt;h4&gt;找&lt;em&gt;x&lt;/em&gt;的后继&lt;/h4&gt;
