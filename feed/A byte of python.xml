@@ -56,7 +56,7 @@ python 。老实说，这本书我是认为不值得写什么笔记的，但它�
 于是才有了写点笔记的打算，留待真正开始学习python的时候能够快速的温习一下。&lt;/p&gt;
 &lt;p&gt;参考：a byte of python –v1.92(for python 3.0)&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周四 03 五月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Thu 03 May 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -118,7 +118,7 @@ del 语句删除相应的对象。&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;参考：a byte of python –v1.92(for python 3.0)&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周三 02 五月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Wed 02 May 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b04.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -229,7 +229,7 @@ list 。下例用以展示 list 的一些基本操作：&lt;/p&gt;
 
 &lt;p&gt;参考：a byte of python –v1.92(for python 3.0)&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周二 01 五月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Tue 01 May 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b03.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -319,7 +319,7 @@ sys.path。&lt;/p&gt;
 &lt;p&gt;那么，from package import * 只会导入mould1、moudle2和moudle3三个模块。&lt;/p&gt;
 &lt;p&gt;参考：a byte of python –v1.92(for python 3.0) 以及pyhon.org关于python3.2的很小部分文档。以及这篇博客：&lt;a href="http://pydoing.blogspot.com/2011/02/python-package.html"&gt;http://pydoing.blogspot.com/2011/02/python-package.html&lt;/a&gt;&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周日 29 四月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Sun 29 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -446,7 +446,7 @@ string"。在python中单引号(‘)与双引号(“)拥有相同的功能——
 &lt;p&gt;注：这篇笔记我主要重点记录一些 python在语法上与C++的一些异同点，以及我认为自己需要留意的地方，所以他仅仅是一篇笔记。&lt;/p&gt;
 &lt;p&gt;参考：a byte of python –v1.92(for python 3.0) 以及pyhon.org关于python3.2的很小部分文档。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周二 24 四月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Tue 24 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/python/python-%e8%af%ad%e6%b3%95%e5%9f%ba%e7%a1%80%e7%ac%94%e8%ae%b01.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;

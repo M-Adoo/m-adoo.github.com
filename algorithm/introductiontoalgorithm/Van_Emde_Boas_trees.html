@@ -23,8 +23,8 @@
 				    <li><a href="http://www.roading.org/archives.html">Archive</a></li>
 		        </ul>
 			<ul id="nav-tags">
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
 			</ul>
 			<div class="clear"></div>
 			<hr>
@@ -39,15 +39,14 @@ Vab Emde Boas trees
 	<h1>Vab Emde Boas trees</h1>
 	<div class="content">
 	      <div class="post-info">
-        <abbr class="published" title="2013-05-24T08:30:00">
-                周五 24 五月 2013
+        <abbr class="published" title="2013-06-10T08:30:00">
+                Mon 10 June 2013
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="algorithm&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to algorithm" href="http://www.roading.org/tag/algorithm.html">algorithm</a>
 		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
@@ -79,10 +78,10 @@ INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在
 <p><img alt="binary_tree_array" src="htt://www.roading.org/images/2013-06/binary_tree_array.jpg" /></p>
 <p>二叉树中的结点存储着0或1，当两个孩子中有一个为1时它为1，只有当两个孩子都为0
 的时候它才为0。</p>
-<p>在Direct Addressing中花费\( \theta(u) \)的操作，依赖于那棵二叉树现在都有了
-一个上限\( O(\lg{u}) \)。但这个上限还并不理想，不然我们不如使用一棵红黑树，
-好歹人家还是\( O(\lg{n}) \)的上限。如果把这棵树的高度降低，说不定是一个突
-破口，姑且试试。</p>
+<p>在Direct Addressing中花费\( \theta(u) \)的操作，依赖于这棵二叉树现在都有了
+一个更低的上限\( O(\lg{u}) \)。但这个上限还并不理想，不然我们不如使用一棵
+红黑树，好歹人家还是\( O(\lg{n}) \)的上限。如果把这棵树的高度降低，说不定
+是一个突破口，姑且试试。</p>
 <h4>Superimposing a tree of constant height</h4>
 <p>要降低树的高度，我们可以直接通过增加树的度数来实现，将二叉树将变为多叉树。
 假设全域的大小是\( u = 2^{2k} \),其中\( k \)是一个整数，那么\( \sqrt{u}
@@ -102,7 +101,7 @@ INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在
 一点新的想法，如果我们把数组\( summary \)也变作一个<strong>Superimposinga tree
 of constant height</strong>怎么样，一路递归下去情况会如何?</p>
 <h3>A recursive structure</h3>
-<p>前面用\( sqrt{u} \)度数的树给了我们一个启示，假如我们能够把问题的规模以开
+<p>前面用\( \sqrt{u} \)度数的树给了我们一个启示，假如我们能够把问题的规模以开
 平方的规模缩小的话，会有一个什么效果？假设我们能做到以开平方的规模递归减小
 一个数据结构的规模，而且每个操作在每一级递归上只产生一次新的递归调用，那么
 对于一个大小为\( u \)的数据结构的操作有：
@@ -362,7 +361,7 @@ of constant height</strong>怎么样，一路递归下去情况会如何?</p>
 题。</p>
 <p>本文参考： Introduction To Algorithm ——third edition</p>
 		  <p style= "text-align:right;"><em>
-		  周五 24 五月 2013 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  Mon 10 June 2013 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html">本文原链</a>)</em></p>

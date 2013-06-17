@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Adoo's blog</title><link href="http://www.roading.org/" rel="alternate"></link><link href="http://www.roading.org/feed/all-en.atom.xml" rel="self"></link><id>http://www.roading.org/</id><updated>2013-05-24T08:30:00+08:00</updated><entry><title>Vab Emde Boas trees</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html" rel="alternate"></link><updated>2013-05-24T08:30:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2013-05-24:/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html</id><summary type="html">&lt;p&gt;van Emde Boas trees 支持所有优先级优先级队列的操作，并且巧妙的是它对于SEARCH,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Adoo's blog</title><link href="http://www.roading.org/" rel="alternate"></link><link href="http://www.roading.org/feed/all-en.atom.xml" rel="self"></link><id>http://www.roading.org/</id><updated>2013-06-10T08:30:00+08:00</updated><entry><title>Vab Emde Boas trees</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html" rel="alternate"></link><updated>2013-06-10T08:30:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2013-06-10:/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html</id><summary type="html">&lt;p&gt;van Emde Boas trees 支持所有优先级优先级队列的操作，并且巧妙的是它对于SEARCH,
 INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在最坏复
 杂度\( O(\lg{\lg n}) \)之内。不过有些限制的是，所有的Kye值都必须在\( 0 
 \dots n-1  \)之间，且不能有重复值。换言之，他的算法复杂度不由数据的规模有多
@@ -25,10 +25,10 @@ INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在
 &lt;p&gt;&lt;img alt="binary_tree_array" src="htt://www.roading.org/images/2013-06/binary_tree_array.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;二叉树中的结点存储着0或1，当两个孩子中有一个为1时它为1，只有当两个孩子都为0
 的时候它才为0。&lt;/p&gt;
-&lt;p&gt;在Direct Addressing中花费\( \theta(u) \)的操作，依赖于那棵二叉树现在都有了
-一个上限\( O(\lg{u}) \)。但这个上限还并不理想，不然我们不如使用一棵红黑树，
-好歹人家还是\( O(\lg{n}) \)的上限。如果把这棵树的高度降低，说不定是一个突
-破口，姑且试试。&lt;/p&gt;
+&lt;p&gt;在Direct Addressing中花费\( \theta(u) \)的操作，依赖于这棵二叉树现在都有了
+一个更低的上限\( O(\lg{u}) \)。但这个上限还并不理想，不然我们不如使用一棵
+红黑树，好歹人家还是\( O(\lg{n}) \)的上限。如果把这棵树的高度降低，说不定
+是一个突破口，姑且试试。&lt;/p&gt;
 &lt;h4&gt;Superimposing a tree of constant height&lt;/h4&gt;
 &lt;p&gt;要降低树的高度，我们可以直接通过增加树的度数来实现，将二叉树将变为多叉树。
 假设全域的大小是\( u = 2^{2k} \),其中\( k \)是一个整数，那么\( \sqrt{u}
@@ -48,7 +48,7 @@ INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在
 一点新的想法，如果我们把数组\( summary \)也变作一个&lt;strong&gt;Superimposinga tree
 of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&lt;/p&gt;
 &lt;h3&gt;A recursive structure&lt;/h3&gt;
-&lt;p&gt;前面用\( sqrt{u} \)度数的树给了我们一个启示，假如我们能够把问题的规模以开
+&lt;p&gt;前面用\( \sqrt{u} \)度数的树给了我们一个启示，假如我们能够把问题的规模以开
 平方的规模缩小的话，会有一个什么效果？假设我们能做到以开平方的规模递归减小
 一个数据结构的规模，而且每个操作在每一级递归上只产生一次新的递归调用，那么
 对于一个大小为\( u \)的数据结构的操作有：
@@ -329,11 +329,11 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 题。&lt;/p&gt;
 &lt;p&gt;本文参考： Introduction To Algorithm ——third edition&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周五 24 五月 2013 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Mon 10 June 2013 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="algorithm"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>未半</title><link href="http://www.roading.org/essaies/less_than_half_of_year.html" rel="alternate"></link><updated>2012-12-25T03:30:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-12-25:essaies/less_than_half_of_year.html</id><summary type="html">&lt;p&gt;来珠海也近半年了，半年来并没有太大的不顺。大概却正因为这顺利，让我恍然
+        </summary><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>未半</title><link href="http://www.roading.org/essaies/less_than_half_of_year.html" rel="alternate"></link><updated>2012-12-25T03:30:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-12-25:essaies/less_than_half_of_year.html</id><summary type="html">&lt;p&gt;来珠海也近半年了，半年来并没有太大的不顺。大概却正因为这顺利，让我恍然
 未觉的过了半年。时间过得如此悄无声息，让我战战栗生出了一股惶恐来。每过
 一月，或又仅有一旬，当我注意到桌上的台历忘了翻动，又或者电脑上的日期让
 我觉得陌生时，我总觉得我应该静下来好好想想，生活是不是驶往我期待的方向。&lt;/p&gt;
@@ -367,7 +367,7 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 半”了。我于是又慎重的关了编辑器，拿出笔和纸，记下上文。&lt;/p&gt;
 &lt;p&gt;十二月二十五日于莲山巷。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周二 25 十二月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Tue 25 December 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.orgessaies/less_than_half_of_year.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -630,7 +630,7 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;endif&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周一 01 十月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Mon 01 October 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -662,7 +662,7 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 &lt;p&gt;大概每个人都需要一个哑巴辛格当朋友，他总用睿智的眼神告诉你他能理解
 你所说，却从不言语。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周五 14 九月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Fri 14 September 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/essaies/lonely.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -814,11 +814,11 @@ applications that manage large amounts of data.&lt;/p&gt;
 的&lt;img alt="咬牙切齿" src="http://www.roading.org/images/2012-07/wlEmoticon-baringteethsmile.png" /&gt;。&lt;/p&gt;
 &lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周一 30 七月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Mon 30 July 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="algorithm"></category><category term="算法导论"></category><category term="笔记"></category><category term="fibonacci heaps"></category></entry><entry><title>Python 基础入门笔记(5)</title><link href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html" rel="alternate"></link><updated>2012-05-03T16:05:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-05-03:/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html</id><summary type="html">&lt;h3&gt;Pickle&lt;/h3&gt;
+        </summary><category term="算法导论"></category><category term="笔记"></category><category term="fibonacci heaps"></category></entry><entry><title>Python 基础入门笔记(5)</title><link href="http://www.roading.org//develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html" rel="alternate"></link><updated>2012-05-03T16:05:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-05-03:/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html</id><summary type="html">&lt;h3&gt;Pickle&lt;/h3&gt;
 &lt;p&gt;python 支持一些常见模式的文件处理方式，通过read 、readline或 write
 函数来读写文件，同时它还支持几种模式的读写方式，这些并没有什么特别的，略去不说。
 不过python的文件处理还有一个非常有用的功能——Pickle。&lt;/p&gt;
@@ -875,7 +875,7 @@ python 。老实说，这本书我是认为不值得写什么笔记的，但它�
 于是才有了写点笔记的打算，留待真正开始学习python的时候能够快速的温习一下。&lt;/p&gt;
 &lt;p&gt;参考：a byte of python –v1.92(for python 3.0)&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周四 03 五月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Thu 03 May 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b05.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -937,7 +937,7 @@ del 语句删除相应的对象。&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;参考：a byte of python –v1.92(for python 3.0)&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周三 02 五月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Wed 02 May 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b04.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1048,7 +1048,7 @@ list 。下例用以展示 list 的一些基本操作：&lt;/p&gt;
 
 &lt;p&gt;参考：a byte of python –v1.92(for python 3.0)&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周二 01 五月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Tue 01 May 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b03.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1138,7 +1138,7 @@ sys.path。&lt;/p&gt;
 &lt;p&gt;那么，from package import * 只会导入mould1、moudle2和moudle3三个模块。&lt;/p&gt;
 &lt;p&gt;参考：a byte of python –v1.92(for python 3.0) 以及pyhon.org关于python3.2的很小部分文档。以及这篇博客：&lt;a href="http://pydoing.blogspot.com/2011/02/python-package.html"&gt;http://pydoing.blogspot.com/2011/02/python-package.html&lt;/a&gt;&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周日 29 四月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Sun 29 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/python/python-%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8%e7%ac%94%e8%ae%b02%e5%87%bd%e6%95%b0%e3%80%81%e6%a8%a1%e5%9d%97%e5%92%8c%e5%8c%85.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1151,7 +1151,7 @@ sys.path。&lt;/p&gt;
 &lt;p&gt;庄之蝶是坏人吗？不！我想庄之蝶是个好人，这世道能有一副热肠、能有一颗良心已经是殊为不易。&lt;/p&gt;
 &lt;p&gt;临近文末，我仿佛听到了庄之蝶丈母娘的喋喋呓语：都废了、都废了、都废…&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周四 26 四月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Thu 26 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/essaies/sadcity.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
