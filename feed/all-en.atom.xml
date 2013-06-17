@@ -48,16 +48,16 @@ INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在
 一点新的想法，如果我们把数组\( summary \)也变作一个&lt;strong&gt;Superimposinga tree
 of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&lt;/p&gt;
 &lt;h3&gt;A recursive structure&lt;/h3&gt;
-&lt;p&gt;前面用\( \sqrt{u} \)度数的树给了我们一个启示，假如我们能够把问题的规模以开
+&lt;p&gt;前面用\(\sqrt{u} \)度数的树给了我们一个启示，假如我们能够把问题的规模以开
 平方的规模缩小的话，会有一个什么效果？假设我们能做到以开平方的规模递归减小
 一个数据结构的规模，而且每个操作在每一级递归上只产生一次新的递归调用，那么
 对于一个大小为\( u \)的数据结构的操作有：
 \[ T(u) = T(\sqrt{u}) + O(1) \]
-令\( m = \lg{u} \), 有\( u = 2{{&lt;sup&gt;m}} \)。那么可以有：
-\[ T(2{{&lt;/sup&gt;m}}) = T(2&lt;sup&gt;{m/2}) + O(1)\]
-设\( S(m) = T(2{&lt;/sup&gt;m})\),可得新方程：
+令\( m = \lg{u} \), 有\( u = 2&lt;sup m="m"&gt;{m} \)。那么可以有：
+\[ T(2&lt;/sup&gt;) = T(2&lt;sup m="m"&gt;{m/2}) + O(1)\]
+设\( S(m) = T(2&lt;/sup&gt;)\),可得新方程：
 \[ S(m) = S(m/2) + O(1)\] 
-可以得出\( S(m) = O(\lg m) \),回到\( T(u) \)上来，那么\( T(u) = T(2{^m})
+可以得出\( S(m) = O(\lg m) \),回到\( T(u) \)上来，那么\( T(u) = T(2^{m})
 = S(m) = O(\lg m) = O(\lg{\lg u}) \)。&lt;/p&gt;
 &lt;p&gt;这个假设说明如果我们能够以递归方式以开平方的规模来缩小数据的规模大小，并在每
 一级递归上花费\( O(1)\)的时间的话，我们这个假设的数据结构的操作的复杂度将
@@ -129,9 +129,9 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 
 &lt;p&gt;复杂度
 \[ T(u) = 2T(\sqrt u) + O(1)\]
-设\( u = 2{&lt;sup&gt;m}\)
-\[ T(2{&lt;/sup&gt;m}) = 2T(2&lt;sup&gt;{m/2}) + O(1)\]
-设\(S(m) = T(2{&lt;/sup&gt;m})\),得：
+设\( u = 2&lt;sup m="m"&gt;{m}\)
+\[ T(2&lt;/sup&gt;) = 2T(2&lt;sup m="m"&gt;{m/2}) + O(1)\]
+设\(S(m) = T(2&lt;/sup&gt;)\),得：
 \[S(m) = 2S(m/2) + O(1)\]
 \[T(u) = S(m) = \theta(m) = \theta(lg u)\]&lt;/p&gt;
 &lt;h4&gt;找&lt;em&gt;x&lt;/em&gt;的后继&lt;/h4&gt;
