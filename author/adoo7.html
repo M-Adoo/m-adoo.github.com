@@ -35,201 +35,223 @@
                     <ul id="posts-list">
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//essaies/ji-fo-2.html" rel="bookmark"
-                           title="Permalink to 第二章">第二章</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/c%e5%af%b9%e8%b1%a1%e7%9a%84%e6%95%b0%e6%8d%ae%e6%88%90%e5%91%98.html" rel="bookmark"
+                           title="Permalink to C++对象的数据成员">C++对象的数据成员</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-09-29T13:18:00">
-                周四 29 九月 2011
+        <abbr class="published" title="2011-11-24T13:00:00">
+                周四 24 十一月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="随笔&nbsp;&nbsp;">
+	    <abbr title="Inside The C++ Object Model&nbsp;&nbsp;data object&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to 随笔" href="http://www.roading.org/tag/sui-bi.html">随笔</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to data object" href="http://www.roading.org/tag/data-object.html">data object</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 随笔" href="http://www.roading.org/category/sui-bi.html">随笔</a></abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 </div><!-- /.post-info -->
-                <p>李家虽然不穷，但也沾不上富家。若要追寻家世，溯源族谱。那么，还要到图远太爷爷的爷爷那辈，到李太爷父辈也还是当地大家，不然也不能让图远的太爷爷读书求学。李太爷九岁的时候，母亲病重，一向惧内的父亲，趁此机会把多年不敢娶的青楼女子娶回了家。他父亲到不见得如何悲伤，仿佛新纳小妾的喜悦能与发妻亡命的悲愁相抵消。便如同正一加负一等于零一般。</p>
-<p>李太爷隐隐觉得父亲有了一些变化，说话好像底气足了一般。但是这样的改变并没有多久.几天后，父亲就一下子从一个趾高气昂的老爷 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//essaies/ji-fo-2.html" rel="bookmark"
-                           title="Permalink to 第二章">Read more→</a>	
+                <h3>数据成员的布局</h3>
+<p>对于一个类来说它的对象中只存放非静态的数据成员,但是除此之外，编译器为了实现virtual功能还会合成一些其它成员插入到对象中。我们来看看这些成员的布局。</p>
+<h3>C++ 标准的规定</h3>
+<ul>
+<li>在同一个Access Section（也就是private,public,protected片段）中，
+    要求较晚出现的数据成员处在较大的内存中。这意味着同一个片段中的数据成员并不需要紧密相连，编译器所做的成员对齐就是一个例子。</li>
+<li>允许编译器将多个Acess Section的顺序自由排列，而不必在乎它们的声明
+    次序 ...</li></ul>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e5%af%b9%e8%b1%a1%e7%9a%84%e6%95%b0%e6%8d%ae%e6%88%90%e5%91%98.html" rel="bookmark"
+                           title="Permalink to C++对象的数据成员">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//essaies/leave.html" rel="bookmark"
-                           title="Permalink to 又到离别时">又到离别时</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/c%e5%af%b9%e8%b1%a1%e9%9d%a2%e9%9d%a2%e8%a7%82.html" rel="bookmark"
+                           title="Permalink to C++对象面面观">C++对象面面观</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-12-10T14:25:00">
-                周六 10 十二月 2011
+        <abbr class="published" title="2011-11-11T19:36:00">
+                周五 11 十一月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="随笔&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to 随笔" href="http://www.roading.org/tag/sui-bi.html">随笔</a>
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 随笔" href="http://www.roading.org/category/sui-bi.html">随笔</a></abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 </div><!-- /.post-info -->
-                <p>前几天毕业后的工作已经决定下来，前两天《深度探索C++对象模型》的学习也已
-经了结。手头事情忙得差不多的时候，一回头不禁感叹，又是一季离别，年后大学
-也算结束了。当然，或许你是以拿到毕业证作为一段生涯的句点，那自然不是，这
-只能说认知上有些差别。</p>
-<p>说到工作的事，首先要很谢谢熊哥的内荐，免了我舟车劳顿、颠沛奔波的辛苦 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//essaies/leave.html" rel="bookmark"
-                           title="Permalink to 又到离别时">Read more→</a>	
+                <p>学习C++应该看过不少关于C与C++的口水贴，以及关于各种对比C与C++效率比较的帖子，
+最有影响力的恐怕当属linus对C++的炮轰——《<a href="http://blog.csdn.net/turingbook/article/details/1775488">糟糕程序员的垃圾语言</a>》。但无论如
+何，我正喜欢着这样一种垃圾，我当然对linus充满敬意，但这不妨碍我口食垃圾而对其
+仰慕。</p>
+<p>无需太在意站在山巅的巨人们的言论，每个人都有不同的道路来追求真理。与其听着Linus
+的嗤笑之声，不妨跟随Lippman一起探索C++对象模型的 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e5%af%b9%e8%b1%a1%e9%9d%a2%e9%9d%a2%e8%a7%82.html" rel="bookmark"
+                           title="Permalink to C++对象面面观">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//essaies/lonely.html" rel="bookmark"
-                           title="Permalink to 载酒买花年少事，浑不似，旧心情">载酒买花年少事，浑不似，旧心情</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/c%e7%b1%bb%e5%af%b9%e8%b1%a1%e7%9a%84%e5%a4%a7%e5%b0%8f.html" rel="bookmark"
+                           title="Permalink to C++类对象的大小">C++类对象的大小</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2012-09-14T00:00:00">
-                周五 14 九月 2012
+        <abbr class="published" title="2011-11-24T12:41:00">
+                周四 24 十一月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="随笔&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to 随笔" href="http://www.roading.org/tag/sui-bi.html">随笔</a>
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 随笔" href="http://www.roading.org/category/sui-bi.html">随笔</a></abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 </div><!-- /.post-info -->
-                <p>当我打开记事本想写点什么的时候，写一个怎样的题目却让我犯难。难在我
-并无什么特别的要求，标题党？我不需要夺人眼球。做点概括？我也并没有
-要具体写点什么东西。我想大概这篇短文并不需要一个标题。不过，鉴于这
-个世界有这么多长着脑袋却并没有什么用处的脑残们，我认为我的这篇短文
-也配拥有一个标题，尽管它或许并没有太大的用处。</p>
-<p>好在我并不是太纠结的人。随意从桌头抽出一本书，然后随意翻开一页，从 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//essaies/lonely.html" rel="bookmark"
-                           title="Permalink to 载酒买花年少事，浑不似，旧心情">Read more→</a>	
+                <h3>一个实例引出的思考</h3>
+<div class="codehilite"><pre><span class="k">class</span> <span class="nc">X</span><span class="p">{};</span>
+<span class="k">class</span> <span class="nc">Y</span><span class="o">:</span><span class="k">virtual</span> <span class="k">public</span> <span class="n">X</span><span class="p">{};</span>
+<span class="k">class</span> <span class="nc">Z</span><span class="o">:</span><span class="k">virtual</span> <span class="k">public</span> <span class="n">X</span><span class="p">{};</span>
+<span class="k">class</span> <span class="nc">A</span><span class="o">:</span><span class="k">public</span> <span class="n">Y</span><span class="p">,</span> <span class="k">public</span> <span class="n">Z</span><span class="p">{};</span>
+</pre></div>
+<p>猜猜sizeof上面各个类都为多少 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e7%b1%bb%e5%af%b9%e8%b1%a1%e7%9a%84%e5%a4%a7%e5%b0%8f.html" rel="bookmark"
+                           title="Permalink to C++类对象的大小">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//essaies/naked-man.html" rel="bookmark"
-                           title="Permalink to 一丝不挂">一丝不挂</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/eh-rtti.html" rel="bookmark"
+                           title="Permalink to EH & RTTI">EH & RTTI</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2010-04-01T16:58:00">
-                周四 01 四月 2010
+        <abbr class="published" title="2011-12-08T22:24:00">
+                周四 08 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="金瓶梅&nbsp;&nbsp;随笔&nbsp;&nbsp;">
+	    <abbr title="EH&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;RTTI&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to 金瓶梅" href="http://www.roading.org/tag/jin-ping-mei.html">金瓶梅</a>
-		<a title="permalink to 随笔" href="http://www.roading.org/tag/sui-bi.html">随笔</a>
+		<a title="permalink to EH" href="http://www.roading.org/tag/eh.html">EH</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to RTTI" href="http://www.roading.org/tag/rtti.html">RTTI</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 随笔" href="http://www.roading.org/category/sui-bi.html">随笔</a></abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 </div><!-- /.post-info -->
-                <p>我想，很难再平静的写一些东西，很难。</p>
-<p>来不及回头看过去的日子，放纵于浮夸的生活中。不经意的时候，想起某些不经
-意的事情。譬如会想起一中图书馆，正面第二个书架最下面的《金瓶梅》学究，
-又或者是右边第四还是第五个书架背面最上排的《中国古代帝王艳史》系列丛书，
-还有那个右墙最里面书架背后我窝着看《三个火枪手》的角落，那些在脑袋中一
-闪而过的画面 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//essaies/naked-man.html" rel="bookmark"
-                           title="Permalink to 一丝不挂">Read more→</a>	
+                <h3>异常处理(Exception Handling)</h3>
+<p>C++的 exception handling 有三个主要的子句组成：</p>
+<ul>
+<li>一个throw子句。它在程序的某处丢出一个exception，被丢出的exception可以是内建类
+    型，也可以是自定义类型。——抛出exception组件。</li>
+<li>一个或多个 catch 子句。 每一个 catch 子句都是一个 ...</li></ul>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/eh-rtti.html" rel="bookmark"
+                           title="Permalink to EH & RTTI">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//essaies/sadcity.html" rel="bookmark"
-                           title="Permalink to 都废">都废</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/metro/windows-8-%e5%88%9d%e4%bd%93%e9%aa%8c.html" rel="bookmark"
+                           title="Permalink to Windows 8 初体验">Windows 8 初体验</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2012-04-26T14:31:00">
-                周四 26 四月 2012
+        <abbr class="published" title="2011-09-16T14:08:00">
+                周五 16 九月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="随笔&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;windows 8&nbsp;&nbsp;xaml&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to 随笔" href="http://www.roading.org/tag/sui-bi.html">随笔</a>
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to windows 8" href="http://www.roading.org/tag/windows-8.html">windows 8</a>
+		<a title="permalink to xaml" href="http://www.roading.org/tag/xaml.html">xaml</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 随笔" href="http://www.roading.org/category/sui-bi.html">随笔</a></abbr>
+	<abbr>In <a title="permalink to Metro" href="http://www.roading.org/category/metro.html">Metro</a></abbr>
 </div><!-- /.post-info -->
-                <p>《废都》，便是迷醉于欲望之中，却又无法抽身自救的那么一群人组成。即便是尼姑庵的慧明亦脱不出肉欲
-、权欲的高墙。大概世道如此，现实并不是人们掉进了欲望的天坑，反而是，欲望便如已然合围的高墙，人生而就在墙内。不是陷入了，而是逃不出。</p>
-<p>便如《废都》演变到最后，这些人或死了、又或走了。死了的人固然逃出了欲望的樊笼，走了的人却尚未完成自救。诚然 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//essaies/sadcity.html" rel="bookmark"
-                           title="Permalink to 都废">Read more→</a>	
+                <p>几个月前，就已经对windows8很期待。主要是因为听说xaml将支持C++。14号刚放出下载链接就
+赶去下下来，准备一探究竟。不过当天好哥们磊子过来了，于是和小庄同学，磊子我自己三个
+人，一起到球场上肆意了一个下午，晚上喝酒聊天，已经忘掉这回事了。昨天又停电一天，到今
+天才有机会体验下windows 8。 第一件事自然是打开Windows 8预览版自带的visual studio ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/metro/windows-8-%e5%88%9d%e4%bd%93%e9%aa%8c.html" rel="bookmark"
+                           title="Permalink to Windows 8 初体验">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//essaies/tado.html" rel="bookmark"
-                           title="Permalink to 大记，亦大忌">大记，亦大忌</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to new expression、operator new 和 placement new——三个妞（new）的故事（1）">new expression、operator new 和 placement new——三个妞（new）的故事（1）</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-04-26T19:51:00">
-                周二 26 四月 2011
+        <abbr class="published" title="2011-12-02T23:35:00">
+                周五 02 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="随笔&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to 随笔" href="http://www.roading.org/tag/sui-bi.html">随笔</a>
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 随笔" href="http://www.roading.org/category/sui-bi.html">随笔</a></abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 </div><!-- /.post-info -->
-                <p>大记，亦是大忌，每每动笔要写点什么，我总是想要尽量把它写短，但太多时候不能如意。
-大概一个人生活中过于默然，需得从文字上还回来。既是大忌，我当然只想小记一下，以
-免言多有失，但人的能力，总要限制住人的意愿，又不得不多费笔舌。又或者，我信奉这
-样一句话，有多大的本事，出多大的风头。.... 人贵于自知 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//essaies/tado.html" rel="bookmark"
-                           title="Permalink to 大记，亦大忌">Read more→</a>	
+                <p>之前虽然一直知道有new expression、operator new和placement new，但对于这三个“new”,
+却不甚了了，这些天从《深度探索C++对象模型》读到new和delete，特意结合《C++ Primer》
+写下这篇笔记，以作总结。三个虽然都是“妞”（new ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to new expression、operator new 和 placement new——三个妞（new）的故事（1）">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//essaies/weekly-jounal.html" rel="bookmark"
-                           title="Permalink to 一周记事10.6-10.12">一周记事10.6-10.12</a></h1>
+                    <h1><a href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to new expression、operator new和placement new——三个妞（new）的故事（2）">new expression、operator new和placement new——三个妞（new）的故事（2）</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-10-12T21:58:00">
-                周三 12 十月 2011
+        <abbr class="published" title="2011-12-05T15:19:00">
+                周一 05 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="随笔&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to 随笔" href="http://www.roading.org/tag/sui-bi.html">随笔</a>
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 随笔" href="http://www.roading.org/category/sui-bi.html">随笔</a></abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
 </div><!-- /.post-info -->
-                <p>10.6日的晚上，实在是自己不能忍受网站的速度太慢，于是决定要换一个空间了。
-原计划一两天时间来完成这个事情。很显然我预估错了时间，原来打算选个不太
-贵的收费空间，但我不是觉得太贵，就是对他们抱有怀疑态度，最后选择了新浪
-的sae,这之间就花了一天。sae的<a href="http://sae.sina.com.cn/activity/invite/44887/weibo%20">注册地址</a>。第二天把网站迁移过去，并
-导入好数据库，又做好了跳转——操蛋的备案 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//essaies/weekly-jounal.html" rel="bookmark"
-                           title="Permalink to 一周记事10.6-10.12">Read more→</a>	
+                <h3>两个 delete 后的问题</h3>
+<p>最近在网上看到两个关于指针 delete 后的问题。第一种情况：</p>
+<div class="codehilite"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">;</span>
+<span class="k">delete</span> <span class="n">p</span><span class="p">;</span>
+<span class="k">delete</span> <span class="n">p</span><span class="p">;</span><span class="c1">// p为什么能delete两次，而程序运行的时候还不报错。</span>
+</pre></div>
+<p>第二种情况：</p>
+<div class="codehilite"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">p ...</span></pre></div>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to new expression、operator new和placement new——三个妞（new）的故事（2）">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -237,14 +259,15 @@
                 <div class="pagination">
 <ul>
     <li class="prev"><a href="http://www.roading.org/author/adoo6.html">&larr; Previous</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo.html">1</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo2.html">2</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo3.html">3</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo4.html">4</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo5.html">5</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo6.html">6</a></li>
-    <li class="active"><a href="http://www.roading.org/author/adoo7.html">7</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo8.html">8</a></li>
+		<li class=""><a href="http://www.roading.org/author/adoo3.html">3</a></li>
+		<li class=""><a href="http://www.roading.org/author/adoo4.html">4</a></li>
+		<li class=""><a href="http://www.roading.org/author/adoo5.html">5</a></li>
+		<li class=""><a href="http://www.roading.org/author/adoo6.html">6</a></li>
+		<li class="active"><a href="http://www.roading.org/author/adoo7.html">7</a></li>
+		<li class=""><a href="http://www.roading.org/author/adoo8.html">8</a></li>
+		<li class=""><a href="http://www.roading.org/author/adoo9.html">9</a></li>
+		<li class=""><a href="http://www.roading.org/author/adoo10.html">10</a></li>
+		<li class=""><a href="http://www.roading.org/author/adoo11.html">11</a></li>
     <li class="next"><a href="http://www.roading.org/author/adoo8.html">Next &rarr;</a></li>
 </ul>
 </div>

@@ -35,6 +35,35 @@
                     <ul id="posts-list">
             <li><article class="hentry">    
                 <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to new expression、operator new 和 placement new——三个妞（new）的故事（1）">new expression、operator new 和 placement new——三个妞（new）的故事（1）</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-12-02T23:35:00">
+                周五 02 十二月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <p>之前虽然一直知道有new expression、operator new和placement new，但对于这三个“new”,
+却不甚了了，这些天从《深度探索C++对象模型》读到new和delete，特意结合《C++ Primer》
+写下这篇笔记，以作总结。三个虽然都是“妞”（new ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to new expression、operator new 和 placement new——三个妞（new）的故事（1）">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
                     <h1><a href="http://www.roading.org//develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html" rel="bookmark"
                            title="Permalink to 构造、复制、析构语意学">构造、复制、析构语意学</a></h1>
                 </header>
@@ -228,40 +257,6 @@ class的指针（或引用），寻址出一个derived class object”的意思�
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e5%91%bd%e5%90%8d%e8%bf%94%e5%9b%9e%e5%80%bc%e4%bc%98%e5%8c%96%e5%92%8c%e6%88%90%e5%91%98%e5%88%9d%e5%a7%8b%e5%8c%96%e9%98%9f%e5%88%97.html" rel="bookmark"
-                           title="Permalink to 命名返回值优化和成员初始化队列">命名返回值优化和成员初始化队列</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-11-24T12:40:00">
-                周四 24 十一月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
-</div><!-- /.post-info -->
-                <h3>命名返回值优化</h3>
-<p>对于一个如<code>foo()</code>这样的函数，它的每一个返回分支都返回相同的对象，编译器
-有可能对其做Named return Value优化（下文都简称NRV优化），方法是以一个参
-数<code>result</code>取代返回对象。</p>
-<p><code>foo()</code>的原型：</p>
-<div class="codehilite"><pre><span class="n">X</span> <span class="nf">foo</span><span class="p">()</span> 
-<span class="p">{</span> 
-    <span class="n">X</span> <span class="n">xx ...</span></pre></div>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%91%bd%e5%90%8d%e8%bf%94%e5%9b%9e%e5%80%bc%e4%bc%98%e5%8c%96%e5%92%8c%e6%88%90%e5%91%98%e5%88%9d%e5%a7%8b%e5%8c%96%e9%98%9f%e5%88%97.html" rel="bookmark"
-                           title="Permalink to 命名返回值优化和成员初始化队列">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
             </ul><!-- /#posts-list -->
                 <div class="pagination">
 <ul>
@@ -269,6 +264,7 @@ class的指针（或引用），寻址出一个derived class object”的意思�
     <li class=""><a href="http://www.roading.org/tag/c.html">1</a></li>
     <li class="active"><a href="http://www.roading.org/tag/c2.html">2</a></li>
     <li class=""><a href="http://www.roading.org/tag/c3.html">3</a></li>
+    <li class=""><a href="http://www.roading.org/tag/c4.html">4</a></li>
     <li class="next"><a href="http://www.roading.org/tag/c3.html">Next &rarr;</a></li>
 </ul>
 </div>

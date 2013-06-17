@@ -35,241 +35,224 @@
                     <ul id="posts-list">
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e5%87%a0%e7%82%b9%e7%b1%bb%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99.html" rel="bookmark"
-                           title="Permalink to 几点类设计原则">几点类设计原则</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 第九章 中位数和顺序统计量（Medians and Order Statistic）">第九章 中位数和顺序统计量（Medians and Order Statistic）</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-11-30T16:04:00">
-                周三 30 十一月 2011
+        <abbr class="published" title="2011-10-17T20:38:00">
+                周一 17 十月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;Order Statistic&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+		<a title="permalink to Order Statistic" href="http://www.roading.org/tag/order-statistic.html">Order Statistic</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <p><strong>1.即使是一个抽象基类，如果它有非静态数据成员，也应该给它提供一
-个带参数的构造函数</strong>，来初始化它的数据成员。或许你可以通过其派生
-类来初始化它的数据成员（假如nostatic data member为publish或
-protected）,但这样做的后果则是破坏了数据的封装性，使类的维护和修
-改更加困难。由此引申，类的data member应当被初始化，且只在其构造函
-数或其member ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%87%a0%e7%82%b9%e7%b1%bb%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99.html" rel="bookmark"
-                           title="Permalink to 几点类设计原则">Read more→</a>	
+                <h3>概览</h3>
+<p>本章主要讲的是如何来获取顺序统计量（Order statistic）,所谓第i个顺序统计量即
+是指在一组数中的第i小的元素，中位数即是大小位于一组数中间的那个数，如果一组
+数为偶数个，则有两个中位数，大的叫大中位数（upper medians 姑且这么翻译吧），
+小的叫小中位数（lower medians）。可以先考虑几个问题：</p>
+<ol>
+<li>获取最大或者最小的元素，要比较多少次 ...</li></ol>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 第九章 中位数和顺序统计量（Medians and Order Statistic）">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e5%91%bd%e5%90%8d%e8%bf%94%e5%9b%9e%e5%80%bc%e4%bc%98%e5%8c%96%e5%92%8c%e6%88%90%e5%91%98%e5%88%9d%e5%a7%8b%e5%8c%96%e9%98%9f%e5%88%97.html" rel="bookmark"
-                           title="Permalink to 命名返回值优化和成员初始化队列">命名返回值优化和成员初始化队列</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 第八章（3） 基数排序（Radix Sort）">第八章（3） 基数排序（Radix Sort）</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-11-24T12:40:00">
-                周四 24 十一月 2011
+        <abbr class="published" title="2011-10-02T16:37:00">
+                周日 02 十月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;快速排序&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to 快速排序" href="http://www.roading.org/tag/kuai-su-pai-xu.html">快速排序</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <h3>命名返回值优化</h3>
-<p>对于一个如<code>foo()</code>这样的函数，它的每一个返回分支都返回相同的对象，编译器
-有可能对其做Named return Value优化（下文都简称NRV优化），方法是以一个参
-数<code>result</code>取代返回对象。</p>
-<p><code>foo()</code>的原型：</p>
-<div class="codehilite"><pre><span class="n">X</span> <span class="nf">foo</span><span class="p">()</span> 
-<span class="p">{</span> 
-    <span class="n">X</span> <span class="n">xx ...</span></pre></div>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%91%bd%e5%90%8d%e8%bf%94%e5%9b%9e%e5%80%bc%e4%bc%98%e5%8c%96%e5%92%8c%e6%88%90%e5%91%98%e5%88%9d%e5%a7%8b%e5%8c%96%e9%98%9f%e5%88%97.html" rel="bookmark"
-                           title="Permalink to 命名返回值优化和成员初始化队列">Read more→</a>	
+                <h3>算法模型</h3>
+<p>基数排序是一种用在老式穿卡机上的算法。至于穿卡机是怎么使用基数排序的，你可以
+参考算法导论第八章的描述。</p>
+<p>在之前两种比较排序——合并排序与快速排序中我们使用一种“分而治之”的策略，基数排
+序则使用另一种与之有有异曲同工之妙的策略。无论是合并排序还是快速排序，我们讲
+究的是在数组级别的“分而治之”；而基数排序我们讲究的是在元素级别的“分而治之”，
+例如我们将一个三位数分成，个位，十位 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 第八章（3） 基数排序（Radix Sort）">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="bookmark"
-                           title="Permalink to 对象的构造和析构">对象的构造和析构</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 桶排序（Bucket sort）">桶排序（Bucket sort）</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-12-06T13:35:00">
-                周二 06 十二月 2011
+        <abbr class="published" title="2011-10-04T14:23:00">
+                周二 04 十月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;桶排序&nbsp;&nbsp;">
 	    Tags: 
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to 桶排序" href="http://www.roading.org/tag/tong-pai-xu.html">桶排序</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <p>一般而言，构造函数被安插在对象的定义处，而析构函数被安插在对象生命
-周期结束前：</p>
-<p>:::C++
-  // Pseudo C++ Code<br />
-  {<br />
-     Point point;<br />
-     // point.Point::Point() 一般被安插在这儿<br />
-     ...<br />
-     // point.Point::~Point() 一般被安插在这儿 
-  }  </p>
-<p>当代码有一个以上的离开点的时候，析构函数则必须放在对象被构造之后的每 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="bookmark"
-                           title="Permalink to 对象的构造和析构">Read more→</a>	
+                <h3>算法模型</h3>
+<ol>
+<li>桶排序假设待排序的一组数统一的分布在一个范围中，并将这一范围划分成几个
+    子范围，也就是桶。</li>
+<li>将待排序的一组数，分档规入这些子桶。并将桶中的数据进行排序。</li>
+<li>将各个桶中的数据有序的合并起来。</li>
+</ol>
+<p>仔细想一想，这是不是一种“分治”策略呢？再仔细想一想，计数排序是不是桶排序的
+一种特化呢？</p>
+<h3>复杂度：</h3>
+<p>很显然桶排序的时间复杂度，取决与对各个桶之间数据进行排序的时间复杂度，因为 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 桶排序（Bucket sort）">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e6%8b%b7%e8%b4%9d%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%ef%bc%88copy-constuctor%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 拷贝构造函数（copy constuctor）">拷贝构造函数（copy constuctor）</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%885%ef%bc%89-%e4%b9%a0%e9%a2%98-8-4-8-5-8-7.html" rel="bookmark"
+                           title="Permalink to 第八章（5） 习题 8-4 8-5 8-7">第八章（5） 习题 8-4 8-5 8-7</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-11-15T19:44:00">
-                周二 15 十一月 2011
+        <abbr class="published" title="2011-10-05T21:33:00">
+                周三 05 十月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="Average sorting&nbsp;&nbsp;算法导论&nbsp;&nbsp;water jugs&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to Average sorting" href="http://www.roading.org/tag/average-sorting.html">Average sorting</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to water jugs" href="http://www.roading.org/tag/water-jugs.html">water jugs</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <h3>拷贝构造函数（copy constuctor）</h3>
-<p>通常C++初级程序员会认为当一个类为没有定义拷贝构造函数的时候，编译器会
-为其合成一个，答案是否定的。编译器只有在必要的时候在合成拷贝构造函数。
-那么编译器什么时候合成，什么时候不合成，合成的拷贝构造函数在不同情况下
-分别如何工作呢？这是本文的重点。</p>
-<h3>拷贝构造函数的定义</h3>
-<p>有一个参数的类型是其类类型的构造函数是为拷贝构造函数。如下：</p>
-<div class="codehilite"><pre><span class="n">X</span><span class="o">::</span><span class="n">X</span><span class="p">(</span> <span class="k">const ...</span></pre></div>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%8b%b7%e8%b4%9d%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%ef%bc%88copy-constuctor%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to 拷贝构造函数（copy constuctor）">Read more→</a>	
+                <h3>8-4 Water jugs</h3>
+<blockquote>
+<p>Suppose that you are given n red and n blue water jugs, all of different
+shapes andsizes ...</p></blockquote>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%885%ef%bc%89-%e4%b9%a0%e9%a2%98-8-4-8-5-8-7.html" rel="bookmark"
+                           title="Permalink to 第八章（5） 习题 8-4 8-5 8-7">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html" rel="bookmark"
-                           title="Permalink to 构造、复制、析构语意学">构造、复制、析构语意学</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html" rel="bookmark"
+                           title="Permalink to 第十章 Elementary Data Structures">第十章 Elementary Data Structures</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-12-01T22:04:00">
-                周四 01 十二月 2011
+        <abbr class="published" title="2011-10-26T22:23:00">
+                周三 26 十月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="算法导论&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <p>一种所谓的Plain OI’Data声明形式：</p>
-<p>:::C++
-  struct Point {
-      float x,y,z;
-  };</p>
-<p>概念上来讲，对于一段这样的C++代码,编译器会为之合成一个默认构造函数、
-复制构造函数、析构函数、赋值操作符。然而实际上编译器会分析这段代码，
-并给<code>Point ...</code></p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html" rel="bookmark"
-                           title="Permalink to 构造、复制、析构语意学">Read more→</a>	
+                <h3>10.1 栈和队列</h3>
+<p>栈是一个后进先出的数据结构，看到《算法导论》关于栈的部分，又让我想起了当初
+在看严蔚敏的数据结构教科书的时候对栈的一个形象理解。我当初将这样理解栈：栈
+就相当于往一个桶中方与其直径相同的饼，最先放进去的在最下面，最后才能拿出来。
+而最后放进去的饼，总在最上面，可以最先拿到。栈简称为LIFO(last in ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html" rel="bookmark"
+                           title="Permalink to 第十章 Elementary Data Structures">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html" rel="bookmark"
-                           title="Permalink to 模板二事">模板二事</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html" rel="bookmark"
+                           title="Permalink to 非递归不用栈遍历搜索二叉树">非递归不用栈遍历搜索二叉树</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-12-07T17:00:00">
-                周三 07 十二月 2011
+        <abbr class="published" title="2011-12-21T14:45:00">
+                周三 21 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;template instantiation&nbsp;&nbsp;">
+	    <abbr title="binary search tree&nbsp;&nbsp;Exercises&nbsp;&nbsp;算法导论&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to template instantiation" href="http://www.roading.org/tag/template-instantiation.html">template instantiation</a>
+		<a title="permalink to binary search tree" href="http://www.roading.org/tag/binary-search-tree.html">binary search tree</a>
+		<a title="permalink to Exercises" href="http://www.roading.org/tag/exercises.html">Exercises</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <h3>模板的实例化</h3>
-<p>一个模板只有被使用到，才会被实例化，否则不会被实例化。对于一个实例化
-后的模板来说，未被调用的成员函数将不会被实例化，只有成员函数被使用时，
-C++标准才要求实例化他们。其原因，有两点：</p>
-<ul>
-<li>空间和时间效率的考虑，如果模板类中有100个成员函数，对某个特定类型
-    只有2个函数会被使用，针对另一个特定类型只会使用3个，那么如果将剩
-    余的195个函数实例化将浪费大量的时间和空间。</li>
-<li>使模板有最大的适用性 ...</li></ul>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html" rel="bookmark"
-                           title="Permalink to 模板二事">Read more→</a>	
+                <h3>Exercises 12.1-3</h3>
+<blockquote>
+<p>Give a nonrecursive algorithm that performs an inorder tree walk.
+(<em>Hint:</em> There is an easy solution that ...</p></blockquote>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html" rel="bookmark"
+                           title="Permalink to 非递归不用栈遍历搜索二叉树">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%85%a5c%e9%bb%98%e8%ae%a4%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0.html" rel="bookmark"
-                           title="Permalink to 深入C++构造函数">深入C++构造函数</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html" rel="bookmark"
+                           title="Permalink to Vab Emde Boas trees">Vab Emde Boas trees</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-11-12T22:15:00">
-                周六 12 十一月 2011
+        <abbr class="published" title="2013-05-24T08:30:00">
+                周五 24 五月 2013
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="algorithm&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to algorithm" href="http://www.roading.org/tag/algorithm.html">algorithm</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <p>通常很多C++程序员存在两种误解：</p>
-<ul>
-<li>没有定义默认构造函数的类都会被编译器生成一个默认构造函数。</li>
-<li>编译器生成的默认构造函数会明确初始化类中每一个数据成员。</li>
-</ul>
-<p>在读《深度探索C++对象模型》之前，我一直停留在上述二种误解上，所幸的是
-Lippman为我破除了藩篱。下面的部分我将随《深度探索C++对象模型》对C++默
-认构造函数一探究竟。</p>
-<p>C++标准规定：如果类的设计者并未为类定义任何构造函数 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%85%a5c%e9%bb%98%e8%ae%a4%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0.html" rel="bookmark"
-                           title="Permalink to 深入C++构造函数">Read more→</a>	
+                <p>van Emde Boas trees 支持所有优先级优先级队列的操作，并且巧妙的是它对于SEARCH,
+INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在最坏复
+杂度\( O(\lg{\lg n}) \)之内。不过有些限制的是，所有的Kye值都必须在 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html" rel="bookmark"
+                           title="Permalink to Vab Emde Boas trees">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -277,14 +260,15 @@ Lippman为我破除了藩篱。下面的部分我将随《深度探索C++对象�
                 <div class="pagination">
 <ul>
     <li class="prev"><a href="http://www.roading.org/author/adoo2.html">&larr; Previous</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo.html">1</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo2.html">2</a></li>
-    <li class="active"><a href="http://www.roading.org/author/adoo3.html">3</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo4.html">4</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo5.html">5</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo6.html">6</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo7.html">7</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo8.html">8</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo.html">1</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo2.html">2</a></li>
+	<li class="active"><a href="http://www.roading.org/author/adoo3.html">3</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo4.html">4</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo5.html">5</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo6.html">6</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo7.html">7</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo8.html">8</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo9.html">9</a></li>
     <li class="next"><a href="http://www.roading.org/author/adoo4.html">Next &rarr;</a></li>
 </ul>
 </div>

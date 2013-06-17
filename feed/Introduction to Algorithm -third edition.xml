@@ -596,7 +596,159 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="算法导论"></category><category term="Fibonacci heaps"></category><category term="笔记"></category></entry><entry><title>B-树的C++实现</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="alternate"></link><updated>2012-04-19T22:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-19:/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html</id><summary type="html">&lt;p&gt;与之前实现哈希表、红黑树…这些数据结构和算法不同，B-trees的实现不再追求模仿STL，因此没有实现b-trees自己的迭代器。这些天温习之前的笔记的过程中意识到了一个问题，所有这些的数据结构毕竟只是作为练习之用，而不是出于作为以后使用的库的目的。故应当以逻辑清晰为第一要务。B-trees的实现是转变的一个开始，以后关于算法导论中的算法和数据结构的实现力求立足与算法本身而不是C++的淫技。&lt;/p&gt;
+        </summary><category term="算法导论"></category><category term="Fibonacci heaps"></category><category term="笔记"></category></entry><entry><title>斐波那契堆(Fibonacci Heaps)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html" rel="alternate"></link><updated>2012-07-30T22:33:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-07-30:/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html</id><summary type="html">&lt;h3&gt;概览&lt;/h3&gt;
+&lt;p&gt;斐波那契堆是由一组最小堆有序树组成，其中的每棵树都必须符合最小堆属性。
+简单点，斐波那契堆是由一组有点特别的树组成。除了两个与元素删除有关的
+操作（EXTRACT-MIN和DELETE）之外，它的其它操作都能在常数时间内完成。可
+以看下斐波那契堆和二叉堆的运行时间对比表：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="time-table" src="http://www.roading.org/images/2012-07/image.png" /&gt;&lt;/p&gt;
+&lt;h3&gt;结构&lt;/h3&gt;
+&lt;p&gt;说白点，斐波那契堆由一组有根树组成，不过这些有根树都得是二项堆。大致
+结构如下：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2012-07/image1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;有一个min指针指向了这些树根中关键字最小的一个。&lt;/p&gt;
+&lt;p&gt;对于每一个结点来说，除了关键字之外，至少还得有left、right、parent、child
+四个指针、一个mark标记和一个degree计数，四个指针好说，分别用来指向左右兄
+弟、父亲和任意一个孩子。至于mark标记则是用来标识一个非根结点是否已经失去
+了一个孩子（这样的结点，不能在夺其子女了，可能要进行一些其它的特别操作），
+实际上涉及到mark的操作并不多。degree则是用来统计该结点有几个儿子。丰满起
+来的斐波那契堆就成了这样：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2012-07/image2.png" /&gt;&lt;/p&gt;
+&lt;h3&gt;基本操作&lt;/h3&gt;
+&lt;p&gt;斐波那契堆包含MAKE-HEAP、INSERT、MINIMUM、EXTRACT-MIN、UNION、
+DECREASE-KEY、DELETE等几项基本操作。建堆、插入、合并、和获得关键字最小的
+结点这四个操作比想象的还要简单。建堆只需简单的初始化一下min指针和记录结点
+数目的成员n即可；插入操作则是直接将结点插入到根链表中，这相当于进行一个循
+环双向链表的插入操作；合并操作直接将两个斐波那契堆得根链表合二为一；获得
+最小关键字的结点，更不必说，直接返回min指针即可。因此，对于MAKE-HEAP、
+INSEST、MINIMUN、UNION这四个操作就不多费笔墨。主要关注一下EXTRACT-MIN和
+DECREAS-KEY两个操作，而一旦实现了这两个操作，DELETE的实现则变得轻而易举。&lt;/p&gt;
+&lt;h4&gt;EXTRACT-MIN&lt;/h4&gt;
+&lt;p&gt;EXTRACT-MIN除了要提取出最小关键字的结点之外，其实还要对斐波那契堆的结构进
+行整理。如果不进行整理的话，那么斐波那契堆就完全成了一个双向循环链表了。整
+理到什么程度？直到根链表中所有的结点的degree值都不同！很奇怪之处在于，算导
+上对于为什么以所有根结点的degree不同为指标，居然只字未提。不过就我观察，其
+原因可能在于，当根结点的degree都不同的时候，此时的斐波那契堆就成了一个二项
+堆或者近似二项堆。&lt;/p&gt;
+&lt;p&gt;EXTRACT-MIN可以分为三步走：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将min的所有孩子取出加入到根链表中去；&lt;/li&gt;
+&lt;li&gt;从根链表中移除min结点；&lt;/li&gt;
+&lt;li&gt;整理斐波那契堆并获得新的min指针；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;EXTRACT-MiN的伪码为：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;EXTRACT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MIN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt; &lt;span class="n"&gt;child&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt; 
+            &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;
+            &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+        &lt;span class="n"&gt;remove&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;
+            &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+            &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;
+            &lt;span class="n"&gt;CONSOLIDATE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;其中CONSOLIDATE函数正是用来整理斐波那契堆的，它创建一个数组A来暂存根结点，
+并在遍历根链表的过程中将根结点degree相同的树合并。&lt;/p&gt;
+&lt;p&gt;其伪码如下（其中&lt;img alt="" src="http://www.roading.org/images/2012-07/image3.png" /&gt;，且&lt;img alt="" src="http://www.roading.org/images/2012-07/image4.png" /&gt;，具体证明见书本）：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;CONSOLIDATE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;array&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;
+        &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;degree&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;
+            &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; 
+                &lt;span class="n"&gt;exchange&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
+            &lt;span class="n"&gt;HEAP&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;LINK&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt; 
+            &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; 
+    &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+                &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt; &lt;span class="n"&gt;contaning&lt;/span&gt; &lt;span class="n"&gt;just&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;
+                &lt;span class="n"&gt;insert&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;into&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;
+                    &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;HEAP&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;LINK&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;remove&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;
+    &lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;child&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;incrementing&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;degree&lt;/span&gt;
+    &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;看一个实例的演示图或许更加清楚明白：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2012-07/image5.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2012-07/image6.png" /&gt;&lt;/p&gt;
+&lt;h3&gt;Decreasing a key&lt;/h3&gt;
+&lt;p&gt;将一个关键字变小，有两种情况发生，一种是这个关键字变小以后还是比它的父结点
+关键字大，这时候什么都不用做；但是如果关键字变小后比它的父结点关键字要小的
+话，这时候可以将这个结点所在的子树直接移植到根链表中去。但是不管不顾的乱移
+植，有可能带来各种怪异的树结构，典型的就是变成了一根棍子。于是，可以采取一
+种折中的方式，当一个非根结点失去第二个孩子的时候，也将被移植到根链表中。这
+可以保证根链表中的每棵树都是一个近似二项堆。伪码如下：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;DECREASE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;
+        &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;new key is greater than current key&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;
+        &lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;CASCADING&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;
+        &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;xCUT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;remove&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;child&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;decrementing&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;degree&lt;/span&gt;
+    &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;span class="n"&gt;CASCADING&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+            &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+            &lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;CASCADING&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;删除操作则完全可以利用DECREASE-KEY配合EXTRACT-MIN两者完成，先将要删除结点的
+关键字减小为无穷小，则提取最小关键字的结点就可以达到目的。&lt;/p&gt;
+&lt;h3&gt;总结&lt;/h3&gt;
+&lt;p&gt;总的来说，斐波那契堆可以在常数时间内进行进行插入、合并、减小关键字等操作，但
+删除搜索等操作并不是其擅长。斐波那契堆并没有太多需要时刻保持的属性，这使得对
+于插入、合并、减小关键字等操作变得轻而易举。但实际上它将很多的工作留在了提取
+最小元素时来完成，所以这个操作实现起来复杂，运行起来耗时。&lt;/p&gt;
+&lt;p&gt;斐波那契堆将一些事情集中起来在某些操作上来处理，这就产生了一些被优化的操作，
+所以斐波那契堆就变成了一个优点很鲜明的数据结构。尽管如此，但斐波那契堆对于工
+程实践来讲，可能太过于复杂了，算导上就说：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;From a practical point of view, however, the constant factors and
+programming complexity of Fibonacci heaps make them less desirable than 
+ordinary binary(or k-ary) heaps for most applications, except for certain
+applications that manage large amounts of data.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;它说呢，鉴于斐波那契堆的复杂性和常数因子可能较大，除了某些管理大数据的应用，
+人们还宁愿用二叉堆。话说回来，它又说了，说斐波那契堆还是有蛮多理论研究价值
+的&lt;img alt="咬牙切齿" src="http://www.roading.org/images/2012-07/wlEmoticon-baringteethsmile.png" /&gt;。&lt;/p&gt;
+&lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          周一 30 七月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="algorithm"></category><category term="算法导论"></category><category term="笔记"></category><category term="fibonacci heaps"></category></entry><entry><title>B-树的C++实现</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="alternate"></link><updated>2012-04-19T22:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-19:/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html</id><summary type="html">&lt;p&gt;与之前实现哈希表、红黑树…这些数据结构和算法不同，B-trees的实现不再追求模仿STL，因此没有实现b-trees自己的迭代器。这些天温习之前的笔记的过程中意识到了一个问题，所有这些的数据结构毕竟只是作为练习之用，而不是出于作为以后使用的库的目的。故应当以逻辑清晰为第一要务。B-trees的实现是转变的一个开始，以后关于算法导论中的算法和数据结构的实现力求立足与算法本身而不是C++的淫技。&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//*******************************************&lt;/span&gt;
 &lt;span class="c1"&gt;//B-trees.cpp   2012/4/18 by Adoo&lt;/span&gt;
 &lt;span class="c1"&gt;//@brief: 本文件为b-trees的C++实现。&lt;/span&gt;
@@ -867,7 +1019,191 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="B-trees"></category><category term="c++"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>C++实现红黑树，仿STL封装</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html" rel="alternate"></link><updated>2011-12-31T20:37:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-31:/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html</id><summary type="html">&lt;p&gt;在[&lt;em&gt;Chapter 13 Red-Black trees(红黑树)&lt;/em&gt;][]这篇笔记中对红黑树的各种操作都有较详尽的伪码，
+        </summary><category term="B-trees"></category><category term="c++"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>动态规划基础</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html" rel="alternate"></link><updated>2012-03-19T17:47:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-19:/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html</id><summary type="html">&lt;p&gt;前一篇笔记有过一个动态编程的实例——&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89rod-cutting.html"&gt;rod cutting&lt;/a&gt;。这篇笔记主要了解动态
+规划的基础理论和弄清楚何时运用动态规划。对于何时来运用动态规划来寻得问
+题的解，取决于两个重要因素：最优子结构和重叠子问题。&lt;/p&gt;
+&lt;h3&gt;最优子结构(Optimal substructure)&lt;/h3&gt;
+&lt;p&gt;如果一个问题的最优解包含了它子问题的最优解，那么这个问题具有最优子结构。
+当一个问题包含有最优子结构时，往往暗示着这个问题应该使用动态规划来解决
+（当然，也可能意味着贪心算法是一种好的的解决办法，这一点会在16章讨论到）
+。&lt;/p&gt;
+&lt;p&gt;可以依照一个共同的模式来发现最优子结构：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;You show that a solution to the problem consists of a makeing
+   a choice. …   &lt;/li&gt;
+&lt;li&gt;You suppose that for a given porblem, you are given the choice 
+   that lead to an optimal solution. …   &lt;/li&gt;
+&lt;li&gt;Given this choice, you determine which subproblem ensue and how
+   to best charatcerize the resulting space of subproblems. …   &lt;/li&gt;
+&lt;li&gt;You show that the solutions to the subproblems used within an
+   optimal solutionsto the problem must themselves be optimal by 
+   using a “cut and paste” technique. …&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;用无权最短路径和无权最长路径两个例子，来演示这个模型。&lt;/p&gt;
+&lt;p&gt;假设有图 G=(V,E)，且u,v∈V.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;无权最短路径&lt;/strong&gt;：找出u到v的无权最短路径。假定u,v是不同点(相同就没什么
+好讨论了)。我们先假设w是u→v最短路径p上的一个点(第二步，做一个选择，并
+假设它导致最优解)，于是最短路径p可以分为两段子路径,子路径p&lt;sub&gt;1&lt;/sub&gt;为u→w;子
+路径p&lt;sub&gt;2&lt;/sub&gt;为w→v(第三步，描述子问题空间)。显然，p&lt;sub&gt;1&lt;/sub&gt;与p&lt;sub&gt;2&lt;/sub&gt;也必须是各自子
+路径的最短路径，不然最短路径p &amp;lt; p&lt;sub&gt;1&lt;/sub&gt;+p&lt;sub&gt;2&lt;/sub&gt;的长度,这与p = p&lt;sub&gt;1&lt;/sub&gt;+p&lt;sub&gt;2&lt;/sub&gt;矛盾。
+于是第四点得证。也就是说这个问题有最优子结构。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;无权最长路径&lt;/strong&gt;：找出u到v的无权最长路径，当然这条路径不能包含环路。同
+样的办法先假设w是u→v最长路径p上的一个点，因此可以得出子路径p&lt;sub&gt;1&lt;/sub&gt;和p2，
+有p = p&lt;sub&gt;1&lt;/sub&gt;+p&lt;sub&gt;2&lt;/sub&gt;。那么这时p1和p2一定是u→w与w→v的最长子路径吗？不是的，
+我们看下图这种情况：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://www.roading.org/images/2012-03/image_thumb10.png" /&gt;&lt;/p&gt;
+&lt;p&gt;u→w的最长路径为：u→v→s→w.&lt;/p&gt;
+&lt;p&gt;w→v的最长路径为： w→u→v.&lt;/p&gt;
+&lt;p&gt;假如p1和p2是u→w与w→v的最长子路径，那么p=u→v→s→w→u→v。这个时候p显然不是
+最长路径，因为环路形成了。所以这个问题不包含最优子结构。&lt;/p&gt;
+&lt;p&gt;感觉上两个问题非常类似，但是为什么结果却截然相反呢？区别在于第一个问题
+的子问题是相互独立，而第二个问题的子问题之间却互有依赖关系——p1和p2如果
+被独立看待，就有可能产生环路。&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;重叠子问题(Overlapping subproblems)&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;使用动态规划求解的第二个必要因素是子问题必须“很小”。也就是说递归算法不
+能总是产生新的子问题，动态规划求解的意义在于，它记录子问题的解，使得子
+问题可以只计算一遍，如果总是产生新的子问题，那么也就失去了使用动态规划
+的意义，因为记录下的子问题的解，不被再用到。&lt;/p&gt;
+&lt;p&gt;这儿可以比较一下动态规划和分治思想，两者虽然都是将问题分割为子问题，但
+又有很大的不同，分治思想的主要目的在于减小问题的规模，而动态规划则主要
+为了减少重复的计算。因此，动态规划适用于子问题重叠且独立的情况。&lt;/p&gt;
+&lt;p&gt;动态规划一般采用自下向上的模式，其实自顶而下也是一种选择，如
+&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89rod-cutting.html"&gt;rod cutting&lt;/a&gt;中就有这种解法。常规的自顶向下有很差的效率，加入“备忘录”
+记录之后，其实与自下而上复杂度是一样的。也就是说动态规划中采用自顶向下
+和自下而上的复杂度是一样的，但通常自下而上，用有更高的效率，因为它采用
+的是迭代的方法，而自顶而下用的则是递归。但是，当问题中的一些子问题是完
+全不用求解的时候，那么自顶而下可能是一种更好的选择。&lt;/p&gt;
+&lt;p&gt;动态规划算法的运行时间取决于两个因素的积：一是有多少个子问题，二则是每
+一个子问题我们有多少选择。&lt;/p&gt;
+&lt;p&gt;总结：动态规划算法的运用有两个必要条件，一是问题包含最优子结构，二是有
+重叠子问题。第一点保证求解的正确性，第二点则是代价问题。简而言之，我认
+为当问题含有独立重叠的子问题时，往往意味着该使用动态规划。子问题独立，
+应该可以保证存有最优子结构。&lt;/p&gt;
+&lt;p&gt;参考：算法导论第三版&lt;/p&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          周一 19 三月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="dynamic programming"></category><category term="算法导论"></category><category term="笔记"></category><category term="DP"></category></entry><entry><title>动态规划笔记（1）——Rod cutting</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html" rel="alternate"></link><updated>2012-03-08T12:16:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-08:/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html</id><summary type="html">&lt;p&gt;动态规划（dynamic programming）,与“分治思想”有些相似，都是利用将问题分
+为子问题，并通过合并子问题的解来获得整个问题的解。于“分治”的不同之处在
+于，对于一个相同的子问题动态规划算法不会计算第二次，其实现原理是将每一
+个计算过的子问题的值保存在一个表中。&lt;/p&gt;
+&lt;p&gt;动态规划一般被用于解决“最优解”问题。编写动态规划算法可以按照以下四个步
+骤(引自原文)：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Characterize the structure of an optimal solution.   &lt;/li&gt;
+&lt;li&gt;Recursively define the value of an optimal solution.   &lt;/li&gt;
+&lt;li&gt;Compute the value of an optimal solution, typically in a bottom-up
+   fashion.   &lt;/li&gt;
+&lt;li&gt;Construct an optimal solution from computed information.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;前三步可以求出最优解的值，如果仅是为了求出最优解的值，第四步可省略。第
+四步用来获得最优解，这种时候通常要在第三步时维持一些额外的数据信息。&lt;/p&gt;
+&lt;h3&gt;Rod cutting&lt;/h3&gt;
+&lt;p&gt;简单的理论之后，看一个切棒子(Rod cutting的撇脚翻译)具体问题。问题如下：
+给你一根长&lt;em&gt;n&lt;/em&gt;英尺的棒子和一份关于该棒子的价目表如下（其中 &lt;em&gt;i = 1,2,3,…,n&lt;/em&gt;），请问如何将这根棒子卖出最高的价格，可以对棒子进行切割。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2012-03/image_thumb.png" /&gt;&lt;/p&gt;
+&lt;h4&gt;常规的解法&lt;/h4&gt;
+&lt;p&gt;假设最优的切割方法是切为 k 段, 1 &amp;lt;= k &amp;lt;= n, 切割的方式为：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;n&lt;/em&gt; = &lt;em&gt;i&lt;sub&gt;1&lt;/sub&gt;&lt;/em&gt; +&lt;em&gt;i&lt;sub&gt;2&lt;/sub&gt;&lt;/em&gt; + ... +&lt;em&gt;i&lt;sub&gt;k&lt;/sub&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;则其总价格为：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;r&lt;sub&gt;n&lt;/sub&gt;&lt;/em&gt; = &lt;em&gt;p&lt;sub&gt;i&lt;/sub&gt;1&lt;sub&gt;&lt;/sub&gt;&lt;/em&gt; + &lt;em&gt;p&lt;sub&gt;i&lt;/sub&gt;2&lt;sub&gt;&lt;/sub&gt;&lt;/em&gt; + ... + &lt;em&gt;p&lt;sub&gt;i&lt;/sub&gt;k&lt;sub&gt;&lt;/sub&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;不像杂乱的切法，我们可以想象这样一种切法，每一刀切下去之后将棒子分为左右
+两段，而下一刀总从右段下手，依此类推。那么：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2012-03/image_thumb3.png" /&gt;&lt;/p&gt;
+&lt;p&gt;根据上述公式，可以很容易的写出相应的代码：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ROD&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="err"&gt;∞&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+        &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ROD&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这段代码提供两个参数。p是一个数组，它存储着一份价目表，而n则表示要切割
+的棒子的长度。当n不大时上述的算法或许简单管用，但是一旦n稍大，运行时间
+将会成几何倍数增加。为什么会这样慢？其一，是因为其复杂度达到O(2&lt;sup&gt;n&lt;/sup&gt;),另外则由于递归的次数太多了(多达2&lt;sup&gt;n-1&lt;/sup&gt;次)。&lt;/p&gt;
+&lt;p&gt;仔细观察不难发现，上述算法做了太多的重复工作，比方Cut-Rod(p,n),要递归
+调用Cut-Rod(p,n-i), 其中 i=1,2,…,n。但对于其中Cut-Rod(p,n)中递归调用的
+ Cut-Rod(p,n-1)又要重复计算 Cut-Rod(p,n-i-1)。&lt;/p&gt;
+&lt;p&gt;对于上述情况动态规划就能派上用场了。&lt;/p&gt;
+&lt;h3&gt;用动态规划算法来切棒子&lt;/h3&gt;
+&lt;p&gt;动态规划的想法很简单，利用一个表来存储子问题的解。只有表中没有这个子问
+题的解的时候，才真正去求这个子问题的解并将该解保存到表中，否则直接用表
+中的解。&lt;/p&gt;
+&lt;p&gt;一般有自顶向下和自下而上两种记忆法来实现动态规划。&lt;/p&gt;
+&lt;p&gt;自顶而下：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;MEMOIZED&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ROD&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;..&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;array&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; 
+        &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="err"&gt;∞&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;MEMOIZED&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ROD&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;AUX&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;MEMOIZED&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ROD&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;AUX&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt; 
+        &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="err"&gt;∞&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; 
+            &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;MEMOIZED&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ROD&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;AUX&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;自上而下：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;array&lt;/span&gt;
+    &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+        &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="err"&gt;∞&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;
+            &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+        &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上述的方法都只求出了最优的值，其解决方案并没有记录下来。也就是说对于切
+棒子这个问题来说，只求出了最大的总价格，至于怎么切才能卖出这样的价钱并
+没有解决。要想获得切法，则需要一个额外的数组来存取一些分割信息。&lt;/p&gt;
+&lt;p&gt;具体扩展后的伪码如下：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;EXTENDED&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;BOTTOM&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;UP&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ROD&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;arrays&lt;/span&gt;
+    &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; 
+        &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="err"&gt;∞&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; 
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
+        &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上面代码中数组s用s[i]记录了长度为i的棒子的最优切法的第一部分长度，这
+一点让我颇受启发。利用数组s可以轻易输出最优解法：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PRINT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ROD&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SOLUTION&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;EXTENDED&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;BOTTOM&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;UP&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;CUT&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ROD&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          周四 08 三月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="dynamic programming"></category><category term="rod cutting"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>C++实现红黑树，仿STL封装</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html" rel="alternate"></link><updated>2011-12-31T20:37:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-31:/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html</id><summary type="html">&lt;p&gt;在[&lt;em&gt;Chapter 13 Red-Black trees(红黑树)&lt;/em&gt;][]这篇笔记中对红黑树的各种操作都有较详尽的伪码，
 相信使用C++来实现也并不是难事，我要做的是，在实现的基础上要进行一定的封装。当然风格嘛，
 自然参照STL，最终的结果就是要实现一个STL风格的红黑树模板。&lt;/p&gt;
 &lt;p&gt;在C++泛型编程中两个重要的概念即是容器和迭代器。我的目的则是要实现一个与STL中的其他容器
@@ -1246,319 +1582,85 @@ They are also used for &lt;a href="http://en.wikipedia.org/wiki/Inverted_index"&
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/radix-tree-%e5%9f%ba%e6%95%b0%e6%a0%91.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="Problem"></category><category term="radix tree"></category><category term="笔记"></category></entry><entry><title>Chapter 12 二叉搜索树(Binary Search Tree) 2</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html" rel="alternate"></link><updated>2011-12-15T21:39:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-15:/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html</id><summary type="html">&lt;h3&gt;前驱和后继(Successor and predecessor)&lt;/h3&gt;
-&lt;p&gt;所谓前驱和后继(也许这么翻译，并不太正确，姑且这么叫)是指，指定元素在所有元素顺序排列模式下的前一个元素或后一个元素。&lt;/p&gt;
-&lt;p&gt;要获取一个二叉搜索树中指定结点的后继的直观的办法是，找到所有比指定结点大的结点中最小的。根据二叉搜索树的属性，找比某结点大的元素，可以往两个两个方向走：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;往右子树方向走，结点右子树的元素都不小于本身；&lt;/li&gt;
-&lt;li&gt;往父结点方向走，&lt;strong&gt;指定的结点有可能处于其它结点的左子树中&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;当指定结点拥有右子树时，那么其后继必存在于其右子树中。因往父结点方向找到的比指定结点大的元素大于指定结点右子树的所有元素。如果指定结点没有右孩子呢？那么沿着父结点的方向找到第一个其做字数包含指定结点的结点，这个结点就是指定结点的后继。&lt;/p&gt;
-&lt;p&gt;求后继的伪码：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SUCCESSOR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
-        &lt;span class="n"&gt;then&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUM&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
-    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;
-        &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
-        &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;类似的方法可以被我们用来求前驱，这里省略。&lt;/p&gt;
-&lt;h3&gt;插入和删除操作&lt;/h3&gt;
-&lt;p&gt;对于插入操作很好解决，从根节点出发，不断比较，一路向下，直到不能再下，就会找到一个合适的位置。下面是伪码：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
-    &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;
-    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
-        &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;
-            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;
-                &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;
-            &lt;span class="k"&gt;else&lt;/span&gt;
-                &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;
-    &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
-        &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;                &lt;span class="c1"&gt;// Tree T was empty&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt; 
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;
-            &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;
-        &lt;span class="k"&gt;else&lt;/span&gt; 
-            &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;至于删除操作，则要麻烦一些，因为删除结点后，我们必须维持搜索二叉树的属性。假定，被删除的结点为z,那么有三种情况:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;z没有孩子；&lt;/li&gt;
-&lt;li&gt;z有一个孩子；&lt;/li&gt;
-&lt;li&gt;z有两个孩子。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;对于没有孩子和一个孩子这种情况比较容易解决，有一个孩子可以用孩子替代z，一个孩子都没有则用 NIL。麻烦的在于有两个孩子的情况，此时我们必须找到z在其&lt;strong&gt;右子树中(仅仅是右子树范围中，而不是整个树中)&lt;/strong&gt;的后继来代替z 。在进行具体操作时，导论上则归纳为四点：&lt;/p&gt;
+        </summary><category term="Problem"></category><category term="radix tree"></category><category term="笔记"></category></entry><entry><title>非递归不用栈遍历搜索二叉树</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html" rel="alternate"></link><updated>2011-12-21T14:45:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-21:/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html</id><summary type="html">&lt;h3&gt;Exercises 12.1-3&lt;/h3&gt;
 &lt;blockquote&gt;
+&lt;p&gt;Give a nonrecursive algorithm that performs an inorder tree walk.
+(&lt;em&gt;Hint:&lt;/em&gt; There is an easy solution that uses a stack as an auxiliary
+data structure and a more complicated but elegant solution that uses
+no stack but assumes that two pointers can be tested for equality.)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Solutions:&lt;/strong&gt;用非递归的方式来遍历二叉树，假如有一个辅助栈的话关键是要注
+意一下压栈的顺序，这儿主要在不使用辅助栈的情况下遍历搜索二叉树。以中序遍
+历为例，如果从根节点开始使用迭代的手法来遍历，那么对于迭代到任意一个结点
+来讲，都需要考虑的第一个问题：它的孩子被迭代的情况：只有左孩子被迭代？两
+个孩子都已被迭代？还是都未被迭代？根据不同的情况作出不同的判断。如此一来，
+情况就变的有点繁琐，在这儿可以做一点简化：直接选用迭代的真实开始点作为起
+点，也就是最左的叶子，或者说最小结点。这样做的好处是，对于迭代到的任意一
+个结点，我们只需考虑它的右子树是否已经被迭代，而无需考虑左子树，因为其左
+子树必然已经被迭代过。模型如下：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;If z has no left child, we replace z by its right child. When z's right child is also NIL, z has no children; when z's right child is not NIL, z has one child.&lt;/li&gt;
-&lt;li&gt;If z has just one child, it is a left child and we replace z by that child . &lt;/li&gt;
-&lt;li&gt;Otherwise z has both a left child and a right child. We find z's successor y which lies in z's right subtree and has no left child . We want to splice y out of its current position and have it replace z in the tree.&lt;/li&gt;
-&lt;li&gt;If y is z's right child (Fig. 12.4c), we replace z by y, maintaining y's right child.&lt;/li&gt;
-&lt;li&gt;If y is not z's right child,we first replace y by its own right   child, then replace z by y.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;我一开始有一点迷惑，为什么要找在右子树中的后继，而不是其真正的后继，好处在哪，更进一步，为什么是后继，而不是其它。&lt;/p&gt;
-&lt;p&gt;首先，我思考了一下，有怎么样的目标？如果目标单单是维持搜索二叉树的属性的话，那么直接重新建树就好，多么节省脑细胞，显然我们不这样做。我们想找的是一种既能维持搜索二叉树的属性，又手术动得比较小的方式，这无疑比较简单高效，就如我们在做堆的删除工作时，将被删除元素与末尾元素互换的原理一样。&lt;/p&gt;
-&lt;p&gt;在这之后，我可以总结出这三条：&lt;/p&gt;
+&lt;li&gt;
+&lt;p&gt;如果&lt;em&gt;x&lt;/em&gt;不是由其右孩子回溯而至(说明其右子树还未被遍历)，那么：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;范围可以缩小，要维持搜索二叉树的属性，只需将范围划定在以 z为根节点的子树中即可，因为其它部分的属性并未被破坏。&lt;/li&gt;
-&lt;li&gt;进一步缩小范围，可以找到一个点来替代z，这样不必要涉及整个子树。什么样的点最适合替代z?z的后继或前驱。秉着关起门来解决自家问题的原则(参照上一条)，对于后继或前驱的选择，应在z的子树中选择，所以这个替代点便变成了右子树中的后继或左子树中的前驱。&lt;/li&gt;
-&lt;li&gt;另外，不论是右子树中的后继，还是左子树中的前驱，都有一个优点，都最多只有一个孩子。因为拿掉这个结点而带来的问题容易解决。至于，为什么它们最多只有一个孩子？想一想，左子树中的前驱为左子树中的最大值，它的位置应该在哪？一路向右走到底。同样的思路，可以加之遇右子树中的后继。&lt;/li&gt;
+&lt;li&gt;输出&lt;em&gt;x&lt;/em&gt;结点。&lt;/li&gt;
+&lt;li&gt;若&lt;em&gt;x&lt;/em&gt;的右结点不为空，将&lt;em&gt;x&lt;/em&gt;赋值为&lt;em&gt;x&lt;/em&gt;右子树中的最小结点；否则，将
+    &lt;em&gt;x&lt;/em&gt;向根结点回溯。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;以下是删除操作的伪码：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;DELETE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;            
-       &lt;span class="n"&gt;TRANSPLANT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;       
-       &lt;span class="n"&gt;TRANSPLANT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUM&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-       &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;              
-          &lt;span class="n"&gt;TRANSPLANT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
-          &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;
-          &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
-       &lt;span class="n"&gt;TRANSPLANT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;          
-       &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;       
-       &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
-
-&lt;span class="n"&gt;TRANSPLANT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;       
-       &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;
-  &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;   
-       &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;
-  &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;      
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
-       &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;注意：伪码中的 TRANSPLANT，只修改 v 与 u的父亲之间的关系，而不修改与u孩子的关系。&lt;/p&gt;
-&lt;p&gt;关于随机构造搜索二叉树，用给定的一列的元素构造二叉树，假使这列元素是有序的，那么将构造成一根“棍子”，为了规避这种最坏情况的发生，可以采用随机构造二叉树的办法，导论上给出证明，随机构造的搜索二叉树的期望复杂度是O(lgn),精力所限，那个证明我就没有细看了。&lt;/p&gt;
-&lt;h3&gt;补：关于删除操作为什么不在被删除结点上赋值&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Many texts, including the ﬁrst two editions of this book, have a
-somewhat simpler method of deleting a node from a binary search tree
-when both of its children are present. Instead of replacing node
-&lt;font face="BatangChe"&gt;z&lt;/font&gt; by its successor y, we delete node y
-but copy its key and satellite data into node
-&lt;font face="BatangChe"&gt;z&lt;/font&gt;. The downside of this approach is that
-the node actually deleted might not be the node passed to the delete
-procedure. If other components of a program maintain pointers to nodes
-in the tree, they could mistakenly end up with “stale” pointers to
-nodes that have been deleted. Although the deletion method presented
-in this edition of this book is a bit more complicated,it guarantees
-that a call to delete node &lt;font face="BatangChe"&gt;z&lt;/font&gt; deletes
-node &lt;font face="BatangChe"&gt;z&lt;/font&gt; and only node
-&lt;font face="BatangChe"&gt;z&lt;/font&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周四 15 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
-          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
-          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="binary search tree"></category><category term="笔记"></category><category term="算法导论"></category></entry><entry><title>Chapter 12 二叉搜索树(Binary Search Tree) 1</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html" rel="alternate"></link><updated>2011-12-15T16:41:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-15:/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html</id><summary type="html">&lt;h3&gt;何为二叉搜索树？&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Such a tree can be represented by a linked data structure in which
-each node is an object. In addition to a &lt;em&gt;key&lt;/em&gt; field and satellite
-data, each node &lt;a name="797"&gt;&lt;/a&gt;&lt;a name="IDX-254"&gt;&lt;/a&gt;contains
-fields &lt;em&gt;left&lt;/em&gt;, &lt;em&gt;right&lt;/em&gt;, and &lt;em&gt;p&lt;/em&gt; that point to the nodes corresponding
-to its left child, its right child, and its parent, respectively. If a
-child or the parent is missing, the appropriate field contains the
-value NIL. The root node is the only node in the tree whose parent
-field is NIL.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;binary-search-tree property&lt;/em&gt;&lt;/strong&gt;:Let &lt;em&gt;x&lt;/em&gt; be a node in a binary search
-tree. If &lt;em&gt;y&lt;/em&gt; is a node in the left subtree of &lt;em&gt;x&lt;/em&gt;, then &lt;em&gt;key&lt;/em&gt;[&lt;em&gt;y&lt;/em&gt;] ≤
-&lt;em&gt;key&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;]. If &lt;em&gt;y&lt;/em&gt; is a node in the right subtree of &lt;em&gt;x&lt;/em&gt;, then
-&lt;em&gt;key&lt;/em&gt;[&lt;em&gt;x&lt;/em&gt;] ≤
-&lt;em&gt;key&lt;/em&gt;[&lt;em&gt;y&lt;/em&gt;].&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3&gt;遍历操作&lt;/h3&gt;
-&lt;p&gt;可以用三种方式来遍历搜索二叉树：前序遍历(preorder tree walk)、中序遍历(inorder tree walk)、后续遍历(postorder tree walk)。其名字的由来，缘于根节点被呈现的次序，是在最前中间、还是最后。&lt;/p&gt;
-&lt;p&gt;对于搜索二叉树来讲，由于其固有的特性（&lt;strong&gt;&lt;em&gt;binary-search-tree property&lt;/em&gt;&lt;/strong&gt;），中序遍历是按节点大小顺序方式遍历二叉树的。看一个递归版本的中序遍历代码：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;INORDER&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;WALK&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
- &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
-    &lt;span class="n"&gt;then&lt;/span&gt; &lt;span class="n"&gt;INORDER&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;WALK&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-        &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-        &lt;span class="n"&gt;INORDER&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;WALK&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;因根结点不小于所有左子树的节点，且不大于所有右子树的节点，所以上面的中序遍历的伪代码，输出的结果将按照从小到大排列。虽然递归用来表现算法简单明了，但在实际应用中为了更好的效率，我们可能更希望有一个迭代版。关于迭代版，会在做本节的习题12.1-3 时在来实现，另外，在用C++实现二叉搜索树这个数据结构的时候，也会采用迭代版。&lt;/p&gt;
-&lt;h3&gt;搜索以及求最大最小节点的操作&lt;/h3&gt;
-&lt;p&gt;根据二叉搜索树属性，这些都是很简单的操作，以下为这些操作的伪码：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//搜索&lt;/span&gt;
-&lt;span class="no"&gt;ITERATIVE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="no"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="no"&gt;SEARCH&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="no"&gt;NIL&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-            &lt;span class="n"&gt;then&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;
-        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-
-&lt;span class="c1"&gt;// 最小值&lt;/span&gt;
-&lt;span class="no"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="no"&gt;MINIMUM&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="no"&gt;NIL&lt;/span&gt;
-        &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-
-&lt;span class="c1"&gt;//最大值&lt;/span&gt;
-&lt;span class="no"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="no"&gt;MAXIMUM&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;while&lt;/span&gt;  &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="no"&gt;NIL&lt;/span&gt;
-       &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;right&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周四 15 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
-          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
-          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="binary search tree"></category><category term="inorder tree walk"></category><category term="笔记"></category></entry><entry><title>Solution of CLRS 11.1 exercises</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html" rel="alternate"></link><updated>2011-12-14T14:43:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-14:/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html</id><summary type="html">&lt;h3&gt;Exercises 11.1-2&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;A &lt;strong&gt;&lt;em&gt;bit vector&lt;/em&gt;&lt;/strong&gt; is simply an array of bits (0's and 1's). A bit vector of
-length &lt;em&gt;m&lt;/em&gt; takes much less space than an array of &lt;em&gt;m&lt;/em&gt; pointers. Describe how
-to use a bit vector to Represent a Dynamic Set of Distinct Elements with no 
-Satellite Data. Dictionary Operations Should Run in &lt;em&gt;O&lt;/em&gt;(1) Time.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solution(I get the result from &lt;a href="http://ripcrixalis.blog.com/2011/02/08/hello-world/"&gt;Rip’s blog&lt;/a&gt;, The original text is
-here for ease of reference.):&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Using a bit vector of length m, as our direct-address table to represent the
-dynamic set.Here m bits tags m slots of the table. The elements in the 
-dynamic set is stored in the direct-address table itself. If slot k is
-allocated, bit k is 0. If slot k contains no element, bit k is 1.&lt;/p&gt;
-&lt;h4&gt;Bit Vector&lt;/h4&gt;
-&lt;p&gt;The free-space list is often implemented as a bit map or bit vector. If a
-block is free, the bit is 1. If a block is allocated, the bit is 0. Assume
-the following blocks are allocated, the rest free: 2, 3, 4, 5, 8, 9, 10, 11,
-12, 13, 17, 18, 25, 27 .The free-space bit map would
-be: 0011110011111100011000000111000000…&lt;/p&gt;
-&lt;p&gt;Adavantages of this approach include: &lt;br /&gt;
-· Relatively simple &lt;br /&gt;
-· Efficient to find the first free blocks or n consecutive free blocks
-on the disk.&lt;/p&gt;
-&lt;p&gt;Bit maps are useful only when it can be kept in main memory. But, as disks get
-larger, this is hard to do. 1.3 gigabyte disk with 512 byte blocks would need 
-a bit map of over 310k to track its free blocks. Clustering the blocks in
-intervals of foul reduces this number to 78k per disk.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3&gt;Exercises 11.1-3&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Suggest how to implement a direct-address table in which the keys of stored
-elements do not need to be distinct and the elements can have satellite data.
-All three dictionary operations (INSERT, DELETE, and SEARCH) should run in 
-&lt;em&gt;O&lt;/em&gt;(1) time. (Don't forget that DELETE takes as an argument a pointer to an 
-object to be deleted, not a key.)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;可以直接用链表来解决碰撞问题。对于搜索的话可以返回链表的指针，根据题
-目的条件来看，对于两个用户提供的两个key相同的object我们是无法区分的，因此只能返回
-一组key相同的objecet让用户用自己的方法来区分。&lt;/p&gt;
-&lt;h3&gt;Exercises 11.1-4&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;We wish to implement a dictionary by using direct addressing on a &lt;em&gt;huge&lt;/em&gt; array.
-At the start, the array entries may contain garbage, and initializing the
-entire array is impractical because of its size. Describe a scheme for 
-implementing a direct-address dictionary on a huge array. Each stored object
-should use &lt;em&gt;O&lt;/em&gt;(1) space; the operations SEARCH, INSERT, and DELETE should
-take &lt;em&gt;O&lt;/em&gt;(1) time each; and the initialization of the data structure should take
-&lt;em&gt;O&lt;/em&gt;(1) time. (&lt;em&gt;Hint:&lt;/em&gt;Use an additional stack, whose size is the number of keys
-actually stored in the dictionary, to help determine whether a given entry in 
-the huge array is valid or not.)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;一直没想出好的办法来解决这个问题，今天看《算法导论教师手册》有这个题
-的解答。觉得它的数据结构的思路比较巧妙：字典中每个元素带有一个索引，表示关于该元
-素的的key存储在辅助栈中的位置。而辅助栈用数组实现，因此可以随机访问。辅助栈中存储
-所有存在于字典中的元素的key ，于是形成了一个所谓validating cycle。要判断从字典中
-直接读取到的元素是不是需要的数据，只需要取出该元素中的索引，判断这个索引是否有效
-（大于栈底而小于栈顶），然后通过索引获取栈中的key ,与自己需要的元素的key比较看是
-否相等即可以。相等表示该数据是要找的数据，否则不是。显而易见，通过这个数据结构模
-型来进行SEARCH, INSERT都为&lt;em&gt;O&lt;/em&gt;(1)。至于DELETE 操作，需要将被删除的数据在栈中的key
-与栈顶存储的key交换后再删除，同样可以达到&lt;em&gt;O&lt;/em&gt;(1)，要注意的是删除过程中，需要更新与
-原栈顶中key相关元素的索引。&lt;/p&gt;
-          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周三 14 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
-          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
-          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="bit vector"></category><category term="Exercises"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>Chapter 10 Exercises and Problems (2)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html" rel="alternate"></link><updated>2011-11-06T17:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-11-06:/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html</id><summary type="html">&lt;h3&gt;Exercises 10.3-4&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;It is often desirable to keep all elements of a doubly linked list compact &amp;gt;in storage, using, for example, the first &lt;em&gt;m&lt;/em&gt; index locations in the &amp;gt;multiple-array representation. (This is the case in a paged, virtual-memory &amp;gt;computing environment.) Explain how the procedures ALLOCATE-OBJECT and FREE-&amp;gt;OBJECT can be implemented so that therepresentation is compact. Assume that &amp;gt;there are no pointers to elements of the linked list outside the list &amp;gt;itself. (&lt;em&gt;Hint:&lt;/em&gt; Use the array implementation of a stack.)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solutions:&lt;/strong&gt;
-用栈来管理空闲资源，并且使得链表的内存紧凑，这表明栈中的空闲资源也是紧凑的，因为若空闲资源不是紧凑的，那分配出去的资源肯定也不是紧凑的。其次，这个栈每一次出栈的资源必然是位置最靠近已分配资源的，这也就是说明该栈中存储的所有空闲资源在位置上是有序的。总而言之，这个问题实质是要我们这样做：对于该双向链表的资源的管理，总是分配最靠近双向链表的空闲资源，而回收时总是回收位置最靠近空闲资源栈的资源。&lt;/p&gt;
-&lt;p&gt;具体操作为，对于资源分配，直接出栈即可。对于资源回收，应当先将其交换到位置最靠近资源回收栈的节点再回收。&lt;/p&gt;
-&lt;p&gt;资源分配的伪代码：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;Allocate_Object&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Stack&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;free&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
-         &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;overflow&amp;quot;&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;free&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;资源回收的伪代码：&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;Free_Object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;last_node&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Top&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;free&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
-    &lt;span class="c1"&gt;//remove the x &lt;/span&gt;
-    &lt;span class="n"&gt;List_Delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="c1"&gt;//replace last_node by x&lt;/span&gt;
-    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;last_node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;
-    &lt;span class="n"&gt;last_node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prev&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-    &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prev&lt;/span&gt;
-    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
-    &lt;span class="c1"&gt;//free last_node;&lt;/span&gt;
-    &lt;span class="n"&gt;Push&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;free&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h3&gt;Exercises 10.3-5&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Let &lt;em&gt;L&lt;/em&gt; be a doubly linked list of length &lt;em&gt;m&lt;/em&gt; stored in arrays &lt;em&gt;key&lt;/em&gt;,
-&lt;em&gt;prev&lt;/em&gt;, and &lt;em&gt;next&lt;/em&gt; of length &lt;em&gt;n&lt;/em&gt;. Suppose that these arrays are managed
-by ALLOCATE-OBJECT and FREE-OBJECT procedures that keep a doubly linked
-free list &lt;em&gt;F&lt;/em&gt;. Suppose further that of the &lt;em&gt;n&lt;/em&gt; items, exactly &lt;em&gt;m&lt;/em&gt; are on
-list &lt;em&gt;L&lt;/em&gt; and &lt;em&gt;n-m&lt;/em&gt; are on the free list. Write a procedure
-COMPACTIFY-LIST(&lt;em&gt;L&lt;/em&gt;, &lt;em&gt;F&lt;/em&gt;) that, given the list &lt;em&gt;L&lt;/em&gt; and the free list
-&lt;em&gt;F&lt;/em&gt;, moves the items in &lt;em&gt;L&lt;/em&gt; so that they occupy array positions 1,
-2,..., &lt;em&gt;m&lt;/em&gt; and adjusts the free list &lt;em&gt;F&lt;/em&gt; so that it remains correct,
-occupying array positions &lt;em&gt;m&lt;/em&gt; + 1, &lt;em&gt;m&lt;/em&gt; + 2,..., &lt;em&gt;n&lt;/em&gt;. The running time of
-your procedure should be Θ(&lt;em&gt;m&lt;/em&gt;), and it should use only a constant
-amount of extra space. Give a careful argument for the correctness of
-your procedure.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Solutions：&lt;/strong&gt;遍历双向链表，依次将它的节点交换到数组的前m个位置即可，在交换时需要提供一个额外的节点。&lt;/p&gt;
-&lt;h3&gt;Problems 10-2: Mergeable heaps using linked lists&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;A &lt;strong&gt;&lt;em&gt;mergeable heap&lt;/em&gt;&lt;/strong&gt; supports the following operations: MAKE-HEAP
-(which creates an empty mergeable heap), INSERT, MINIMUM, EXTRACT-MIN,
-and UNION&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;.Show how to implement mergeable heaps using linked lists in
-each of the following cases. Try to make each operation as efficient as
-possible. Analyze the running time of each operation in terms of the
-size of the dynamic set(s) being operated on.
-1.  Lists are sorted.
-2.  Lists are unsorted.
-3.  Lists are unsorted, and dynamic sets to be merged are disjoint.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;em&gt;Solution:&lt;/em&gt;*想了快一个小时，没找到什么思路，留待高手来教我。&lt;/p&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:1"&gt;
-&lt;p&gt;Because we have defined a mergeable heap to support MINIMUM and
-EXTRACT-MIN, we can also refer to it as a &lt;strong&gt;&lt;em&gt;mergeable min-heap&lt;/em&gt;&lt;/strong&gt;.
-Alternatively, if it supported MAXIMUM and EXTRACT-MAX, it would be a
-&lt;strong&gt;&lt;em&gt;mergeable max-heap&lt;/em&gt;&lt;/strong&gt;.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
+&lt;li&gt;
+&lt;p&gt;如果x是由其右孩子回溯而至(说明，以x为根结点的子树已经遍历完成)，那么
+    将&lt;em&gt;x&lt;/em&gt;向根结点方向回溯。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;用伪代码表示如下：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;iter_bst&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;        
+        &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="n"&gt;xc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;
+            &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;                    
+            &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="err"&gt;≠&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;
+                &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;实质上，因为对于BST的中序遍历来讲，我们可以直接从最小结点一直求后继，
+或从最大结点一直求前驱的方式来实现对搜索二叉树的遍历，我在[仿STL
+的二叉搜索树的C++实现][]中就是这么做的。且，其算法复杂度也是 O(n)。&lt;/p&gt;
+&lt;p&gt;另外，下面给出对应于上述伪代码的C++代码，当然，要配合
+&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E4%BB%BFstl-%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84c%E5%AE%9E%E7%8E%B0.html"&gt;仿STL的二叉搜索树的C++实现&lt;/a&gt;中的BST类模板才能通过编译。&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;template&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;typename&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;BST&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;  &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_root&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;pointer&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;  &lt;span class="n"&gt;x_pre&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;x_pre&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;x_pre&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_value&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;iterator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_right&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;pointer&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+                &lt;span class="k"&gt;else&lt;/span&gt;
+                    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_parent&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;
+                &lt;span class="p"&gt;{&lt;/span&gt;   
+                    &lt;span class="n"&gt;x_pre&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_parent&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;    
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周日 06 十一月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周三 21 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
-          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="Exercises"></category><category term="算法导论"></category></entry></feed>
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="binary search tree"></category><category term="Exercises"></category><category term="算法导论"></category></entry></feed>

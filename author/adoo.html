@@ -116,150 +116,166 @@
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html" rel="bookmark"
-                           title="Permalink to Vab Emde Boas trees">Vab Emde Boas trees</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 仿STL 的二叉搜索树的C++实现">仿STL 的二叉搜索树的C++实现</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2013-05-24T08:30:00">
-                周五 24 五月 2013
+        <abbr class="published" title="2011-12-17T23:37:00">
+                周六 17 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="algorithm&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="binary search tree&nbsp;&nbsp;c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;stl&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to algorithm" href="http://www.roading.org/tag/algorithm.html">algorithm</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <p>van Emde Boas trees 支持所有优先级优先级队列的操作，并且巧妙的是它对于SEARCH,
-INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在最坏复
-杂度\( O(\lg{\lg n}) \)之内。不过有些限制的是，所有的Kye值都必须在 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html" rel="bookmark"
-                           title="Permalink to Vab Emde Boas trees">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
-                           title="Permalink to B-树的C++实现">B-树的C++实现</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2012-04-19T22:28:00">
-                周四 19 四月 2012
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="B-trees&nbsp;&nbsp;c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to B-trees" href="http://www.roading.org/tag/b-trees.html">B-trees</a>
+		<a title="permalink to binary search tree" href="http://www.roading.org/tag/binary-search-tree.html">binary search tree</a>
 		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to stl" href="http://www.roading.org/tag/stl.html">stl</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
 	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <p>与之前实现哈希表、红黑树…这些数据结构和算法不同，B-trees的实现不再追求模仿STL，因此没有实现b-trees自己的迭代器。这些天温习之前的笔记的过程中意识到了一个问题，所有这些的数据结构毕竟只是作为练习之用，而不是出于作为以后使用的库的目的。故应当以逻辑清晰为第一要务。B-trees的实现是转变的一个开始，以后关于算法导论中的算法和数据结构的实现力求立足与算法本身而不是C++的淫技。</p>
-<div class="codehilite"><pre><span class="c1">//*******************************************</span>
-<span class="c1">//B-trees.cpp   2012/4/18 by Adoo</span>
-<span class="c1">//@brief ...</span></pre></div>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
-                           title="Permalink to B-树的C++实现">Read more→</a>	
+                <p>看完导论的Chapter 12 binary search tree后，不忘用C++实现一下这个
+数据结构，学习算法的时候也锻炼下C++的编码能力。另则，若按照STL的
+风格来封装搜索二叉树，一是可以培养良好的编程风格，也能好好体会STL
+的设计思想。</p>
+<p>模型：BST模板类中有两个嵌套模板类，一个为节点模板，一个为迭代器的 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 仿STL 的二叉搜索树的C++实现">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html" rel="bookmark"
-                           title="Permalink to C++实现红黑树，仿STL封装">C++实现红黑树，仿STL封装</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html" rel="bookmark"
+                           title="Permalink to 动态规划基础">动态规划基础</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-12-31T20:37:00">
-                周六 31 十二月 2011
+        <abbr class="published" title="2012-03-19T17:47:00">
+                周一 19 三月 2012
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="red black trees&nbsp;&nbsp;算法导论&nbsp;&nbsp;C++&nbsp;&nbsp;">
+	    <abbr title="dynamic programming&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;DP&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to red black trees" href="http://www.roading.org/tag/red-black-trees.html">red black trees</a>
+		<a title="permalink to dynamic programming" href="http://www.roading.org/tag/dynamic-programming.html">dynamic programming</a>
 		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to C++" href="http://www.roading.org/tag/c.html">C++</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+		<a title="permalink to DP" href="http://www.roading.org/tag/dp.html">DP</a>
 	    </abbr>
 	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <p>在[<em>Chapter 13 Red-Black trees(红黑树)</em>][]这篇笔记中对红黑树的各种操作都有较详尽的伪码，
-相信使用C++来实现也并不是难事，我要做的是，在实现的基础上要进行一定的封装。当然风格嘛，
-自然参照STL，最终的结果就是要实现一个STL风格的红黑树模板。</p>
-<p>在C++泛型编程中两个重要的概念即是容器和迭代器。我的目的则是要实现一个与STL中的其他容器
-类似，但是以红黑树为基础的容器<code>RB_Tree ...</code></p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html" rel="bookmark"
-                           title="Permalink to C++实现红黑树，仿STL封装">Read more→</a>	
+                <p>前一篇笔记有过一个动态编程的实例——<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89rod-cutting.html">rod cutting</a>。这篇笔记主要了解动态
+规划的基础理论和弄清楚何时运用动态规划。对于何时来运用动态规划来寻得问
+题的解，取决于两个重要因素：最优子结构和重叠子问题。</p>
+<h3>最优子结构(Optimal substructure)</h3>
+<p>如果一个问题的最优解包含了它子问题的最优解，那么这个问题具有最优子结构。
+当一个问题包含有最优子结构时，往往暗示着这个问题应该使用动态规划来解决
+（当然，也可能意味着贪心算法是一种好的的解决办法，这一点会在16章讨论到）
+。</p>
+<p>可以依照一个共同的模式来发现最优子结构 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html" rel="bookmark"
+                           title="Permalink to 动态规划基础">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html" rel="bookmark"
-                           title="Permalink to Chapter 10 Exercises（1）">Chapter 10 Exercises（1）</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html" rel="bookmark"
+                           title="Permalink to 动态规划笔记（1）——Rod cutting">动态规划笔记（1）——Rod cutting</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-11-05T14:49:00">
-                周六 05 十一月 2011
+        <abbr class="published" title="2012-03-08T12:16:00">
+                周四 08 三月 2012
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="Exercises&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    <abbr title="dynamic programming&nbsp;&nbsp;rod cutting&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to Exercises" href="http://www.roading.org/tag/exercises.html">Exercises</a>
+		<a title="permalink to dynamic programming" href="http://www.roading.org/tag/dynamic-programming.html">dynamic programming</a>
+		<a title="permalink to rod cutting" href="http://www.roading.org/tag/rod-cutting.html">rod cutting</a>
 		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
 		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
 	    </abbr>
 	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <h3>Exercises 10.1-2★</h3>
-<blockquote>
-<p>Explain how to implement two stacks in one array <em>A</em>[<em>1</em> ‥ <em>n</em>] in such a
-way that ...</p></blockquote>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html" rel="bookmark"
-                           title="Permalink to Chapter 10 Exercises（1）">Read more→</a>	
+                <p>动态规划（dynamic programming）,与“分治思想”有些相似，都是利用将问题分
+为子问题，并通过合并子问题的解来获得整个问题的解。于“分治”的不同之处在
+于，对于一个相同的子问题动态规划算法不会计算第二次，其实现原理是将每一
+个计算过的子问题的值保存在一个表中。</p>
+<p>动态规划一般被用于解决“最优解”问题。编写动态规划算法可以按照以下四个步 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html" rel="bookmark"
+                           title="Permalink to 动态规划笔记（1）——Rod cutting">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
             <li><article class="hentry">    
                 <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html" rel="bookmark"
-                           title="Permalink to Chapter 10 Exercises and Problems (2)">Chapter 10 Exercises and Problems (2)</a></h1>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 哈希表的C++模板实现">哈希表的C++模板实现</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
-        <abbr class="published" title="2011-11-06T17:28:00">
-                周日 06 十一月 2011
+        <abbr class="published" title="2011-11-13T16:36:00">
+                周日 13 十一月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
         </address>
-	    <abbr title="Exercises&nbsp;&nbsp;算法导论&nbsp;&nbsp;">
+	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;hash tables&nbsp;&nbsp;">
 	    Tags: 
-		<a title="permalink to Exercises" href="http://www.roading.org/tag/exercises.html">Exercises</a>
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
 		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
 	    </abbr>
 	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
-                <h3>Exercises 10.3-4</h3>
-<blockquote>
-<p>It is often desirable to keep all elements of a doubly linked list compact &gt;in storage, using ...</p></blockquote>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html" rel="bookmark"
-                           title="Permalink to Chapter 10 Exercises and Problems (2)">Read more→</a>	
+                <p>采用引用计数来解决指针管理问题。开放地址、双重哈希来解决碰撞和探测问题，
+实现了哈希表的创建、查找、插入，复制控制，[]操作符… 但总觉得欠缺点什么。</p>
+<p>源码：</p>
+<div class="codehilite"><pre><span class="c1">//hash.h </span>
+<span class="c1">//2011/11/13   By Adoo</span>
+<span class="cp">#ifndef  HASH_H</span>
+<span class="cp">#define ...</span></pre></div>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 哈希表的C++模板实现">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 哈希表（1）">哈希表（1）</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-08T22:18:00">
+                周二 08 十一月 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="hash tables&nbsp;&nbsp;算法导论&nbsp;&nbsp;散列表&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to 散列表" href="http://www.roading.org/tag/san-lie-biao.html">散列表</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <h3>直接寻址表（Direct-address tables）</h3>
+<p>假设有一组元素，每个元素的Key值都包含在范围U={0,1,2,3,…m-1}中。如果这个
+值m不是太大，且这一组元素的Key值都不相同，我们用key值来直接决定元素或指
+向元素指针的存储位置（slot,我将其翻译为位置而不是狭缝，槽或…），这就是直 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 哈希表（1）">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -267,14 +283,15 @@ way that ...</p></blockquote>
                 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-    <li class="active"><a href="http://www.roading.org/author/adoo.html">1</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo2.html">2</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo3.html">3</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo4.html">4</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo5.html">5</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo6.html">6</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo7.html">7</a></li>
-    <li class=""><a href="http://www.roading.org/author/adoo8.html">8</a></li>
+	<li class="active"><a href="http://www.roading.org/author/adoo.html">1</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo2.html">2</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo3.html">3</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo4.html">4</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo5.html">5</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo6.html">6</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo7.html">7</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo8.html">8</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo9.html">9</a></li>
     <li class="next"><a href="http://www.roading.org/author/adoo2.html">Next &rarr;</a></li>
 </ul>
 </div>
