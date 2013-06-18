@@ -23,8 +23,8 @@
 				    <li><a href="http://www.roading.org/archives.html">Archive</a></li>
 		        </ul>
 			<ul id="nav-tags">
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
 			</ul>
 			<div class="clear"></div>
 			<hr>
@@ -33,6 +33,37 @@
 <div class="index-content">       
                 <section id="content" class="body">
                     <ul id="posts-list">
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 哈希表（1）">哈希表（1）</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-08T22:18:00">
+                Tue 08 November 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="hash tables&nbsp;&nbsp;算法导论&nbsp;&nbsp;散列表&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to 散列表" href="http://www.roading.org/tag/san-lie-biao.html">散列表</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <h3>直接寻址表（Direct-address tables）</h3>
+<p>假设有一组元素，每个元素的Key值都包含在范围\(U=\lbrack 0,1,2,3,…m-1 \rbrack\)\
+中。如果这个值\(m\)不是太大，且这一组元素的Key值都不相同，我们用key值
+来直接决定元素或指向元素指针的存储位置 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html" rel="bookmark"
+                           title="Permalink to 哈希表（1）">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
             <li><article class="hentry">    
                 <header>
                     <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html" rel="bookmark"
@@ -227,44 +258,6 @@ as a nearly completely ...</p></blockquote>
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html" rel="bookmark"
-                           title="Permalink to 斐波那契堆(Fibonacci Heaps)">斐波那契堆(Fibonacci Heaps)</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2012-07-30T22:33:00">
-                Mon 30 July 2012
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;fibonacci heaps&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-		<a title="permalink to fibonacci heaps" href="http://www.roading.org/tag/fibonacci-heaps.html">fibonacci heaps</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <h3>概览</h3>
-<p>斐波那契堆是由一组最小堆有序树组成，其中的每棵树都必须符合最小堆属性。
-简单点，斐波那契堆是由一组有点特别的树组成。除了两个与元素删除有关的
-操作（EXTRACT-MIN和DELETE）之外，它的其它操作都能在常数时间内完成。可
-以看下斐波那契堆和二叉堆的运行时间对比表：</p>
-<p><img alt="time-table" src="http://www.roading.org/images/2012-07/image.png" /></p>
-<h3>结构</h3>
-<p>说白点，斐波那契堆由一组有根树组成，不过这些有根树都得是二项堆。大致
-结构如下：</p>
-<p><img alt="" src="http://www.roading.org/images/2012-07/image1.png" /></p>
-<p>有一个min指针指向了这些树根中关键字最小的一个。</p>
-<p>对于每一个结点来说 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html" rel="bookmark"
-                           title="Permalink to 斐波那契堆(Fibonacci Heaps)">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
             </ul><!-- /#posts-list -->
                 <div class="pagination">
 <ul>
@@ -293,6 +286,9 @@ as a nearly completely ...</p></blockquote>
              <li ><a href="http://www.roading.org/category/metro.html">Metro</a>
 	         <a href="http://www.roading.org/feed/Metro.xml" 
 		title="Subscribe for Metro" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/qt.html">QT</a>
+	         <a href="http://www.roading.org/feed/QT.xml" 
+		title="Subscribe for QT" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
              <li ><a href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a>
 	         <a href="http://www.roading.org/feed/深度探索C++对象模型.xml" 
 		title="Subscribe for 深度探索C++对象模型" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>

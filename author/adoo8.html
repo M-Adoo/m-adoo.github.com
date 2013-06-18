@@ -23,8 +23,8 @@
 				    <li><a href="http://www.roading.org/archives.html">Archive</a></li>
 		        </ul>
 			<ul id="nav-tags">
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
 			</ul>
 			<div class="clear"></div>
 			<hr>
@@ -33,6 +33,43 @@
 <div class="index-content">       
                 <section id="content" class="body">
                     <ul id="posts-list">
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="bookmark"
+                           title="Permalink to 对象的构造和析构">对象的构造和析构</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-12-06T13:35:00">
+                Tue 06 December 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <p>一般而言，构造函数被安插在对象的定义处，而析构函数被安插在对象生命
+周期结束前：</p>
+<p>:::C++
+  // Pseudo C++ Code<br />
+  {<br />
+     Point point;<br />
+     // point.Point::Point() 一般被安插在这儿<br />
+     ...<br />
+     // point.Point::~Point() 一般被安插在这儿 
+  }  </p>
+<p>当代码有一个以上的离开点的时候，析构函数则必须放在对象被构造之后的每 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="bookmark"
+                           title="Permalink to 对象的构造和析构">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
             <li><article class="hentry">    
                 <header>
                     <h1><a href="http://www.roading.org//develop/cpp/%e6%8b%b7%e8%b4%9d%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%ef%bc%88copy-constuctor%ef%bc%89.html" rel="bookmark"
@@ -228,40 +265,6 @@ Lippman为我破除了藩篱。下面的部分我将随《深度探索C++对象�
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/c%e4%b9%8b%e8%99%9a%e5%87%bd%e6%95%b0virtual-member-functions.html" rel="bookmark"
-                           title="Permalink to C++之虚函数(Virtual Member Functions)">C++之虚函数(Virtual Member Functions)</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-11-29T19:50:00">
-                Tue 29 November 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
-</div><!-- /.post-info -->
-                <p>《深度探索C++对象模型》是这样来说多态的:</p>
-<blockquote>
-<p>在C++中,多态表示“以一个public base
-class的指针（或引用），寻址出一个derived class object”的意思。</p>
-</blockquote>
-<h3>消极多态与积极多态</h3>
-<p>用基类指针来寻址继承类的对象，我们可以这样：</p>
-<div class="codehilite"><pre><span class="n">Point</span> <span class="n">ptr</span><span class="o">=</span><span class="k">new ...</span></pre></div>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e4%b9%8b%e8%99%9a%e5%87%bd%e6%95%b0virtual-member-functions.html" rel="bookmark"
-                           title="Permalink to C++之虚函数(Virtual Member Functions)">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
             </ul><!-- /#posts-list -->
                 <div class="pagination">
 <ul>
@@ -290,6 +293,9 @@ class的指针（或引用），寻址出一个derived class object”的意思�
              <li ><a href="http://www.roading.org/category/metro.html">Metro</a>
 	         <a href="http://www.roading.org/feed/Metro.xml" 
 		title="Subscribe for Metro" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/qt.html">QT</a>
+	         <a href="http://www.roading.org/feed/QT.xml" 
+		title="Subscribe for QT" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
              <li ><a href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a>
 	         <a href="http://www.roading.org/feed/深度探索C++对象模型.xml" 
 		title="Subscribe for 深度探索C++对象模型" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
