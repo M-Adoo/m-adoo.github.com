@@ -35,6 +35,169 @@
                     <ul id="posts-list">
             <li><article class="hentry">    
                 <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 仿STL 的二叉搜索树的C++实现">仿STL 的二叉搜索树的C++实现</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-12-17T23:37:00">
+                Sat 17 December 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="binary search tree&nbsp;&nbsp;c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;stl&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to binary search tree" href="http://www.roading.org/tag/binary-search-tree.html">binary search tree</a>
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to stl" href="http://www.roading.org/tag/stl.html">stl</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <p>看完导论的Chapter 12 binary search tree后，不忘用C++实现一下这个
+数据结构，学习算法的时候也锻炼下C++的编码能力。另则，若按照STL的
+风格来封装搜索二叉树，一是可以培养良好的编程风格，也能好好体会STL
+的设计思想。</p>
+<p>模型：BST模板类中有两个嵌套模板类，一个为节点模板，一个为迭代器的 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 仿STL 的二叉搜索树的C++实现">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html" rel="bookmark"
+                           title="Permalink to Chapter 12 二叉搜索树(Binary Search Tree) 2">Chapter 12 二叉搜索树(Binary Search Tree) 2</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-12-15T21:39:00">
+                Thu 15 December 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="binary search tree&nbsp;&nbsp;笔记&nbsp;&nbsp;算法导论&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to binary search tree" href="http://www.roading.org/tag/binary-search-tree.html">binary search tree</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <h3>前驱和后继(Successor and predecessor)</h3>
+<p>所谓前驱和后继(也许这么翻译，并不太正确，姑且这么叫)是指，指定元素在所有元素顺序排列模式下的前一个元素或后一个元素。</p>
+<p>要获取一个二叉搜索树中指定结点的后继的直观的办法是，找到所有比指定结点大的结点中最小的。根据二叉搜索树的属性，找比某结点大的元素，可以往两个两个方向走：</p>
+<ol>
+<li>往右子树方向走，结点右子树的元素都不小于本身；</li>
+<li>往父结点方向走，<strong>指定的结点有可能处于其它结点的左子树中</strong>。</li>
+</ol>
+<p>当指定结点拥有右子树时 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html" rel="bookmark"
+                           title="Permalink to Chapter 12 二叉搜索树(Binary Search Tree) 2">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html" rel="bookmark"
+                           title="Permalink to Chapter 12 二叉搜索树(Binary Search Tree) 1">Chapter 12 二叉搜索树(Binary Search Tree) 1</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-12-15T16:41:00">
+                Thu 15 December 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="binary search tree&nbsp;&nbsp;inorder tree walk&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to binary search tree" href="http://www.roading.org/tag/binary-search-tree.html">binary search tree</a>
+		<a title="permalink to inorder tree walk" href="http://www.roading.org/tag/inorder-tree-walk.html">inorder tree walk</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <h3>何为二叉搜索树？</h3>
+<blockquote>
+<p>Such a tree can be represented by a linked data structure in which
+each node is an object. In ...</p></blockquote>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html" rel="bookmark"
+                           title="Permalink to Chapter 12 二叉搜索树(Binary Search Tree) 1">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html" rel="bookmark"
+                           title="Permalink to Solution of CLRS 11.1 exercises">Solution of CLRS 11.1 exercises</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-12-14T14:43:00">
+                Wed 14 December 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="bit vector&nbsp;&nbsp;Exercises&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to bit vector" href="http://www.roading.org/tag/bit-vector.html">bit vector</a>
+		<a title="permalink to Exercises" href="http://www.roading.org/tag/exercises.html">Exercises</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <h3>Exercises 11.1-2</h3>
+<blockquote>
+<p>A <strong><em>bit vector</em></strong> is simply an array of bits (0's and 1's). A bit vector ...</p></blockquote>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html" rel="bookmark"
+                           title="Permalink to Solution of CLRS 11.1 exercises">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/%e3%80%8a%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b%e3%80%8b%e7%ac%94%e8%ae%b0%e6%b1%87%e6%80%bb.html" rel="bookmark"
+                           title="Permalink to 《深度探索C++对象模型》笔记汇总">《深度探索C++对象模型》笔记汇总</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-12-09T22:03:00">
+                Fri 09 December 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <ul>
+<li><a href="http://www.roading.org/develop/cpp/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2c%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/%E6%80%BB%E7%BB%93%E4%BA%A6%E4%B8%BA%E5%BC%95%E8%A8%80.html">01. 总结——亦为引言</a></li>
+</ul>
+<h3>第1章 关于对象(Object Lessons)</h3>
+<ul>
+<li><a href="http://www.roading.org/develop/cpp/c%E5%AF%B9%E8%B1%A1%E9%9D%A2%E9%9D%A2%E8%A7%82.html">02. C++对象面面观</a></li>
+</ul>
+<h3>第2章 构造函数语意学(The Semantics of constructors)</h3>
+<ul>
+<li><a href="http://www.roading.org/develop/cpp/%E6%B7%B1%E5%85%A5c%E9%BB%98%E8%AE%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.html">03. 深入C++构造函数</a></li>
+<li><a href="http://www.roading.org/develop/cpp/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%EF%BC%88copy-constuctor%EF%BC%89.html">04 ...</a></li></ul>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e3%80%8a%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b%e3%80%8b%e7%ac%94%e8%ae%b0%e6%b1%87%e6%80%bb.html" rel="bookmark"
+                           title="Permalink to 《深度探索C++对象模型》笔记汇总">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
                     <h1><a href="http://www.roading.org//develop/cpp/%e4%b8%b4%e6%97%b6%e6%80%a7%e5%af%b9%e8%b1%a1temporary-objects.html" rel="bookmark"
                            title="Permalink to 临时性对象(Temporary Objects)">临时性对象(Temporary Objects)</a></h1>
                 </header>
@@ -105,167 +268,6 @@
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to new expression、operator new和placement new——三个“妞（new）”的故事（3）">new expression、operator new和placement new——三个“妞（new）”的故事（3）</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-12-05T15:49:00">
-                Mon 05 December 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
-</div><!-- /.post-info -->
-                <h3>placement operator new</h3>
-<p>placement operator new用来在指定地址上构造对象，要注意的是，它并不分配内存，仅仅是
-对指定地址调用构造函数。其调用方式如下：</p>
-<div class="codehilite"><pre><span class="n">point</span> <span class="o">*</span><span class="n">pt</span><span class="o">=</span><span class="k">new</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="n">point3d</span><span class="p">;</span>
-</pre></div>
-<p>观其名字可知，它是operator new的一个重载版本。它的实现方式异常简单 ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to new expression、operator new和placement new——三个“妞（new）”的故事（3）">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to new expression、operator new和placement new——三个妞（new）的故事（2）">new expression、operator new和placement new——三个妞（new）的故事（2）</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-12-05T15:19:00">
-                Mon 05 December 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
-</div><!-- /.post-info -->
-                <h3>两个 delete 后的问题</h3>
-<p>最近在网上看到两个关于指针 delete 后的问题。第一种情况：</p>
-<div class="codehilite"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">;</span>
-<span class="k">delete</span> <span class="n">p</span><span class="p">;</span>
-<span class="k">delete</span> <span class="n">p</span><span class="p">;</span><span class="c1">// p为什么能delete两次，而程序运行的时候还不报错。</span>
-</pre></div>
-<p>第二种情况：</p>
-<div class="codehilite"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">p ...</span></pre></div>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to new expression、operator new和placement new——三个妞（new）的故事（2）">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to new expression、operator new 和 placement new——三个妞（new）的故事（1）">new expression、operator new 和 placement new——三个妞（new）的故事（1）</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-12-02T23:35:00">
-                Fri 02 December 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
-</div><!-- /.post-info -->
-                <p>之前虽然一直知道有new expression、operator new和placement new，但对于这三个“new”,
-却不甚了了，这些天从《深度探索C++对象模型》读到new和delete，特意结合《C++ Primer》
-写下这篇笔记，以作总结。三个虽然都是“妞”（new ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html" rel="bookmark"
-                           title="Permalink to new expression、operator new 和 placement new——三个妞（new）的故事（1）">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html" rel="bookmark"
-                           title="Permalink to 构造、复制、析构语意学">构造、复制、析构语意学</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-12-01T22:04:00">
-                Thu 01 December 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
-</div><!-- /.post-info -->
-                <p>一种所谓的Plain OI’Data声明形式：</p>
-<p>:::C++
-  struct Point {
-      float x,y,z;
-  };</p>
-<p>概念上来讲，对于一段这样的C++代码,编译器会为之合成一个默认构造函数、
-复制构造函数、析构函数、赋值操作符。然而实际上编译器会分析这段代码，
-并给<code>Point ...</code></p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html" rel="bookmark"
-                           title="Permalink to 构造、复制、析构语意学">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e5%87%a0%e7%82%b9%e7%b1%bb%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99.html" rel="bookmark"
-                           title="Permalink to 几点类设计原则">几点类设计原则</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-11-30T16:04:00">
-                Wed 30 November 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
-</div><!-- /.post-info -->
-                <p><strong>1.即使是一个抽象基类，如果它有非静态数据成员，也应该给它提供一
-个带参数的构造函数</strong>，来初始化它的数据成员。或许你可以通过其派生
-类来初始化它的数据成员（假如nostatic data member为publish或
-protected）,但这样做的后果则是破坏了数据的封装性，使类的维护和修
-改更加困难。由此引申，类的data member应当被初始化，且只在其构造函
-数或其member ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%87%a0%e7%82%b9%e7%b1%bb%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99.html" rel="bookmark"
-                           title="Permalink to 几点类设计原则">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
             </ul><!-- /#posts-list -->
                 <div class="pagination">
 <ul>
@@ -286,6 +288,9 @@ protected）,但这样做的后果则是破坏了数据的封装性，使类的�
     <div class="categories">
 	<h3>Categories</h3>
         <ul>
+             <li ><a href="http://www.roading.org/category/a-byte-of-python.html">A byte of python</a>
+	         <a href="http://www.roading.org/feed/A byte of python.xml" 
+		title="Subscribe for A byte of python" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
              <li ><a href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a>
 	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edition.xml" 
 		title="Subscribe for Introduction to Algorithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
