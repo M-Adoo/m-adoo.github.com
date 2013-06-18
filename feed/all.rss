@@ -164,172 +164,343 @@
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/essaies/leave.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adoo</dc:creator><pubDate>Sat, 10 Dec 2011 14:25:00 +0800</pubDate><guid>tag:www.roading.org,2011-12-10:/essaies/leave.html</guid><category>随笔</category></item><item><title>在北回归线上远望</title><link>http://www.roading.org//essaies/Tropic-of-Cancer.html</link><description>&lt;p&gt;在某处看到这样一句话：“我对生活的要求无外乎几本书，几场梦，几个女人而已。”
-我虽然有看书过目即忘的陋习，但总喜欢查一查看到中意的话的出处，原因在于看到
-一句中意的话，我若不去拜读一下该话的原著，便有可能错过一部中意的作品。我深
-知，在这样一个伟大的时代，能让人中意一回却是多么艰难。可见，我尚处在一种从
-书中找快慰的状态……&lt;/p&gt;
-&lt;p&gt;我并未有多么认同这句话，但起码我不反感，因为范诺登仅仅说出其所想，我想真话
-即使再烂，也总有能让人原谅的理由。这么一句平淡真实的话，非是大恶，又不煽情，
-本该平淡如水，不惹人注意，偏偏让人感觉突兀。人在看待事情，往往会带有“思维惯
-性”，事情的合理性反倒在其次，中国人尤其如此——说出这句话的时候，请原谅我的浅
-薄，因为我并没有有过外国朋友，又不曾在异域生活，与见多识广的海龟相比，我充
-其量是一只没有见过世面的“土鳖”，但实际上在“人”看来，海龟较之土鳖，亦难逃龟
-类命途。——我既知，这话浅薄，但仍要这样说，为何？因为太多人这样说，太多人说
-这类话，甚至都不经过思考——他们为什么这样说？因为他们与我有一样的理由。&lt;/p&gt;
-&lt;p&gt;有趣的是《北回归线》是一本解禁的禁书，而更有趣的是我上一次，因一句话去找一
-本书，也是一本解禁的禁书。不禁感叹这个世界，百有禁忌。初中的时候贾平凹的一
-句话让我印象深刻，他说：“常言说四十不惑，我却事事令人大惑，之一就是写了本
-《废都》”。那段时间我在四处寻找《废都》，却求之不得。直到大二，我才从网上看
-到关于《废都》解禁的新闻，才明白，丫的原来我一直在一个解禁的禁书都找不到的
-地方找一本禁书。&lt;/p&gt;
-&lt;p&gt;回到范诺登的话，我必须很官方的澄清一下，一如外交部的郑重声明，或严重警告：
-我虽然承认这是一句大实话，也大概是太多人的梦想——但并不代表我赞同或推崇这样的
-作为，也并不表明我持有这样的立场。&lt;/p&gt;
-&lt;p&gt;我将《北回归线》放在床头。&lt;/p&gt;
+        </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adoo</dc:creator><pubDate>Sat, 10 Dec 2011 14:25:00 +0800</pubDate><guid>tag:www.roading.org,2011-12-10:/essaies/leave.html</guid><category>随笔</category></item><item><title>《深度探索C++对象模型》笔记汇总</title><link>http://www.roading.org//develop/cpp/%e3%80%8a%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b%e3%80%8b%e7%ac%94%e8%ae%b0%e6%b1%87%e6%80%bb.html</link><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2c%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/%E6%80%BB%E7%BB%93%E4%BA%A6%E4%B8%BA%E5%BC%95%E8%A8%80.html"&gt;01. 总结——亦为引言&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;第1章 关于对象(Object Lessons)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/c%E5%AF%B9%E8%B1%A1%E9%9D%A2%E9%9D%A2%E8%A7%82.html"&gt;02. C++对象面面观&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;第2章 构造函数语意学(The Semantics of constructors)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/%E6%B7%B1%E5%85%A5c%E9%BB%98%E8%AE%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.html"&gt;03. 深入C++构造函数&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%EF%BC%88copy-constuctor%EF%BC%89.html"&gt;04. 拷贝构造函数(Copy Constructor)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/%E5%91%BD%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E4%BC%98%E5%8C%96%E5%92%8C%E6%88%90%E5%91%98%E5%88%9D%E5%A7%8B%E5%8C%96%E9%98%9F%E5%88%97.html"&gt;05. 命名返回值优化和成员初始化队列&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;第3章 Data语意学（The Semantics of Data）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/c%E7%B1%BB%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%A7%E5%B0%8F.html"&gt;06. C++类对象的大小&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/vc%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E5%87%86%E5%88%99%EF%BC%88memory-alignment%EF%BC%89.html"&gt;07. VC内存对齐准则（Memory alignment）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/c%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%95%B0%E6%8D%AE%E6%88%90%E5%91%98.html"&gt;08. C++对象的数据成员&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;第4章 Function语意学（The Semantics of Function）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/c%E4%B9%8B%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8.html"&gt;09. C++之成员函数调用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/c%E4%B9%8B%E8%99%9A%E5%87%BD%E6%95%B0virtual-member-functions.html"&gt;10. C++之虚函数(Virtual Member Functions)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;第5章 构造、解构、拷贝 语意学（Semantics of Construction，Destruction，and Copy）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/%E5%87%A0%E7%82%B9%E7%B1%BB%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html"&gt;11. 几点类设计原则&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/%E6%9E%84%E9%80%A0%E3%80%81%E5%A4%8D%E5%88%B6%E3%80%81%E6%9E%90%E6%9E%84%E8%AF%AD%E6%84%8F%E5%AD%A6.html"&gt;12. 构造、复制、析构语意学&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;第6章 执行期语意学（Runting Semantics）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/new-expression%E3%80%81operator-new-%E5%92%8C-placement-new%E4%B8%89%E4%B8%AA%E5%A6%9E%EF%BC%88new%EF%BC%89%E7%9A%84%E6%95%85%E4%BA%8B%EF%BC%881%EF%BC%89.html"&gt;13. new expression、operator new 和 placement new——三个“妞（new）”的故事（1）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/new-expression%E3%80%81operator-new-%E5%92%8C-placement-new%E4%B8%89%E4%B8%AA%E5%A6%9E%EF%BC%88new%EF%BC%89%E7%9A%84%E6%95%85%E4%BA%8B%EF%BC%882%EF%BC%89.html"&gt;14. new expression、operator new 和 placement new——三个“妞（new）”的故事（2）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/new-expression%E3%80%81operator-new-%E5%92%8C-placement-new%E4%B8%89%E4%B8%AA%E5%A6%9E%EF%BC%88new%EF%BC%89%E7%9A%84%E6%95%85%E4%BA%8B%EF%BC%883%EF%BC%89.html"&gt;15. new expression、operator new 和 placement new——三个“妞（new）”的故事（3）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84.html"&gt;16. 对象的构造和析构&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/%E4%B8%B4%E6%97%B6%E6%80%A7%E5%AF%B9%E8%B1%A1temporary-objects.html"&gt;17. 临时性对象(Temporary Objects)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;第7章 站在对象模型的类端（On the Cusp of the Object Model）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/%E6%A8%A1%E6%9D%BF%E4%BA%8C%E4%BA%8B.html"&gt;18. 模板二事&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/eh-rtti.html"&gt;19. EH &amp;amp; RTTI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Tue 25 October 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Fri 09 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
-          (&lt;a href="http://www.roading.org/essaies/Tropic-of-Cancer.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adoo</dc:creator><pubDate>Tue, 25 Oct 2011 21:40:00 +0800</pubDate><guid>tag:www.roading.org,2011-10-25:/essaies/Tropic-of-Cancer.html</guid><category>随笔</category></item><item><title>一周记事10.6-10.12</title><link>http://www.roading.org//essaies/weekly-jounal.html</link><description>&lt;p&gt;10.6日的晚上，实在是自己不能忍受网站的速度太慢，于是决定要换一个空间了。
-原计划一两天时间来完成这个事情。很显然我预估错了时间，原来打算选个不太
-贵的收费空间，但我不是觉得太贵，就是对他们抱有怀疑态度，最后选择了新浪
-的sae,这之间就花了一天。sae的&lt;a href="http://sae.sina.com.cn/activity/invite/44887/weibo%20"&gt;注册地址&lt;/a&gt;。第二天把网站迁移过去，并
-导入好数据库，又做好了跳转——操蛋的备案。最后手痒打算修改一下主题，但我
-又高估了自己的艺术天赋，同时对于php代码和css的难度估计不足——很显然我不
-可能花一周来专门学习php或css。这期间又花了三天，小小修改了一下
-evening-sun的代码，成了现在这般摸样，没有了evening的感觉更没有sun的影
-子。原谅我将很多插件的代码分解直接加入了主题，但我充分珍重各位插件作者
-的劳动成果——比如jiathis插件，特别是对于evening-sun主题的修改。进行一些
-改动后，我虽然又萌生了有新的修改想法，但被我及时打住，这是个明智的决定。&lt;/p&gt;
-&lt;p&gt;原计划休息一天后，又重拾算法导论，并且要适当加快进度。但11号休息一天后，
-晚上和磊子，庄峰小朋友约定2号骑单车去韶山，于是关于算法导论的计划顺延了
-一天。&lt;/p&gt;
-&lt;p&gt;当然这些天还有各种零碎而快乐的事物，比如下午去踢球，中午一起自己搞顿饭
-吃吃，或者看看球赛。当然球赛还是失望的。&lt;/p&gt;
-&lt;p&gt;12号早上6点半起床，到湘大租了四辆单车，便往韶山去了。愈近韶山自然容易谈
-到政治，不想多谈，也吝惜多谈。只想说一句，你倘若觉得有一天天子洪恩，你
-须自问一下，是否是昨日太被寡待，你倘若哪天觉得清气上扬，你得自问一句是
-否昨日被压迫太盛，唯此，才能少被愚弄。凡是问合理，莫问惯例。——晚上7：30，
-返校，来回全程100公里左右。路上我的车胎破一个，刹车坏一次。黄乐车钢丝段
-两根。此外特感谢一下某汽修厂某小哥为我补胎，技巧了得，却又认真细致。
-下次，或许没有下次，但还需谨记，选车要细致，二是别穿牛仔裤，裆下被磨的
-厉害。三要记得带块大牛肉，回程的时候太饿了。&lt;/p&gt;
-&lt;p&gt;8：20已经吃完饭洗完澡了。 9：15看完了新闻网页，感谢Doris的一杯浓茶。
-现在，该记得记得差不多了。&lt;/p&gt;
+          (&lt;a href="http://www.roading.org/develop/cpp/%e3%80%8a%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b%e3%80%8b%e7%ac%94%e8%ae%b0%e6%b1%87%e6%80%bb.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adoo</dc:creator><pubDate>Fri, 09 Dec 2011 22:03:00 +0800</pubDate><guid>tag:www.roading.org,2011-12-09:/develop/cpp/%e3%80%8a%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b%e3%80%8b%e7%ac%94%e8%ae%b0%e6%b1%87%e6%80%bb.html</guid><category>Inside The C++ Object Model</category><category>笔记</category></item><item><title>总结·亦为引言</title><link>http://www.roading.org//develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html</link><description>&lt;p&gt;《深度探索C++对象模型》终于在昨天写完了最后一篇笔记，前前后后花费了一个
+月左右，期间学到了很多，很感激书的作者和译者。之后的日子，可以将精力转
+回《算法导论》和一些非技术类的书上来了。&lt;/p&gt;
+&lt;p&gt;11月11号开始看《深度探索C++对象模型》一书，到二十八号看完，共计花费了十
+八天。不过到做完全书的笔记则是昨天的事了。期间也算是反复阅读，中英文版本
+对照，虽然不能说事深掘至微末，但也能算掌握了主络，倒是令我自己满意。&lt;/p&gt;
+&lt;p&gt;期间花费的心力精神自不必说，但收获欢欣也实在不少。得益于 Lippman
+的大师技艺，书中很多地方使我有拨云见日的豁然，一些原以为晦涩高超的技巧，
+其真实面目暴力且直接。这本书不厚，但可以深掘的东西实在不少，以至于某些
+时候，我不得不停下思路，以免难以自拔。&lt;/p&gt;
+&lt;p&gt;当然，在这个行业来说，这本书毕竟有点“远古”，读这本书的时候，必须保持着
+清晰的头脑，不能迷信作者和译者——虽然他们都是值得尊敬的人物。需要抱有怀
+疑精神，更需要多动手编码验证一番。原书的疏漏笔误之处着实不少，这要多谢
+译者侯捷一一指正。但或许正因为这个原因，无端膨胀了译者的自信，毕竟指点
+一个大师的错误是一件如此刺激的事情。这无端膨胀的自信，同样带来了一些问
+题——一些原本正确之处，被做了错误的更正。可见，于技术学习来说，谨慎谦虚，
+何其重要。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Wed 12 October 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Fri 09 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
-          (&lt;a href="http://www.roading.org/essaies/weekly-jounal.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adoo</dc:creator><pubDate>Wed, 12 Oct 2011 21:58:00 +0800</pubDate><guid>tag:www.roading.org,2011-10-12:/essaies/weekly-jounal.html</guid><category>随笔</category></item><item><title>第二章</title><link>http://www.roading.org//essaies/ji-fo-2.html</link><description>&lt;p&gt;李家虽然不穷，但也沾不上富家。若要追寻家世，溯源族谱。那么，还要到图远太爷爷的爷爷那辈，到李太爷父辈也还是当地大家，不然也不能让图远的太爷爷读书求学。李太爷九岁的时候，母亲病重，一向惧内的父亲，趁此机会把多年不敢娶的青楼女子娶回了家。他父亲到不见得如何悲伤，仿佛新纳小妾的喜悦能与发妻亡命的悲愁相抵消。便如同正一加负一等于零一般。&lt;/p&gt;
-&lt;p&gt;李太爷隐隐觉得父亲有了一些变化，说话好像底气足了一般。但是这样的改变并没有多久.几天后，父亲就一下子从一个趾高气昂的老爷，变成了一个点头哈腰的奴才。因为，小娘掌了家，父亲再无银子去青楼逍遥。小娘似乎全不记得自己的出身，少不了对着父亲劈头盖脸的臭骂。又或者，数落那些个青楼女子的薄情和险恶，和夸赞自己的端庄和贤良。&lt;/p&gt;
-&lt;p&gt;怕老婆像一切复发病一样，总会一次厉害过一次。&lt;/p&gt;
-&lt;p&gt;一个刻薄女人的尖酸是无法描述的。到李太爷十六岁的时候，他觉得这家再也呆不小去了，于是他向父亲要求出门求学。当即被他父亲反对。&lt;/p&gt;
-&lt;p&gt;“‘家有老，不远行’，你念了这些年书是白念了。”&lt;/p&gt;
-&lt;p&gt;“........”。&lt;/p&gt;
-&lt;p&gt;“百行孝为先，你看我这副身子，怕是也活不了多少年了。等我入了黄土，你远走天涯海角我也不管你，何况我就你一个儿子，你小娘又不曾生儿产女.......”。&lt;/p&gt;
-&lt;p&gt;“小娘，小娘，你就懂得小娘，他能生孩子，你别忘了他原来就是个妓女。”李太爷像是一头激怒的牛犊，怒目圆睁。&lt;/p&gt;
-&lt;p&gt;“啪”一巴掌，李太爷牙缝里渗出血水，但仍就咬着牙关，鼓着鼻孔。&lt;/p&gt;
-&lt;p&gt;“连娘都骂，我生你养你有什么用。”&lt;/p&gt;
-&lt;p&gt;“她没生我，更没养我，她不是我娘。”&lt;/p&gt;
-&lt;p&gt;“小娘也是娘！”&lt;/p&gt;
-&lt;p&gt;“父亲，休了他。”李太爷突然停止了咆哮，态度认真的可怕。&lt;/p&gt;
-&lt;p&gt;“混账！这样大逆不道的话你也说的出来!”李太爷的父亲眼眶怒睁着，像要滴出血来。&lt;/p&gt;
-&lt;p&gt;“哈哈哈哈，”李太爷突然笑出来“我知道你不敢，人家都是从夫，惟独我们家是要从妇。莫说要你把他扫地出门，她不把你赶出李宅就该千恩万谢了。”&lt;/p&gt;
-&lt;p&gt;又是一巴掌下来，不过这回却被李太爷一手接住了。他父亲震惊的看着他，李太爷放下他的手，还是走了。&lt;/p&gt;
-&lt;p&gt;接住父亲手的那一刻，李太爷心中一酸：父亲老了。走在路上，没来由的想起了从前种种，父亲把小娘煮给他的三鞭汤偷偷的带一碗给自己，背地里给自己铜板，夜里给自己盖被，带自己到林子里掏鸟蛋，给自己做弹弓........
-没有包裹，没有盘缠，李太爷不知道自己要去哪儿，他原来想到南方去参军的。&lt;/p&gt;
-&lt;p&gt;走了不过两里路，当午饭没有着落，肚子也不争气的咕咕叫时，他坐在石头上不知道如何是好。&lt;/p&gt;
-&lt;p&gt;李太爷踟蹰不前，而这边他父亲却是，收拾起李太爷的衣物，又帮他把书本收拾在包袱中。不管不顾，一斧头劈开了小娘藏钱的柜子，拿了两锭最大的银子，跑出来追儿子了。&lt;/p&gt;
-&lt;p&gt;李太爷接过东西，他父亲什么也没说，转身走了。&lt;/p&gt;
-&lt;p&gt;似乎活到现在，所有的感动在顷刻间爆发了，眼泪一下子模糊了父亲的背影。李太爷只是扯着哭腔喊道：“我一定会风风光光的回来。”&lt;/p&gt;
-&lt;p&gt;父亲的背影一怔，没有回头，往回家的方向走去。等待的不知道又将是怎样的狂风暴雨。五十两银子，对于把宅子买了也凑出不过几百两银子的李家来说的确不是个小数目。&lt;/p&gt;
-&lt;p&gt;最让人不经意的莫过于时间，李太爷回家的时候已是十年后了。&lt;/p&gt;
-&lt;p&gt;世事总是难料，李太爷到南方参军不成，却在当地学校做了老师。&lt;/p&gt;
-&lt;p&gt;十年，似很长，又很短。四处弥漫着战争的影子，李太爷再也忍不住思乡的苦楚，踏上了回乡的归途。&lt;/p&gt;
-&lt;p&gt;李太爷听着小镇街角的齐老头讲着变故。&lt;/p&gt;
-&lt;p&gt;物是人非，李宅大门的牌匾已经换成了吴府。李太爷的父亲两年前就已经去世了。小娘买了宅子，和一个相好跑了。只几天后，小娘和相好便被路过的逃兵杀死在了路边，钱物都抢了，小娘被奸污时却誓死不从。只是小娘前半生在青楼买了身体，后半生从良了，又偷了汉子，一辈子放浪，反倒是性命关头，却贞烈了一回。&lt;/p&gt;
-&lt;p&gt;齐老头一阵唏嘘，带着李太爷找他父亲的坟墓。父亲的坟墓好找，立了碑。只是小娘的坟连齐老头也分不出，只是这几年暴死的人太多，这儿像一个乱葬岗，到处是坟头，没有墓碑，根本找不着。李太爷对着那一片坟地拜了一拜。&lt;/p&gt;
-&lt;p&gt;他不气小娘，也不恨那汉子。&lt;/p&gt;
-&lt;p&gt;这世间如同一个火烤的铜炉，我们都是其中的可怜虫，挣扎求生.......
-和平时是如此，战争时更是如此。&lt;/p&gt;
-&lt;p&gt;李太爷在战乱中漂浮了半个世纪，教过书，跑过货，最后参加了国民党的部队，老婆和儿子都在战乱中死去，他一个人把孙子天华拉扯大，还当上了政委。那一年，国名党要逃往台湾，他辞了政委，悄悄的当了逃兵，回到了小镇。&lt;/p&gt;
-&lt;p&gt;当文化大革命爆发的时候，他被批斗，被整改，六十多岁的男人被打断过肋骨，扇掉过牙齿。被人用鞋底拍在脸上，他被强摁着下过跪，磕过头。而他却活过来了，活到了九十七岁。&lt;/p&gt;
-&lt;p&gt;李天华（图远的父亲）讲到这儿的时候，露出坚定的目光：“是啊，你爷爷他活下来了，活着就是最大的成功。”&lt;/p&gt;
-&lt;p&gt;原来一起哭泣的两父子，再李天华的讲述中，慢慢把心情平静下来。&lt;/p&gt;
-&lt;p&gt;“远儿，没事了，没事了。生老病死，自然之道，爷爷值到死前也没经历过大的病痛，这是再让人安慰不过了。何况爷爷活了将近百岁，虽然其中苦楚颇多，但也算多姿多彩。你去看一看爷爷，他最大的遗憾便是没有你送终了。”&lt;/p&gt;
-&lt;p&gt;太爷爷安详的躺在床上，似乎一切再平常不过。图远轻轻的握着太爷爷的手。&lt;/p&gt;
-&lt;p&gt;恍惚间，图远似乎感觉到李太爷的手轻轻地卧了他一下。抬头看时，李太爷的嘴角带着一丝淡淡的微笑。好像在诉说这自己的满足。&lt;/p&gt;
-&lt;p&gt;李天华要遵从李太爷的遗言“丧事从简，人死归土，早日下葬，入土为安。”&lt;/p&gt;
-&lt;p&gt;而图远的母亲怕人背后嚼舌头，觉得应该办五天，这样才显得我们李家讲孝道。图远那唯一的小姑和姑爷也这样认为。李家就这一个老头，应该办得风风光光。&lt;/p&gt;
-&lt;p&gt;李天华问图远。图远愣了愣....... 原来自己已经长大了，这意味着担当和责任。&lt;/p&gt;
-&lt;p&gt;总之，生者是不该拿死去的亲人来赚取孝顺的名声的。&lt;/p&gt;
-&lt;p&gt;丧事如同李太爷的遗言那般简陋，李家也没有多少亲戚，三天就下了葬。小姑和姑爷回了自家，来帮忙的各位三姑六婶也都散去。李家还是李家，一切都好像都没有发生。只是门前的悼词挽联，屋内的遗照和七星灯散发着哀痛的气息。&lt;/p&gt;
-&lt;p&gt;图远又在家里呆了七天，过了头七的祭祀才返校。&lt;/p&gt;
+          (&lt;a href="http://www.roading.org/develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adoo</dc:creator><pubDate>Fri, 09 Dec 2011 21:39:00 +0800</pubDate><guid>tag:www.roading.org,2011-12-09:/develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html</guid><category>Inside The C++ Object Model</category></item><item><title>EH &amp; RTTI</title><link>http://www.roading.org//develop/cpp/eh-rtti.html</link><description>&lt;h3&gt;异常处理(Exception Handling)&lt;/h3&gt;
+&lt;p&gt;C++的 exception handling 有三个主要的子句组成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个throw子句。它在程序的某处丢出一个exception，被丢出的exception可以是内建类
+    型，也可以是自定义类型。——抛出exception组件。&lt;/li&gt;
+&lt;li&gt;一个或多个 catch 子句。 每一个 catch 子句都是一个 exception handler。每个子句
+    可以处理一种类型(也包括其继承类)的exception，在大括号中包含处理代码。——专治各
+    种不服组件。每一个catch子句都可以用来处理某种exception。&lt;/li&gt;
+&lt;li&gt;一个 try 区段。用大括号包围一系列语句，这些语句有可能抛出exception，从而引发
+    catch 子句的作用。——逮捕各种 exception 组件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当一个 exception 被抛出后，控制权从函数调用中被释放，寻找一个吻合的catch子句，如
+果各层调用都没有吻合的catch子句，&lt;code&gt;terminate()&lt;/code&gt;将被调用。在控制权被放弃后，堆栈中
+的每一个函数调用也被出栈，这个过程称为unwinding the stack(关于 stack unwinding ,
+可以参考《C++ Primer》第四版之 17.1.2 Stack Unwinding)，在每一个函数被出栈之前,其
+局部变量会被摧毁。&lt;/p&gt;
+&lt;p&gt;异常抛出有可能带来一些问题，比方在一块内存的lock和unlock内存之间，或是在new和
+delete之间的代码抛出了异常，那么将导致本该进行的unlock或delete操作不能进行。解决
+方法之一是：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kt"&gt;void&lt;/span&gt;  &lt;span class="nf"&gt;mumble&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;arena&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="p"&gt;{&lt;/span&gt;  
+   &lt;span class="n"&gt;Point&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  
+   &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  
+   &lt;span class="n"&gt;try&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;  
+      &lt;span class="n"&gt;smLock&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;arena&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;  
+      &lt;span class="c1"&gt;// ...  &lt;/span&gt;
+   &lt;span class="p"&gt;}&lt;/span&gt;  
+   &lt;span class="n"&gt;catch&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;  
+      &lt;span class="n"&gt;smUnLock&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;arena&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;  
+      &lt;span class="n"&gt;delete&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  
+      &lt;span class="n"&gt;throw&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  
+   &lt;span class="p"&gt;}&lt;/span&gt;  
+   &lt;span class="n"&gt;smUnLock&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;arena&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;  
+   &lt;span class="n"&gt;delete&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在函数被出栈之前，先截住异常，在unlock和delete之后再将异常原样抛出。new expression
+的调用不用包括在try块之内是因为，不论在new operator调用时还是构造函数调用时抛出异
+常，都会在抛出异常之前释放已分配好的资源，所以不用再调用delete 。&lt;/p&gt;
+&lt;p&gt;另一个办法是，将这些资源管理的问题，封装在一个类对象中，由析构函数释放资源，这样就
+不需要对代码进行上面那样的处理——利用函数释放控制权之前会析构所有局部对象的原理。&lt;/p&gt;
+&lt;p&gt;在对单个对象构造过程中抛出异常，会只调用已经构造好的base class object或member class
+ object的析构函数。同样的道理，适用于数组身上，如果在调用构造函数过程中抛出异常，那
+ 么之前所有被构造好的元素的析构函数被调用，对于抛出异常的该元素，则遵循关于单个对象
+ 构造的原则，然后释放已经分配好的内存。&lt;/p&gt;
+&lt;p&gt;只有在一个catch子句评估完毕并且知道它不会再抛出exception后，真正的exception object
+才会被释放。关于 catch子句使用引用还是使用对象来捕获异常，省略。&lt;/p&gt;
+&lt;h3&gt;执行期类型识别（Runtime Type Identification RTTI）&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;RTTI 只支持多态类，也就是说没有定义虚函数是的类是不能进行 RTTI的。&lt;/li&gt;
+&lt;li&gt;对指针进行&lt;code&gt;dynamic_cast&lt;/code&gt;失败会返回NULL ,而对引用的话，识别会抛出
+    &lt;code&gt;bad_cast exception&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;typeid 可以返回&lt;code&gt;const type_info&amp;amp;&lt;/code&gt;，用以获取类型信息。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;关于1是因为RTTI的实现是通过vptr来获取存储在虚函数表中的&lt;code&gt;type_info*&lt;/code&gt; ，事实上为非多
+态类提供RTTI,也没有多大意义。 2的原因在于指针可以被赋值为0，以表示 no object，但是
+引用不行。关于3，虽然第一点指出RTTI只支持多态类，但&lt;code&gt;typeid&lt;/code&gt;和&lt;code&gt;type_info&lt;/code&gt;同样可用于
+内建类型及所有非多态类。与多态类的差别在于，非多态类的&lt;code&gt;type_info&lt;/code&gt;对象是静态取得(所
+以不能叫“执行期类型识别”)，而多态类的是在执行期获得。&lt;/p&gt;
+&lt;p&gt;参考：深度探索C++对象模型&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Thu 29 September 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Thu 08 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
-          (&lt;a href="http://www.roading.org/essaies/ji-fo-2.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adoo</dc:creator><pubDate>Thu, 29 Sep 2011 13:18:00 +0800</pubDate><guid>tag:www.roading.org,2011-09-29:/essaies/ji-fo-2.html</guid><category>随笔</category></item><item><title>第一章</title><link>http://www.roading.org//essaies/ji-fo-1.html</link><description>&lt;p&gt;李图远在K大读书，而且读的一塌糊涂，足见K大是个培养人才的地方，而非天才。&lt;/p&gt;
-&lt;p&gt;图远少年时有文学梦，又有政治梦。然而这年头搞文学自是混的艰难，赚钱不多之外，还得哗众取宠。虽然作家要是出名了，除了文章那些儿钱外，还能赚得很多衍生价值。譬如，据说他很喜欢的作家贾平凹的字画，能买到几万块钱一副，只不过以图远以及作者那外行眼光，只觉得他的字画就如他的长相一般，断断算不得一流。当官呢虽有好的“钱途”，但无非要欺欺平头百姓，骗骗混蛋上司，只是想得做大之前，大多还得昧着数年良心，图远也是不愿。人生在世，除却那美丽的梦想外，总还得讨生活，养父母，娶老婆，生孩子。那梦想只有在做梦的时候还以为他是美丽的，醒了便如戳破的泡沫，除了一摊水渍，不留半点其他，那留下的水渍也多半是自己的口水。&lt;/p&gt;
-&lt;p&gt;受文学梦的影响，图远以为男人总该有点才情，胸中有些沟壑才是。只是在K大读了两年，终于明白，大学里面胸有“沟壑”的人四处皆是，不过全是女人——挤出双峰，露出乳沟。而胸有沟壑的男人，却是绝难见到。于是图远总结出一条：大学如同交易市场，有一半人是来寻沟壑的，而另一半人是来推销沟壑的（倘若中国的大学生，男女数目相仿的话）。&lt;/p&gt;
-&lt;p&gt;这时候夕阳已到天际，地平线上的两片白云，被染上了金红的残色。图远郁郁的走在路上，一言不发，脸色也一成不变，高高瘦瘦的身躯，微有佝偻，低头紧锁的两条青眉分明，又似看不出的深沉。&lt;/p&gt;
-&lt;p&gt;人们总以为，梦想会在时间的流淌下变得发酵，实际上往往是会发霉。你不去动它，它不会令人越来越沉醉，只会尘封在某个角落。只当你记忆再去触碰的时候带起一阵霉灰，徒惹心底唏嘘。&lt;/p&gt;
-&lt;p&gt;太阳还未落下，吉佛街街口的发廊红灯已然初上，几个女人尖细的笑骂声，从街口传出，那尖声，好似要打破整个吉佛街的寂静，传遍整个K大，又好像不甘于此，要传遍整个莲城才很罢休。图远低头走路，不曾抬头看几女，几女只顾搔首也不曾看他。&lt;/p&gt;
-&lt;p&gt;亲人的离去，是莫大的悲伤。图远刚买完票回来，明天凌晨的火车。太爷爷病重，父亲电话，大意是要图远赶回去送终的。图远心中空落落的。一年时间恍若隔世，原来太爷爷身子还健朗，图远怎么也料不到，这人说要走就要在的，留也留不住。&lt;/p&gt;
-&lt;p&gt;李太爷原来对图远期望很大，认定这孩子聪明，又上了大学，大有前途不可限量的感觉。只是如今，图远对自己大为失望，只觉得孝道未尽，又时光不再。&lt;/p&gt;
-&lt;p&gt;一路无话，院子门前的两颗枣树，还是那样，夕阳透过，投下两颗孤独的树影。图远似没听到张建人的招呼，也没有理会史书的打趣，一个人进了屋，坐在床上，回首往昔种种。张建人心里骂了一声：“还当自己是根葱了，算什么东西。”史书也耸耸肩，继续念着：“我家门前有两棵树，一棵是枣树，另一颗还是枣树;村里出了两个官，一个是贪官，另一个还是贪官”。&lt;/p&gt;
-&lt;p&gt;........&lt;/p&gt;
-&lt;p&gt;图远坐在车上，电话响个不停，于是索性把电话关了。&lt;/p&gt;
-&lt;p&gt;列车呼啸的奔驰，但是图远归家的心却更加急切，列车才走一半的路，他的心便快要看到了进小镇的旧桥。他盼望着家门，又想着太爷爷的往昔.......&lt;/p&gt;
-&lt;p&gt;李图远原来叫李途远，是李太爷给取的名字，于这个名字还有一些故事。&lt;/p&gt;
-&lt;p&gt;——李图远决计是个有远大图谋的人，因此每日沉溺于自己的远大理想的规划中，却是顾不得眼前这短短时日。远图年近百岁的太爷爷，少时读过私塾，算的上是个读书人。在图远还未出生前，李太爷就为自己长重孙取好了名字——李途远。以此来时时告诫长重孙，人生短暂，前路遥遥。又有典故“日暮途远”。李太爷也一直为此捻须自得，觉得这名字涵养内敛。比之那亚运啊，建国，爱党之流的名字好了不只百倍。&lt;/p&gt;
-&lt;p&gt;但图远却不这般觉得。初中时候，图远有个同学叫王小乐，很受女孩子欢迎。让远图很是羡慕。他总归觉得都怪自己的名字不顺口，不像人家“小乐，小乐”的叫着朗朗上口，若自己叫“小远”说不定又是另一番光景。但从此，想改名字的种子便埋在了他的心中。万事都是这样，若是种子一旦种下了，便保不准会有生根发芽的一天。譬如，被开过玩笑的男女，纵不能成其好事，但多年后见了面，总免不了要生出一丝旎念的。&lt;/p&gt;
-&lt;p&gt;到考入K大的时候，图远顺便就把名字改了。“小远”自然是不行的，这单单是跟了那王小乐，图远不屑。他想人倘若一生跟着旁人走，便终生走不到人前。但一时半会却也想不出好的名字，于是便做了个小小的改动，将“途远”改成了“图远”。陡然间，图远便觉得名字似乎气势增了不少，连带着人也有了一丝霸气。&lt;/p&gt;
-&lt;p&gt;只一月军训完，便是国庆，图远本来不想回家，只是家里来了电话说是太爷爷生了病，图远只能回家看望。&lt;/p&gt;
-&lt;p&gt;改名的事被李太爷，如同很多文学家们不愿意旁人对自己的文章擅自修改一般，李太爷也对自己取的名字被改自然也很不满。对着图远和李父。“诶....诶....诶”一连三声叹气，才接着说下文。&lt;/p&gt;
-&lt;p&gt;“远儿这名改的倒是有些意思，原来给你取名途远，便是要告诉你踏踏实实，一步一印，莫要学现世很多人眼高于顶，浮躁的很。你却好，改一字，虽然没改了音，却把我的意思全改变了。”李太爷声音提高，松弛暗黑的老脸上难得见到两砣殷红。李父赶紧过去帮李太爷搓背顺气。&lt;/p&gt;
-&lt;p&gt;图远恭恭敬敬的低头站在旁边，心里却是暗自得意。李太爷的话太只听进了前小半句，隐隐自得，半点不顾李太爷话的重点在后半句。&lt;/p&gt;
-&lt;p&gt;李父看图远没有丝毫悔过之意，正要训斥，李太爷把手一伸制止住，倒是有一股清末古戏中读书人的摸样。李太爷根本就是读书人。&lt;/p&gt;
-&lt;p&gt;“现今名字也已经改了，改回来也麻烦。只是远儿要记住，切莫好高骛远。学了些东西，不要以为了不起了，莫要学人家买弄，肚子里要有真学才是。三国的孔明先生虽有经纶满腹，也甘躬耕陇亩。”&lt;/p&gt;
-&lt;p&gt;“口说不求闻达，声声自比管乐。”图远突地这一句，差点把李太爷气的背过气。李太爷原来是想，图远小时候最喜欢诸葛亮，便想用诸葛亮教育图远，却不知图远什么时候转了性。李父赶紧扶着李太爷回了房，生怕图远这不肖子再气李太爷。&lt;/p&gt;
-&lt;p&gt;李太爷回房后揣摩图远的话，越是揣摩越是深以为然。反而认为这孩子见识不凡，心里也是安稳了。&lt;/p&gt;
-&lt;p&gt;他是以为这话来自图远自己的见地，但却不知这话出自和他同年代周大荒的书中。&lt;/p&gt;
-&lt;p&gt;只两天过后，图远便是支了各种理由返了K大。在路上一顿恍惚，觉得家里好似腐朽了一般，也不觉得太爷爷博学了，也不觉得父亲亲切了。家里的空气似乎带着一股霉味，与他这开放的思想格格不入。&lt;/p&gt;
-&lt;p&gt;到K大时候使劲的吸了几口空气。觉得这空气中弥漫了清新。看了两旁的大樟树，心里就有了底气。觉得有大树就是有历史，有历史就厚重，厚重就是有底蕴。对K大尤为满意。&lt;/p&gt;
-&lt;p&gt;照他看来大学似乎还真就是一个解放思想，增长见识的地方。很多的好事，喜事从这儿传出去，很多的坏事，丑事也从这儿捅出来。某天女博士被Z教授潜规则了；哪天又会有X书记在和教育部领导在晚宴上海量；又或者爆出来W大学的书记抄袭论文了......
-总之没完没了，三天两条。&lt;/p&gt;
-&lt;p&gt;.......&lt;/p&gt;
-&lt;p&gt;只是转眼间，一年过去，此刻的图远再不是之前的图远，他不曾感到高等教育感到高明之处。大学是够大，老师也够老，但惟独这学校的才子无才，食堂也没什么菜。大学就如同吉佛街每日傍晚叫卖的烤番薯，香气四溢，看着觉得非吃不可，真的吃了，也不过是，嘴上哈哈气，裆后放放屁罢了。&lt;/p&gt;
-&lt;p&gt;当心儿停止了飞驰，列车似乎却快了，图远终于到了昌县。打了车回小镇。&lt;/p&gt;
-&lt;p&gt;图远远远的就看到了在大门前烧着火纸的父亲，大铁锅里的火苗一突一突的往上窜，跳动的火苗中似乎就有太爷爷苍老的脸容。图远心里空落落的，似乎一伸手便能触摸，又怕一伸手便打破了幻象。待走近时，图远不觉伸手要去触摸，甫一靠近，手指的灼痛传来，火苗还是在舞动，太爷爷的影像却不见了踪影。&lt;/p&gt;
-&lt;p&gt;“爸，我看到太爷爷了，他在火锅中冲我笑。”&lt;/p&gt;
-&lt;p&gt;李父一阵哽咽，两行热泪簌簌流下，图远也再忍不住眼中打转的泪水，顿时哭出声来。&lt;/p&gt;
+          (&lt;a href="http://www.roading.org/develop/cpp/eh-rtti.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adoo</dc:creator><pubDate>Thu, 08 Dec 2011 22:24:00 +0800</pubDate><guid>tag:www.roading.org,2011-12-08:/develop/cpp/eh-rtti.html</guid><category>EH</category><category>Inside The C++ Object Model</category><category>RTTI</category></item><item><title>模板二事</title><link>http://www.roading.org//develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html</link><description>&lt;h3&gt;模板的实例化&lt;/h3&gt;
+&lt;p&gt;一个模板只有被使用到，才会被实例化，否则不会被实例化。对于一个实例化
+后的模板来说，未被调用的成员函数将不会被实例化，只有成员函数被使用时，
+C++标准才要求实例化他们。其原因，有两点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;空间和时间效率的考虑，如果模板类中有100个成员函数，对某个特定类型
+    只有2个函数会被使用，针对另一个特定类型只会使用3个，那么如果将剩
+    余的195个函数实例化将浪费大量的时间和空间。&lt;/li&gt;
+&lt;li&gt;使模板有最大的适用性。并不是实例化出来的每个类型都支持所有模板的全
+    部成员函数所需要的运算符。如果只实例化那些真正被使用的成员函数的话，
+    那么原本在编译期有错误的类型也能够得到支持。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以明确的要求在一个文件中将整个类模板实例化：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="nx"&gt;template&lt;/span&gt; &lt;span class="nb"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;Point3d&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;float&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;也可以显示指定实例化一个模板类的成员函数：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="nx"&gt;template&lt;/span&gt; &lt;span class="nx"&gt;float&lt;/span&gt; &lt;span class="nx"&gt;Point3d&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;float&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nl"&gt;X&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="nx"&gt;const&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;或是针对一个模板函数：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="nx"&gt;template&lt;/span&gt; &lt;span class="nx"&gt;Point3d&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;float&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="nx"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;Point3d&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;float&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;amp;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;Point3d&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;float&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;模板的错误报告，使用模板并遇到错误的大概都深有体会，那就是一个灾难。&lt;/p&gt;
+&lt;h3&gt;模板的名称决议&lt;/h3&gt;
+&lt;p&gt;一开始先要区分两种意义,一种是C++ 标准所谓的“scope of the template
+definition”，直译就是“定义模板的范围”。另一种是C++标准所谓的“scope of 
+the temlate instantiation”，可以直译为“实例化模板的范围”。&lt;/p&gt;
+&lt;p&gt;第一种情况：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// scope of the template definition&lt;/span&gt;
+&lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt; &lt;span class="n"&gt;foo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="n"&gt;template&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt;  
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="n"&gt;ScopeRules&lt;/span&gt;  
+&lt;span class="p"&gt;{&lt;/span&gt;  
+&lt;span class="nl"&gt;public:&lt;/span&gt;  
+   &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;invariant&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;  
+      &lt;span class="n"&gt;_member&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;_val&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;  
+   &lt;span class="p"&gt;}&lt;/span&gt;
+
+   &lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;type_dependent&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;  
+      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;_member&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;  
+   &lt;span class="p"&gt;}&lt;/span&gt;  
+   &lt;span class="c1"&gt;// ...  &lt;/span&gt;
+&lt;span class="nl"&gt;private:&lt;/span&gt;  
+   &lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;_val&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  
+   &lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;_member&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;第二种情况:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//scope of the template instantiation  &lt;/span&gt;
+&lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;  
+&lt;span class="c1"&gt;// ...  &lt;/span&gt;
+&lt;span class="n"&gt;ScopeRules&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;sr0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  
+&lt;span class="n"&gt;sr0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;invariant&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="n"&gt;sr0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;type_dependent&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在“scope of the template instantiation ”中 两个foo()都声明在此 scope
+中。猜猜sr0.invariant() 中调用的是哪个foo()函数，出乎意料，实际调用的
+是：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="nf"&gt;foo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;看上去，应该调用：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;毕竟，_val 的类型是 int 类型，它们才完全匹配。而 sr0.type_dependent()
+中调用的却在我们意料之中，调用的是:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;诸上所述,看上去或合理或不合理的选择，原因在于:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;template 之中， 对于一个非成员名字的决议结果是根据这个 name
+的使用是否与“用以实例化该模板的参数类型”有关来决定name。如果其使用互
+不相干，那么就以“scope of the template dclaration”来决定name。如果其
+使用的互相关联，那么就以“scope of the template
+instantiation”来决定name.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对于上面这一段话我的理解比较粗鲁且直接：在模板中，一个非成员名字的决议
+在于它适不适合在当前决议，当它完全与实例化模板的参数的类型无关的时候，
+就可以在当前决议下来；如果有关的话，则认为不适合在当前决议下来，将被推
+迟到实例化这个模板实例化的时候来决议。为什么以与实例化的类型相关不相关
+来区别适不适合当前决议？一个与实例化类型无关的名字，如果推迟到实例化的
+时候来决议，将使模板的设计者无所适从，一个模板的设计者能容忍一个与实例
+化类型无关的名字在他的模板中表现出当前不具有的含义吗？当然不行，那种场
+面，估计没有一个模板设计者能够hold住。相反，对于一个与实例化类型有关的
+名字，天生就应该可以根据实例化模板的不同类型表现出不同含义，如果其名字
+早在模板定义时被决议出来，那就该轮到模板的使用者hold不住了。当然所上完
+全属一家之言，呸，连一家之言都不算，怎么敢自称“家”。如有不同理解，可当
+我一派胡言，如果你聊发善心，可以对我赐教一二，当聆听受教。&lt;/p&gt;
+&lt;p&gt;参考：深度探索C++对象模型&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Wed 28 September 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Wed 07 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
-          (&lt;a href="http://www.roading.org/essaies/ji-fo-1.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adoo</dc:creator><pubDate>Wed, 28 Sep 2011 12:24:00 +0800</pubDate><guid>tag:www.roading.org,2011-09-28:/essaies/ji-fo-1.html</guid><category>随笔</category></item><item><title>Windows 8 初体验</title><link>http://www.roading.org//develop/cpp/metro/windows-8-%e5%88%9d%e4%bd%93%e9%aa%8c.html</link><description>&lt;p&gt;几个月前，就已经对windows8很期待。主要是因为听说xaml将支持C++。14号刚放出下载链接就
-赶去下下来，准备一探究竟。不过当天好哥们磊子过来了，于是和小庄同学，磊子我自己三个
-人，一起到球场上肆意了一个下午，晚上喝酒聊天，已经忘掉这回事了。昨天又停电一天，到今
-天才有机会体验下windows 8。 第一件事自然是打开Windows 8预览版自带的visual studio 
-2011,没有令我失望，可以使用C++来开发Metro程序。用xaml来为C++写界面，相信会是不一样的
-感觉。之前一直用WPF来写界面，用C++/Cli来包装C++写好的代码，供C#调用。这实在是一种畸
-形的工作方式，但是好的是，马上就要向其告别了。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2011-09/image_thumb4.png" /&gt;&lt;/p&gt;
-&lt;p&gt;但是实话说，频繁的在Metro与传统桌面像切换，确实另我有点不习惯，这倒是因为Metro程序太
-少的原因。另外预览版中应用商店并没有开放。作为开发人员来讲，另外Metro程序无法关闭，
-只能用Alt+F4。QQ2011的聊天窗口容易假死。性能方面倒是表现不错。当然现在还只是预览版，
-相信到正式版发布，还会有很大的改观。Windows 8 Start页面 &lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2011-09/image_thumb5.png" /&gt; &lt;/p&gt;
-&lt;p&gt;论坛地址： &lt;a href="http://win8.ms/forfroums"&gt;froums&lt;/a&gt;&lt;/p&gt;
+          (&lt;a href="http://www.roading.org/develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adoo</dc:creator><pubDate>Wed, 07 Dec 2011 17:00:00 +0800</pubDate><guid>tag:www.roading.org,2011-12-07:/develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html</guid><category>c++</category><category>Inside The C++ Object Model</category><category>template instantiation</category></item><item><title>临时性对象(Temporary Objects)</title><link>http://www.roading.org//develop/cpp/%e4%b8%b4%e6%97%b6%e6%80%a7%e5%af%b9%e8%b1%a1temporary-objects.html</link><description>&lt;h3&gt;何时生成临时对象&lt;/h3&gt;
+&lt;p&gt;对于一个下面这样的程序片段：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;死板一点来讲，它应当产生一个临时对象用来存储a+b的结果，然后以临时对
+象作为初值调用拷贝构造函数初始化对象c。而实际上编译器更愿意直接调用
+拷贝构造函数的方式将a+b的值放到c中，这样就不需要临时对象，和它的构造
+函数和拷贝构造函数的调用了。&lt;/p&gt;
+&lt;p&gt;更进一步，如果operator +的定义符合NRV优化的条件，那么NRV优化的开启，
+将使得拷贝构造函数的调用和named object的析构函数都免了。期间详情可
+以参见”&lt;a href="http://www.roading.org/?p=544"&gt;NRV优化&lt;/a&gt;”。也就是说对于上面那种情形在我们的代码中是不产生
+临时对象的。但是对于一个情况非常类似的赋值操作语句&lt;code&gt;c = a+b&lt;/code&gt;，却有很
+大的差别，那个临时变量是不能省的&lt;/p&gt;
+&lt;p&gt;不能忽略临时对象，反而导致如下过程：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// Pseudo C++ code  &lt;/span&gt;
+&lt;span class="c1"&gt;// T temp = a + b;  &lt;/span&gt;
+&lt;span class="no"&gt;T&lt;/span&gt; &lt;span class="n"&gt;temp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  
+&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;temp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;     &lt;span class="c1"&gt;// @1 [^注1]&lt;/span&gt;
+
+&lt;span class="c1"&gt;// c = temp  &lt;/span&gt;
+&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;temp&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;       &lt;span class="c1"&gt;// @2  &lt;/span&gt;
+&lt;span class="n"&gt;temp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="no"&gt;T&lt;/span&gt;&lt;span class="o"&gt;::~&lt;/span&gt;&lt;span class="no"&gt;T&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在代码@1处，表明以拷贝构造函数或NRV方式将结果保存的临时对象中。为什
+么不能省略那个临时对象，比如直接这样：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;::~&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这不是更高效，更简洁的方式吗？不行，其原因在于，拷贝构造函数、析构
+函数以及赋值操作符都可以由使用者提供，没有人能保证，析构函数加拷贝
+构造函数的组合和赋值操作符具有相同的含义。所以：&lt;code&gt;T c=a+b&lt;/code&gt;总是比
+&lt;code&gt;c = a + b&lt;/code&gt;更有效率。&lt;/p&gt;
+&lt;p&gt;对于一个没有出现目标对象的表达式&lt;code&gt;a + b&lt;/code&gt;,那么产生一个临时对象来存储
+运算结果，则是非常必要的。&lt;/p&gt;
+&lt;h3&gt;临时对象的生命周期&lt;/h3&gt;
+&lt;p&gt;很多时候，产生临时对象是必不可少的，但是何时摧毁一个临时对象才是最
+佳行为呢？过早或过晚都不太适合，过早有可能使得程序错误，过晚的话又
+使得资源没有得到及时回收。对于下面的程序：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="nf"&gt;s1&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;world &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;by Adoo&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;显然保存&lt;code&gt;s1+s2&lt;/code&gt;结果的临时对象，如果在与s3进行加法之前析构，将会带来
+大麻烦。于是C++标准中有一条：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;临时性对象的摧毁应当作为造成产生这个临时对象的完整表达式的最后
+一个步骤。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;完整的表达式，是指涵括的表达式中最外围的那个。我们再看上面那个字符
+串相加的表达式，当计算完成，而cout还未调用，此时我们析构掉存储最终
+结果的临时对象，岂不悲剧。其实上面的规定还有两个例外：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;凡含有表达式执行结果的临时性对象，应该保存到Object的初始化操作
+    完成为止。&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果临时性对象被绑定与一个引用，临时对象将残留，直至被初始化的
+    引用的生命结束，或直到临时对象的生命周期结束——视哪一种情况先达
+    到，对应于这种情况：&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;world&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:注1"&gt;
+&lt;p&gt;侯捷认为此处为 Lippman 的错误，他认为应该为
+&lt;code&gt;temp.operator + ( a, b )&lt;/code&gt;但我以为是侯捷并没有理解Lippman的意思，回
+顾一下,《深度探索对象模型》2.3讲到的返回值初始化(Return Value 
+Initialization)——返回值将作为一个额外的参数提供给函数，来传回函数内
+部的值，也就是说对于一个 operator + 操作符
+&lt;code&gt;T T::operator+ (const T&amp;amp; right)&lt;/code&gt;将转化为
+&lt;code&gt;void T::operator+ (T &amp;amp;result ,const T&amp;amp; right)&lt;/code&gt;所以&lt;code&gt;temp=a+b&lt;/code&gt;是
+&lt;code&gt;a.operator+( temp, b )&lt;/code&gt;还是&lt;code&gt;temp.operator+( a, b )&lt;/code&gt;自然不言而喻。&amp;#160;&lt;a class="footnote-backref" href="#fnref:注1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Fri 16 September 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Tue 06 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
-          (&lt;a href="http://www.roading.org/develop/cpp/metro/windows-8-%e5%88%9d%e4%bd%93%e9%aa%8c.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adoo</dc:creator><pubDate>Fri, 16 Sep 2011 14:08:00 +0800</pubDate><guid>tag:www.roading.org,2011-09-16:/develop/cpp/metro/windows-8-%e5%88%9d%e4%bd%93%e9%aa%8c.html</guid><category>c++</category><category>windows 8</category><category>xaml</category></item></channel></rss>
+          (&lt;a href="http://www.roading.org/develop/cpp/%e4%b8%b4%e6%97%b6%e6%80%a7%e5%af%b9%e8%b1%a1temporary-objects.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adoo</dc:creator><pubDate>Tue, 06 Dec 2011 17:48:00 +0800</pubDate><guid>tag:www.roading.org,2011-12-06:/develop/cpp/%e4%b8%b4%e6%97%b6%e6%80%a7%e5%af%b9%e8%b1%a1temporary-objects.html</guid><category>c++</category><category>Inside The C++ Object Model</category><category>笔记</category></item></channel></rss>
