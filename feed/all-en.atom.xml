@@ -22,7 +22,7 @@ INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在
 们在Direct Addressing之上建立一棵二叉树想必有所改善。&lt;/p&gt;
 &lt;h4&gt;Superimposing a binary tree structure&lt;/h4&gt;
 &lt;p&gt;为了提高几个操作的效率，我们的数据结构由一个数组，演变成了下面的结构：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="binary_tree_array" src="htt://www.roading.org/images/2013-06/binary_tree_array.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="binary_tree_array" src="http://www.roading.org/images/2013-06/binary_tree_array.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;二叉树中的结点存储着0或1，当两个孩子中有一个为1时它为1，只有当两个孩子都为0
 的时候它才为0。&lt;/p&gt;
 &lt;p&gt;在Direct Addressing中花费\( \theta(u) \)的操作，依赖于这棵二叉树现在都有了
