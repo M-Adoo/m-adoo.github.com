@@ -64,7 +64,7 @@
 <p>顺序统计树，是从红黑树扩展而来。相较于红黑树，一个顺序统计树的结点<em>x</em>，
 比一个红黑树的结点要多拥有一个字段size 。size为以<em>x</em>为根结点的子树所包
 含的所有结点的数目(也包括x本身)。一棵顺序统计树如下图所示：</p>
-<p><img alt="" src="http://www.roading.org/algorithm/introductiontoalgorithm/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E4%B8%AD%E4%BD%8D%E6%95%B0%E5%92%8C%E9%A1%BA%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%EF%BC%88medians-and-order-statistic%EF%BC%89.html" /></p>
+<p><img alt="" src="http://www.roading.org/images/2012-01/order-statistics.png" /></p>
 <p>不难得出一条结论：</p>
 <p><strong><em> x.size=x.left.size+x.right.size+1 </em></strong></p>
 <p>在一棵顺序统计树中，可以很轻便的求该树中第 <em>i</em>小的结点：</p>
