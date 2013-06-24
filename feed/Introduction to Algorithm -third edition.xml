@@ -656,7 +656,7 @@ DECREAS-KEY两个操作，而一旦实现了这两个操作，DELETE的实现则
 
 &lt;p&gt;其中CONSOLIDATE函数正是用来整理斐波那契堆的，它创建一个数组A来暂存根结点，
 并在遍历根链表的过程中将根结点degree相同的树合并。&lt;/p&gt;
-&lt;p&gt;其伪码如下（其中\(D(n) \leq \lfloor \log_{\phi} n \rfloor\)，且\(\phi = (1 + \sqrt 5)/2 = 1.6180...3\)，具体证明见书本）：&lt;/p&gt;
+&lt;p&gt;其伪码如下（其中\(D(n) \leq \lfloor \log_{\phi} n \rfloor\)，且\(\phi = (1 + \sqrt 5)/2 = 1.61803...\)，具体证明见书本）：&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;CONSOLIDATE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;array&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
