@@ -102,24 +102,24 @@
  我们有：
 \[w(i, j) = w(i, j-1) + p_j+ q_j\]</p>
 <h4>伪码：</h4>
-<p>:::C
-OPTIMAL-BST(p, q, n)
-    let e[1 .. n + 1, 0 .. n], w[1, n + 1, 0 .. n],
-        and root[1..n, 1..n] be new tables
-    for i = 1 to n + 1
-        e[i, i - 1] = q<sub>i-1</sub>
-        w[i, i - 1] = q<sub>i-1</sub>
-    for l = 1 to n 
-        for i = 1 to n - l + 1
-            j = i + l - 1
-            e[i, j] = ∞
-            w[i, j] = w[i, j -1] + p<sub>j</sub> + q<sup>j</sup>
-            for r = i to j 
-                t = e[i, r - 1] + e[r + 1, j] + w[i, j]
-                if t &lt; e[i, j]
-                    e[i, j] = t
-                    root[i, j] = r
-    return e and root</p>
+<div class="codehilite"><pre><span class="n">OPTIMAL</span><span class="o">-</span><span class="n">BST</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">let</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span> <span class="p">..</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span> <span class="p">..</span> <span class="n">n</span><span class="p">],</span> <span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span> <span class="p">..</span> <span class="n">n</span><span class="p">],</span>
+        <span class="n">and</span> <span class="n">root</span><span class="p">[</span><span class="mf">1.</span><span class="p">.</span><span class="n">n</span><span class="p">,</span> <span class="mf">1.</span><span class="p">.</span><span class="n">n</span><span class="p">]</span> <span class="n">be</span> <span class="n">new</span> <span class="n">tables</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="o">&lt;</span><span class="n">sub</span><span class="o">&gt;</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">sub</span><span class="o">&gt;</span>
+        <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="o">&lt;</span><span class="n">sub</span><span class="o">&gt;</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">sub</span><span class="o">&gt;</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">n</span> 
+        <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">n</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">l</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="err">∞</span>
+            <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="o">&lt;</span><span class="n">sub</span><span class="o">&gt;</span><span class="n">j</span><span class="o">&lt;/</span><span class="n">sub</span><span class="o">&gt;</span> <span class="o">+</span> <span class="n">q</span><span class="o">&lt;</span><span class="n">sup</span><span class="o">&gt;</span><span class="n">j</span><span class="o">&lt;/</span><span class="n">sup</span><span class="o">&gt;</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="n">to</span> <span class="n">j</span> 
+                <span class="n">t</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">e</span><span class="p">[</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                    <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+                    <span class="n">root</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>
+    <span class="k">return</span> <span class="n">e</span> <span class="n">and</span> <span class="n">root</span>
+</pre></div>
 <h4>C++的实现</h4>
 <div class="codehilite"><pre><span class="cp">#include&lt;iostream&gt;</span>
 <span class="cp">#include&lt;numeric&gt;</span>

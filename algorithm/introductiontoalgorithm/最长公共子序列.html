@@ -68,10 +68,10 @@
 <h3>动态规划法求最长公共子序列</h3>
 <p>求最长公共子序列最直接最暴力的一种方法当然是枚举出两个序列所有的子序列，
 然后从中找出所有的公共子序列，再选出所有公共子序列中最长的那个。不过这
-种粗暴的做法是很低效的，假如两个序列的长度分别为m和n,因为它们分别有2^m^
-和2^n^个子序列，那么这个算法的时间复杂度将是指数级别的O(2^m+n^)，对于长
-一些的序列这种方法是不实际的。撇开这种方法不谈，我们将关注另一种方法
-——用动态规划策略来求最长公共子路径问题。</p>
+种粗暴的做法是很低效的，假如两个序列的长度分别为m和n,因为它们分别有
+\(2^m\)和\(2^n\)个子序列，那么这个算法的时间复杂度将是指数级别的,
+\(O(2^{m+n})\)，对于长一些的序列这种方法是不实际的。撇开这种方法不谈，
+我们将关注另一种方法——用动态规划策略来求最长公共子路径问题。</p>
 <h4>第一步：描述问题的最优子结构</h4>
 <p>之前一篇笔记有总结到，动态规划算法的运用有两个必要条件，一是问题包含最
 优子结构，二是有重叠子问题。第一步我们要做的便是证明LCS问题确实包含有最
@@ -79,41 +79,43 @@
 引用原书的定理15.1证明：</p>
 <blockquote>
 <h4>Theorem 15.1: (Optimal substructure of an LCS)</h4>
-<p>Let <em>X</em> = 〈<em>x</em>~1~, <em>x</em>~2~, ..., <em>x~m~</em>〉 and <em>Y</em> = 〈<em>y</em>~1~, <em>y</em>~2~,
-..., <em>y~n~</em>〉 be sequences, and let <em>Z</em> = 〈<em>z</em>~1~, <em>z</em>~2~, ...,
-<em>z~k~</em>〉 be any LCS of <em>X</em> and <em>Y</em>.</p>
+<p>Let \(X = \langle x_1, x_2,...,x_m \rangle\) and 
+\(Y = \langle y_1,y_2,...,y_n \rangle\) be sequences, and let
+\(Z = \langle z_1,z_2,...,z_k \rangle\) be any LCS of \(X\) and \(Y\).</p>
 <ul>
-<li>If <em>x~m~</em> = <em>y~n~</em>, then <em>z~k~</em> = <em>x~m~</em> = <em>y~n~</em> and <em>Z</em>~<em>k</em>-1~
-    is an LCS of <em>X</em>~<em>m</em>-1~ and <em>Y</em>~<em>n</em>-1~.</li>
-<li>If <em>x~m~</em> ≠ <em>y~n~</em>, then <em>z~k~</em> ≠ <em>x~m~</em> implies that <em>Z</em> is an
-    LCS of <em>X</em>~<em>m</em>-1~ and <em>Y</em>.</li>
-<li>If <em>x~m~</em> ≠ <em>y~n~</em>, then <em>z~k~</em> ≠ <em>y~n~</em> implies that <em>Z</em> is an
-    LCS of <em>X</em> and <em>Y</em>~<em>n</em>-1~.</li>
+<li>If \(x_m = y_n\), then \(z_k = x_m = y_n\) and \(Z_{k-1}\)
+       is an LCS of \(X_{m-1}\)  and \(Y_{n-1}\).</li>
+<li>If \(x_m \neq y_n\), then \(z_k \neq x_m\)implies that \(Z\) is an
+      LCS of \(X_m-1\)and \(Y\).</li>
+<li>If \(x_m \neq y_m\), then \(z_k \neq y_m\) implies that 
+      \(Z\) is an LCS of \(X\) and \(Y{n-1}\).</li>
 </ul>
-<p><strong><em>Proof</em></strong> (1) If <em>z~k~</em> ≠ <em>x~m~</em>, then we could append <em>x~m~</em> =
-<em>y~n~</em> to <em>Z</em> to obtain a common subsequence of <em>X</em> and <em>Y</em> of length
-<em>k</em> + 1, contradicting the supposition that <em>Z</em> is a <em>longest</em> common
-subsequence of <em>X</em> and <em>Y</em> . Thus, we must have <em>z~k~</em> = <em>x~m~</em> =
-<em>y~n~</em>. <a name="1088"></a><a name="IDX-352"></a>Now, the prefix
-<em>Z</em>~<em>k</em>-1~ is a length-(<em>k</em> - 1) common subsequence of <em>X</em>~<em>m</em>-1~ and
-<em>Y</em>~<em>n</em>-1~. We wish to show that it is an LCS. Suppose for the purpose
-of contradiction that there is a common subsequence <em>W</em> of <em>X</em>~<em>m</em>-1~
-and <em>Y</em>~<em>n</em>-1~ with length greater than <em>k</em> - 1. Then, appending
-<em>x~m~</em> = <em>y~n~</em> to <em>W</em> produces a common subsequence of <em>X</em> and <em>Y</em>
-whose length is greater than <em>k</em>, which is a contradiction.</p>
-<p>(2) If <em>z~k~</em> ≠ <em>x~m~</em>, then <em>Z</em> is a common subsequence of
-<em>X</em>~<em>m</em>-1~ and <em>Y</em>. If there were a common subsequence <em>W</em> of
-<em>X</em>~<em>m</em>-1~ and <em>Y</em> with length greater than <em>k</em>, then <em>W</em> would also
-be a common subsequence of <em>X~m~</em> and <em>Y</em> , contradicting the
-assumption that <em>Z</em> is an LCS of <em>X</em> and <em>Y</em>.</p>
+<p><strong><em>Proof</em></strong> </p>
+<p>(1) If \(z_k \neq x_m\), then we could append 
+\(x_m = y_n\) to \(Z\) to obtain a common subsequence of \(X\) and
+\(Y\) of length \(k + 1\), contradicting the supposition that \(X\)
+is a <em>longest</em> common subsequence of \(X\) and \(Y\) . Thus, we must have
+\(z_k = x_m = y_n\). Now, the prefix \(z_{k-1}\) is a length-\(k-1\) 
+common subsequence of \(X_{m-1}\) and \(Y_{n-1}\) We wish to show that
+it is an LCS. Suppose for the purpose  of contradiction that there is a common
+subsequence\(W\) of \(X_{m-1}\) and \(Y_{n-1}\) with length greater than
+\(k-1\). Then, appending \(x_m = y_n\) to \(W\) produces a common
+subsequence of \(X\) and \(Y\) whose length is greater than \(k\), which
+is a contradiction.</p>
+<p>(2) If \(z_k \neq x_m\), then \(Z\) is a common subsequence of
+\(X_{m-1}\) and \(Y\). If there were a common subsequence \(W\) of
+\(X_{m-1}\)and \(Y\) with length greater than \(k\), then \(W\) would also
+be a common subsequence of \(X_m\) and \(Y\) , contradicting the
+assumption that \(Z\) is an LCS of \(X\) and \(Y\).</p>
 <p>(3) The proof is symmetric to (2).</p>
 </blockquote>
 <h4>第二步：一个递归解</h4>
-<p>由定理15.1可以看出，找序列X和序列Y的LCS,我们有可能需要找出X和Y~m-1~的LCS，
-以及X~n-1~和Y~m~的LCS。而这两个子问题，都拥有一个共同的子子问题,便是求
-X~n-1~和Y~m-1~的LCS。依次类推，还有很多其他的子问题会共有许多其他的子子问
-题。这就满足了动态规划的第二点条件，拥有重叠的子问题。</p>
-<p>定义c[i, j]为X~i~和Y+的LCS长度，根据定理15.1可以得出下面的递归式：</p>
+<p>由定理15.1可以看出，找序列X和序列Y的LCS,我们有可能需要找出\(X\)和
+\(Y_{m-1}\)的LCS，以及\(X_{n-1}\)和\(Y_m\)的LCS。而这两个子问题，都拥
+有一个共同的子子问题,便是求\(X_{n-1}\)和\(Y_{m-1}\)的LCS。依次类推，还
+有很多其他的子问题会共有许多其他的子子问题。这就满足了动态规划的第二点条件，
+拥有重叠的子问题。</p>
+<p>定义c[i, j]为\(X_i\)和\(Y_j\)的LCS长度，根据定理15.1可以得出下面的递归式：</p>
 <p><img alt="0" src="http://www.roading.org/images/2012-03/image_thumb11.png" /></p>
 <h4>第三步：计算LCS的长度</h4>
 <p>利用第二步的递归式15.9，可以很容易写出计算LCS长度的递归求解程序，但这种方
@@ -147,12 +149,12 @@ X~n-1~和Y~m-1~的LCS。依次类推，还有很多其他的子问题会共有�
 <p><img alt="" src="http://www.roading.org/images/2012-03/image_thumb12.png" /></p>
 <p><span style="font-family: 楷体">说明：右图是将表b和表c的信息合二为一的显示，
 d第i行和第j列所指方块，记录了c[i,j]和b[i,j]中的信息。我们通过那些箭头来获得
-问题的最优子问题的路径，路径上的"↖"表示X~i~=Y~i~,所以为LCS上的一个字母。</span></p>
+问题的最优子问题的路径，路径上的"↖"表示\(X-i = Y_i\),所以为LCS上的一个字母。</span></p>
 <h4>第四步：构建LCS</h4>
-<p>通过表b我们可以很快的构建出<em>X</em> = 〈<em>x</em>~1~, <em>x</em>~2~, ..., <em>x~m~</em>〉和<em>Y</em> =
-〈<em>y</em>~1~, <em>y</em>~2~, ...,<em>y~n~</em>〉的LCS。可以从b[m,n]开始跟踪路径，当b[i,j]为"↖"时，
-输出当前字母。考虑到时从后往前追踪的，所以求出来的LCS将是反向的，所以在我们下面的
-递归伪码中，将先递归再输出。以下为伪码：</p>
+<p>通过表b我们可以很快的构建出\(X = \langle x_1,x_2,...,x_m \rangle\)和
+\(Y = \langle y_1, y_2,...,y_n \rangle\)的LCS。可以从b[m,n]开始跟踪路径，
+当b[i,j]为"↖"时，输出当前字母。考虑到时从后往前追踪的，所以求出来的LCS将是
+反向的，所以在我们下面的递归伪码中，将先递归再输出。以下为伪码：</p>
 <div class="codehilite"><pre><span class="n">PRINT</span><span class="o">-</span><span class="n">LCS</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">or</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span>
     <span class="k">return</span> 
@@ -310,7 +312,7 @@ d第i行和第j列所指方块，记录了c[i,j]和b[i,j]中的信息。我们�
 的是，我的机器内存不大，总共就2G,我大体得到了规模在1万以下的结论。规模在1万
 以上的时候，我的机器就并不呢功能胜任了，因为内存的使用已经达到了90%以上，每
 次得到的数据偏差较大，已经不准确。</p>
-<p>当两个字符串长度在0\~500的时候，自下而上的方式，速度要快的比较明显。然而当长
+<p>当两个字符串长度在0~500的时候，自下而上的方式，速度要快的比较明显。然而当长
 度超过500的时候，自顶而下的方式便开始具有比较不错的优势，大约有25%左右。不过
 我的数据两只测到8000。另外很明显的一点是自顶而下的方式，消耗更多的内存。</p>
 <p>我这样认为，当字符串较短的时候，因少计算的子问题带来的时间节省并不足以弥补递
