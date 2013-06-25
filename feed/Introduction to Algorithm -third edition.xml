@@ -1035,22 +1035,21 @@ applications that manage large amounts of data.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;x.n&lt;/em&gt;, the number of keys currently stored in node &lt;em&gt;x&lt;/em&gt;,&lt;/li&gt;
 &lt;li&gt;the x.n keys themselves, stored in nondecreasing order, so that
-    x.&lt;em&gt;key&lt;/em&gt;~1~ ≤ x.&lt;em&gt;key&lt;/em&gt;~2~ ≤ ··· ≤ &lt;em&gt;x.key~x.n~.&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;x.leaf&lt;/em&gt; , a boolean value that is TRUE if &lt;em&gt;x&lt;/em&gt; is a leaf and FALSE
-    if &lt;em&gt;x&lt;/em&gt; is an internal node.&lt;/li&gt;
+    \(x.key_i \leq x.key_2 \leq ... \leq x.key_{x.n}\).&lt;/li&gt;
+&lt;li&gt;\(x.leaf\), a boolean value that is TRUE if \(x\) is a leaf and FALSE
+    if \(x\) is an internal node.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Each internal node &lt;em&gt;x&lt;/em&gt; also contains &lt;em&gt;x.n+1&lt;/em&gt; pointers x.&lt;em&gt;c&lt;/em&gt;~1~,
-    x.&lt;em&gt;c&lt;/em&gt;~2~, ..., x.&lt;em&gt;c~x.~&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;+1~ to its children. Leaf nodes have
-    no children, so their &lt;em&gt;c~i~&lt;/em&gt; fields are undefined.&lt;/p&gt;
+&lt;p&gt;Each internal node \(x\) also contains
+    \(x.n+1\) pointers \(x.c_1, x.c_2,...,x.c_{x.n+1}\), to its
+    children. Leaf nodes have no children, so their \(c_i\) fields are undefined.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;The keys x.&lt;em&gt;key~i~&lt;/em&gt; separate the ranges of keys stored in each
-    subtree: if &lt;em&gt;k~i~&lt;/em&gt; is any key stored in the subtree with root x.
-    &lt;em&gt;c~i~&lt;/em&gt;, then&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;k&lt;/em&gt;~1~ ≤ x.&lt;em&gt;key&lt;/em&gt;~1~≤&lt;em&gt;k&lt;/em&gt;~2~ ≤x. &lt;em&gt;key&lt;/em&gt;~2~ ≤··· ≤x. &lt;em&gt;key~x.~&lt;/em&gt;~&lt;em&gt;n&lt;/em&gt;~ ≤
-&lt;em&gt;k&lt;/em&gt;~&lt;em&gt;x.n+1&lt;/em&gt;~.&lt;/p&gt;
+&lt;p&gt;The keys \(x.key_i\) separate the ranges of keys stored in each
+    subtree: if \(key_i\) is any key stored in the subtree with root x.
+    \(c_i\), then
+    \[k_1 \leq x.key_1 \leq k_2 \leq x.key_2 \leq ... \leq x.key_{x.n} \leq k_{x.n + 1}\]&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;All leaves have the same depth, which is the tree's height &lt;em&gt;h&lt;/em&gt;.&lt;/p&gt;
@@ -1273,7 +1272,7 @@ applications that manage large amounts of data.&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
         </summary><category term="Amortized Analysis"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>赫夫曼编码</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html" rel="alternate"></link><updated>2012-03-28T16:01:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-28:/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html</id><summary type="html">&lt;p&gt;赫夫曼编码(huffman codes)是一种非常有用的数据压缩方法，通常能将数据压
-缩20%\~90%。从具体问题出发，假设我们有一包含10000个字符的文件，这些字
+缩20%~90%。从具体问题出发，假设我们有一包含10000个字符的文件，这些字
 符仅由6个不同的字符组成，就设这6个字符分别为“abcdef”，下面的表给出了
 这6个字符在整个文件中的占比，和两种不同的编码方式。&lt;/p&gt;
 &lt;table&gt;

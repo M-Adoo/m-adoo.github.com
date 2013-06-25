@@ -69,22 +69,21 @@
 <ul>
 <li><em>x.n</em>, the number of keys currently stored in node <em>x</em>,</li>
 <li>the x.n keys themselves, stored in nondecreasing order, so that
-    x.<em>key</em>~1~ ≤ x.<em>key</em>~2~ ≤ ··· ≤ <em>x.key~x.n~.</em></li>
-<li><em>x.leaf</em> , a boolean value that is TRUE if <em>x</em> is a leaf and FALSE
-    if <em>x</em> is an internal node.</li>
+    \(x.key_i \leq x.key_2 \leq ... \leq x.key_{x.n}\).</li>
+<li>\(x.leaf\), a boolean value that is TRUE if \(x\) is a leaf and FALSE
+    if \(x\) is an internal node.</li>
 </ul>
 </li>
 <li>
-<p>Each internal node <em>x</em> also contains <em>x.n+1</em> pointers x.<em>c</em>~1~,
-    x.<em>c</em>~2~, ..., x.<em>c~x.~</em>~<em>n</em>+1~ to its children. Leaf nodes have
-    no children, so their <em>c~i~</em> fields are undefined.</p>
+<p>Each internal node \(x\) also contains
+    \(x.n+1\) pointers \(x.c_1, x.c_2,...,x.c_{x.n+1}\), to its
+    children. Leaf nodes have no children, so their \(c_i\) fields are undefined.</p>
 </li>
 <li>
-<p>The keys x.<em>key~i~</em> separate the ranges of keys stored in each
-    subtree: if <em>k~i~</em> is any key stored in the subtree with root x.
-    <em>c~i~</em>, then</p>
-<p><em>k</em>~1~ ≤ x.<em>key</em>~1~≤<em>k</em>~2~ ≤x. <em>key</em>~2~ ≤··· ≤x. <em>key~x.~</em>~<em>n</em>~ ≤
-<em>k</em>~<em>x.n+1</em>~.</p>
+<p>The keys \(x.key_i\) separate the ranges of keys stored in each
+    subtree: if \(key_i\) is any key stored in the subtree with root x.
+    \(c_i\), then
+    \[k_1 \leq x.key_1 \leq k_2 \leq x.key_2 \leq ... \leq x.key_{x.n} \leq k_{x.n + 1}\]</p>
 </li>
 <li>
 <p>All leaves have the same depth, which is the tree's height <em>h</em>.</p>

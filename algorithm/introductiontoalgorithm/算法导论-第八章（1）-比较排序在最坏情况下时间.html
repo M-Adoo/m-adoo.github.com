@@ -69,8 +69,9 @@
 三个元素进行排序的话，你总可以找到一条路径来表示它的整个比较过程。（需要
 注意的是，1并不表示它代表第一个元素，它可以代表三个元素中任意一个。2，3也
 相同。但是1，2，3不指向相同元素）。显然最坏情况下的复杂度即是判定树的高。</p>
-<p>假设用比较排序对N个元素进行排序，它的判定树高为H,叶子数目为L。显然L &lt;=2^H^，
-然而N！&lt;= L<sup id="fnref:注1"><a class="footnote-ref" href="#fn:注1" rel="footnote">1</a></sup>。所以N！&lt;= L &lt;= 2^H^。可化为： H >= lg(N！) = Ω(N*lgN).</p>
+<p>假设用比较排序对N个元素进行排序，它的判定树高为H,叶子数目为L。显然\(L \leq 2^H\)，
+然而\(N! \leq L\)<sup id="fnref:注1"><a class="footnote-ref" href="#fn:注1" rel="footnote">1</a></sup>。所以\(N! \leq L \leq 2^H\)。可化为：
+\(H \geq \lg(N!) = \Omega(N \cdot \lg N) \).</p>
 <p>是考虑到原文这一句：Because each of the N! permutation appears as areachable
 leaf.我觉得作者的意思着重于用N！来表示N个元素的所有可能排列，但是N个元素的所
 有可能排列实际上是小于等于N！的，因为在N个元素中有可能有相等的元素。</p>
