@@ -82,11 +82,11 @@
 位最合适？在选多少位之前，我们先总结一条定理。</p>
 <p><strong>定理</strong>：对于n个b-bit位的元素和一任意正数<code>r &lt;= b</code>（r代表基数排序选取的位数）
 ，在Stable Sort的时间复杂度为θ(n+k)的情况下，基数排序的时间复杂度为
-θ((b/r)(n+2^r^))。</p>
+\(\theta((b/r)(n + 2^r))\)。</p>
 <p>证明：每一次对r位进行排序，则总共进行b/r次Stable Sort排序。每一次选r位，显
-然k=2（k为<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA-%E7%AC%AC%E5%85%AB%E7%AB%A02-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8Fcounting-sort.html">计数排序</a>的范围）的r次方。所以θ(d（n+k）) = θ((b/r)(n+2^r^))。算法导论给出说明：当
-<code>b&lt;lgn</code>时，r=b可以得到最小复杂度；当b>=lgn时，r=lgn有最小复杂度。原谅我不
-能给出数学上的证明。</p>
+然k=2（k为<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA-%E7%AC%AC%E5%85%AB%E7%AB%A02-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8Fcounting-sort.html">计数排序</a>的范围）的r次方。所以\(\theta(d(n+k)) = \theta((b/r)(n+ 2^r))\)。
+算法导论给出说明：当\(b &lt; \lg n\)时，\(r = b\)b可以得到最小复杂度；当
+\(b \geq \lg n\)时,\(r = \lg n\)有最小复杂度。原谅我不能给出数学上的证明。</p>
 <h3>实例</h3>
 <p>回到之前说的关于有负数的时候怎么排序的问题上来，我们要注意的一点事和I负数在
 内存中存储的是补码。也就是说在我们基于二进制来进行排序的时候负数是用其补码

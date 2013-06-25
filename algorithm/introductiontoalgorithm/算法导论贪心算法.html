@@ -59,16 +59,17 @@
 一步的最优解来构建出整个问题的最优解。这并不能保证总能构建出最优解，但它通常能
 做到。我们可以先看一个具体的问题——活动安排问题。</p>
 <h3>活动安排问题</h3>
-<p>有一系列活动<em>S</em> = {<em>a</em>~1~, <em>a</em>~2~, ...,<em>a~n~</em>}，它们都要用到同一个舞台，而舞台
-一次只能举办一个活动。那么要如何安排才能举办最多的活动呢？</p>
-<p>假设活动<em>a~i~</em> 的开始时间用<em>s~i~</em> 表示，结束时间用<em>f~i~</em>表示, 有
-0 ≤ <em>s~i~</em> &lt; <em>f~i~</em> &lt; ∞. 也就是说<em>a~i~</em> 占用舞台的时间段为[<em>s~i~, f~i~</em>).那么
-安排的活动之间必须满足一个条件，那就是各自的时间段之间没有重叠的部分。</p>
+<p>有一系列活动\(S = {a_1, a_2,...,a_n}\)，它们都要用到同一个舞台，而舞台一次只
+能举办一个活动。那么要如何安排才能举办最多的活动呢？</p>
+<p>假设活动\(a-i\)的开始时间用\(s_i\)表示，结束时间用\(f_i\)表示, 有
+\(0 \leq s_i &lt; f_i &lt; \infty\). 也就是说\(a_i\)占用舞台的时间段为
+\([s_i, f_i)\)。那么安排的活动之间必须满足一个条件，那就是各自的时间段之间没
+有重叠的部分。</p>
 <p>一个具体的例子（将这些活动按结束时间排好了序）：</p>
 <table>
 <thead>
 <tr>
-<th><em>i</em></th>
+<th>\(i\)</th>
 <th>1</th>
 <th>2</th>
 <th>3</th>
@@ -84,7 +85,7 @@
 </thead>
 <tbody>
 <tr>
-<td><em>s~i~</em></td>
+<td>\(s_i\)</td>
 <td>1</td>
 <td>3</td>
 <td>0</td>
@@ -98,7 +99,7 @@
 <td>12</td>
 </tr>
 <tr>
-<td><em>f~i~</em></td>
+<td>\(f_i\)</td>
 <td>4</td>
 <td>5</td>
 <td>6</td>
@@ -114,12 +115,12 @@
 </tbody>
 </table>
 <p>对于这样一个问题，因为能够比较快速的发现其最优子结构，我们会很容易想到用动态规
-划来解决。——假设<em>a~i~</em>是最优解中的一个元素，那么以<em>a~i~</em>为界可以将问题分成为两
-个子问题，一个是活动结束时间在<em>a~i~</em>的开始时间之前的所有活动，另一个则是活动开
-始时间在<em>a~i~</em>结束时间之后的所有活动。可以证明最优解包含这两个子问题的最优解组
+划来解决。——假设\(a_i\)是最优解中的一个元素，那么以\(a_i\)为界可以将问题分成为两
+个子问题，一个是活动结束时间在\(a_i\)的开始时间之前的所有活动，另一个则是活动开
+始时间在\(a_i\)结束时间之后的所有活动。可以证明最优解包含这两个子问题的最优解组
 成的，具体证明可见原书。</p>
-<p>令<em>S~ij~</em>代表活动开始时间在<em>a~i~</em>结束之后而活动结束时间在<em>a~j~</em>开始之前的所有
-活动的集合，用<em>c</em>[<em>i, j</em> ]来代表的<em>Sij</em>的最优解，那么我们可以获得递归公式：</p>
+<p>令\(S_{ij}\)代表活动开始时间在\(a_i\)结束之后而活动结束时间在\(a_j\)开始之前的所有
+活动的集合，用\(c[i, j]\)来代表的\(S_{ij}\)的最优解，那么我们可以获得递归公式：</p>
 <p><img alt="" src="http://www.roading.org/images/2012-03/image_thumb18.png" /></p>
 <p>如果用贪心算法的话，则不用考虑那么多种选择，只需考虑贪心选择——当前最佳的选择。
 在这个问题上，我们可以总是优先安排结束时间最早而又不与之前安排的任务有冲突的活
@@ -191,8 +192,8 @@ subproblems.</p>
 <h4>0-1背包和部分背包问题</h4>
 <blockquote>
 <p>The <strong><em>0-1 knapsack problem</em></strong> is the following. A thief robbing a
-store finds <em>n</em> items; the <em>i</em>th item is worth <em>v~i~</em> dollars and
-weighs <em>w~i~</em> pounds, where <em>v~i~</em> and <em>w~i~</em> are integers. He wants
+store finds <em>n</em> items; the <em>i</em>th item is worth \(v_i\) dollars and
+weighs \(w_i\) pounds, where \(v_i\) and \(w_i\) are integers. He wants
 to take as valuable a load as possible, but he can carry at most <em>W</em>
 pounds in his knapsack for some integer <em>W</em>. Which items should he
 take? (This is called the 0-1 knapsack problem because each item must

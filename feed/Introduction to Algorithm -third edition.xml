@@ -1234,8 +1234,8 @@ applications that manage large amounts of data.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;由PUSH, POP, 和 MULTIPOP构成的一个长度为&lt;em&gt;n&lt;/em&gt;的序列操作作用在一个空栈上，最坏情况下的时间复杂度为多少？当然，你可以说是&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;^2^)。的确没错，毕竟这一序列操作可由&lt;em&gt;n&lt;/em&gt;个MULTIPOP组成，由此得出&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)*&lt;em&gt;n&lt;/em&gt; = &lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;^2^)。但我们还能将这个上限向下压。&lt;/p&gt;
-&lt;p&gt;MULTIPOP的复杂度为&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)，但它真实的时间花费其实是由伪码中第2句决定的——MULTIPOP内部执行了多少次POP操作。当我们把上述问题综合考虑的时候，问题出现了戏剧性的转变。对于一个空栈来说，调用POP的操作最多等于PUSH的操作。可见上述的&lt;em&gt;n&lt;/em&gt;个操作可以有更矮的上界&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)。而三种操作的平摊代价为&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)/&lt;em&gt;n&lt;/em&gt; = &lt;em&gt;O&lt;/em&gt;(1)。&lt;/p&gt;
+&lt;p&gt;由PUSH, POP, 和 MULTIPOP构成的一个长度为&lt;em&gt;n&lt;/em&gt;的序列操作作用在一个空栈上，最坏情况下的时间复杂度为多少？当然，你可以说是\(O(n^2)\)。的确没错，毕竟这一序列操作可由\(n\)个MULTIPOP组成，由此得出\(O(n) \cdot n = O(n^2)\)。但我们还能将这个上限向下压。&lt;/p&gt;
+&lt;p&gt;MULTIPOP的复杂度为\(O(n)\)，但它真实的时间花费其实是由伪码中第2句决定的——MULTIPOP内部执行了多少次POP操作。当我们把上述问题综合考虑的时候，问题出现了戏剧性的转变。对于一个空栈来说，调用POP的操作最多等于PUSH的操作。可见上述的\(n\)个操作可以有更矮的上界\(O(n)\)。而三种操作的平摊代价为\(O(n)/n = O(1)\)。&lt;/p&gt;
 &lt;h3&gt;记账方法(The accounting method)&lt;/h3&gt;
 &lt;p&gt;在记账方法中，给不同的操作分配不同的平摊代价。有些操作的平摊代价大于实际代价，就把多余的部分当作存款，供那些实际代价大于平摊代价的操作使用。需要保证的是序列操作的平均代价总和应该要不小于实际代价的总和。仍然用上面栈的例子，我们给栈的三种操作分派的平摊代价如下：&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PUSH&lt;/span&gt;        &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -1248,16 +1248,16 @@ applications that manage large amounts of data.&lt;/p&gt;
 &lt;p&gt;所以由PUSH, POP, 和 MULTIPOP构成的一个长度为&lt;em&gt;n&lt;/em&gt;的序列操作作用在一个空栈上的总平摊代价为&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;),而它的实际代价也是。&lt;/p&gt;
 &lt;h3&gt;势能方法(he potential method)&lt;/h3&gt;
 &lt;p&gt;势能方法其实与记账方法相通，不同之处在于势能方法不是把账记在单个的对象上，而是记全记在数据结构上。当然按书上的说法来讲就是“势”，当某个操作支付的多时可以为这个数据结构积蓄势能，积蓄的势能则可以释放来支付后续的操作。&lt;/p&gt;
-&lt;p&gt;势能方法的工作流程如下. 对一个初始的数据结构&lt;em&gt;D&lt;/em&gt;~0~ 执行&lt;em&gt;n&lt;/em&gt;次操作。用&lt;em&gt;D~i~&lt;/em&gt;
-来表示执行第&lt;em&gt;i&lt;/em&gt;次操作后的数据结构。函数Φ(&lt;em&gt;D~i~&lt;/em&gt;)代表数据结构&lt;em&gt;D~i~&lt;/em&gt;拥有的势能。如果用&lt;em&gt;c~i~&lt;/em&gt;表示第&lt;em&gt;i&lt;/em&gt;个操作的实际代价的话，那第&lt;em&gt;i&lt;/em&gt;步操作的平摊代价就相当于实际代价加上由于这一步操作所增加的势能。所以第&lt;em&gt;i&lt;/em&gt;步操作的平摊代价：&lt;img alt="公式1" src="http://www.roading.org/images/2012-03/image_thumb25.png" /&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;n&lt;/em&gt; 步操作的总平摊代价则为：&lt;/p&gt;
+&lt;p&gt;势能方法的工作流程如下. 对一个初始的数据结构\(D_0\) 执行\(n\)次操作。用\(D_i\)
+来表示执行第\(i\)次操作后的数据结构。函数\(\phi (D_i)\)代表数据结构\(D_i\)拥有的势能。如果用\(c_i\)表示第\(i\)个操作的实际代价的话，那第\(i\)步操作的平摊代价就相当于实际代价加上由于这一步操作所增加的势能。所以第\(i\)步操作的平摊代价：&lt;img alt="公式1" src="http://www.roading.org/images/2012-03/image_thumb25.png" /&gt;。&lt;/p&gt;
+&lt;p&gt;\(n\)步操作的总平摊代价则为：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="公式2" src="http://www.roading.org/images/2012-03/image_thumb26.png" /&gt;&lt;/p&gt;
-&lt;p&gt;如果使得Φ(&lt;em&gt;D~n~&lt;/em&gt;) ≥ Φ(&lt;em&gt;D&lt;/em&gt;~0~)为真，那么我们就可以用总的平摊代价&lt;img alt="公式3" src="http://www.roading.org/images/2012-03/image_thumb27.png" /&gt;表示总的实际代价&lt;img alt="公式4" src="http://www.roading.org/images/2012-03/image_thumb28.png" /&gt;的一个上界。&lt;/p&gt;
-&lt;p&gt;再次用上面的栈例子作为实例，一开始时空栈，而且Φ(&lt;em&gt;D&lt;/em&gt;~0~) = 0 (势能为0)。于是有Φ(&lt;em&gt;D~n~&lt;/em&gt;) ≥ Φ(&lt;em&gt;D&lt;/em&gt;~0~) = 0。因&lt;em&gt;n&lt;/em&gt;的大小是不确定的，这个表达式要说明的是在一系列操作的过程中，势能可以有增有减，但绝不能为负数。&lt;/p&gt;
-&lt;p&gt;如果第&lt;em&gt;i&lt;/em&gt;个操作是个PUSH操作，那么第&lt;em&gt;i&lt;/em&gt;个操作带来的势差为：Φ(&lt;em&gt;D~i~&lt;/em&gt;) - Φ(&lt;em&gt;D&lt;/em&gt;~&lt;em&gt;i&lt;/em&gt;-1~) = (&lt;em&gt;s&lt;/em&gt; + 1) –&lt;em&gt;s&lt;/em&gt;= 1。那么平摊代价PUSH操作的平摊代价就为：&lt;/p&gt;
+&lt;p&gt;如果使得\(\phi (D_n) \geq \phi (D_0)\)为真，那么我们就可以用总的平摊代价&lt;img alt="公式3" src="http://www.roading.org/images/2012-03/image_thumb27.png" /&gt;表示总的实际代价&lt;img alt="公式4" src="http://www.roading.org/images/2012-03/image_thumb28.png" /&gt;的一个上界。&lt;/p&gt;
+&lt;p&gt;再次用上面的栈例子作为实例，一开始时空栈，而且\(\phi (D_0) = 0\) (势能为0)。于是有\(\phi (D_n) \geq \phi (D_0) = 0\)。因\(n\)的大小是不确定的，这个表达式要说明的是在一系列操作的过程中，势能可以有增有减，但绝不能为负数。&lt;/p&gt;
+&lt;p&gt;如果第\(i\)个操作是个PUSH操作，那么第\(i\)个操作带来的势差为：\(\phi(D-i) - \phi(D_{i-1}) =(s + 1) -s = 1\)。那么平摊代价PUSH操作的平摊代价就为：&lt;/p&gt;
 &lt;p&gt;![公式5][fromula5]&lt;/p&gt;
 &lt;p&gt;同理也可以求得POP操作的平摊代价为0.&lt;/p&gt;
-&lt;p&gt;如果第&lt;em&gt;i&lt;/em&gt;步操作为MULTIPOP(&lt;em&gt;S&lt;/em&gt;, &lt;em&gt;k&lt;/em&gt;)。令k'= min(&lt;em&gt;k&lt;/em&gt;,&lt;em&gt;s&lt;/em&gt;)&lt;sup id="fnref:注1"&gt;&lt;a class="footnote-ref" href="#fn:注1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;，其中&lt;em&gt;s&lt;/em&gt;表示栈中元素的个数。那么Φ(&lt;em&gt;D~i~&lt;/em&gt;) - Φ(&lt;em&gt;D&lt;/em&gt;~&lt;em&gt;i&lt;/em&gt;-1~)= –k' 。它的平摊代价就为：&lt;/p&gt;
+&lt;p&gt;如果第&lt;em&gt;i&lt;/em&gt;步操作为MULTIPOP(&lt;em&gt;S&lt;/em&gt;, &lt;em&gt;k&lt;/em&gt;)。令k'= min(&lt;em&gt;k&lt;/em&gt;,&lt;em&gt;s&lt;/em&gt;)&lt;sup id="fnref:注1"&gt;&lt;a class="footnote-ref" href="#fn:注1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;，其中&lt;em&gt;s&lt;/em&gt;表示栈中元素的个数。那么\(\phi(D-i) - \phi(D_{i-1}) = k'\)。它的平摊代价就为：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="公式6" src="http://www.roading.org/images/2012-03/image_thumb30.png" /&gt;&lt;/p&gt;
 &lt;div class="footnote"&gt;
 &lt;hr /&gt;
@@ -1395,16 +1395,17 @@ bits&lt;/p&gt;
 一步的最优解来构建出整个问题的最优解。这并不能保证总能构建出最优解，但它通常能
 做到。我们可以先看一个具体的问题——活动安排问题。&lt;/p&gt;
 &lt;h3&gt;活动安排问题&lt;/h3&gt;
-&lt;p&gt;有一系列活动&lt;em&gt;S&lt;/em&gt; = {&lt;em&gt;a&lt;/em&gt;~1~, &lt;em&gt;a&lt;/em&gt;~2~, ...,&lt;em&gt;a~n~&lt;/em&gt;}，它们都要用到同一个舞台，而舞台
-一次只能举办一个活动。那么要如何安排才能举办最多的活动呢？&lt;/p&gt;
-&lt;p&gt;假设活动&lt;em&gt;a~i~&lt;/em&gt; 的开始时间用&lt;em&gt;s~i~&lt;/em&gt; 表示，结束时间用&lt;em&gt;f~i~&lt;/em&gt;表示, 有
-0 ≤ &lt;em&gt;s~i~&lt;/em&gt; &amp;lt; &lt;em&gt;f~i~&lt;/em&gt; &amp;lt; ∞. 也就是说&lt;em&gt;a~i~&lt;/em&gt; 占用舞台的时间段为[&lt;em&gt;s~i~, f~i~&lt;/em&gt;).那么
-安排的活动之间必须满足一个条件，那就是各自的时间段之间没有重叠的部分。&lt;/p&gt;
+&lt;p&gt;有一系列活动\(S = {a_1, a_2,...,a_n}\)，它们都要用到同一个舞台，而舞台一次只
+能举办一个活动。那么要如何安排才能举办最多的活动呢？&lt;/p&gt;
+&lt;p&gt;假设活动\(a-i\)的开始时间用\(s_i\)表示，结束时间用\(f_i\)表示, 有
+\(0 \leq s_i &amp;lt; f_i &amp;lt; \infty\). 也就是说\(a_i\)占用舞台的时间段为
+\([s_i, f_i)\)。那么安排的活动之间必须满足一个条件，那就是各自的时间段之间没
+有重叠的部分。&lt;/p&gt;
 &lt;p&gt;一个具体的例子（将这些活动按结束时间排好了序）：&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;&lt;em&gt;i&lt;/em&gt;&lt;/th&gt;
+&lt;th&gt;\(i\)&lt;/th&gt;
 &lt;th&gt;1&lt;/th&gt;
 &lt;th&gt;2&lt;/th&gt;
 &lt;th&gt;3&lt;/th&gt;
@@ -1420,7 +1421,7 @@ bits&lt;/p&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;em&gt;s~i~&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;\(s_i\)&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;0&lt;/td&gt;
@@ -1434,7 +1435,7 @@ bits&lt;/p&gt;
 &lt;td&gt;12&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;em&gt;f~i~&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;\(f_i\)&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;5&lt;/td&gt;
 &lt;td&gt;6&lt;/td&gt;
@@ -1450,12 +1451,12 @@ bits&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;对于这样一个问题，因为能够比较快速的发现其最优子结构，我们会很容易想到用动态规
-划来解决。——假设&lt;em&gt;a~i~&lt;/em&gt;是最优解中的一个元素，那么以&lt;em&gt;a~i~&lt;/em&gt;为界可以将问题分成为两
-个子问题，一个是活动结束时间在&lt;em&gt;a~i~&lt;/em&gt;的开始时间之前的所有活动，另一个则是活动开
-始时间在&lt;em&gt;a~i~&lt;/em&gt;结束时间之后的所有活动。可以证明最优解包含这两个子问题的最优解组
+划来解决。——假设\(a_i\)是最优解中的一个元素，那么以\(a_i\)为界可以将问题分成为两
+个子问题，一个是活动结束时间在\(a_i\)的开始时间之前的所有活动，另一个则是活动开
+始时间在\(a_i\)结束时间之后的所有活动。可以证明最优解包含这两个子问题的最优解组
 成的，具体证明可见原书。&lt;/p&gt;
-&lt;p&gt;令&lt;em&gt;S~ij~&lt;/em&gt;代表活动开始时间在&lt;em&gt;a~i~&lt;/em&gt;结束之后而活动结束时间在&lt;em&gt;a~j~&lt;/em&gt;开始之前的所有
-活动的集合，用&lt;em&gt;c&lt;/em&gt;[&lt;em&gt;i, j&lt;/em&gt; ]来代表的&lt;em&gt;Sij&lt;/em&gt;的最优解，那么我们可以获得递归公式：&lt;/p&gt;
+&lt;p&gt;令\(S_{ij}\)代表活动开始时间在\(a_i\)结束之后而活动结束时间在\(a_j\)开始之前的所有
+活动的集合，用\(c[i, j]\)来代表的\(S_{ij}\)的最优解，那么我们可以获得递归公式：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2012-03/image_thumb18.png" /&gt;&lt;/p&gt;
 &lt;p&gt;如果用贪心算法的话，则不用考虑那么多种选择，只需考虑贪心选择——当前最佳的选择。
 在这个问题上，我们可以总是优先安排结束时间最早而又不与之前安排的任务有冲突的活
@@ -1533,8 +1534,8 @@ subproblems.&lt;/p&gt;
 &lt;h4&gt;0-1背包和部分背包问题&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The &lt;strong&gt;&lt;em&gt;0-1 knapsack problem&lt;/em&gt;&lt;/strong&gt; is the following. A thief robbing a
-store finds &lt;em&gt;n&lt;/em&gt; items; the &lt;em&gt;i&lt;/em&gt;th item is worth &lt;em&gt;v~i~&lt;/em&gt; dollars and
-weighs &lt;em&gt;w~i~&lt;/em&gt; pounds, where &lt;em&gt;v~i~&lt;/em&gt; and &lt;em&gt;w~i~&lt;/em&gt; are integers. He wants
+store finds &lt;em&gt;n&lt;/em&gt; items; the &lt;em&gt;i&lt;/em&gt;th item is worth \(v_i\) dollars and
+weighs \(w_i\) pounds, where \(v_i\) and \(w_i\) are integers. He wants
 to take as valuable a load as possible, but he can carry at most &lt;em&gt;W&lt;/em&gt;
 pounds in his knapsack for some integer &lt;em&gt;W&lt;/em&gt;. Which items should he
 take? (This is called the 0-1 knapsack problem because each item must
@@ -1713,7 +1714,7 @@ pound yields an optimal solution.&lt;/p&gt;
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
         </summary><category term="c++"></category><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>最长单调子序列问题</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html" rel="alternate"></link><updated>2012-03-22T17:19:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-03-22:/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html</id><summary type="html">&lt;h5&gt;Exercises 15.4-5&lt;/h5&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Give an &lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;^2^)-time algorithm to find the longest monotonically
+&lt;p&gt;Give an \(O(n^2)\)-time algorithm to find the longest monotonically
 increasing subsequence of a sequence of &lt;em&gt;n&lt;/em&gt; numbers。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Let X is the sequence of the sequence of n numbers.&lt;/li&gt;

@@ -79,10 +79,11 @@ n-1次比较。且这已经是最优方法，因为除了最小的数本身，�
 <h3>9.2以期望复杂度为线性获取第i个统计顺序量</h3>
 <p>很显然我们通过排序来获取第i个统计顺序量，这种方法无疑简单护脑。但是毫无疑问的
 一点是，以排序来获取第i个统计量的话，这其中肯定有“浪费”，因为我们获取了一些我
-们不需要的信息。所以，我们可以更优秀的算法，其期望复杂度为Θ(n) ，最坏复杂度为
-Θ(n^2^)。在这儿我们再一次用到“分治”思想，与<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E7%AC%AC%E4%B8%83%E7%AB%A0%EF%BC%881%EF%BC%89-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html">快速排序</a>类似,我们先利用一个中
-枢值将一组数分为两部分,一部分都大于中枢值,另一部分都小于中枢值。然后判断出要求
-的统计量在哪部分，另一部分则可以抛弃——以此达到缩小问题规模的目的，依此递归。</p>
+们不需要的信息。所以，我们可以更优秀的算法，其期望复杂度为\(\theta (n)\)，最
+坏复杂度为\(\theta(n^2)\)。在这儿我们再一次用到“分治”思想，与<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E7%AC%AC%E4%B8%83%E7%AB%A0%EF%BC%881%EF%BC%89-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html">快速排序</a>类
+似,我们先利用一个中枢值将一组数分为两部分,一部分都大于中枢值,另一部分都小于中
+枢值。然后判断出要求的统计量在哪部分，另一部分则可以抛弃——以此达到缩小问题规模
+的目的，依此递归。</p>
 <p><strong>伪代码为</strong></p>
 <div class="codehilite"><pre><span class="n">RANDOMIZED</span><span class="o">-</span><span class="n">SELECT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="n">r</span>
