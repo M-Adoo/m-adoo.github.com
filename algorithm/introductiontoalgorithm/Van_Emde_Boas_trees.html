@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Van Emde Boas trees</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
+        <link href="http://www.roading.org/feed/index.xml" type="application/atom+xml" rel="alternate" title="Adoo's blog Atom Feed" />
+        <link href="http://www.roading.org/feed/all.rss" type="application/rss+xml" rel="alternate" title="Adoo's blog RSS Feed" />
+</head>
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <div id="siteinfo"><a id="sitename" rel="nofollow" href="http://www.roading.org">Adoo's blog </a><span id="subsitename"> 怀理想主义，行务实之道。</span></div>
+<div id="header-search-form">
+<gcse:searchbox-only>Loading...</gcse:searchbox-only>
+</div>
+                <div class="clear"></div>
+		<nav>
+			<ul id= "nav-pages">
+				    <li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
+				    <li><a href="http://www.roading.org/pages/links.html">links</a></li>
+				    <li><a href="http://www.roading.org/pages/message.html">Message</a></li>
+				    <li><a href = "http://www.roading.org/tweets.html">Tweets</a></li>
+				    <li><a href="http://www.roading.org/archives.html">Archive</a></li>
+		        </ul>
+			<ul id="nav-tags">
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+			</ul>
+			<div class="clear"></div>
+			<hr>
+<div class="crumbs">
+<a href="http://www.roading.org" title ="Back to homepage">Home</a> »
+<a href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a> »
+Van Emde Boas trees
+</div>
+		</nav>
+	</header><!-- /#banner -->
+    <div class="article-page">
+	<h1>Van Emde Boas trees</h1>
+	<div class="content">
+	      <div class="post-info">
+        <abbr class="published" title="2013-06-10T08:30:00">
+                Mon 10 June 2013
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+	      <p>van Emde Boas trees 支持所有优先级优先级队列的操作，并且巧妙的是它对于SEARCH,
+INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在最坏复
+杂度\( O(\lg{\lg n}) \)之内。不过有些限制的是，所有的Kye值都必须在\( 0 
+\dots n-1  \)之间，且不能有重复值。换言之，他的算法复杂度不由数据的规模有多
+大而决定，而由key值的取值范围而决定。</p>
+<p>算导上这一章的讲述方式我非常喜欢，循序渐进，从最基础最简单的一个结构开始，最
+终演化成Van Emde Boas trees，这样的方式更能让人捕捉到发明人思路发展的一个演
+变过程，毫无疑问，这一章得多记点笔记。</p>
+<h3>基础方法</h3>
+<p>这部分会有三种方法来存储动态集合，尽管它们没有一个能达到\( O(\lg\lg u) \),
+但是通过这三种方法却能让我们得到理解Van Emde Boas trees的真知灼见。</p>
+<h4>Direct Address</h4>
+<p>Direct Addressing提供一种最简单的方法来存储一组数据。Direct Addressing直接用
+一个大小为\( u \)的位数组\( A[0..u-1] \)来存储这组属于集合\( \lbrace 0,
+1,2,...,u-1 \rbrace \)的数。如果这组数中有\( x \),那么\( A[x] \)的值存
+1，否则存0。</p>
+<p>这种简单粗暴的方法，显然不能达到预期。对于INSERT、DELETE、MEMBER这些操作复杂
+度在\( O(1) \)内。而对于MINIMUM、MAXMIMUM、SUCCESSOR、PREDECESSOR这些操作
+每一个都要\( \theta(u) \)。我们不妨对Direct Addressing进行改进一下。几个
+\( \theta(u) \)的操作皆因必须对数组进行迭代才能得到结果的缘故。那么如果我
+们在Direct Addressing之上建立一棵二叉树想必有所改善。</p>
+<h4>Superimposing a binary tree structure</h4>
+<p>为了提高几个操作的效率，我们的数据结构由一个数组，演变成了下面的结构：</p>
+<p><img alt="binary_tree_array" src="http://www.roading.org/images/2013-06/binary_tree_array.jpg" /></p>
+<p>二叉树中的结点存储着0或1，当两个孩子中有一个为1时它为1，只有当两个孩子都为0
+的时候它才为0。</p>
+<p>在Direct Addressing中花费\( \theta(u) \)的操作，依赖于这棵二叉树现在都有了
+一个更低的上限\( O(\lg{u}) \)。但这个上限还并不理想，不然我们不如使用一棵
+红黑树，好歹人家还是\( O(\lg{n}) \)的上限。如果把这棵树的高度降低，说不定
+是一个突破口，姑且试试。</p>
+<h4>Superimposing a tree of constant height</h4>
+<p>要降低树的高度，我们可以直接通过增加树的度数来实现，将二叉树将变为多叉树。
+假设全域的大小是\( u = 2^{2k} \),其中\( k \)是一个整数，那么\( \sqrt{u}
+\)也是一个整数。</p>
+<p>和在位数组上建立一棵二叉树不同，现在我们在位数组上建立一棵度数为\( \sqrt{u}
+\)的树，如下图(a)。这棵树的高度是2。树中的每个结点存储了各子树的逻辑与结果。</p>
+<p>如下图(b)所示，可以将那些结点看作是一个数组\( summary[0..\sqrt{u}-1] \),当
+且仅当\( A[i\sqrt{u}..(i+1)\sqrt{u}-1] \)含1,\( summary[i] \)才为1。</p>
+<p><img alt="constant_height_tree_array" src="http://www.roading.org/images/2013-06/constant_height_tree_array.jpg" /></p>
+<p>我们把\( A \)中的\( \sqrt{u} \)位的子数组称为<strong>簇</strong>，对于一个给定值\( x 
+\),位\( A[x] \)存在于第\( \lfloor x/\sqrt{u}\rfloor \)个簇中。现在INSERT
+将在\( O(1) \)内完成——对于插入一个\( x \),分别将\( A[x] \)和\(\lfloor x/
+\sqrt{u}\rfloor \)设为1。对于MINIMUM、MAXIMUM、SUCCESSOR、PREDECESSOR和DELETE
+这些操作将花费\( O(\sqrt{u}) \)。具体操作不做赘述。</p>
+<p>比起<strong>Superimposing a binary tree</strong>，现在的结构似乎反而更糟了，前者最差劲的
+操作也只要\( \lg{u} \),现在都要\( \sqrt{u} \)了，但是透过这个结构带来了
+一点新的想法，如果我们把数组\( summary \)也变作一个<strong>Superimposinga tree
+of constant height</strong>怎么样，一路递归下去情况会如何?</p>
+<h3>A recursive structure</h3>
+<p>前面用\(\sqrt{u} \)度数的树给了我们一个启示，假如我们能够把问题的规模以开
+平方的规模缩小的话，会有一个什么效果？假设我们能做到以开平方的规模递归减小
+一个数据结构的规模，而且每个操作在每一级递归上只产生一次新的递归调用，那么
+对于一个大小为\( u \)的数据结构的操作有：
+\[ T(u) = T(\sqrt{u}) + O(1) \]
+令\( m = \lg{u} \), 有\( u = 2^m \)。那么可以有：
+\[ T(2^m) = T(2^{m/2}) + O(1)\]
+设\( S(m) = T(2^m)\),可得新方程：
+\[ S(m) = S(m/2) + O(1)\] 
+可以得出\( S(m) = O(\lg m) \),回到\( T(u) \)上来，那么\( T(u) = T(2^m)
+= S(m) = O(\lg m) = O(\lg{\lg u}) \)。</p>
+<p>这个假设说明如果我们能够以递归方式以开平方的规模来缩小数据的规模大小，并在每
+一级递归上花费\( O(1)\)的时间的话，我们这个假设的数据结构的操作的复杂度将
+是\( O(\lg{\lg u}) \)。</p>
+<p>围绕方程 \( T(u) = T(\sqrt{u} + O(1)) \),我们来设计一个递归的数据结构，以
+开平方的规模来减小每一次递归的大小。当然，我们可能不能一步达到让所有的操作都
+达到\( O(\lg{\lg u}) \),但是我们还是可以先设计出一个原型。自\( u \)起，
+我们用一个\( \sqrt{u} = u^{1/2}\)项的数据结构来持有\( u^{1/4} \)项的，以
+\( u^{1/4} \)项的递归持有\( u^{1/8} \)项的，以\( u^{1/8} \)项的递归持
+有...，一直到数据结构的大小为2。在这里为了简单起见，假设\( u=2^{2^k} \)，
+如此，\( u^{1/2}，u^{1/4},u^{1/8},... \)都为整数。</p>
+<p>对于一个全域为\( \lbrace 0,1,2,...u-1 \rbrace \)的van Emde Boas数据结构为
+原型，我们简称为<em>proto-vEB(u)</em>。它遵循以下这些规则：</p>
+<ul>
+<li>如果\( u = 2\),那么已是基础大小，那么它包含两个标志位\( A[0...1]\)</li>
+<li>否则，\( u = 2^{2^k} \), 且整数\( k \geq 1\), 所以\(  u \geq 4 \)
+    这种时候，<em>proto-vEB(u)</em>包含两个属性<ul>
+<li>一个名为<em>summary</em>指向<em>proto-vEB(\(\sqrt u\))</em>的指针。</li>
+<li>一个\( \sqrt{u} \)大的指针数组\( cluster[0...1] \)，其中每一个指
+针指向一个<em>proto-vEB</em>(\( \sqrt u \))。</li>
+</ul>
+</li>
+<li>如果<em>cluster</em>的第<em>i</em>个指针所指向的的集合含有元素，那么<em>i</em>也   存在于
+    <em>summary</em>所指向的集合中，否则<em>i</em>也不存在与<em>summary</em>中。</li>
+</ul>
+<p>对于一个\( u = 16 \)的集合\( \lbrace 2,3,4,5,7,14,15 \rbrace \)情况就是
+下面这样的：</p>
+<p><img alt="proto_van_emde_boas" src="http://www.roading.org/images/2013-06/proto_van_emde_boas.jpg" /></p>
+<p>在<em>proto-VEB(u)</em>中，一个给定值\(x\),那么他应该储存在<em>proto-VEB(u)</em>中<em>cluster</em>
+的第\( \lfloor{x}/\sqrt{u} \rfloor\)个指针指向的<em>proto-VEB(\( \sqrt{u} \))</em>
+的第\( x \mod \sqrt{u} \)个值。鉴于此，在分析各项操作之前，先定义几个有用
+的工具函数：
+\[ high(x) = \lfloor{x} / \sqrt{u} \rfloor \]
+\[ low(x) = x \mod \sqrt{u} \]
+\[ index(x, y) = x\sqrt{u} + y \]</p>
+<h4>判断一个值是否存在</h4>
+<div class="codehilite"><pre><span class="n">PROTO</span><span class="o">-</span><span class="n">VEB</span><span class="o">-</span><span class="n">MEMBER</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">u</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="n">V</span><span class="p">.</span><span class="n">A</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">PROTO</span><span class="o">-</span><span class="n">VEB</span><span class="o">-</span><span class="n">MEMBER</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span> <span class="n">low</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+<p>一个简单的递归查找，很显然，\( T(u) = T(\sqrt u + O(1)\),无疑复杂度为
+\( O(\lg\lg u) \)。</p>
+<h4>找最小值</h4>
+<p>从<em>summary</em>中得到最小值<em>i</em>，那么最小值必定存在于\(cluster[i]\)所表示的集
+合中，在从\(cluster[i]\)表示的集合中得到最小值，结合<em>i</em>值可以得到全局的最
+小值。伪码：</p>
+<div class="codehilite"><pre><span class="n">PROTO</span><span class="o">-</span><span class="n">VEB</span><span class="o">-</span><span class="n">MINIMUMN</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">u</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">else</span>
+            <span class="k">return</span> <span class="n">NIL</span>
+    <span class="k">else</span>
+        <span class="n">min</span><span class="o">-</span><span class="n">cluster</span> <span class="o">=</span> <span class="n">PROTO</span><span class="o">-</span><span class="n">VEB</span><span class="o">-</span><span class="n">MINIMUM</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">summary</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">min</span><span class="o">-</span><span class="n">cluster</span> <span class="o">==</span> <span class="n">NIL</span>
+            <span class="k">return</span> <span class="n">NIL</span>
+        <span class="k">else</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">PROTO</span><span class="o">-</span><span class="n">VEB</span><span class="o">-</span><span class="n">MINIMUN</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">min</span><span class="o">-</span><span class="n">cluster</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">index</span><span class="p">(</span><span class="n">min</span><span class="o">-</span><span class="n">cluster</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span>
+</pre></div>
+<p>复杂度
+\[ T(u) = 2T(\sqrt u) + O(1)\]
+设\( u = 2^m\)
+\[ T(2^m) = 2T(2^{m/2}) + O(1)\]
+设\(S(m) = T(2^m)\),得：
+\[S(m) = 2S(m/2) + O(1)\]
+\[T(u) = S(m) = \theta(m) = \theta(lg u)\]</p>
+<h4>找<em>x</em>的后继</h4>
+<ol>
+<li>从<em>x</em>所在的子集中找后继</li>
+<li>找不到的话，先从<em>summary</em>中得到下一个子集的索引，从下一个子集中找最小值。</li>
+<li>转换成全局的值。</li>
+</ol>
+<p>伪码：</p>
+<div class="codehilite"><pre><span class="n">PROTO</span><span class="o">-</span><span class="n">VEB</span><span class="o">-</span><span class="n">SUCCESSOR</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">u</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">and</span> <span class="n">V</span><span class="p">.</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">else</span> 
+            <span class="k">return</span> <span class="n">NIL</span>
+    <span class="k">else</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">PROTO</span><span class="o">-</span><span class="n">VEB</span><span class="o">-</span><span class="n">SUCCESSOR</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span> <span class="n">low</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">offset</span> <span class="o">!=</span> <span class="n">NIL</span><span class="p">)</span>
+            <span class="n">retuen</span> <span class="n">index</span><span class="p">(</span><span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">offset</span><span class="p">)</span>
+        <span class="k">else</span>
+            <span class="n">succ</span><span class="o">-</span><span class="n">cluster</span> <span class="o">=</span> <span class="n">PROTO</span><span class="o">-</span><span class="n">VEB</span><span class="o">-</span><span class="n">SUCCESSOR</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">summary</span><span class="p">,</span> <span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">succ</span><span class="o">-</span><span class="n">cluster</span> <span class="o">!=</span> <span class="n">NIL</span>
+                <span class="n">offset</span> <span class="o">=</span> <span class="n">PROTO</span><span class="o">-</span><span class="n">VEB</span><span class="o">-</span><span class="n">MINIMUM</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">succ</span><span class="o">-</span><span class="n">cluster</span><span class="p">])</span>
+                <span class="k">return</span> <span class="n">index</span><span class="p">(</span><span class="n">succ</span><span class="o">-</span><span class="n">cluster</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span>
+            <span class="k">else</span>
+                <span class="k">return</span> <span class="n">NIL</span>
+</pre></div>
+<p>复杂度:
+\[ T(u) = 2T(\sqrt u) + \theta(\lg{\sqrt u})\]
+\[ = 2T(\sqrt u) + \theta(\lg u)\]
+用与前文类似的方法可以化得\( T(u) = \theta(\lg u\lg\lg u) \)</p>
+<h4>插入元素</h4>
+<p>一路向下递归插入，并将<em>summary</em>相应设为1即可。伪码：</p>
+<div class="codehilite"><pre><span class="n">PROTO</span><span class="o">-</span><span class="n">VEB</span><span class="o">-</span><span class="n">INSERT</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">u</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="n">V</span><span class="p">.</span><span class="n">A</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span>
+        <span class="n">PROTO</span><span class="o">-</span><span class="n">VEB</span><span class="o">-</span><span class="n">INSERT</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">summary</span><span class="p">,</span> <span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">PROTO</span><span class="o">-</span><span class="n">VEB</span><span class="o">-</span><span class="n">INSERT</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span> <span class="n">low</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+<p>复杂度和PROTO-VEB-MINIMUN一样
+\[ T(u) = 2T(\sqrt u) + O(1)\]
+即\(\theta(\lg u)\)</p>
+<h4>删除元素</h4>
+<p>相对于插入，删除要麻烦一点，因为不能直接从<em>summary</em>中删除元素。要确保相对应
+的<em>cluser</em>所代表的子集不包含任何元素才能在<em>smmary</em>中置0。探查一个<em>proto-VEB</em>
+是否只包含一个元素，以目前的结构可以有几种方式，但没有一种快于
+\(\theta(\lg u)\)的方式。也就是说PROTO-VEB-DELETE注定要超过
+\(\theta(\lg u)\)。这儿先别急着实现<em>proto-VEB</em>的删除操作，先来回顾一下，所
+有的基本操作我们都已经分析过一遍了。拿最大值、最小值很慢，拿前驱、后继很慢，
+插入删除也要比预期的慢，似乎除了MEMBER操作，所有的操作都很慢，但是仔细分析发
+现，找前驱慢是因为取最小值太慢了，找后继慢是因为取最大值太慢了。插入慢是因为
+要额外对<em>summary</em>执行一次插入，删除慢是因为对这个结构的判空慢，实际上插入和删
+除慢是因为同一个问题，没法快速知道一个<em>proto-VEB</em>的尺寸和极限值。归根结底，这
+些操作慢的症结在于，没法快速知道最大值最小值，因为知道最大值最小值以后，尺寸便
+能在\(\theta(1)\)之内得到了。既然如此，我们不如直接将最大值，最小值直接记录
+在proto-VEB的结构中。Van Emde Boas Trees的最终模型就得到了，给<em>proto-VEB</em>添加
+记录最大值和最小值的两个属性。</p>
+<h3>The van Emde Boas tree</h3>
+<p>先约定，将van Emde Boas tree简称为<em>vEb</em>。</p>
+<p>在给proto-VEB加上<em>min</em>和<em>max</em>两个属性之前,还得有一个问题要解决，<em>proto-VEB</em>
+要求\(u = 2^{2^k}\)，这个要求显然有点太过苛刻了，现在我们把这个范围放宽到
+\(u = 2^k\)。放宽要面对的第一个问题就是\(\sqrt u\)不一定是整数了，解决的
+办法便是，我们的规模不再要求以开平方的规模来缩小了，而是以接近开平方的规模
+缩小，简言之，原来将<em>proto-VEB(u)</em>分解为\(\sqrt u\)个<em>proto-VEB</em>(\(\sqrt u\)),
+现在则是将<em>vEB</em>(u)分解成\(\lceil (\lg u)/2 \rceil\)个
+<em>vEB</em>(\(\lfloor (\lg u)/2 \rfloor\))。直观起见，将\(\lceil (\lg u)/2 \rceil\)
+用\(\sqrt[\uparrow] u\)表示,将\(\lfloor (\lg u)/2 \rfloor\)以
+\(\sqrt[\downarrow] u\)表示，\(u = {\sqrt[\uparrow] u} \cdot {\sqrt[\downarrow] u}\).</p>
+<p>相较于<em>proto-VEB</em>结构上有以下两个变化：</p>
+<ul>
+<li>增加<em>min</em>和<em>max</em>两个属性</li>
+<li>对于\(u = 2\)的<em>VEB</em>来说，不需要数组\(A[0..1]\)了，因为<em>min</em>和<em>max</em>
+    足以来记录两个值。</li>
+<li>对于\(u &gt; 2\)的<em>VEB</em>来说，<em>min</em>不储存在任何一个<em>cluster</em>中，但是<em>max</em>
+    值要，为什么这么做，可以让在空集合中插入元素和删除集合中唯一元素的操作
+    都为\(O(1)\)。</li>
+</ul>
+<p>重新定义一下几个方法：
+\[high(x) = \lfloor x / \sqrt[\downarrow] u \rfloor\]
+\[low(x) = x \mod \sqrt[\downarrow] u\]
+\[index(x, y) = x \sqrt[\uparrow] u + y\]</p>
+<p>现在，vEB的结构应该是这样的：</p>
+<p><img alt="veb_struct" src="http://www.roading.org/images/2013-06/veb_struct.jpg" /></p>
+<p>一个具体的例子:</p>
+<p><img alt="veb_example" src="http://www.roading.org/images/2013-06/veb_example.jpg" /></p>
+<h4>最大值和最小值</h4>
+<div class="codehilite"><pre><span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MINIMUN</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">V</span><span class="p">.</span><span class="n">min</span>
+<span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MAXIMUM</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">V</span><span class="p">.</span><span class="n">max</span>
+</pre></div>
+<h4>判断一个值是否存在</h4>
+<div class="codehilite"><pre><span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MEMBER</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">V</span><span class="p">.</span><span class="n">min</span> <span class="n">or</span> <span class="n">x</span> <span class="o">==</span> <span class="n">v</span><span class="p">.</span><span class="n">max</span>
+        <span class="k">return</span> <span class="n">TRUE</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">u</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="n">FALSE</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MEMBER</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span> <span class="n">low</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+<h4>后继</h4>
+<div class="codehilite"><pre><span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">SUCCESSOR</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">u</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">and</span> <span class="n">V</span><span class="p">.</span><span class="n">max</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">else</span> 
+            <span class="k">return</span> <span class="n">NIL</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">min</span> <span class="o">!=</span> <span class="n">NIL</span> <span class="n">and</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">V</span><span class="p">.</span><span class="n">min</span>
+        <span class="k">return</span> <span class="n">v</span><span class="p">.</span><span class="n">min</span>
+    <span class="k">else</span>
+        <span class="n">max</span><span class="o">-</span><span class="n">low</span> <span class="o">=</span> <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MAXMIUN</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">high</span><span class="p">](</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">max</span><span class="o">-</span><span class="n">low</span> <span class="o">!=</span> <span class="n">NIL</span> <span class="n">nad</span> <span class="n">low</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">max</span><span class="o">-</span><span class="n">low</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">SUCCESSOR</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span> <span class="n">low</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">index</span><span class="p">(</span><span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">offset</span><span class="p">)</span>
+        <span class="k">else</span>
+            <span class="n">succ</span><span class="o">-</span><span class="n">cluster</span> <span class="o">=</span> <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">SUCCESSOR</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">summary</span><span class="p">,</span> <span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">succ</span><span class="o">-</span><span class="n">cluster</span> <span class="o">==</span> <span class="n">NIL</span>
+                <span class="k">return</span> <span class="n">NIL</span>
+            <span class="k">else</span>
+                <span class="n">offset</span> <span class="o">=</span> <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MINIMUN</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">succ</span><span class="o">-</span><span class="n">cluster</span><span class="p">])</span>
+                <span class="k">return</span> <span class="n">index</span><span class="p">(</span><span class="n">high</span><span class="p">(</span><span class="n">succ</span><span class="o">-</span><span class="n">cluster</span><span class="p">),</span> <span class="n">offset</span><span class="p">)</span>
+</pre></div>
+<h4>前驱</h4>
+<p>略。</p>
+<h4>插入元素</h4>
+<div class="codehilite"><pre><span class="n">VEB</span><span class="o">-</span><span class="n">EMPTY</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">INSERT</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">V</span><span class="p">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">V</span><span class="p">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">INSERT</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">min</span> <span class="o">==</span> <span class="n">NIL</span>
+        <span class="n">VEB</span><span class="o">-</span><span class="n">EMPTY</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">INSERT</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">V</span><span class="p">.</span><span class="n">min</span>
+        <span class="n">exchange</span> <span class="n">x</span> <span class="n">with</span> <span class="n">V</span><span class="p">.</span><span class="n">min</span>
+        <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">u</span> <span class="o">&gt;</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MINIMUN</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span> <span class="o">==</span> <span class="n">NIL</span>
+                <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">INSERT</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">summary</span><span class="p">,</span> <span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+                <span class="n">VEB</span><span class="o">-</span><span class="n">EMPTY</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">INSERT</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span> <span class="n">low</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="k">else</span>
+                <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">INSERT</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span> <span class="n">low</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">V</span><span class="p">.</span><span class="n">max</span> 
+            <span class="n">V</span><span class="p">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">x</span>
+</pre></div>
+<h3>删除元素</h3>
+<div class="codehilite"><pre><span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">DELETE</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">min</span> <span class="o">==</span> <span class="n">V</span><span class="p">.</span><span class="n">max</span>
+        <span class="n">V</span><span class="p">.</span><span class="n">min</span> <span class="o">==</span> <span class="n">NIL</span>
+        <span class="n">V</span><span class="p">.</span><span class="n">max</span> <span class="o">==</span> <span class="n">NIL</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="n">V</span><span class="p">.</span><span class="n">u</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span>
+            <span class="n">V</span><span class="p">.</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span>
+            <span class="n">V</span><span class="p">.</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">V</span><span class="p">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">V</span><span class="p">.</span><span class="n">min</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">V</span><span class="p">.</span><span class="n">min</span>
+            <span class="n">first</span><span class="o">-</span><span class="n">cluster</span> <span class="o">=</span> <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MINIMUN</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">summary</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">index</span><span class="p">(</span><span class="n">first</span><span class="o">-</span><span class="n">cluster</span><span class="p">,</span> <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MINIMUN</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">first</span><span class="o">-</span><span class="n">cluster</span><span class="p">]))</span>
+            <span class="n">V</span><span class="p">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">DELETE</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">high</span><span class="p">(</span><span class="n">X</span><span class="p">)],</span> <span class="n">low</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MINIMUN</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span> <span class="o">==</span> <span class="n">NIL</span>
+            <span class="n">VEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">DELETE</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">summary</span><span class="p">,</span> <span class="n">high</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">V</span><span class="p">.</span><span class="n">max</span>
+            <span class="n">summary</span><span class="o">-</span><span class="n">max</span> <span class="o">=</span> <span class="n">vEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MAXIMUN</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">summary</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">summary</span><span class="o">-</span><span class="n">max</span> <span class="o">==</span> <span class="n">NIL</span>
+                <span class="n">V</span><span class="p">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">V</span><span class="p">.</span><span class="n">min</span>
+            <span class="k">else</span>
+                <span class="n">V</span><span class="p">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">index</span><span class="p">(</span><span class="n">summary</span><span class="o">-</span><span class="n">max</span><span class="p">,</span> <span class="n">vEB</span><span class="o">-</span><span class="n">TREE</span><span class="o">-</span><span class="n">MAXMIMUN</span><span class="p">(</span><span class="n">V</span><span class="p">.</span><span class="n">cluster</span><span class="p">[</span><span class="n">summary</span><span class="o">-</span><span class="n">max</span><span class="p">]))</span>
+</pre></div>
+<p>综合分析上面的几个操作，除了删除操作以外其它几个操作每一次递归调用都只产生
+一次新的递归调用。根据前文的\( T(u) = T(\sqrt{u}) + O(1) \)公式，些操作
+都是\(O(\lg \lg u)\)。再仔细看下删除操作的第二次递归调用(在第16行)我们会
+发现,假如这一次递归被调到，那么必然<em>x</em>所在的cluster只包含一个元素，这种情
+况下第一次递归调用(在第14行)只花费常数时间(只执行1-3行代码)，换言之，第二
+个递归调用发生的情况下，第一个递归调用必然能在常熟时间内完成。所以删除操作
+还是符合公式\( T(u) = T(\sqrt{u}) + O(1) \)。</p>
+<h3>小结</h3>
+<p>Van Emde Boas Tree空间的大小依赖于\(u\)的大小而不是数据的规模，另外创建
+一个Van Emde Boas Tree初始化的时间估计不会太少。当然这些都是可以优化的问
+题。</p>
+<p>本文参考： Introduction To Algorithm ——third edition</p>
+		  <p style= "text-align:right;"><em>
+		  Mon 10 June 2013 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
+		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html">本文原链</a>)</em></p>
+	    <span class = "left">Share this with your friends:</span>
+	    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+		<a class="bds_tsina"></a>
+		<a class="bds_qzone"></a>
+		<a class="bds_tqq"></a>
+		<a class="bds_douban"></a>
+		<a class="bds_taobao"></a>
+		<a class="bds_renren"></a>
+		<a class="bds_kaixin001"></a>
+		<a class="bds_twi"></a>
+		<a class="bds_copy"></a>
+	    </div>     
+	<div class="ds-thread"></div>
+	</div>
+        <div class="sidebar">
+		<div id="relative-articles">
+		<h3>Related Posts</h3>
+		<ul class="related-articles">
+		   <li class="selected">Van Emde Boas trees</li>
+		   <li><a title="斐波那契堆的C++实现" href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html">斐波那契堆的C++实现</a></li>
+		   <li><a title="斐波那契堆(Fibonacci Heaps)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html">斐波那契堆(Fibonacci Heaps)</a></li>
+		   <li><a title="并查集(Disjoint Set)" href="http://www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html">并查集(Disjoint Set)</a></li>
+		   <li><a title="B-树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">B-树的C++实现</a></li>
+		   <li><a title="算法导论——B-trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html">算法导论——B-trees</a></li>
+		   <li><a title="算法导论——平摊分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html">算法导论——平摊分析</a></li>
+		   <li><a title="赫夫曼编码" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html">赫夫曼编码</a></li>
+		   <li><a title="贪心算法" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html">贪心算法</a></li>
+		   <li><a title="最优二叉查找树" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html">最优二叉查找树</a></li>
+		   <li><a title="最长单调子序列问题" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html">最长单调子序列问题</a></li>
+		   <li><a title="最长公共子序列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html">最长公共子序列</a></li>
+		   <li><a title="动态规划基础" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html">动态规划基础</a></li>
+		   <li><a title="动态规划笔记（1）——Rod cutting" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html">动态规划笔记（1）——Rod cutting</a></li>
+		   <li><a title="扩展数据结构" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%89%a9%e5%b1%95%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.html">扩展数据结构</a></li>
+		   <li><a title="在没有父指针情况下的红黑树插入操作" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%9c%a8%e6%b2%a1%e6%9c%89%e7%88%b6%e6%8c%87%e9%92%88%e6%83%85%e5%86%b5%e4%b8%8b%e7%9a%84%e7%ba%a2%e9%bb%91%e6%a0%91%e6%8f%92%e5%85%a5%e6%93%8d%e4%bd%9c.html">在没有父指针情况下的红黑树插入操作</a></li>
+		   <li><a title="C++实现红黑树，仿STL封装" href="http://www.roading.org/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html">C++实现红黑树，仿STL封装</a></li>
+		   <li><a title="Chapter 13 Red-Black trees (红黑树)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-13-red-black-trees-%e7%ba%a2%e9%bb%91%e6%a0%91.html">Chapter 13 Red-Black trees (红黑树)</a></li>
+		   <li><a title="Radix Tree 基数树" href="http://www.roading.org/algorithm/introductiontoalgorithm/radix-tree-%e5%9f%ba%e6%95%b0%e6%a0%91.html">Radix Tree 基数树</a></li>
+		   <li><a title="非递归不用栈遍历搜索二叉树" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html">非递归不用栈遍历搜索二叉树</a></li>
+		   <li><a title="仿STL 的二叉搜索树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">仿STL 的二叉搜索树的C++实现</a></li>
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 2" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html">Chapter 12 二叉搜索树(Binary Search Tree) 2</a></li>
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 1" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html">Chapter 12 二叉搜索树(Binary Search Tree) 1</a></li>
+		   <li><a title="Solution of CLRS 11.1 exercises" href="http://www.roading.org/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html">Solution of CLRS 11.1 exercises</a></li>
+		   <li><a title="哈希表的C++模板实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html">哈希表的C++模板实现</a></li>
+		   <li><a title="哈希表（Hash Tables）（2）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html">哈希表（Hash Tables）（2）</a></li>
+		   <li><a title="哈希表（1）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html">哈希表（1）</a></li>
+		   <li><a title="Chapter 10 Exercises and Problems (2)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html">Chapter 10 Exercises and Problems (2)</a></li>
+		   <li><a title="Chapter 10 Exercises（1）" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html">Chapter 10 Exercises（1）</a></li>
+		   <li><a title="第十章 Elementary Data Structures" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html">第十章 Elementary Data Structures</a></li>
+		   <li><a title="第九章习题选做" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0%e4%b9%a0%e9%a2%98%e9%80%89%e5%81%9a.html">第九章习题选做</a></li>
+		   <li><a title="第九章 中位数和顺序统计量（Medians and Order Statistic）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html">第九章 中位数和顺序统计量（Medians and Order Statistic）</a></li>
+		   <li><a title="第八章（5） 习题 8-4 8-5 8-7" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%885%ef%bc%89-%e4%b9%a0%e9%a2%98-8-4-8-5-8-7.html">第八章（5） 习题 8-4 8-5 8-7</a></li>
+		   <li><a title="桶排序（Bucket sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html">桶排序（Bucket sort）</a></li>
+		   <li><a title="第八章（3） 基数排序（Radix Sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html">第八章（3） 基数排序（Radix Sort）</a></li>
+		   <li><a title="计数排序(Counting Sort)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html">计数排序(Counting Sort)</a></li>
+		   <li><a title="《算法导论》笔记汇总" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e7%b4%a2%e5%bc%95%e8%a1%a8.html">《算法导论》笔记汇总</a></li>
+		   <li><a title="比较排序在最坏情况下时间复杂度为Ω(nlgn)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%881%ef%bc%89-%e6%af%94%e8%be%83%e6%8e%92%e5%ba%8f%e5%9c%a8%e6%9c%80%e5%9d%8f%e6%83%85%e5%86%b5%e4%b8%8b%e6%97%b6%e9%97%b4.html">比较排序在最坏情况下时间复杂度为Ω(nlgn)</a></li>
+		   <li><a title="快速排序课后7.4-5" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html">快速排序课后7.4-5</a></li>
+		   <li><a title="快排与随机快排效率分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%bf%ab%e6%8e%92%e4%b8%8e%e9%9a%8f%e6%9c%ba%e5%bf%ab%e6%8e%92%e6%95%88%e7%8e%87%e5%88%86%e6%9e%90.html">快排与随机快排效率分析</a></li>
+		   <li><a title="快速排序及C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html">快速排序及C++实现</a></li>
+		   <li><a title="算法导论6-3 young tableaus" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba6-3-young-tableaus.html">算法导论6-3 young tableaus</a></li>
+		   <li><a title="利用堆来建立优先级队列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%88%a9%e7%94%a8%e5%a0%86%e6%9d%a5%e5%bb%ba%e7%ab%8b%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97.html">利用堆来建立优先级队列</a></li>
+		   <li><a title="堆排序及其C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html">堆排序及其C++实现</a></li>
+		   <li><a title="排序之插入排序与合并排序-C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%8f%92%e5%85%a5%e6%8e%92%e5%ba%8f-insertionsort-c%e5%ae%9e%e7%8e%b0.html">排序之插入排序与合并排序-C++实现</a></li>
+		</ul>
+		</div>
+<h3>Contact me</h3>
+<div class="social">
+	<span style="font-size:15px">I'm here:</span>	
+	<a href="http://www.roading.org/feed/index.xml" type="application/atom+xml" title="Atom feed" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a>
+	<a href="http://twitter.com/Monkey_Adoo" title="@Monkey_Adoo"><img src="http://www.roading.org/theme/images/icons/twitter.png"></img></a>
+	<a href="http://weibo.com/boringMonkey" title="@M-Adoo"><img src="http://www.roading.org/theme/images/icons/weibo.png"></img></a>
+	<a href="http://douban.com/people/Monkey_Adoo" title="Adoo"><img src="http://www.roading.org/theme/images/icons/douban.png"></img></a>
+	<a rea="tomail" title="Adoo@outlook.com" href="mailto:Adoo@outlook.com"><img src="http://www.roading.org/theme/images/icons/email.png"></img></a>
+	</div><!-- /.social -->
+	</div>
+	</div>
+<div class="clear"></div>
+ <div id="footer">
+	<a class="right" href="#banner"  titile="Back to Top" rel="nofollow" title="Back to top">Top↑</a>
+	<ul id="footer-nav" class="right">
+		<li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
+		<li><a href="http://www.roading.org/pages/links.html">links</a></li>
+		<li><a href="http://www.roading.org/pages/message.html">Message</a></li>
+		<li><a href="http://www.roading.org/archives.html">Archive</a></li>
+	</ul>
+	<div class="clear"></div>
+	<p>Theme designed by Adoo. Powered by Pelican. &copy; 2011-2012</p>
+       </div>
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"adoo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Google Search -->
+<script>
+  (function() {
+    var cx = '014593096765008582725:vpqn4f4zw88';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+	'//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<!-- Google Analytics -->
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-29709820-1");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+<!-- 百度分享 -->
+<script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+</script>
+<!-- Baidu Button END -->
+<!-- Support latex by mathjax -->
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>

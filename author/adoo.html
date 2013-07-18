@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Adoo's blog - Articles by Adoo</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
+        <link href="http://www.roading.org/feed/index.xml" type="application/atom+xml" rel="alternate" title="Adoo's blog Atom Feed" />
+        <link href="http://www.roading.org/feed/all.rss" type="application/rss+xml" rel="alternate" title="Adoo's blog RSS Feed" />
+</head>
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <div id="siteinfo"><a id="sitename" rel="nofollow" href="http://www.roading.org">Adoo's blog </a><span id="subsitename"> 怀理想主义，行务实之道。</span></div>
+<div id="header-search-form">
+<gcse:searchbox-only>Loading...</gcse:searchbox-only>
+</div>
+                <div class="clear"></div>
+		<nav>
+			<ul id= "nav-pages">
+				    <li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
+				    <li><a href="http://www.roading.org/pages/links.html">links</a></li>
+				    <li><a href="http://www.roading.org/pages/message.html">Message</a></li>
+				    <li><a href = "http://www.roading.org/tweets.html">Tweets</a></li>
+				    <li><a href="http://www.roading.org/archives.html">Archive</a></li>
+		        </ul>
+			<ul id="nav-tags">
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+			</ul>
+			<div class="clear"></div>
+			<hr>
+		</nav>
+	</header><!-- /#banner -->
+<div class="index-content">       
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a  title="Permalink to Qt Quick 笔记（2）——用户界面相关" href="http://www.roading.org//Qt/about-ui.html">Qt Quick 笔记（2）——用户界面相关</a></h1> 
+                    <div class="post-info">
+        <abbr class="published" title="2012-02-24T15:34:00">
+                Fri 24 February 2012
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="qml&nbsp;&nbsp;QT&nbsp;&nbsp;qt quick&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to qml" href="http://www.roading.org/tag/qml.html">qml</a>
+		<a title="permalink to QT" href="http://www.roading.org/tag/qt.html">QT</a>
+		<a title="permalink to qt quick" href="http://www.roading.org/tag/qt-quick.html">qt quick</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to QT" href="http://www.roading.org/category/qt.html">QT</a></abbr>
+</div><!-- /.post-info -->
+		    <h3>Nested ELements</h3>
+<p>在QML中的 UI 元素是以树形结构组织的,因此“<em>Elements are often nested</em>”——也就是说，
+一个元素可以包含很多个其它元素。</p>
+<p>一个例子：</p>
+<div class="codehilite"><pre><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">1.1</span> 
+<span class="nx">Rectangle</span><span class="p">{</span>
+    <span class="k">width:</span> <span class="mi">400</span> <span class="p">;</span> <span class="k">height:</span> <span class="mi">300</span>
+    <span class="k">color:</span><span class="s2">&quot;gray&quot;</span>
+    <span class="nx">Rectangle</span><span class="p">{</span>
+        <span class="k">x:</span><span class="mi">50</span><span class="p">;</span> <span class="k">y:</span> <span class="mi">50</span>
+        <span class="k">width:</span><span class="mi">300</span><span class="p">;</span> <span class="k">height:</span> <span class="mi">200</span>
+        <span class="k">color:</span> <span class="s2">&quot;lightblue&quot;</span>
+        <span class="nx">Rectangle</span><span class="p">{</span>
+            <span class="k">x:</span><span class="mi">50</span> <span class="p">;</span> <span class="k">y:</span> <span class="mi">50</span>
+            <span class="k">width:</span> <span class="mi">200</span> <span class="p">;</span> <span class="k">height:</span> <span class="mi">100</span><span class="p">;</span>
+            <span class="k">color:</span><span class="s2">&quot;red&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>上例中浅蓝色和红色的矩形都是“Nested Element”，通过右边的显示效果可以看出 ...</p>
+		    <a class="read-more" href="http://www.roading.org//Qt/about-ui.html" rel="bookmark"
+                           title="Permalink to Qt Quick 笔记（2）——用户界面相关">Read more→</a>	
+                </article>
+		<div class="clear"></div>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ul id="posts-list" class="hfeed">
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/fibonacci-heaps-in-cpp.html" rel="bookmark"
+                           title="Permalink to 斐波那契堆的C++实现">斐波那契堆的C++实现</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2012-10-01T00:00:00">
+                Mon 01 October 2012
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="算法导论&nbsp;&nbsp;Fibonacci heaps&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to Fibonacci heaps" href="http://www.roading.org/tag/fibonacci-heaps.html">Fibonacci heaps</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <p>时间过的真是快，都是七月份写的代码了，两个多月了。</p>
+<div class="codehilite"><pre><span class="c1">//-------------------------------------------------------------------------</span>
+<span class="c1">//filename: fibonacciHeaps.h</span>
+<span class="c1">//Author:   Adoo</span>
+<span class="c1">//Date:     2012/7/16</span>
+<span class="c1">//Description:Implement Fibonacci Heaps by C++</span>
+<span class="c1">//-------------------------------------------------------------------------</span>
+<span class="p">#</span><span class="n">ifndef</span> <span class="no">FIBONACCIHEAP_HPP ...</span></pre></div>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/fibonacci-heaps-in-cpp.html" rel="bookmark"
+                           title="Permalink to 斐波那契堆的C++实现">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 仿STL 的二叉搜索树的C++实现">仿STL 的二叉搜索树的C++实现</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-12-17T23:37:00">
+                Sat 17 December 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="binary search tree&nbsp;&nbsp;c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;stl&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to binary search tree" href="http://www.roading.org/tag/binary-search-tree.html">binary search tree</a>
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to stl" href="http://www.roading.org/tag/stl.html">stl</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <p>看完导论的Chapter 12 binary search tree后，不忘用C++实现一下这个
+数据结构，学习算法的时候也锻炼下C++的编码能力。另则，若按照STL的
+风格来封装搜索二叉树，一是可以培养良好的编程风格，也能好好体会STL
+的设计思想。</p>
+<p>模型：BST模板类中有两个嵌套模板类，一个为节点模板，一个为迭代器的 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 仿STL 的二叉搜索树的C++实现">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%88%a9%e7%94%a8%e5%a0%86%e6%9d%a5%e5%bb%ba%e7%ab%8b%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97.html" rel="bookmark"
+                           title="Permalink to 利用堆来建立优先级队列">利用堆来建立优先级队列</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-09-20T11:55:00">
+                Tue 20 September 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="算法导论&nbsp;&nbsp;c++&nbsp;&nbsp;优先级队列&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to 优先级队列" href="http://www.roading.org/tag/you-xian-ji-dui-lie.html">优先级队列</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <p>堆除了用来排序，还可以有很多其他用途，本文利用堆来建立一个优先级队列
+（关于堆的介绍可以看前一篇博文<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E5%A0%86%E6%8E%92%E5%BA%8F.html">堆排序</a>）。对比一下堆与优先级队列，
+堆的根元素，总是整个堆中的最大或最小元素（最大还是最小，取决于大堆还是
+小堆）；而优先级队列呢，它要求我们从优先级队列取对象的时候，取的总是优
+先级最高的那一个。不难发现，假若我们以优先级来建大堆，那么优先级最高的
+对象总在根节点。那么不管是向队列中增加对象还是从队列中取出对象 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%88%a9%e7%94%a8%e5%a0%86%e6%9d%a5%e5%bb%ba%e7%ab%8b%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97.html" rel="bookmark"
+                           title="Permalink to 利用堆来建立优先级队列">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html" rel="bookmark"
+                           title="Permalink to 动态规划基础">动态规划基础</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2012-03-19T17:47:00">
+                Mon 19 March 2012
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="dynamic programming&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;DP&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to dynamic programming" href="http://www.roading.org/tag/dynamic-programming.html">dynamic programming</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+		<a title="permalink to DP" href="http://www.roading.org/tag/dp.html">DP</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <p>前一篇笔记有过一个动态编程的实例——<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89rod-cutting.html">rod cutting</a>。这篇笔记主要了解动态
+规划的基础理论和弄清楚何时运用动态规划。对于何时来运用动态规划来寻得问
+题的解，取决于两个重要因素：最优子结构和重叠子问题。</p>
+<h3>最优子结构(Optimal substructure)</h3>
+<p>如果一个问题的最优解包含了它子问题的最优解，那么这个问题具有最优子结构。
+当一个问题包含有最优子结构时，往往暗示着这个问题应该使用动态规划来解决
+（当然，也可能意味着贪心算法是一种好的的解决办法，这一点会在16章讨论到）
+。</p>
+<p>可以依照一个共同的模式来发现最优子结构 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html" rel="bookmark"
+                           title="Permalink to 动态规划基础">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html" rel="bookmark"
+                           title="Permalink to 动态规划笔记（1）——Rod cutting">动态规划笔记（1）——Rod cutting</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2012-03-08T12:16:00">
+                Thu 08 March 2012
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="dynamic programming&nbsp;&nbsp;rod cutting&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to dynamic programming" href="http://www.roading.org/tag/dynamic-programming.html">dynamic programming</a>
+		<a title="permalink to rod cutting" href="http://www.roading.org/tag/rod-cutting.html">rod cutting</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <p>动态规划（dynamic programming）,与“分治思想”有些相似，都是利用将问题分
+为子问题，并通过合并子问题的解来获得整个问题的解。于“分治”的不同之处在
+于，对于一个相同的子问题动态规划算法不会计算第二次，其实现原理是将每一
+个计算过的子问题的值保存在一个表中。</p>
+<p>动态规划一般被用于解决“最优解”问题。编写动态规划算法可以按照以下四个步 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html" rel="bookmark"
+                           title="Permalink to 动态规划笔记（1）——Rod cutting">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 哈希表的C++模板实现">哈希表的C++模板实现</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-13T16:36:00">
+                Sun 13 November 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;hash tables&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <p>采用引用计数来解决指针管理问题。开放地址、双重哈希来解决碰撞和探测问题，
+实现了哈希表的创建、查找、插入，复制控制，[]操作符… 但总觉得欠缺点什么。</p>
+<p>源码：</p>
+<div class="codehilite"><pre><span class="c1">//hash.h </span>
+<span class="c1">//2011/11/13   By Adoo</span>
+<span class="cp">#ifndef  HASH_H</span>
+<span class="cp">#define ...</span></pre></div>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 哈希表的C++模板实现">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            </ul><!-- /#posts-list -->
+                <div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+	<li class="active"><a href="http://www.roading.org/author/adoo.html">1</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo2.html">2</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo3.html">3</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo4.html">4</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo5.html">5</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo6.html">6</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo7.html">7</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo8.html">8</a></li>
+	<li class=""><a href="http://www.roading.org/author/adoo9.html">9</a></li>
+    <li class="next"><a href="http://www.roading.org/author/adoo2.html">Next &rarr;</a></li>
+</ul>
+</div>
+            </section><!-- /#content -->
+</div>
+<div class="index-sidebar">
+    <div class="categories">
+	<h3>Categories</h3>
+        <ul>
+             <li ><a href="http://www.roading.org/category/a-byte-of-python.html">A byte of python</a>
+	         <a href="http://www.roading.org/feed/A byte of python.xml" 
+		title="Subscribe for A byte of python" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a>
+	         <a href="http://www.roading.org/feed/Introduction to Algorithm -third edition.xml" 
+		title="Subscribe for Introduction to Algorithm -third edition" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/metro.html">Metro</a>
+	         <a href="http://www.roading.org/feed/Metro.xml" 
+		title="Subscribe for Metro" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/qt.html">QT</a>
+	         <a href="http://www.roading.org/feed/QT.xml" 
+		title="Subscribe for QT" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a>
+	         <a href="http://www.roading.org/feed/深度探索C++对象模型.xml" 
+		title="Subscribe for 深度探索C++对象模型" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/sui-bi.html">随笔</a>
+	         <a href="http://www.roading.org/feed/随笔.xml" 
+		title="Subscribe for 随笔" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+        </ul>
+</div> 
+	<div class="discusses">
+		<h3>Discusses</h3>
+		<ul class="ds-recent-comments" data-num-items="10" data-show-admin="0" ata-excerpt-length="40" ></ul>
+	</div>
+<h3>Contact me</h3>
+<div class="social">
+	<span style="font-size:15px">I'm here:</span>	
+	<a href="http://www.roading.org/feed/index.xml" type="application/atom+xml" title="Atom feed" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a>
+	<a href="http://twitter.com/Monkey_Adoo" title="@Monkey_Adoo"><img src="http://www.roading.org/theme/images/icons/twitter.png"></img></a>
+	<a href="http://weibo.com/boringMonkey" title="@M-Adoo"><img src="http://www.roading.org/theme/images/icons/weibo.png"></img></a>
+	<a href="http://douban.com/people/Monkey_Adoo" title="Adoo"><img src="http://www.roading.org/theme/images/icons/douban.png"></img></a>
+	<a rea="tomail" title="Adoo@outlook.com" href="mailto:Adoo@outlook.com"><img src="http://www.roading.org/theme/images/icons/email.png"></img></a>
+	</div><!-- /.social -->
+</div>		
+<div class="clear"></div>
+<div class="clear"></div>
+ <div id="footer">
+	<a class="right" href="#banner"  titile="Back to Top" rel="nofollow" title="Back to top">Top↑</a>
+	<ul id="footer-nav" class="right">
+		<li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
+		<li><a href="http://www.roading.org/pages/links.html">links</a></li>
+		<li><a href="http://www.roading.org/pages/message.html">Message</a></li>
+		<li><a href="http://www.roading.org/archives.html">Archive</a></li>
+	</ul>
+	<div class="clear"></div>
+	<p>Theme designed by Adoo. Powered by Pelican. &copy; 2011-2012</p>
+       </div>
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"adoo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Google Search -->
+<script>
+  (function() {
+    var cx = '014593096765008582725:vpqn4f4zw88';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+	'//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<!-- Google Analytics -->
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-29709820-1");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+<!-- 百度分享 -->
+<script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+</script>
+<!-- Baidu Button END -->
+<!-- Support latex by mathjax -->
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
