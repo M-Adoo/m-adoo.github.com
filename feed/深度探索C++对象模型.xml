@@ -42,7 +42,7 @@
 &lt;li&gt;&lt;a href="http://www.roading.org/develop/cpp/eh-rtti.html"&gt;19. EH &amp;amp; RTTI&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Fri 09 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周五 09 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/cpp/%e3%80%8a%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b%e3%80%8b%e7%ac%94%e8%ae%b0%e6%b1%87%e6%80%bb.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -64,7 +64,7 @@
 题——一些原本正确之处，被做了错误的更正。可见，于技术学习来说，谨慎谦虚，
 何其重要。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Fri 09 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周五 09 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -131,7 +131,7 @@ delete之间的代码抛出了异常，那么将导致本该进行的unlock或de
 以不能叫“执行期类型识别”)，而多态类的是在执行期获得。&lt;/p&gt;
 &lt;p&gt;参考：深度探索C++对象模型&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Thu 08 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周四 08 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/cpp/eh-rtti.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -241,7 +241,7 @@ instantiation”来决定name.&lt;/p&gt;
 我一派胡言，如果你聊发善心，可以对我赐教一二，当聆听受教。&lt;/p&gt;
 &lt;p&gt;参考：深度探索C++对象模型&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Wed 07 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周三 07 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/cpp/%e6%a8%a1%e6%9d%bf%e4%ba%8c%e4%ba%8b.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -334,20 +334,22 @@ Initialization)——返回值将作为一个额外的参数提供给函数，�
 &lt;/ol&gt;
 &lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Tue 06 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周二 06 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/cpp/%e4%b8%b4%e6%97%b6%e6%80%a7%e5%af%b9%e8%b1%a1temporary-objects.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
         </summary><category term="c++"></category><category term="Inside The C++ Object Model"></category><category term="笔记"></category></entry><entry><title>对象的构造和析构</title><link href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="alternate"></link><updated>2011-12-06T13:35:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2011-12-06:/develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html</id><summary type="html">&lt;p&gt;一般而言，构造函数被安插在对象的定义处，而析构函数被安插在对象生命
 周期结束前：&lt;/p&gt;
-&lt;p&gt;:::C++
-  // Pseudo C++ Code&lt;br /&gt;
-  {&lt;br /&gt;
-     Point point;&lt;br /&gt;
-     // point.Point::Point() 一般被安插在这儿&lt;br /&gt;
-     ...&lt;br /&gt;
-     // point.Point::~Point() 一般被安插在这儿 
-  }  &lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// Pseudo C++ Code  &lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;  
+   &lt;span class="n"&gt;Point&lt;/span&gt; &lt;span class="n"&gt;point&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  
+   &lt;span class="c1"&gt;// point.Point::Point() 一般被安插在这儿  &lt;/span&gt;
+   &lt;span class="p"&gt;...&lt;/span&gt;  
+   &lt;span class="c1"&gt;// point.Point::~Point() 一般被安插在这儿 &lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;当代码有一个以上的离开点的时候，析构函数则必须放在对象被构造之后的每
 一个离开点之前。因此，尽可能将对象定义在接近要使用的地方，可以减少不
 必要的构造对象和析构对象的代码被插入到自己的代码当中。&lt;/p&gt;
@@ -407,7 +409,7 @@ mat_identity的构造函数只有在第一次被调用时在被施行，而在�
 &lt;/ol&gt;
 &lt;p&gt;参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Tue 06 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周二 06 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -470,7 +472,7 @@ operator new然后再调用指定类型的匹配参数的构造函数，而说�
 Derived对象，但是，通过一个对象来调用虚函数，将被静态决议出来，虚函数机制不会被启用。&lt;/p&gt;
 &lt;p&gt;参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Mon 05 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周一 05 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -569,7 +571,7 @@ cfront中的&lt;code&gt;vec_delete&lt;/code&gt;是根据被删除指针的类型
 
 &lt;p&gt;参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Mon 05 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周一 05 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%882%ef%bc%89.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -633,7 +635,7 @@ new expression分配内存。&lt;/p&gt;
 造函数逐个初始化它们，而不调用所谓的&lt;code&gt;vec_new()&lt;/code&gt;，也许cfront确实离我们有点遥远。&lt;/p&gt;
 &lt;p&gt;参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Fri 02 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周五 02 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%881%ef%bc%89.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -763,7 +765,7 @@ this must be put into place.
 &lt;/ol&gt;
 &lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Thu 01 December 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周四 01 十二月 2011 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/cpp/%e6%9e%84%e9%80%a0%e3%80%81%e5%a4%8d%e5%88%b6%e3%80%81%e6%9e%90%e6%9e%84%e8%af%ad%e6%84%8f%e5%ad%a6.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;

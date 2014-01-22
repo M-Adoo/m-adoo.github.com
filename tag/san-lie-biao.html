@@ -36,7 +36,7 @@
                     <h1 class="entry-title"><a  title="Permalink to 哈希表（1）" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html">哈希表（1）</a></h1> 
                     <div class="post-info">
         <abbr class="published" title="2011-11-08T22:18:00">
-                Tue 08 November 2011
+                周二 08 十一月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -51,10 +51,10 @@
 	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
 </div><!-- /.post-info -->
 		    <h3>直接寻址表（Direct-address tables）</h3>
-<p>假设有一组元素，每个元素的Key值都包含在范围\(U=\lbrack 0,1,2,3,…m-1 \rbrack\)\
-中。如果这个值\(m\)不是太大，且这一组元素的Key值都不相同，我们用key值
-来直接决定元素或指向元素指针的存储位置（slot,我将其翻译为位置而不是狭缝，
-槽或…），这就是直接寻址表。如下图：</p>
+<p>假设有一组元素，每个元素的Key值都包含在范围U={0,1,2,3,…m-1}中。如果这个
+值m不是太大，且这一组元素的Key值都不相同，我们用key值来直接决定元素或指
+向元素指针的存储位置（slot,我将其翻译为位置而不是狭缝，槽或…），这就是直
+接寻址表。如下图：</p>
 <p><img alt="direct-address-tables" src="http://www.roading.org/images/2011-11/image_thumb.png" /></p>
 <p>从左图看到，对于一个元素Key值为2的元素，指向它的指针被存储在下标为2的位
 置中。key值为3的被存储在小标为三的位置…</p>
@@ -63,7 +63,8 @@
 之，存储元素本身应该更易管理。</p>
 <p>直接寻指表虽然有逻辑简单，查询存储速度快等优点，但缺点也显而易见：假如U的
 范围非常大的话，那么建一张这样的直接寻址表的话，不知需内存几何？另外，对
-于一个U的范围偏大，而实际的元素个数又很少的话 ...</p>
+于一个U的范围偏大，而实际的元素个数又很少的话，其内存的利用率就令人发指了。
+再暴力点，直接给它两个key相同的元素呢 ...</p>
 		    <a class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html" rel="bookmark"
                            title="Permalink to 哈希表（1）">Read more→</a>	
                 </article>

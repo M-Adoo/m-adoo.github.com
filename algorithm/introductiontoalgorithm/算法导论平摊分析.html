@@ -40,7 +40,7 @@
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2012-03-29T15:52:00">
-                Thu 29 March 2012
+                周四 29 三月 2012
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -62,8 +62,15 @@
        <span class="k">do</span> <span class="n">POP</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
        <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span>
 </pre></div>
-<p>由PUSH, POP, 和 MULTIPOP构成的一个长度为<em>n</em>的序列操作作用在一个空栈上，最坏情况下的时间复杂度为多少？当然，你可以说是\(O(n^2)\)。的确没错，毕竟这一序列操作可由\(n\)个MULTIPOP组成，由此得出\(O(n) \cdot n = O(n^2)\)。但我们还能将这个上限向下压。</p>
-<p>MULTIPOP的复杂度为\(O(n)\)，但它真实的时间花费其实是由伪码中第2句决定的——MULTIPOP内部执行了多少次POP操作。当我们把上述问题综合考虑的时候，问题出现了戏剧性的转变。对于一个空栈来说，调用POP的操作最多等于PUSH的操作。可见上述的\(n\)个操作可以有更矮的上界\(O(n)\)。而三种操作的平摊代价为\(O(n)/n = O(1)\)。</p>
+<p>由PUSH, POP, 和 MULTIPOP构成的一个长度为<em>n</em>的序列操作作用在一个空栈上，
+最坏情况下的时间复杂度为多少？当然，你可以说是\(O(n^2)\)。的确没错，毕
+竟这一序列操作可由<em>n</em>个MULTIPOP组成，由此得出\(O(n)*n = O(n^2)\)。但
+我们还能将这个上限向下压。</p>
+<p>MULTIPOP的复杂度为<em>O</em>(<em>n</em>)，但它真实的时间花费其实是由伪码中第2句决定的
+——MULTIPOP内部执行了多少次POP操作。当我们把上述问题综合考虑的时候，问题
+出现了戏剧性的转变。对于一个空栈来说，调用POP的操作最多等于PUSH的操作。可
+见上述的<em>n</em>个操作可以有更矮的上界<em>O</em>(<em>n</em>)。而三种操作的平摊代价为
+\(O(n) / n = O(1)\)。</p>
 <h3>记账方法(The accounting method)</h3>
 <p>在记账方法中，给不同的操作分配不同的平摊代价。有些操作的平摊代价大于实际代价，就把多余的部分当作存款，供那些实际代价大于平摊代价的操作使用。需要保证的是序列操作的平均代价总和应该要不小于实际代价的总和。仍然用上面栈的例子，我们给栈的三种操作分派的平摊代价如下：</p>
 <div class="codehilite"><pre><span class="n">PUSH</span>        <span class="mi">2</span><span class="p">,</span>
@@ -73,17 +80,28 @@
 <p>这是什么意思呢？假设我们把栈数据结构看做餐厅叠放一堆盘子，每次压盘子入栈需要付费1美元，弹出盘子也需要1美元。但是如果我放盘子的时候付费2美元，1美元用来支付入栈的费用，另1美元放在盘子上，告诉收钱的家伙，如果弹出盘子的时候，盘子上的那一美元就是付盘子弹出的费用。这样事情就简单了，任何出栈相关的花费都可以看为0，因为每一个盘子进栈的时候已经预付了足够它出栈的费用。所以POP和MULTIPOP都可以指派平摊代价为0.</p>
 <p>所以由PUSH, POP, 和 MULTIPOP构成的一个长度为<em>n</em>的序列操作作用在一个空栈上的总平摊代价为<em>O</em>(<em>n</em>),而它的实际代价也是。</p>
 <h3>势能方法(he potential method)</h3>
-<p>势能方法其实与记账方法相通，不同之处在于势能方法不是把账记在单个的对象上，而是记全记在数据结构上。当然按书上的说法来讲就是“势”，当某个操作支付的多时可以为这个数据结构积蓄势能，积蓄的势能则可以释放来支付后续的操作。</p>
-<p>势能方法的工作流程如下. 对一个初始的数据结构\(D_0\) 执行\(n\)次操作。用\(D_i\)
-来表示执行第\(i\)次操作后的数据结构。函数\(\phi (D_i)\)代表数据结构\(D_i\)拥有的势能。如果用\(c_i\)表示第\(i\)个操作的实际代价的话，那第\(i\)步操作的平摊代价就相当于实际代价加上由于这一步操作所增加的势能。所以第\(i\)步操作的平摊代价：<img alt="公式1" src="http://www.roading.org/images/2012-03/image_thumb25.png" />。</p>
-<p>\(n\)步操作的总平摊代价则为：</p>
+<p>势能方法其实与记账方法相通，不同之处在于势能方法不是把账记在单个的对象上，而是记
+全记在数据结构上。当然按书上的说法来讲就是“势”，当某个操作支付的多时可以为这个数
+据结构积蓄势能，积蓄的势能则可以释放来支付后续的操作。</p>
+<p>势能方法的工作流程如下. 对一个初始的数据结构\( D_0 \)执行<em>n</em>次操作。用\( D_i \)
+来表示执行第<em>i</em>次操作后的数据结构。函数\( \Phi(D_i) \)代表数据结构\(D_i\)
+拥有的势能。如果用\( c_i \)表示第<em>i</em>个操作的实际代价的话，那第<em>i</em>步操作的平摊
+代价就相当于实际代价加上由于这一步操作所增加的势能。所以第<em>i</em>步操作的平摊代价：
+<img alt="公式1" src="http://www.roading.org/images/2012-03/image_thumb25.png" />。</p>
+<p><em>n</em> 步操作的总平摊代价则为：</p>
 <p><img alt="公式2" src="http://www.roading.org/images/2012-03/image_thumb26.png" /></p>
-<p>如果使得\(\phi (D_n) \geq \phi (D_0)\)为真，那么我们就可以用总的平摊代价<img alt="公式3" src="http://www.roading.org/images/2012-03/image_thumb27.png" />表示总的实际代价<img alt="公式4" src="http://www.roading.org/images/2012-03/image_thumb28.png" />的一个上界。</p>
-<p>再次用上面的栈例子作为实例，一开始时空栈，而且\(\phi (D_0) = 0\) (势能为0)。于是有\(\phi (D_n) \geq \phi (D_0) = 0\)。因\(n\)的大小是不确定的，这个表达式要说明的是在一系列操作的过程中，势能可以有增有减，但绝不能为负数。</p>
-<p>如果第\(i\)个操作是个PUSH操作，那么第\(i\)个操作带来的势差为：\(\phi(D-i) - \phi(D_{i-1}) =(s + 1) -s = 1\)。那么平摊代价PUSH操作的平摊代价就为：</p>
+<p>如果使得\( \Phi(D_n) \geq \Phi(D_0) \)为真，那么我们就可以用总的平摊代价
+<img alt="公式3" src="http://www.roading.org/images/2012-03/image_thumb27.png" />表示总的实际代价<img alt="公式4" src="http://www.roading.org/images/2012-03/image_thumb28.png" />的一个上界。</p>
+<p>再次用上面的栈例子作为实例，一开始时空栈，而且\( \Phi(D_0) = 0 \)(势能为0)。
+于是有\( \Phi(D_n) \geq \Phi(D_0) = 0 \)。因<em>n</em>的大小是不确定的，这个表达式
+要说明的是在一系列操作的过程中，势能可以有增有减，但绝不能为负数。</p>
+<p>如果第<em>i</em>个操作是个PUSH操作，那么第<em>i</em>个操作带来的势差为:
+\( \Phi(D_i) - \Phi(D_{i-1} = (s + 1) - s = 1) \)。那么平摊代价PUSH操作的
+平摊代价就为：</p>
 <p>![公式5][fromula5]</p>
 <p>同理也可以求得POP操作的平摊代价为0.</p>
-<p>如果第<em>i</em>步操作为MULTIPOP(<em>S</em>, <em>k</em>)。令k'= min(<em>k</em>,<em>s</em>)<sup id="fnref:注1"><a class="footnote-ref" href="#fn:注1" rel="footnote">1</a></sup>，其中<em>s</em>表示栈中元素的个数。那么\(\phi(D-i) - \phi(D_{i-1}) = k'\)。它的平摊代价就为：</p>
+<p>如果第<em>i</em>步操作为MULTIPOP(<em>S</em>, <em>k</em>)。令k'= min(<em>k</em>,<em>s</em>)<sup id="fnref:注1"><a class="footnote-ref" href="#fn:注1" rel="footnote">1</a></sup>，其中<em>s</em>表示栈
+中元素的个数。那么\( \Phi(D_i) - \Phi(D_{i-1} = -k') \)。它的平摊代价就为：</p>
 <p><img alt="公式6" src="http://www.roading.org/images/2012-03/image_thumb30.png" /></p>
 <div class="footnote">
 <hr />
@@ -94,7 +112,7 @@
 </ol>
 </div>
 		  <p style= "text-align:right;"><em>
-		  Thu 29 March 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周四 29 三月 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html">本文原链</a>)</em></p>
@@ -116,10 +134,10 @@
 		<div id="relative-articles">
 		<h3>Related Posts</h3>
 		<ul class="related-articles">
+		   <li><a title="并查集(Disjoint Set)" href="http://www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html">并查集(Disjoint Set)</a></li>
 		   <li><a title="Van Emde Boas trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html">Van Emde Boas trees</a></li>
 		   <li><a title="斐波那契堆的C++实现" href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html">斐波那契堆的C++实现</a></li>
 		   <li><a title="斐波那契堆(Fibonacci Heaps)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html">斐波那契堆(Fibonacci Heaps)</a></li>
-		   <li><a title="并查集(Disjoint Set)" href="http://www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html">并查集(Disjoint Set)</a></li>
 		   <li><a title="B-树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">B-树的C++实现</a></li>
 		   <li><a title="算法导论——B-trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html">算法导论——B-trees</a></li>
 		   <li class="selected">算法导论——平摊分析</li>

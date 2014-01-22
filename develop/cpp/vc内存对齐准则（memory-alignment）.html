@@ -40,7 +40,7 @@ VC内存对齐准则（Memory alignment）
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-11-24T12:42:00">
-                Thu 24 November 2011
+                周四 24 十一月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -62,8 +62,8 @@ VC内存对齐准则（Memory alignment）
 读一个机器字长（这儿是32bit）。更重要的是，有的机器在存取或存储数据的时候它要求数据
 必须是对齐的，何谓对齐？它要求数据的地址从4的倍数开始，如若不然，它就报错。还有的机
 器它虽然不报错，但对于一个类似int变量，假如它横跨一个边界的两端，那么它将要进行两次
-读取才能获得这个int值。比方它存储在地址为2\~5的四个字节中，那么要读取这个int，将要
-进行两次读取，第一次读取0\~3四个字节，第二次读取4\~7四个字节。但是如果我们把这个整
+读取才能获得这个int值。比方它存储在地址为2~5的四个字节中，那么要读取这个int，将要
+进行两次读取，第一次读取0~3四个字节，第二次读取4~7四个字节。但是如果我们把这个整
 形的起始地址调整到0,4,8…呢？一次存取就够了！这种调整就是内存对齐了。我们也可以依次
 类推到16位或64位的机器上。</p>
 <h3>边界该如何调整</h3>
@@ -103,8 +103,8 @@ VC内存对齐准则（Memory alignment）
 </pre></div>
 <p>它sizeof后的结果或许会令你大吃一惊，或许不会（如果你有认真读前面的两条准则）。L 
 sizeof后的结果是24！同样是一个int，一个char，一个double却整整多出了8个字节。这期间
-发生了什么？我们依据前面两条规则来看看。C存储于0的位置，1\~7都不能整除8，所以d存储
-在8\~15，16给i正好合适，i存储在16\~19。总共花费了20个字节，抱歉不是8的倍数，还得补
+发生了什么？我们依据前面两条规则来看看。C存储于0的位置，1~7都不能整除8，所以d存储
+在8~15，16给i正好合适，i存储在16~19。总共花费了20个字节，抱歉不是8的倍数，还得补
 齐4个。现在你可以看看图L的关于类L的内存布局，再比较一下类L和类T的内存布局。</p>
 <p>图L(类L的布局)</p>
 <p><img alt="" src="http://www.roading.org/images/2011-11/image_thumb9.png" /></p>
@@ -141,7 +141,7 @@ sizeof后的结果是24！同样是一个int，一个char，一个double却整�
 </ol>
 </div>
 		  <p style= "text-align:right;"><em>
-		  Thu 24 November 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周四 24 十一月 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//develop/cpp/vc%e5%86%85%e5%ad%98%e5%af%b9%e9%bd%90%e5%87%86%e5%88%99%ef%bc%88memory-alignment%ef%bc%89.html">本文原链</a>)</em></p>

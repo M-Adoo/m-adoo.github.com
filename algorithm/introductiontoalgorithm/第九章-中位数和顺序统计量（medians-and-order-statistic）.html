@@ -40,7 +40,7 @@
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-10-17T20:38:00">
-                Mon 17 October 2011
+                周一 17 十月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -79,11 +79,11 @@ n-1次比较。且这已经是最优方法，因为除了最小的数本身，�
 <h3>9.2以期望复杂度为线性获取第i个统计顺序量</h3>
 <p>很显然我们通过排序来获取第i个统计顺序量，这种方法无疑简单护脑。但是毫无疑问的
 一点是，以排序来获取第i个统计量的话，这其中肯定有“浪费”，因为我们获取了一些我
-们不需要的信息。所以，我们可以更优秀的算法，其期望复杂度为\(\theta (n)\)，最
-坏复杂度为\(\theta(n^2)\)。在这儿我们再一次用到“分治”思想，与<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E7%AC%AC%E4%B8%83%E7%AB%A0%EF%BC%881%EF%BC%89-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html">快速排序</a>类
-似,我们先利用一个中枢值将一组数分为两部分,一部分都大于中枢值,另一部分都小于中
-枢值。然后判断出要求的统计量在哪部分，另一部分则可以抛弃——以此达到缩小问题规模
-的目的，依此递归。</p>
+们不需要的信息。所以，我们可以更优秀的算法，其期望复杂度为Θ(n) ，最坏复杂度为
+\(\theta(n^2)\)。在这儿我们再一次用到“分治”思想，与<a href="http://www.roading.org/algorithm/introductiontoalgorithm/%E7%AC%AC%E4%B8%83%E7%AB%A0%EF%BC%881%EF%BC%89-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html">快速排序</a>类似,我们先
+利用一个中枢值将一组数分为两部分,一部分都大于中枢值,另一部分都小于中枢值。然后
+判断出要求的统计量在哪部分，另一部分则可以抛弃——以此达到缩小问题规模的目的，
+依此递归。</p>
 <p><strong>伪代码为</strong></p>
 <div class="codehilite"><pre><span class="n">RANDOMIZED</span><span class="o">-</span><span class="n">SELECT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="n">r</span>
@@ -171,7 +171,7 @@ n-1次比较。且这已经是最优方法，因为除了最小的数本身，�
 <h3>关于算法复杂度的证明</h3>
 <p>勉强看懂，不证。</p>
 		  <p style= "text-align:right;"><em>
-		  Mon 17 October 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周一 17 十月 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html">本文原链</a>)</em></p>
@@ -193,10 +193,10 @@ n-1次比较。且这已经是最优方法，因为除了最小的数本身，�
 		<div id="relative-articles">
 		<h3>Related Posts</h3>
 		<ul class="related-articles">
+		   <li><a title="并查集(Disjoint Set)" href="http://www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html">并查集(Disjoint Set)</a></li>
 		   <li><a title="Van Emde Boas trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html">Van Emde Boas trees</a></li>
 		   <li><a title="斐波那契堆的C++实现" href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html">斐波那契堆的C++实现</a></li>
 		   <li><a title="斐波那契堆(Fibonacci Heaps)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html">斐波那契堆(Fibonacci Heaps)</a></li>
-		   <li><a title="并查集(Disjoint Set)" href="http://www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html">并查集(Disjoint Set)</a></li>
 		   <li><a title="B-树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">B-树的C++实现</a></li>
 		   <li><a title="算法导论——B-trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html">算法导论——B-trees</a></li>
 		   <li><a title="算法导论——平摊分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html">算法导论——平摊分析</a></li>

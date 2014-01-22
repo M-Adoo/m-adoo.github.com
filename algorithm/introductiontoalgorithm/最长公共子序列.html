@@ -40,7 +40,7 @@
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2012-03-22T12:57:00">
-                Thu 22 March 2012
+                周四 22 三月 2012
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -66,10 +66,10 @@
 <p>举一个实例来说，假如有序列X&lt;A,B,C,B,D,A,B>和序列Y&lt;B,D,C,A,B,A>，那么他
 们的最长公共子序列为&lt;B,C,D,B>。</p>
 <h3>动态规划法求最长公共子序列</h3>
-<p>求最长公共子序列最直接最暴力的一种方法当然是枚举出两个序列所有的子序列，
+<p>求最长公共子序列最直接最暴力的一种方法当然是枚举出两个序列所有的子序列,
 然后从中找出所有的公共子序列，再选出所有公共子序列中最长的那个。不过这
 种粗暴的做法是很低效的，假如两个序列的长度分别为m和n,因为它们分别有
-\(2^m\)和\(2^n\)个子序列，那么这个算法的时间复杂度将是指数级别的,
+\(2^m\)和\(2^n\)个子序列，那么这个算法的时间复杂度将是指数级别的
 \(O(2^{m+n})\)，对于长一些的序列这种方法是不实际的。撇开这种方法不谈，
 我们将关注另一种方法——用动态规划策略来求最长公共子路径问题。</p>
 <h4>第一步：描述问题的最优子结构</h4>
@@ -79,43 +79,41 @@
 引用原书的定理15.1证明：</p>
 <blockquote>
 <h4>Theorem 15.1: (Optimal substructure of an LCS)</h4>
-<p>Let \(X = \langle x_1, x_2,...,x_m \rangle\) and 
-\(Y = \langle y_1,y_2,...,y_n \rangle\) be sequences, and let
-\(Z = \langle z_1,z_2,...,z_k \rangle\) be any LCS of \(X\) and \(Y\).</p>
+<p>Let \( X = <x_1, x_2, \\dots, \\x_m> \) and \( Y = &lt; y_1, y_2, \dots,
+y_n &gt; \) be sequences, and let \( Z = <z_1, z_2, \\dots, z_k> \) be
+any LCS of \( X and Y \).</p>
 <ul>
-<li>If \(x_m = y_n\), then \(z_k = x_m = y_n\) and \(Z_{k-1}\)
-       is an LCS of \(X_{m-1}\)  and \(Y_{n-1}\).</li>
-<li>If \(x_m \neq y_n\), then \(z_k \neq x_m\)implies that \(Z\) is an
-      LCS of \(X_m-1\)and \(Y\).</li>
-<li>If \(x_m \neq y_m\), then \(z_k \neq y_m\) implies that 
-      \(Z\) is an LCS of \(X\) and \(Y{n-1}\).</li>
+<li>If \( x_m = y_n \), then \( z_k = x_m = y_n \) and \( Z_{k-1} \)
+    is an LCS of \( X_{m-1} and Y_{n-1} \).</li>
+<li>If \( x_m \neq y_n \), then \( z_k \neq x_m \ implies that
+    \( Z \) is an LCS of \( X_{m - 1} and Y \).</li>
+<li>If \(x_m \neq y_n \), then \( z_k \neq y_n \) implies that
+    \( Z \) is an LCS of \( X and Y_{n -1}\).</li>
 </ul>
-<p><strong><em>Proof</em></strong> </p>
-<p>(1) If \(z_k \neq x_m\), then we could append 
-\(x_m = y_n\) to \(Z\) to obtain a common subsequence of \(X\) and
-\(Y\) of length \(k + 1\), contradicting the supposition that \(X\)
-is a <em>longest</em> common subsequence of \(X\) and \(Y\) . Thus, we must have
-\(z_k = x_m = y_n\). Now, the prefix \(z_{k-1}\) is a length-\(k-1\) 
-common subsequence of \(X_{m-1}\) and \(Y_{n-1}\) We wish to show that
-it is an LCS. Suppose for the purpose  of contradiction that there is a common
-subsequence\(W\) of \(X_{m-1}\) and \(Y_{n-1}\) with length greater than
-\(k-1\). Then, appending \(x_m = y_n\) to \(W\) produces a common
-subsequence of \(X\) and \(Y\) whose length is greater than \(k\), which
-is a contradiction.</p>
-<p>(2) If \(z_k \neq x_m\), then \(Z\) is a common subsequence of
-\(X_{m-1}\) and \(Y\). If there were a common subsequence \(W\) of
-\(X_{m-1}\)and \(Y\) with length greater than \(k\), then \(W\) would also
-be a common subsequence of \(X_m\) and \(Y\) , contradicting the
-assumption that \(Z\) is an LCS of \(X\) and \(Y\).</p>
+<p><strong><em>Proof</em></strong> (1) If \(z_k \neq x_m\), then we could append
+\( x_m = y_n \) to \( Z \) to obtain a common subsequence of
+\( X and Y \) of length \( k + 1\), contradicting the supposition
+that <em>Z</em> is a <em>longest</em> common subsequence of \( X and Y\). Thus, we
+must have \( z_k = x_m = y_n\).Now, the prefix \( Z_{k-1} \) is a
+length-\( (k - 1) \) common subsequence of \(X_{m -1} and Y_{n-1}\).
+We wish to show that it is an LCS. Suppose for the purpose
+of contradiction that there is a common subsequence <em>W</em> of \(X_{m-1}\)
+and \( Y_{n -1}\) with length greater than \(k - 1\). Then, appending
+\(x_m = y_n \) to <em>W</em> produces a common subsequence of <em>X</em> and <em>Y</em>
+whose length is greater than <em>k</em>, which is a contradiction.</p>
+<p>(2) If \(x_k \neq x_m \), then <em>Z</em> is a common subsequence of
+\( X_{m - 1} and Y \). If there were a common subsequence <em>W</em> of
+\( X_{m - 1} and Y \) with length greater than <em>k</em>, then <em>W</em> would also
+be a common subsequence of \( X_m and Y\), contradicting the assumption
+that <em>Z</em> is an LCS of <em>X</em> and <em>Y</em>.</p>
 <p>(3) The proof is symmetric to (2).</p>
 </blockquote>
 <h4>第二步：一个递归解</h4>
-<p>由定理15.1可以看出，找序列X和序列Y的LCS,我们有可能需要找出\(X\)和
-\(Y_{m-1}\)的LCS，以及\(X_{n-1}\)和\(Y_m\)的LCS。而这两个子问题，都拥
-有一个共同的子子问题,便是求\(X_{n-1}\)和\(Y_{m-1}\)的LCS。依次类推，还
-有很多其他的子问题会共有许多其他的子子问题。这就满足了动态规划的第二点条件，
-拥有重叠的子问题。</p>
-<p>定义c[i, j]为\(X_i\)和\(Y_j\)的LCS长度，根据定理15.1可以得出下面的递归式：</p>
+<p>由定理15.1可以看出，找序列X和序列Y的LCS,我们有可能需要找出X和\( Y_{m - 1} \)
+的LCS，以及\( X_{n-1}和Y_m \)的LCS。而这两个子问题，都拥有一个共同的子子问题,
+便是求\( X_{n-1} 和 Y_{m-1} \)的LCS。依次类推，还有很多其他的子问题会共有许多
+其他的子子问题。这就满足了动态规划的第二点条件，拥有重叠的子问题。</p>
+<p>定义c[i, j]为\( X_i 和 Y_j \)的LCS长度，根据定理15.1可以得出下面的递归式：</p>
 <p><img alt="0" src="http://www.roading.org/images/2012-03/image_thumb11.png" /></p>
 <h4>第三步：计算LCS的长度</h4>
 <p>利用第二步的递归式15.9，可以很容易写出计算LCS长度的递归求解程序，但这种方
@@ -149,12 +147,13 @@ assumption that \(Z\) is an LCS of \(X\) and \(Y\).</p>
 <p><img alt="" src="http://www.roading.org/images/2012-03/image_thumb12.png" /></p>
 <p><span style="font-family: 楷体">说明：右图是将表b和表c的信息合二为一的显示，
 d第i行和第j列所指方块，记录了c[i,j]和b[i,j]中的信息。我们通过那些箭头来获得
-问题的最优子问题的路径，路径上的"↖"表示\(X-i = Y_i\),所以为LCS上的一个字母。</span></p>
+问题的最优子问题的路径，路径上的"↖"表示\( X_i = Y_i \),所以为LCS上的一个
+字母。</span></p>
 <h4>第四步：构建LCS</h4>
-<p>通过表b我们可以很快的构建出\(X = \langle x_1,x_2,...,x_m \rangle\)和
-\(Y = \langle y_1, y_2,...,y_n \rangle\)的LCS。可以从b[m,n]开始跟踪路径，
-当b[i,j]为"↖"时，输出当前字母。考虑到时从后往前追踪的，所以求出来的LCS将是
-反向的，所以在我们下面的递归伪码中，将先递归再输出。以下为伪码：</p>
+<p>通过表b我们可以很快的构建出\( X = <x_1, x_2, \\dots, x_m 和 Y = <y_1，y_2,
+\\dots, y_n>&gt; \)的LCS。可以从b[m,n]开始跟踪路径，当b[i,j]为"↖"时，输出当前
+字母。考虑到时从后往前追踪的，所以求出来的LCS将是反向的，所以在我们下面的递归伪
+码中，将先递归再输出。以下为伪码：</p>
 <div class="codehilite"><pre><span class="n">PRINT</span><span class="o">-</span><span class="n">LCS</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">or</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span>
     <span class="k">return</span> 
@@ -324,7 +323,7 @@ d第i行和第j列所指方块，记录了c[i,j]和b[i,j]中的信息。我们�
 很快就爆栈了。</p>
 <p>参考： introduction to algorithm –third edition</p>
 		  <p style= "text-align:right;"><em>
-		  Thu 22 March 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周四 22 三月 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html">本文原链</a>)</em></p>
@@ -346,10 +345,10 @@ d第i行和第j列所指方块，记录了c[i,j]和b[i,j]中的信息。我们�
 		<div id="relative-articles">
 		<h3>Related Posts</h3>
 		<ul class="related-articles">
+		   <li><a title="并查集(Disjoint Set)" href="http://www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html">并查集(Disjoint Set)</a></li>
 		   <li><a title="Van Emde Boas trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html">Van Emde Boas trees</a></li>
 		   <li><a title="斐波那契堆的C++实现" href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html">斐波那契堆的C++实现</a></li>
 		   <li><a title="斐波那契堆(Fibonacci Heaps)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html">斐波那契堆(Fibonacci Heaps)</a></li>
-		   <li><a title="并查集(Disjoint Set)" href="http://www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html">并查集(Disjoint Set)</a></li>
 		   <li><a title="B-树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">B-树的C++实现</a></li>
 		   <li><a title="算法导论——B-trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html">算法导论——B-trees</a></li>
 		   <li><a title="算法导论——平摊分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html">算法导论——平摊分析</a></li>

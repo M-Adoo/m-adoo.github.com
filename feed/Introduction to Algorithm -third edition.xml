@@ -1,20 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Adoo's blog</title><link href="http://www.roading.org/" rel="alternate"></link><link href="http://www.roading.org/feed/Introduction%20to%20Algorithm%20-third%20edition.xml" rel="self"></link><id>http://www.roading.org/</id><updated>2013-06-10T08:30:00+08:00</updated><entry><title>Van Emde Boas trees</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html" rel="alternate"></link><updated>2013-06-10T08:30:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2013-06-10:/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html</id><summary type="html">&lt;p&gt;van Emde Boas trees 支持所有优先级优先级队列的操作，并且巧妙的是它对于SEARCH,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Adoo's blog</title><link href="http://www.roading.org/" rel="alternate"></link><link href="http://www.roading.org/feed/Introduction%20to%20Algorithm%20-third%20edition.xml" rel="self"></link><id>http://www.roading.org/</id><updated>2013-07-18T18:00:00+08:00</updated><entry><title>并查集(Disjoint Set)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/Disjoint_set.html" rel="alternate"></link><updated>2013-07-18T18:00:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2013-07-18:/algorithm/introductiontoalgorithm/Disjoint_set.html</id><summary type="html">&lt;p&gt;一些应用经常有这样的需求：查找一个包含某个元素的唯一集合，合并两个集合。
+搜了一下google能够应用的地方还是挺多的，这里略去不表。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;并查集&lt;/strong&gt;又称不相交集，有两个名字的原因在于它原就有两个不同的英文名字，Disjoint
+sets和Union-find set。更准确点应该说并查集是用来操作不相交集的数据结构。算法
+导论上这一章就叫用于不相交集合的数据结构（Data Structures for Disjoint Sets）。
+维基百科上也说：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A union-find algorithm is an algorithm that performs two useful operations
+on such a data structure:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Find: Determine which subset a particular element is in. This can be used
+  for determining if two elements are in the same subset.&lt;/li&gt;
+&lt;li&gt;Union: Join two subsets into a single subset.
+  Because it supports these two operations, a disjoint-set data structure is
+  sometimes called a union-find data structure or merge-find set. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;但一般说Disjoint Sets就指的是Data Structures for Disjoint Sets。&lt;/p&gt;
+&lt;p&gt;话休饶舌（最近金瓶梅看多了），转到并查集的正题上来。&lt;/p&gt;
+&lt;h3&gt;并查集的操作&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;并查集维持了一组不相交动态集合\(S = \lbrace S_1, S_2,...,S_k\rbrace\)，简言
+之并查集就是一些互不相交的动态集合的集合。&lt;/strong&gt;假设\(x\)是某动态集合中的对象，那
+么并查集应该支持以下操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MAKE-SET(x) 创建一个只有一个成员\(x\)的新集合，并要求\(x\)不在其它的
+    集合中。&lt;/li&gt;
+&lt;li&gt;UNION(x, y) 合并\(x,y\)所在的集合。\(x, y\)所在的原集合都不再存在，一个
+    新的集合产生。&lt;/li&gt;
+&lt;li&gt;FIND-SET(x) 返回包含\(x\)的集合。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;并查集的一个应用&lt;/h3&gt;
+&lt;p&gt;并查集众多应用中的一个就是用来确定无向图中的联通子图。对于图\(G\),我们用
+\(G.V\)来表示它顶点的集合，用\(G.E\)来表示它所有边的集合。下图(a)是一个包含
+四个联通子图的图。我们用并查集的操作来实现CONNECTED-COMPONENTS用以计算图的联通
+子图，一旦CONNECTED-COMPONENTs执行，则可以用SAME-COMPONENT来判断两个顶点是否在
+同一个联通子图上。下图(b)则说明了对图(a)执行CONNECTED-COMPONENTS的过程。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="graph" src="http://www.roading.org/images/2013-07/graph.jpg" /&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;CONNECTED&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;COMPNENTS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;G&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt; &lt;span class="n"&gt;vertex&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;G&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;
+        &lt;span class="n"&gt;MAKE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt; &lt;span class="n"&gt;edge&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;G&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;E&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;UNION&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;SAME&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;COMPONENT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;TRUE&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;FALSE&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;并查集的链表表示&lt;/h4&gt;
+&lt;p&gt;下图(a)展示了一个用链表表示的并查集:每个集合都有其自己的链表表示。每个集合的
+对象都有一个&lt;em&gt;head&lt;/em&gt;指针指向链表的第一个对象，一个&lt;em&gt;tail&lt;/em&gt;指针指向链表的最后一个
+对象。每一个链表对象都有一个&lt;em&gt;next&lt;/em&gt;指针指向链表中的下一个对象，以及一个指向集
+合对象的的指针。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="link_disjoint_set" src="http://www.roading.org/images/2013-07/link_disjoint_set.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;用链表表示的并查集实现MAKE-SET和FIND-SET都很容易，并且只需\(O(1)\),略去不表。
+对于UNION的实现，则要复杂点。&lt;/p&gt;
+&lt;h4&gt;UNION的简单实现&lt;/h4&gt;
+&lt;p&gt;如上图(b)所示，实现UNION的最简单方法是将一个链表附加到另一个链表的最后。我们
+可以很快的通过&lt;em&gt;tail&lt;/em&gt;和&lt;em&gt;head&lt;/em&gt;指针找到一个链表的第一个对象和最后一个对象，并将
+两个链表链接起来，不过不幸的是我们还要将其中一个链表的所有对象中指向集合的指
+针更新。&lt;/p&gt;
+&lt;p&gt;实际上，我们可以轻易的构建一个用于\(n\)个对象上的&lt;em&gt;m&lt;/em&gt;个操作且需要\(O(n^2)\)
+运行时间的序列。假设我们有对象\(x_1,x_2,...,x_n\)。我们用\(n\)个MAKE-SET来
+创建\(n\)个并查集，并依靠\(n-1\)来将它们合并成一个并查集，所以
+\(m = 2n -1 \)。最坏情况下，这\(2n-1\)个操作的顺序和用时是这样的：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Operation&lt;/th&gt;
+&lt;th&gt;Number of objects updated&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;MAKE-SET(\(x_1\))&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;MAKE-SET(\(x_2\))&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;MAKE-SET(\(x_n\))&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;UNION(\(x_2, x_1\))&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;UNION(\(x_3, x_2\))&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;UNION(\(x_n, x_{n-1}\))&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;很显然这\(2n-1\)个操作的复杂度为：&lt;/p&gt;
+&lt;p&gt;\[ m + \sum^{n-1}_{i=1}{i} = \theta(n^2)\]&lt;/p&gt;
+&lt;p&gt;所有这\(2n-1\)个操作的平均复杂度在\(\theta (n)\)。&lt;/p&gt;
+&lt;h4&gt;加权合并(weighted-union)的启发策略&lt;/h4&gt;
+&lt;p&gt;在最坏的情况下，合并的时候我们总是把一个长的链表合并到一个短的链表中去，于是
+我们不得不更新更多的对象。反过来，假如在合并的时候我们总能把一个短的链表合并
+到一个长的链表中去的话，则能保证我们每一次合并操作都以最合理的方式进行，而不
+是依赖于运气了，而我们仅仅只需维持一个属性来代表链表的长度就能轻而易举的达到
+上述目的。利用启发策略改进后的合并操作仍然需要\(\omega(n)\)的时间，假如两个
+集合都有\(\omega (n)\)个成员的话。但是对于一个由MAKE-SET、UNION、FIND-SET
+组成的大小为\(m\)，其中\(n\)个操作为MAKE-SET的操作序列来说，最多花费
+\(O(m + n\lg n)\)，下面给出证明：&lt;/p&gt;
+&lt;p&gt;对于合并操作来说，我们最多执行\(n-1\)次操作。先来计算一下合并操作最多能花
+费多少时间。合并操作的运行时间取决于更新链表中对象的指针的数目。换言之，
+通过计算对象指向集合指针的更新次数就能计算出合并操作花费的总时间。对于对象
+\(x\)来说，如果它指向集合的指针被更新，代表着它处在一个较短的链表中，那么当
+\(x\)指向集合的指针第一次被更新的时候它所在的链表最少有两个成员，第二次被更
+新时最少有4个成员，第三次最少有8个...，很显然对于\(x\)来说从始至终，它指向
+集合的指针最多能被更新\(\lg n\)次，那么所有\(n\)个它们指向集合的指针最多
+能被更新\(n\lg n\)次。&lt;/p&gt;
+&lt;p&gt;而除合并操作外的其它操作都只需要\(O(1)\)的时间，所以这个序列需要的总时间
+为:\(O(m + n\lg n)\)。&lt;/p&gt;
+&lt;h3&gt;不相交集森林&lt;/h3&gt;
+&lt;p&gt;与之前用链表表示一个集合不同，不相交集森林用一棵树来表示一个集合。不相交集
+森林如下图(a)表示的，每个结点代表一个成员都只包含一个指向父亲的指针，根节点
+的父亲是自己。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="disjoint_set_forests" src="http://www.roading.org/images/2013-07/disjoint_set_forests.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;以这样的方式来实现并查集的三个操作：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A MAKE-SET operation simply creates a tree with just one node. We perform
+a FIND-SET operation by following parent pointers until we find the root
+of the tree. The nodes visited on this simple path toward the root
+constitute the find path. A UNION operation, shown in Figure 21.4(b),
+causes the root of one tree to point to the root of the other&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;可改进运行时间的启发式策略&lt;/h4&gt;
+&lt;p&gt;但直接用这个简单的结构并不会有更快的速度，极端的情况是当一颗树成棍状时，它
+和链表并没有什么区别。不过有两种方法可以对它进行优化——按秩合并(union by rank)
+和路径压缩(path compression)。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;按秩合并(union by rank)&lt;/strong&gt; 和链表的加权合并非常类似，不过这里是根据树的高度
+来合并，总是将矮的树合并到高的树中。对于每个结点，我们维持一个&lt;em&gt;rank&lt;/em&gt;属性，用
+来表示每个结点高度的一个上界。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径压缩&lt;/strong&gt;方法用在FIND-SET操作中，其具体做法就是在查找的过程中将查找路径上
+的每一个结点都直接放到根结点下。&lt;strong&gt;查找路径并不改变任何结点的&lt;/strong&gt;&lt;em&gt;rank&lt;/em&gt;&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;
+&lt;h4&gt;不相交集森林操作的伪码实现&lt;/h4&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;MAKE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+&lt;span class="n"&gt;UNION&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;LINK&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="n"&gt;LINK&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt;
+        &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt;
+            &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+&lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;当同时使用到上述两种启发式策略时，不相交集森林\(m\)个操作的运行时间在
+\(O(m\alpha(n))\),\(\alpha(n)\)的增长非常慢，在可以想象到的不相交集森林
+的应用中，\(\alpha(n) \leq 4\),所以这个运行时间可以看作是线性的。也就是说
+不相交集森林操作的平摊分析是\(O(1)\)。关于这个上限的证明，未曾吃透，也没
+什么心情去细细看了，这篇笔记就只能如此草草记之了。&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;这句话配合前面按秩合并中将&lt;em&gt;rank&lt;/em&gt;定义为一个结点高度的上限两个点让我很纠结了一阵，为什么改变压缩路径的时候不用改变&lt;em&gt;rank&lt;/em&gt;？如此一来，不是有可能在进行合并的时候将高的树合到了矮的树上吗?还有为什么将&lt;em&gt;rank&lt;/em&gt;定义为结点高度的上限，而不是准确的节点高度，如果是准确的结点高度，不就可以确保总是将矮的树合并到高的树上吗？显然这两个问题是纠缠在一起的。我想了许久，总是得到了一点明悟，对于一系列UNION操作而言，在这个过冲不论进行了多少次路径压缩，合并的顺序是不会发生变化的，该是谁合到谁上还是谁合到谁上，合并的效率也不会有差别。看上去对FIND-SET有一点影响，因为合并后的树高度可能偏高1，而这中情况的最坏结果是对于合并后的树的第一次FIND-SET有可能要多花费O(1)。这个开销对于每一次FIND-SET都要去维护一个准确的结点高度而言反而要更小了。&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
+          周四 18 七月 2013 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+        </summary><category term="算法导论"></category><category term="Disjoint set"></category><category term="笔记"></category></entry><entry><title>Van Emde Boas trees</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html" rel="alternate"></link><updated>2013-06-10T17:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2013-06-10:/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html</id><summary type="html">&lt;p&gt;van Emde Boas trees 支持所有优先级优先级队列的操作，并且巧妙的是它对于SEARCH, 
 INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在最坏复
-杂度\( O(\lg{\lg n}) \)之内。不过有些限制的是，所有的Kye值都必须在\( 0 
-\dots n-1  \)之间，且不能有重复值。换言之，他的算法复杂度不由数据的规模有多
-大而决定，而由key值的取值范围而决定。&lt;/p&gt;
-&lt;p&gt;算导上这一章的讲述方式我非常喜欢，循序渐进，从最基础最简单的一个结构开始，最
-终演化成Van Emde Boas trees，这样的方式更能让人捕捉到发明人思路发展的一个演
-变过程，毫无疑问，这一章得多记点笔记。&lt;/p&gt;
+杂度\( O(\lg{\lg n}) \)之内。不过有些限制的是，所有的Kye值都必须在
+\( 0 \dots n-1 \)之间，且不能有重复值。换言之，他的算法复杂度不由数据的规模
+有多 大而决定，而由key值的取值范围而决定。&lt;/p&gt;
+&lt;p&gt;算导上这一章的讲述方式我非常喜欢，循序渐进，从最基础最简单的一个结构开始，最终
+演化成Van Emde Boas trees，这样的方式更能让人捕捉到发明人思路发展的一个演变过
+程，毫无疑问，这一章得多记点笔记。&lt;/p&gt;
 &lt;h3&gt;基础方法&lt;/h3&gt;
-&lt;p&gt;这部分会有三种方法来存储动态集合，尽管它们没有一个能达到\( O(\lg\lg u) \),
+&lt;p&gt;这部分会有三种方法来存储动态集合，尽管它们没有一个能达到\( O(\lg\lg u) \), 
 但是通过这三种方法却能让我们得到理解Van Emde Boas trees的真知灼见。&lt;/p&gt;
 &lt;h4&gt;Direct Address&lt;/h4&gt;
 &lt;p&gt;Direct Addressing提供一种最简单的方法来存储一组数据。Direct Addressing直接用
-一个大小为\( u \)的位数组\( A[0..u-1] \)来存储这组属于集合\( \lbrace 0,
-1,2,...,u-1 \rbrace \)的数。如果这组数中有\( x \),那么\( A[x] \)的值存
-1，否则存0。&lt;/p&gt;
+一个大小为\( u \)的位数组\( A[0..u-1] \)来存储这组属于集合\( \lbrace 0, 
+1,2,...,u-1 \rbrace \)的数。如果这组数中有\( x \),那么\( A[x] \)的值存1，
+否则存0。&lt;/p&gt;
 &lt;p&gt;这种简单粗暴的方法，显然不能达到预期。对于INSERT、DELETE、MEMBER这些操作复杂
 度在\( O(1) \)内。而对于MINIMUM、MAXMIMUM、SUCCESSOR、PREDECESSOR这些操作
 每一个都要\( \theta(u) \)。我们不妨对Direct Addressing进行改进一下。几个
@@ -30,69 +242,71 @@ INSERT,DELETE,MINIMUM,MAXMUN,SUCCESSOR,和PREDECESSOR这些操作的支持都在
 红黑树，好歹人家还是\( O(\lg{n}) \)的上限。如果把这棵树的高度降低，说不定
 是一个突破口，姑且试试。&lt;/p&gt;
 &lt;h4&gt;Superimposing a tree of constant height&lt;/h4&gt;
-&lt;p&gt;要降低树的高度，我们可以直接通过增加树的度数来实现，将二叉树将变为多叉树。
-假设全域的大小是\( u = 2^{2k} \),其中\( k \)是一个整数，那么\( \sqrt{u}
-\)也是一个整数。&lt;/p&gt;
-&lt;p&gt;和在位数组上建立一棵二叉树不同，现在我们在位数组上建立一棵度数为\( \sqrt{u}
-\)的树，如下图(a)。这棵树的高度是2。树中的每个结点存储了各子树的逻辑与结果。&lt;/p&gt;
+&lt;p&gt;要降低树的高度，我们可以直接通过增加树的度数来实现，将二叉树将变为多叉树。假
+设全域的大小是\( u = 2^{2k} \),其中\( k \)是一个整数，那么\( \sqrt{u} \)
+也是一个整数。&lt;/p&gt;
+&lt;p&gt;和在位数组上建立一棵二叉树不同，现在我们在位数组上建立一棵度数为\(\sqrt{u}\)
+的树，如下图(a)。这棵树的高度是2。树中的每个结点存储了各子树的逻辑与结果。&lt;/p&gt;
 &lt;p&gt;如下图(b)所示，可以将那些结点看作是一个数组\( summary[0..\sqrt{u}-1] \),当
 且仅当\( A[i\sqrt{u}..(i+1)\sqrt{u}-1] \)含1,\( summary[i] \)才为1。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="constant_height_tree_array" src="http://www.roading.org/images/2013-06/constant_height_tree_array.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;我们把\( A \)中的\( \sqrt{u} \)位的子数组称为&lt;strong&gt;簇&lt;/strong&gt;，对于一个给定值\( x 
-\),位\( A[x] \)存在于第\( \lfloor x/\sqrt{u}\rfloor \)个簇中。现在INSERT
-将在\( O(1) \)内完成——对于插入一个\( x \),分别将\( A[x] \)和\(\lfloor x/
-\sqrt{u}\rfloor \)设为1。对于MINIMUM、MAXIMUM、SUCCESSOR、PREDECESSOR和DELETE
-这些操作将花费\( O(\sqrt{u}) \)。具体操作不做赘述。&lt;/p&gt;
-&lt;p&gt;比起&lt;strong&gt;Superimposing a binary tree&lt;/strong&gt;，现在的结构似乎反而更糟了，前者最差劲的
-操作也只要\( \lg{u} \),现在都要\( \sqrt{u} \)了，但是透过这个结构带来了
-一点新的想法，如果我们把数组\( summary \)也变作一个&lt;strong&gt;Superimposinga tree
-of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2013-06/constant_height_tree_array.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;我们把\( A \)中的\( \sqrt{u} \)位的子数组称为簇，对于一个给定值\( x \),
+位\( A[x] \)存在于第\( \lfloor x/\sqrt{u}\rfloor \)个簇中。现在INSERT将在
+\( O(1) \)内完成——对于插入一个\( x \),分别将\( A[x] \)和\(\lfloor x/ 
+\sqrt{u}\rfloor \)设为1。对于MINIMUM、MAXIMUM、SUCCESSOR、PREDECESSOR和
+DELETE这些操作将花费\( O(\sqrt{u}) \)。具体操作不做赘述。&lt;/p&gt;
+&lt;p&gt;比起Superimposing a binary tree，现在的结构似乎反而更糟了，前者最差劲的操作
+也只要\( \lg{u} \),现在都要\( \sqrt{u} \)了，但是透过这个结构带来了一点
+新的想法，如果我们把数组\( summary \)也变作一个Superimposinga tree of
+constant height怎么样，一路递归下去情况会如何?&lt;/p&gt;
 &lt;h3&gt;A recursive structure&lt;/h3&gt;
-&lt;p&gt;前面用\(\sqrt{u} \)度数的树给了我们一个启示，假如我们能够把问题的规模以开
-平方的规模缩小的话，会有一个什么效果？假设我们能做到以开平方的规模递归减小
-一个数据结构的规模，而且每个操作在每一级递归上只产生一次新的递归调用，那么
-对于一个大小为\( u \)的数据结构的操作有：
-\[ T(u) = T(\sqrt{u}) + O(1) \]
-令\( m = \lg{u} \), 有\( u = 2^m \)。那么可以有：
-\[ T(2^m) = T(2^{m/2}) + O(1)\]
+&lt;p&gt;前面用\(\sqrt{u} \)度数的树给了我们一个启示，假如我们能够把问题的规模以开平
+方的规模缩小的话，会有一个什么效果？假设我们能做到以开平方的规模递归减小一个
+数据结构的规模，而且每个操作在每一级递归上只产生一次新的递归调用，那么 对于一
+个大小为\( u \)的数据结构的操作有： 
+[ T(u) = T(\sqrt{u}) + O(1) ]
+令\( m= \lg{u} \), 有\( u = 2^m \)。那么可以有：
+[ T(2^m) = T(2^{m/2}) + O(1)]
 设\( S(m) = T(2^m)\),可得新方程：
-\[ S(m) = S(m/2) + O(1)\] 
-可以得出\( S(m) = O(\lg m) \),回到\( T(u) \)上来，那么\( T(u) = T(2^m)
-= S(m) = O(\lg m) = O(\lg{\lg u}) \)。&lt;/p&gt;
+[ S(m) = S(m/2) + O(1)]
+可以得出\( S(m) = O(\lg m) \),回到\( T(u) \)上来，那么
+\( T(u) = T(2^m) = S(m) = O(\lg m) = O(\lg{\lg u}) \)。&lt;/p&gt;
 &lt;p&gt;这个假设说明如果我们能够以递归方式以开平方的规模来缩小数据的规模大小，并在每
 一级递归上花费\( O(1)\)的时间的话，我们这个假设的数据结构的操作的复杂度将
 是\( O(\lg{\lg u}) \)。&lt;/p&gt;
-&lt;p&gt;围绕方程 \( T(u) = T(\sqrt{u} + O(1)) \),我们来设计一个递归的数据结构，以
-开平方的规模来减小每一次递归的大小。当然，我们可能不能一步达到让所有的操作都
-达到\( O(\lg{\lg u}) \),但是我们还是可以先设计出一个原型。自\( u \)起，
-我们用一个\( \sqrt{u} = u^{1/2}\)项的数据结构来持有\( u^{1/4} \)项的，以
-\( u^{1/4} \)项的递归持有\( u^{1/8} \)项的，以\( u^{1/8} \)项的递归持
-有...，一直到数据结构的大小为2。在这里为了简单起见，假设\( u=2^{2^k} \)，
-如此，\( u^{1/2}，u^{1/4},u^{1/8},... \)都为整数。&lt;/p&gt;
-&lt;p&gt;对于一个全域为\( \lbrace 0,1,2,...u-1 \rbrace \)的van Emde Boas数据结构为
-原型，我们简称为&lt;em&gt;proto-vEB(u)&lt;/em&gt;。它遵循以下这些规则：&lt;/p&gt;
+&lt;p&gt;围绕方程 \( T(u) = T(\sqrt{u} + O(1)) \),我们来设计一个递归的数据结构，以开
+平方的规模来减小每一次递归的大小。当然，我们可能不能一步达到让所有的操作都达
+到\( O(\lg{\lg u}) \),但是我们还是可以先设计出一个原型。自\( u \)起，我们
+用一个\( \sqrt{u} = u^{1/2}\)项的数据结构来持有\( u^{1/4} \)项的，以
+\( u^{1/4}\)项的递归持有\( u^{1/8} \)项的，以\( u^{1/8} \)项的递归持有
+... \( u=2^{2^k} \)，如此，\( u^{1/2}，u^{1/4},u^{1/8},... \)都为整数。&lt;/p&gt;
+&lt;p&gt;对于一个全域为\( \lbrace 0,1,2,...u-1 \rbrace \)的van Emde Boas数据结构为原
+型，我们简称为proto-vEB(u)。它遵循以下这些规则：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;如果\( u = 2\),那么已是基础大小，那么它包含两个标志位\( A[0...1]\)&lt;/li&gt;
-&lt;li&gt;否则，\( u = 2^{2^k} \), 且整数\( k \geq 1\), 所以\(  u \geq 4 \)
-    这种时候，&lt;em&gt;proto-vEB(u)&lt;/em&gt;包含两个属性&lt;ul&gt;
-&lt;li&gt;一个名为&lt;em&gt;summary&lt;/em&gt;指向&lt;em&gt;proto-vEB(\(\sqrt u\))&lt;/em&gt;的指针。&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;否则，\( u = 2^{2^k} \), 且整数\( k \geq 1\), 所以\( u \geq 4 \)，
+    这时，proto-vEB(u)包含两个属性:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个名为summary指向proto-vEB(\(\sqrt u\))的指针。&lt;/li&gt;
 &lt;li&gt;一个\( \sqrt{u} \)大的指针数组\( cluster[0...1] \)，其中每一个指
-针指向一个&lt;em&gt;proto-vEB&lt;/em&gt;(\( \sqrt u \))。&lt;/li&gt;
+    针指向一个proto-vEB(\( \sqrt u \))。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;如果&lt;em&gt;cluster&lt;/em&gt;的第&lt;em&gt;i&lt;/em&gt;个指针所指向的的集合含有元素，那么&lt;em&gt;i&lt;/em&gt;也   存在于
-    &lt;em&gt;summary&lt;/em&gt;所指向的集合中，否则&lt;em&gt;i&lt;/em&gt;也不存在与&lt;em&gt;summary&lt;/em&gt;中。&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果cluster的第i个指针所指向的的集合含有元素，那么i也存在于summary所指向
+    的集合中，否则i也不存在于summary中。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;对于一个\( u = 16 \)的集合\( \lbrace 2,3,4,5,7,14,15 \rbrace \)情况就是
 下面这样的：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="proto_van_emde_boas" src="http://www.roading.org/images/2013-06/proto_van_emde_boas.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;在&lt;em&gt;proto-VEB(u)&lt;/em&gt;中，一个给定值\(x\),那么他应该储存在&lt;em&gt;proto-VEB(u)&lt;/em&gt;中&lt;em&gt;cluster&lt;/em&gt;
-的第\( \lfloor{x}/\sqrt{u} \rfloor\)个指针指向的&lt;em&gt;proto-VEB(\( \sqrt{u} \))&lt;/em&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2013-06/proto_van_emde_boas.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;在proto-VEB(u)中，一个给定值\(x\),那么他应该储存在proto-VEB(u)中cluster的
+第\( \lfloor{x}/\sqrt{u} \rfloor\)个指针指向的proto-VEB(\( \sqrt{u} \))
 的第\( x \mod \sqrt{u} \)个值。鉴于此，在分析各项操作之前，先定义几个有用
 的工具函数：
-\[ high(x) = \lfloor{x} / \sqrt{u} \rfloor \]
-\[ low(x) = x \mod \sqrt{u} \]
-\[ index(x, y) = x\sqrt{u} + y \]&lt;/p&gt;
+[ high(x) = \lfloor{x} / \sqrt{u} \rfloor ]
+[ low(x) = x \mod \sqrt{u} ] [ index(x, y) = x\sqrt{u} + y ]&lt;/p&gt;
 &lt;h4&gt;判断一个值是否存在&lt;/h4&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MEMBER&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
@@ -105,9 +319,9 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 &lt;p&gt;一个简单的递归查找，很显然，\( T(u) = T(\sqrt u + O(1)\),无疑复杂度为
 \( O(\lg\lg u) \)。&lt;/p&gt;
 &lt;h4&gt;找最小值&lt;/h4&gt;
-&lt;p&gt;从&lt;em&gt;summary&lt;/em&gt;中得到最小值&lt;em&gt;i&lt;/em&gt;，那么最小值必定存在于\(cluster[i]\)所表示的集
-合中，在从\(cluster[i]\)表示的集合中得到最小值，结合&lt;em&gt;i&lt;/em&gt;值可以得到全局的最
-小值。伪码：&lt;/p&gt;
+&lt;p&gt;从summary中得到最小值i，那么最小值必定存在于\(cluster[i]\)所表示的集合中，
+在从\(cluster[i]\)表示的集合中得到最小值，结合i值可以得到全局的最小值。伪
+码：&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUMN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
@@ -127,16 +341,14 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 
 
 &lt;p&gt;复杂度
-\[ T(u) = 2T(\sqrt u) + O(1)\]
-设\( u = 2^m\)
-\[ T(2^m) = 2T(2^{m/2}) + O(1)\]
-设\(S(m) = T(2^m)\),得：
-\[S(m) = 2S(m/2) + O(1)\]
-\[T(u) = S(m) = \theta(m) = \theta(lg u)\]&lt;/p&gt;
-&lt;h4&gt;找&lt;em&gt;x&lt;/em&gt;的后继&lt;/h4&gt;
+[ T(u) = 2T(\sqrt u) + O(1)] 设\( u = 2^m\) 
+[ T(2^m) = 2T(2^{m/2}) + O(1)] 设\(S(m) = T(2^m)\),得：
+[S(m) = 2S(m/2) + O(1)]
+[T(u) = S(m) = \theta(m) = \theta(lg u)]&lt;/p&gt;
+&lt;h4&gt;找x的后继&lt;/h4&gt;
 &lt;ol&gt;
-&lt;li&gt;从&lt;em&gt;x&lt;/em&gt;所在的子集中找后继&lt;/li&gt;
-&lt;li&gt;找不到的话，先从&lt;em&gt;summary&lt;/em&gt;中得到下一个子集的索引，从下一个子集中找最小值。&lt;/li&gt;
+&lt;li&gt;从x所在的子集中找后继&lt;/li&gt;
+&lt;li&gt;找不到的话，先从summary中得到下一个子集的索引，从下一个子集中找最小值。&lt;/li&gt;
 &lt;li&gt;转换成全局的值。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;伪码：&lt;/p&gt;
@@ -160,12 +372,12 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;复杂度:
-\[ T(u) = 2T(\sqrt u) + \theta(\lg{\sqrt u})\]
-\[ = 2T(\sqrt u) + \theta(\lg u)\]
+&lt;p&gt;复杂度: 
+[ T(u) = 2T(\sqrt u) + \theta(\lg{\sqrt u})]
+[ = 2T(\sqrt u) + \theta(\lg u)]
 用与前文类似的方法可以化得\( T(u) = \theta(\lg u\lg\lg u) \)&lt;/p&gt;
 &lt;h4&gt;插入元素&lt;/h4&gt;
-&lt;p&gt;一路向下递归插入，并将&lt;em&gt;summary&lt;/em&gt;相应设为1即可。伪码：&lt;/p&gt;
+&lt;p&gt;一路向下递归插入，并将summary相应设为1即可。伪码：&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PROTO&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
         &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
@@ -176,55 +388,56 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 
 
 &lt;p&gt;复杂度和PROTO-VEB-MINIMUN一样
-\[ T(u) = 2T(\sqrt u) + O(1)\]
-即\(\theta(\lg u)\)&lt;/p&gt;
+[ T(u) = 2T(\sqrt u) + O(1)]
+即
+\(\theta(\lg u)\)&lt;/p&gt;
 &lt;h4&gt;删除元素&lt;/h4&gt;
-&lt;p&gt;相对于插入，删除要麻烦一点，因为不能直接从&lt;em&gt;summary&lt;/em&gt;中删除元素。要确保相对应
-的&lt;em&gt;cluser&lt;/em&gt;所代表的子集不包含任何元素才能在&lt;em&gt;smmary&lt;/em&gt;中置0。探查一个&lt;em&gt;proto-VEB&lt;/em&gt;
-是否只包含一个元素，以目前的结构可以有几种方式，但没有一种快于
-\(\theta(\lg u)\)的方式。也就是说PROTO-VEB-DELETE注定要超过
-\(\theta(\lg u)\)。这儿先别急着实现&lt;em&gt;proto-VEB&lt;/em&gt;的删除操作，先来回顾一下，所
-有的基本操作我们都已经分析过一遍了。拿最大值、最小值很慢，拿前驱、后继很慢，
-插入删除也要比预期的慢，似乎除了MEMBER操作，所有的操作都很慢，但是仔细分析发
-现，找前驱慢是因为取最小值太慢了，找后继慢是因为取最大值太慢了。插入慢是因为
-要额外对&lt;em&gt;summary&lt;/em&gt;执行一次插入，删除慢是因为对这个结构的判空慢，实际上插入和删
-除慢是因为同一个问题，没法快速知道一个&lt;em&gt;proto-VEB&lt;/em&gt;的尺寸和极限值。归根结底，这
-些操作慢的症结在于，没法快速知道最大值最小值，因为知道最大值最小值以后，尺寸便
-能在\(\theta(1)\)之内得到了。既然如此，我们不如直接将最大值，最小值直接记录
-在proto-VEB的结构中。Van Emde Boas Trees的最终模型就得到了，给&lt;em&gt;proto-VEB&lt;/em&gt;添加
-记录最大值和最小值的两个属性。&lt;/p&gt;
+&lt;p&gt;相对于插入，删除要麻烦一点，因为不能直接从summary中删除元素。要确保相对应的
+cluser所代表的子集不包含任何元素才能在smmary中置0。探查一个proto-VEB是否只
+包含一个元素，以目前的结构可以有几种方式，但没有一种快于 \(\theta(\lg u)\)
+的方式。也就是说PROTO-VEB-DELETE注定要超过 \(\theta(\lg u)\)。这儿先别急
+着实现proto-VEB的删除操作，先来回顾一下，所有的基本操作我们都已经分析过一遍
+了。拿最大值、最小值很慢，拿前驱、后继很慢，插入删除也要比预期的慢，似乎除
+了MEMBER操作，所有的操作都很慢，但是仔细分析发现，找前驱慢是因为取最小值太
+慢了，找后继慢是因为取最大值太慢了。插入慢是因为要额外对summary执行一次插入，
+删除慢是因为对这个结构的判空慢，实际上插入和删除慢是因为同一个问题，没法快
+速知道一个proto-VEB的尺寸和极限值。归根结底，这些操作慢的症结在于，没法快速
+知道最大值最小值，因为知道最大值最小值以后，尺寸便能在\(\theta(1)\)之内得
+到了。既然如此，我们不如直接将最大值，最小值直接记录在proto-VEB的结构中。
+Van Emde Boas Trees的最终模型就得到了，给proto-VEB添加记录最大值和最小值的
+两个属性。&lt;/p&gt;
 &lt;h3&gt;The van Emde Boas tree&lt;/h3&gt;
-&lt;p&gt;先约定，将van Emde Boas tree简称为&lt;em&gt;vEb&lt;/em&gt;。&lt;/p&gt;
-&lt;p&gt;在给proto-VEB加上&lt;em&gt;min&lt;/em&gt;和&lt;em&gt;max&lt;/em&gt;两个属性之前,还得有一个问题要解决，&lt;em&gt;proto-VEB&lt;/em&gt;
-要求\(u = 2^{2^k}\)，这个要求显然有点太过苛刻了，现在我们把这个范围放宽到
+&lt;p&gt;先约定，将van Emde Boas tree简称为vEb。&lt;/p&gt;
+&lt;p&gt;在给proto-VEB加上min和max两个属性之前,还得有一个问题要解决，proto-VEB 要求
+\(u = 2^{2^k}\)，这个要求显然有点太过苛刻了，现在我们把这个范围放宽到
 \(u = 2^k\)。放宽要面对的第一个问题就是\(\sqrt u\)不一定是整数了，解决的
-办法便是，我们的规模不再要求以开平方的规模来缩小了，而是以接近开平方的规模
-缩小，简言之，原来将&lt;em&gt;proto-VEB(u)&lt;/em&gt;分解为\(\sqrt u\)个&lt;em&gt;proto-VEB&lt;/em&gt;(\(\sqrt u\)),
-现在则是将&lt;em&gt;vEB&lt;/em&gt;(u)分解成\(\lceil (\lg u)/2 \rceil\)个
-&lt;em&gt;vEB&lt;/em&gt;(\(\lfloor (\lg u)/2 \rfloor\))。直观起见，将\(\lceil (\lg u)/2 \rceil\)
-用\(\sqrt[\uparrow] u\)表示,将\(\lfloor (\lg u)/2 \rfloor\)以
-\(\sqrt[\downarrow] u\)表示，\(u = {\sqrt[\uparrow] u} \cdot {\sqrt[\downarrow] u}\).&lt;/p&gt;
-&lt;p&gt;相较于&lt;em&gt;proto-VEB&lt;/em&gt;结构上有以下两个变化：&lt;/p&gt;
+办法便是，我们的规模不再要求以开平方的规模来缩小了，而是以接近开平方的规模缩
+小，简言之，原来将proto-VEB(u)分解为\(\sqrt u\)个proto-VEB(\(\sqrt u\)),
+现在则是将vEB(u)分解成\(\lceil (\lg u)/2 \rceil\)个
+vEB(\(\lfloor (\lg u)/2 \rfloor\))。直观起见，将
+\(\lceil (\lg u)/2 \rceil\)用\(\sqrt[\uparrow] u\)表示,将
+\(\lfloor (\lg u)/2 \rfloor\)以\(\sqrt[\downarrow] u\)表示，
+\(u = {\sqrt[\uparrow] u} \cdot {\sqrt[\downarrow] u}\).&lt;/p&gt;
+&lt;p&gt;相较于proto-VEB结构上有以下两个变化：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;增加&lt;em&gt;min&lt;/em&gt;和&lt;em&gt;max&lt;/em&gt;两个属性&lt;/li&gt;
-&lt;li&gt;对于\(u = 2\)的&lt;em&gt;VEB&lt;/em&gt;来说，不需要数组\(A[0..1]\)了，因为&lt;em&gt;min&lt;/em&gt;和&lt;em&gt;max&lt;/em&gt;
-    足以来记录两个值。&lt;/li&gt;
-&lt;li&gt;对于\(u &amp;gt; 2\)的&lt;em&gt;VEB&lt;/em&gt;来说，&lt;em&gt;min&lt;/em&gt;不储存在任何一个&lt;em&gt;cluster&lt;/em&gt;中，但是&lt;em&gt;max&lt;/em&gt;
-    值要，为什么这么做，可以让在空集合中插入元素和删除集合中唯一元素的操作
-    都为\(O(1)\)。&lt;/li&gt;
+&lt;li&gt;增加min和max两个属性&lt;/li&gt;
+&lt;li&gt;对于\(u = 2\)的VEB来说，不需要数组\(A[0..1]\)了，因为min和max足以来
+    记录两个值。&lt;/li&gt;
+&lt;li&gt;对于\(u &amp;gt; 2\)的VEB来说，min不储存在任何一个cluster中，但是max值要，
+    为什么这么做，可以让在空集合中插入元素和删除集合中唯一元素的操作都为
+    \(O(1)\)。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;重新定义一下几个方法：
-\[high(x) = \lfloor x / \sqrt[\downarrow] u \rfloor\]
-\[low(x) = x \mod \sqrt[\downarrow] u\]
-\[index(x, y) = x \sqrt[\uparrow] u + y\]&lt;/p&gt;
-&lt;p&gt;现在，vEB的结构应该是这样的：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="veb_struct" src="http://www.roading.org/images/2013-06/veb_struct.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;一个具体的例子:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="veb_example" src="http://www.roading.org/images/2013-06/veb_example.jpg" /&gt;&lt;/p&gt;
+[high(x) = \lfloor x / \sqrt[\downarrow] u \rfloor]
+[low(x) = x \mod \sqrt[\downarrow] u]
+[index(x, y) = x \sqrt[\uparrow] u + y]&lt;/p&gt;
+&lt;p&gt;现在，vEB的结构应该是这样的：
+&lt;img alt="" src="http://www.roading.org/images/2013-06/veb_struct.jpg" /&gt;
+一个具体的例子:
+&lt;img alt="" src="http://www.roading.org/images/2013-06/veb_example.jpg" /&gt;&lt;/p&gt;
 &lt;h4&gt;最大值和最小值&lt;/h4&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MINIMUN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;
-
 &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MAXIMUM&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -271,7 +484,6 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;EMPTY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
     &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-
 &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
         &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;EMPTY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -283,13 +495,12 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
                 &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;EMPTY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; &lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
             &lt;span class="k"&gt;else&lt;/span&gt;
                 &lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;INSERT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; &lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt; 
             &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;删除元素&lt;/h3&gt;
+&lt;h4&gt;删除元素&lt;/h4&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;VEB&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;TREE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;DELETE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;
         &lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;NIL&lt;/span&gt;
@@ -316,24 +527,23 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;综合分析上面的几个操作，除了删除操作以外其它几个操作每一次递归调用都只产生
-一次新的递归调用。根据前文的\( T(u) = T(\sqrt{u}) + O(1) \)公式，些操作
-都是\(O(\lg \lg u)\)。再仔细看下删除操作的第二次递归调用(在第16行)我们会
-发现,假如这一次递归被调到，那么必然&lt;em&gt;x&lt;/em&gt;所在的cluster只包含一个元素，这种情
-况下第一次递归调用(在第14行)只花费常数时间(只执行1-3行代码)，换言之，第二
-个递归调用发生的情况下，第一个递归调用必然能在常熟时间内完成。所以删除操作
-还是符合公式\( T(u) = T(\sqrt{u}) + O(1) \)。&lt;/p&gt;
+&lt;p&gt;综合分析上面的几个操作，除了删除操作以外其它几个操作每一次递归调用都只产生一次
+新的递归调用。根据前文的\( T(u) = T(\sqrt{u}) + O(1) \)公式，些操作 都是
+\(O(\lg \lg u)\)。再仔细看下删除操作的第二次递归调用(在第16行)我们会发现,假
+如这一次递归被调到，那么必然x所在的cluster只包含一个元素，这种情况下第一次递归
+调用(在第14行)只花费常数时间(只执行1-3行代码)，换言之，第二个递归调用发生的情
+况下，第一个递归调用必然能在常熟时间内完成。所以删除操作还是符合公式
+\( T(u) = T(\sqrt{u}) + O(1) \)。&lt;/p&gt;
 &lt;h3&gt;小结&lt;/h3&gt;
-&lt;p&gt;Van Emde Boas Tree空间的大小依赖于\(u\)的大小而不是数据的规模，另外创建
-一个Van Emde Boas Tree初始化的时间估计不会太少。当然这些都是可以优化的问
-题。&lt;/p&gt;
+&lt;p&gt;Van Emde Boas Tree空间的大小依赖于\(u\)的大小而不是数据的规模，另外创建一个
+Van Emde Boas Tree初始化的时间估计不会太少。当然这些都是可以优化的问题。&lt;/p&gt;
 &lt;p&gt;本文参考： Introduction To Algorithm ——third edition&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Mon 10 June 2013 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周一 10 六月 2013 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="算法导论"></category><category term="笔记"></category></entry><entry><title>斐波那契堆的C++实现</title><link href="http://www.roading.org//algorithm/fibonacci-heaps-in-cpp.html" rel="alternate"></link><updated>2012-10-01T00:00:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-10-01:/algorithm/fibonacci-heaps-in-cpp.html</id><summary type="html">&lt;p&gt;时间过的真是快，都是七月份写的代码了，两个多月了。&lt;/p&gt;
+        </summary><category term="Exercises"></category><category term="算法导论"></category></entry><entry><title>斐波那契堆的C++实现</title><link href="http://www.roading.org//algorithm/fibonacci-heaps-in-cpp.html" rel="alternate"></link><updated>2012-10-01T00:00:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-10-01:/algorithm/fibonacci-heaps-in-cpp.html</id><summary type="html">&lt;p&gt;时间过的真是快，都是七月份写的代码了，两个多月了。&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//-------------------------------------------------------------------------&lt;/span&gt;
 &lt;span class="c1"&gt;//filename: fibonacciHeaps.h&lt;/span&gt;
 &lt;span class="c1"&gt;//Author:   Adoo&lt;/span&gt;
@@ -592,7 +802,7 @@ of constant height&lt;/strong&gt;怎么样，一路递归下去情况会如何?&
 &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;endif&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Mon 01 October 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周一 01 十月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -656,7 +866,7 @@ DECREAS-KEY两个操作，而一旦实现了这两个操作，DELETE的实现则
 
 &lt;p&gt;其中CONSOLIDATE函数正是用来整理斐波那契堆的，它创建一个数组A来暂存根结点，
 并在遍历根链表的过程中将根结点degree相同的树合并。&lt;/p&gt;
-&lt;p&gt;其伪码如下（其中\(D(n) \leq \lfloor \log_{\phi} n \rfloor\)，且\(\phi = (1 + \sqrt 5)/2 = 1.61803...\)，具体证明见书本）：&lt;/p&gt;
+&lt;p&gt;其伪码如下（其中&lt;img alt="" src="http://www.roading.org/images/2012-07/image3.png" /&gt;，且&lt;img alt="" src="http://www.roading.org/images/2012-07/image4.png" /&gt;，具体证明见书本）：&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;CONSOLIDATE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;array&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -744,223 +954,11 @@ applications that manage large amounts of data.&lt;/p&gt;
 的&lt;img alt="咬牙切齿" src="http://www.roading.org/images/2012-07/wlEmoticon-baringteethsmile.png" /&gt;。&lt;/p&gt;
 &lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Mon 30 July 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周一 30 七月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="算法导论"></category><category term="笔记"></category><category term="fibonacci heaps"></category></entry><entry><title>并查集(Disjoint Set)</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/Disjoint_set.html" rel="alternate"></link><updated>2012-07-18T18:00:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-07-18:/algorithm/introductiontoalgorithm/Disjoint_set.html</id><summary type="html">&lt;p&gt;一些应用经常有这样的需求：查找一个包含某个元素的唯一集合，合并两个集合。
-搜了一下google能够应用的地方还是挺多的，这里略去不表。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;并查集&lt;/strong&gt;又称不相交集，有两个名字的原因在于它原就有两个不同的英文名字，Disjoint
-sets和Union-find set。更准确点应该说并查集是用来操作不相交集的数据结构。算法
-导论上这一章就叫用于不相交集合的数据结构（Data Structures for Disjoint Sets）。
-维基百科上也说：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;A union-find algorithm is an algorithm that performs two useful operations
-on such a data structure:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Find: Determine which subset a particular element is in. This can be used
-  for determining if two elements are in the same subset.&lt;/li&gt;
-&lt;li&gt;Union: Join two subsets into a single subset.
-  Because it supports these two operations, a disjoint-set data structure is
-  sometimes called a union-find data structure or merge-find set. &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;但一般说Disjoint Sets就指的是Data Structures for Disjoint Sets。&lt;/p&gt;
-&lt;p&gt;话休饶舌（最近金瓶梅看多了），转到并查集的正题上来。&lt;/p&gt;
-&lt;h3&gt;并查集的操作&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;并查集维持了一组不相交动态集合\(S = \lbrace S_1, S_2,...,S_k\rbrace\)，简言
-之并查集就是一些互不相交的动态集合的集合。&lt;/strong&gt;假设\(x\)是某动态集合中的对象，那
-么并查集应该支持以下操作：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;MAKE-SET(x) 创建一个只有一个成员\(x\)的新集合，并要求\(x\)不在其它的
-    集合中。&lt;/li&gt;
-&lt;li&gt;UNION(x, y) 合并\(x,y\)所在的集合。\(x, y\)所在的原集合都不再存在，一个
-    新的集合产生。&lt;/li&gt;
-&lt;li&gt;FIND-SET(x) 返回包含\(x\)的集合。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;并查集的一个应用&lt;/h3&gt;
-&lt;p&gt;并查集众多应用中的一个就是用来确定无向图中的联通子图。对于图\(G\),我们用
-\(G.V\)来表示它顶点的集合，用\(G.E\)来表示它所有边的集合。下图(a)是一个包含
-四个联通子图的图。我们用并查集的操作来实现CONNECTED-COMPONENTS用以计算图的联通
-子图，一旦CONNECTED-COMPONENTs执行，则可以用SAME-COMPONENT来判断两个顶点是否在
-同一个联通子图上。下图(b)则说明了对图(a)执行CONNECTED-COMPONENTS的过程。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="graph" src="http://www.roading.org/images/2013-07/graph.jpg" /&gt;&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;CONNECTED&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;COMPNENTS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;G&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt; &lt;span class="n"&gt;vertex&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;G&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;
-        &lt;span class="n"&gt;MAKE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt; &lt;span class="n"&gt;edge&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;G&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;E&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-            &lt;span class="n"&gt;UNION&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;SAME&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;COMPONENT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;TRUE&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;FALSE&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h4&gt;并查集的链表表示&lt;/h4&gt;
-&lt;p&gt;下图(a)展示了一个用链表表示的并查集:每个集合都有其自己的链表表示。每个集合的
-对象都有一个&lt;em&gt;head&lt;/em&gt;指针指向链表的第一个对象，一个&lt;em&gt;tail&lt;/em&gt;指针指向链表的最后一个
-对象。每一个链表对象都有一个&lt;em&gt;next&lt;/em&gt;指针指向链表中的下一个对象，以及一个指向集
-合对象的的指针。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="link_disjoint_set" src="http://www.roading.org/images/2013-07/link_disjoint_set.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;用链表表示的并查集实现MAKE-SET和FIND-SET都很容易，并且只需\(O(1)\),略去不表。
-对于UNION的实现，则要复杂点。&lt;/p&gt;
-&lt;h4&gt;UNION的简单实现&lt;/h4&gt;
-&lt;p&gt;如上图(b)所示，实现UNION的最简单方法是将一个链表附加到另一个链表的最后。我们
-可以很快的通过&lt;em&gt;tail&lt;/em&gt;和&lt;em&gt;head&lt;/em&gt;指针找到一个链表的第一个对象和最后一个对象，并将
-两个链表链接起来，不过不幸的是我们还要将其中一个链表的所有对象中指向集合的指
-针更新。&lt;/p&gt;
-&lt;p&gt;实际上，我们可以轻易的构建一个用于\(n\)个对象上的&lt;em&gt;m&lt;/em&gt;个操作且需要\(O(n^2)\)
-运行时间的序列。假设我们有对象\(x_1,x_2,...,x_n\)。我们用\(n\)个MAKE-SET来
-创建\(n\)个并查集，并依靠\(n-1\)来将它们合并成一个并查集，所以
-\(m = 2n -1 \)。最坏情况下，这\(2n-1\)个操作的顺序和用时是这样的：&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Operation&lt;/th&gt;
-&lt;th&gt;Number of objects updated&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;MAKE-SET(\(x_1\))&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;MAKE-SET(\(x_2\))&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;MAKE-SET(\(x_n\))&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;UNION(\(x_2, x_1\))&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;UNION(\(x_3, x_2\))&lt;/td&gt;
-&lt;td&gt;2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;UNION(\(x_n, x_{n-1}\))&lt;/td&gt;
-&lt;td&gt;n&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;很显然这\(2n-1\)个操作的复杂度为：&lt;/p&gt;
-&lt;p&gt;\[ m + \sum^{n-1}_{i=1}{i} = \theta(n^2)\]&lt;/p&gt;
-&lt;p&gt;所有这\(2n-1\)个操作的平均复杂度在\(\theta (n)\)。&lt;/p&gt;
-&lt;h4&gt;加权合并(weighted-union)的启发策略&lt;/h4&gt;
-&lt;p&gt;在最坏的情况下，合并的时候我们总是把一个长的链表合并到一个短的链表中去，于是
-我们不得不更新更多的对象。反过来，假如在合并的时候我们总能把一个短的链表合并
-到一个长的链表中去的话，则能保证我们每一次合并操作都以最合理的方式进行，而不
-是依赖于运气了，而我们仅仅只需维持一个属性来代表链表的长度就能轻而易举的达到
-上述目的。利用启发策略改进后的合并操作仍然需要\(\omega(n)\)的时间，假如两个
-集合都有\(\omega (n)\)个成员的话。但是对于一个由MAKE-SET、UNION、FIND-SET
-组成的大小为\(m\)，其中\(n\)个操作为MAKE-SET的操作序列来说，最多花费
-\(O(m + n\lg n)\)，下面给出证明：&lt;/p&gt;
-&lt;p&gt;对于合并操作来说，我们最多执行\(n-1\)次操作。先来计算一下合并操作最多能花
-费多少时间。合并操作的运行时间取决于更新链表中对象的指针的数目。换言之，
-通过计算对象指向集合指针的更新次数就能计算出合并操作花费的总时间。对于对象
-\(x\)来说，如果它指向集合的指针被更新，代表着它处在一个较短的链表中，那么当
-\(x\)指向集合的指针第一次被更新的时候它所在的链表最少有两个成员，第二次被更
-新时最少有4个成员，第三次最少有8个...，很显然对于\(x\)来说从始至终，它指向
-集合的指针最多能被更新\(\lg n\)次，那么所有\(n\)个它们指向集合的指针最多
-能被更新\(n\lg n\)次。&lt;/p&gt;
-&lt;p&gt;而除合并操作外的其它操作都只需要\(O(1)\)的时间，所以这个序列需要的总时间
-为:\(O(m + n\lg n)\)。&lt;/p&gt;
-&lt;h3&gt;不相交集森林&lt;/h3&gt;
-&lt;p&gt;与之前用链表表示一个集合不同，不相交集森林用一棵树来表示一个集合。不相交集
-森林如下图(a)表示的，每个结点代表一个成员都只包含一个指向父亲的指针，根节点
-的父亲是自己。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="disjoint_set_forests" src="http://www.roading.org/images/2013-07/disjoint_set_forests.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;以这样的方式来实现并查集的三个操作：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;A MAKE-SET operation simply creates a tree with just one node. We perform
-a FIND-SET operation by following parent pointers until we find the root
-of the tree. The nodes visited on this simple path toward the root
-constitute the find path. A UNION operation, shown in Figure 21.4(b),
-causes the root of one tree to point to the root of the other&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4&gt;可改进运行时间的启发式策略&lt;/h4&gt;
-&lt;p&gt;但直接用这个简单的结构并不会有更快的速度，极端的情况是当一颗树成棍状时，它
-和链表并没有什么区别。不过有两种方法可以对它进行优化——按秩合并(union by rank)
-和路径压缩(path compression)。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;按秩合并(union by rank)&lt;/strong&gt; 和链表的加权合并非常类似，不过这里是根据树的高度
-来合并，总是将矮的树合并到高的树中。对于每个结点，我们维持一个&lt;em&gt;rank&lt;/em&gt;属性，用
-来表示每个结点高度的一个上界。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;路径压缩&lt;/strong&gt;方法用在FIND-SET操作中，其具体做法就是在查找的过程中将查找路径上
-的每一个结点都直接放到根结点下。&lt;strong&gt;查找路径并不改变任何结点的&lt;/strong&gt;&lt;em&gt;rank&lt;/em&gt;&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;
-&lt;h4&gt;不相交集森林操作的伪码实现&lt;/h4&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;MAKE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;
-    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
-
-&lt;span class="n"&gt;UNION&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;LINK&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-
-&lt;span class="n"&gt;LINK&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt;
-        &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;
-        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt;
-            &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-
-&lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
-        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;当同时使用到上述两种启发式策略时，不相交集森林\(m\)个操作的运行时间在
-\(O(m\alpha(n))\),\(\alpha(n)\)的增长非常慢，在可以想象到的不相交集森林
-的应用中，\(\alpha(n) \leq 4\),所以这个运行时间可以看作是线性的。也就是说
-不相交集森林操作的平摊分析是\(O(1)\)。关于这个上限的证明，未曾吃透，也没
-什么心情去细细看了，这篇笔记就只能如此草草记之了。&lt;/p&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:1"&gt;
-&lt;p&gt;这句话配合前面按秩合并中将&lt;em&gt;rank&lt;/em&gt;定义为一个结点高度的上限两个点让我很纠结了一阵，为什么改变压缩路径的时候不用改变&lt;em&gt;rank&lt;/em&gt;？如此一来，不是有可能在进行合并的时候将高的树合到了矮的树上吗?还有为什么将&lt;em&gt;rank&lt;/em&gt;定义为结点高度的上限，而不是准确的节点高度，如果是准确的结点高度，不就可以确保总是将矮的树合并到高的树上吗？显然这两个问题是纠缠在一起的。我想了许久，总是得到了一点明悟，对于一系列UNION操作而言，在这个过冲不论进行了多少次路径压缩，合并的顺序是不会发生变化的，该是谁合到谁上还是谁合到谁上，合并的效率也不会有差别。看上去对FIND-SET有一点影响，因为合并后的树高度可能偏高1，而这中情况的最坏结果是对于合并后的树的第一次FIND-SET有可能要多花费O(1)。这个开销对于每一次FIND-SET都要去维护一个准确的结点高度而言反而要更小了。&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-          &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Wed 18 July 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
-          (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-          &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
-          (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-        </summary><category term="算法导论"></category><category term="Disjoint set"></category><category term="笔记"></category></entry><entry><title>B-树的C++实现</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="alternate"></link><updated>2012-04-19T22:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-19:/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html</id><summary type="html">&lt;p&gt;与之前实现哈希表、红黑树…这些数据结构和算法不同，B-trees的实现不再追求模仿STL，因此没有实现b-trees自己的迭代器。这些天温习之前的笔记的过程中意识到了一个问题，所有这些的数据结构毕竟只是作为练习之用，而不是出于作为以后使用的库的目的。故应当以逻辑清晰为第一要务。B-trees的实现是转变的一个开始，以后关于算法导论中的算法和数据结构的实现力求立足与算法本身而不是C++的淫技。&lt;/p&gt;
+        </summary><category term="algorithm"></category><category term="算法导论"></category><category term="笔记"></category><category term="fibonacci heaps"></category></entry><entry><title>B-树的C++实现</title><link href="http://www.roading.org//algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html" rel="alternate"></link><updated>2012-04-19T22:28:00+08:00</updated><author><name>Adoo</name></author><id>tag:www.roading.org,2012-04-19:/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html</id><summary type="html">&lt;p&gt;与之前实现哈希表、红黑树…这些数据结构和算法不同，B-trees的实现不再追求模仿STL，因此没有实现b-trees自己的迭代器。这些天温习之前的笔记的过程中意识到了一个问题，所有这些的数据结构毕竟只是作为练习之用，而不是出于作为以后使用的库的目的。故应当以逻辑清晰为第一要务。B-trees的实现是转变的一个开始，以后关于算法导论中的算法和数据结构的实现力求立足与算法本身而不是C++的淫技。&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//*******************************************&lt;/span&gt;
 &lt;span class="c1"&gt;//B-trees.cpp   2012/4/18 by Adoo&lt;/span&gt;
 &lt;span class="c1"&gt;//@brief: 本文件为b-trees的C++实现。&lt;/span&gt;
@@ -1227,7 +1225,7 @@ causes the root of one tree to point to the root of the other&lt;/p&gt;
 &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Thu 19 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周四 19 四月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1246,23 +1244,22 @@ causes the root of one tree to point to the root of the other&lt;/p&gt;
 &lt;p&gt;Every node &lt;em&gt;x&lt;/em&gt; has the following fields:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;x.n&lt;/em&gt;, the number of keys currently stored in node &lt;em&gt;x&lt;/em&gt;,&lt;/li&gt;
-&lt;li&gt;the x.n keys themselves, stored in nondecreasing order, so that
-    \(x.key_i \leq x.key_2 \leq ... \leq x.key_{x.n}\).&lt;/li&gt;
-&lt;li&gt;\(x.leaf\), a boolean value that is TRUE if \(x\) is a leaf and FALSE
-    if \(x\) is an internal node.&lt;/li&gt;
+&lt;li&gt;the x.n keys themselves, \( x.key_1, x.key_2, \dots, x.key_{x.n}\)
+    stored in nondecreasing order, so that
+    \( x.key_i \leq x.key_2 \leq \dots \leq x.key_{x.n}\),&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;x.leaf&lt;/em&gt; , a boolean value that is TRUE if &lt;em&gt;x&lt;/em&gt; is a leaf and FALSE
+    if &lt;em&gt;x&lt;/em&gt; is an internal node.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Each internal node \(x\) also contains
-    \(x.n+1\) pointers \(x.c_1, x.c_2,...,x.c_{x.n+1}\), to its
-    children. Leaf nodes have no children, so their \(c_i\) fields are undefined.&lt;/p&gt;
+&lt;p&gt;Each internal node &lt;em&gt;x&lt;/em&gt; also contains &lt;em&gt;x.n+1&lt;/em&gt; pointers
+    \( x.c_1, x.c_2, \dots, x.c_{x.n+1} \) to its children. Leaf
+    nodes have no children, so their \( c_i \) fields are undefined.&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The keys \(x.key_i\) separate the ranges of keys stored in each
-    subtree: if \(key_i\) is any key stored in the subtree with root x.
-    \(c_i\), then
-    \[k_1 \leq x.key_1 \leq k_2 \leq x.key_2 \leq ... \leq x.key_{x.n} \leq k_{x.n + 1}\]&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;The keys \( x.key_i\) separate the ranges of keys stored in each
+    subtree: if \(k_i\) is any key stored in the subtree with root
+    \(x.c_i\), then\( k_i \leq x.key_1 \leq x_2 \leq x.key_2 \leq \dots
+    \x.key_{x.n} \leq k_{x.n + 1} \)&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;All leaves have the same depth, which is the tree's height &lt;em&gt;h&lt;/em&gt;.&lt;/p&gt;
 &lt;/li&gt;
@@ -1430,7 +1427,7 @@ causes the root of one tree to point to the root of the other&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Sun 15 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周日 15 四月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1445,8 +1442,15 @@ causes the root of one tree to point to the root of the other&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;由PUSH, POP, 和 MULTIPOP构成的一个长度为&lt;em&gt;n&lt;/em&gt;的序列操作作用在一个空栈上，最坏情况下的时间复杂度为多少？当然，你可以说是\(O(n^2)\)。的确没错，毕竟这一序列操作可由\(n\)个MULTIPOP组成，由此得出\(O(n) \cdot n = O(n^2)\)。但我们还能将这个上限向下压。&lt;/p&gt;
-&lt;p&gt;MULTIPOP的复杂度为\(O(n)\)，但它真实的时间花费其实是由伪码中第2句决定的——MULTIPOP内部执行了多少次POP操作。当我们把上述问题综合考虑的时候，问题出现了戏剧性的转变。对于一个空栈来说，调用POP的操作最多等于PUSH的操作。可见上述的\(n\)个操作可以有更矮的上界\(O(n)\)。而三种操作的平摊代价为\(O(n)/n = O(1)\)。&lt;/p&gt;
+&lt;p&gt;由PUSH, POP, 和 MULTIPOP构成的一个长度为&lt;em&gt;n&lt;/em&gt;的序列操作作用在一个空栈上，
+最坏情况下的时间复杂度为多少？当然，你可以说是\(O(n^2)\)。的确没错，毕
+竟这一序列操作可由&lt;em&gt;n&lt;/em&gt;个MULTIPOP组成，由此得出\(O(n)*n = O(n^2)\)。但
+我们还能将这个上限向下压。&lt;/p&gt;
+&lt;p&gt;MULTIPOP的复杂度为&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)，但它真实的时间花费其实是由伪码中第2句决定的
+——MULTIPOP内部执行了多少次POP操作。当我们把上述问题综合考虑的时候，问题
+出现了戏剧性的转变。对于一个空栈来说，调用POP的操作最多等于PUSH的操作。可
+见上述的&lt;em&gt;n&lt;/em&gt;个操作可以有更矮的上界&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;)。而三种操作的平摊代价为
+\(O(n) / n = O(1)\)。&lt;/p&gt;
 &lt;h3&gt;记账方法(The accounting method)&lt;/h3&gt;
 &lt;p&gt;在记账方法中，给不同的操作分配不同的平摊代价。有些操作的平摊代价大于实际代价，就把多余的部分当作存款，供那些实际代价大于平摊代价的操作使用。需要保证的是序列操作的平均代价总和应该要不小于实际代价的总和。仍然用上面栈的例子，我们给栈的三种操作分派的平摊代价如下：&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PUSH&lt;/span&gt;        &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -1458,17 +1462,28 @@ causes the root of one tree to point to the root of the other&lt;/p&gt;
 &lt;p&gt;这是什么意思呢？假设我们把栈数据结构看做餐厅叠放一堆盘子，每次压盘子入栈需要付费1美元，弹出盘子也需要1美元。但是如果我放盘子的时候付费2美元，1美元用来支付入栈的费用，另1美元放在盘子上，告诉收钱的家伙，如果弹出盘子的时候，盘子上的那一美元就是付盘子弹出的费用。这样事情就简单了，任何出栈相关的花费都可以看为0，因为每一个盘子进栈的时候已经预付了足够它出栈的费用。所以POP和MULTIPOP都可以指派平摊代价为0.&lt;/p&gt;
 &lt;p&gt;所以由PUSH, POP, 和 MULTIPOP构成的一个长度为&lt;em&gt;n&lt;/em&gt;的序列操作作用在一个空栈上的总平摊代价为&lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;),而它的实际代价也是。&lt;/p&gt;
 &lt;h3&gt;势能方法(he potential method)&lt;/h3&gt;
-&lt;p&gt;势能方法其实与记账方法相通，不同之处在于势能方法不是把账记在单个的对象上，而是记全记在数据结构上。当然按书上的说法来讲就是“势”，当某个操作支付的多时可以为这个数据结构积蓄势能，积蓄的势能则可以释放来支付后续的操作。&lt;/p&gt;
-&lt;p&gt;势能方法的工作流程如下. 对一个初始的数据结构\(D_0\) 执行\(n\)次操作。用\(D_i\)
-来表示执行第\(i\)次操作后的数据结构。函数\(\phi (D_i)\)代表数据结构\(D_i\)拥有的势能。如果用\(c_i\)表示第\(i\)个操作的实际代价的话，那第\(i\)步操作的平摊代价就相当于实际代价加上由于这一步操作所增加的势能。所以第\(i\)步操作的平摊代价：&lt;img alt="公式1" src="http://www.roading.org/images/2012-03/image_thumb25.png" /&gt;。&lt;/p&gt;
-&lt;p&gt;\(n\)步操作的总平摊代价则为：&lt;/p&gt;
+&lt;p&gt;势能方法其实与记账方法相通，不同之处在于势能方法不是把账记在单个的对象上，而是记
+全记在数据结构上。当然按书上的说法来讲就是“势”，当某个操作支付的多时可以为这个数
+据结构积蓄势能，积蓄的势能则可以释放来支付后续的操作。&lt;/p&gt;
+&lt;p&gt;势能方法的工作流程如下. 对一个初始的数据结构\( D_0 \)执行&lt;em&gt;n&lt;/em&gt;次操作。用\( D_i \)
+来表示执行第&lt;em&gt;i&lt;/em&gt;次操作后的数据结构。函数\( \Phi(D_i) \)代表数据结构\(D_i\)
+拥有的势能。如果用\( c_i \)表示第&lt;em&gt;i&lt;/em&gt;个操作的实际代价的话，那第&lt;em&gt;i&lt;/em&gt;步操作的平摊
+代价就相当于实际代价加上由于这一步操作所增加的势能。所以第&lt;em&gt;i&lt;/em&gt;步操作的平摊代价：
+&lt;img alt="公式1" src="http://www.roading.org/images/2012-03/image_thumb25.png" /&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;n&lt;/em&gt; 步操作的总平摊代价则为：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="公式2" src="http://www.roading.org/images/2012-03/image_thumb26.png" /&gt;&lt;/p&gt;
-&lt;p&gt;如果使得\(\phi (D_n) \geq \phi (D_0)\)为真，那么我们就可以用总的平摊代价&lt;img alt="公式3" src="http://www.roading.org/images/2012-03/image_thumb27.png" /&gt;表示总的实际代价&lt;img alt="公式4" src="http://www.roading.org/images/2012-03/image_thumb28.png" /&gt;的一个上界。&lt;/p&gt;
-&lt;p&gt;再次用上面的栈例子作为实例，一开始时空栈，而且\(\phi (D_0) = 0\) (势能为0)。于是有\(\phi (D_n) \geq \phi (D_0) = 0\)。因\(n\)的大小是不确定的，这个表达式要说明的是在一系列操作的过程中，势能可以有增有减，但绝不能为负数。&lt;/p&gt;
-&lt;p&gt;如果第\(i\)个操作是个PUSH操作，那么第\(i\)个操作带来的势差为：\(\phi(D-i) - \phi(D_{i-1}) =(s + 1) -s = 1\)。那么平摊代价PUSH操作的平摊代价就为：&lt;/p&gt;
+&lt;p&gt;如果使得\( \Phi(D_n) \geq \Phi(D_0) \)为真，那么我们就可以用总的平摊代价
+&lt;img alt="公式3" src="http://www.roading.org/images/2012-03/image_thumb27.png" /&gt;表示总的实际代价&lt;img alt="公式4" src="http://www.roading.org/images/2012-03/image_thumb28.png" /&gt;的一个上界。&lt;/p&gt;
+&lt;p&gt;再次用上面的栈例子作为实例，一开始时空栈，而且\( \Phi(D_0) = 0 \)(势能为0)。
+于是有\( \Phi(D_n) \geq \Phi(D_0) = 0 \)。因&lt;em&gt;n&lt;/em&gt;的大小是不确定的，这个表达式
+要说明的是在一系列操作的过程中，势能可以有增有减，但绝不能为负数。&lt;/p&gt;
+&lt;p&gt;如果第&lt;em&gt;i&lt;/em&gt;个操作是个PUSH操作，那么第&lt;em&gt;i&lt;/em&gt;个操作带来的势差为:
+\( \Phi(D_i) - \Phi(D_{i-1} = (s + 1) - s = 1) \)。那么平摊代价PUSH操作的
+平摊代价就为：&lt;/p&gt;
 &lt;p&gt;![公式5][fromula5]&lt;/p&gt;
 &lt;p&gt;同理也可以求得POP操作的平摊代价为0.&lt;/p&gt;
-&lt;p&gt;如果第&lt;em&gt;i&lt;/em&gt;步操作为MULTIPOP(&lt;em&gt;S&lt;/em&gt;, &lt;em&gt;k&lt;/em&gt;)。令k'= min(&lt;em&gt;k&lt;/em&gt;,&lt;em&gt;s&lt;/em&gt;)&lt;sup id="fnref:注1"&gt;&lt;a class="footnote-ref" href="#fn:注1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;，其中&lt;em&gt;s&lt;/em&gt;表示栈中元素的个数。那么\(\phi(D-i) - \phi(D_{i-1}) = k'\)。它的平摊代价就为：&lt;/p&gt;
+&lt;p&gt;如果第&lt;em&gt;i&lt;/em&gt;步操作为MULTIPOP(&lt;em&gt;S&lt;/em&gt;, &lt;em&gt;k&lt;/em&gt;)。令k'= min(&lt;em&gt;k&lt;/em&gt;,&lt;em&gt;s&lt;/em&gt;)&lt;sup id="fnref:注1"&gt;&lt;a class="footnote-ref" href="#fn:注1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;，其中&lt;em&gt;s&lt;/em&gt;表示栈
+中元素的个数。那么\( \Phi(D_i) - \Phi(D_{i-1} = -k') \)。它的平摊代价就为：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="公式6" src="http://www.roading.org/images/2012-03/image_thumb30.png" /&gt;&lt;/p&gt;
 &lt;div class="footnote"&gt;
 &lt;hr /&gt;
@@ -1479,7 +1494,7 @@ causes the root of one tree to point to the root of the other&lt;/p&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Thu 29 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周四 29 三月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1597,7 +1612,7 @@ bits&lt;/p&gt;
 &lt;p&gt;每个人都有自己的做事原则，我的原则是做一件事，要有一个明确的理由，放弃一件
 在做的事也要有一个明确的理由。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Wed 28 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周三 28 三月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1606,17 +1621,17 @@ bits&lt;/p&gt;
 一步的最优解来构建出整个问题的最优解。这并不能保证总能构建出最优解，但它通常能
 做到。我们可以先看一个具体的问题——活动安排问题。&lt;/p&gt;
 &lt;h3&gt;活动安排问题&lt;/h3&gt;
-&lt;p&gt;有一系列活动\(S = {a_1, a_2,...,a_n}\)，它们都要用到同一个舞台，而舞台一次只
-能举办一个活动。那么要如何安排才能举办最多的活动呢？&lt;/p&gt;
-&lt;p&gt;假设活动\(a-i\)的开始时间用\(s_i\)表示，结束时间用\(f_i\)表示, 有
-\(0 \leq s_i &amp;lt; f_i &amp;lt; \infty\). 也就是说\(a_i\)占用舞台的时间段为
-\([s_i, f_i)\)。那么安排的活动之间必须满足一个条件，那就是各自的时间段之间没
-有重叠的部分。&lt;/p&gt;
+&lt;p&gt;有一系列活动\( S = {a_1, a_2, \dots, a_n} \)，它们都要用到同一个舞台，而
+舞台一次只能举办一个活动。那么要如何安排才能举办最多的活动呢？&lt;/p&gt;
+&lt;p&gt;假设活动\(a_i\)的开始时间用\(s_i\)表示，结束时间用\( f_i \)表示, 有
+\( 0 \leq s_i &amp;lt; f_i &amp;lt; \infty \). 也就是说\( a_i \)占用舞台的时间段为
+\( [s_i, f_i] \)。那么安排的活动之间必须满足一个条件，那就是各自的时间段之
+间没有重叠的部分。&lt;/p&gt;
 &lt;p&gt;一个具体的例子（将这些活动按结束时间排好了序）：&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;\(i\)&lt;/th&gt;
+&lt;th&gt;&lt;em&gt;i&lt;/em&gt;&lt;/th&gt;
 &lt;th&gt;1&lt;/th&gt;
 &lt;th&gt;2&lt;/th&gt;
 &lt;th&gt;3&lt;/th&gt;
@@ -1662,12 +1677,13 @@ bits&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;对于这样一个问题，因为能够比较快速的发现其最优子结构，我们会很容易想到用动态规
-划来解决。——假设\(a_i\)是最优解中的一个元素，那么以\(a_i\)为界可以将问题分成为两
-个子问题，一个是活动结束时间在\(a_i\)的开始时间之前的所有活动，另一个则是活动开
-始时间在\(a_i\)结束时间之后的所有活动。可以证明最优解包含这两个子问题的最优解组
-成的，具体证明可见原书。&lt;/p&gt;
-&lt;p&gt;令\(S_{ij}\)代表活动开始时间在\(a_i\)结束之后而活动结束时间在\(a_j\)开始之前的所有
-活动的集合，用\(c[i, j]\)来代表的\(S_{ij}\)的最优解，那么我们可以获得递归公式：&lt;/p&gt;
+划来解决。——假设\(a_i\)是最优解中的一个元素，那么以\(a_i\)为界可以将问题
+分成为两个子问题，一个是活动结束时间在\(a_i\)的开始时间之前的所有活动，另一个
+则是活动开始时间在\(a_i\)结束时间之后的所有活动。可以证明最优解包含这两个子问
+题的最优解组成的，具体证明可见原书。&lt;/p&gt;
+&lt;p&gt;令\( S_{ij} \)代表活动开始时间在\(a_i\)结束之后而活动结束时间在\(a_j\)
+开始之前的所有活动的集合，用\( c[i, j] \)来代表的\(S_{ij}\)的最优解，那么
+我们可以获得递归公式：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2012-03/image_thumb18.png" /&gt;&lt;/p&gt;
 &lt;p&gt;如果用贪心算法的话，则不用考虑那么多种选择，只需考虑贪心选择——当前最佳的选择。
 在这个问题上，我们可以总是优先安排结束时间最早而又不与之前安排的任务有冲突的活
@@ -1745,11 +1761,11 @@ subproblems.&lt;/p&gt;
 &lt;h4&gt;0-1背包和部分背包问题&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The &lt;strong&gt;&lt;em&gt;0-1 knapsack problem&lt;/em&gt;&lt;/strong&gt; is the following. A thief robbing a
-store finds &lt;em&gt;n&lt;/em&gt; items; the &lt;em&gt;i&lt;/em&gt;th item is worth \(v_i\) dollars and
-weighs \(w_i\) pounds, where \(v_i\) and \(w_i\) are integers. He wants
-to take as valuable a load as possible, but he can carry at most &lt;em&gt;W&lt;/em&gt;
-pounds in his knapsack for some integer &lt;em&gt;W&lt;/em&gt;. Which items should he
-take? (This is called the 0-1 knapsack problem because each item must
+store finds &lt;em&gt;n&lt;/em&gt; items; the &lt;em&gt;i&lt;/em&gt;th item is worth \( v_i \) dollars
+and weighs \(w_i\) pounds, where \(v_i\) and \(w_i\) are integers.
+He wants to take as valuable a load as possible, but he can carry at
+most &lt;em&gt;W&lt;/em&gt; pounds in his knapsack for some integer &lt;em&gt;W&lt;/em&gt;. Which items should
+he take? (This is called the 0-1 knapsack problem because each item must
 either be taken or left behind; the thief cannot take a fractional
 amount of an item or take an item more than once.)&lt;/p&gt;
 &lt;p&gt;In the &lt;strong&gt;&lt;em&gt;fractional knapsack problem&lt;/em&gt;&lt;/strong&gt;, the setup is the same, but
@@ -1775,7 +1791,7 @@ pound yields an optimal solution.&lt;/p&gt;
 &lt;p&gt;0-1背包不能用贪心策略来求解，但动态规划确实使用它的。&lt;/p&gt;
 &lt;p&gt;参考： introduction to algorithm –third edition&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Tue 27 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周二 27 三月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1788,45 +1804,43 @@ pound yields an optimal solution.&lt;/p&gt;
 在根节点附近。可见用一颗平衡二叉搜索树来做这个问题并不是非常高效，在
 这儿就引出了另一种二叉查找树——最优二叉查找树。&lt;/p&gt;
 &lt;h3&gt;问题定义&lt;/h3&gt;
-&lt;p&gt;假设给定一组有序的序列\(K = 〈k_1, k_2, ...,k_n〉\)，在查找的过程中
-被查找的键是\(k_i\)的概率是\(p_i\)。同时因为有一些单词是\(K\)
-中不存在的,因此我们用\(n+1\)个虚拟键来表示这些不存在于&lt;em&gt;K&lt;/em&gt;中的键，分
-别为\(d_0, d_1, d_2, ..., d_n\) 。其中\(d_0\)代表所有比\(k_1\)
-小的键, \(d_n\)表示 所有比\(k_n\)大的键,对于\(i=1,2,...,n-1\)
-虚拟键\(d_i\)表示所有位于\(k_i\)和\(k_{i+1}\)之间的键。对于每
-一个\(d_1\),我们有一个概率\(q_i\)。&lt;/p&gt;
-&lt;p&gt;对于每次搜索，非成功，即失败，所以有：
-\[\sum_{i=1}^n p_i + \sum_{i=0}^n q_i = 1\]
-因为对于每个关键字和虚拟键的概率都是已知的，所以我们可以求出一颗二叉搜
-索树的期望值：
-\[ E[search\ const\ in\ T] = \sum_{i=1}^n( depth_T(k_i) + 1) \cdot p_i + 
-\sum_{i=0}^n( depth_T(d_i) + 1) \cdot q_i\]
-\[ = 1 + \sum_{i=1}^n(depth_T(k_i)) \cdot p_i + \sum_{i=0}^n depth_T(d_i) \cdot q_i\]&lt;/p&gt;
-&lt;p&gt;\(depth_T\)代表结点在树种的深度。而我们的目标就是要建立起一颗搜索期望值最
+&lt;p&gt;假设给定一组有序的序列\( K = &lt;K_1, k_2, \\dots, k_n&gt;\)，在查找的
+过程中被查找的键是\(k_i\)的概率是\(p_i\)。同时因为有一些单词是&lt;em&gt;K&lt;/em&gt;
+中不存在的,因此我们用n+1个虚拟键来表示这些不存在于&lt;em&gt;K&lt;/em&gt;中的键，分别为
+\(d_0, d_1, d_2, \dots, d_n\)。其中\(d_0\)代表所有比\(k_1\)
+小的键,\(d_n\)表示 所有比\(k_n\)大的键,对于\(i = 1, 2, \dots, n-1 \),
+虚拟键\(d_i\)表示所有位于\( k_i 和 k_{i+1} \)之间的键。对于每一
+个\(d_i\),我们有一个概率\(q_i\)。&lt;/p&gt;
+&lt;p&gt;对于每次搜索，非成功，即失败，所以有：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2012-03/image_thumb13.png" /&gt;&lt;/p&gt;
+&lt;p&gt;因为对于每个关键字和虚拟键的概率都是已知的，所以我们可以求出一颗二叉搜
+索树的期望值：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2012-03/image_thumb14.png" /&gt;&lt;/p&gt;
+&lt;p&gt;\(dpth_T\)代表结点在树种的深度。而我们的目标就是要建立起一颗搜索期望值最
 小的二叉树——也就是最优二叉搜索树。&lt;/p&gt;
 &lt;h3&gt;动态规划的解法&lt;/h3&gt;
 &lt;p&gt;很显然，假如\(k_i\)是最优二叉搜索树的根节点，那么它的左子树和右子树必然是最
 优二叉搜索树。由此可见，这个问题拥有最优子结构。&lt;/p&gt;
 &lt;p&gt;要注意到，当一棵树成为另一棵树的子树的时候，由于每个结点的深度增加了1，所
-以搜索期望代价增加量为所有结点的概率总和：
-\[w(i,j) = \sum_{l=i}^j p_l + \sum_{l=i-1}^j q_l\]&lt;/p&gt;
-&lt;p&gt;所以对于一棵根结点为 \(k_r\) 包含有结点\(k_i,...,k_j\)的最优二叉搜索树，
-我们有：
-\[e[i, j] = p_r + (e[i, r-1] + w(i, r-1)) + (e[r+1, j] + w(r+1, j)).\]
-注意到：\(w(i, j) = w(i, r-1) + p_r + w(r + 1, j)\)，所以：&lt;/p&gt;
-&lt;p&gt;\[e[i, j] = e[i, r-1] + e[r+1, j] + w(i, j)\].
-如此一来，我们可以建立起递归式了：&lt;/p&gt;
+以搜索期望代价增加量为所有结点的概率总和：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2012-03/image_thumb15.png" /&gt;&lt;/p&gt;
+&lt;p&gt;所以对于一棵根结点为\(k_r\)包含有结点\(k_i, \dots, k_j\)的最优二叉搜索树，
+我们有：&lt;/p&gt;
+&lt;p&gt;\[ e[i, j] = p_r + e(r[i, r-1] + w(i, r-1)) + (e[r+1, j] + w(r+1, j)).\]&lt;/p&gt;
+&lt;p&gt;注意到：\(w(i, j) = w(i, r-1) + p_r + w(r + 1, j)\)，所以：&lt;/p&gt;
+&lt;p&gt;\[ e[i, j] = e[i, r - 1] + e[r + 1, j] + w(i, j) \].&lt;/p&gt;
+&lt;p&gt;如此一来，我们可以建立起递归式了：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://www.roading.org/images/2012-03/image_thumb16.png" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt; ]记录了最优二叉查找树中的期望搜索代价，为了可以建立起二叉搜索
-树的结构，我们需要一个&lt;em&gt;root&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;,&lt;em&gt;j&lt;/em&gt; ]来记录根结点\(k_r\)的下标。&lt;/p&gt;
-&lt;p&gt;在下面的伪码中，用表 &lt;em&gt;e&lt;/em&gt;[1 ‥ &lt;em&gt;n&lt;/em&gt; + 1, 0 ‥ &lt;em&gt;n&lt;/em&gt;]来存储&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;]。第一维
-需要到&lt;em&gt;n&lt;/em&gt; + 1 而不是 &lt;em&gt;n&lt;/em&gt; 因为有子树只包含虚拟键\(d_n\)，我们需要计算和存储 
-&lt;em&gt;e&lt;/em&gt;[&lt;em&gt;n&lt;/em&gt; + 1, &lt;em&gt;n&lt;/em&gt;].第二维需要从0开始是因为有子树只包含虚拟键\(d_0\),我们需要计
-算和存储&lt;em&gt;e&lt;/em&gt;[1, 0]. 此外，除了用表&lt;em&gt;root&lt;/em&gt;[&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;]来记录根结点\(k_r\)的下标外，
-我们还需要一个表&lt;em&gt;w&lt;/em&gt;[1 ‥ &lt;em&gt;n&lt;/em&gt; + 1, 0 ‥&lt;em&gt;n&lt;/em&gt;]，来记录&lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;, &lt;em&gt;j&lt;/em&gt;)以提高效率
-——这样就不必每次都从头计算&lt;em&gt;w&lt;/em&gt;(&lt;em&gt;i&lt;/em&gt;,&lt;em&gt;j&lt;/em&gt;)了。对于 1 ≤ &lt;em&gt;i&lt;/em&gt; ≤ &lt;em&gt;n&lt;/em&gt;. 且 &lt;em&gt;j&lt;/em&gt; ≥ &lt;em&gt;i&lt;/em&gt;,
- 我们有：
-\[w(i, j) = w(i, j-1) + p_j+ q_j\]&lt;/p&gt;
+&lt;p&gt;\( e[i, j] \)记录了最优二叉查找树中的期望搜索代价，为了可以建立起二叉搜索
+树的结构，我们需要一个\( root[i, j] \)来记录根结点\( k_r \)的下标。&lt;/p&gt;
+&lt;p&gt;在下面的伪码中，用表\( e[i \dots n, 0 \dots n] \)来存储\( e[i, j] \)。
+第一维需要到\( n + 1 \)而不是\( n \)因为有子树只包含虚拟键\( d_n \)，
+我们需要计算和存储\( e[n+1, n] \).第二维需要从0开始是因为有子树只包含虚拟
+键\(d_0\),我们需要计算和存储\( e[1, 0] \). 此外，除了用表\( root[i, j] \)
+来记录根结点\(k_r\)的下标外，我们还需要一个表\( w[1 \dots n+1, 0 \dots n] \)，
+来记录\( w(i, j) \)以提高效率——这样就不必每次都从头计算\( w(i, j) \)了。
+对于\(  1 \leq i \leq n \). 且\(j \geq i\), 我们有：&lt;/p&gt;
+&lt;p&gt;\[ w(i, j) = w(i, j - 1) + p_j + q_j \]&lt;/p&gt;
 &lt;h4&gt;伪码：&lt;/h4&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;OPTIMAL&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;BST&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
@@ -1919,7 +1933,7 @@ pound yields an optimal solution.&lt;/p&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Mon 26 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周一 26 三月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;

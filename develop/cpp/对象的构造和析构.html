@@ -40,7 +40,7 @@
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-12-06T13:35:00">
-                Tue 06 December 2011
+                周二 06 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -55,14 +55,14 @@
 </div><!-- /.post-info -->
 	      <p>一般而言，构造函数被安插在对象的定义处，而析构函数被安插在对象生命
 周期结束前：</p>
-<p>:::C++
-  // Pseudo C++ Code<br />
-  {<br />
-     Point point;<br />
-     // point.Point::Point() 一般被安插在这儿<br />
-     ...<br />
-     // point.Point::~Point() 一般被安插在这儿 
-  }  </p>
+<div class="codehilite"><pre><span class="c1">// Pseudo C++ Code  </span>
+<span class="p">{</span>  
+   <span class="n">Point</span> <span class="n">point</span><span class="p">;</span>  
+   <span class="c1">// point.Point::Point() 一般被安插在这儿  </span>
+   <span class="p">...</span>  
+   <span class="c1">// point.Point::~Point() 一般被安插在这儿 </span>
+<span class="p">}</span>
+</pre></div>
 <p>当代码有一个以上的离开点的时候，析构函数则必须放在对象被构造之后的每
 一个离开点之前。因此，尽可能将对象定义在接近要使用的地方，可以减少不
 必要的构造对象和析构对象的代码被插入到自己的代码当中。</p>
@@ -120,7 +120,7 @@ mat_identity的构造函数只有在第一次被调用时在被施行，而在�
 </ol>
 <p>参考：Lippman 的两本书《深度探索C++对象模型》和《C++ Primer》。</p>
 		  <p style= "text-align:right;"><em>
-		  Tue 06 December 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周二 06 十二月 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html">本文原链</a>)</em></p>

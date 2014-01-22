@@ -224,7 +224,7 @@ tansformOrigin 来设定旋转的轴心。rotation可以用来设定旋转的度
 &lt;p&gt;参考资料：&lt;a href="http://qt.nokia.com/learning/online/training/materials/qt-essentials-qt-quick-edition"&gt;Qt Quick for C++ Developers&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Fri 24 February 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周五 24 二月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/Qt/about-ui.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -283,7 +283,7 @@ C++相同，可以用 “//”与“/* … */ ”两种形式。&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;元素拥有一些属性，同时属性用以描述元素。当然，也可以对元素扩展一些自定义的属性。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          Thu 23 February 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          周四 23 二月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/develop/cpp/qt/%e5%88%9d%e8%af%86-qt-quick.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;

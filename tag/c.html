@@ -36,7 +36,7 @@
                     <h1 class="entry-title"><a  title="Permalink to B-树的C++实现" href="http://www.roading.org//algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">B-树的C++实现</a></h1> 
                     <div class="post-info">
         <abbr class="published" title="2012-04-19T22:28:00">
-                Thu 19 April 2012
+                周四 19 四月 2012
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -88,7 +88,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2012-03-27T16:46:00">
-                Tue 27 March 2012
+                周二 27 三月 2012
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -107,7 +107,7 @@
 一步的最优解来构建出整个问题的最优解。这并不能保证总能构建出最优解，但它通常能
 做到。我们可以先看一个具体的问题——活动安排问题。</p>
 <h3>活动安排问题</h3>
-<p>有一系列活动\(S = {a_1, a_2,...,a_n}\)，它们都要用到同一个舞台，而舞台一次只 ...</p>
+<p>有一系列活动\( S = {a_1, a_2, \dots, a_n} \)，它们都要用到同一个舞台 ...</p>
                  <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html" rel="bookmark"
                            title="Permalink to 贪心算法">Read more→</a>	
 		<div class="clear"></div>
@@ -121,7 +121,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2012-03-26T11:56:00">
-                Mon 26 March 2012
+                周一 26 三月 2012
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -154,7 +154,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-17T23:37:00">
-                Sat 17 December 2011
+                周六 17 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -187,7 +187,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-07T17:00:00">
-                Wed 07 December 2011
+                周三 07 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -222,7 +222,7 @@ C++标准才要求实例化他们。其原因，有两点：</p>
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-06T17:48:00">
-                Tue 06 December 2011
+                周二 06 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -257,7 +257,7 @@ C++标准才要求实例化他们。其原因，有两点：</p>
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-06T13:35:00">
-                Tue 06 December 2011
+                周二 06 十二月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -272,15 +272,16 @@ C++标准才要求实例化他们。其原因，有两点：</p>
 </div><!-- /.post-info -->
                 <p>一般而言，构造函数被安插在对象的定义处，而析构函数被安插在对象生命
 周期结束前：</p>
-<p>:::C++
-  // Pseudo C++ Code<br />
-  {<br />
-     Point point;<br />
-     // point.Point::Point() 一般被安插在这儿<br />
-     ...<br />
-     // point.Point::~Point() 一般被安插在这儿 
-  }  </p>
-<p>当代码有一个以上的离开点的时候，析构函数则必须放在对象被构造之后的每 ...</p>
+<div class="codehilite"><pre><span class="c1">// Pseudo C++ Code  </span>
+<span class="p">{</span>  
+   <span class="n">Point</span> <span class="n">point</span><span class="p">;</span>  
+   <span class="c1">// point.Point::Point() 一般被安插在这儿  </span>
+   <span class="p">...</span>  
+   <span class="c1">// point.Point::~Point() 一般被安插在这儿 </span>
+<span class="p">}</span>
+</pre></div>
+<p>当代码有一个以上的离开点的时候，析构函数则必须放在对象被构造之后的每
+一个离开点之前 ...</p>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="bookmark"
                            title="Permalink to 对象的构造和析构">Read more→</a>	
 		<div class="clear"></div>

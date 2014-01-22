@@ -40,7 +40,7 @@
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2011-09-25T15:59:00">
-                Sun 25 September 2011
+                周日 25 九月 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -79,7 +79,8 @@ Sort）有一点不同。合并排序的是直接按数目不断递归划分成�
 Apart将一个序列分成两个序列，且Partition保证Apart前的元素小于Apart指向的值，
 它之后的元素大于等于它指向的值。</p>
 <p>来看Partition的实现：</p>
-<div class="codehilite"><pre><span class="n">templateIter</span>  <span class="nf">Partition</span><span class="p">(</span><span class="n">Iter</span> <span class="n">BegIter</span><span class="p">,</span> <span class="n">Iter</span> <span class="n">EndIter</span><span class="p">)</span>
+<div class="codehilite"><pre><span class="n">template</span><span class="o">&lt;</span><span class="kr">typename</span> <span class="n">Iter</span><span class="o">&gt;</span> 
+<span class="n">Iter</span>  <span class="n">Partition</span><span class="p">(</span><span class="n">Iter</span> <span class="n">BegIter</span><span class="p">,</span> <span class="n">Iter</span> <span class="n">EndIter</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="c1">//let the EndIter point to the pivot Iterator;</span>
     <span class="o">--</span><span class="n">EndIter</span><span class="p">;</span>
@@ -87,7 +88,16 @@ Apart将一个序列分成两个序列，且Partition保证Apart前的元素小�
     <span class="n">Iter</span> <span class="n">Apart</span><span class="o">=</span><span class="n">BegIter</span><span class="p">;</span>
     <span class="k">while</span><span class="p">(</span><span class="n">BegIter</span><span class="o">!=</span><span class="n">EndIter</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">BegIter</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">BegIter</span><span class="o">&lt;*</span><span class="n">EndIter</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">swap</span> <span class="p">(</span><span class="o">*</span><span class="n">BegIter</span><span class="p">,</span><span class="o">*</span><span class="n">Apart</span><span class="p">);</span>
+            <span class="o">++</span><span class="n">Apart</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="o">++</span><span class="n">BegIter</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="o">*</span><span class="n">Apart</span><span class="p">,</span><span class="o">*</span><span class="n">EndIter</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">Apart</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 <p>代码中中枢轴为序列的最后一个元素。这段代码的目的在于，将m个大于中枢轴的元素，
 放到前m个位置，并将中枢轴放在第m+1个位置，自然大于等于中枢轴的n-m-1个元素就
@@ -105,7 +115,7 @@ Apart将一个序列分成两个序列，且Partition保证Apart前的元素小�
 不是以可能失去最好情况为代价的呢？我想，对于快速排序的优化，应该考虑更多的实
 际情况。关于随机快速排序，在独酌的博客，我与博主进行了<a href="http://www.cnblogs.com/chinazhangjie/archive/2010/12/09/1901491.html">探讨</a>。</p>
 		  <p style= "text-align:right;"><em>
-		  Sun 25 September 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  周日 25 九月 2011 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html">本文原链</a>)</em></p>
@@ -127,10 +137,10 @@ Apart将一个序列分成两个序列，且Partition保证Apart前的元素小�
 		<div id="relative-articles">
 		<h3>Related Posts</h3>
 		<ul class="related-articles">
+		   <li><a title="并查集(Disjoint Set)" href="http://www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html">并查集(Disjoint Set)</a></li>
 		   <li><a title="Van Emde Boas trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html">Van Emde Boas trees</a></li>
 		   <li><a title="斐波那契堆的C++实现" href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html">斐波那契堆的C++实现</a></li>
 		   <li><a title="斐波那契堆(Fibonacci Heaps)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html">斐波那契堆(Fibonacci Heaps)</a></li>
-		   <li><a title="并查集(Disjoint Set)" href="http://www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html">并查集(Disjoint Set)</a></li>
 		   <li><a title="B-树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">B-树的C++实现</a></li>
 		   <li><a title="算法导论——B-trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html">算法导论——B-trees</a></li>
 		   <li><a title="算法导论——平摊分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html">算法导论——平摊分析</a></li>
