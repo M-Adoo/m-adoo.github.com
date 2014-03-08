@@ -24,8 +24,8 @@
 		        </ul>
 			<ul id="nav-tags">
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
-       					 <li><a href="http://www.roading.org/tag/fan-yi.html" title="外文翻译">翻译</a></li>
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+       					 <li><a href="http://www.roading.org/tag/fan-yi.html" title="外文翻译">翻译</a></li>
 			</ul>
 			<div class="clear"></div>
 			<hr>
@@ -34,38 +34,6 @@
 <div class="index-content">       
                 <section id="content" class="body">
                     <ul id="posts-list">
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/%e5%87%a0%e7%82%b9%e7%b1%bb%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99.html" rel="bookmark"
-                           title="Permalink to 几点类设计原则">几点类设计原则</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-11-30T16:04:00">
-                Wed 30 November 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
-</div><!-- /.post-info -->
-                <p><strong>1.即使是一个抽象基类，如果它有非静态数据成员，也应该给它提供一
-个带参数的构造函数</strong>，来初始化它的数据成员。或许你可以通过其派生
-类来初始化它的数据成员（假如nostatic data member为publish或
-protected）,但这样做的后果则是破坏了数据的封装性，使类的维护和修
-改更加困难。由此引申，类的data member应当被初始化，且只在其构造函
-数或其member ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%87%a0%e7%82%b9%e7%b1%bb%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99.html" rel="bookmark"
-                           title="Permalink to 几点类设计原则">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
             <li><article class="hentry">    
                 <header>
                     <h1><a href="http://www.roading.org//develop/cpp/%e5%91%bd%e5%90%8d%e8%bf%94%e5%9b%9e%e5%80%bc%e4%bc%98%e5%8c%96%e5%92%8c%e6%88%90%e5%91%98%e5%88%9d%e5%a7%8b%e5%8c%96%e9%98%9f%e5%88%97.html" rel="bookmark"
@@ -272,6 +240,35 @@ Lippman为我破除了藩篱。下面的部分我将随《深度探索C++对象�
 <p>C++标准规定：如果类的设计者并未为类定义任何构造函数 ...</p>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%85%a5c%e9%bb%98%e8%ae%a4%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0.html" rel="bookmark"
                            title="Permalink to 深入C++构造函数">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html" rel="bookmark"
+                           title="Permalink to 总结·亦为引言">总结·亦为引言</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-12-09T21:39:00">
+                Fri 09 December 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="Inside The C++ Object Model&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <p>《深度探索C++对象模型》终于在昨天写完了最后一篇笔记，前前后后花费了一个
+月左右，期间学到了很多，很感激书的作者和译者。之后的日子，可以将精力转
+回《算法导论》和一些非技术类的书上来了。</p>
+<p>11月11号开始看《深度探索C++对象模型》一书，到二十八号看完，共计花费了十
+八天。不过到做完全书的笔记则是昨天的事了 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2c%e5%af%b9%e8%b1%a1%e6%a8%a1%e5%9e%8b/%e6%80%bb%e7%bb%93%e4%ba%a6%e4%b8%ba%e5%bc%95%e8%a8%80.html" rel="bookmark"
+                           title="Permalink to 总结·亦为引言">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
