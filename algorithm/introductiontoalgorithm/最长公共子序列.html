@@ -24,6 +24,7 @@
 		        </ul>
 			<ul id="nav-tags">
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+       					 <li><a href="http://www.roading.org/tag/fan-yi.html" title="外文翻译">翻译</a></li>
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
 			</ul>
 			<div class="clear"></div>
@@ -40,7 +41,7 @@
 	<div class="content">
 	      <div class="post-info">
         <abbr class="published" title="2012-03-22T12:57:00">
-                周四 22 三月 2012
+                Thu 22 March 2012
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -79,8 +80,8 @@
 引用原书的定理15.1证明：</p>
 <blockquote>
 <h4>Theorem 15.1: (Optimal substructure of an LCS)</h4>
-<p>Let \( X = <x_1, x_2, \\dots, \\x_m> \) and \( Y = &lt; y_1, y_2, \dots,
-y_n &gt; \) be sequences, and let \( Z = <z_1, z_2, \\dots, z_k> \) be
+<p>Let \( X = <x_1, x_2, \dots, \x_m> \) and \( Y = &lt; y_1, y_2, \dots,
+y_n &gt; \) be sequences, and let \( Z = <z_1, z_2, \dots, z_k> \) be
 any LCS of \( X and Y \).</p>
 <ul>
 <li>If \( x_m = y_n \), then \( z_k = x_m = y_n \) and \( Z_{k-1} \)
@@ -150,8 +151,8 @@ d第i行和第j列所指方块，记录了c[i,j]和b[i,j]中的信息。我们�
 问题的最优子问题的路径，路径上的"↖"表示\( X_i = Y_i \),所以为LCS上的一个
 字母。</span></p>
 <h4>第四步：构建LCS</h4>
-<p>通过表b我们可以很快的构建出\( X = <x_1, x_2, \\dots, x_m 和 Y = <y_1，y_2,
-\\dots, y_n>&gt; \)的LCS。可以从b[m,n]开始跟踪路径，当b[i,j]为"↖"时，输出当前
+<p>通过表b我们可以很快的构建出\( X = <x_1, x_2, \dots, x_m 和 Y = <y_1，y_2,
+\dots, y_n>&gt; \)的LCS。可以从b[m,n]开始跟踪路径，当b[i,j]为"↖"时，输出当前
 字母。考虑到时从后往前追踪的，所以求出来的LCS将是反向的，所以在我们下面的递归伪
 码中，将先递归再输出。以下为伪码：</p>
 <div class="codehilite"><pre><span class="n">PRINT</span><span class="o">-</span><span class="n">LCS</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
@@ -323,7 +324,7 @@ d第i行和第j列所指方块，记录了c[i,j]和b[i,j]中的信息。我们�
 很快就爆栈了。</p>
 <p>参考： introduction to algorithm –third edition</p>
 		  <p style= "text-align:right;"><em>
-		  周四 22 三月 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  Thu 22 March 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
 		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
 		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
 		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html">本文原链</a>)</em></p>

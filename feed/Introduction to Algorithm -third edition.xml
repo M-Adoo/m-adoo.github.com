@@ -121,7 +121,7 @@ on such a data structure:&lt;/p&gt;
 &lt;td&gt;.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;UNION(\(x_n, x_{n-1}\))&lt;/td&gt;
+&lt;td n-1="n-1"&gt;UNION(\(x_n, x_&lt;/td&gt;
 &lt;td&gt;n&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -207,7 +207,7 @@ causes the root of one tree to point to the root of the other&lt;/p&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周四 18 七月 2013 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Thu 18 July 2013 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -539,7 +539,7 @@ vEB(\(\lfloor (\lg u)/2 \rfloor\))。直观起见，将
 Van Emde Boas Tree初始化的时间估计不会太少。当然这些都是可以优化的问题。&lt;/p&gt;
 &lt;p&gt;本文参考： Introduction To Algorithm ——third edition&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周一 10 六月 2013 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Mon 10 June 2013 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -802,7 +802,7 @@ Van Emde Boas Tree初始化的时间估计不会太少。当然这些都是可�
 &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;endif&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周一 01 十月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Mon 01 October 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -954,7 +954,7 @@ applications that manage large amounts of data.&lt;/p&gt;
 的&lt;img alt="咬牙切齿" src="http://www.roading.org/images/2012-07/wlEmoticon-baringteethsmile.png" /&gt;。&lt;/p&gt;
 &lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周一 30 七月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Mon 30 July 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1225,7 +1225,7 @@ applications that manage large amounts of data.&lt;/p&gt;
 &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周四 19 四月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Thu 19 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1427,7 +1427,7 @@ applications that manage large amounts of data.&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;参考：introduction to algorithm –third edition&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周日 15 四月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Sun 15 April 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1494,7 +1494,7 @@ applications that manage large amounts of data.&lt;/p&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周四 29 三月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Thu 29 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1612,7 +1612,7 @@ bits&lt;/p&gt;
 &lt;p&gt;每个人都有自己的做事原则，我的原则是做一件事，要有一个明确的理由，放弃一件
 在做的事也要有一个明确的理由。&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周三 28 三月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Wed 28 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1791,7 +1791,7 @@ pound yields an optimal solution.&lt;/p&gt;
 &lt;p&gt;0-1背包不能用贪心策略来求解，但动态规划确实使用它的。&lt;/p&gt;
 &lt;p&gt;参考： introduction to algorithm –third edition&lt;/p&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周二 27 三月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Tue 27 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
@@ -1804,7 +1804,7 @@ pound yields an optimal solution.&lt;/p&gt;
 在根节点附近。可见用一颗平衡二叉搜索树来做这个问题并不是非常高效，在
 这儿就引出了另一种二叉查找树——最优二叉查找树。&lt;/p&gt;
 &lt;h3&gt;问题定义&lt;/h3&gt;
-&lt;p&gt;假设给定一组有序的序列\( K = &lt;K_1, k_2, \\dots, k_n&gt;\)，在查找的
+&lt;p&gt;假设给定一组有序的序列\( K = &lt;K_1, k_2, \dots, k_n&gt;\)，在查找的
 过程中被查找的键是\(k_i\)的概率是\(p_i\)。同时因为有一些单词是&lt;em&gt;K&lt;/em&gt;
 中不存在的,因此我们用n+1个虚拟键来表示这些不存在于&lt;em&gt;K&lt;/em&gt;中的键，分别为
 \(d_0, d_1, d_2, \dots, d_n\)。其中\(d_0\)代表所有比\(k_1\)
@@ -1933,7 +1933,7 @@ pound yields an optimal solution.&lt;/p&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
           &lt;p style= "text-align:right;"&gt;&lt;em&gt;
-          周一 26 三月 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
+          Mon 26 March 2012 By &lt;a href="http://www.roading.org/pages/about-me.html"&gt;Adoo&lt;/a&gt;
           (&lt;a href = "http://www.roading.org/pages/message.html"&gt;Contact me&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
           &lt;p style="text-align:right;"&gt;&lt;em&gt;欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
           (&lt;a href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html"&gt;本文原链&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;

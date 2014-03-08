@@ -24,6 +24,7 @@
 		        </ul>
 			<ul id="nav-tags">
        					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+       					 <li><a href="http://www.roading.org/tag/fan-yi.html" title="外文翻译">翻译</a></li>
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
 			</ul>
 			<div class="clear"></div>
@@ -35,13 +36,51 @@
                     <ul id="posts-list">
             <li><article class="hentry">    
                 <header>
+                    <h1><a href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="bookmark"
+                           title="Permalink to 对象的构造和析构">对象的构造和析构</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-12-06T13:35:00">
+                Tue 06 December 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+	    </abbr>
+	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
+</div><!-- /.post-info -->
+                <p>一般而言，构造函数被安插在对象的定义处，而析构函数被安插在对象生命
+周期结束前：</p>
+<div class="codehilite"><pre><span class="c1">// Pseudo C++ Code  </span>
+<span class="p">{</span>  
+   <span class="n">Point</span> <span class="n">point</span><span class="p">;</span>  
+   <span class="c1">// point.Point::Point() 一般被安插在这儿  </span>
+   <span class="p">...</span>  
+   <span class="c1">// point.Point::~Point() 一般被安插在这儿 </span>
+<span class="p">}</span>
+</pre></div>
+<p>当代码有一个以上的离开点的时候，析构函数则必须放在对象被构造之后的每
+一个离开点之前 ...</p>
+                 <a  class="read-more" href="http://www.roading.org//develop/cpp/%e5%af%b9%e8%b1%a1%e7%9a%84%e6%9e%84%e9%80%a0%e5%92%8c%e6%9e%90%e6%9e%84.html" rel="bookmark"
+                           title="Permalink to 对象的构造和析构">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
+            <li><article class="hentry">    
+                <header>
                     <h1><a href="http://www.roading.org//develop/cpp/new-expression%e3%80%81operator-new-%e5%92%8c-placement-new%e4%b8%89%e4%b8%aa%e5%a6%9e%ef%bc%88new%ef%bc%89%e7%9a%84%e6%95%85%e4%ba%8b%ef%bc%883%ef%bc%89.html" rel="bookmark"
                            title="Permalink to new expression、operator new和placement new——三个“妞（new）”的故事（3）">new expression、operator new和placement new——三个“妞（new）”的故事（3）</a></h1>
                 </header>
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-05T15:49:00">
-                周一 05 十二月 2011
+                Mon 05 December 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -73,7 +112,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-05T15:19:00">
-                周一 05 十二月 2011
+                Mon 05 December 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -107,7 +146,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-02T23:35:00">
-                周五 02 十二月 2011
+                Fri 02 December 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -136,7 +175,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-12-01T22:04:00">
-                周四 01 十二月 2011
+                Thu 01 December 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -170,7 +209,7 @@
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-30T16:04:00">
-                周三 30 十一月 2011
+                Wed 30 November 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -202,7 +241,7 @@ protected）,但这样做的后果则是破坏了数据的封装性，使类的�
                 <div class="entry-content">
                 <div class="post-info">
         <abbr class="published" title="2011-11-29T19:50:00">
-                周二 29 十一月 2011
+                Tue 29 November 2011
         </abbr>
         <address class="article_author">
                 By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
@@ -225,35 +264,6 @@ class的指针（或引用），寻址出一个derived class object”的意思�
 <div class="codehilite"><pre><span class="n">Point</span> <span class="n">ptr</span><span class="o">=</span><span class="k">new ...</span></pre></div>
                  <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e4%b9%8b%e8%99%9a%e5%87%bd%e6%95%b0virtual-member-functions.html" rel="bookmark"
                            title="Permalink to C++之虚函数(Virtual Member Functions)">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//develop/cpp/c%e4%b9%8b%e6%88%90%e5%91%98%e5%87%bd%e6%95%b0%e8%b0%83%e7%94%a8.html" rel="bookmark"
-                           title="Permalink to C++之成员函数调用">C++之成员函数调用</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-11-27T15:14:00">
-                周日 27 十一月 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;Inside The C++ Object Model&nbsp;&nbsp;笔记&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to Inside The C++ Object Model" href="http://www.roading.org/tag/inside-the-c-object-model.html">Inside The C++ Object Model</a>
-		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
-	    </abbr>
-	<abbr>In <a title="permalink to 深度探索C++对象模型" href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a></abbr>
-</div><!-- /.post-info -->
-                <p>c++支持三种类型的成员函数，分别为static,nostatic,virtual。每一种调用方式都不尽相同。</p>
-<h3>非静态成员函数（Nonstatic Member Functions）</h3>
-<p>保证nostatic member function至少必须和一般的nonmember function有相同的效率是C++的设计准则之一。事实上在c++中非静态成员函数（nostatic member function ...</p>
-                 <a  class="read-more" href="http://www.roading.org//develop/cpp/c%e4%b9%8b%e6%88%90%e5%91%98%e5%87%bd%e6%95%b0%e8%b0%83%e7%94%a8.html" rel="bookmark"
-                           title="Permalink to C++之成员函数调用">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -291,6 +301,9 @@ class的指针（或引用），寻址出一个derived class object”的意思�
              <li ><a href="http://www.roading.org/category/qt.html">QT</a>
 	         <a href="http://www.roading.org/feed/QT.xml" 
 		title="Subscribe for QT" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
+             <li ><a href="http://www.roading.org/category/translate.html">translate</a>
+	         <a href="http://www.roading.org/feed/translate.xml" 
+		title="Subscribe for translate" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
              <li ><a href="http://www.roading.org/category/shen-du-tan-suo-cdui-xiang-mo-xing.html">深度探索C++对象模型</a>
 	         <a href="http://www.roading.org/feed/深度探索C++对象模型.xml" 
 		title="Subscribe for 深度探索C++对象模型" type="application/atom+xml" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a></li>
