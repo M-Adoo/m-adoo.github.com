@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>斐波那契堆(Fibonacci Heaps)</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://www.roading.org/theme/css/main.css" type="text/css" />
+        <link href="http://www.roading.org/feed/index.xml" type="application/atom+xml" rel="alternate" title="Adoo's blog Atom Feed" />
+        <link href="http://www.roading.org/feed/all.rss" type="application/rss+xml" rel="alternate" title="Adoo's blog RSS Feed" />
+</head>
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <div id="siteinfo"><a id="sitename" rel="nofollow" href="http://www.roading.org">Adoo's blog </a><span id="subsitename"> 怀理想主义，行务实之道。</span></div>
+<div id="header-search-form">
+<gcse:searchbox-only>Loading...</gcse:searchbox-only>
+</div>
+                <div class="clear"></div>
+		<nav>
+			<ul id= "nav-pages">
+				    <li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
+				    <li><a href="http://www.roading.org/pages/links.html">links</a></li>
+				    <li><a href="http://www.roading.org/pages/message.html">Message</a></li>
+				    <li><a href = "http://www.roading.org/tweets.html">Tweets</a></li>
+				    <li><a href="http://www.roading.org/archives.html">Archive</a></li>
+		        </ul>
+			<ul id="nav-tags">
+       					 <li><a href="http://www.roading.org/tag/fan-yi.html" title="外文翻译">翻译</a></li>
+       					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
+			</ul>
+			<div class="clear"></div>
+			<hr>
+<div class="crumbs">
+<a href="http://www.roading.org" title ="Back to homepage">Home</a> »
+<a href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a> »
+斐波那契堆(Fibonacci Heaps)
+</div>
+		</nav>
+	</header><!-- /#banner -->
+    <div class="article-page">
+	<h1>斐波那契堆(Fibonacci Heaps)</h1>
+	<div class="content">
+	      <div class="post-info">
+        <abbr class="published" title="2012-07-30T22:33:00">
+                Mon 30 July 2012
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="algorithm&nbsp;&nbsp;算法导论&nbsp;&nbsp;笔记&nbsp;&nbsp;fibonacci heaps&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to algorithm" href="http://www.roading.org/tag/algorithm.html">algorithm</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to 笔记" href="http://www.roading.org/tag/bi-ji.html">笔记</a>
+		<a title="permalink to fibonacci heaps" href="http://www.roading.org/tag/fibonacci-heaps.html">fibonacci heaps</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+	      <h3>概览</h3>
+<p>斐波那契堆是由一组最小堆有序树组成，其中的每棵树都必须符合最小堆属性。
+简单点，斐波那契堆是由一组有点特别的树组成。除了两个与元素删除有关的
+操作（EXTRACT-MIN和DELETE）之外，它的其它操作都能在常数时间内完成。可
+以看下斐波那契堆和二叉堆的运行时间对比表：</p>
+<p><img alt="time-table" src="http://www.roading.org/images/2012-07/image.png" /></p>
+<h3>结构</h3>
+<p>说白点，斐波那契堆由一组有根树组成，不过这些有根树都得是二项堆。大致
+结构如下：</p>
+<p><img alt="" src="http://www.roading.org/images/2012-07/image1.png" /></p>
+<p>有一个min指针指向了这些树根中关键字最小的一个。</p>
+<p>对于每一个结点来说，除了关键字之外，至少还得有left、right、parent、child
+四个指针、一个mark标记和一个degree计数，四个指针好说，分别用来指向左右兄
+弟、父亲和任意一个孩子。至于mark标记则是用来标识一个非根结点是否已经失去
+了一个孩子（这样的结点，不能在夺其子女了，可能要进行一些其它的特别操作），
+实际上涉及到mark的操作并不多。degree则是用来统计该结点有几个儿子。丰满起
+来的斐波那契堆就成了这样：</p>
+<p><img alt="" src="http://www.roading.org/images/2012-07/image2.png" /></p>
+<h3>基本操作</h3>
+<p>斐波那契堆包含MAKE-HEAP、INSERT、MINIMUM、EXTRACT-MIN、UNION、
+DECREASE-KEY、DELETE等几项基本操作。建堆、插入、合并、和获得关键字最小的
+结点这四个操作比想象的还要简单。建堆只需简单的初始化一下min指针和记录结点
+数目的成员n即可；插入操作则是直接将结点插入到根链表中，这相当于进行一个循
+环双向链表的插入操作；合并操作直接将两个斐波那契堆得根链表合二为一；获得
+最小关键字的结点，更不必说，直接返回min指针即可。因此，对于MAKE-HEAP、
+INSEST、MINIMUN、UNION这四个操作就不多费笔墨。主要关注一下EXTRACT-MIN和
+DECREAS-KEY两个操作，而一旦实现了这两个操作，DELETE的实现则变得轻而易举。</p>
+<h4>EXTRACT-MIN</h4>
+<p>EXTRACT-MIN除了要提取出最小关键字的结点之外，其实还要对斐波那契堆的结构进
+行整理。如果不进行整理的话，那么斐波那契堆就完全成了一个双向循环链表了。整
+理到什么程度？直到根链表中所有的结点的degree值都不同！很奇怪之处在于，算导
+上对于为什么以所有根结点的degree不同为指标，居然只字未提。不过就我观察，其
+原因可能在于，当根结点的degree都不同的时候，此时的斐波那契堆就成了一个二项
+堆或者近似二项堆。</p>
+<p>EXTRACT-MIN可以分为三步走：</p>
+<ol>
+<li>将min的所有孩子取出加入到根链表中去；</li>
+<li>从根链表中移除min结点；</li>
+<li>整理斐波那契堆并获得新的min指针；</li>
+</ol>
+<p>EXTRACT-MiN的伪码为：</p>
+<div class="codehilite"><pre><span class="n">EXTRACT</span><span class="o">-</span><span class="n">MIN</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">H</span><span class="p">.</span><span class="n">min</span>
+    <span class="k">if</span> <span class="n">z</span> <span class="o">!=</span> <span class="n">NIL</span>
+        <span class="k">for</span> <span class="n">each</span> <span class="n">child</span> <span class="n">of</span> <span class="n">z</span> 
+            <span class="n">add</span> <span class="n">x</span> <span class="n">to</span> <span class="n">the</span> <span class="n">root</span> <span class="n">list</span> <span class="n">of</span> <span class="n">H</span>
+            <span class="n">x</span><span class="p">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">NIL</span>
+        <span class="n">remove</span> <span class="n">z</span> <span class="n">from</span> <span class="n">the</span> <span class="n">root</span> <span class="n">list</span> <span class="n">of</span> <span class="n">H</span>
+        <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="n">z</span><span class="p">.</span><span class="n">right</span>
+            <span class="n">H</span><span class="p">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">NIL</span>
+        <span class="k">else</span>
+            <span class="n">H</span><span class="p">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">z</span><span class="p">.</span><span class="n">right</span>
+            <span class="n">CONSOLIDATE</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+        <span class="n">H</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">H</span><span class="p">.</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">z</span>
+</pre></div>
+<p>其中CONSOLIDATE函数正是用来整理斐波那契堆的，它创建一个数组A来暂存根结点，
+并在遍历根链表的过程中将根结点degree相同的树合并。</p>
+<p>其伪码如下（其中<img alt="" src="http://www.roading.org/images/2012-07/image3.png" />，且<img alt="" src="http://www.roading.org/images/2012-07/image4.png" />，具体证明见书本）：</p>
+<div class="codehilite"><pre><span class="n">CONSOLIDATE</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+    <span class="n">let</span> <span class="n">A</span><span class="p">[</span><span class="n">D</span><span class="p">(</span><span class="n">H</span><span class="p">.</span><span class="n">n</span><span class="p">)]</span> <span class="n">be</span> <span class="n">a</span> <span class="k">new</span> <span class="n">array</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">D</span><span class="p">(</span><span class="n">H</span><span class="p">.</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">NULL</span>
+    <span class="k">for</span> <span class="n">each</span> <span class="n">node</span> <span class="n">w</span> <span class="n">in</span> <span class="n">the</span> <span class="n">root</span> <span class="n">list</span> <span class="n">of</span> <span class="n">H</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">w</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">degree</span>
+        <span class="k">while</span> <span class="n">A</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">NULL</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">d</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">x</span><span class="p">.</span><span class="n">key</span> <span class="o">&gt;</span> <span class="n">y</span><span class="p">.</span><span class="n">key</span> 
+                <span class="n">exchange</span> <span class="n">x</span> <span class="n">with</span> <span class="n">y</span>
+            <span class="n">HEAP</span><span class="o">-</span><span class="n">LINK</span> <span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">NIL</span> 
+            <span class="n">d</span> <span class="o">=</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span> 
+    <span class="n">H</span><span class="p">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">NIL</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">D</span><span class="p">(</span><span class="n">H</span><span class="p">.</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">NIL</span>
+            <span class="k">if</span> <span class="n">H</span><span class="p">.</span><span class="n">min</span> <span class="o">==</span> <span class="n">NIL</span>
+                <span class="n">create</span> <span class="n">a</span> <span class="n">root</span> <span class="n">list</span> <span class="k">for</span> <span class="n">H</span> <span class="n">contaning</span> <span class="n">just</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">H</span><span class="p">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">else</span>
+                <span class="n">insert</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="n">into</span> <span class="n">H</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">root</span> <span class="n">list</span>
+                <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">H</span><span class="p">.</span><span class="n">min</span><span class="p">.</span><span class="n">key</span>
+                    <span class="n">H</span><span class="p">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="n">HEAP</span><span class="o">-</span><span class="n">LINK</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">remove</span> <span class="n">y</span> <span class="n">from</span> <span class="n">the</span> <span class="n">root</span> <span class="n">list</span> <span class="n">of</span> <span class="n">H</span>
+    <span class="n">make</span> <span class="n">y</span> <span class="n">a</span> <span class="n">child</span> <span class="n">of</span> <span class="n">x</span><span class="p">,</span> <span class="n">incrementing</span> <span class="n">x</span><span class="p">.</span><span class="n">degree</span>
+    <span class="n">y</span><span class="p">.</span><span class="n">mark</span> <span class="o">=</span> <span class="nb">false</span>
+</pre></div>
+<p>看一个实例的演示图或许更加清楚明白：</p>
+<p><img alt="" src="http://www.roading.org/images/2012-07/image5.png" /></p>
+<p><img alt="" src="http://www.roading.org/images/2012-07/image6.png" /></p>
+<h3>Decreasing a key</h3>
+<p>将一个关键字变小，有两种情况发生，一种是这个关键字变小以后还是比它的父结点
+关键字大，这时候什么都不用做；但是如果关键字变小后比它的父结点关键字要小的
+话，这时候可以将这个结点所在的子树直接移植到根链表中去。但是不管不顾的乱移
+植，有可能带来各种怪异的树结构，典型的就是变成了一根棍子。于是，可以采取一
+种折中的方式，当一个非根结点失去第二个孩子的时候，也将被移植到根链表中。这
+可以保证根链表中的每棵树都是一个近似二项堆。伪码如下：</p>
+<div class="codehilite"><pre><span class="n">DECREASE</span><span class="o">-</span><span class="n">KEY</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">key</span>
+        <span class="n">error</span> <span class="s">&quot;new key is greater than current key&quot;</span>
+    <span class="n">x</span><span class="p">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">k</span>
+    <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">NIL</span> <span class="n">and</span> <span class="n">x</span><span class="p">.</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">.</span><span class="n">key</span>
+        <span class="n">CUT</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span>  <span class="n">y</span><span class="p">)</span>
+        <span class="n">CASCADING</span><span class="o">-</span><span class="n">CUT</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span><span class="p">.</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">h</span><span class="p">.</span><span class="n">min</span><span class="p">.</span><span class="n">key</span>
+        <span class="n">H</span><span class="p">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">xCUT</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">remove</span> <span class="n">x</span> <span class="n">from</span> <span class="n">the</span> <span class="n">child</span> <span class="n">list</span> <span class="n">of</span> <span class="n">y</span><span class="p">,</span> <span class="n">decrementing</span> <span class="n">y</span><span class="p">.</span><span class="n">degree</span>
+    <span class="n">add</span> <span class="n">x</span> <span class="n">to</span> <span class="n">the</span> <span class="n">root</span> <span class="n">list</span> <span class="n">of</span> <span class="n">H</span>
+    <span class="n">x</span><span class="p">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">NIL</span>
+    <span class="n">x</span><span class="p">.</span><span class="n">mark</span> <span class="o">=</span> <span class="nb">false</span>
+<span class="n">CASCADING</span><span class="o">-</span><span class="n">CUT</span><span class="p">(</span><span class="n">H</span><span class="p">.</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="n">p</span>
+    <span class="k">if</span> <span class="n">z</span> <span class="o">!=</span> <span class="n">NIL</span>
+        <span class="k">if</span> <span class="n">y</span><span class="p">.</span><span class="n">mark</span> <span class="o">==</span> <span class="nb">false</span>
+            <span class="n">y</span><span class="p">.</span><span class="n">mark</span> <span class="o">=</span> <span class="nb">true</span>
+        <span class="k">else</span>
+            <span class="n">CUT</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+            <span class="n">CASCADING</span><span class="o">-</span><span class="n">CUT</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+</pre></div>
+<p>删除操作则完全可以利用DECREASE-KEY配合EXTRACT-MIN两者完成，先将要删除结点的
+关键字减小为无穷小，则提取最小关键字的结点就可以达到目的。</p>
+<h3>总结</h3>
+<p>总的来说，斐波那契堆可以在常数时间内进行进行插入、合并、减小关键字等操作，但
+删除搜索等操作并不是其擅长。斐波那契堆并没有太多需要时刻保持的属性，这使得对
+于插入、合并、减小关键字等操作变得轻而易举。但实际上它将很多的工作留在了提取
+最小元素时来完成，所以这个操作实现起来复杂，运行起来耗时。</p>
+<p>斐波那契堆将一些事情集中起来在某些操作上来处理，这就产生了一些被优化的操作，
+所以斐波那契堆就变成了一个优点很鲜明的数据结构。尽管如此，但斐波那契堆对于工
+程实践来讲，可能太过于复杂了，算导上就说：</p>
+<blockquote>
+<p>From a practical point of view, however, the constant factors and
+programming complexity of Fibonacci heaps make them less desirable than 
+ordinary binary(or k-ary) heaps for most applications, except for certain
+applications that manage large amounts of data.</p>
+</blockquote>
+<p>它说呢，鉴于斐波那契堆的复杂性和常数因子可能较大，除了某些管理大数据的应用，
+人们还宁愿用二叉堆。话说回来，它又说了，说斐波那契堆还是有蛮多理论研究价值
+的<img alt="咬牙切齿" src="http://www.roading.org/images/2012-07/wlEmoticon-baringteethsmile.png" />。</p>
+<p>参考：introduction to algorithm –third edition</p>
+		  <p style= "text-align:right;"><em>
+		  Mon 30 July 2012 By <a class="url fn" href="http://www.roading.org/pages/about-me.html">Adoo</a>
+		  (<a href = "http://www.roading.org/pages/message.html">Contact me</a>)</em></p>
+		  <p style="text-align:right;"><em>欢迎你与我交流探讨，如有错误疏漏之处，恳请指正。
+		  (<a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e5%a0%86fibonacci-heaps.html">本文原链</a>)</em></p>
+	    <span class = "left">Share this with your friends:</span>
+	    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+		<a class="bds_tsina"></a>
+		<a class="bds_qzone"></a>
+		<a class="bds_tqq"></a>
+		<a class="bds_douban"></a>
+		<a class="bds_taobao"></a>
+		<a class="bds_renren"></a>
+		<a class="bds_kaixin001"></a>
+		<a class="bds_twi"></a>
+		<a class="bds_copy"></a>
+	    </div>     
+	<div class="ds-thread"></div>
+	</div>
+        <div class="sidebar">
+		<div id="relative-articles">
+		<h3>Related Posts</h3>
+		<ul class="related-articles">
+		   <li><a title="并查集(Disjoint Set)" href="http://www.roading.org/algorithm/introductiontoalgorithm/Disjoint_set.html">并查集(Disjoint Set)</a></li>
+		   <li><a title="Van Emde Boas trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/Van_Emde_Boas_trees.html">Van Emde Boas trees</a></li>
+		   <li><a title="斐波那契堆的C++实现" href="http://www.roading.org/algorithm/fibonacci-heaps-in-cpp.html">斐波那契堆的C++实现</a></li>
+		   <li class="selected">斐波那契堆(Fibonacci Heaps)</li>
+		   <li><a title="B-树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/b-%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">B-树的C++实现</a></li>
+		   <li><a title="算法导论——B-trees" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%bab-trees.html">算法导论——B-trees</a></li>
+		   <li><a title="算法导论——平摊分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e5%b9%b3%e6%91%8a%e5%88%86%e6%9e%90.html">算法导论——平摊分析</a></li>
+		   <li><a title="赫夫曼编码" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b5%ab%e5%a4%ab%e6%9b%bc%e7%bc%96%e7%a0%81.html">赫夫曼编码</a></li>
+		   <li><a title="贪心算法" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95.html">贪心算法</a></li>
+		   <li><a title="最优二叉查找树" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e4%bc%98%e5%84%bf%e5%8f%89%e6%9f%a5%e6%89%be%e6%a0%91.html">最优二叉查找树</a></li>
+		   <li><a title="最长单调子序列问题" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%8d%95%e8%b0%83%e5%ad%90%e5%ba%8f%e5%88%97%e9%97%ae%e9%a2%98.html">最长单调子序列问题</a></li>
+		   <li><a title="最长公共子序列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%ad%90%e5%ba%8f%e5%88%97.html">最长公共子序列</a></li>
+		   <li><a title="动态规划基础" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e5%9f%ba%e7%a1%80.html">动态规划基础</a></li>
+		   <li><a title="动态规划笔记（1）——Rod cutting" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89rod-cutting.html">动态规划笔记（1）——Rod cutting</a></li>
+		   <li><a title="扩展数据结构" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%89%a9%e5%b1%95%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.html">扩展数据结构</a></li>
+		   <li><a title="在没有父指针情况下的红黑树插入操作" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%9c%a8%e6%b2%a1%e6%9c%89%e7%88%b6%e6%8c%87%e9%92%88%e6%83%85%e5%86%b5%e4%b8%8b%e7%9a%84%e7%ba%a2%e9%bb%91%e6%a0%91%e6%8f%92%e5%85%a5%e6%93%8d%e4%bd%9c.html">在没有父指针情况下的红黑树插入操作</a></li>
+		   <li><a title="C++实现红黑树，仿STL封装" href="http://www.roading.org/algorithm/introductiontoalgorithm/c%e5%ae%9e%e7%8e%b0%e7%ba%a2%e9%bb%91%e6%a0%91%ef%bc%8c%e4%bb%bfstl%e5%b0%81%e8%a3%85.html">C++实现红黑树，仿STL封装</a></li>
+		   <li><a title="Chapter 13 Red-Black trees (红黑树)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-13-red-black-trees-%e7%ba%a2%e9%bb%91%e6%a0%91.html">Chapter 13 Red-Black trees (红黑树)</a></li>
+		   <li><a title="Radix Tree 基数树" href="http://www.roading.org/algorithm/introductiontoalgorithm/radix-tree-%e5%9f%ba%e6%95%b0%e6%a0%91.html">Radix Tree 基数树</a></li>
+		   <li><a title="非递归不用栈遍历搜索二叉树" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e9%9d%9e%e9%80%92%e5%bd%92%e4%b8%8d%e7%94%a8%e6%a0%88%e9%81%8d%e5%8e%86%e6%90%9c%e7%b4%a2%e4%ba%8c%e5%8f%89%e6%a0%91.html">非递归不用栈遍历搜索二叉树</a></li>
+		   <li><a title="仿STL 的二叉搜索树的C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e4%bb%bfstl-%e7%9a%84%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84c%e5%ae%9e%e7%8e%b0.html">仿STL 的二叉搜索树的C++实现</a></li>
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 2" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree-2.html">Chapter 12 二叉搜索树(Binary Search Tree) 2</a></li>
+		   <li><a title="Chapter 12 二叉搜索树(Binary Search Tree) 1" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-12-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91binary-search-tree.html">Chapter 12 二叉搜索树(Binary Search Tree) 1</a></li>
+		   <li><a title="Solution of CLRS 11.1 exercises" href="http://www.roading.org/algorithm/introductiontoalgorithm/solution-of-clrs-11-1-exercises.html">Solution of CLRS 11.1 exercises</a></li>
+		   <li><a title="哈希表的C++模板实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html">哈希表的C++模板实现</a></li>
+		   <li><a title="哈希表（Hash Tables）（2）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%88hash-tables%ef%bc%89%ef%bc%882%ef%bc%89.html">哈希表（Hash Tables）（2）</a></li>
+		   <li><a title="哈希表（1）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html">哈希表（1）</a></li>
+		   <li><a title="Chapter 10 Exercises and Problems (2)" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises-and-problems-2.html">Chapter 10 Exercises and Problems (2)</a></li>
+		   <li><a title="Chapter 10 Exercises（1）" href="http://www.roading.org/algorithm/introductiontoalgorithm/chapter-10-exercises%ef%bc%881%ef%bc%89-2.html">Chapter 10 Exercises（1）</a></li>
+		   <li><a title="第十章 Elementary Data Structures" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%8d%81%e7%ab%a0-elementary-data-structures-3.html">第十章 Elementary Data Structures</a></li>
+		   <li><a title="第九章习题选做" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0%e4%b9%a0%e9%a2%98%e9%80%89%e5%81%9a.html">第九章习题选做</a></li>
+		   <li><a title="第九章 中位数和顺序统计量（Medians and Order Statistic）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e4%b8%ad%e4%bd%8d%e6%95%b0%e5%92%8c%e9%a1%ba%e5%ba%8f%e7%bb%9f%e8%ae%a1%e9%87%8f%ef%bc%88medians-and-order-statistic%ef%bc%89.html">第九章 中位数和顺序统计量（Medians and Order Statistic）</a></li>
+		   <li><a title="第八章（5） 习题 8-4 8-5 8-7" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%885%ef%bc%89-%e4%b9%a0%e9%a2%98-8-4-8-5-8-7.html">第八章（5） 习题 8-4 8-5 8-7</a></li>
+		   <li><a title="桶排序（Bucket sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%884%ef%bc%89-%e6%a1%b6%e6%8e%92%e5%ba%8f%ef%bc%88bucket-sort%ef%bc%89.html">桶排序（Bucket sort）</a></li>
+		   <li><a title="第八章（3） 基数排序（Radix Sort）" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%883%ef%bc%89-%e5%9f%ba%e6%95%b0%e6%8e%92%e5%ba%8f%ef%bc%88radix-sort%ef%bc%89.html">第八章（3） 基数排序（Radix Sort）</a></li>
+		   <li><a title="计数排序(Counting Sort)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a02-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8fcounting-sort.html">计数排序(Counting Sort)</a></li>
+		   <li><a title="《算法导论》笔记汇总" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba%e7%b4%a2%e5%bc%95%e8%a1%a8.html">《算法导论》笔记汇总</a></li>
+		   <li><a title="比较排序在最坏情况下时间复杂度为Ω(nlgn)" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba-%e7%ac%ac%e5%85%ab%e7%ab%a0%ef%bc%881%ef%bc%89-%e6%af%94%e8%be%83%e6%8e%92%e5%ba%8f%e5%9c%a8%e6%9c%80%e5%9d%8f%e6%83%85%e5%86%b5%e4%b8%8b%e6%97%b6%e9%97%b4.html">比较排序在最坏情况下时间复杂度为Ω(nlgn)</a></li>
+		   <li><a title="快速排序课后7.4-5" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%882%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f-%e8%af%be%e5%90%8e7-4-5.html">快速排序课后7.4-5</a></li>
+		   <li><a title="快排与随机快排效率分析" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%bf%ab%e6%8e%92%e4%b8%8e%e9%9a%8f%e6%9c%ba%e5%bf%ab%e6%8e%92%e6%95%88%e7%8e%87%e5%88%86%e6%9e%90.html">快排与随机快排效率分析</a></li>
+		   <li><a title="快速排序及C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ac%ac%e4%b8%83%e7%ab%a0%ef%bc%881%ef%bc%89-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f.html">快速排序及C++实现</a></li>
+		   <li><a title="算法导论6-3 young tableaus" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e7%ae%97%e6%b3%95%e5%af%bc%e8%ae%ba6-3-young-tableaus.html">算法导论6-3 young tableaus</a></li>
+		   <li><a title="利用堆来建立优先级队列" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%88%a9%e7%94%a8%e5%a0%86%e6%9d%a5%e5%bb%ba%e7%ab%8b%e4%bc%98%e5%85%88%e7%ba%a7%e9%98%9f%e5%88%97.html">利用堆来建立优先级队列</a></li>
+		   <li><a title="堆排序及其C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e5%a0%86%e6%8e%92%e5%ba%8f.html">堆排序及其C++实现</a></li>
+		   <li><a title="排序之插入排序与合并排序-C++实现" href="http://www.roading.org/algorithm/introductiontoalgorithm/%e6%8f%92%e5%85%a5%e6%8e%92%e5%ba%8f-insertionsort-c%e5%ae%9e%e7%8e%b0.html">排序之插入排序与合并排序-C++实现</a></li>
+		</ul>
+		</div>
+<h3>Contact me</h3>
+<div class="social">
+	<span style="font-size:15px">I'm here:</span>	
+	<a href="http://www.roading.org/feed/index.xml" type="application/atom+xml" title="Atom feed" rel="alternate"><img src="http://www.roading.org/theme/images/icons/rss.png"></img></a>
+	<a href="http://twitter.com/Monkey_Adoo" title="@Monkey_Adoo"><img src="http://www.roading.org/theme/images/icons/twitter.png"></img></a>
+	<a href="http://weibo.com/boringMonkey" title="@M-Adoo"><img src="http://www.roading.org/theme/images/icons/weibo.png"></img></a>
+	<a href="http://douban.com/people/Monkey_Adoo" title="Adoo"><img src="http://www.roading.org/theme/images/icons/douban.png"></img></a>
+	<a rea="tomail" title="Adoo@outlook.com" href="mailto:Adoo@outlook.com"><img src="http://www.roading.org/theme/images/icons/email.png"></img></a>
+	</div><!-- /.social -->
+	</div>
+	</div>
+<div class="clear"></div>
+ <div id="footer">
+	<a class="right" href="#banner"  titile="Back to Top" rel="nofollow" title="Back to top">Top↑</a>
+	<ul id="footer-nav" class="right">
+		<li><a href="http://www.roading.org/pages/about-me.html">About me</a></li>
+		<li><a href="http://www.roading.org/pages/links.html">links</a></li>
+		<li><a href="http://www.roading.org/pages/message.html">Message</a></li>
+		<li><a href="http://www.roading.org/archives.html">Archive</a></li>
+	</ul>
+	<div class="clear"></div>
+	<p>Theme designed by Adoo. Powered by Pelican. &copy; 2011-2012</p>
+       </div>
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"adoo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Google Search -->
+<script>
+  (function() {
+    var cx = '014593096765008582725:vpqn4f4zw88';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+	'//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<!-- Google Analytics -->
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-29709820-1");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+<!-- 百度分享 -->
+<script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+</script>
+<!-- Baidu Button END -->
+<!-- Support latex by mathjax -->
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
