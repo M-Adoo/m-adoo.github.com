@@ -23,9 +23,9 @@
 				    <li><a href="http://www.roading.org/archives.html">Archive</a></li>
 		        </ul>
 			<ul id="nav-tags">
-       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
-       					 <li><a href="http://www.roading.org/tag/fan-yi.html" title="外文翻译">翻译</a></li>
        					 <li><a href="http://www.roading.org/tag/sui-bi.html" title="人生愁几许？难有不悲秋！">随笔</a></li>
+       					 <li><a href="http://www.roading.org/tag/fan-yi.html" title="外文翻译">翻译</a></li>
+       					 <li><a href="http://www.roading.org/tag/bi-ji.html" title="或为读书笔记，或偶有心得">笔记</a></li>
 			</ul>
 			<div class="clear"></div>
 			<hr>
@@ -34,6 +34,39 @@
 <div class="index-content">       
                 <section id="content" class="body">
                     <ul id="posts-list">
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 哈希表的C++模板实现">哈希表的C++模板实现</a></h1>
+                </header>
+                <div class="entry-content">
+                <div class="post-info">
+        <abbr class="published" title="2011-11-13T16:36:00">
+                Sun 13 November 2011
+        </abbr>
+        <address class="article_author">
+                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
+        </address>
+	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;hash tables&nbsp;&nbsp;">
+	    Tags: 
+		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
+		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
+		<a title="permalink to hash tables" href="http://www.roading.org/tag/hash-tables.html">hash tables</a>
+	    </abbr>
+	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
+</div><!-- /.post-info -->
+                <p>采用引用计数来解决指针管理问题。开放地址、双重哈希来解决碰撞和探测问题，
+实现了哈希表的创建、查找、插入，复制控制，[]操作符… 但总觉得欠缺点什么。</p>
+<p>源码：</p>
+<div class="codehilite"><pre><span class="c1">//hash.h </span>
+<span class="c1">//2011/11/13   By Adoo</span>
+<span class="cp">#ifndef  HASH_H</span>
+<span class="cp">#define ...</span></pre></div>
+                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%e7%9a%84c%e6%a8%a1%e6%9d%bf%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
+                           title="Permalink to 哈希表的C++模板实现">Read more→</a>	
+		<div class="clear"></div>
+                </div><!-- /.entry-content -->
+            </article></li>
             <li><article class="hentry">    
                 <header>
                     <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e5%93%88%e5%b8%8c%e8%a1%a8%ef%bc%881%ef%bc%89.html" rel="bookmark"
@@ -226,36 +259,6 @@ as a nearly completely ...</p></blockquote>
 取一组数据中第 ...</p>
                  <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%89%a9%e5%b1%95%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.html" rel="bookmark"
                            title="Permalink to 扩展数据结构">Read more→</a>	
-		<div class="clear"></div>
-                </div><!-- /.entry-content -->
-            </article></li>
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%8f%92%e5%85%a5%e6%8e%92%e5%ba%8f-insertionsort-c%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
-                           title="Permalink to 排序之插入排序与合并排序-C++实现">排序之插入排序与合并排序-C++实现</a></h1>
-                </header>
-                <div class="entry-content">
-                <div class="post-info">
-        <abbr class="published" title="2011-09-10T06:51:00">
-                Sat 10 September 2011
-        </abbr>
-        <address class="article_author">
-                By <a class="url fn" href="http://www.roading.org/author/adoo.html">Adoo</a>
-        </address>
-	    <abbr title="c++&nbsp;&nbsp;算法导论&nbsp;&nbsp;">
-	    Tags: 
-		<a title="permalink to c++" href="http://www.roading.org/tag/c.html">c++</a>
-		<a title="permalink to 算法导论" href="http://www.roading.org/tag/suan-fa-dao-lun.html">算法导论</a>
-	    </abbr>
-	<abbr>In <a title="permalink to Introduction to Algorithm -third edition" href="http://www.roading.org/category/introduction-to-algorithm-third-edition.html">Introduction to Algorithm -third edition</a></abbr>
-</div><!-- /.post-info -->
-                <p>插入排序很简单，也好实现。下面是实现代码:  </p>
-<div class="codehilite"><pre><span class="c1">//2011/7/17</span>
-<span class="cp">#include&lt;algorithm&gt;</span>
-<span class="cp">#include&lt;limits&gt;template  &lt;typename  T&gt;</span>
-<span class="n">T</span> <span class="nf">InsertionSort</span><span class="p">(</span> <span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">BeginIter</span><span class="p">,</span> <span class="k">const</span> <span class="n">T ...</span></pre></div>
-                 <a  class="read-more" href="http://www.roading.org//algorithm/introductiontoalgorithm/%e6%8f%92%e5%85%a5%e6%8e%92%e5%ba%8f-insertionsort-c%e5%ae%9e%e7%8e%b0.html" rel="bookmark"
-                           title="Permalink to 排序之插入排序与合并排序-C++实现">Read more→</a>	
 		<div class="clear"></div>
                 </div><!-- /.entry-content -->
             </article></li>
